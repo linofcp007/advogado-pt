@@ -1,0 +1,16 @@
+// Configuração de markdownlint para o advogado-pt.
+// As regras desativadas abaixo refletem o ESTILO INTENCIONAL da skill — listas coladas aos
+// cabeçalhos, secções "## Legislação Base" repetidas entre referências, linhas longas com
+// citações de diplomas, etc. Não é ruído a corrigir; é a convenção da casa (ver CLAUDE.md).
+{
+  "default": true,
+  "MD013": false,                  // line-length (citações de diplomas e tabelas longas)
+  "MD022": false,                  // blanks-around-headings (listas coladas ao cabeçalho)
+  "MD032": false,                  // blanks-around-lists (mesmo motivo)
+  "MD041": false,                  // first-line-heading (alguns ficheiros começam com comentário)
+  "MD034": false,                  // bare-urls (dre.pt / dgsi.pt referidos diretamente)
+  "MD029": false,                  // ol-prefix (numeração de passos não-sequencial)
+  "MD009": false,                  // trailing-spaces
+  "MD060": false,                  // table-column-style (tabelas de valores)
+  "MD024": { "siblings_only": true } // headings repetidos OK se não forem irmãos diretos
+}

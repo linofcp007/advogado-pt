@@ -1,0 +1,18 @@
+# Artefactos de build
+advogado-pt.skill
+*.skill
+dist/
+
+# Node
+node_modules/
+mcp-server/node_modules/
+mcp-server/dist/
+mcp-server/content/
+
+# Python
+**/__pycache__/
+*.py[cod]
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

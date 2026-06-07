@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "advogado-pt": {
+      "command": "npx",
+      "args": ["-y", "advogado-pt-mcp"]
+    }
+  }
+}

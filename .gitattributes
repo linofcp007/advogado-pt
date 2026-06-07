@@ -1,0 +1,11 @@
+# Normaliza fins de linha. Os scripts Node, os hooks e o protocolo MCP (JSON-RPC delimitado por
+# newline) correm cross-platform — mantém LF no repositório em todo o lado.
+* text=auto eol=lf
+
+# Pacote da skill e imagens: binários (sem diff / sem normalização de eol).
+*.skill binary
+*.png binary
+
+# Conteúdo empacotado e build do MCP: gerados — não contam para estatísticas de linguagem.
+mcp-server/content/** linguist-generated
+mcp-server/dist/**    linguist-generated

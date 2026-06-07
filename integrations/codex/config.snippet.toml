@@ -1,0 +1,15 @@
+# Servidor MCP advogado-pt para o Codex CLi (OpenAI).
+# Cola este bloco no teu ~/.codex/config.toml
+#
+# Modo publicado (recomendado):
+[mcp_servers.advogado-pt]
+command = "npx"
+args = ["-y", "advogado-pt-mcp"]
+
+# Modo local (desenvolvimento) — alternativa ao bloco acima.
+# Compila primeiro o servidor (npm install && npm run build em mcp-server/)
+# e usa o caminho ABSOLUTO para dist/index.js:
+#
+# [mcp_servers.advogado-pt]
+# command = "node"
+# args = ["C:/Users/Administrator/Desktop/CLAUDE SKILLS/advogado-pt/mcp-server/dist/index.js"]

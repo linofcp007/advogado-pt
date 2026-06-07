@@ -1,0 +1,23 @@
+{
+  "name": "advogado-pt-marketplace",
+  "owner": {
+    "name": "Carlos Pereira",
+    "email": "carlospereira@prodigitalkey.com"
+  },
+  "metadata": {
+    "description": "Advogado PT — assessoria jurídica pessoal e empresarial de Portugal",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "advogado-pt",
+      "source": "./",
+      "version": "1.0.0",
+      "description": "Advogado pessoal e empresarial em Portugal: skill + servidor MCP + comandos. Referências jurídicas, templates, playbooks, checklists e calculadoras.",
+      "category": "legal",
+      "tags": ["advogado", "legal", "direito", "portugal", "contratos", "rgpd", "fiscal", "laboral"],
+      "homepage": "https://github.com/linofcp007/advogado-pt",
+      "author": "Carlos Pereira"
+    }
+  ]
+}

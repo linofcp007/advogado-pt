@@ -1,0 +1,24 @@
+{
+  "name": "advogado-pt-marketplace",
+  "owner": {
+    "name": "ProDigitalKey",
+    "email": "carlospereira@prodigitalkey.com"
+  },
+  "metadata": {
+    "description": "Marketplace de exemplo com o plugin Advogado PT (assessoria jurídica de Portugal via MCP).",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "advogado-pt",
+      "source": "./",
+      "description": "Advogado pessoal e empresarial em Portugal — calculadoras jurídicas, referências legais, templates, playbooks e checklists, expostos via servidor MCP advogado-pt-mcp.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Carlos Pereira",
+        "email": "carlospereira@prodigitalkey.com"
+      },
+      "keywords": ["mcp", "legal", "direito", "portugal", "advogado"]
+    }
+  ]
+}

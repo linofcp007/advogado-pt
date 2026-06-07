@@ -1,0 +1,24 @@
+{
+  "name": "advogado-pt",
+  "version": "1.0.0",
+  "description": "Advogado pessoal e empresarial em Portugal — servidor MCP com calculadoras jurídicas (juros, IMT, prazos, prescrição, compensação, custas, imposto de selo, IRS), referências legais por área, templates, playbooks e checklists. Funciona em PT/EN.",
+  "author": {
+    "name": "Carlos Pereira",
+    "email": "carlospereira@prodigitalkey.com"
+  },
+  "homepage": "https://github.com/prodigitalkey/advogado-pt",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "legal",
+    "direito",
+    "portugal",
+    "advogado"
+  ],
+  "mcpServers": {
+    "advogado-pt": {
+      "command": "npx",
+      "args": ["-y", "advogado-pt-mcp"]
+    }
+  }
+}
