@@ -15,6 +15,7 @@ import {
   COMPENSACAO_MODALIDADES,
 } from "./calculators/index.js";
 import { listar, ler, procurar } from "./content.js";
+import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 
 const AVISO =
   "\n\n⚠️ Estimativa de apoio. Valores/taxas de 2026 — confirmar no ano corrente. Não substitui aconselhamento de advogado inscrito na OA.";
@@ -51,6 +52,7 @@ export function registerTools(server: McpServer): void {
           .describe("Data final (YYYY-MM-DD); por defeito, hoje"),
         tipo: z.enum(["comercial", "civil"]).default("comercial"),
       },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ capital, data_inicio, data_fim, tipo }) => {
       const fim = data_fim ? parseData(data_fim) : new Date();
@@ -78,6 +80,7 @@ export function registerTools(server: McpServer): void {
         dias: z.number().int().describe("Número de dias do prazo"),
         tipo: z.enum(["uteis", "corridos"]).default("uteis"),
       },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ inicio, dias, tipo }) => {
       const r = contarPrazo(parseData(inicio), dias, tipo);
@@ -103,6 +106,7 @@ export function registerTools(server: McpServer): void {
           .enum(["sem-termo", "extincao-posto", "coletivo", "termo"])
           .default("sem-termo"),
       },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ retribuicao_base, diuturnidades, anos, modalidade }) => {
       const r = calcularCompensacao(retribuicao_base, diuturnidades, anos, modalidade);
@@ -124,6 +128,7 @@ export function registerTools(server: McpServer): void {
       description:
         "Estima a taxa de justiça de um requerimento de injunção (UC 2026 = 102€). Usa quando o utilizador vai avançar com a cobrança judicial de uma dívida e quer saber o custo ('quanto custa uma injunção', 'taxa de justiça', 'custas', 'cobrar judicialmente'). EN: court fee for a payment-order (injunção).",
       inputSchema: { valor: z.number().describe("Valor da dívida (€)") },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ valor }) => {
       const r = custasInjuncao(valor);
@@ -150,6 +155,7 @@ export function registerTools(server: McpServer): void {
         inclui_imovel: z.boolean().default(false),
         vpt_imovel: z.number().default(0),
       },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ valor, herdeiro, inclui_imovel, vpt_imovel }) => {
       const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel);
@@ -174,6 +180,7 @@ export function registerTools(server: McpServer): void {
         tipo: z.enum(["hpp", "secundaria"]).default("hpp"),
         jovem: z.boolean().default(false).describe("Isenção IMT Jovem (≤35 anos, 1.ª HPP)"),
       },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ valor, tipo, jovem }) => {
       const r = calcularIMT(valor, tipo, jovem);
@@ -198,6 +205,7 @@ export function registerTools(server: McpServer): void {
         inicio: z.string().describe("Data de início da contagem (YYYY-MM-DD)"),
         tipo: z.enum(PRESCRICAO_TIPOS as [string, ...string[]]),
       },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ inicio, tipo }) => {
       const r = calcularPrescricao(parseData(inicio), tipo);
@@ -228,6 +236,7 @@ export function registerTools(server: McpServer): void {
           "propriedade-intelectual",
         ]),
       },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ rendimento, tipo }) => {
       const r = calcularIRSSimplificado(rendimento, tipo);
@@ -251,6 +260,7 @@ export function registerTools(server: McpServer): void {
       description:
         "Lista todas as áreas de referência jurídica disponíveis (laboral, fiscal, rgpd, arrendamento, contratos, …). Usa para descobrir que áreas existem antes de ler uma referência. EN: list available legal reference areas.",
       inputSchema: {},
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async () => texto("Áreas de referência:\n- " + listar("references").join("\n- "))
   );
@@ -270,7 +280,16 @@ export function registerTools(server: McpServer): void {
       title: "Ler referência jurídica",
       description:
         "Devolve a referência jurídica de uma área (ex.: cobrancas, laboral, rgpd, imobiliario, valores-2026). Usa para perguntas de fundo sobre a lei ('o que diz a lei sobre…', 'quais são os meus direitos', 'enquadramento legal'). EN: pull the legal reference/background for an area.",
-      inputSchema: { nome: z.string().describe("Nome da área (ex.: 'laboral')") },
+      inputSchema: {
+        nome: completable(
+          z.string().describe("Nome da área (ex.: 'laboral')"),
+          (value) =>
+            listar("references").filter((n) =>
+              n.toLowerCase().startsWith((value || "").toLowerCase())
+            )
+        ),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     obter("references", "referências")
   );
@@ -282,6 +301,7 @@ export function registerTools(server: McpServer): void {
       description:
         "Lista os templates de documentos jurídicos disponíveis (contratos, NDA, cartas, injunção, política de privacidade, …). Usa para descobrir que documentos podem ser gerados. EN: list available document templates.",
       inputSchema: {},
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async () => texto("Templates:\n- " + listar("templates").join("\n- "))
   );
@@ -292,7 +312,14 @@ export function registerTools(server: McpServer): void {
       title: "Obter template de documento",
       description:
         "Devolve um template de documento (ex.: requerimento-injuncao, nda-bilingue, contrato-promessa-compra-venda, carta, política de privacidade). Usa quando o utilizador pede para redigir/gerar/elaborar um documento ('preciso de um contrato', 'redige uma carta', 'minuta', 'modelo'). EN: draft a contract/letter/agreement.",
-      inputSchema: { nome: z.string() },
+      inputSchema: {
+        nome: completable(z.string(), (value) =>
+          listar("templates").filter((n) =>
+            n.toLowerCase().startsWith((value || "").toLowerCase())
+          )
+        ),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     obter("templates", "templates")
   );
@@ -304,6 +331,7 @@ export function registerTools(server: McpServer): void {
       description:
         "Lista os playbooks (árvores de decisão) para cenários comuns (cliente não paga, citação, despedir, data breach, comprar imóvel, …). Usa para descobrir que guias passo-a-passo existem. EN: list available step-by-step playbooks.",
       inputSchema: {},
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async () => texto("Playbooks:\n- " + listar("playbooks").join("\n- "))
   );
@@ -314,7 +342,14 @@ export function registerTools(server: McpServer): void {
       title: "Obter playbook",
       description:
         "Devolve um playbook (árvore de decisão) para um cenário (ex.: cliente-nao-paga, data-breach, comprar-imovel, citação, despedir). Usa quando o utilizador descreve uma situação e quer saber os passos a dar ('o que faço se…', 'tenho um problema com um cliente', 'recebi uma citação', 'como procedo'). EN: step-by-step playbook for a scenario.",
-      inputSchema: { nome: z.string() },
+      inputSchema: {
+        nome: completable(z.string(), (value) =>
+          listar("playbooks").filter((n) =>
+            n.toLowerCase().startsWith((value || "").toLowerCase())
+          )
+        ),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     obter("playbooks", "playbooks")
   );
@@ -326,6 +361,7 @@ export function registerTools(server: McpServer): void {
       description:
         "Lista as checklists acionáveis disponíveis (RGPD, due diligence, constituição de sociedade, revisão de contrato, pré-deploy, …). Usa para descobrir que checklists existem. EN: list available actionable checklists.",
       inputSchema: {},
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async () => texto("Checklists:\n- " + listar("checklists").join("\n- "))
   );
@@ -336,7 +372,14 @@ export function registerTools(server: McpServer): void {
       title: "Obter checklist",
       description:
         "Devolve uma checklist acionável (ex.: checklist-rgpd, checklist-due-diligence-imovel, constituição, revisão de contrato, pré-deploy). Usa quando o utilizador quer uma lista de verificação/passos a confirmar ('o que tenho de verificar', 'checklist', 'o que não posso esquecer'). EN: actionable checklist of items to verify.",
-      inputSchema: { nome: z.string() },
+      inputSchema: {
+        nome: completable(z.string(), (value) =>
+          listar("checklists").filter((n) =>
+            n.toLowerCase().startsWith((value || "").toLowerCase())
+          )
+        ),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     obter("checklists", "checklists")
   );
@@ -348,6 +391,7 @@ export function registerTools(server: McpServer): void {
       description:
         "Procura um termo em todo o conteúdo jurídico (referências, templates, playbooks e checklists). Usa quando não sabes em que área/categoria está o assunto e precisas de localizar onde é tratado ('onde se fala de…', 'procura por', 'pesquisa'). EN: full-text search across all legal content.",
       inputSchema: { query: z.string().describe("Termo a procurar") },
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ query }) => {
       const res = procurar(query);

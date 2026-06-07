@@ -8,3 +8,5 @@ Ativa a skill `advogado-pt` e calcula o prazo legal a partir de $ARGUMENTS usand
 Devolve a DATA-LIMITE e, se relevante, a consequência do incumprimento. Apresenta o resultado como estimativa de apoio.
 
 **EN:** Activate the `advogado-pt` skill and compute the legal deadline from $ARGUMENTS using the `calc_prazo` MCP tool (`inicio` in YYYY-MM-DD, `dias`, `tipo`: uteis/corridos). If no MCP is available, use `scripts/prazos.py`. Return the DEADLINE and, where relevant, the consequence of missing it. Present the result as a supporting estimate.
+
+*Exemplos · Examples: "tenho 15 dias úteis a partir de hoje", "deadline 30 days from 2026-06-01".*

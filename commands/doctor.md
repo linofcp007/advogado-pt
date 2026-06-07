@@ -22,3 +22,5 @@ No fim, apresenta um resumo claro: o que está OK e o que precisa de ser corrigi
 4. **MCP tools respond** — call a light content tool, e.g. `listar_areas_juridicas` (or `listar_templates`), and confirm it returns results; if it fails, the server is not running or not built (back to step 2).
 
 Finally, give a clear summary of what is OK and what needs fixing, with the exact commands to run.
+
+*Exemplos · Examples: "as tools do advogado-pt não respondem", "check why the MCP server isn't loading".*

@@ -8,3 +8,5 @@ Ativa a skill `advogado-pt` e obtém o template indicado em $ARGUMENTS usando a 
 Se o nome não existir, lista os templates disponíveis. Substitui os `{{PLACEHOLDERS}}` pelos dados do caso e remove os comentários `<!-- ... -->`.
 
 **EN:** Activate the `advogado-pt` skill and fetch the template named in $ARGUMENTS using the `obter_template` MCP tool (`nome`: e.g. `requerimento-injuncao`, `nda-bilingue`, `contrato-promessa-compra-venda`). If no MCP is available, read the file in `assets/templates/`. If the name does not exist, list the available templates. Replace the `{{PLACEHOLDERS}}` with the case data and remove the `<!-- ... -->` comments.
+
+*Exemplos · Examples: "dá-me o template do nda-bilingue", "fetch the requerimento-injuncao template".*

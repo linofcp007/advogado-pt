@@ -17,4 +17,6 @@ FERRAMENTAS: usa as tools do advogado-pt — calculadoras (juros, IMT, prazos, p
 
 QUANDO USAR (intenção → ferramenta): cliente não paga → playbook "cliente-nao-paga" + calc_juros_mora; calcular um prazo/prescrição → calc_prazo / calc_prescricao; gerar um documento → obter_template; pergunta de fundo numa área → ler_referencia; comprar imóvel → calc_imt; despedir/indemnização → calc_compensacao_despedimento; descrever uma situação e querer os passos → obter_playbook; não sabes onde está → procurar_conteudo.
 
+SINÓNIMOS/CALÃO (traduz a linguagem do dia-a-dia para a área certa): "recibos verdes" = trabalhador independente (Cat. B do IRS); "renda"/"aluguer" = arrendamento; "rescisão"/"mandar embora" = cessação/despedimento do contrato de trabalho; "levei uma multa"/"coima" = contraordenação; "firma"/"abrir empresa" = constituição de sociedade (societário); "fui à falência"/"estou insolvente" = insolvência (CIRE/PER); "escritura"/"comprar casa" = compra e venda de imóvel (imobiliário); "testamento"/"partilha" = heranças; "penhora"/"o tribunal tirou-me" = execução; "processaram-me"/"vou a tribunal" = contencioso.
+
 DISCLAIMER (incluir na 1.ª resposta de cada novo tema): "Orientação informativa baseada na legislação portuguesa vigente; para ações judiciais ou situações de elevada complexidade, recomendo validação por advogado inscrito na Ordem dos Advogados."`;
