@@ -36,16 +36,7 @@ Todas as operações são locais: sem rede, sem API key.
    ```
 
    A mesma shape `mcpServers` funciona em **Cursor, Claude Desktop, Windsurf, Gemini e Cline**.
-
-   Em alternativa, se o pacote estiver publicado no npm, não precisas de clonar nem construir:
-
-   ```json
-   {
-     "mcpServers": {
-       "advogado-pt": { "command": "npx", "args": ["-y", "advogado-pt-mcp"] }
-     }
-   }
-   ```
+   Dica: `node bin/advogado-pt.mjs mcp-config <host>` imprime o bloco com o caminho absoluto já preenchido.
 
 4. **Recarrega o cliente MCP.** O servidor anuncia **17 tools** (8 calculadoras jurídicas + 9
    ferramentas de conteúdo), **resources** (todo o conteúdo jurídico em

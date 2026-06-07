@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "advogado-pt": {
-      "command": "npx",
-      "args": ["-y", "advogado-pt-mcp"]
+      "command": "node",
+      "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
     }
   }
 }

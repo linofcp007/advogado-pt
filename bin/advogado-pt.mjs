@@ -23,15 +23,13 @@ const HOSTS = {
   codex: "toml",
 };
 
-function serverSpec(npx) {
-  return npx
-    ? { command: "npx", args: ["-y", "advogado-pt-mcp"] }
-    : { command: "node", args: [serverPath] };
+function serverSpec() {
+  return { command: "node", args: [serverPath] };
 }
 
-function renderConfig(host, npx) {
+function renderConfig(host) {
   const fmt = HOSTS[host];
-  const spec = serverSpec(npx);
+  const spec = serverSpec();
   if (fmt === "toml") {
     return (
       `[mcp_servers.advogado-pt]\n` +
@@ -47,12 +45,11 @@ function renderConfig(host, npx) {
 }
 
 function mcpConfig(args) {
-  const npx = args.includes("--npx");
   const host = args.find((a) => !a.startsWith("--")) || "generic";
   if (host === "all") {
     for (const h of Object.keys(HOSTS)) {
       console.log(`# ${h}`);
-      console.log(renderConfig(h, npx));
+      console.log(renderConfig(h));
       console.log("");
     }
     return;
@@ -61,13 +58,12 @@ function mcpConfig(args) {
     console.error(`Host desconhecido: ${host}. Opções: ${Object.keys(HOSTS).join(", ")}, all.`);
     process.exit(1);
   }
-  if (!npx && !existsSync(serverPath)) {
+  if (!existsSync(serverPath)) {
     console.error(
-      `Aviso: ${serverPath} não existe ainda. Corre primeiro:\n  cd mcp-server && npm install && npm run build\n` +
-        `Ou usa --npx para a forma publicada.\n`
+      `Aviso: ${serverPath} não existe ainda. Corre primeiro:\n  cd mcp-server && npm install && npm run build\n`
     );
   }
-  console.log(renderConfig(host, npx));
+  console.log(renderConfig(host));
 }
 
 function num(args, flag, def) {
@@ -134,9 +130,9 @@ async function calc(args) {
 const HELP = `advogado-pt — CLI
 
 Uso:
-  advogado-pt mcp-config <host> [--npx]
+  advogado-pt mcp-config <host>
       hosts: ${Object.keys(HOSTS).join(", ")}, all
-      Imprime o bloco de configuração MCP para ligar o servidor a esse cliente.
+      Imprime o bloco de configuração MCP (node + caminho local) para esse cliente.
 
   advogado-pt calc imt --valor 250000 [--tipo hpp|secundaria] [--jovem]
   advogado-pt calc juros --capital 5000 --inicio 2025-03-01 [--fim YYYY-MM-DD] [--tipo comercial|civil]

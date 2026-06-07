@@ -20,20 +20,26 @@ O Gemini CLI lê as definições de `settings.json`:
 | **Global (utilizador)** | `~/.gemini/settings.json`  (Windows: `C:\Users\<utilizador>\.gemini\settings.json`) |
 | **Por projeto** | `.gemini/settings.json` na raiz do projeto |
 
-Cola o bloco `mcpServers` de [`settings.snippet.json`](./settings.snippet.json). Se o
-ficheiro já existir, acrescenta apenas a chave `"advogado-pt"` dentro do `mcpServers`
-existente:
+Clona o repo e compila o servidor **uma vez** (`npm install && npm run build` em
+`mcp-server/`). Depois cola o bloco `mcpServers` de
+[`settings.snippet.json`](./settings.snippet.json), com o caminho **absoluto** para
+`dist/index.js`. Se o ficheiro já existir, acrescenta apenas a chave `"advogado-pt"` dentro
+do `mcpServers` existente:
 
 ```json
 {
   "mcpServers": {
     "advogado-pt": {
-      "command": "npx",
-      "args": ["-y", "advogado-pt-mcp"]
+      "command": "node",
+      "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
     }
   }
 }
 ```
+
+> Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
+> `node bin/advogado-pt.mjs mcp-config gemini` na raiz do repo para gerar o bloco com o
+> caminho **absoluto** já preenchido.
 
 Inicia o `gemini` e confirma com o comando `/mcp` que o servidor `advogado-pt` está ligado e
 que as tools estão listadas.
@@ -42,19 +48,3 @@ que as tools estão listadas.
 
 Copia [`GEMINI.md`](./GEMINI.md) para a raiz do projeto (ou para `~/.gemini/GEMINI.md` para
 ser global). O Gemini CLI carrega automaticamente o `GEMINI.md` como contexto hierárquico.
-
-## Modo local (desenvolvimento)
-
-Compila o servidor (`npm install && npm run build` em `mcp-server/`) e usa esta variante no
-`settings.json` (caminho **absoluto** para `dist/index.js`):
-
-```json
-{
-  "mcpServers": {
-    "advogado-pt": {
-      "command": "node",
-      "args": ["C:/Users/Administrator/Desktop/CLAUDE SKILLS/advogado-pt/mcp-server/dist/index.js"]
-    }
-  }
-}
-```

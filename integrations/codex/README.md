@@ -20,13 +20,19 @@ O Codex CLI lê a configuração de **`~/.codex/config.toml`**:
 | **Windows** | `%USERPROFILE%\.codex\config.toml` |
 | **macOS / Linux** | `~/.codex/config.toml` |
 
-Cola o bloco de [`config.snippet.toml`](./config.snippet.toml):
+Clona o repo e compila o servidor **uma vez** (`npm install && npm run build` em
+`mcp-server/`). Depois cola o bloco de [`config.snippet.toml`](./config.snippet.toml), com o
+caminho **absoluto** para `dist/index.js`:
 
 ```toml
 [mcp_servers.advogado-pt]
-command = "npx"
-args = ["-y", "advogado-pt-mcp"]
+command = "node"
+args = ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
 ```
+
+> Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
+> `node bin/advogado-pt.mjs mcp-config codex` na raiz do repo para gerar o bloco com o
+> caminho **absoluto** já preenchido.
 
 Inicia o `codex` e confirma com `/mcp` que o servidor `advogado-pt` está ligado e que as
 tools aparecem listadas.
@@ -35,14 +41,3 @@ tools aparecem listadas.
 
 Copia [`AGENTS.md`](./AGENTS.md) para a raiz do projeto. O Codex CLI lê o `AGENTS.md`
 automaticamente como instruções do agente.
-
-## Modo local (desenvolvimento)
-
-Compila o servidor (`npm install && npm run build` em `mcp-server/`) e usa esta variante no
-`config.toml` (caminho **absoluto** para `dist/index.js`):
-
-```toml
-[mcp_servers.advogado-pt]
-command = "node"
-args = ["C:/Users/Administrator/Desktop/CLAUDE SKILLS/advogado-pt/mcp-server/dist/index.js"]
-```

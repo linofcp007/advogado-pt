@@ -15,51 +15,42 @@ Atalho para abrir a partir da app: **Settings → Developer → Edit Config**.
 
 ## Como configurar
 
-1. Abre (ou cria) o `claude_desktop_config.json`.
-2. Cola o bloco `mcpServers` de [`claude_desktop_config.snippet.json`](./claude_desktop_config.snippet.json).
-   Se o ficheiro já tiver outros servidores, acrescenta apenas a chave `"advogado-pt"`
-   dentro do `mcpServers` existente (não dupliques a chave `mcpServers`).
+1. Clona o repo e compila o servidor **uma vez**:
+
+   ```powershell
+   # dentro de mcp-server/
+   npm install
+   npm run build
+   ```
+
+2. Abre (ou cria) o `claude_desktop_config.json`.
+3. Cola o bloco `mcpServers` de [`claude_desktop_config.snippet.json`](./claude_desktop_config.snippet.json),
+   usando o caminho **absoluto** para `dist/index.js`. Se o ficheiro já tiver outros
+   servidores, acrescenta apenas a chave `"advogado-pt"` dentro do `mcpServers` existente
+   (não dupliques a chave `mcpServers`).
 
    ```json
    {
      "mcpServers": {
        "advogado-pt": {
-         "command": "npx",
-         "args": ["-y", "advogado-pt-mcp"]
+         "command": "node",
+         "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
        }
      }
    }
    ```
 
-3. **Fecha e reabre** o Claude Desktop (sai por completo, não apenas a janela).
-4. Confirma no ícone de ferramentas/plug (🔌) da caixa de conversa que o servidor
+   > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
+   > `node bin/advogado-pt.mjs mcp-config claude-desktop` na raiz do repo para gerar o bloco
+   > com o caminho **absoluto** já preenchido.
+
+4. **Fecha e reabre** o Claude Desktop (sai por completo, não apenas a janela).
+5. Confirma no ícone de ferramentas/plug (🔌) da caixa de conversa que o servidor
    `advogado-pt` está ligado. O prompt `advogado_pt` aparece no menu de prompts.
-
-## Modo local (desenvolvimento)
-
-Compila primeiro o servidor:
-
-```powershell
-# dentro de mcp-server/
-npm install
-npm run build
-```
-
-e usa esta variante no `mcpServers` (caminho **absoluto** para `dist/index.js`):
-
-```json
-{
-  "mcpServers": {
-    "advogado-pt": {
-      "command": "node",
-      "args": ["C:/Users/Administrator/Desktop/CLAUDE SKILLS/advogado-pt/mcp-server/dist/index.js"]
-    }
-  }
-}
-```
 
 ## Resolução de problemas
 
-- **O servidor não aparece** — confirma que o JSON é válido (sem vírgulas a mais) e que o
-  `node`/`npx` estão no PATH. No Windows pode ser necessário usar `"command": "npx.cmd"`.
+- **O servidor não aparece** — confirma que o JSON é válido (sem vírgulas a mais), que o
+  `node` está no PATH e que o caminho para `dist/index.js` existe (compilaste o servidor com
+  `npm run build`?).
 - **Logs** — em macOS, `~/Library/Logs/Claude/`; em Windows, `%APPDATA%\Claude\logs\`.

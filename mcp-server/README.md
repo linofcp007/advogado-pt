@@ -11,20 +11,16 @@ Servidor **MCP (Model Context Protocol)** que disponibiliza a skill **Advogado P
 
 ## Instalação rápida
 
-Depois de publicado no npm, qualquer cliente MCP arranca o servidor com:
+Constrói uma vez (`npm install && npm run build`) e liga qualquer cliente MCP ao `dist/index.js`.
 
-```bash
-npx -y advogado-pt-mcp
-```
-
-Bloco de configuração genérico (Claude Desktop, Cursor, Windsurf, Gemini, …):
+Bloco de configuração genérico (Claude Desktop, Cursor, Windsurf, Gemini, …) — usa o caminho absoluto da tua máquina:
 
 ```json
 {
   "mcpServers": {
     "advogado-pt": {
-      "command": "npx",
-      "args": ["-y", "advogado-pt-mcp"]
+      "command": "node",
+      "args": ["/CAMINHO/ABSOLUTO/advogado-pt/mcp-server/dist/index.js"]
     }
   }
 }

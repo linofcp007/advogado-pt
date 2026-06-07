@@ -18,31 +18,33 @@ respetivo `README.md`.
 
 ## Como o servidor é arrancado
 
-Em qualquer plataforma existem dois modos. Usa sempre o mesmo comando, muda só onde colas
-o bloco de configuração.
+O servidor corre a partir do **build local** do repositório. O comando é sempre o mesmo em
+todas as plataformas; muda só onde colas o bloco de configuração.
 
-**Modo publicado (recomendado)** — sem instalar nada manualmente, via `npx`:
+**1. Clona o repo e compila o servidor uma vez:**
 
-```json
-{
-  "command": "npx",
-  "args": ["-y", "advogado-pt-mcp"]
-}
+```bash
+cd mcp-server
+npm install
+npm run build
 ```
 
-**Modo local (desenvolvimento)** — aponta ao build local. Primeiro compila o servidor
-(`npm install && npm run build` dentro de `mcp-server/`) e depois usa o caminho **absoluto**
-para `dist/index.js`:
+**2. Aponta a configuração ao `dist/index.js` com o caminho ABSOLUTO:**
 
 ```json
 {
   "command": "node",
-  "args": ["C:/Users/Administrator/Desktop/CLAUDE SKILLS/advogado-pt/mcp-server/dist/index.js"]
+  "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
 }
 ```
 
-> Substitui o caminho acima pelo caminho absoluto correto na tua máquina. Em Windows podes
-> usar `/` ou `\\` (com escape) no JSON.
+> Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto correto na tua máquina. Em
+> Windows podes usar `/` ou `\\` (com escape) no JSON.
+>
+> Atalho: na raiz do repo corre `node bin/advogado-pt.mjs mcp-config <host>` (hosts:
+> `claude-desktop`, `claude-code`, `cursor`, `windsurf`, `gemini`, `codex`, `vscode`,
+> `generic`, ou `all`) e o comando imprime o bloco de configuração com o caminho **absoluto**
+> já preenchido para a tua máquina, pronto a colar.
 
 ## Plataformas suportadas
 

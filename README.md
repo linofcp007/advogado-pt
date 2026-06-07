@@ -7,7 +7,7 @@ Skill personalizada para o Claude atuar como advogado pessoal e empresarial em P
 Além da Skill para Claude, o Advogado PT corre como **servidor MCP** (`mcp-server/`), ligando-se a **Cursor, Windsurf, Codex, Gemini CLI e ChatGPT/OpenAI** — além de Claude. Um servidor único expõe as calculadoras (tools), as referências/templates (resources) e a persona (prompt). Guia completo em [INSTALL.md](INSTALL.md); configs por plataforma em [integrations/](integrations/).
 
 ```json
-{ "mcpServers": { "advogado-pt": { "command": "npx", "args": ["-y", "advogado-pt-mcp"] } } }
+{ "mcpServers": { "advogado-pt": { "command": "node", "args": ["/CAMINHO/ABSOLUTO/advogado-pt/mcp-server/dist/index.js"] } } }
 ```
 
 ## Instalação

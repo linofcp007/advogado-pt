@@ -5,7 +5,7 @@ O Advogado PT distribui-se por **dois canais**:
 | Canal | Para quê | Onde |
 |---|---|---|
 | **A. Skill (.skill)** | Claude.ai, Claude Code, Claude Desktop (sistema de Skills) | `advogado-pt.skill` (gerar com `python build.py`) |
-| **B. Servidor MCP** | Cursor, Windsurf, Codex, Gemini CLI, ChatGPT/OpenAI, Claude (via MCP) | pacote npm `advogado-pt-mcp` |
+| **B. Servidor MCP** | Cursor, Windsurf, Codex, Gemini CLI, ChatGPT/OpenAI, Claude (via MCP) | `mcp-server/` (Node, build local — sem npm publish) |
 
 O **MCP** é o que torna isto disponível em "todas as IAs": é um padrão aberto que Claude, OpenAI, Google e os editores (Cursor/Windsurf) já falam. Um único servidor serve todos.
 
@@ -22,29 +22,28 @@ Carrega em **Claude → Settings → Skills**. (Claude Code: coloca a pasta em `
 
 ## B. Servidor MCP (universal)
 
-### 1. Publicar (uma vez)
+### 1. Construir (uma vez)
 
 ```bash
 cd mcp-server
 npm install
 npm test                   # 18 testes das calculadoras
-npm run build              # empacota conteúdo + compila para dist/
-npm publish --access public
+npm run build              # empacota conteúdo + compila para dist/index.js
 ```
 
-> Sem publicar? Usa o **modo local** em qualquer config: `command: "node"`, `args: ["/CAMINHO/ABSOLUTO/advogado-pt/mcp-server/dist/index.js"]`.
+> Não há pacote npm publicado (por opção): o servidor corre localmente a partir de `mcp-server/dist/index.js`.
 
 ### 2. Ligar a cada plataforma
 
-Config genérica (funciona na maioria):
+Config genérica — substitui pelo caminho absoluto da tua máquina, ou corre `node bin/advogado-pt.mjs mcp-config <host>` para o gerar:
 
 ```json
-{ "mcpServers": { "advogado-pt": { "command": "npx", "args": ["-y", "advogado-pt-mcp"] } } }
+{ "mcpServers": { "advogado-pt": { "command": "node", "args": ["/CAMINHO/ABSOLUTO/advogado-pt/mcp-server/dist/index.js"] } } }
 ```
 
 | Plataforma | Instruções | Persona |
 |---|---|---|
-| **Claude Code** (plugin) | `integrations/claude-code-plugin/` | prompt MCP `advogado_pt` |
+| **Claude Code** (plugin) | `/plugin marketplace add linofcp007/advogado-pt` | prompt MCP `advogado_pt` |
 | **Claude Desktop** | `integrations/claude-desktop/` | prompt MCP `advogado_pt` |
 | **Cursor** | `integrations/cursor/` (`.cursor/mcp.json` + rule) | `.cursor/rules/advogado-pt.mdc` |
 | **Windsurf** | `integrations/windsurf/` | `.windsurfrules` |
@@ -66,5 +65,5 @@ node test/smoke-client.mjs   # liga via MCP e exercita tools/resources/prompt
 ## Notas
 
 - **ChatGPT web** consome MCP via *connectors* (dev mode) mas precisa do servidor exposto por HTTP/remoto; **Codex** e **OpenAI Agents SDK** consomem o stdio diretamente. Em alternativa, o **Custom GPT** usa a persona + ficheiros de conhecimento (de `references/` e `assets/templates/`).
-- Ao atualizar o conteúdo jurídico da skill, corre `cd mcp-server && npm run build` para re-empacotar e volta a publicar.
+- Ao atualizar o conteúdo jurídico da skill, corre `cd mcp-server && npm run build` para re-empacotar o conteúdo no servidor.
 - Tudo é **MIT** / uso pessoal; orientação informativa, não substitui advogado inscrito na OA.
