@@ -18,6 +18,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "setup": "npm --prefix mcp-server install && npm --prefix mcp-server run build && node bin/advogado-pt.mjs doctor",
     "build:skill": "python build.py",
     "build:mcp": "npm --prefix mcp-server install && npm --prefix mcp-server run build",
     "test": "npm --prefix mcp-server test"

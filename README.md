@@ -19,7 +19,7 @@ Além da Skill para Claude, o Advogado PT corre como **servidor MCP** (`mcp-serv
 /plugin install advogado-pt
 ```
 
-Depois, no repositório: `cd mcp-server && npm install && npm run build` (uma vez, para o servidor MCP).
+Depois, no repositório, **uma vez**: `npm run setup` (instala + compila o servidor MCP e corre o diagnóstico).
 
 **Como Skill** (Claude.ai / Claude Desktop):
 

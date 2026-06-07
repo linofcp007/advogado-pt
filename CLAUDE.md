@@ -44,8 +44,8 @@ Caminhos relativos a `skills/advogado-pt/`:
 ## Build, testes e versões
 
 ```bash
+npm run setup                                    # bootstrap: instala + compila o MCP + doctor
 python build.py                                  # gera advogado-pt.skill (empacota skills/advogado-pt/)
-cd mcp-server && npm install && npm run build    # compila o MCP -> dist/ (+ empacota content/)
 cd mcp-server && npm test                        # calculadoras + estrutura do plugin
 python skills/advogado-pt/scripts/test_scripts.py  # testes das calculadoras Python
 ```

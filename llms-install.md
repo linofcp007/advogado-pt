@@ -13,12 +13,11 @@ Todas as operações são locais: sem rede, sem API key.
    # guarda o caminho absoluto, ex.: /home/you/advogado-pt (ou C:\tools\advogado-pt)
    ```
 
-2. **Constrói o servidor MCP** (compila o TypeScript e empacota o conteúdo):
+2. **Constrói o servidor MCP** (um comando na raiz):
 
    ```bash
-   cd advogado-pt/mcp-server
-   npm install
-   npm run build      # gera dist/index.js
+   cd advogado-pt
+   npm run setup      # instala + compila o MCP (gera dist/index.js) + doctor
    ```
 
 3. **Regista o servidor** no teu cliente MCP. Substitui `/ABSOLUTE/PATH/` pelo caminho do passo 1.

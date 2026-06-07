@@ -5,9 +5,13 @@
 //   SessionStart  -> breve briefing de "advogado ativo".
 //   PostToolUse   -> ao gravar um documento com aspeto jurídico (contrato/carta/cláusula),
 //                    lembra das cláusulas essenciais e do disclaimer. Informativo, nunca bloqueia.
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const EVENT = process.argv[2] || "";
+const HERE = dirname(fileURLToPath(import.meta.url));
+const MCP_DIST = resolve(HERE, "..", "mcp-server", "dist", "index.js");
 
 function emit(additionalContext) {
   if (!additionalContext) return;
@@ -29,12 +33,17 @@ function lerStdin() {
 }
 
 function sessionStart() {
-  emit(
-    "⚖️ advogado-pt ativo — assessoria jurídica de Portugal. " +
-      "Comandos: /advogado, /parecer, /cobrar, /contrato, /prazo, /defesa, /rgpd, /despedir, /comprar-imovel. " +
-      "Calculadoras e referências via tools MCP. Os valores de 2026 estão em valores-2026; confirma sempre prazos a correr. " +
-      "Orientação informativa — não substitui advogado inscrito na OA."
-  );
+  let msg =
+    "⚖️ advogado-pt ativo — assessoria jurídica de Portugal · active — legal assistant for Portugal. " +
+    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /defesa /rgpd /despedir /comprar-imovel /doctor. " +
+    "Valores 2026 em valores-2026; confirma prazos a correr · check running deadlines. " +
+    "Orientação informativa, não substitui advogado da OA · informational guidance, not a substitute for a registered lawyer.";
+  if (!existsSync(MCP_DIST)) {
+    msg +=
+      " ⚠️ Servidor MCP por construir: corre `npm run setup` na raiz do plugin · " +
+      "MCP server not built: run `npm run setup` at the plugin root.";
+  }
+  emit(msg);
 }
 
 const SINAIS = /\b(contrato|cláusula|clausula|NDA|arrendamento|interpela|resolu[çc][aã]o do contrato|cessão|honor[aá]rios)\b/i;
@@ -45,9 +54,10 @@ function postToolUse(payload) {
     const alvo = `${ti.file_path || ti.path || ""}\n${ti.content || ti.new_string || ""}`;
     if (!SINAIS.test(alvo)) return; // só fala quando parece um documento jurídico
     emit(
-      "📝 Documento jurídico detetado. Lembra: identificar as partes, objeto, preço/prazos, " +
-        "lei aplicável e foro (ou arbitragem), proteção de dados se aplicável, e — em comunicações — " +
-        "enviar por registado com AR quando recomendável. Confere o template correspondente em assets/templates/."
+      "📝 Documento jurídico detetado · legal document detected. " +
+        "Verifica/check: partes (parties), objeto (subject), preço/prazos (price/deadlines), " +
+        "lei aplicável e foro/arbitragem (governing law & jurisdiction), proteção de dados (data protection), " +
+        "envio por registado com AR quando aplicável. Vê o template em assets/templates/ · see the matching template."
     );
   } catch {
     /* fail-open */

@@ -24,14 +24,13 @@ Carrega em **Claude → Settings → Skills**. (Claude Code: coloca a pasta em `
 
 ### 1. Construir (uma vez)
 
+Na raiz do repositório, um comando:
+
 ```bash
-cd mcp-server
-npm install
-npm test                   # 18 testes das calculadoras
-npm run build              # empacota conteúdo + compila para dist/index.js
+npm run setup             # instala + compila o servidor MCP + diagnóstico (doctor)
 ```
 
-> Não há pacote npm publicado (por opção): o servidor corre localmente a partir de `mcp-server/dist/index.js`.
+> Não há pacote npm publicado (por opção): o servidor corre localmente a partir de `mcp-server/dist/index.js`. Equivale a `cd mcp-server && npm install && npm run build`.
 
 ### 2. Ligar a cada plataforma
 
