@@ -35,27 +35,25 @@ Depois, no repositório: `cd mcp-server && npm install && npm run build` (uma ve
 ## Estrutura
 
 ```text
-advogado-pt/
-├── SKILL.md                  # Ficheiro principal — lógica, fluxo, protocolos de rigor
-├── CLAUDE.md                 # Guia de manutenção da skill (não é runtime)
-├── references/   (26)        # Conhecimento jurídico por área
-│   ├── valores-2026.md       # ⭐ Ponto único de verdade: taxas, montantes, prazos, tabela IMT
-│   │   Empresarial: contratos, contratos-internacionais, cobrancas, insolvencia,
-│   │   societario, garantias, laboral, fiscal, rgpd, digital-ue, seguros, pi,
-│   │   consumo, contratacao-publica
-│   │   Pessoal: imobiliario, arrendamento, familia, herancas, sucessorio-internacional,
-│   │   fiscal-pessoal, multas
-│   │   Transversal: contencioso, penal-cibercrime, estrangeiros, glossario-pt-en
-├── assets/
-│   ├── templates/   (28)     # Documentos reais com placeholders {{...}}
-│   └── checklists/  (5)      # Listas de verificação acionáveis
-├── playbooks/       (5)      # Árvores de decisão para cenários comuns
-└── scripts/         (9)      # Calculadoras determinísticas (Python 3, stdlib) + testes
-    ├── juros_mora.py · prazos.py · compensacao_despedimento.py
-    ├── custas_injuncao.py · imposto_selo_heranca.py
-    ├── imt.py · prescricao.py · irs_simplificado.py
-    └── test_scripts.py       # Testes de regressão (18 testes)
-build.py · build.ps1 · .gitignore
+advogado-pt/                     # plugin Claude Code
+├── .claude-plugin/             # plugin.json + marketplace.json
+├── .mcp.json                   # servidor MCP (${CLAUDE_PLUGIN_ROOT})
+├── commands/        (22)       # slash commands (/advogado, /cobrar, /imt, /doctor…)
+├── hooks/                      # hooks.json + advogado-hook.mjs (SessionStart/PostToolUse)
+├── bin/advogado-pt.mjs         # CLI universal (mcp-config + calc + doctor)
+├── skills/advogado-pt/         # a skill (conteúdo jurídico)
+│   ├── SKILL.md                # lógica, fluxo, protocolos de rigor
+│   ├── references/   (26)      # ⭐ valores-2026.md = ponto único de verdade
+│   ├── assets/templates/  (28) # documentos com placeholders {{...}}
+│   ├── assets/checklists/ (5)
+│   ├── playbooks/    (5)       # árvores de decisão
+│   └── scripts/      (9)       # calculadoras Python + testes (18)
+├── mcp-server/                 # servidor MCP TypeScript (17 tools + resources + prompt)
+├── integrations/               # configs por plataforma (Cursor, Windsurf, Codex, Gemini, ChatGPT)
+├── .cursor/ .windsurf/ .gemini/ .vscode/   # dotfiles de editor (dogfooding)
+├── AGENTS.md · GEMINI.md · CLAUDE.md        # persona portátil + manutenção
+├── build.py · build.ps1        # empacota a .skill
+└── LICENSE · CHANGELOG.md · CONTRIBUTING.md · SECURITY.md · glama.json
 ```
 
 ## Áreas Cobertas
@@ -70,17 +68,18 @@ build.py · build.ps1 · .gitignore
 - **Playbooks** (5): árvores de decisão que transformam conhecimento em ação guiada.
 - **Checklists** (5): verificação acionável (RGPD, due diligence, constituição, contrato, pré-deploy).
 - **Calculadoras** (8 + testes): juros, prazos, compensação, custas, imposto de selo, **IMT**, prescrição, IRS simplificado.
-- **Ponto único de verdade** para valores (`references/valores-2026.md`) — sem números desatualizados espalhados.
+- **Ponto único de verdade** para valores (`skills/advogado-pt/references/valores-2026.md`) — sem números desatualizados espalhados.
 - **Protocolos de rigor**: anti-alucinação de citações e anti-desatualização de valores (ver SKILL.md).
 
 ## Empacotamento e qualidade
 
 ```powershell
-python scripts/test_scripts.py   # testes das calculadoras (devem passar)
-python build.py                  # gera advogado-pt.skill
+python build.py                                      # gera advogado-pt.skill
+python skills/advogado-pt/scripts/test_scripts.py    # testes das calculadoras Python (18)
+cd mcp-server; npm test                              # calculadoras TS + estrutura do plugin
 ```
 
-`build.py`/`build.ps1` excluem `__pycache__`, `.pyc`, `.git` e o próprio `.skill`.
+`build.py`/`build.ps1` empacotam `skills/advogado-pt/` (excluem `__pycache__`, `.pyc`, `.git`, `.skill`).
 
 ## Perfil
 
@@ -98,6 +97,9 @@ Os valores legais mudam — ver `CLAUDE.md` para o guia completo. Pontos de revi
 
 ## Changelog
 
+> Histórico formal (SemVer) em [CHANGELOG.md](CHANGELOG.md). Resumo da evolução:
+
+- **v7 (2026-06)**: convertido em **plugin Claude Code** — `.claude-plugin/` (marketplace), 22 slash commands, hooks (SessionStart/PostToolUse), CLI `bin/` (`mcp-config`/`calc`/`doctor`), dotfiles de editor e `AGENTS.md`/`GEMINI.md` na raiz, governance (LICENSE/CONTRIBUTING/SECURITY/glama), conteúdo reestruturado para `skills/advogado-pt/`, teste de estrutura do plugin. Publicado em github.com/linofcp007/advogado-pt.
 - **v6 (2026-06)**: distribuição multi-plataforma — servidor **MCP** em TypeScript (`mcp-server/`) com as 8 calculadoras portadas (18 testes + smoke end-to-end), conteúdo jurídico como resources e persona como prompt; manifestos para Claude Code (plugin), Claude Desktop, Cursor, Windsurf, Gemini CLI, Codex e ChatGPT em [integrations/](integrations/); guia [INSTALL.md](INSTALL.md). O pacote `.skill` exclui agora `mcp-server/` e `integrations/`.
 - **v5 (2026-06)**: revisão completa de QA — corrigidos 9 defeitos (custas de injunção desatualizadas, link da Plataforma ODR extinta, IRC 17%/21% residual, placeholder partido, "Modelo 2 do IMT"→Selo, etc.); + 5 templates nucleares (injunção, cookie policy, contrato a termo certo, despedimento com justa causa, livrança); emolumentos centralizados em valores-2026.md; "(a confirmar)" da LCS/Haia confirmados; nota mitigadora nas secções "## Templates" das referências (28 templates).
 - **v4 (2026-06)**: + áreas penal/cibercrime, contencioso, contratação pública, sucessões internacionais, estrangeiros, garantias (26 referências); + pasta `playbooks/` (5 árvores de decisão); + `assets/checklists/` (5); + calculadoras IMT/prescrição/IRS simplificado e `test_scripts.py` (18 testes); + templates intake e parecer; + `CLAUDE.md` e `.gitignore`; tabela IMT 2026 no ficheiro central; correção do laboral.md (compensação 12→14 dias).
@@ -111,4 +113,4 @@ Orientação informativa baseada na legislação portuguesa. Para ações judici
 
 ## Licença
 
-Uso pessoal. Adapta conforme necessário.
+MIT — ver [LICENSE](LICENSE).

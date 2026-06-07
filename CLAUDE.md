@@ -1,47 +1,63 @@
-# CLAUDE.md — Guia de Manutenção da Skill `advogado-pt`
+# CLAUDE.md — Guia de Manutenção do plugin `advogado-pt`
 
-Este ficheiro orienta quem (humano ou Claude) **mantém ou desenvolve** a skill. Não é carregado em runtime como conhecimento jurídico — o ponto de entrada da skill é o `SKILL.md`.
+Orienta quem (humano ou Claude) **mantém ou desenvolve** o plugin. Não é runtime jurídico — o conteúdo da skill está em `skills/advogado-pt/SKILL.md`.
 
 ## O que é
 
-Assessor jurídico de Portugal para um **empresário tech** (ENI, possível transição para Unipessoal Lda; software/retalho/serviços/consultoria; clientes nacionais e internacionais; PT + EN). Conhecimento por área em `references/`, documentos em `assets/templates/`, ação guiada em `playbooks/`, verificações em `assets/checklists/`, cálculos em `scripts/`.
+Plugin Claude Code de assessoria jurídica de Portugal, com 4 superfícies sobre o mesmo conteúdo:
+
+- **Skill** (`skills/advogado-pt/`) — `SKILL.md` + `references/`, `assets/templates/`, `assets/checklists/`, `playbooks/`, `scripts/` (calculadoras Python).
+- **Servidor MCP** (`mcp-server/`, TypeScript) — calculadoras (port TS) + conteúdo como tools/resources + persona como prompt.
+- **Slash commands** (`commands/`) — wrappers finos que invocam a skill / tools.
+- **Hooks** (`hooks/`) + **CLI** (`bin/advogado-pt.mjs`).
+
+Distribuição: plugin via marketplace git (`.claude-plugin/`) + `.skill` (Anthropic Skills) gerado por `build.py`. **Sem npm publish e sem CI, por opção** (zero custo).
 
 ## Princípios invioláveis
 
-1. **Ponto único de verdade para valores**: todos os montantes/taxas/limiares vivem em `references/valores-2026.md`. Os outros ficheiros **remetem** para lá; não repetem números. Ao mudar de ano, atualizar esse ficheiro e renomeá-lo.
-2. **Anti-alucinação**: nunca inventar números de artigos ou jurisprudência. Marcar "(a confirmar)" e verificar em dre.pt/dgsi.pt. Ver "Princípios de Rigor" no `SKILL.md`.
-3. **Estilo da casa**: H1; `## Legislação Base` com diplomas/artigos; secções em bullets; `## Para o contexto do utilizador`; `## Templates`. Listas coladas aos cabeçalhos (o linter MD022/MD032 sinaliza, mas é o estilo consistente da skill — não perseguir).
-4. **Cross-refs com nomes reais**: usar `references/x.md`, `assets/templates/y.md`, `scripts/z.py` que existam mesmo.
+1. **Ponto único de verdade para valores**: todos os montantes/taxas/limiares vivem em `skills/advogado-pt/references/valores-2026.md`. Os outros ficheiros **remetem** para lá. Ao mudar de ano, atualizar e renomear.
+2. **Anti-alucinação**: nunca inventar artigos ou jurisprudência. Marcar "(a confirmar)" e verificar em dre.pt/dgsi.pt. Ver "Princípios de Rigor" no `SKILL.md`.
+3. **Estilo da casa**: H1; `## Legislação Base`; secções em bullets; `## Para o contexto do utilizador`; `## Templates`. O `.markdownlint.jsonc` já silencia o ruído (MD022/MD032/…) — é estilo intencional.
+4. **Cross-refs com nomes reais**: usar caminhos que existem mesmo (o teste `mcp-server/test/plugin.test.mjs` valida commands→tools e conteúdo referenciado).
 
 ## Calendário de manutenção (valores mudam!)
 
-| Quando | Rever em `valores-2026.md` |
+| Quando | Rever em `skills/advogado-pt/references/valores-2026.md` |
 |---|---|
 | **Janeiro** (pós-OE) | IRC, IRS, IAS, salário mínimo, deduções, IMT/IMI, isenções jovem |
 | **Julho** | juros de mora comerciais do 2.º semestre (aviso da ETF) |
 | **Outubro** | coeficiente de atualização de rendas (INE) |
-| Sempre que mudar uma lei estrutural | atualizar o ficheiro de referência da área + nota de correção |
 
-Ao corrigir um valor, **atualizar também a "Última atualização"** no topo do `valores-2026.md`.
+Ao corrigir um valor: atualizar a "Última atualização" no topo do `valores-2026.md` **e** o port TS em `mcp-server/src/calculators/` se for uma taxa usada numa calculadora.
 
-## Como adicionar conteúdo
+## Como adicionar
 
-- **Nova área jurídica** → criar `references/nova-area.md` no estilo da casa + ligar em `SKILL.md` (secção "Áreas de Competência") + no `README.md`.
-- **Novo template** → `assets/templates/nome.md` com comentário `<!-- Template: ... -->`, placeholders `{{...}}`, base legal; registar no índice `assets/templates/README.md`.
-- **Novo playbook** → `playbooks/nome.md` (árvore de decisão) + índice.
-- **Nova checklist** → `assets/checklists/nome.md` (checkboxes) + índice.
-- **Nova calculadora** → `scripts/nome.py` (stdlib, `argparse`, `formatar_euros`, AVISO no output) + adicionar teste em `scripts/test_scripts.py` + registar no `scripts/README.md`.
+Caminhos relativos a `skills/advogado-pt/`:
 
-## Antes de publicar
+- **Nova área** → `references/nova-area.md` + ligar em `SKILL.md` (Áreas de Competência), no `README.md` e (opcional) um command.
+- **Novo template** → `assets/templates/nome.md` (comentário `<!-- Template: -->`, placeholders `{{...}}`) + índice `assets/templates/README.md`.
+- **Novo playbook / checklist** → `playbooks/nome.md` / `assets/checklists/nome.md` + índice.
+- **Nova calculadora** → **dois lados**: Python em `scripts/nome.py` (stdlib, `argparse`, `formatar_euros`, AVISO) + teste em `scripts/test_scripts.py`; **e** o port TS em `mcp-server/src/calculators/nome.ts` (reexportar em `index.ts`) + teste em `mcp-server/test/calculators.test.mjs` + registar a tool em `mcp-server/src/tools.ts`.
+- **Novo command** → `commands/nome.md` (frontmatter `description` PT+EN + `argument-hint`; corpo fino que nomeia a tool/ficheiro real).
+- **Novo hook** → registar em `hooks/hooks.json`; manter o dispatcher `hooks/advogado-hook.mjs` dependency-free e fail-open.
 
-```powershell
-python scripts/test_scripts.py     # testes de regressão das calculadoras
-python build.py                    # gera advogado-pt.skill
+## Build, testes e versões
+
+```bash
+python build.py                                  # gera advogado-pt.skill (empacota skills/advogado-pt/)
+cd mcp-server && npm install && npm run build    # compila o MCP -> dist/ (+ empacota content/)
+cd mcp-server && npm test                        # calculadoras + estrutura do plugin
+python skills/advogado-pt/scripts/test_scripts.py  # testes das calculadoras Python
 ```
 
-`build.py`/`build.ps1` empacotam tudo exceto `__pycache__`, `.pyc`, `.git` e o próprio `.skill`. Fazer upload em **Claude → Settings → Skills**.
+**Bump de versão**: alterar em SIMULTÂNEO `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `package.json`, `mcp-server/package.json` e adicionar entrada no `CHANGELOG.md` (Keep a Changelog + SemVer).
+
+## Distribuição
+
+Plugin: `git push` → `/plugin marketplace add linofcp007/advogado-pt` → `/plugin install advogado-pt`. Depois, build único do MCP. Noutras IAs: `node bin/advogado-pt.mjs mcp-config <host>`.
 
 ## Notas técnicas
 
-- Scripts em Python 3 (stdlib apenas); output reconfigurado para UTF-8 para não rebentar na consola cp1252 do Windows; usar `->` em vez de setas unicode nas mensagens.
-- O conteúdo jurídico foi parcialmente gerado com subagentes a partir de especificações detalhadas; rever sempre citações determinantes antes de confiar nelas.
+- Scripts Python e CLI/MCP reconfiguram stdout para UTF-8 (consola cp1252 do Windows); usar `->` em vez de setas unicode nas mensagens.
+- `mcp-server/dist/` e `mcp-server/content/` são gerados (gitignored) — o plugin exige o build único.
+- Conteúdo jurídico parcialmente gerado por subagentes; rever citações determinantes antes de confiar.

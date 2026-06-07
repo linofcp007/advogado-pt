@@ -50,7 +50,7 @@ npm run build
 
 | Plataforma | Pasta | Configuração MCP | Persona / instruções |
 |---|---|---|---|
-| **Claude Code** (plugin) | [`claude-code-plugin/`](./claude-code-plugin/) | `.claude-plugin/plugin.json` (`mcpServers`) | prompt `advogado_pt` do servidor |
+| **Claude Code** (plugin) | raiz: `.claude-plugin/` | `/plugin marketplace add linofcp007/advogado-pt` | prompt `advogado_pt` do servidor |
 | **Claude Desktop** | [`claude-desktop/`](./claude-desktop/) | `claude_desktop_config.json` (`mcpServers`) | prompt `advogado_pt` do servidor |
 | **Cursor** | [`cursor/`](./cursor/) | `.cursor/mcp.json` | `.cursor/rules/advogado-pt.mdc` |
 | **Windsurf** | [`windsurf/`](./windsurf/) | `mcp_config.json` | `.windsurfrules` |

@@ -3,7 +3,7 @@
 #
 # Compila primeiro o servidor (npm install && npm run build em mcp-server/)
 # e usa o caminho ABSOLUTO para dist/index.js:
-[mcp_servers.advogado-pt]
+[mcp_servers."advogado-pt"]
 command = "node"
 args = ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
 

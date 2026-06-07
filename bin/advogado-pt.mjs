@@ -32,7 +32,7 @@ function renderConfig(host) {
   const spec = serverSpec();
   if (fmt === "toml") {
     return (
-      `[mcp_servers.advogado-pt]\n` +
+      `[mcp_servers."advogado-pt"]\n` +
       `command = "${spec.command}"\n` +
       `args = [${spec.args.map((a) => `"${a.replace(/\\/g, "\\\\")}"`).join(", ")}]`
     );
@@ -121,10 +121,52 @@ async function calc(args) {
       console.log(`Compensação: ${fmt(r.bruto)} (${r.diasAno} dias/ano${r.minimoAplicado ? ", mínimo aplicado" : ""})`);
       break;
     }
+    case "custas": {
+      const r = c.custasInjuncao(num(rest, "--valor", 0));
+      console.log(`Custas injunção: ${fmt(r.taxa)} (${r.escalao})`);
+      break;
+    }
+    case "selo": {
+      const r = c.impostoSeloHeranca(
+        num(rest, "--valor", 0),
+        str(rest, "--herdeiro", "outro"),
+        rest.includes("--imovel"),
+        num(rest, "--vpt", 0)
+      );
+      console.log(`Imposto do selo: ${fmt(r.total)} (transmissão: ${r.isento ? "isento" : fmt(r.isTransmissao)})`);
+      break;
+    }
+    case "irs": {
+      const r = c.calcularIRSSimplificado(num(rest, "--rendimento", 0), str(rest, "--tipo", "servicos-151"));
+      console.log(`IRS rendimento tributável: ${fmt(r.tributavel)} (coeficiente ${r.coeficiente})`);
+      break;
+    }
     default:
-      console.error("calc <imt|juros|prazo|prescricao|compensacao> [--flags]");
+      console.error("calc <imt|juros|prazo|prescricao|compensacao|custas|selo|irs> [--flags]");
       process.exit(1);
   }
+}
+
+function doctor() {
+  const contentDir = resolve(repo, "mcp-server", "content");
+  const major = Number(process.versions.node.split(".")[0]);
+  const checks = [
+    [`Node >= 18`, major >= 18, `Node ${process.versions.node}`],
+    [`MCP compilado (dist/index.js)`, existsSync(serverPath), ""],
+    [`Calculadoras compiladas`, existsSync(calcPath), ""],
+    [`Conteúdo empacotado (content/)`, existsSync(contentDir), ""],
+  ];
+  let ok = true;
+  for (const [label, pass, extra] of checks) {
+    console.log(`${pass ? "OK  " : "FALTA"} ${label}${extra ? " — " + extra : ""}`);
+    if (!pass) ok = false;
+  }
+  console.log(
+    ok
+      ? "\nTudo pronto. Liga um cliente com: node bin/advogado-pt.mjs mcp-config <host>"
+      : "\nResolver: cd mcp-server && npm install && npm run build"
+  );
+  process.exit(ok ? 0 : 1);
 }
 
 const HELP = `advogado-pt — CLI
@@ -139,6 +181,12 @@ Uso:
   advogado-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo uteis|corridos]
   advogado-pt calc prescricao --inicio 2025-01-15 --tipo creditos-comerciais
   advogado-pt calc compensacao --retribuicao 1500 --anos 4 [--modalidade sem-termo]
+  advogado-pt calc custas --valor 8000
+  advogado-pt calc selo --valor 100000 [--herdeiro conjuge|descendente|ascendente|outro] [--imovel --vpt N]
+  advogado-pt calc irs --rendimento 60000 [--tipo mercadorias|servicos-151|servicos-outros|propriedade-intelectual]
+
+  advogado-pt doctor
+      Verifica pré-requisitos (Node, build do MCP, conteúdo empacotado).
 
 Orientação informativa — não substitui advogado inscrito na Ordem dos Advogados.`;
 
@@ -146,6 +194,7 @@ async function main() {
   const [cmd, ...args] = process.argv.slice(2);
   if (cmd === "mcp-config") return mcpConfig(args);
   if (cmd === "calc") return calc(args);
+  if (cmd === "doctor") return doctor();
   console.log(HELP);
 }
 
