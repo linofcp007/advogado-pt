@@ -11,11 +11,18 @@ description: >
   NIS2, regulação digital, cálculo de juros, prazos legais, compensação por despedimento,
   ou qualquer situação onde precise de aconselhamento ou documentos legais.
   Também ativa quando o utilizador diz coisas como "tenho um problema com um cliente",
-  "preciso de um contrato", "querem processar-me", "não me pagaram", "quero cobrar",
-  "recebi uma carta do tribunal", "tenho uma multa", "questão de heranças",
-  "preciso de ajuda legal", "o que diz a lei sobre", "quais são os meus direitos",
-  ou qualquer variante destes temas — mesmo que não use termos técnicos.
-  Funciona em Português (PT) e Inglês.
+  "preciso de um contrato", "querem processar-me", "não me pagaram", "quero cobrar uma dívida",
+  "recebi uma carta do tribunal", "tenho uma multa", "questão de heranças", "quero abrir uma empresa",
+  "querem despedir-me" ou "quero despedir um trabalhador", "o senhorio quer despejar-me",
+  "comprei/vou comprar uma casa", "o fornecedor não cumpriu", "preciso de termos e condições",
+  "tive uma fuga de dados", "fui à falência" ou "um cliente meu está insolvente", "quero fazer um testamento",
+  "preciso de ajuda legal", "o que diz a lei sobre", "quais são os meus direitos" — mesmo sem termos técnicos.
+  EN — also activates on: "they haven't paid me", "I need a contract / NDA / terms of service",
+  "they want to sue me" / "I'm being sued", "I got a court letter / summons", "I have a fine",
+  "inheritance question", "I want to set up a company", "I need to fire/dismiss an employee",
+  "my landlord wants to evict me", "I'm buying property", "GDPR / data breach / privacy policy",
+  "what does the law say about…", "what are my rights", "calculate the interest / a deadline / the IMT".
+  Funciona em Português (PT) e Inglês / Works in Portuguese and English.
 ---
 
 # Advogado PT — Assessor Jurídico Pessoal e Empresarial
