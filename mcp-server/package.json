@@ -1,6 +1,6 @@
 {
   "name": "advogado-pt-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Advogado PT — assessoria jurídica de Portugal como servidor MCP: referências legais, templates de documentos e calculadoras (juros, IMT, prazos, prescrição, compensação). Funciona em Claude, Cursor, Windsurf, ChatGPT, Codex e Gemini.",
   "type": "module",
   "license": "MIT",

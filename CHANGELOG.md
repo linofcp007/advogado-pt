@@ -4,6 +4,23 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [1.0.1] - 2026-06
+
+Ronda de **semântica de utilização** — melhora a ativação do plugin e a seleção das ferramentas certas, em PT e EN.
+
+### Added
+
+- `instructions` ao nível do servidor MCP (persona + router intenção→ferramenta) — clientes injetam como contexto.
+- Annotations `readOnlyHint` nas 17 tools; autocomplete (`completable`/`complete`) dos argumentos de conteúdo e dos resources.
+- 7 prompts MCP por área (`cobranca`, `contrato`, `rgpd`, `laboral`, `imovel`, `heranca`, `sociedade`), além do `advogado_pt`.
+- Dicionário de sinónimos/calão na persona; exemplos de gatilho (PT/EN) nos 22 commands.
+
+### Changed
+
+- `SKILL.md` description com gatilhos EN (paridade) e mais frases coloquiais PT.
+- Descrições das 17 tools reescritas em estilo "usa-quando" + sinónimos + pista EN.
+- `plugin.json` keywords (10→20, PT/EN); `marketplace.json` description com frases-gatilho.
+
 ## [1.0.0] - 2026-06
 
 Primeira versão pública consolidada. Reúne o trabalho desenvolvido de forma incremental (v1→v6, antes
