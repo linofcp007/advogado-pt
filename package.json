@@ -1,6 +1,6 @@
 {
   "name": "advogado-pt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "type": "module",
   "description": "Advogado pessoal e empresarial em Portugal — uma skill do Claude Code + um servidor MCP local + integrações multi-plataforma (Cursor, Windsurf, Codex, Gemini, ChatGPT). Referências por área, templates de documentos, playbooks, checklists e calculadoras jurídicas (juros, IMT, prazos, prescrição, compensação). PT/EN.",

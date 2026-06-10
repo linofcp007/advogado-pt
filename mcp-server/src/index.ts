@@ -13,7 +13,7 @@ async function main(): Promise<void> {
   const server = new McpServer(
     {
       name: "advogado-pt",
-      version: "1.0.0",
+      version: "1.0.2",
     },
     {
       // Muitos clientes MCP injetam estas instruções como contexto do servidor,

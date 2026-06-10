@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Advogado PT — assessoria jurídica pessoal e empresarial de Portugal",
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "plugins": [
     {
       "name": "advogado-pt",
       "source": "./",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Advogado pessoal e empresarial em Portugal (PT/EN). Para contratos, cobranças (cliente não paga), RGPD/fuga de dados, laboral/despedimentos, fiscal, imobiliário/IMT, heranças, sociedades (ENI→Lda), insolvência e multas — com referências por área, templates de documentos, playbooks, checklists e calculadoras jurídicas. Personal & business lawyer for Portugal.",
       "category": "legal",
       "tags": ["advogado", "legal", "direito", "portugal", "contratos", "rgpd", "fiscal", "laboral"],

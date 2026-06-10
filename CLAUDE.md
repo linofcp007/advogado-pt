@@ -50,14 +50,14 @@ cd mcp-server && npm test                        # calculadoras + estrutura do p
 python skills/advogado-pt/scripts/test_scripts.py  # testes das calculadoras Python
 ```
 
-**Bump de versão**: alterar em SIMULTÂNEO `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `package.json`, `mcp-server/package.json` e adicionar entrada no `CHANGELOG.md` (Keep a Changelog + SemVer).
+**Bump de versão**: alterar em SIMULTÂNEO `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` (campo `metadata.version` **e** `plugins[0].version`), `package.json`, `mcp-server/package.json`, `mcp-server/src/index.ts` (versão reportada pelo servidor) e adicionar entrada no `CHANGELOG.md` (Keep a Changelog + SemVer). Depois `cd mcp-server && npm run build` e **committar o bundle** `mcp-server/dist/index.js` regenerado.
 
 ## Distribuição
 
-Plugin: `git push` → `/plugin marketplace add linofcp007/advogado-pt` → `/plugin install advogado-pt`. Depois, build único do MCP. Noutras IAs: `node bin/advogado-pt.mjs mcp-config <host>`.
+Plugin: `git push` → `/plugin marketplace add linofcp007/advogado-pt` → `/plugin install advogado-pt`. **Não é preciso build após instalar**: o servidor MCP é distribuído como bundle self-contained versionado (`mcp-server/dist/index.js`). Noutras IAs: `node bin/advogado-pt.mjs mcp-config <host>`.
 
 ## Notas técnicas
 
 - Scripts Python e CLI/MCP reconfiguram stdout para UTF-8 (consola cp1252 do Windows); usar `->` em vez de setas unicode nas mensagens.
-- `mcp-server/dist/` e `mcp-server/content/` são gerados (gitignored) — o plugin exige o build único.
+- `mcp-server/dist/index.js` (bundle self-contained via esbuild) e `mcp-server/content/` são **versionados** — é o que permite o plugin funcionar via marketplace sem `npm install`. São gerados por `npm run build`; regenerar e committar ao mudar `src/` ou conteúdo. O resto de `mcp-server/dist/` (saída do `tsc`, usada só nos testes) e `node_modules/` ficam ignorados.
 - Conteúdo jurídico parcialmente gerado por subagentes; rever citações determinantes antes de confiar.

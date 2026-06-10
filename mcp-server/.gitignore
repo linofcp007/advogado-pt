@@ -1,4 +1,7 @@
 node_modules/
-dist/
-content/
+# `dist/index.js` é o bundle self-contained versionado (plugin via marketplace);
+# o resto de dist/ (saída do tsc, só para testes) fica ignorado.
+dist/*
+!dist/index.js
+# `content/` é versionado (lido em runtime pelo servidor); regenerado por `npm run build`.
 *.tgz

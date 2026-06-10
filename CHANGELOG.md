@@ -4,6 +4,20 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [1.0.2] - 2026-06
+
+Correção de **instalação via marketplace**: o plugin instala e o servidor MCP arranca sem passos manuais.
+
+### Fixed
+
+- `marketplace.json`: o campo `author` da entrada do plugin passou de string para objeto `{name, email}`, como exige o schema. Antes, a validação da entrada falhava e o Claude Code mostrava o erro genérico *"This plugin uses a source type your Claude Code version does not support. Update Claude Code"* — impedindo a instalação (o problema não era a versão do Claude Code nem o `source`).
+- Servidor MCP deixou de exigir `npm install`/build manual depois de instalado: `mcp-server/dist/index.js` passou a ser um **bundle self-contained** (dependências `@modelcontextprotocol/sdk` e `zod` embebidas via esbuild) e é versionado, tal como `mcp-server/content/`. Sem isto, `node dist/index.js` falhava com *"Cannot find package"* num plugin instalado via marketplace (onde não há `node_modules`).
+
+### Changed
+
+- Build do servidor MCP: novo passo `build:server` (esbuild) dentro de `npm run build`; `esbuild` adicionado como devDependency. O `tsc` mantém-se para type-check e para a árvore `dist/` usada nos testes.
+- `.gitignore` (raiz e `mcp-server/`) passam a versionar `mcp-server/dist/index.js` e `mcp-server/content/`, mantendo ignorado o resto da saída do `tsc`.
+
 ## [1.0.1] - 2026-06
 
 Ronda de **semântica de utilização** — melhora a ativação do plugin e a seleção das ferramentas certas, em PT e EN.
@@ -57,4 +71,6 @@ registado informalmente no `README.md`) numa única release versionada, com dist
 - **Custas de injunção** atualizadas (escalões e taxa de justiça desatualizados).
 - Removido o link da **Plataforma ODR** (extinta) e demais correções de revisão de QA.
 
+[1.0.2]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.2
+[1.0.1]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.1
 [1.0.0]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.0

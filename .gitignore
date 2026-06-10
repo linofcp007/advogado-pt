@@ -1,13 +1,18 @@
 # Artefactos de build
 advogado-pt.skill
 *.skill
-dist/
+/dist/
 
 # Node
 node_modules/
 mcp-server/node_modules/
-mcp-server/dist/
-mcp-server/content/
+
+# Servidor MCP: o bundle self-contained `dist/index.js` e o conteúdo jurídico
+# em `content/` SÃO versionados, para o plugin funcionar quando instalado via
+# marketplace (não há `npm install` nesse fluxo). O resto de `dist/` (saída do
+# tsc, usada só nos testes) é gerado e fica ignorado.
+mcp-server/dist/*
+!mcp-server/dist/index.js
 
 # Python
 **/__pycache__/
@@ -16,3 +21,6 @@ mcp-server/content/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# dev-guardian outputs
+.guardian/
