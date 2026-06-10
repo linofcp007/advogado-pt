@@ -39,7 +39,7 @@ Caminhos relativos a `skills/advogado-pt/`:
 - **Novo playbook / checklist** → `playbooks/nome.md` / `assets/checklists/nome.md` + índice.
 - **Nova calculadora** → **dois lados**: Python em `scripts/nome.py` (stdlib, `argparse`, `formatar_euros`, AVISO) + teste em `scripts/test_scripts.py`; **e** o port TS em `mcp-server/src/calculators/nome.ts` (reexportar em `index.ts`) + teste em `mcp-server/test/calculators.test.mjs` + registar a tool em `mcp-server/src/tools.ts`.
 - **Novo command** → `commands/nome.md` (frontmatter `description` PT+EN + `argument-hint`; corpo fino que nomeia a tool/ficheiro real).
-- **Novo hook** → registar em `hooks/hooks.json`; manter o dispatcher `hooks/advogado-hook.mjs` dependency-free e fail-open.
+- **Novo hook** → registar em `hooks/hooks.json`; manter o dispatcher `hooks/advogado-hook.mjs` dependency-free e fail-open. **Não** declarar `hooks/hooks.json` em `plugin.json` (o caminho padrão é carregado automaticamente pelo Claude Code; declará-lo dá "Duplicate hooks file detected"). O `manifest.hooks` só serve para ficheiros de hooks fora do caminho padrão. O teste `mcp-server/test/plugin.test.mjs` trava esta regressão.
 
 ## Build, testes e versões
 
