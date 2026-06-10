@@ -59,12 +59,21 @@ test("cada tool referenciada num command existe no servidor MCP", () => {
 test("plugin.json aponta para caminhos existentes", () => {
   const manifest = JSON.parse(readFileSync(r(".claude-plugin", "plugin.json"), "utf8"));
 
-  // skills, commands e hooks são caminhos relativos à raiz do plugin.
-  for (const chave of ["skills", "commands", "hooks"]) {
+  // skills e commands são caminhos relativos à raiz do plugin.
+  for (const chave of ["skills", "commands"]) {
     const valor = manifest[chave];
     assert.ok(typeof valor === "string", `plugin.json: '${chave}' deve ser uma string`);
     assert.ok(existsSync(r(valor)), `plugin.json: '${chave}' -> '${valor}' não existe`);
   }
+
+  // hooks/hooks.json está no caminho padrão e é carregado AUTOMATICAMENTE pelo
+  // Claude Code; declará-lo em plugin.json provoca "Duplicate hooks file detected".
+  // Logo: o ficheiro tem de existir, mas o manifesto NÃO o deve referenciar.
+  assert.ok(existsSync(r("hooks", "hooks.json")), "hooks/hooks.json (caminho padrão) deve existir");
+  assert.ok(
+    manifest.hooks === undefined,
+    "plugin.json: não deve declarar 'hooks' para o ficheiro padrão (é carregado automaticamente)"
+  );
 
   // mcpServers aponta para o .mcp.json, que por sua vez referencia o servidor.
   const mcpRef = manifest.mcpServers;

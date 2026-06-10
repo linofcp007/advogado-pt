@@ -2,7 +2,7 @@
   "name": "advogado-pt",
   "displayName": "Advogado PT",
   "description": "Advogado pessoal e empresarial em Portugal: referências por área (contratos, laboral, fiscal, RGPD, imobiliário, societário, cobranças, heranças…), templates de documentos, playbooks, checklists e calculadoras jurídicas (juros, IMT, prazos, prescrição, compensação). PT/EN. Personal & business lawyer for Portugal — legal references, document templates, playbooks and calculators.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "Carlos Pereira",
     "email": "carlospereira@prodigitalkey.com"
@@ -34,6 +34,5 @@
   ],
   "skills": "./skills/",
   "commands": "./commands/",
-  "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json"
 }

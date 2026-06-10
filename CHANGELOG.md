@@ -4,6 +4,14 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [1.0.3] - 2026-06
+
+Correção do **carregamento de hooks** após instalação.
+
+### Fixed
+
+- `plugin.json`: removida a referência `"hooks": "./hooks/hooks.json"`. O Claude Code carrega `hooks/hooks.json` (caminho padrão) **automaticamente**, pelo que declará-lo no manifesto provocava *"Duplicate hooks file detected"* e a falha do carregamento dos hooks (`SessionStart`, `PostToolUse`). O campo `manifest.hooks` só deve apontar para ficheiros de hooks **adicionais**, fora do caminho padrão.
+
 ## [1.0.2] - 2026-06
 
 Correção de **instalação via marketplace**: o plugin instala e o servidor MCP arranca sem passos manuais.
@@ -71,6 +79,7 @@ registado informalmente no `README.md`) numa única release versionada, com dist
 - **Custas de injunção** atualizadas (escalões e taxa de justiça desatualizados).
 - Removido o link da **Plataforma ODR** (extinta) e demais correções de revisão de QA.
 
+[1.0.3]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.3
 [1.0.2]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.2
 [1.0.1]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.1
 [1.0.0]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.0
