@@ -4,6 +4,19 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [1.0.4] - 2026-07
+
+Correção de **falsos positivos** do hook `PostToolUse`.
+
+### Fixed
+
+- O hook `PostToolUse` deixou de anunciar *"Documento jurídico detetado"* em ficheiros técnicos. Detetava por presença de palavras (`contrato`, `cláusula`, `NDA`, …), mas num plugin de direito esse vocabulário **é** o assunto: disparava em 105 ficheiros do próprio repositório — incluindo `mcp-server/src/tools.ts`, todas as `references/` e todos os `playbooks/` — e em specs de software que dizem "contrato" no sentido de *contrato de interface*. Passa a classificar pela **estrutura do instrumento** (título de documento, bloco de outorgantes, cláusulas numeradas, assunto/fecho de carta), ignorando ficheiros que não sejam prosa, caminhos técnicos (`.specs/`, `src/`, `scripts/`, …) e referências da casa (`## Legislação Base`). Medido no repositório: 52/56 templates detetados, **0 falsos positivos em 190** ficheiros não-jurídicos.
+
+### Added
+
+- `mcp-server/test/hooks.test.mjs` — testes do detetor, incluindo o caso de regressão que originou a correção.
+- `detetarDocumentoJuridico()` passa a ser exportada de `hooks/advogado-hook.mjs`; o dispatcher só corre quando o ficheiro é executado diretamente, para ser testável sem efeitos secundários.
+
 ## [1.0.3] - 2026-06
 
 Correção do **carregamento de hooks** após instalação.
