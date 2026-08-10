@@ -31,7 +31,7 @@ args = ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
 ```
 
 > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-> `node bin/advogado-pt.mjs mcp-config codex` na raiz do repo para gerar o bloco com o
+> `node cli/advogado-pt.mjs mcp-config codex` na raiz do repo para gerar o bloco com o
 > caminho **absoluto** já preenchido.
 
 Inicia o `codex` e confirma com `/mcp` que o servidor `advogado-pt` está ligado e que as

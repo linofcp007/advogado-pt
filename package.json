@@ -1,6 +1,6 @@
 {
   "name": "advogado-pt",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "type": "module",
   "description": "Advogado pessoal e empresarial em Portugal — uma skill do Claude Code + um servidor MCP local + integrações multi-plataforma (Cursor, Windsurf, Codex, Gemini, ChatGPT). Referências por área, templates de documentos, playbooks, checklists e calculadoras jurídicas (juros, IMT, prazos, prescrição, compensação). PT/EN.",
@@ -12,13 +12,13 @@
     "url": "git+https://github.com/linofcp007/advogado-pt.git"
   },
   "bin": {
-    "advogado-pt": "bin/advogado-pt.mjs"
+    "advogado-pt": "cli/advogado-pt.mjs"
   },
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "setup": "npm --prefix mcp-server install && npm --prefix mcp-server run build && node bin/advogado-pt.mjs doctor",
+    "setup": "npm --prefix mcp-server install && npm --prefix mcp-server run build && node cli/advogado-pt.mjs doctor",
     "build:skill": "python build.py",
     "build:mcp": "npm --prefix mcp-server install && npm --prefix mcp-server run build",
     "test": "npm --prefix mcp-server test"

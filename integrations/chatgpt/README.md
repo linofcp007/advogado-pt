@@ -71,7 +71,7 @@ Resumo:
 
 - Compila (`npm install && npm run build` em `mcp-server/`) e usa `command: "node"`,
   `args: ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]` (caminho **absoluto**).
-- Atalho: corre `node bin/advogado-pt.mjs mcp-config codex` (ou outro host) na raiz do repo
+- Atalho: corre `node cli/advogado-pt.mjs mcp-config codex` (ou outro host) na raiz do repo
   para obter o bloco com o caminho **absoluto** já preenchido para a tua máquina.
 
 ---

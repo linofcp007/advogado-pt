@@ -33,7 +33,7 @@ preenchendo o caminho **absoluto** para `dist/index.js`:
 ```
 
 > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-> `node bin/advogado-pt.mjs mcp-config cursor` na raiz do repo para gerar o bloco com o
+> `node cli/advogado-pt.mjs mcp-config cursor` na raiz do repo para gerar o bloco com o
 > caminho **absoluto** já preenchido.
 
 Depois vai a **Settings → Cursor Settings → MCP** e confirma que `advogado-pt` está

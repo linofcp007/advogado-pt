@@ -7,5 +7,5 @@
 command = "node"
 args = ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
 
-# Dica: corre `node bin/advogado-pt.mjs mcp-config codex` na raiz do repo
+# Dica: corre `node cli/advogado-pt.mjs mcp-config codex` na raiz do repo
 # para gerar este bloco com o caminho ABSOLUTO já preenchido para a tua máquina.

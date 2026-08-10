@@ -34,7 +34,7 @@ npm run setup             # instala + compila o servidor MCP + diagnóstico (doc
 
 ### 2. Ligar a cada plataforma
 
-Config genérica — substitui pelo caminho absoluto da tua máquina, ou corre `node bin/advogado-pt.mjs mcp-config <host>` para o gerar:
+Config genérica — substitui pelo caminho absoluto da tua máquina, ou corre `node cli/advogado-pt.mjs mcp-config <host>` para o gerar:
 
 ```json
 { "mcpServers": { "advogado-pt": { "command": "node", "args": ["/CAMINHO/ABSOLUTO/advogado-pt/mcp-server/dist/index.js"] } } }

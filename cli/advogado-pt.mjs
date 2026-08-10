@@ -163,7 +163,7 @@ function doctor() {
   }
   console.log(
     ok
-      ? "\nTudo pronto. Liga um cliente com: node bin/advogado-pt.mjs mcp-config <host>"
+      ? "\nTudo pronto. Liga um cliente com: node cli/advogado-pt.mjs mcp-config <host>"
       : "\nResolver: cd mcp-server && npm install && npm run build"
   );
   process.exit(ok ? 0 : 1);

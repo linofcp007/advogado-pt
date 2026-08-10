@@ -26,7 +26,7 @@ Depois, no repositório, **uma vez**: `npm run setup` (instala + compila o servi
 1. Gera o pacote com `python build.py` (ou `./build.ps1`) → `advogado-pt.skill`
 2. No Claude, **Settings → Skills** e faz upload do ficheiro
 
-**Noutras IAs** (Cursor, Windsurf, Codex, Gemini, ChatGPT): ver [INSTALL.md](INSTALL.md) e [integrations/](integrations/), ou corre `node bin/advogado-pt.mjs mcp-config <host>`.
+**Noutras IAs** (Cursor, Windsurf, Codex, Gemini, ChatGPT): ver [INSTALL.md](INSTALL.md) e [integrations/](integrations/), ou corre `node cli/advogado-pt.mjs mcp-config <host>`.
 
 ### Comandos (slash commands)
 
@@ -40,7 +40,7 @@ advogado-pt/                     # plugin Claude Code
 ├── .mcp.json                   # servidor MCP (${CLAUDE_PLUGIN_ROOT})
 ├── commands/        (22)       # slash commands (/advogado, /cobrar, /imt, /doctor…)
 ├── hooks/                      # hooks.json + advogado-hook.mjs (SessionStart/PostToolUse)
-├── bin/advogado-pt.mjs         # CLI universal (mcp-config + calc + doctor)
+├── cli/advogado-pt.mjs         # CLI universal (mcp-config + calc + doctor)
 ├── skills/advogado-pt/         # a skill (conteúdo jurídico)
 │   ├── SKILL.md                # lógica, fluxo, protocolos de rigor
 │   ├── references/   (26)      # ⭐ valores-2026.md = ponto único de verdade
@@ -99,7 +99,7 @@ Os valores legais mudam — ver `CLAUDE.md` para o guia completo. Pontos de revi
 
 > Histórico formal (SemVer) em [CHANGELOG.md](CHANGELOG.md). Resumo da evolução:
 
-- **v7 (2026-06)**: convertido em **plugin Claude Code** — `.claude-plugin/` (marketplace), 22 slash commands, hooks (SessionStart/PostToolUse), CLI `bin/` (`mcp-config`/`calc`/`doctor`), dotfiles de editor e `AGENTS.md`/`GEMINI.md` na raiz, governance (LICENSE/CONTRIBUTING/SECURITY/glama), conteúdo reestruturado para `skills/advogado-pt/`, teste de estrutura do plugin. Publicado em github.com/linofcp007/advogado-pt.
+- **v7 (2026-06)**: convertido em **plugin Claude Code** — `.claude-plugin/` (marketplace), 22 slash commands, hooks (SessionStart/PostToolUse), CLI `cli/` (`mcp-config`/`calc`/`doctor`), dotfiles de editor e `AGENTS.md`/`GEMINI.md` na raiz, governance (LICENSE/CONTRIBUTING/SECURITY/glama), conteúdo reestruturado para `skills/advogado-pt/`, teste de estrutura do plugin. Publicado em github.com/linofcp007/advogado-pt.
 - **v6 (2026-06)**: distribuição multi-plataforma — servidor **MCP** em TypeScript (`mcp-server/`) com as 8 calculadoras portadas (18 testes + smoke end-to-end), conteúdo jurídico como resources e persona como prompt; manifestos para Claude Code (plugin), Claude Desktop, Cursor, Windsurf, Gemini CLI, Codex e ChatGPT em [integrations/](integrations/); guia [INSTALL.md](INSTALL.md). O pacote `.skill` exclui agora `mcp-server/` e `integrations/`.
 - **v5 (2026-06)**: revisão completa de QA — corrigidos 9 defeitos (custas de injunção desatualizadas, link da Plataforma ODR extinta, IRC 17%/21% residual, placeholder partido, "Modelo 2 do IMT"→Selo, etc.); + 5 templates nucleares (injunção, cookie policy, contrato a termo certo, despedimento com justa causa, livrança); emolumentos centralizados em valores-2026.md; "(a confirmar)" da LCS/Haia confirmados; nota mitigadora nas secções "## Templates" das referências (28 templates).
 - **v4 (2026-06)**: + áreas penal/cibercrime, contencioso, contratação pública, sucessões internacionais, estrangeiros, garantias (26 referências); + pasta `playbooks/` (5 árvores de decisão); + `assets/checklists/` (5); + calculadoras IMT/prescrição/IRS simplificado e `test_scripts.py` (18 testes); + templates intake e parecer; + `CLAUDE.md` e `.gitignore`; tabela IMT 2026 no ficheiro central; correção do laboral.md (compensação 12→14 dias).

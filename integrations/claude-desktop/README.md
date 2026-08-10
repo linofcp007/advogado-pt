@@ -41,7 +41,7 @@ Atalho para abrir a partir da app: **Settings → Developer → Edit Config**.
    ```
 
    > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-   > `node bin/advogado-pt.mjs mcp-config claude-desktop` na raiz do repo para gerar o bloco
+   > `node cli/advogado-pt.mjs mcp-config claude-desktop` na raiz do repo para gerar o bloco
    > com o caminho **absoluto** já preenchido.
 
 4. **Fecha e reabre** o Claude Desktop (sai por completo, não apenas a janela).

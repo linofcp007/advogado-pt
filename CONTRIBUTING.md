@@ -13,7 +13,7 @@ advogado-pt/
 ├── mcp-server/           # Servidor MCP em TypeScript (src/, test/, scripts/bundle-content.mjs → content/)
 ├── commands/             # Slash commands do plugin do Claude Code
 ├── hooks/                # Hooks locais do plugin (hooks.json)
-├── bin/                  # CLI / entry point (bin/advogado-pt.mjs)
+├── cli/                  # CLI / entry point (cli/advogado-pt.mjs)
 ├── integrations/         # Configs por plataforma (Cursor, Windsurf, Gemini, Codex, ChatGPT, Claude)
 └── .claude-plugin/       # plugin.json + marketplace.json
 ```

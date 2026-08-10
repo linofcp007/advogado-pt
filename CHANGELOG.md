@@ -4,6 +4,15 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [1.0.5] - 2026-08
+
+Correção da **sincronização do marketplace** no Claude Desktop / claude.ai.
+
+### Fixed
+
+- O diretório de topo `bin/` foi renomeado para `cli/`. O Claude Desktop não clona o repositório localmente — delega a validação num serviço remoto da Anthropic, que rejeitava o plugin com `status=failed_content`: *"Plugin contains a top-level bin/ directory ('bin/advogado-pt.mjs'). claude.ai-hosted plugins may not ship bin/ executables because they are added to PATH on the CLI but are not shown on the admin approval surface."* Na UI isto aparecia apenas como **"Falha na sincronização do marketplace. Verifique a URL do repositório"** — mensagem enganadora, porque a URL estava correta e o repositório é público. A instalação pelo CLI (`/plugin marketplace add`) nunca foi afetada, porque usa `git clone` local e não passa por esta validação.
+- Atualizadas as 16 referências a `bin/advogado-pt.mjs` (README, INSTALL, CONTRIBUTING, CLAUDE.md, llms-install, `commands/doctor.md`, todas as `integrations/` e o campo `bin` + script `setup` do `package.json`). O comando passa a ser `node cli/advogado-pt.mjs`.
+
 ## [1.0.4] - 2026-07
 
 Correção de **falsos positivos** do hook `PostToolUse`.

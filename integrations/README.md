@@ -41,7 +41,7 @@ npm run build
 > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto correto na tua máquina. Em
 > Windows podes usar `/` ou `\\` (com escape) no JSON.
 >
-> Atalho: na raiz do repo corre `node bin/advogado-pt.mjs mcp-config <host>` (hosts:
+> Atalho: na raiz do repo corre `node cli/advogado-pt.mjs mcp-config <host>` (hosts:
 > `claude-desktop`, `claude-code`, `cursor`, `windsurf`, `gemini`, `codex`, `vscode`,
 > `generic`, ou `all`) e o comando imprime o bloco de configuração com o caminho **absoluto**
 > já preenchido para a tua máquina, pronto a colar.

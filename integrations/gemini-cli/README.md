@@ -38,7 +38,7 @@ do `mcpServers` existente:
 ```
 
 > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-> `node bin/advogado-pt.mjs mcp-config gemini` na raiz do repo para gerar o bloco com o
+> `node cli/advogado-pt.mjs mcp-config gemini` na raiz do repo para gerar o bloco com o
 > caminho **absoluto** já preenchido.
 
 Inicia o `gemini` e confirma com o comando `/mcp` que o servidor `advogado-pt` está ligado e

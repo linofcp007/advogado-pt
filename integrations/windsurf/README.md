@@ -35,7 +35,7 @@ ficheiro de configuração MCP do Windsurf, preenchendo o caminho **absoluto** p
 ```
 
 > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-> `node bin/advogado-pt.mjs mcp-config windsurf` na raiz do repo para gerar o bloco com o
+> `node cli/advogado-pt.mjs mcp-config windsurf` na raiz do repo para gerar o bloco com o
 > caminho **absoluto** já preenchido.
 
 Em alternativa, abre o painel do **Cascade → MCP servers → Configure** (ícone do martelo) e

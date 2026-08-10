@@ -9,7 +9,7 @@ Plugin Claude Code de assessoria jurídica de Portugal, com 4 superfícies sobre
 - **Skill** (`skills/advogado-pt/`) — `SKILL.md` + `references/`, `assets/templates/`, `assets/checklists/`, `playbooks/`, `scripts/` (calculadoras Python).
 - **Servidor MCP** (`mcp-server/`, TypeScript) — calculadoras (port TS) + conteúdo como tools/resources + persona como prompt.
 - **Slash commands** (`commands/`) — wrappers finos que invocam a skill / tools.
-- **Hooks** (`hooks/`) + **CLI** (`bin/advogado-pt.mjs`).
+- **Hooks** (`hooks/`) + **CLI** (`cli/advogado-pt.mjs`).
 
 Distribuição: plugin via marketplace git (`.claude-plugin/`) + `.skill` (Anthropic Skills) gerado por `build.py`. **Sem npm publish e sem CI, por opção** (zero custo).
 
@@ -54,7 +54,9 @@ python skills/advogado-pt/scripts/test_scripts.py  # testes das calculadoras Pyt
 
 ## Distribuição
 
-Plugin: `git push` → `/plugin marketplace add linofcp007/advogado-pt` → `/plugin install advogado-pt`. **Não é preciso build após instalar**: o servidor MCP é distribuído como bundle self-contained versionado (`mcp-server/dist/index.js`). Noutras IAs: `node bin/advogado-pt.mjs mcp-config <host>`.
+Plugin: `git push` → `/plugin marketplace add https://github.com/linofcp007/advogado-pt.git` → `/plugin install advogado-pt`. **Não é preciso build após instalar**: o servidor MCP é distribuído como bundle self-contained versionado (`mcp-server/dist/index.js`). Noutras IAs: `node cli/advogado-pt.mjs mcp-config <host>`.
+
+**Nunca criar um diretório `bin/` na raiz.** O Claude Desktop / claude.ai não clona o repo: valida-o num serviço remoto da Anthropic, que **rejeita** qualquer plugin com `bin/` de topo (esses ficheiros entram no PATH no CLI mas não são mostrados na superfície de aprovação). O sync falha com `status=failed_content` e a UI mostra só *"Falha na sincronização do marketplace. Verifique a URL do repositório"* — que não tem nada a ver com a causa. Pontos de entrada executáveis vão para `hooks/`, `commands/` ou `mcpServers`; o CLI universal vive em `cli/`. O CLI local (`/plugin marketplace add`) usa `git clone` e **não** aplica esta regra, por isso passa mesmo quando o Desktop falha — não serve de validação.
 
 ## Notas técnicas
 
