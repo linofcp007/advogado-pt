@@ -102,6 +102,11 @@ def calcular_prazo(inicio, tipo):
     return descricao, texto_prazo, base, limite
 
 
+def calcular_prescricao(inicio, tipo):
+    """Stub — v1.2.1, tarefa 8."""
+    raise NotImplementedError
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Calcula prazos de prescrição / caducidade em Portugal.",

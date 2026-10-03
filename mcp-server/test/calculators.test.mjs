@@ -187,17 +187,21 @@ test("IMT hpp 100000 isento", () => {
   assert.ok(r.isento);
 });
 
-test("IMT jovem 300000 isento", () => {
+test("T-243 IMT jovem 300000: isento de IMT e de Imposto do Selo (CIS, art. 7.º, n.º 1, al. y))", () => {
   const r = calcularIMT(300000, "hpp", true);
   quase(r.imt, 0.0);
   assert.ok(r.isento);
+  quase(r.selo, 0.0);
+  quase(r.total, 0.0);
 });
 
-test("IMT jovem 400000 parcial", () => {
-  // (400000 - 330539) * 0,08 = 5.556,88.
+test("T-243 IMT jovem 400000: IMT e Selo só sobre o excedente de 330.539 €", () => {
+  // IMT: (400000 - 330539) * 0,08 = 5.556,88. Selo: 0,8% * (400000 - 330539) = 555,69.
   const r = calcularIMT(400000, "hpp", true);
   quase(r.imt, (400000 - 330539) * 0.08);
   quase(r.imt, 5556.88);
+  quase(r.selo, 555.69);
+  quase(r.total, 6112.57);
 });
 
 test("IMT taxa única 6% (hpp 700000)", () => {
@@ -242,12 +246,19 @@ test("compensação sem-termo 1500 / 4 anos -> 2800 (sem mínimo de 3 meses)", (
 });
 
 // === Prescrição ===
-test("prescrição servicos-profissionais 2025-01-01 -> 2030-01-01", () => {
-  const { limite } = calcularPrescricao(
-    dataUTC(2025, 1, 1),
-    "servicos-profissionais"
-  );
-  assert.equal(isoUTC(limite), "2030-01-01");
+test("T-243 prescrição servicos-profissionais 2025-01-01 -> 2027-01-01 (presuntiva, CC 317.º, al. c))", () => {
+  // A v1.2 dava 5 anos; os créditos por serviços prestados no exercício de profissão liberal
+  // prescrevem (presuntivamente) em 2 anos.
+  const r = calcularPrescricao(dataUTC(2025, 1, 1), "servicos-profissionais");
+  assert.equal(isoUTC(r.limite), "2027-01-01");
+  assert.equal(r.presuntiva, true);
+  assert.match(r.base, /317\.º, al\. c\)/);
+});
+
+test("T-243 IRS simplificado: propriedade intelectual com coeficiente 0,95 (CIRS, art. 31.º, n.º 1, al. c))", () => {
+  const r = calcularIRSSimplificado(100000, "propriedade-intelectual");
+  quase(r.coeficiente, 0.95);
+  quase(r.tributavel, 95000);
 });
 
 test("prescrição civil-geral 2025-01-01 -> 2045-01-01", () => {

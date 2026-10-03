@@ -94,6 +94,11 @@ def contar_dias_uteis(inicio, n_dias):
     return data
 
 
+def contar_prazo(inicio, dias, tipo="corridos", urgente=False):
+    """Stub — v1.2.1, tarefa 6."""
+    raise NotImplementedError
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Conta prazos legais (dias úteis ou corridos) em Portugal.",

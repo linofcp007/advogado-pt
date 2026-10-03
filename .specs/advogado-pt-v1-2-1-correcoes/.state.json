@@ -40,6 +40,17 @@
       "by": "Carlos Pereira",
       "fingerprint": "322f2039c38a96515c3836330766804c8c4eec2a",
       "batch": true
+    },
+    "tests": {
+      "at": "2026-10-03T21:19:17.134Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    "tasks": {
+      "at": "2026-10-03T21:19:17.236Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "95a3a8b54a2bbabef35e501e752a73cc9257f33d",
+      "batch": true
     }
   },
   "createdAt": "2026-10-03T20:44:27.929Z",
@@ -85,7 +96,66 @@
       "fingerprint": "322f2039c38a96515c3836330766804c8c4eec2a",
       "batch": true,
       "snapshot": ".history/test-plan@1.md"
+    },
+    {
+      "phase": "tests",
+      "at": "2026-10-03T21:19:17.134Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    {
+      "phase": "tasks",
+      "at": "2026-10-03T21:19:17.236Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "95a3a8b54a2bbabef35e501e752a73cc9257f33d",
+      "batch": true,
+      "snapshot": ".history/tasks@1.md"
     }
   ],
-  "lastApprovedPhase": "test-plan"
+  "lastApprovedPhase": "tasks",
+  "evidence": {
+    "1": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exitCode": 0,
+      "summary": "fix/v1.2.1-correcoes; specs v1.2.1 e v2.0 commitadas",
+      "at": "2026-10-03T21:01:03.885Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "git rev-parse --abbrev-ref HEAD",
+          "exitCode": 0,
+          "summary": "fix/v1.2.1-correcoes; specs v1.2.1 e v2.0 commitadas",
+          "at": "2026-10-03T21:01:03.885Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Branch `fix/v1.2.1-correcoes` a partir do `main`; commit da spec aprovada",
+      "verify": "git rev-parse --abbrev-ref HEAD"
+    },
+    "2": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 1,
+      "summary": "Vermelho esperado: 153 testes, 105 passam, 48 falham — T-201..T-205, T-207, T-209..T-227, T-229..T-237, T-239, T-240, T-242..T-249 e T-130 (factos v121-). T-228 e T-250 já passam (sem stack traces hoje; hook < 300 ms). Python: python skills/advogado-pt/scripts/test_scripts.py -> exit 1 (T206, T208, T241 e o teste antigo da prescrição 2030 -> 2027).",
+      "at": "2026-10-03T21:18:47.832Z",
+      "expected": "fail",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 1,
+          "summary": "Vermelho esperado: 153 testes, 105 passam, 48 falham — T-201..T-205, T-207, T-209..T-227, T-229..T-237, T-239, T-240, T-242..T-249 e T-130 (factos v121-). T-228 e T-250 já passam (sem stack traces hoje; hook < 300 ms). Python: python skills/advogado-pt/scripts/test_scripts.py -> exit 1 (T206, T208, T241 e o teste antigo da prescrição 2030 -> 2027).",
+          "at": "2026-10-03T21:18:47.832Z",
+          "expected": "fail",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Escrever os testes a falhar: `mcp-server/test/v121.test.mjs` (T-201 a T-250 exceto T-206, T-208, T-241, T-243), os novos casos de `plugin.test.mjs` (T-233 a T-237, T-239, T-244, T-249), `test_scripts.py` (T-206, T-208, T-241), `fixtures/paridade.json` e os factos `v121-` esperados",
+      "verify": "npm --prefix mcp-server test"
+    }
+  },
+  "lastTickAt": "2026-10-03T21:18:47.832Z",
+  "ticks": {
+    "1": "2026-10-03T21:01:03.885Z",
+    "2": "2026-10-03T21:18:47.832Z"
+  }
 }

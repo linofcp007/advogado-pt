@@ -2,21 +2,21 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 65%** ▰▰▰▰▰▰▰▱▱▱ · 2/4 features completas · 58/137 tasks feitas
+**Progresso: 66%** ▰▰▰▰▰▰▰▱▱▱ · 2/4 features completas · 60/137 tasks feitas
 
-_Velocidade: 149 ponto(s)/dia útil — 58 tarefa(s), 149 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 155 ponto(s)/dia útil — 60 tarefa(s), 155 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
 ## ▶ A seguir
-- **advogado-pt-v1-2-1-correcoes** (core +tdd +sec) — próxima #1 Branch `fix/v1.2.1-correcoes` a partir do 
+- **advogado-pt-v1-2-1-correcoes** (core +tdd +sec) — próxima #3 `fs-seguro.ts` (`dirProjeto`, `escreverSeg
 
 ## Features
 
 | | Feature | Tracks | Fase | % | Tasks | Deps | Próxima | Previsão |
 |---|---|---|---|---|---|---|---|---|
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
-| 📋 | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | tarefas prontas | 30% | 0/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | #1 Branch `fix/v1.2.1-correcoes` a partir do  | 2026-10-05 |
+| 🟡 | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | em execução | 33% | 2/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | #3 `fs-seguro.ts` (`dirProjeto`, `escreverSeg | 2026-10-05 |
 | ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
 | ⛔ | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | tarefas prontas | 30% | 0/38 | advogado-pt-v1-2-1-correcoes ✗ | bloqueada | 2026-10-06 |
 

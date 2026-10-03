@@ -13,11 +13,11 @@
 - Mensagens de consola com `->`; stdout UTF-8; erros sem stack trace.
 
 ## Fase: Setup
-- [x] 1. [shared] Branch `fix/v1.2.1-correcoes` a partir do `main`; commit da spec aprovada
+- [ ] 1. [shared] Branch `fix/v1.2.1-correcoes` a partir do `main`; commit da spec aprovada
   - _Requirements: NFR-2_
   - _Verify: git rev-parse --abbrev-ref HEAD_
   - _Size: XS_
-- [x] 2. [shared] Escrever os testes a falhar: `mcp-server/test/v121.test.mjs` (T-201 a T-250 exceto T-206, T-208, T-241, T-243), os novos casos de `plugin.test.mjs` (T-233 a T-237, T-239, T-244, T-249), `test_scripts.py` (T-206, T-208, T-241), `fixtures/paridade.json` e os factos `v121-` esperados
+- [ ] 2. [shared] Escrever os testes a falhar: `mcp-server/test/v121.test.mjs` (T-201 a T-250 exceto T-206, T-208, T-241, T-243), os novos casos de `plugin.test.mjs` (T-233 a T-237, T-239, T-244, T-249), `test_scripts.py` (T-206, T-208, T-241), `fixtures/paridade.json` e os factos `v121-` esperados
   - _Requirements: US-1.AC-1, US-2.AC-1, US-3.AC-1, US-4.AC-8, US-6.AC-10, US-8.AC-1, US-9.AC-1, US-10.AC-1_
   - _Implements: mcp-server/test/v121.test.mjs, mcp-server/test/plugin.test.mjs, mcp-server/test/fixtures/paridade.json, skills/advogado-pt/scripts/test_scripts.py_
   - _Verify: npm --prefix mcp-server test_
