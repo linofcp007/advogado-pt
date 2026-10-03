@@ -23,7 +23,7 @@ _Sem dependências declaradas._
 
 ## ⚠ Precisa de atenção
 
-- **advogado-pt-v1-1-empresas** — alterado desde a aprovação — rever de novo: tasks.md
+_Nada a assinalar ✓_
 
 ## Backlog (planeadas, ainda sem spec)
 
