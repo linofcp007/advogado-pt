@@ -4,6 +4,17 @@
       "dependsOn": [
         "advogado-pt-v1-1-empresas"
       ]
+    },
+    "advogado-pt-v1-2-1-correcoes": {
+      "dependsOn": [
+        "advogado-pt-v1-2-operacional",
+        "advogado-pt-v1-1-empresas"
+      ]
+    },
+    "juridico-pt-v2-0": {
+      "dependsOn": [
+        "advogado-pt-v1-2-1-correcoes"
+      ]
     }
   },
   "meta": {

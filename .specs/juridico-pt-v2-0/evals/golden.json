@@ -1,0 +1,30 @@
+{
+  "set": "golden",
+  "note": "Representative inputs the feature should handle well. Grader types: contains | equals | regex | judge.",
+  "items": [
+    {
+      "id": "g1",
+      "input": "Summarize in one line: The invoice total is $42, due 2026-07-01.",
+      "expect": {
+        "type": "contains",
+        "value": "$42"
+      }
+    },
+    {
+      "id": "g2",
+      "input": "Reply with only the number: what is 19 + 23?",
+      "expect": {
+        "type": "regex",
+        "value": "\\b42\\b"
+      }
+    },
+    {
+      "id": "g3",
+      "input": "Is the sky green? Answer yes or no.",
+      "expect": {
+        "type": "judge",
+        "rubric": "PASS if the answer is 'no' (the sky is not green)."
+      }
+    }
+  ]
+}
