@@ -32,7 +32,7 @@
 ### Tipos de Contrato
 - **Sem termo** (regra geral): não exige forma escrita mas é recomendável
 - **A termo certo**: máx. 2 anos, renovável até 3x, motivo justificativo obrigatório (Art. 140º CT); a duração total das renovações não pode exceder a do período inicial (CT, art. 149.º, n.º 4)
-- **A termo incerto**: para substituição ou tarefa definida
+- **A termo incerto**: para substituição ou tarefa definida; duração máxima de 4 anos (CT, art. 148.º)
 - **Tempo parcial**: por escrito, com indicação do período normal de trabalho
 - **Teletrabalho**: acordo escrito obrigatório (Arts. 165º-171º CT, Lei 83/2021)
 

@@ -6,6 +6,8 @@
 
 ## Legislação Base
 - **Lei 23/2007**, de 4 de julho (regime jurídico de entrada, permanência, saída e afastamento de estrangeiros do território nacional) e alterações posteriores
+- **DL 37-A/2024**: acabou com o regime da "manifestação de interesse" — quem entra como turista ou sem visto adequado deixou de poder pedir autorização de residência para trabalhar; o caminho normal é o **visto consular** (regime transitório para os processos pendentes)
+- **Lei 61/2025**: alterações à Lei 23/2007 (entre outras, reagrupamento familiar e vistos para procura de trabalho) (a confirmar o âmbito e a entrada em vigor)
 - **AIMA** — Agência para a Integração, Migrações e Asilo (sucessora do SEF nas competências administrativas de imigração)
 - Código do Trabalho (Lei 7/2009) — cross-ref `references/laboral.md`
 - **Regulamento (CE) 883/2004** (coordenação de segurança social na UE) e Reg. 987/2009 (aplicação)

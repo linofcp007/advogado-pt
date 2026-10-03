@@ -21,6 +21,7 @@ import {
   memoriaJuros,
   calcularCreditosCessacao,
   calcularLegitima,
+  impostoSeloHeranca,
 } from "../dist/calculators/index.js";
 
 // Compara floats com tolerância (equivalente a assertAlmostEqual places=2).
@@ -414,4 +415,16 @@ test("T-16 legítima sem herdeiros legitimários -> 0 e QD 100%", () => {
 test("T-17 legítima: erro com bens ou filhos negativos", () => {
   assert.throws(() => calcularLegitima({ bens: -1, conjuge: true, filhos: 1 }), /bens/i);
   assert.throws(() => calcularLegitima({ bens: 1000, conjuge: true, filhos: -2 }), /filhos/i);
+});
+
+// === Imposto do Selo: 0,8% (verba 1.1) só nas doações de imóveis ===
+test("T-242 Selo: herança de imóvel não paga os 0,8%; doação paga, mesmo a descendente", () => {
+  const h = impostoSeloHeranca(80000, "descendente", true, 120000);
+  quase(h.isImovel, 0);
+  quase(h.total, 0);
+  const d = impostoSeloHeranca(80000, "descendente", true, 120000, true);
+  quase(d.isImovel, 960);
+  quase(d.total, 960);
+  const o = impostoSeloHeranca(80000, "outro", true, 120000, true);
+  quase(o.total, 8000 + 960);
 });

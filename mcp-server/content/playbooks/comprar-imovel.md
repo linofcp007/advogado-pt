@@ -26,7 +26,7 @@
    - **Sinal** (Art. 442.º CC): define o valor; incumprimento do comprador = perde o sinal; do vendedor = devolve em dobro.
    - **Execução específica** (Art. 830.º CC): permite obter por sentença a venda prometida. Com sinal presume-se afastada, **mas** na promessa de compra de edifício ou fração autónoma não pode ser afastada (art. 830.º, n.º 3, e art. 410.º, n.º 3). Se pagaste sinal e já tens a chave (tradição), como consumidor tens direito de retenção, mesmo na insolvência do vendedor (AUJ do STJ 4/2014).
    - **Forma**: escrito com **reconhecimento de assinaturas** (prédios — Art. 410.º n.º 3 CC).
-   - **Tradição da coisa** (se receberes já o imóvel): confere direito de retenção que prevalece sobre hipoteca anterior.
+   - **Tradição da coisa** (se receberes já o imóvel): confere direito de retenção que prevalece sobre hipoteca anterior (CC, arts. 755.º, n.º 1, al. f), e 759.º, n.º 2); na insolvência do vendedor, só se fores consumidor (AUJ do STJ 4/2014).
    - Fixa **prazo e local da escritura**, condição de financiamento, e o que acontece se o crédito não for aprovado.
 
 4. **Simula os impostos da aquisição** para saberes o custo total antes de te comprometeres:

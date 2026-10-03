@@ -152,6 +152,8 @@ O Trespassante: _______________________________
 
 O Trespassário: _______________________________
 
+{{CONSENTIMENTO_CONJUGE: opcional — se o Trespassante for casado num regime que não seja o de separação de bens: «{{CONJUGE_NOME}}, cônjuge de {{TRESPASSANTE_NOME}}, declara dar o seu consentimento ao presente trespasse, nos termos do art. 1682.º-A do Código Civil.» Cônjuge: _______________________________}}
+
 **Anexos:** I — Equipamentos e utensílios · II — Existências · III — Nome, insígnia, marcas, domínios e contas · IV — Contratos transmitidos · V — Licenças e autorizações · VI — Trabalhadores e datas de informação/consulta · VII — Passivo assumido e ónus · {{ANEXO_VIII: VIII — Volume de negócios (opcional)}}
 
 ---

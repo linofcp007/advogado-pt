@@ -111,6 +111,8 @@ A sociedade designa um revisor oficial de contas sempre que a tal esteja obrigad
 O sócio único,
 
 _______________________________
+
+{{CONSENTIMENTO_CONJUGE: opcional — se o sócio for casado num regime que não seja o de separação de bens: «{{CONJUGE_NOME}}, cônjuge de {{SOCIO_NOME}}, declara dar o seu consentimento ao presente ato, quanto à entrada em espécie de imóvel ou estabelecimento, nos termos do art. 1682.º-A do Código Civil.» Cônjuge: _______________________________}}
 {{SOCIO_NOME}} {{SE_PESSOA_COLETIVA: representada por {{REPRESENTANTE}}}}
 
 <!-- Reconhecimento presencial da assinatura (art. 7.º, n.º 1, CSC), salvo constituição nos serviços de registo

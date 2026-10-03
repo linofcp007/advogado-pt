@@ -255,7 +255,7 @@ export function registerTools(servidor: McpServer): void {
     {
       title: "Imposto do selo em herança",
       description:
-        "Calcula o imposto do selo numa herança/transmissão gratuita (10%; isento para cônjuge/descendente/ascendente) + 0,8% sobre VPT de imóveis. Usa em partilhas e heranças quando se quer saber o imposto a pagar ('quanto pago de imposto na herança', 'partilha', 'doação', 'herdar'). EN: stamp duty on an inheritance or gift.",
+        "Calcula o imposto do selo numa herança ou doação (verba 1.2: 10%; isentos cônjuge/unido de facto, descendentes e ascendentes). Na DOAÇÃO de imóveis acresce 0,8% sobre o VPT (verba 1.1), mesmo para os isentos; na herança não. Usa em partilhas e heranças quando se quer saber o imposto a pagar ('quanto pago de imposto na herança', 'partilha', 'doação', 'herdar'). EN: stamp duty on an inheritance or gift.",
       inputSchema: {
         valor: z.number().describe("Valor dos bens (€)"),
         herdeiro: z
@@ -263,15 +263,20 @@ export function registerTools(servidor: McpServer): void {
           .default("outro"),
         inclui_imovel: z.boolean().default(false),
         vpt_imovel: z.number().default(0),
+        doacao: z.boolean().default(false).describe("true para doação (acresce 0,8% sobre o VPT dos imóveis); false para herança"),
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ valor, herdeiro, inclui_imovel, vpt_imovel }) => {
-      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel);
+    async ({ valor, herdeiro, inclui_imovel, vpt_imovel, doacao }) => {
+      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel, doacao);
       return texto(
-        `Imposto do selo — herança (herdeiro: ${herdeiro})\n` +
-          `IS transmissão (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}\n` +
-          (inclui_imovel ? `IS imóvel (0,8% VPT): ${formatarEuros(r.isImovel)}\n` : "") +
+        `Imposto do selo — ${doacao ? "doação" : "herança"} (beneficiário: ${herdeiro})\n` +
+          `IS transmissão (10%, verba 1.2): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}\n` +
+          (inclui_imovel
+            ? doacao
+              ? `IS imóvel (0,8% VPT, verba 1.1): ${formatarEuros(r.isImovel)}\n`
+              : "IS imóvel: não se aplica na herança (a verba 1.1 só abrange a aquisição onerosa ou por doação)\n"
+            : "") +
           `TOTAL: ${formatarEuros(r.total)}` +
           AVISO
       );

@@ -48,7 +48,7 @@
 ## Fiscalidade
 - **Imposto do selo**: 10% sobre o valor dos bens (verba 1.2 TGIS)
 - **Isenção**: cônjuge/unido de facto, descendentes e ascendentes estão ISENTOS
-- **Imóveis**: imposto do selo de 0,8% sobre o VPT (adicional ao IS de 10% quando aplicável)
+- **Imóveis**: na herança não há o Imposto do Selo de 0,8% (a verba 1.1 só abrange a aquisição onerosa ou por doação); na **doação** de imóveis acresce 0,8% sobre o VPT, mesmo para o cônjuge, descendentes e ascendentes — calcula com `calc_imposto_selo_heranca` (`doacao: true`)
 - Declaração Modelo 1 do IS: até ao fim do 3.º mês seguinte ao do óbito (art. 26.º CIS)
 - Avaliação de imóveis: VPT (Valor Patrimonial Tributário) das Finanças
 

@@ -35,6 +35,7 @@ from prescricao import calcular_prazo, calcular_prescricao, add_anos, add_meses
 from irs_simplificado import calcular_rendimento_tributavel
 from prazos import contar_prazo
 from custas_injuncao import estimar_taxa
+from imposto_selo_heranca import calcular_is
 
 # Casos partilhados com o TypeScript (mcp-server/test/fixtures/paridade.json).
 _FIXTURE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..",
@@ -482,6 +483,22 @@ class TestV121Paridade(unittest.TestCase):
         for c in self.fx["injuncao"]:
             _, _, taxa = estimar_taxa(c["in"]["valor"])
             self.assertAlmostEqual(taxa, c["out"]["taxa"], places=2, msg=str(c["in"]))
+
+
+class TestV121Selo(unittest.TestCase):
+    """T242 — Imposto do Selo: 0,8% (verba 1.1) só nas doações de imóveis (igual ao TS)."""
+
+    def test_T242_heranca_sem_verba_1_1(self):
+        _, isento, is_imovel, total = calcular_is(80000, "descendente", True, 120000)
+        self.assertTrue(isento)
+        self.assertAlmostEqual(is_imovel, 0.0)
+        self.assertAlmostEqual(total, 0.0)
+
+    def test_T242_doacao_com_verba_1_1(self):
+        _, _, is_imovel, total = calcular_is(80000, "descendente", True, 120000, doacao=True)
+        self.assertAlmostEqual(is_imovel, 960.0, places=2)
+        self.assertAlmostEqual(total, 960.0, places=2)
+        self.assertAlmostEqual(calcular_is(80000, "outro", True, 120000, True)[3], 8960.0, places=2)
 
 
 if __name__ == "__main__":

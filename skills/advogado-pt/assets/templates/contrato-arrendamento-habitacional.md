@@ -60,6 +60,8 @@ O presente contrato é feito em duplicado, ficando um exemplar na posse de cada 
 
 O Senhorio: _______________________   O Arrendatário: _______________________
 
+{{CONSENTIMENTO_CONJUGE: opcional — se o Senhorio for casado num regime que não seja o de separação de bens: «{{CONJUGE_NOME}}, cônjuge de {{SENHORIO_NOME}}, declara dar o seu consentimento ao presente contrato de arrendamento, nos termos do art. 1682.º-A do Código Civil.» Cônjuge: _______________________________}} <!-- Casa de morada de família: consentimento sempre necessário, qualquer que seja o regime (art. 1682.º-A, n.º 2). -->
+
 ---
 
 ## Antes de enviar — verificar

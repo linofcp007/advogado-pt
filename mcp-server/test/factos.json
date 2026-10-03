@@ -1532,5 +1532,74 @@
     ],
     "naoContem": [],
     "fonte": "LULL arts. 10.º e 77.º; DL 446/85"
+  },
+  {
+    "id": "v121-final-selo-heranca",
+    "pergunta": "A herança de um imóvel paga os 0,8% da verba 1.1?",
+    "ficheiro": "skills/advogado-pt/references/herancas.md",
+    "contem": [
+      "doação"
+    ],
+    "naoContem": [
+      "imposto do selo de 0,8% sobre o VPT \\(adicional ao IS de 10% quando aplicável\\)"
+    ],
+    "fonte": "TGIS verbas 1.1 e 1.2; CIS art. 6.º, al. e)"
+  },
+  {
+    "id": "v121-final-saas-en",
+    "pergunta": "A versão EN do SaaS ainda resolve por insolvência?",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-saas-b2b.md",
+    "contem": [
+      "119"
+    ],
+    "naoContem": [
+      "or immediately upon the other Party's insolvency"
+    ],
+    "fonte": "CIRE art. 119.º"
+  },
+  {
+    "id": "v121-final-insolvencia-graduacao",
+    "pergunta": "Graduação na insolvência alinhada com o CC",
+    "ficheiro": "skills/advogado-pt/references/insolvencia.md",
+    "contem": [
+      "751\\.º",
+      "749\\.º"
+    ],
+    "naoContem": [],
+    "fonte": "CC arts. 749.º, 751.º e 759.º; CIRE arts. 97.º, 174.º e 175.º"
+  },
+  {
+    "id": "v121-final-pi-software",
+    "pergunta": "Software criado por trabalhador",
+    "ficheiro": "skills/advogado-pt/references/pi.md",
+    "contem": [
+      "2009/24"
+    ],
+    "naoContem": [
+      "\\(Art\\. 14º Diretiva\\)"
+    ],
+    "fonte": "Diretiva 2009/24/CE art. 2.º, n.º 3; DL 252/94 art. 3.º, n.º 3"
+  },
+  {
+    "id": "v121-final-amlr",
+    "pergunta": "Limite europeu de numerário (AMLR)",
+    "ficheiro": "skills/advogado-pt/references/bancario.md",
+    "contem": [
+      "10/7/2027"
+    ],
+    "naoContem": [
+      "a confirmar data e valor"
+    ],
+    "fonte": "Reg. (UE) 2024/1624, art. 80.º"
+  },
+  {
+    "id": "v121-final-iva-mensal",
+    "pergunta": "Limiar do IVA mensal em fiscal.md",
+    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "contem": [],
+    "naoContem": [
+      "mensal se volume negócios > 650\\.000€"
+    ],
+    "fonte": "CIVA art. 41.º"
   }
 ]

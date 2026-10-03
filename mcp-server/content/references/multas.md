@@ -67,7 +67,7 @@
 ## Contraordenações RGPD (CNPD)
 - CNPD: Comissão Nacional de Proteção de Dados
 - Coimas até 20M€ ou 4% do volume de negócios (RGPD)
-- Lei 58/2019 prevê advertências prévias para PMEs em certas situações
+- A Lei 58/2019 prevê advertências prévias para PME, mas a CNPD declarou que desaplica essas normas por contrariarem o RGPD (Deliberação 2019/494) — não contar com elas (a confirmar a prática atual)
 
 ## Estratégia de Defesa — Argumentos Comuns
 - Nulidade da notificação (falta de elementos obrigatórios)

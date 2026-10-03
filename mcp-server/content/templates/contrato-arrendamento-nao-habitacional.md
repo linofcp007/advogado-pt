@@ -139,6 +139,8 @@ O Senhorio: _______________________________
 
 O Arrendatário: _______________________________
 
+{{CONSENTIMENTO_CONJUGE: opcional — se o Senhorio for casado num regime que não seja o de separação de bens: «{{CONJUGE_NOME}}, cônjuge de {{SENHORIO_NOME}}, declara dar o seu consentimento ao presente contrato de arrendamento, nos termos do art. 1682.º-A do Código Civil.» Cônjuge: _______________________________}}
+
 {{ASSINATURA_FIADOR: opcional — O(s) Fiador(es): _______________________________}}
 
 **Anexo I** — Inventário e estado de conservação do locado (com fotografias datadas).

@@ -16,7 +16,7 @@
 - Duração: vida do autor + 70 anos (pessoa singular) / 70 anos desde publicação (pessoa coletiva)
 
 ### Titularidade
-- Software criado por trabalhador no âmbito do contrato: presume-se que pertence ao empregador (Art. 14º Diretiva)
+- Software criado por trabalhador no exercício das suas funções ou segundo instruções do empregador: os direitos patrimoniais pertencem ao empregador, salvo estipulação em contrário (Diretiva 2009/24/CE, art. 2.º, n.º 3; DL 252/94, art. 3.º, n.º 3)
 - Software feito por encomenda (freelancer/fornecedor): por defeito os direitos pertencem ao destinatário/cliente, salvo estipulação em contrário ou se outra coisa resultar das finalidades do contrato (art. 3.º, n.º 3, DL 252/94) — mesmo assim, definir sempre por contrato (template `contrato-desenvolvimento-software.md`); para documentação/design aplica-se o CDADC (art. 14.º e forma dos arts. 43.º/44.º)
 - Software criado em coautoria: direitos conjuntos, decisões por unanimidade
 - **Cláusula essencial em todos os contratos de desenvolvimento**: assignment ou licença clara

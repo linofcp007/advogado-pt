@@ -20,7 +20,7 @@
 - Vincula as partes a celebrar o contrato definitivo; forma escrita com reconhecimento de assinaturas (Art. 410.º, n.º 3 CC, para prédios)
 - **Sinal** (Art. 442.º CC): o valor entregue presume-se sinal; em incumprimento, o promitente-comprador faltoso perde o sinal; o promitente-vendedor faltoso restitui o sinal em dobro
 - **Execução específica** (Art. 830.º CC): a parte fiel pode pedir ao tribunal uma sentença que produza os efeitos da declaração negocial em falta; havendo sinal presume-se afastada (n.º 2), **salvo** nas promessas de transmissão de edifício ou fração autónoma (art. 410.º, n.º 3), em que não pode ser afastada (n.º 3). O promitente-comprador consumidor, com sinal e tradição da coisa, goza de direito de retenção, mesmo na insolvência do vendedor (CC, art. 755.º, n.º 1, al. f); AUJ do STJ 4/2014)
-- **Tradição da coisa**: entrega antecipada do imóvel ao promitente-comprador; confere direito de retenção (Art. 755.º, n.º 1, al. f) CC) que prevalece sobre hipoteca anterior
+- **Tradição da coisa**: entrega antecipada do imóvel ao promitente-comprador; confere direito de retenção pelo crédito resultante do incumprimento (Art. 755.º, n.º 1, al. f) CC), que prevalece sobre hipoteca anterior (art. 759.º, n.º 2); na **insolvência** do promitente-vendedor, só o promitente-comprador **consumidor** o mantém (AUJ do STJ 4/2014)
 
 ### (b) Escritura pública ou Documento Particular Autenticado (DPA)
 - A compra e venda de imóveis exige forma autêntica: escritura notarial **ou** DPA (notário, advogado, solicitador, conservador) com depósito eletrónico

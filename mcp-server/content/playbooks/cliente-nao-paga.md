@@ -32,7 +32,7 @@
 
 7. **Que via usar?**
    - **Dívida entre empresas (transação comercial)** → **Injunção, independentemente do valor** (DL 62/2013, art. 10.º): requerimento eletrónico no Balcão Nacional de Injunções. Se houver oposição e o valor for elevado, segue como ação comum no tribunal.
-   - **Outras dívidas** → **Injunção** até 15.000 € (DL 269/98); acima disso, **ação declarativa** no tribunal cível (advogado obrigatório acima da alçada da 1.ª instância — ver `references/contencioso.md`). Litígio simples até 15.000 €: também **Julgado de Paz**.
+   - **Dívidas que não são transações comerciais** (ex.: a consumidores ou entre particulares) → **Injunção** até 15.000 € (DL 269/98); acima disso, **ação declarativa** no tribunal cível (advogado obrigatório acima da alçada da 1.ª instância — ver `references/contencioso.md`). Litígio simples até 15.000 €: também **Julgado de Paz**.
    - Estima a taxa de justiça da injunção (tool `calc_custas_injuncao`):
      ```
      python scripts/custas_injuncao.py --valor <valor>

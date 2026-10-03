@@ -22181,10 +22181,13 @@ var HERDEIROS_ISENTOS = /* @__PURE__ */ new Set([
   "descendente",
   "ascendente"
 ]);
-function impostoSeloHeranca(valor, herdeiro, incluiImovel, vptImovel) {
+function impostoSeloHeranca(valor, herdeiro, incluiImovel, vptImovel, doacao = false) {
+  if (!Number.isFinite(valor) || valor < 0 || !Number.isFinite(vptImovel) || vptImovel < 0) {
+    throw new Error("O valor dos bens e o VPT n\xE3o podem ser negativos.");
+  }
   const isento = HERDEIROS_ISENTOS.has(herdeiro);
   const isTransmissao = isento ? 0 : valor * TAXA_TRANSMISSAO;
-  const isImovel = incluiImovel ? vptImovel * TAXA_IMOVEL : 0;
+  const isImovel = doacao && incluiImovel ? vptImovel * TAXA_IMOVEL : 0;
   const total = isTransmissao + isImovel;
   return { isTransmissao, isImovel, total, isento };
 }
@@ -24136,22 +24139,23 @@ Taxa de justi\xE7a estimada: ${formatarEuros(r.taxa)}` + AVISO
     "calc_imposto_selo_heranca",
     {
       title: "Imposto do selo em heran\xE7a",
-      description: "Calcula o imposto do selo numa heran\xE7a/transmiss\xE3o gratuita (10%; isento para c\xF4njuge/descendente/ascendente) + 0,8% sobre VPT de im\xF3veis. Usa em partilhas e heran\xE7as quando se quer saber o imposto a pagar ('quanto pago de imposto na heran\xE7a', 'partilha', 'doa\xE7\xE3o', 'herdar'). EN: stamp duty on an inheritance or gift.",
+      description: "Calcula o imposto do selo numa heran\xE7a ou doa\xE7\xE3o (verba 1.2: 10%; isentos c\xF4njuge/unido de facto, descendentes e ascendentes). Na DOA\xC7\xC3O de im\xF3veis acresce 0,8% sobre o VPT (verba 1.1), mesmo para os isentos; na heran\xE7a n\xE3o. Usa em partilhas e heran\xE7as quando se quer saber o imposto a pagar ('quanto pago de imposto na heran\xE7a', 'partilha', 'doa\xE7\xE3o', 'herdar'). EN: stamp duty on an inheritance or gift.",
       inputSchema: {
         valor: external_exports.number().describe("Valor dos bens (\u20AC)"),
         herdeiro: external_exports.enum(["conjuge", "descendente", "ascendente", "outro"]).default("outro"),
         inclui_imovel: external_exports.boolean().default(false),
-        vpt_imovel: external_exports.number().default(0)
+        vpt_imovel: external_exports.number().default(0),
+        doacao: external_exports.boolean().default(false).describe("true para doa\xE7\xE3o (acresce 0,8% sobre o VPT dos im\xF3veis); false para heran\xE7a")
       },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async ({ valor, herdeiro, inclui_imovel, vpt_imovel }) => {
-      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel);
+    async ({ valor, herdeiro, inclui_imovel, vpt_imovel, doacao }) => {
+      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel, doacao);
       return texto(
-        `Imposto do selo \u2014 heran\xE7a (herdeiro: ${herdeiro})
-IS transmiss\xE3o (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
-` + (inclui_imovel ? `IS im\xF3vel (0,8% VPT): ${formatarEuros(r.isImovel)}
-` : "") + `TOTAL: ${formatarEuros(r.total)}` + AVISO
+        `Imposto do selo \u2014 ${doacao ? "doa\xE7\xE3o" : "heran\xE7a"} (benefici\xE1rio: ${herdeiro})
+IS transmiss\xE3o (10%, verba 1.2): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
+` + (inclui_imovel ? doacao ? `IS im\xF3vel (0,8% VPT, verba 1.1): ${formatarEuros(r.isImovel)}
+` : "IS im\xF3vel: n\xE3o se aplica na heran\xE7a (a verba 1.1 s\xF3 abrange a aquisi\xE7\xE3o onerosa ou por doa\xE7\xE3o)\n" : "") + `TOTAL: ${formatarEuros(r.total)}` + AVISO
       );
     }
   );

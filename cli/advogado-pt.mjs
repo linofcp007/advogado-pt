@@ -171,7 +171,8 @@ async function calc(args) {
         num(rest, "--valor"),
         str(rest, "--herdeiro", "outro"),
         rest.includes("--imovel"),
-        num(rest, "--vpt", 0)
+        num(rest, "--vpt", 0),
+        rest.includes("--doacao")
       );
       console.log(`Imposto do selo: ${fmt(r.total)} (transmissão: ${r.isento ? "isento" : fmt(r.isTransmissao)})`);
       break;
@@ -484,7 +485,8 @@ Uso:
   advogado-pt calc compensacao --retribuicao 1500 --admissao 2015-05-01 --cessacao 2024-04-30 [--modalidade sem-termo|termo]
       (ou --anos N para a regra atual; regime transitório por períodos com as datas)
   advogado-pt calc custas --valor 8000
-  advogado-pt calc selo --valor 100000 [--herdeiro conjuge|descendente|ascendente|outro] [--imovel --vpt N]
+  advogado-pt calc selo --valor 100000 [--herdeiro conjuge|descendente|ascendente|outro] [--imovel --vpt N] [--doacao]
+      (0,8% sobre o VPT só na doação de imóveis; na herança só a verba 1.2)
   advogado-pt calc irs --rendimento 60000 [--tipo mercadorias|servicos-151|servicos-outros|propriedade-intelectual]
   advogado-pt calc creditos --retribuicao 1500 --admissao 2020-03-01 --cessacao 2026-06-30 [--diuturnidades N] [--ferias-vencidas DIAS] [--sf-em-falta]
   advogado-pt calc legitima --bens 300000 [--doacoes N] [--dividas N] [--conjuge] [--filhos N] [--ascendentes nenhum|pais|outros]

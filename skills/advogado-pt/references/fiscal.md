@@ -33,7 +33,7 @@
    - Recomendável quando despesas reais > 25% dos rendimentos (prestação de serviços)
 
 ### Obrigações Declarativas ENI
-- Declaração trimestral de IVA (ou mensal se volume negócios > 650.000€)
+- Declaração periódica de IVA trimestral ou mensal, consoante o volume de negócios (CIVA, art. 41.º; limiar em `references/valores-2026.md`)
 - Declaração anual de IRS (Modelo 3, Anexo B ou C)
 - Declaração de início/alteração/cessação de atividade
 - Comunicação de faturas à AT (SAF-T mensal)

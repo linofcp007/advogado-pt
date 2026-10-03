@@ -87,7 +87,7 @@
 ## Coimas
 - Até 20 milhões € ou 4% do volume de negócios global (infrações graves)
 - Até 10 milhões € ou 2% do volume de negócios global (infrações menos graves)
-- Lei 58/2019 prevê molduras reduzidas para PMEs em Portugal
+- A Lei 58/2019 prevê molduras reduzidas para PME, mas a CNPD declarou que desaplica essas normas por contrariarem o RGPD (Deliberação 2019/494) — não contar com elas (a confirmar a prática atual)
 - CNPD tem aplicado coimas crescentes — tendência de maior enforcement
 
 ## Templates

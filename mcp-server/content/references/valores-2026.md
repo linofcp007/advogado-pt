@@ -211,7 +211,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 |---|---|---|
 | Imposto do selo — transmissão gratuita | **10%** (verba 1.2 TGIS) | |
 | Isenção — cônjuge/unido de facto, descendentes, ascendentes | **isentos** | |
-| Imposto do selo adicional sobre imóveis | 0,8% sobre VPT | |
+| Imposto do selo sobre imóveis — **doação** (verba 1.1) | 0,8% sobre o VPT | também para cônjuge, descendentes e ascendentes; **não** se aplica às heranças (sucessão por morte) |
 | Prazo Modelo 1 do IS (participação) | até ao fim do 3.º mês seguinte ao do óbito | art. 26.º CIS |
 
 ---

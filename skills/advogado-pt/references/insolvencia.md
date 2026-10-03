@@ -28,8 +28,8 @@
 
 ### Graduação dos créditos (ordem de prioridade)
 1. **Dívidas da massa insolvente** (custas, remuneração do AI, dívidas posteriores) — pagas em primeiro lugar
-2. **Créditos garantidos** — com garantia real (hipoteca, penhor, consignação de rendimentos); pagos pelo produto do bem onerado
-3. **Créditos privilegiados** — privilégios creditórios gerais/especiais (ex.: créditos laborais, alguns créditos do Estado/SS)
+2. **Créditos garantidos e com privilégio especial** — pagos pelo produto do bem a que respeitam, pela ordem do Código Civil: os **privilégios imobiliários especiais** (ex.: IMI do próprio prédio; créditos laborais sobre o imóvel onde o trabalhador presta a atividade — CT, art. 333.º) e o **direito de retenção** preferem à hipoteca, mesmo anterior (CC, arts. 751.º e 759.º, n.º 2); depois as garantias reais (hipoteca, penhor, consignação de rendimentos) pela ordem do registo
+3. **Créditos com privilégio geral** (ex.: créditos laborais mobiliários, certos créditos do Estado e da Segurança Social) — pagos pelo restante, depois das garantias reais (CC, art. 749.º); a declaração de insolvência extingue alguns privilégios do Estado e da Segurança Social constituídos mais de 12 meses antes (CIRE, art. 97.º)
 4. **Créditos comuns** — sem garantia nem privilégio (a maioria dos fornecedores); rateio proporcional
 5. **Créditos subordinados** (Art. 48.º CIRE) — pessoas especialmente relacionadas, suprimentos de sócios, juros após declaração; pagos por último
 
