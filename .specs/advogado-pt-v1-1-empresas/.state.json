@@ -1,0 +1,115 @@
+{
+  "lang": "pt",
+  "size": "m",
+  "tracks": [
+    "core",
+    "tdd"
+  ],
+  "approvals": {
+    "classification": {
+      "at": "2026-10-03T17:05:44.201Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "59874143a8095582399ee1c0987d1f8e6ecb094f",
+      "batch": true
+    },
+    "requirements": {
+      "at": "2026-10-03T17:05:44.230Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "35fa7ec3a81c0f3376421a3de5854d58bacde9dc",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "batch": true
+    },
+    "design": {
+      "at": "2026-10-03T17:05:44.250Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "e71b554a91c184887290ca4f0e6364d9b297604e",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "batch": true
+    },
+    "test-plan": {
+      "at": "2026-10-03T17:05:44.278Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "db12932c6f37d94b5564c30ed4f7dbf1f681aa84",
+      "batch": true
+    },
+    "tests": {
+      "at": "2026-10-03T17:10:51.168Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    "tasks": {
+      "at": "2026-10-03T17:10:51.197Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "6415ffbacef238b0a01cf645d43c4fca5e2c39b8",
+      "batch": true
+    }
+  },
+  "createdAt": "2026-10-03T16:51:35.146Z",
+  "approvalHistory": [
+    {
+      "phase": "classification",
+      "at": "2026-10-03T17:05:44.201Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "59874143a8095582399ee1c0987d1f8e6ecb094f",
+      "batch": true,
+      "snapshot": ".history/classification@1.md"
+    },
+    {
+      "phase": "requirements",
+      "at": "2026-10-03T17:05:44.230Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "35fa7ec3a81c0f3376421a3de5854d58bacde9dc",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "batch": true,
+      "snapshot": ".history/requirements@1.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-03T17:05:44.250Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "e71b554a91c184887290ca4f0e6364d9b297604e",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "batch": true,
+      "snapshot": ".history/design@1.md"
+    },
+    {
+      "phase": "test-plan",
+      "at": "2026-10-03T17:05:44.278Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "db12932c6f37d94b5564c30ed4f7dbf1f681aa84",
+      "batch": true,
+      "snapshot": ".history/test-plan@1.md"
+    },
+    {
+      "phase": "tests",
+      "at": "2026-10-03T17:10:51.168Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    {
+      "phase": "tasks",
+      "at": "2026-10-03T17:10:51.197Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "6415ffbacef238b0a01cf645d43c4fca5e2c39b8",
+      "batch": true,
+      "snapshot": ".history/tasks@1.md"
+    }
+  ],
+  "lastApprovedPhase": "tasks"
+}

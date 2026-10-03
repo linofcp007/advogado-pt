@@ -22,3 +22,7 @@ export {
   PRESCRICAO_TIPOS,
 } from "./prescricao.js";
 export { calcularIRSSimplificado } from "./irs.js";
+export { memoriaJuros } from "./juros.js";
+export type { TipoJuros } from "./juros.js";
+export { calcularCreditosCessacao } from "./creditos.js";
+export { calcularLegitima } from "./legitima.js";

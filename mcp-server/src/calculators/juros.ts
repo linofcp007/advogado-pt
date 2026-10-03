@@ -53,3 +53,10 @@ export function calcularJuros(
   const total = capital + juros;
   return { dias, taxa, juros, total };
 }
+
+// --- v1.1 (stubs — Phase 4; implementação na tarefa 4) ---
+export type TipoJuros = "comercial" | "comercial-geral" | "civil";
+
+export function memoriaJuros(_capital: number, _resultado: unknown, _tipo: TipoJuros): string {
+  throw new Error("não implementado");
+}

@@ -124,3 +124,55 @@ test("entradas degeneradas não rebentam (fail-open silencioso)", () => {
   // sem path (ex.: Edit sem file_path) não deve inferir instrumento a partir de ruído
   assert.equal(detetarDocumentoJuridico({ content: "isto fala de um contrato" }), false);
 });
+
+// --- Perfil da empresa no SessionStart ------------------------------------
+import { mensagemSessionStart } from "../../hooks/advogado-hook.mjs";
+import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+
+const HOJE_HOOK = new Date(Date.UTC(2026, 9, 3));
+function dirsHook() {
+  return {
+    projeto: mkdtempSync(join(tmpdir(), "adv-hook-proj-")),
+    home: mkdtempSync(join(tmpdir(), "adv-hook-home-")),
+  };
+}
+function perfilEm(base, conteudo) {
+  mkdirSync(join(base, ".advogado-pt"), { recursive: true });
+  writeFileSync(join(base, ".advogado-pt", "perfil-empresa.md"), conteudo);
+}
+
+test("T-41 SessionStart: com perfil mostra resumo e origem; sem perfil manda perguntar; desatualizado pede confirmação", () => {
+  const a = dirsHook();
+  perfilEm(a.projeto, "forma_juridica: Lda\nsetor: Restauração\ntrabalhadores: 12\natualizado_em: 2026-09-01\n");
+  const m1 = mensagemSessionStart({ ...a, hoje: HOJE_HOOK });
+  assert.match(m1, /Perfil da empresa \(projeto\)/);
+  assert.match(m1, /Lda/);
+  assert.match(m1, /Restaura/);
+  assert.doesNotMatch(m1, /confirma/i);
+
+  const b = dirsHook();
+  perfilEm(b.home, "forma_juridica: ENI\natualizado_em: 2026-09-01\n");
+  assert.match(mensagemSessionStart({ ...b, hoje: HOJE_HOOK }), /Perfil da empresa \(geral\)/);
+
+  const c = dirsHook();
+  const m3 = mensagemSessionStart({ ...c, hoje: HOJE_HOOK });
+  assert.match(m3, /Sem perfil da empresa/);
+  assert.match(m3, /guardar_perfil_empresa/);
+
+  const d = dirsHook();
+  perfilEm(d.projeto, "forma_juridica: Lda\natualizado_em: 2024-01-01\n");
+  assert.match(mensagemSessionStart({ ...d, hoje: HOJE_HOOK }), /confirma/i);
+});
+
+test("T-42 SessionStart: perfil ilegível ou diretório inexistente -> sem erro, segue sem perfil", () => {
+  const a = dirsHook();
+  perfilEm(a.projeto, Buffer.from([0, 159, 146, 150, 255, 0, 1]));
+  let m;
+  assert.doesNotThrow(() => (m = mensagemSessionStart({ ...a, hoje: HOJE_HOOK })));
+  assert.match(m, /Sem perfil da empresa/);
+  assert.doesNotThrow(() =>
+    mensagemSessionStart({ projeto: join(a.projeto, "nao", "existe"), home: join(a.home, "x"), hoje: HOJE_HOOK })
+  );
+});

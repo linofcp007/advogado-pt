@@ -92,3 +92,18 @@ export function listarTudo(): Array<{ categoria: Categoria; nome: string; label:
   }
   return out;
 }
+
+// --- v1.1 (stubs — Phase 4; implementação na tarefa 2) ---
+export type Ambito = "nacional" | "ue" | "misto";
+
+export function lerAmbito(_texto: string): Ambito | null {
+  throw new Error("não implementado");
+}
+
+export function listarComAmbito(_cat: Categoria): Array<{ nome: string; ambito: Ambito | null }> {
+  throw new Error("não implementado");
+}
+
+export function formatarProcura(_res: Array<ResultadoProcura & { ambito?: Ambito | null }>): string {
+  throw new Error("não implementado");
+}

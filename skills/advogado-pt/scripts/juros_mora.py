@@ -68,6 +68,11 @@ def calcular_juros(capital, data_inicio, data_fim, tipo):
     return dias, taxa, juros, total
 
 
+def memoria_juros(capital, resultado, tipo):
+    """Memória de cálculo por tramos (stub — Phase 4; tarefa 5)."""
+    raise NotImplementedError
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Calcula juros de mora (comerciais ou civis) em Portugal.",

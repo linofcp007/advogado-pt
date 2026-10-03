@@ -47,6 +47,11 @@ function sessionStart() {
   emit(msg);
 }
 
+// Mensagem do SessionStart com o perfil da empresa (stub — Phase 4; tarefa 12).
+export function mensagemSessionStart(_opts = {}) {
+  throw new Error("não implementado");
+}
+
 // --- Deteção de documento jurídico ---------------------------------------
 // Num plugin de direito o vocabulário jurídico É o assunto: referências,
 // playbooks e specs técnicas falam de "contrato" e "cláusula" sem serem

@@ -33,7 +33,7 @@
     "build:server": "node scripts/build-server.mjs",
     "build": "npm run bundle && npm run typecheck && npm run build:server",
     "start": "node dist/index.js",
-    "test": "npm run build && node --test test/calculators.test.mjs test/plugin.test.mjs test/hooks.test.mjs",
+    "test": "npm run build && node --test test/calculators.test.mjs test/plugin.test.mjs test/hooks.test.mjs test/content.test.mjs test/perfil.test.mjs test/cli.test.mjs",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
