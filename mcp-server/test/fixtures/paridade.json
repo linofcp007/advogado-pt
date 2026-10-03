@@ -4028,5 +4028,202 @@
         "base": "310.º, al. g)"
       }
     }
+  ],
+  "jurosLote": {
+    "_nota": "Juros por tramos semestrais de cada fatura desde o vencimento (motor calcularJuros/calcular_juros), arredondados ao cêntimo; indemnização de 40 € por fatura comercial vencida (DL 62/2013, art. 7.º); total = capital + juros + indemnização.",
+    "in": {
+      "dataFim": "2026-10-01",
+      "faturas": [
+        {
+          "cliente": "Alfa, Lda",
+          "fatura": "FT 2026/101",
+          "capital": 1000,
+          "vencimento": "2026-01-15",
+          "tipo": "comercial"
+        },
+        {
+          "cliente": "Alfa, Lda",
+          "fatura": "FT 2026/140",
+          "capital": 2500.5,
+          "vencimento": "2026-03-31",
+          "tipo": "comercial"
+        },
+        {
+          "cliente": "Alfa, Lda",
+          "fatura": "FT 2026/190",
+          "capital": 800,
+          "vencimento": "2026-11-30",
+          "tipo": "comercial"
+        },
+        {
+          "cliente": "Beta Unipessoal, Lda",
+          "fatura": "FT 2025/450",
+          "capital": 4200,
+          "vencimento": "2025-09-30",
+          "tipo": "comercial"
+        },
+        {
+          "cliente": "Beta Unipessoal, Lda",
+          "fatura": "FR 2026/12",
+          "capital": 300,
+          "vencimento": "2026-06-15",
+          "tipo": "civil"
+        }
+      ]
+    },
+    "out": {
+      "faturas": [
+        {
+          "fatura": "FT 2026/101",
+          "juros": 72.65,
+          "indemnizacao40": 40,
+          "vencida": true
+        },
+        {
+          "fatura": "FT 2026/140",
+          "juros": 129.52,
+          "indemnizacao40": 40,
+          "vencida": true
+        },
+        {
+          "fatura": "FT 2026/190",
+          "juros": 0,
+          "indemnizacao40": 0,
+          "vencida": false
+        },
+        {
+          "fatura": "FT 2025/450",
+          "juros": 430.11,
+          "indemnizacao40": 40,
+          "vencida": true
+        },
+        {
+          "fatura": "FR 2026/12",
+          "juros": 3.55,
+          "indemnizacao40": 0,
+          "vencida": true
+        }
+      ],
+      "porCliente": [
+        {
+          "cliente": "Alfa, Lda",
+          "capital": 4300.5,
+          "juros": 202.17,
+          "indemnizacao": 80,
+          "total": 4582.67
+        },
+        {
+          "cliente": "Beta Unipessoal, Lda",
+          "capital": 4500,
+          "juros": 433.66,
+          "indemnizacao": 40,
+          "total": 4973.66
+        }
+      ],
+      "total": {
+        "capital": 8800.5,
+        "juros": 635.83,
+        "indemnizacao": 120,
+        "total": 9556.33
+      }
+    }
+  },
+  "ccp": [
+    {
+      "in": {
+        "valor": 74999.99,
+        "tipo": "bens-servicos"
+      },
+      "out": {
+        "admissiveis": [
+          "ajuste-direto",
+          "consulta-previa",
+          "concurso-publico"
+        ]
+      }
+    },
+    {
+      "in": {
+        "valor": 75000,
+        "tipo": "bens-servicos"
+      },
+      "out": {
+        "admissiveis": [
+          "consulta-previa",
+          "concurso-publico"
+        ]
+      }
+    },
+    {
+      "in": {
+        "valor": 129999.99,
+        "tipo": "bens-servicos"
+      },
+      "out": {
+        "admissiveis": [
+          "consulta-previa",
+          "concurso-publico"
+        ]
+      }
+    },
+    {
+      "in": {
+        "valor": 130000,
+        "tipo": "bens-servicos"
+      },
+      "out": {
+        "admissiveis": [
+          "concurso-publico"
+        ]
+      }
+    },
+    {
+      "in": {
+        "valor": 149999.99,
+        "tipo": "empreitada"
+      },
+      "out": {
+        "admissiveis": [
+          "ajuste-direto",
+          "consulta-previa",
+          "concurso-publico"
+        ]
+      }
+    },
+    {
+      "in": {
+        "valor": 150000,
+        "tipo": "empreitada"
+      },
+      "out": {
+        "admissiveis": [
+          "consulta-previa",
+          "concurso-publico"
+        ]
+      }
+    },
+    {
+      "in": {
+        "valor": 999999.99,
+        "tipo": "empreitada"
+      },
+      "out": {
+        "admissiveis": [
+          "consulta-previa",
+          "concurso-publico"
+        ]
+      }
+    },
+    {
+      "in": {
+        "valor": 1000000,
+        "tipo": "empreitada"
+      },
+      "out": {
+        "admissiveis": [
+          "concurso-publico"
+        ]
+      }
+    }
   ]
 }

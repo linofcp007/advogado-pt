@@ -182,11 +182,32 @@
       "at": "2026-10-03T22:41:08.058Z",
       "task": "[shared] Investigação: confirmar na documentação oficial (claude-code-guide e docs) (a) o que acontece a um marketplace instalado quando o `name` do `marketplace.json` e o repositório mudam, (b) o formato e as opções do `claude plugin eval`, (c) o manifesto `.mcpb` para servidores Node, (d) a elicitation no SDK do MCP e o anúncio da capacidade pelo cliente; registar as decisões em `decisions.md` e ajustar o design se a alternativa de recurso for necessária",
       "verify": ""
+    },
+    "3": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 1,
+      "summary": "Vermelho esperado: 192 testes, 154 passam, 36 falham (T-301 a T-340 da v2.0 e T-130 pelos 8 factos v20-); T-336 já passa (dependências inalteradas). Python: T309 e T326 em erro (módulos por criar), restantes 49 OK. Fixtures: paridade.json com jurosLote e ccp; 10 perfis fictícios em fixtures/contabilista.",
+      "at": "2026-10-03T22:48:16.978Z",
+      "expected": "fail",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 1,
+          "summary": "Vermelho esperado: 192 testes, 154 passam, 36 falham (T-301 a T-340 da v2.0 e T-130 pelos 8 factos v20-); T-336 já passa (dependências inalteradas). Python: T309 e T326 em erro (módulos por criar), restantes 49 OK. Fixtures: paridade.json com jurosLote e ccp; 10 perfis fictícios em fixtures/contabilista.",
+          "at": "2026-10-03T22:48:16.978Z",
+          "expected": "fail",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Escrever os testes a falhar: `mcp-server/test/v20.test.mjs` (T-302 a T-340 exceto T-309, T-313, T-316, T-326, T-336 a T-338), os casos novos de `plugin.test.mjs` (T-301, T-316, T-336, T-337), `test_scripts.py` (T-309, T-326), fixtures do contabilista e factos `v20-` esperados",
+      "verify": "npm --prefix mcp-server test"
     }
   },
-  "lastTickAt": "2026-10-03T22:41:08.058Z",
+  "lastTickAt": "2026-10-03T22:48:16.978Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
-    "2": "2026-10-03T22:41:08.058Z"
+    "2": "2026-10-03T22:41:08.058Z",
+    "3": "2026-10-03T22:48:16.978Z"
   }
 }

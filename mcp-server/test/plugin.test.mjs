@@ -511,3 +511,74 @@ test("T-249 versão 1.2.1 nos 6 sítios e no package-lock; CHANGELOG com ## [1.2
   assert.equal(lock.packages[""].version, V);
   assert.ok(lerMd(r("CHANGELOG.md")).includes(`## [${V}]`));
 });
+
+// ---------------- v2.0 (juridico-pt) ----------------
+
+test("T-301 identificador juridico-pt em todo o lado e nome apresentado 'Jurídico PT'", () => {
+  const manifest = JSON.parse(lerMd(r(".claude-plugin", "plugin.json")));
+  assert.equal(manifest.name, "juridico-pt");
+  assert.equal(manifest.displayName, "Jurídico PT");
+  const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
+  assert.equal(mk.name, "juridico-pt");
+  assert.equal(mk.plugins[0].name, "juridico-pt");
+  assert.match(lerMd(r("mcp-server", "src", "index.ts")), /name:\s*"juridico-pt"/);
+  assert.ok(existsSync(r("skills", "juridico-pt", "SKILL.md")), "falta skills/juridico-pt/SKILL.md");
+  assert.ok(!existsSync(r("skills", "advogado-pt")), "a pasta skills/advogado-pt ainda existe");
+  assert.match(lerMd(r("skills", "juridico-pt", "SKILL.md")), /^---\r?\nname:\s*juridico-pt\r?\n/);
+  assert.ok(existsSync(r("cli", "juridico-pt.mjs")));
+  assert.ok(!existsSync(r("cli", "advogado-pt.mjs")), "sem atalhos com o nome antigo (D-1)");
+  assert.ok(existsSync(r("hooks", "juridico-hook.mjs")));
+  assert.match(lerMd(r("hooks", "hooks.json")), /juridico-hook\.mjs/);
+  assert.match(lerMd(r("build.py")), /SKILL_NAME = "juridico-pt"/);
+  assert.ok(JSON.parse(lerMd(r(".mcp.json"))).mcpServers["juridico-pt"], ".mcp.json sem o servidor juridico-pt");
+  for (const f of [r(".claude-plugin", "plugin.json"), r(".claude-plugin", "marketplace.json"), r(".mcp.json"), r("hooks", "hooks.json")]) {
+    assert.doesNotMatch(lerMd(f), /advogado-pt|advogado-hook/, f);
+  }
+  assert.match(lerMd(r("mcp-server", "src", "resources.ts")), /juridico-pt:\/\//);
+  assert.match(lerMd(r("mcp-server", "src", "prompts.ts")), /"assistente_juridico"/);
+});
+
+const SO_LEITURA = new Set(["Read", "Grep", "Glob", "WebFetch", "WebSearch"]);
+
+test("T-316 subagentes verificador-citacoes e revisor-contratos: frontmatter válido, só leitura e formato de saída", () => {
+  const casos = {
+    "verificador-citacoes": [/verificad[ao]/i, /divergente/i, /não encontrad[ao]/i, /URL/],
+    "revisor-contratos": [/vermelho/i, /amarelo/i, /verde/i, /checklist-revisao-contrato/],
+  };
+  for (const [nome, padroes] of Object.entries(casos)) {
+    const t = lerMd(r("agents", `${nome}.md`));
+    const m = /^---\r?\n([\s\S]*?)\r?\n---/.exec(t);
+    assert.ok(m, `${nome}: sem frontmatter`);
+    assert.match(m[1], new RegExp(`^name:\\s*${nome}\\s*$`, "m"));
+    assert.match(m[1], /^description:\s*\S/m);
+    const tools = (/^tools:\s*(.+)$/m.exec(m[1]) || [])[1];
+    assert.ok(tools, `${nome}: sem tools`);
+    const lista = tools.replace(/[[\]"']/g, "").split(",").map((s) => s.trim()).filter(Boolean);
+    assert.ok(lista.length > 0 && lista.every((x) => SO_LEITURA.has(x)), `${nome}: ferramentas que escrevem (${lista.join(", ")})`);
+    for (const p of padroes) assert.match(t, p, `${nome}: falta ${p}`);
+  }
+});
+
+test("T-336 dependências de runtime iguais às da 1.2.1", () => {
+  const mcp = JSON.parse(lerMd(r("mcp-server", "package.json")));
+  assert.deepEqual(Object.keys(mcp.dependencies).sort(), ["@modelcontextprotocol/sdk", "zod"]);
+  assert.deepEqual(JSON.parse(lerMd(r("package.json"))).dependencies || {}, {});
+});
+
+test("T-337 versão 2.0.0 em todos os sítios; CHANGELOG ## [2.0.0] com secção Migração", () => {
+  const V = "2.0.0";
+  assert.equal(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version, V);
+  const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
+  assert.equal(mk.metadata.version, V);
+  assert.equal(mk.plugins[0].version, V);
+  assert.equal(JSON.parse(lerMd(r("package.json"))).version, V);
+  assert.equal(JSON.parse(lerMd(r("mcp-server", "package.json"))).version, V);
+  assert.ok(lerMd(r("mcp-server", "src", "index.ts")).includes(`version: "${V}"`));
+  const lock = JSON.parse(lerMd(r("mcp-server", "package-lock.json")));
+  assert.equal(lock.version, V);
+  const c = lerMd(r("CHANGELOG.md"));
+  const i = c.indexOf(`## [${V}]`);
+  assert.ok(i >= 0);
+  const fim = c.indexOf("\n## [", i + 5);
+  assert.match(c.slice(i, fim < 0 ? undefined : fim), /^### Migração/m);
+});

@@ -22,7 +22,7 @@
   - _Requirements: US-1.AC-1, US-1.AC-4, US-4.AC-1, US-10.AC-2, US-10.AC-3_
   - _Size: S_
   - _Depends: 1_
-- [ ] 3. [shared] Escrever os testes a falhar: `mcp-server/test/v20.test.mjs` (T-302 a T-340 exceto T-309, T-313, T-316, T-326, T-336 a T-338), os casos novos de `plugin.test.mjs` (T-301, T-316, T-336, T-337), `test_scripts.py` (T-309, T-326), fixtures do contabilista e factos `v20-` esperados
+- [x] 3. [shared] Escrever os testes a falhar: `mcp-server/test/v20.test.mjs` (T-302 a T-340 exceto T-309, T-313, T-316, T-326, T-336 a T-338), os casos novos de `plugin.test.mjs` (T-301, T-316, T-336, T-337), `test_scripts.py` (T-309, T-326), fixtures do contabilista e factos `v20-` esperados
   - _Requirements: US-1.AC-1, US-1.AC-3, US-3.AC-1, US-7.AC-1, US-9.AC-3, US-10.AC-1, US-11.AC-2_
   - _Implements: mcp-server/test/v20.test.mjs, mcp-server/test/plugin.test.mjs, mcp-server/test/fixtures/contabilista/_
   - _Verify: npm --prefix mcp-server test_

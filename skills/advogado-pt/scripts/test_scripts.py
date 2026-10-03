@@ -501,5 +501,39 @@ class TestV121Selo(unittest.TestCase):
         self.assertAlmostEqual(calcular_is(80000, "outro", True, 120000, True)[3], 8960.0, places=2)
 
 
+class TestV20(unittest.TestCase):
+    """T309 (juros em lote) e T326 (procedimento CCP) — os mesmos casos do TS (paridade.json)."""
+
+    def test_T309_juros_lote(self):
+        from juros_mora import calcular_juros_lote
+        c = _paridade()["jurosLote"]
+        faturas = [dict(f, vencimento=_d(f["vencimento"])) for f in c["in"]["faturas"]]
+        r = calcular_juros_lote(faturas, _d(c["in"]["dataFim"]))
+        for esperado, obtido in zip(c["out"]["faturas"], r["faturas"]):
+            self.assertEqual(obtido["fatura"], esperado["fatura"])
+            self.assertAlmostEqual(obtido["juros"], esperado["juros"], places=2)
+            self.assertAlmostEqual(obtido["indemnizacao40"], esperado["indemnizacao40"], places=2)
+            self.assertEqual(obtido["vencida"], esperado["vencida"])
+        for esperado, obtido in zip(c["out"]["porCliente"], r["por_cliente"]):
+            self.assertEqual(obtido["cliente"], esperado["cliente"])
+            for k in ("capital", "juros", "indemnizacao", "total"):
+                self.assertAlmostEqual(obtido[k], esperado[k], places=2, msg=k)
+        for k in ("capital", "juros", "indemnizacao", "total"):
+            self.assertAlmostEqual(r["total"][k], c["out"]["total"][k], places=2, msg=k)
+
+    def test_T326_procedimento_ccp(self):
+        from procedimento_ccp import calcular_procedimento_ccp
+        for c in _paridade()["ccp"]:
+            r = calcular_procedimento_ccp(c["in"]["valor"], c["in"]["tipo"])
+            ids = [a["procedimento"] for a in r["admissiveis"]]
+            for p in c["out"]["admissiveis"]:
+                self.assertIn(p, ids, msg=str(c["in"]))
+            for p in ("ajuste-direto", "consulta-previa"):
+                if p not in c["out"]["admissiveis"]:
+                    self.assertNotIn(p, ids, msg=str(c["in"]))
+        with self.assertRaisesRegex(ValueError, "(?i)valor"):
+            calcular_procedimento_ccp(-1, "bens-servicos")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

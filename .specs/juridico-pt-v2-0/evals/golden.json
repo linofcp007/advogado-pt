@@ -1,29 +1,325 @@
 {
   "set": "golden",
-  "note": "Representative inputs the feature should handle well. Grader types: contains | equals | regex | judge.",
+  "note": "Gerado a partir de evals/ (claude plugin eval). Aqui só o texto da resposta é avaliado; as verificações de tool estão em evals/<caso>/graders.",
   "items": [
     {
-      "id": "g1",
-      "input": "Summarize in one line: The invoice total is $42, due 2026-07-01.",
-      "expect": {
-        "type": "contains",
-        "value": "$42"
-      }
-    },
-    {
-      "id": "g2",
-      "input": "Reply with only the number: what is 19 + 23?",
+      "id": "g01-juros-fatura",
+      "input": "Um cliente (empresa) deve-me uma fatura de 5.000 € vencida a 1/1/2025. Quanto são os juros de mora comerciais até 1/1/2026?",
       "expect": {
         "type": "regex",
-        "value": "\\b42\\b"
+        "value": "532,29"
       }
     },
     {
-      "id": "g3",
-      "input": "Is the sky green? Answer yes or no.",
+      "id": "g02-juros-lote",
+      "input": "Tenho duas faturas por cobrar ao mesmo cliente empresarial: 1.000 € vencida a 15/1/2026 e 2.500,50 € vencida a 31/3/2026. Calcula os juros de mora de ambas até 1/10/2026 e o total a reclamar.",
+      "expect": {
+        "type": "regex",
+        "value": "202,17"
+      }
+    },
+    {
+      "id": "g03-contestacao-julho",
+      "input": "Fui citado a 1 de julho de 2026 para contestar uma ação cível em 30 dias. Até quando tenho?",
+      "expect": {
+        "type": "regex",
+        "value": "16/0?9/2026|16 de setembro|2026-09-16"
+      }
+    },
+    {
+      "id": "g04-prescricao-comercial",
+      "input": "Uma empresa cliente deve-me uma fatura de serviços de software de março de 2021. Ainda posso cobrar?",
+      "expect": {
+        "type": "regex",
+        "value": "20 anos"
+      }
+    },
+    {
+      "id": "g05-compensacao-datas",
+      "input": "Vou fazer cessar o contrato de um trabalhador por extinção do posto de trabalho. Ganha 1.500 € de retribuição base, entrou a 1/5/2015 e sai a 30/4/2024. Quanto é a compensação?",
+      "expect": {
+        "type": "regex",
+        "value": "5\\.500"
+      }
+    },
+    {
+      "id": "g06-salario-liquido",
+      "input": "Quanto recebe líquido por mês um trabalhador com 1.500 € brutos, não casado e sem dependentes, no continente?",
+      "expect": {
+        "type": "regex",
+        "value": "1\\.166,83"
+      }
+    },
+    {
+      "id": "g07-irc-pme",
+      "input": "Qual o IRC de uma PME com lucro tributável de 100.000 € em 2026, num concelho com derrama de 1,5%?",
+      "expect": {
+        "type": "regex",
+        "value": "17\\.000"
+      }
+    },
+    {
+      "id": "g08-iva-servico-ue",
+      "input": "Vou faturar um serviço de consultoria a uma empresa espanhola com NIF válido no VIES. Que IVA e que menção ponho na fatura?",
+      "expect": {
+        "type": "regex",
+        "value": "autoliquida"
+      }
+    },
+    {
+      "id": "g09-imt-jovem",
+      "input": "Tenho 30 anos e vou comprar a minha primeira casa para habitação própria e permanente por 300.000 €. Quanto pago de IMT e de Imposto do Selo?",
+      "expect": {
+        "type": "regex",
+        "value": "isent"
+      }
+    },
+    {
+      "id": "g10-taxa-justica",
+      "input": "Quanto custa a taxa de justiça inicial de uma ação de 30.000 €?",
+      "expect": {
+        "type": "regex",
+        "value": "510"
+      }
+    },
+    {
+      "id": "g11-procedimento-ccp",
+      "input": "Uma câmara municipal quer contratar-nos um serviço de consultoria de 100.000 €. Que procedimento de contratação pública pode usar?",
+      "expect": {
+        "type": "regex",
+        "value": "consulta prévia"
+      }
+    },
+    {
+      "id": "g12-calendario-lda",
+      "input": "Que obrigações fiscais e contributivas tem uma Lda com IVA trimestral e 5 trabalhadores em novembro de 2026?",
+      "expect": {
+        "type": "regex",
+        "value": "IVA"
+      }
+    },
+    {
+      "id": "g13-cliente-nao-paga",
+      "input": "Um cliente não me paga uma fatura de 3.000 € vencida há 4 meses. O que faço?",
+      "expect": {
+        "type": "regex",
+        "value": "injunção"
+      }
+    },
+    {
+      "id": "g14-notificacao-portal",
+      "input": "Recebi uma notificação da AT na área reservada do Portal das Finanças, disponibilizada a 1/10/2026. Em que dia se considera feita?",
+      "expect": {
+        "type": "regex",
+        "value": "6/10/2026|6 de outubro|2026-10-06|5\\.º dia|quinto dia"
+      }
+    },
+    {
+      "id": "g15-quero-despedir",
+      "input": "Quero despedir um trabalhador que falta muito sem justificação. Como faço?",
+      "expect": {
+        "type": "regex",
+        "value": "nota de culpa"
+      }
+    },
+    {
+      "id": "g16-fuga-dados",
+      "input": "Tivemos ontem uma fuga de dados de clientes da nossa loja online. O que tenho de fazer?",
+      "expect": {
+        "type": "regex",
+        "value": "72 horas"
+      }
+    },
+    {
+      "id": "g17-comprar-casa",
+      "input": "Vou comprar uma casa. Que passos e que impostos tenho pela frente?",
+      "expect": {
+        "type": "regex",
+        "value": "contrato-promessa|CPCV"
+      }
+    },
+    {
+      "id": "g18-faturar-eua",
+      "input": "Vou faturar um serviço a uma empresa nos Estados Unidos. Que IVA e que menção ponho?",
+      "expect": {
+        "type": "regex",
+        "value": "M40|não (é )?tributad"
+      }
+    },
+    {
+      "id": "g19-faturas-pdf-2027",
+      "input": "As minhas faturas em PDF continuam a valer em 2027?",
+      "expect": {
+        "type": "regex",
+        "value": "2027"
+      }
+    },
+    {
+      "id": "g20-rgpc-50",
+      "input": "A minha empresa vai passar a ter 55 trabalhadores. Que obrigações de compliance passo a ter?",
+      "expect": {
+        "type": "regex",
+        "value": "canal de denúncia"
+      }
+    },
+    {
+      "id": "g21-painel-contabilista",
+      "input": "Sou contabilista e tenho vários clientes com perfis guardados. Mostra-me as obrigações e prazos dos próximos 30 dias.",
       "expect": {
         "type": "judge",
-        "rubric": "PASS if the answer is 'no' (the sky is not green)."
+        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa (painel_clientes) ou dá o resultado correto; FAIL se inventa valores ou normas."
+      }
+    },
+    {
+      "id": "g22-ata-contas",
+      "input": "Preciso da ata de aprovação de contas da minha Lda.",
+      "expect": {
+        "type": "judge",
+        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa (obter_template) ou dá o resultado correto; FAIL se inventa valores ou normas."
+      }
+    },
+    {
+      "id": "g23-exportar-word",
+      "input": "Gera uma carta de interpelação ao cliente Beta, Lda por uma fatura de 1.200 € vencida a 30/6/2026 e exporta-a para Word.",
+      "expect": {
+        "type": "judge",
+        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa (exportar_documento) ou dá o resultado correto; FAIL se inventa valores ou normas."
+      }
+    },
+    {
+      "id": "g24-atualidade",
+      "input": "Os valores e as taxas que usas estão atualizados?",
+      "expect": {
+        "type": "judge",
+        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa (verificar_atualidade) ou dá o resultado correto; FAIL se inventa valores ou normas."
+      }
+    },
+    {
+      "id": "g25-presuntiva",
+      "input": "Sou consultor em profissão liberal e um cliente particular não me paga os honorários de 2023. A dívida já prescreveu?",
+      "expect": {
+        "type": "regex",
+        "value": "presuntiva"
+      }
+    },
+    {
+      "id": "g26-arrendamento-5-anos",
+      "input": "Como senhorio, posso denunciar um contrato de arrendamento de duração indeterminada sem dar motivo?",
+      "expect": {
+        "type": "regex",
+        "value": "5 anos|cinco anos"
+      }
+    },
+    {
+      "id": "g27-execucao-especifica",
+      "input": "No contrato-promessa de compra de um apartamento posso afastar a execução específica?",
+      "expect": {
+        "type": "regex",
+        "value": "não pode(m)? ser afastad|830\\.º, n\\.º 3"
+      }
+    },
+    {
+      "id": "g28-quitacao-revogacao",
+      "input": "Posso pôr no acordo de revogação que o trabalhador dá quitação total de todos os créditos?",
+      "expect": {
+        "type": "regex",
+        "value": "337|transação judicial"
+      }
+    },
+    {
+      "id": "g29-cisg",
+      "input": "Portugal aplica a Convenção de Viena sobre compra e venda internacional de mercadorias?",
+      "expect": {
+        "type": "regex",
+        "value": "2021"
+      }
+    },
+    {
+      "id": "g30-viactt",
+      "input": "Recebi uma notificação da AT na caixa postal eletrónica ViaCTT, disponibilizada a 1/10/2026. Quando se considera feita?",
+      "expect": {
+        "type": "regex",
+        "value": "15\\.º dia|décimo quinto"
+      }
+    },
+    {
+      "id": "g31-coima-laboral",
+      "input": "Recebi uma notificação da ACT para apresentar defesa numa contraordenação laboral. Quantos dias tenho e são úteis?",
+      "expect": {
+        "type": "regex",
+        "value": "15 dias"
+      }
+    },
+    {
+      "id": "g32-injuncao-b2b",
+      "input": "Uma empresa deve-me 40.000 € de faturas. Posso usar a injunção?",
+      "expect": {
+        "type": "regex",
+        "value": "independentemente do valor|sem limite|62/2013"
+      }
+    },
+    {
+      "id": "g33-irs-royalties",
+      "input": "Recebo royalties pela cedência temporária de software, como trabalhador independente no regime simplificado. Que coeficiente se aplica?",
+      "expect": {
+        "type": "regex",
+        "value": "0,95"
+      }
+    },
+    {
+      "id": "g34-ss-eni",
+      "input": "Sou empresário em nome individual. Qual é a minha taxa contributiva para a Segurança Social?",
+      "expect": {
+        "type": "regex",
+        "value": "25,2"
+      }
+    },
+    {
+      "id": "g35-sem-perfil",
+      "input": "Que obrigações legais tem a minha empresa?",
+      "expect": {
+        "type": "regex",
+        "value": "forma jurídica|quantos trabalhadores|que tipo de empresa|perfil"
+      }
+    },
+    {
+      "id": "g36-eni-patrimonio",
+      "input": "Sou ENI. Respondo pelas dívidas da atividade com o meu património pessoal?",
+      "expect": {
+        "type": "regex",
+        "value": "ilimitad|património pessoal"
+      }
+    },
+    {
+      "id": "g37-guardar-perfil",
+      "input": "Guarda o perfil da minha empresa neste projeto: Lda, 12 trabalhadores, IVA trimestral, comércio a retalho.",
+      "expect": {
+        "type": "judge",
+        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa (guardar_perfil_empresa) ou dá o resultado correto; FAIL se inventa valores ou normas."
+      }
+    },
+    {
+      "id": "g38-apagar-perfil",
+      "input": "Apaga o perfil do cliente-a e os prazos dele.",
+      "expect": {
+        "type": "judge",
+        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa (apagar_perfil) ou dá o resultado correto; FAIL se inventa valores ou normas."
+      }
+    },
+    {
+      "id": "g39-privacidade",
+      "input": "Que dados guardas sobre a minha empresa, onde e durante quanto tempo?",
+      "expect": {
+        "type": "regex",
+        "value": "\\.juridico-pt"
+      }
+    },
+    {
+      "id": "g40-ativar-perfil",
+      "input": "Tenho três clientes com perfis guardados. Passa a trabalhar com o perfil da empresa beta.",
+      "expect": {
+        "type": "judge",
+        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa ((?:ativar_perfil|listar_perfis)) ou dá o resultado correto; FAIL se inventa valores ou normas."
       }
     }
   ]

@@ -1,0 +1,46 @@
+{
+  "set": "regression",
+  "note": "Gerado a partir de evals/ (claude plugin eval). Aqui só o texto da resposta é avaliado; as verificações de tool estão em evals/<caso>/graders.",
+  "items": [
+    {
+      "id": "r01-contestacao-outubro",
+      "input": "Fui citado a 1 de outubro de 2026 para contestar em 30 dias. Até quando tenho?",
+      "expect": {
+        "type": "regex",
+        "value": "2/11/2026|2 de novembro|2026-11-02"
+      }
+    },
+    {
+      "id": "r02-comercial-5-anos",
+      "input": "Uma fatura entre empresas emitida em 2019 já prescreveu aos 5 anos, certo?",
+      "expect": {
+        "type": "regex",
+        "value": "20 anos"
+      }
+    },
+    {
+      "id": "r03-selo-imt-jovem",
+      "input": "Compro a primeira casa aos 28 anos por 300.000 €, para habitação própria. Pago o Imposto do Selo de 0,8%?",
+      "expect": {
+        "type": "regex",
+        "value": "isent"
+      }
+    },
+    {
+      "id": "r04-portal-15-dias",
+      "input": "Uma notificação na área reservada do Portal das Finanças considera-se feita ao 15.º dia, certo?",
+      "expect": {
+        "type": "regex",
+        "value": "5\\.º dia|quinto dia"
+      }
+    },
+    {
+      "id": "r05-injuncao-acima-15000",
+      "input": "Entre empresas, acima de 15.000 € já não posso usar a injunção, pois não?",
+      "expect": {
+        "type": "regex",
+        "value": "pode|independentemente do valor|62/2013"
+      }
+    }
+  ]
+}

@@ -1601,5 +1601,104 @@
       "mensal se volume negócios > 650\\.000€"
     ],
     "fonte": "CIVA art. 41.º"
+  },
+  {
+    "id": "v20-fatura-ref",
+    "pergunta": "As faturas em PDF continuam a valer em 2027?",
+    "ficheiro": "skills/juridico-pt/references/faturacao.md",
+    "contem": [
+      "28/2019",
+      "art\\. 12\\.º|artigo 12\\.º",
+      "31/12/2026|31 de dezembro de 2026",
+      "ATCUD",
+      "QR",
+      "qualificad"
+    ],
+    "naoContem": [],
+    "fonte": "DL 28/2019, art. 12.º; regime transitório do OE2026; Portaria 195/2020"
+  },
+  {
+    "id": "v20-fatura-playbook",
+    "pergunta": "O que muda a 1/1/2027 nas faturas",
+    "ficheiro": "skills/juridico-pt/playbooks/faturacao-eletronica-2027.md",
+    "contem": [
+      "1/1/2027|1 de janeiro de 2027",
+      "selo eletrónico qualificado|assinatura eletrónica qualificada"
+    ],
+    "naoContem": [],
+    "fonte": "DL 28/2019, art. 12.º"
+  },
+  {
+    "id": "v20-cobranca-pepex",
+    "pergunta": "Procedimento extrajudicial pré-executivo",
+    "ficheiro": "skills/juridico-pt/playbooks/cliente-nao-paga.md",
+    "contem": [
+      "PEPEX",
+      "32/2014",
+      "78\\.º-A"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 32/2014; CIVA art. 78.º-A"
+  },
+  {
+    "id": "v20-nis2-checklist",
+    "pergunta": "Obrigações NIS2",
+    "ficheiro": "skills/juridico-pt/assets/checklists/checklist-nis2.md",
+    "contem": [
+      "125/2025",
+      "essencia",
+      "importante",
+      "incidente",
+      "CNCS"
+    ],
+    "naoContem": [],
+    "fonte": "DL 125/2025; Diretiva (UE) 2022/2555"
+  },
+  {
+    "id": "v20-fundos-ref",
+    "pergunta": "Fundos europeus: PRR e Portugal 2030",
+    "ficheiro": "skills/juridico-pt/references/fundos-europeus.md",
+    "contem": [
+      "PRR",
+      "Portugal 2030|PT2030",
+      "devolu"
+    ],
+    "naoContem": [],
+    "fonte": "regulamentação do PRR e do Portugal 2030"
+  },
+  {
+    "id": "v20-fundos-playbook",
+    "pergunta": "Recebi um pedido de devolução de apoio",
+    "ficheiro": "skills/juridico-pt/playbooks/recebi-pedido-devolucao-apoio.md",
+    "contem": [
+      "audiência prévia|audição prévia",
+      "prazo"
+    ],
+    "naoContem": [],
+    "fonte": "CPA arts. 121.º e 122.º"
+  },
+  {
+    "id": "v20-ccp-playbook",
+    "pergunta": "Vender ao Estado — limiares",
+    "ficheiro": "skills/juridico-pt/playbooks/vender-ao-estado.md",
+    "contem": [
+      "177/2026",
+      "calc_procedimento_ccp"
+    ],
+    "naoContem": [],
+    "fonte": "DL 177/2026"
+  },
+  {
+    "id": "v20-priv-ref",
+    "pergunta": "Que dados guarda o plugin?",
+    "ficheiro": "skills/juridico-pt/references/privacidade-plugin.md",
+    "contem": [
+      "\\.juridico-pt/",
+      "12 meses",
+      "fornecedor do modelo",
+      "apagar_perfil"
+    ],
+    "naoContem": [],
+    "fonte": "RGPD arts. 5.º e 13.º"
   }
 ]
