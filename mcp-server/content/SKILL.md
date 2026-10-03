@@ -230,7 +230,7 @@ Quando o utilizador pede um documento, **parte do template correspondente** em v
 ### Calculadoras → `scripts/`
 Para cálculos exatos (onde o erro é fácil), corre o script em vez de calcular de cabeça:
 - `python scripts/juros_mora.py --capital 5000 --data-inicio 2025-03-01 [--tipo comercial|comercial-geral|civil]` — juros de mora **por tramos semestrais**, com memória de cálculo pronta a anexar
-- `python scripts/prazos.py --inicio 2026-06-01 --dias 15 --tipo uteis` — prazos legais (dias úteis/feriados PT)
+- `python scripts/prazos.py --inicio 2026-10-01 --dias 30 --tipo judicial` — prazos: `judicial` (processos em tribunal — CPC, art. 138.º, com férias judiciais; `--urgente` para processos urgentes), `corridos` (por defeito — CC, art. 279.º) ou `uteis` (ex.: CPA, art. 87.º)
 - `python scripts/compensacao_despedimento.py --retribuicao-base 1500 --anos 4` — compensação por cessação
 - `python scripts/custas_injuncao.py --valor 8000` — taxa de justiça de injunção
 - `python scripts/imposto_selo_heranca.py --valor 100000 --herdeiro outro` — imposto do selo em heranças
@@ -340,14 +340,19 @@ Sempre que identificas um prazo legal relevante, destaca-o claramente:
 
 **⏰ PRAZO IMPORTANTE**: [descrição] — [prazo] — [consequência de incumprimento]
 
+**Regras de contagem** (a tool `calc_prazo` aplica-as — escolhe o tipo pelo meio de defesa):
+- **Processo em tribunal** (contestação, oposição à injunção, embargos, recursos) → tipo `judicial`: prazo contínuo que **se suspende nas férias judiciais** (22/12 a 3/1, Domingo de Ramos a Segunda-feira de Páscoa, 16/7 a 31/8 — LOSJ, art. 28.º), salvo processos urgentes; termo em dia não útil passa para o dia útil seguinte (CPC, art. 138.º); ainda há 3 dias úteis com multa (CPC, art. 139.º, n.º 5).
+- **Prazos civis, contratuais e do procedimento tributário** → tipo `corridos` (CC, art. 279.º; CPPT, art. 20.º): dias seguidos; o dia de início não conta.
+- **Procedimento administrativo** → tipo `uteis` (CPA, art. 87.º). Prazos em meses ou anos contam-se até ao dia correspondente (CC, art. 279.º, al. c)).
+
 Prazos comuns a ter em mente:
-- Prescrição das dívidas: regra geral 20 anos (art. 309.º CC), com prazos mais curtos para muitos créditos (arts. 310.º e 316.º-317.º CC) — usar `calc_prescricao`; a interpelação extrajudicial **não** interrompe a prescrição (arts. 323.º/325.º CC)
-- Contraordenações: defesa no prazo indicado na notificação (trânsito/laboral: 15 dias úteis; fiscais: 30 dias — art. 70.º RGIT); recurso de coima: 20 dias (art. 59.º, n.º 3, RGCO) ou 30 dias nas fiscais (art. 80.º RGIT)
-- Notificações das Finanças por via eletrónica (ViaCTT/domicílio fiscal eletrónico): consideram-se feitas no 15.º dia após a disponibilização (art. 39.º, n.º 10, CPPT) — ver `playbooks/recebi-notificacao-at.md`
+- Prescrição das dívidas: regra geral 20 anos (art. 309.º CC) — é o caso das faturas entre empresas; 5 anos para rendas, juros e prestações periódicas (art. 310.º); 2 anos, como prescrição **presuntiva**, para serviços de profissões liberais e fornecimentos a quem não é comerciante (art. 317.º) — a presuntiva assenta numa presunção de pagamento que só cai por confissão do devedor (arts. 312.º a 314.º). Usar `calc_prescricao`; a interpelação extrajudicial **não** interrompe a prescrição (arts. 323.º/325.º CC)
+- Contraordenações: defesa no prazo indicado na notificação (laborais: 15 dias contínuos — Lei 107/2009, arts. 6.º e 17.º; trânsito: 15 dias úteis; fiscais: 30 dias — art. 70.º RGIT); impugnação judicial: 20 dias (art. 59.º, n.º 3, RGCO; nas laborais, art. 33.º da Lei 107/2009, com efeito meramente devolutivo) ou 30 dias nas fiscais (art. 80.º RGIT)
+- Notificações das Finanças por via eletrónica: na área reservada do Portal das Finanças consideram-se feitas no **5.º dia** posterior à disponibilização (art. 38.º-A, n.º 4, CPPT); na caixa postal eletrónica (ViaCTT/domicílio fiscal eletrónico), no 15.º dia (art. 39.º, n.º 10, CPPT) — ver `playbooks/recebi-notificacao-at.md`
 - Direito de livre resolução (vendas à distância): 14 dias
 - Reclamação graciosa (finanças): 120 dias (art. 70.º CPPT)
 - Impugnação judicial (finanças): 3 meses (art. 102.º CPPT) — ver `references/contencioso-tributario.md`
-- Contestação de ação judicial: 30 dias (regra geral)
+- Contestação de ação judicial: 30 dias (CPC, art. 569.º) — prazo judicial, suspende-se nas férias judiciais (`calc_prazo` com `tipo=judicial`)
 
 ---
 

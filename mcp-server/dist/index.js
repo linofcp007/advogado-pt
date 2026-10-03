@@ -21501,7 +21501,6 @@ function memoriaJuros(capital, r, tipo) {
 
 // src/calculators/prazos.ts
 var MS_POR_DIA2 = 24 * 60 * 60 * 1e3;
-var NOTA = "Regra geral processual: se o prazo terminar em dia n\xE3o \xFAtil, transfere-se para o 1.\xBA dia \xFAtil seguinte (Art. 138.\xBA CPC). Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
 function domingoPascoa(ano) {
   const a = ano % 19;
   const b = Math.floor(ano / 100);
@@ -21547,9 +21546,9 @@ function feriadosNacionais(ano) {
     // Natal
   ]);
   const { mes, dia } = domingoPascoa(ano);
-  const pascoaTs = Date.UTC(ano, mes - 1, dia);
-  feriados.add(chaveDia(pascoaTs - 2 * MS_POR_DIA2));
-  feriados.add(chaveDia(pascoaTs + 60 * MS_POR_DIA2));
+  const pascoaTs2 = Date.UTC(ano, mes - 1, dia);
+  feriados.add(chaveDia(pascoaTs2 - 2 * MS_POR_DIA2));
+  feriados.add(chaveDia(pascoaTs2 + 60 * MS_POR_DIA2));
   return feriados;
 }
 function ehDiaUtil(timestamp, cache) {
@@ -21585,22 +21584,79 @@ function contarDiasUteis(inicioTs, nDias) {
   }
   return ts;
 }
-function contarPrazo(inicio, dias, tipo) {
-  if (dias < 0) {
-    throw new Error("O n\xFAmero de dias n\xE3o pode ser negativo.");
+var MAX_DIAS = 3650;
+function pascoaTs(ano) {
+  const { mes, dia } = domingoPascoa(ano);
+  return Date.UTC(ano, mes - 1, dia);
+}
+function emFeriasJudiciais(timestamp) {
+  const d = new Date(timestamp);
+  const m = d.getUTCMonth() + 1;
+  const dia = d.getUTCDate();
+  if (m === 12 && dia >= 22 || m === 1 && dia <= 3) return true;
+  if (m === 7 && dia >= 16 || m === 8) return true;
+  const p = pascoaTs(d.getUTCFullYear());
+  return timestamp >= p - 7 * MS_POR_DIA2 && timestamp <= p + MS_POR_DIA2;
+}
+var DIAS_SEMANA = ["domingo", "segunda-feira", "ter\xE7a-feira", "quarta-feira", "quinta-feira", "sexta-feira", "s\xE1bado"];
+function isoDia(ts) {
+  return new Date(ts).toISOString().slice(0, 10);
+}
+function contarPrazo(inicio, dias, tipo = "corridos", opts = {}) {
+  if (!(inicio instanceof Date) || Number.isNaN(inicio.getTime())) {
+    throw new Error("Data de in\xEDcio inv\xE1lida. Usa AAAA-MM-DD.");
   }
-  const inicioTs = Date.UTC(
-    inicio.getUTCFullYear(),
-    inicio.getUTCMonth(),
-    inicio.getUTCDate()
-  );
-  let limiteTs;
-  if (tipo === "corridos") {
-    limiteTs = inicioTs + dias * MS_POR_DIA2;
+  if (!Number.isInteger(dias) || dias < 0 || dias > MAX_DIAS) {
+    throw new Error(`O n\xFAmero de dias tem de ser um inteiro entre 0 e ${MAX_DIAS}.`);
+  }
+  if (tipo !== "judicial" && tipo !== "corridos" && tipo !== "uteis") {
+    throw new Error(`Tipo de prazo desconhecido: '${String(tipo)}'. Usa judicial, corridos ou uteis.`);
+  }
+  const urgente = Boolean(opts.urgente);
+  const inicioTs = Date.UTC(inicio.getUTCFullYear(), inicio.getUTCMonth(), inicio.getUTCDate());
+  let legalTs;
+  let diasSuspensos = 0;
+  const suspende = tipo === "judicial" && !urgente && dias < 180;
+  if (tipo === "uteis") {
+    legalTs = contarDiasUteis(inicioTs, dias);
+  } else if (tipo === "corridos" || !suspende) {
+    legalTs = inicioTs + dias * MS_POR_DIA2;
   } else {
-    limiteTs = contarDiasUteis(inicioTs, dias);
+    legalTs = inicioTs;
+    let contados = 0;
+    while (contados < dias) {
+      legalTs += MS_POR_DIA2;
+      if (emFeriasJudiciais(legalTs)) diasSuspensos += 1;
+      else contados += 1;
+    }
   }
-  return { dataLimite: new Date(limiteTs), nota: NOTA };
+  let limiteTs = legalTs;
+  while (!ehDiaUtil(limiteTs, CACHE_FERIADOS) || suspende && emFeriasJudiciais(limiteTs)) {
+    limiteTs += MS_POR_DIA2;
+  }
+  const transferido = limiteTs !== legalTs;
+  const diaLegal = `${isoDia(legalTs)} (${DIAS_SEMANA[new Date(legalTs).getUTCDay()]})`;
+  let nota;
+  if (tipo === "judicial") {
+    nota = (urgente ? "Processo urgente: o prazo corre tamb\xE9m nas f\xE9rias judiciais (CPC, art. 138.\xBA, n.\xBA 1). " : "Prazo judicial (CPC, art. 138.\xBA): cont\xEDnuo, suspende-se nas f\xE9rias judiciais (LOSJ, art. 28.\xBA: 22/12 a 3/1, Domingo de Ramos a Segunda-feira de P\xE1scoa, 16/7 a 31/8)" + (dias >= 180 ? ", exceto nos prazos de 6 meses ou mais, como este" : "") + (diasSuspensos > 0 ? ` \u2014 ${diasSuspensos} dias de f\xE9rias n\xE3o contaram` : "") + ". ") + (transferido ? `O termo legal, ${diaLegal}, passa para o 1.\xBA dia \xFAtil seguinte (art. 138.\xBA, n.\xBA 2). ` : "") + "O ato pode ainda ser praticado nos 3 dias \xFAteis seguintes, com multa (CPC, art. 139.\xBA, n.\xBA 5). Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
+  } else if (tipo === "corridos") {
+    nota = "Prazo em dias seguidos (CC, art. 279.\xBA): o dia de in\xEDcio n\xE3o conta. " + (transferido ? `O termo legal \xE9 ${diaLegal}; se o ato tiver de ser praticado num tribunal ou servi\xE7o encerrado nesse dia, passa para o 1.\xBA dia \xFAtil seguinte (CC, art. 279.\xBA, al. e); CPA, art. 87.\xBA). ` : "") + "Para prazos de processos em tribunal (contesta\xE7\xE3o, oposi\xE7\xE3o, recurso) usa o tipo 'judicial'. Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
+  } else {
+    nota = "Contagem em dias \xFAteis (ex.: procedimento administrativo \u2014 CPA, art. 87.\xBA): saltam-se s\xE1bados, domingos e feriados nacionais. Para prazos de processos em tribunal usa o tipo 'judicial'. Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
+  }
+  return { dataLimite: new Date(limiteTs), dataLegal: new Date(legalTs), transferido, diasSuspensos, nota };
+}
+
+// src/calculators/datas.ts
+function parseDataEstrita(texto2, campo) {
+  const s = typeof texto2 === "string" ? texto2.trim() : "";
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (m) {
+    const [a, mes, dia] = [Number(m[1]), Number(m[2]), Number(m[3])];
+    const d = new Date(Date.UTC(a, mes - 1, dia));
+    if (d.getUTCFullYear() === a && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia) return d;
+  }
+  throw new Error(`Data inv\xE1lida em '${campo}': '${String(texto2).slice(0, 40)}'. Usa AAAA-MM-DD com uma data que exista.`);
 }
 
 // src/calculators/compensacao.ts
@@ -23494,23 +23550,30 @@ function registerTools(server) {
     "calc_prazo",
     {
       title: "Contar prazo legal",
-      description: "Conta um prazo legal em dias \xFAteis (salta fins-de-semana e feriados nacionais de Portugal) ou dias corridos, devolvendo a data-limite. Usa quando h\xE1 um prazo a contar a partir de uma data ('at\xE9 quando tenho para', 'contesta\xE7\xE3o', 'oposi\xE7\xE3o', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline in business/calendar days.",
+      description: "Conta um prazo legal e devolve a data-limite e o termo legal. Tipos: 'judicial' para prazos de processos em tribunal (contesta\xE7\xE3o, oposi\xE7\xE3o \xE0 execu\xE7\xE3o, recurso, resposta \u2014 CPC, art. 138.\xBA: cont\xEDnuo, suspende-se nas f\xE9rias judiciais, termo em dia n\xE3o \xFAtil passa para o dia \xFAtil seguinte; 'urgente' para processos urgentes); 'corridos' (por defeito) para prazos civis e contratuais em dias seguidos (CC, art. 279.\xBA); 'uteis' para prazos em dias \xFAteis (ex.: CPA, art. 87.\xBA). Usa quando h\xE1 um prazo a contar a partir de uma data ('at\xE9 quando tenho para', 'contesta\xE7\xE3o', 'oposi\xE7\xE3o', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline (court, calendar or business days).",
       inputSchema: {
-        inicio: external_exports.string().describe("Data de in\xEDcio (YYYY-MM-DD)"),
-        dias: external_exports.number().int().describe("N\xFAmero de dias do prazo"),
-        tipo: external_exports.enum(["uteis", "corridos"]).default("uteis")
+        inicio: external_exports.string().describe("Data de in\xEDcio (AAAA-MM-DD) \u2014 o dia em que se considera feita a cita\xE7\xE3o/notifica\xE7\xE3o; n\xE3o conta"),
+        dias: external_exports.number().int().describe("N\xFAmero de dias do prazo (0 a 3650)"),
+        tipo: external_exports.enum(["judicial", "corridos", "uteis"]).default("corridos").describe("judicial (CPC 138.\xBA, f\xE9rias judiciais) | corridos (CC 279.\xBA) | uteis (ex.: CPA 87.\xBA)"),
+        urgente: external_exports.boolean().default(false).describe("Processo urgente: o prazo judicial corre nas f\xE9rias")
       },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async ({ inicio, dias, tipo }) => {
-      const r = contarPrazo(parseData(inicio), dias, tipo);
-      return texto(
-        `Prazo de ${dias} dias ${tipo}
+    async ({ inicio, dias, tipo, urgente }) => {
+      try {
+        const r = contarPrazo(parseDataEstrita(inicio, "inicio"), dias, tipo, { urgente });
+        const termoLegal = r.transferido ? `Termo legal: ${iso4(r.dataLegal)}
+` : "";
+        return texto(
+          `Prazo de ${dias} dias (${tipo}${tipo === "judicial" && urgente ? ", processo urgente" : ""})
 In\xEDcio: ${inicio}
-DATA-LIMITE: ${iso4(r.dataLimite)}
+` + termoLegal + `\u23F0 DATA-LIMITE: ${iso4(r.dataLimite)}
 
-${r.nota}`
-      );
+${r.nota}` + AVISO
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel contar o prazo: ${e.message}`);
+      }
     }
   );
   server.registerTool(

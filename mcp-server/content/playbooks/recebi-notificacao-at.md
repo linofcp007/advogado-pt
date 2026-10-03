@@ -13,7 +13,7 @@
   - Procedimento tributário e impugnação judicial: **dias seguidos** (art. 279.º CC); se o último dia calhar em dia em que os serviços ou tribunais estejam encerrados, passa para o **1.º dia útil seguinte** (art. 20.º, n.º 1, CPPT; art. 57.º, n.º 3, LGT). Prazos em **meses** terminam no dia correspondente do último mês (art. 279.º, al. c), CC).
   - Atos dentro de processo judicial (ex.: oposição à execução, reclamação de atos do órgão de execução fiscal): regras do Código de Processo Civil (art. 20.º, n.º 2, CPPT) — a suspensão em férias judiciais deve ser confirmada caso a caso com advogado (a confirmar). Contraordenações fiscais: RGIT, com o regime geral das contraordenações como direito subsidiário (art. 3.º, al. b), RGIT) — regra de contagem a confirmar.
   - **Na dúvida, conta em dias seguidos e sem suspensões** — dá-te sempre a data mais cedo.
-  - Conta com a calculadora (dias corridos; faz à mão o ajuste para o dia útil seguinte e os prazos em meses):
+  - Conta com a calculadora: `tipo=corridos` para o procedimento tributário (já passa o termo para o dia útil seguinte e mostra o termo legal); `tipo=judicial` só para atos dentro de processo judicial, se confirmares que se suspendem nas férias judiciais. Os prazos em **meses** (ex.: impugnação judicial, 3 meses) contam-se à mão, até ao dia correspondente do último mês:
     ```
     calc_prazo  inicio=<AAAA-MM-DD da notificação>  dias=120  tipo=corridos
     python scripts/prazos.py --inicio <AAAA-MM-DD> --dias 30 --tipo corridos

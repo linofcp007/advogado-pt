@@ -101,8 +101,13 @@ async function calc(args) {
       break;
     }
     case "prazo": {
-      const r = c.contarPrazo(new Date(str(rest, "--inicio", "")), num(rest, "--dias", 0), str(rest, "--tipo", "uteis"));
+      const inicio = c.parseDataEstrita(str(rest, "--inicio", ""), "--inicio");
+      const r = c.contarPrazo(inicio, num(rest, "--dias", NaN), str(rest, "--tipo", "corridos"), {
+        urgente: rest.includes("--urgente"),
+      });
+      if (r.transferido) console.log(`Termo legal: ${r.dataLegal.toISOString().slice(0, 10)}`);
       console.log(`Data-limite: ${r.dataLimite.toISOString().slice(0, 10)}`);
+      console.log(r.nota);
       break;
     }
     case "prescricao": {
@@ -444,7 +449,8 @@ Uso:
   advogado-pt calc imt --valor 250000 [--tipo hpp|secundaria] [--jovem]
   advogado-pt calc juros --capital 5000 --inicio 2025-03-01 [--fim YYYY-MM-DD] [--tipo comercial|comercial-geral|civil]
       (memória de cálculo por tramos semestrais)
-  advogado-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo uteis|corridos]
+  advogado-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo judicial|corridos|uteis] [--urgente]
+      (judicial: CPC 138.º com férias judiciais; corridos por defeito)
   advogado-pt calc prescricao --inicio 2025-01-15 --tipo creditos-comerciais
   advogado-pt calc compensacao --retribuicao 1500 --admissao 2015-05-01 --cessacao 2024-04-30 [--modalidade sem-termo|termo]
       (ou --anos N para a regra atual; regime transitório por períodos com as datas)

@@ -26,13 +26,13 @@
   - _Depends: 1_
 
 ## Fase: Fundacional (bloqueia todas as histórias)
-- [ ] 3. [shared] `fs-seguro.ts` (`dirProjeto`, `escreverSeguro`: `lstat` em cada componente, recusa de links, tmp + `rename`) e `calculators/arredondar.ts` (r2 meio para cima)
+- [x] 3. [shared] `fs-seguro.ts` (`dirProjeto`, `escreverSeguro`: `lstat` em cada componente, recusa de links, tmp + `rename`) e `calculators/arredondar.ts` (r2 meio para cima)
   - _Requirements: US-6.AC-1, US-6.AC-10, US-9.AC-1_
   - _Implements: mcp-server/src/fs-seguro.ts, mcp-server/src/calculators/arredondar.ts_
   - _Verify: npm --prefix mcp-server run build_
   - _Size: S_
   - _Depends: 2_
-- [ ] 4. [shared] Helper de datas estrito (AAAA-MM-DD com verificação de calendário) partilhado por tools e CLI
+- [x] 4. [shared] Helper de datas estrito (AAAA-MM-DD com verificação de calendário) partilhado por tools e CLI
   - _Requirements: US-7.AC-1_
   - _Implements: mcp-server/src/calculators/datas.ts_
   - _Verify: npm --prefix mcp-server run build_
@@ -40,21 +40,21 @@
   - _Depends: 2_
 
 ## História US-1 (P1 — MVP): prazos
-- [ ] 5. [US1] `contarPrazo` com `judicial` (art. 138.º CPC, férias judiciais da LOSJ, urgente, transferência) e `corridos` com transferência e data legal; `calc_prazo` com `judicial`, `urgente` e default `corridos`; CLI `calc prazo --tipo judicial [--urgente]`
+- [x] 5. [US1] `contarPrazo` com `judicial` (art. 138.º CPC, férias judiciais da LOSJ, urgente, transferência) e `corridos` com transferência e data legal; `calc_prazo` com `judicial`, `urgente` e default `corridos`; CLI `calc prazo --tipo judicial [--urgente]`
   - _Requirements: US-1.AC-1, US-1.AC-2, US-1.AC-4, EC-1, EC-2_
   - _Makes green: T-201, T-202, T-203, T-205_
   - _Implements: mcp-server/src/calculators/prazos.ts, mcp-server/src/tools.ts, cli/advogado-pt.mjs_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-201|T-202|T-203|T-205" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 4_
-- [ ] 6. [US1] `prazos.py` com os mesmos tipos e casos
+- [x] 6. [US1] `prazos.py` com os mesmos tipos e casos
   - _Requirements: US-1.AC-1, US-1.AC-2, US-1.AC-4_
   - _Makes green: T-206_
   - _Implements: skills/advogado-pt/scripts/prazos.py_
   - _Verify: python skills/advogado-pt/scripts/test_scripts.py -k T206_
   - _Size: S_
   - _Depends: 5_
-- [ ] 7. [US1] Tipo de contagem por meio de defesa no SKILL.md, na description da tool e nos playbooks (`recebi-citacao-ou-injuncao`, `recebi-notificacao-at`, `cliente-nao-paga`); factos `v121-prazos-`
+- [x] 7. [US1] Tipo de contagem por meio de defesa no SKILL.md, na description da tool e nos playbooks (`recebi-citacao-ou-injuncao`, `recebi-notificacao-at`, `cliente-nao-paga`); factos `v121-prazos-`
   - _Requirements: US-1.AC-3_
   - _Makes green: T-204_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-204" mcp-server/test/v121.test.mjs_

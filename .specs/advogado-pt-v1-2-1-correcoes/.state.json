@@ -151,11 +151,106 @@
       ],
       "task": "[shared] Escrever os testes a falhar: `mcp-server/test/v121.test.mjs` (T-201 a T-250 exceto T-206, T-208, T-241, T-243), os novos casos de `plugin.test.mjs` (T-233 a T-237, T-239, T-244, T-249), `test_scripts.py` (T-206, T-208, T-241), `fixtures/paridade.json` e os factos `v121-` esperados",
       "verify": "npm --prefix mcp-server test"
+    },
+    "3": {
+      "command": "npm --prefix mcp-server run build",
+      "exitCode": 0,
+      "summary": "tsc + esbuild OK (dist/index.js). fs-seguro: grava por tmp+rename, recusa junction em .advogado-pt e symlink no ficheiro, recusa '..'; r2 igual ao Decimal(repr(x)) ROUND_HALF_UP em 9 casos (135,795 -> 135,80).",
+      "at": "2026-10-03T21:20:49.700Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build",
+          "exitCode": 0,
+          "summary": "tsc + esbuild OK (dist/index.js). fs-seguro: grava por tmp+rename, recusa junction em .advogado-pt e symlink no ficheiro, recusa '..'; r2 igual ao Decimal(repr(x)) ROUND_HALF_UP em 9 casos (135,795 -> 135,80).",
+          "at": "2026-10-03T21:20:49.700Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] `fs-seguro.ts` (`dirProjeto`, `escreverSeguro`: `lstat` em cada componente, recusa de links, tmp + `rename`) e `calculators/arredondar.ts` (r2 meio para cima)",
+      "verify": "npm --prefix mcp-server run build"
+    },
+    "4": {
+      "command": "npm --prefix mcp-server run build",
+      "exitCode": 0,
+      "summary": "Build OK. parseDataEstrita recusa 2026-02-30, 2025-13-01 e 01/02/2026 nomeando o campo; aceita 2024-02-29; hojeLisboa(2026-10-01T23:30Z) = 2026-10-02. T-232 fica verde só com a tarefa 26 (tools.ts).",
+      "at": "2026-10-03T21:21:14.801Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build",
+          "exitCode": 0,
+          "summary": "Build OK. parseDataEstrita recusa 2026-02-30, 2025-13-01 e 01/02/2026 nomeando o campo; aceita 2024-02-29; hojeLisboa(2026-10-01T23:30Z) = 2026-10-02. T-232 fica verde só com a tarefa 26 (tools.ts).",
+          "at": "2026-10-03T21:21:14.801Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Helper de datas estrito (AAAA-MM-DD com verificação de calendário) partilhado por tools e CLI",
+      "verify": "npm --prefix mcp-server run build"
+    },
+    "5": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-201|T-202|T-203|T-205\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "4/4 (T-201, T-202, T-203, T-205). Suite completa: 155 testes, 109 passam, 44 falham (todos dos testes novos ainda por implementar), nenhum teste antes verde ficou vermelho.",
+      "at": "2026-10-03T21:23:36.484Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-201|T-202|T-203|T-205\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "4/4 (T-201, T-202, T-203, T-205). Suite completa: 155 testes, 109 passam, 44 falham (todos dos testes novos ainda por implementar), nenhum teste antes verde ficou vermelho.",
+          "at": "2026-10-03T21:23:36.484Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] `contarPrazo` com `judicial` (art. 138.º CPC, férias judiciais da LOSJ, urgente, transferência) e `corridos` com transferência e data legal; `calc_prazo` com `judicial`, `urgente` e default `corridos`; CLI `calc prazo --tipo judicial [--urgente]`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-201|T-202|T-203|T-205\" mcp-server/test/v121.test.mjs"
+    },
+    "6": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py -k T206",
+      "exitCode": 0,
+      "summary": "3/3 OK (casos partilhados de paridade.json, default corridos, entradas inválidas). CLI prazos.py --tipo judicial/--urgente; notas iguais às do TS.",
+      "at": "2026-10-03T21:24:48.193Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py -k T206",
+          "exitCode": 0,
+          "summary": "3/3 OK (casos partilhados de paridade.json, default corridos, entradas inválidas). CLI prazos.py --tipo judicial/--urgente; notas iguais às do TS.",
+          "at": "2026-10-03T21:24:48.193Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] `prazos.py` com os mesmos tipos e casos",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py -k T206"
+    },
+    "7": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-204\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1 (T-204: calc_prazo com judicial e default corridos; factos v121-prazos- verdes). SKILL.md com 'Regras de contagem' por meio de defesa; playbooks recebi-citacao (judicial, férias, 728.º, 785.º, 139.º n.º 5) e recebi-notificacao-at atualizados.",
+      "at": "2026-10-03T21:27:16.479Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-204\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1 (T-204: calc_prazo com judicial e default corridos; factos v121-prazos- verdes). SKILL.md com 'Regras de contagem' por meio de defesa; playbooks recebi-citacao (judicial, férias, 728.º, 785.º, 139.º n.º 5) e recebi-notificacao-at atualizados.",
+          "at": "2026-10-03T21:27:16.479Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Tipo de contagem por meio de defesa no SKILL.md, na description da tool e nos playbooks (`recebi-citacao-ou-injuncao`, `recebi-notificacao-at`, `cliente-nao-paga`); factos `v121-prazos-`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-204\" mcp-server/test/v121.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T21:18:47.832Z",
+  "lastTickAt": "2026-10-03T21:27:16.479Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
-    "2": "2026-10-03T21:18:47.832Z"
+    "2": "2026-10-03T21:18:47.832Z",
+    "3": "2026-10-03T21:20:49.700Z",
+    "4": "2026-10-03T21:21:14.801Z",
+    "5": "2026-10-03T21:23:36.484Z",
+    "6": "2026-10-03T21:24:48.193Z",
+    "7": "2026-10-03T21:27:16.479Z"
   }
 }

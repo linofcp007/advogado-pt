@@ -20,6 +20,7 @@ import {
   calcularTaxaJustica,
   decidirIVA,
   formatarEuros,
+  parseDataEstrita,
   PRESCRICAO_TIPOS,
   COMPENSACAO_MODALIDADES,
 } from "./calculators/index.js";
@@ -89,21 +90,37 @@ export function registerTools(server: McpServer): void {
     {
       title: "Contar prazo legal",
       description:
-        "Conta um prazo legal em dias úteis (salta fins-de-semana e feriados nacionais de Portugal) ou dias corridos, devolvendo a data-limite. Usa quando há um prazo a contar a partir de uma data ('até quando tenho para', 'contestação', 'oposição', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline in business/calendar days.",
+        "Conta um prazo legal e devolve a data-limite e o termo legal. Tipos: 'judicial' para prazos de processos em tribunal (contestação, oposição à execução, recurso, resposta — CPC, art. 138.º: contínuo, suspende-se nas férias judiciais, termo em dia não útil passa para o dia útil seguinte; 'urgente' para processos urgentes); 'corridos' (por defeito) para prazos civis e contratuais em dias seguidos (CC, art. 279.º); 'uteis' para prazos em dias úteis (ex.: CPA, art. 87.º). Usa quando há um prazo a contar a partir de uma data ('até quando tenho para', 'contestação', 'oposição', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline (court, calendar or business days).",
       inputSchema: {
-        inicio: z.string().describe("Data de início (YYYY-MM-DD)"),
-        dias: z.number().int().describe("Número de dias do prazo"),
-        tipo: z.enum(["uteis", "corridos"]).default("uteis"),
+        inicio: z.string().describe("Data de início (AAAA-MM-DD) — o dia em que se considera feita a citação/notificação; não conta"),
+        dias: z.number().int().describe("Número de dias do prazo (0 a 3650)"),
+        tipo: z
+          .enum(["judicial", "corridos", "uteis"])
+          .default("corridos")
+          .describe("judicial (CPC 138.º, férias judiciais) | corridos (CC 279.º) | uteis (ex.: CPA 87.º)"),
+        urgente: z.boolean().default(false).describe("Processo urgente: o prazo judicial corre nas férias"),
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ inicio, dias, tipo }) => {
-      const r = contarPrazo(parseData(inicio), dias, tipo);
-      return texto(
-        `Prazo de ${dias} dias ${tipo}\n` +
-          `Início: ${inicio}\n` +
-          `DATA-LIMITE: ${iso(r.dataLimite)}\n\n${r.nota}`
-      );
+    async ({ inicio, dias, tipo, urgente }) => {
+      try {
+        const r = contarPrazo(parseDataEstrita(inicio, "inicio"), dias, tipo, { urgente });
+        const termoLegal = r.transferido ? `Termo legal: ${iso(r.dataLegal)}
+` : "";
+        return texto(
+          `Prazo de ${dias} dias (${tipo}${tipo === "judicial" && urgente ? ", processo urgente" : ""})
+` +
+            `Início: ${inicio}
+` +
+            termoLegal +
+            `⏰ DATA-LIMITE: ${iso(r.dataLimite)}
+
+${r.nota}` +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível contar o prazo: ${(e as Error).message}`);
+      }
     }
   );
 

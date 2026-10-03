@@ -8,7 +8,10 @@
 export { formatarEuros } from "./format.js";
 export { calcularJuros, memoriaJuros, taxaDoSemestre, TAXAS_SEMESTRAIS } from "./juros.js";
 export type { TipoJuros, ResultadoJuros, TramoJuros } from "./juros.js";
-export { contarPrazo } from "./prazos.js";
+export { contarPrazo, emFeriasJudiciais } from "./prazos.js";
+export type { TipoPrazo, ResultadoPrazo } from "./prazos.js";
+export { parseDataEstrita, hojeLisboa } from "./datas.js";
+export { r2 } from "./arredondar.js";
 export {
   calcularCompensacao,
   COMPENSACAO_MODALIDADES,
