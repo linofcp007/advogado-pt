@@ -1,5 +1,5 @@
 ---
-description: Cumprimento obrigatório por dimensão da empresa — RGPC e plano anticorrupção, canal de denúncias, SST, regulamento interno. Mandatory compliance by company size — anti-corruption plan, whistleblowing channel, health and safety.
+description: Obrigações por dimensão: RGPC, canal de denúncias, SST, regulamento interno. Compliance by company size.
 argument-hint: "[n.º de trabalhadores, forma jurídica e setor | documento pretendido, ex.: 'PPR' ou 'canal de denúncias']"
 ---
 

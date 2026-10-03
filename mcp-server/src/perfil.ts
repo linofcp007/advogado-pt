@@ -21,6 +21,16 @@ export const CAMPOS_PERFIL = [
   "dados_pessoais",
   "linguas",
   "notas",
+  // v2.0 (modo contabilista e calendário)
+  "cae",
+  "concelho",
+  "fim_periodo_tributacao",
+  "imoveis",
+  "viaturas",
+  "setor_nis2",
+  "vendas_b2c",
+  "trabalhadores_estrangeiros",
+  "emite_faturas",
   "atualizado_em",
 ] as const;
 
@@ -36,6 +46,15 @@ const ROTULOS: Record<string, string> = {
   dados_pessoais: "Dados pessoais tratados (clientes, trabalhadores, saúde…)",
   linguas: "Línguas de trabalho",
   notas: "Notas (licenças, setor regulado, sócios…)",
+  cae: "CAE principal",
+  concelho: "Concelho da sede (derrama, IMI)",
+  fim_periodo_tributacao: "Fim do período de tributação, se não for 31/12 (MM-DD, ex.: 06-30)",
+  imoveis: "Tem imóveis (sim/não) — IMI",
+  viaturas: "Tem viaturas (sim/não; meses da matrícula, ex.: sim (março, julho)) — IUC",
+  setor_nis2: "Setor dos anexos da NIS2, se aplicável (DL 125/2025)",
+  vendas_b2c: "Vende a consumidores (sim/não; online, loja física)",
+  trabalhadores_estrangeiros: "Tem trabalhadores estrangeiros (sim/não)",
+  emite_faturas: "Emite faturas (sim/não; programa certificado ou Portal das Finanças)",
 };
 
 const PASTA = PASTA_DADOS;

@@ -29,7 +29,7 @@
   - _Expect: fail_
   - _Size: L_
   - _Depends: 2_
-- [ ] 4. [shared] Conjunto de avaliação (`evals/`, ≥ 40 casos golden/adversariais/regressão com verificações determinísticas) e base registada no `eval-plan.md` (sem plugin e com a 1.2.1)
+- [x] 4. [shared] Conjunto de avaliação (`evals/`, ≥ 40 casos golden/adversariais/regressão com verificações determinísticas) e base registada no `eval-plan.md` (sem plugin e com a 1.2.1)
   - _Requirements: US-4.AC-1, US-4.AC-2_
   - _Makes green: T-312_
   - _Implements: evals/_
@@ -66,13 +66,13 @@
 **Checkpoint:** US-1 — `juridico-pt` instalável, dados em `.juridico-pt/`, passos de troca documentados.
 
 ## História US-2 (P1): faturação 2027
-- [ ] 9. [US2] Referência `faturacao`, playbook `faturacao-eletronica-2027`, checklist `checklist-faturacao`, command `/faturacao`, datas em `valores-2026.md` — cada regra confirmada no DR/Portal das Finanças; factos `v20-fatura-`
+- [x] 9. [US2] Referência `faturacao`, playbook `faturacao-eletronica-2027`, checklist `checklist-faturacao`, command `/faturacao`, datas em `valores-2026.md` — cada regra confirmada no DR/Portal das Finanças; factos `v20-fatura-`
   - _Requirements: US-2.AC-1_
   - _Makes green: T-306_
   - _Verify: node --test --test-name-pattern="T-306" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 6_
-- [ ] 10. [US2] Calendário: campo `emite_faturas` e evento da data-limite das faturas em PDF sem assinatura qualificada
+- [x] 10. [US2] Calendário: campo `emite_faturas` e evento da data-limite das faturas em PDF sem assinatura qualificada
   - _Requirements: US-2.AC-2_
   - _Makes green: T-307_
   - _Implements: mcp-server/src/calendario.ts_
@@ -95,7 +95,7 @@
   - _Verify: python skills/juridico-pt/scripts/test_scripts.py -k T309_
   - _Size: S_
   - _Depends: 11_
-- [ ] 13. [US3][P] Template de carta com várias faturas; PEPEX (Lei 32/2014) e IVA de créditos incobráveis no playbook `cliente-nao-paga` e em `cobrancas.md`, com fonte
+- [x] 13. [US3][P] Template de carta com várias faturas; PEPEX (Lei 32/2014) e IVA de créditos incobráveis no playbook `cliente-nao-paga` e em `cobrancas.md`, com fonte
   - _Requirements: US-3.AC-2_
   - _Makes green: T-310_
   - _Verify: node --test --test-name-pattern="T-310" mcp-server/test/v20.test.mjs_
@@ -110,7 +110,7 @@
 **Checkpoint:** US-1 a US-3 — o MVP da 2.0.
 
 ## História US-5 (P2): atualidade
-- [ ] 15. [US5] `atualidade.ts` + tool `verificar_atualidade` + linha no SessionStart; "Próxima revisão" no topo de `valores-2026.md`
+- [x] 15. [US5] `atualidade.ts` + tool `verificar_atualidade` + linha no SessionStart; "Próxima revisão" no topo de `valores-2026.md`
   - _Requirements: US-5.AC-1, US-5.AC-2_
   - _Makes green: T-314, T-315_
   - _Implements: mcp-server/src/atualidade.ts, hooks/juridico-hook.mjs_
@@ -128,7 +128,7 @@
   - _Depends: 6_
 
 ## História US-7 (P2): modo contabilista
-- [ ] 17. [US7] Campos novos do perfil e regras do calendário que os usam (IMI, IUC, período de tributação diferente do ano civil)
+- [x] 17. [US7] Campos novos do perfil e regras do calendário que os usam (IMI, IUC, período de tributação diferente do ano civil)
   - _Requirements: US-7.AC-3_
   - _Makes green: T-320_
   - _Implements: mcp-server/src/perfil.ts, mcp-server/src/calendario.ts_
@@ -151,7 +151,7 @@
   - _Depends: 17, 18_
 
 ## História US-8 (P2): templates do dia a dia
-- [ ] 20. [US8][P] Templates `convocatoria-assembleia-geral`, `ata-aprovacao-contas`, `procuracao`, `carta-caducidade-contrato-termo`, `resposta-livro-reclamacoes` (fonte por regra) e índice
+- [x] 20. [US8][P] Templates `convocatoria-assembleia-geral`, `ata-aprovacao-contas`, `procuracao`, `carta-caducidade-contrato-termo`, `resposta-livro-reclamacoes` (fonte por regra) e índice
   - _Requirements: US-8.AC-1_
   - _Makes green: T-321_
   - _Verify: node --test --test-name-pattern="T-321" mcp-server/test/v20.test.mjs_
@@ -165,13 +165,13 @@
   - _Depends: 20_
 
 ## História US-9 (P2): NIS2, fundos e contratação pública
-- [ ] 22. [US9][P] `checklist-nis2` (DL 125/2025) e atualização de `compliance.md`/`digital-ue.md`
+- [x] 22. [US9][P] `checklist-nis2` (DL 125/2025) e atualização de `compliance.md`/`digital-ue.md`
   - _Requirements: US-9.AC-1_
   - _Makes green: T-323_
   - _Verify: node --test --test-name-pattern="T-323" mcp-server/test/v20.test.mjs_
   - _Size: S_
   - _Depends: 6_
-- [ ] 23. [US9][P] Referência `fundos-europeus` e playbook `recebi-pedido-devolucao-apoio`
+- [x] 23. [US9][P] Referência `fundos-europeus` e playbook `recebi-pedido-devolucao-apoio`
   - _Requirements: US-9.AC-2_
   - _Makes green: T-324_
   - _Verify: node --test --test-name-pattern="T-324" mcp-server/test/v20.test.mjs_
@@ -191,7 +191,7 @@
   - _Verify: python skills/juridico-pt/scripts/test_scripts.py -k T326_
   - _Size: S_
   - _Depends: 24_
-- [ ] 26. [US9][P] Playbook `vender-ao-estado` e templates de esclarecimentos, erros e omissões, audiência prévia e impugnação administrativa
+- [x] 26. [US9][P] Playbook `vender-ao-estado` e templates de esclarecimentos, erros e omissões, audiência prévia e impugnação administrativa
   - _Requirements: US-9.AC-4_
   - _Makes green: T-327_
   - _Verify: node --test --test-name-pattern="T-327" mcp-server/test/v20.test.mjs_
@@ -234,7 +234,7 @@
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-332" mcp-server/test/v20.test.mjs_
   - _Size: S_
   - _Depends: 18_
-- [ ] 32. [US11] SessionStart numa linha fora de projetos com dados; descrições dos commands ≤ 150 caracteres
+- [x] 32. [US11] SessionStart numa linha fora de projetos com dados; descrições dos commands ≤ 150 caracteres
   - _Requirements: US-11.AC-3, SC-003_
   - _Makes green: T-333_
   - _Implements: hooks/juridico-hook.mjs_

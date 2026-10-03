@@ -22991,10 +22991,10 @@ function calcularProcedimentoCCP({ valor, tipo, inicio }) {
   admissiveis.push({ procedimento: "concurso-publico", nome: NOMES["concurso-publico"], ate: null, base: `${base} \u2014 qualquer valor` });
   admissiveis.push({ procedimento: "concurso-limitado", nome: NOMES["concurso-limitado"], ate: null, base: `${base} \u2014 qualquer valor` });
   const notas = [
-    "O valor \xE9 o do contrato a celebrar, sem IVA, incluindo prorroga\xE7\xF5es e op\xE7\xF5es; dividir o contrato para ficar abaixo de um limiar n\xE3o \xE9 permitido (CCP, art. 22.\xBA).",
-    "O ajuste direto e a consulta pr\xE9via dependem da escolha da entidade adjudicante; h\xE1 ainda escolhas por crit\xE9rios materiais, independentes do valor (CCP, arts. 24.\xBA a 27.\xBA).",
+    "Conta o valor estimado do contrato (CCP, art. 17.\xBA), sem IVA (art. 473.\xBA); \xE9 proibido dividir o contrato para fugir a um procedimento e somam-se as presta\xE7\xF5es do mesmo tipo (art. 17.\xBA-B).",
+    "O ajuste direto e a consulta pr\xE9via dependem da escolha da entidade adjudicante; h\xE1 ainda escolhas por crit\xE9rios materiais, independentes do valor (CCP, arts. 23.\xBA a 30.\xBA-A; ajuste direto nos arts. 24.\xBA a 27.\xBA).",
     "Acima dos limiares europeus, o an\xFAncio do concurso \xE9 publicado tamb\xE9m no Jornal Oficial da UE \u2014 confirmar os limiares em vigor.",
-    anterior ? `Procedimento iniciado antes de ${INICIO_DL_177_2026}: aplicam-se os limiares anteriores ao DL 177/2026.` : `Limiares do DL 177/2026, para procedimentos iniciados a partir de ${INICIO_DL_177_2026}.`
+    anterior ? `Procedimento iniciado antes de ${INICIO_DL_177_2026}: aplicam-se os limiares anteriores ao DL 177/2026.` : `Limiares do DL 177/2026 (em vigor a ${INICIO_DL_177_2026}; o diploma aplica-se aos procedimentos iniciados ap\xF3s a entrada em vigor \u2014 um procedimento iniciado nesse mesmo dia fica a confirmar).`
   ];
   return { valor, tipo, regime: anterior ? "anterior ao DL 177/2026" : "DL 177/2026", admissiveis, notas };
 }
@@ -23384,6 +23384,16 @@ var CAMPOS_PERFIL = [
   "dados_pessoais",
   "linguas",
   "notas",
+  // v2.0 (modo contabilista e calendário)
+  "cae",
+  "concelho",
+  "fim_periodo_tributacao",
+  "imoveis",
+  "viaturas",
+  "setor_nis2",
+  "vendas_b2c",
+  "trabalhadores_estrangeiros",
+  "emite_faturas",
   "atualizado_em"
 ];
 var ROTULOS = {
@@ -23397,7 +23407,16 @@ var ROTULOS = {
   clientes: "Clientes (B2B/B2C; nacionais, UE, fora da UE)",
   dados_pessoais: "Dados pessoais tratados (clientes, trabalhadores, sa\xFAde\u2026)",
   linguas: "L\xEDnguas de trabalho",
-  notas: "Notas (licen\xE7as, setor regulado, s\xF3cios\u2026)"
+  notas: "Notas (licen\xE7as, setor regulado, s\xF3cios\u2026)",
+  cae: "CAE principal",
+  concelho: "Concelho da sede (derrama, IMI)",
+  fim_periodo_tributacao: "Fim do per\xEDodo de tributa\xE7\xE3o, se n\xE3o for 31/12 (MM-DD, ex.: 06-30)",
+  imoveis: "Tem im\xF3veis (sim/n\xE3o) \u2014 IMI",
+  viaturas: "Tem viaturas (sim/n\xE3o; meses da matr\xEDcula, ex.: sim (mar\xE7o, julho)) \u2014 IUC",
+  setor_nis2: "Setor dos anexos da NIS2, se aplic\xE1vel (DL 125/2025)",
+  vendas_b2c: "Vende a consumidores (sim/n\xE3o; online, loja f\xEDsica)",
+  trabalhadores_estrangeiros: "Tem trabalhadores estrangeiros (sim/n\xE3o)",
+  emite_faturas: "Emite faturas (sim/n\xE3o; programa certificado ou Portal das Finan\xE7as)"
 };
 var PASTA2 = PASTA_DADOS;
 var FICHEIRO2 = "perfil-empresa.md";
@@ -23609,6 +23628,10 @@ var PGDL_CT = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=1047&
 var PGDL_RGPC = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3543&tabela=leis";
 var RCBE = "https://justica.gov.pt/Guias/guia-do-registo-central-do-beneficiario-efetivo-rcbe";
 var RU = "https://www.dgcp.mtsss.gov.pt/relatorio-unico";
+var OE2026 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/legislacao/diplomas_legislativos/Documents/lei-73-a-2025.pdf";
+var CIMI120 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cimi/Pages/cimi120.aspx";
+var CIUC17 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/iuc/Pages/iuc17.aspx";
+var DL161 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/legislacao/diplomas_legislativos/Documents/decreto-lei-161-2026.pdf";
 var PRORROGACOES = {
   "efatura_comunicacao@2026-01-05": { data: "2026-01-09", nota: "Prorrogado pelo Despacho SEAF 166/2025." },
   "efatura_comunicacao@2026-04-05": { data: "2026-04-08", nota: "Prorrogado pelo Despacho SEAF 40/2026." },
@@ -23859,9 +23882,9 @@ var REGRAS = [
     base: "CIRC, art. 120.\xBA, n.\xBAs 1 e 2, e art. 104.\xBA, n.\xBA 1, al. b)",
     fonte: AT_D,
     transferivel: false,
-    nota: "Prazo legal: \xFAltimo dia de maio, independentemente de ser \xFAtil. Per\xEDodo diferente do ano civil: \xFAltimo dia do 5.\xBA m\xEAs ap\xF3s o fim.",
+    nota: "Prazo legal: \xFAltimo dia do 5.\xBA m\xEAs ap\xF3s o fim do per\xEDodo de tributa\xE7\xE3o (maio, se coincidir com o ano civil), independentemente de ser \xFAtil.",
     aplica: (p) => formaEm(p, ["sociedade", "associacao"]),
-    datas: (a) => [{ data: iso4(a, 5, 31), periodo: `exerc\xEDcio de ${a - 1}` }]
+    datas: (a, p) => p.fimPeriodo ? apos(a, p.fimPeriodo, 5, (ano, m) => fimMes(ano, m)) : [{ data: iso4(a, 5, 31), periodo: `exerc\xEDcio de ${a - 1}` }]
   },
   {
     id: "irc_pagamentos_conta",
@@ -23872,7 +23895,7 @@ var REGRAS = [
     transferivel: true,
     nota: "Dispensado se o IRC do ano anterior for < 199,52 \u20AC. Lucro tribut\xE1vel > 1,5 M\u20AC: tamb\xE9m pagamento adicional por conta (derrama estadual).",
     aplica: (p) => formaEm(p, ["sociedade"]),
-    datas: (a) => [
+    datas: (a, p) => p.fimPeriodo ? pagamentosContaPeriodo(a, p.fimPeriodo) : [
       { data: fimMes(a, 7), periodo: "1.\xBA pagamento" },
       { data: fimMes(a, 9), periodo: "2.\xBA pagamento" },
       { data: iso4(a, 12, 15), periodo: "3.\xBA pagamento" }
@@ -23885,14 +23908,14 @@ var REGRAS = [
     base: "CIRC, art. 121.\xBA, n.\xBA 2; CIRS, art. 113.\xBA; CRCom, arts. 15.\xBA, n.\xBA 4, e 42.\xBA",
     fonte: AT_D,
     transferivel: false,
-    nota: "15 de julho, independentemente de ser \xFAtil. Per\xEDodo diferente do ano civil: dia 15 do 7.\xBA m\xEAs ap\xF3s o fim.",
+    nota: "Dia 15 do 7.\xBA m\xEAs ap\xF3s o fim do per\xEDodo de tributa\xE7\xE3o (15 de julho, se coincidir com o ano civil), independentemente de ser \xFAtil.",
     aplica: (p) => {
       if (!p.forma) return talvez("forma_juridica");
       if (p.forma === "sociedade" || p.forma === "associacao") return SIM;
       if (p.forma === "eni") return contabOrganizada(p);
       return NAO;
     },
-    datas: (a) => [{ data: iso4(a, 7, 15), periodo: `exerc\xEDcio de ${a - 1}` }]
+    datas: (a, p) => p.fimPeriodo && (p.forma === "sociedade" || p.forma === "associacao") ? apos(a, p.fimPeriodo, 7, (ano, m) => iso4(ano, m, 15)) : [{ data: iso4(a, 7, 15), periodo: `exerc\xEDcio de ${a - 1}` }]
   },
   // ---------------- Fiscal: IRS (ENI) ----------------
   {
@@ -24055,8 +24078,92 @@ var REGRAS = [
     nota: "Elaborado no m\xEAs de outubro, sobre os riscos elevados ou m\xE1ximos do PPR; publicar em 10 dias.",
     aplica: rgpc,
     datas: (a) => [{ data: iso4(a, 10, 31), final: ultimoDiaUtilAte(iso4(a, 10, 31)) }]
+  },
+  // ---------------- v2.0: faturação, IMI e IUC ----------------
+  {
+    id: "faturas_pdf_fim",
+    titulo: "\xDAltimo dia das faturas em PDF sem assinatura qualificada",
+    area: "Fiscal",
+    base: "Lei 73-A/2025 (OE 2026), art. 95.\xBA, n.\xBA 3; DL 28/2019, art. 12.\xBA",
+    fonte: OE2026,
+    transferivel: false,
+    nota: "A partir de 1/1/2027 s\xF3 \xE9 fatura eletr\xF3nica a que tiver assinatura eletr\xF3nica qualificada ou selo eletr\xF3nico qualificado (ou EDI); um PDF simples passa a ser fatura em papel. Ver o playbook faturacao-eletronica-2027.",
+    aplica: (p) => {
+      if (p.forma === "particular") return NAO;
+      if (p.emiteFaturas === false) return NAO;
+      return p.emiteFaturas ? SIM : talvez("emite_faturas");
+    },
+    datas: (a) => a === 2026 ? [{ data: iso4(2026, 12, 31) }] : []
+  },
+  {
+    id: "imi",
+    titulo: "IMI \u2014 pagamento",
+    area: "Fiscal",
+    base: "CIMI, art. 120.\xBA, n.\xBA 1",
+    fonte: CIMI120,
+    transferivel: true,
+    nota: "Presta\xE7\xE3o \xFAnica em maio se o IMI for at\xE9 100 \u20AC; maio e novembro se for de 100 \u20AC a 500 \u20AC; maio, agosto e novembro acima de 500 \u20AC (valores em valores-2026). Falhar uma presta\xE7\xE3o vence as seguintes.",
+    aplica: (p) => p.imoveis ? SIM : NAO,
+    datas: (a) => [
+      { data: fimMes(a, 5), periodo: "1.\xAA presta\xE7\xE3o (ou \xFAnica)" },
+      { data: fimMes(a, 8), periodo: "2.\xAA presta\xE7\xE3o (s\xF3 acima de 500 \u20AC)" },
+      { data: fimMes(a, 11), periodo: "\xFAltima presta\xE7\xE3o (acima de 100 \u20AC)" }
+    ]
+  },
+  {
+    id: "iuc_matricula",
+    titulo: "IUC \u2014 m\xEAs da matr\xEDcula",
+    area: "Fiscal",
+    base: "CIUC, art. 17.\xBA, n.\xBA 2, e art. 4.\xBA, n.\xBA 2 (reda\xE7\xE3o anterior ao DL 161/2026)",
+    fonte: CIUC17,
+    transferivel: true,
+    nota: "At\xE9 2026 o IUC das viaturas ligeiras paga-se at\xE9 ao fim do m\xEAs do anivers\xE1rio da matr\xEDcula de cada viatura. A partir de 2027 passa a uma liquida\xE7\xE3o anual (DL 161/2026).",
+    aplica: (p) => p.viaturas ? p.mesesMatricula.length ? SIM : talvez("viaturas") : NAO,
+    datas: (a, p) => a > 2026 ? [] : p.mesesMatricula.length ? p.mesesMatricula.map((m) => ({ data: fimMes(a, m), periodo: `viaturas matriculadas em ${MESES[m - 1]}` })) : [{ data: fimMes(a, 1), periodo: "indica no perfil os meses da matr\xEDcula (ex.: viaturas: sim (mar\xE7o, julho))" }]
+  },
+  {
+    id: "iuc_anual",
+    titulo: "IUC \u2014 pagamento anual",
+    area: "Fiscal",
+    base: "CIUC, art. 17.\xBA (reda\xE7\xE3o do DL 161/2026, com efeitos a 1/1/2027); DL 161/2026, art. 6.\xBA (2027)",
+    fonte: DL161,
+    transferivel: true,
+    nota: "Liquida\xE7\xE3o anual at\xE9 30 de abril. Em 2027 (regime transit\xF3rio): at\xE9 500 \u20AC paga-se em outubro; acima de 500 \u20AC, em julho e outubro (ou tudo em julho). Desde 2028: abril se for at\xE9 100 \u20AC; abril e outubro de 100 \u20AC a 500 \u20AC; abril, julho e outubro acima de 500 \u20AC. Isen\xE7\xF5es e elementos a comunicar at\xE9 ao fim de fevereiro.",
+    aplica: (p) => p.viaturas ? SIM : NAO,
+    datas: (a) => a < 2027 ? [] : a === 2027 ? [
+      { data: fimMes(a, 7), periodo: "1.\xAA presta\xE7\xE3o (s\xF3 acima de 500 \u20AC)" },
+      { data: fimMes(a, 10), periodo: "presta\xE7\xE3o \xFAnica (at\xE9 500 \u20AC) ou 2.\xAA presta\xE7\xE3o" }
+    ] : [
+      { data: fimMes(a, 4), periodo: "1.\xAA presta\xE7\xE3o (ou \xFAnica)" },
+      { data: fimMes(a, 7), periodo: "2.\xAA presta\xE7\xE3o (s\xF3 acima de 500 \u20AC)" },
+      { data: fimMes(a, 10), periodo: "\xFAltima presta\xE7\xE3o (acima de 100 \u20AC)" }
+    ]
   }
 ];
+function apos(a, fim, meses, dia) {
+  const out = [];
+  for (const anoFim of [a - 1, a]) {
+    const [pa, pm] = mesMais(anoFim, fim.m, meses);
+    if (pa === a) out.push({ data: dia(pa, pm), periodo: `per\xEDodo que terminou a ${iso4(anoFim, fim.m, fim.d)}` });
+  }
+  return out;
+}
+function pagamentosContaPeriodo(a, fim) {
+  const out = [];
+  for (const anoFim of [a, a + 1]) {
+    const [ia, im] = mesMais(anoFim - 1, fim.m, 1);
+    const pagamentos = [
+      [6, "1.\xBA pagamento", (ano, m) => fimMes(ano, m)],
+      [8, "2.\xBA pagamento", (ano, m) => fimMes(ano, m)],
+      [11, "3.\xBA pagamento", (ano, m) => iso4(ano, m, 15)]
+    ];
+    for (const [desloc, rotulo, dia] of pagamentos) {
+      const [pa, pm] = mesMais(ia, im, desloc);
+      if (pa === a) out.push({ data: dia(pa, pm), periodo: `${rotulo} (per\xEDodo que termina a ${iso4(anoFim, fim.m, fim.d)})` });
+    }
+  }
+  return out;
+}
 function rgpc(p) {
   if (p.forma === "eni" || p.forma === "particular") return NAO;
   if (p.trabalhadores === null) return p.forma ? talvez("trabalhadores") : talvez("trabalhadores", "forma_juridica");
@@ -24081,7 +24188,34 @@ function normalizar(perfil) {
   const c = v("contabilidade");
   const contabilidade = /organizada/.test(c) ? "organizada" : /simplificad/.test(c) ? "simplificado" : null;
   const ue = /\bue\b|europ|intracomunit|estrangeir|internacion/.test(v("clientes"));
-  return { forma, iva, trabalhadores, contabilidade, ue };
+  const simNao = (k) => {
+    const x = v(k);
+    if (!x) return null;
+    if (/^(n[ãa]o|nao|nenhum|0\b|sem\b|no\b)/.test(x)) return false;
+    if (/^(sim|s\b|yes|\d)/.test(x)) return true;
+    return null;
+  };
+  const viaturas = simNao("viaturas");
+  const mesesMatricula = viaturas ? [...new Set(MESES.map((nome, i2) => new RegExp(`\\b${nome}\\b`).test(v("viaturas")) ? i2 + 1 : 0).filter(Boolean))] : [];
+  const fp = /^(\d{1,2})-(\d{1,2})$/.exec(v("fim_periodo_tributacao"));
+  let fimPeriodo = null;
+  if (fp) {
+    const m = Number(fp[1]);
+    const d = Number(fp[2]);
+    if (m >= 1 && m <= 12 && d >= 1 && d <= 31 && !(m === 12 && d === 31)) fimPeriodo = { m, d };
+  }
+  return {
+    forma,
+    iva,
+    trabalhadores,
+    contabilidade,
+    ue,
+    imoveis: simNao("imoveis"),
+    viaturas,
+    mesesMatricula,
+    fimPeriodo,
+    emiteFaturas: simNao("emite_faturas")
+  };
 }
 function resolverData(r, o, ano) {
   if (o.final) {
@@ -24109,7 +24243,7 @@ function gerarCalendario(ano, perfil) {
   for (const r of REGRAS) {
     const a = r.aplica(p);
     if (a.ok === false) continue;
-    for (const o of r.datas(ano)) {
+    for (const o of r.datas(ano, p)) {
       const { data, nota } = resolverData(r, o, ano);
       const notas = [nota, o.nota, r.nota].filter(Boolean).join(" ");
       out.push({
@@ -24578,6 +24712,70 @@ async function pedirPerfil(servidor, motivo) {
   } catch {
     return null;
   }
+}
+
+// src/atualidade.ts
+function limiteJuros(ano, semestre) {
+  return semestre === 1 ? `${ano}-07-15` : `${ano + 1}-01-15`;
+}
+function lerCabecalhoValores(texto2) {
+  const topo = texto2.slice(0, 4e3);
+  const proxima = /\*\*Próxima revisão:\*\*\s*(\d{4}-\d{2}-\d{2})/.exec(topo)?.[1] ?? null;
+  const ultima = /\*\*Última atualização:\*\*\s*(\d{4}-\d{2}(?:-\d{2})?)/.exec(topo)?.[1] ?? null;
+  const j = /\*\*Juros de mora:\*\*[^\n]*?([12])\.º semestre de (\d{4})/.exec(topo);
+  return { proxima, ultima, juros: j ? { ano: Number(j[2]), semestre: Number(j[1]) } : null };
+}
+var REVISOES_FIXAS = [
+  {
+    item: "Coeficiente de atualiza\xE7\xE3o das rendas",
+    fonte: "INE e Aviso no Di\xE1rio da Rep\xFAblica (valores-2026, sec\xE7\xE3o Arrendamento)",
+    ultimaAtualizacao: "2027: 1,0256 (INE, 10/9/2026; a confirmar com o Aviso no DR)",
+    proximaRevisao: "2026-10-31",
+    nota: "Confirmar o Aviso publicado at\xE9 30/10/2026 e retirar o '(a confirmar)'."
+  }
+];
+function verificarAtualidade(opts = {}) {
+  const h = hojeEmLisboa(opts.hoje ?? /* @__PURE__ */ new Date());
+  const texto2 = opts.textoValores ?? ler("references", "valores-2026") ?? "";
+  const cab = lerCabecalhoValores(texto2);
+  const itens = [];
+  const proxima = cab.proxima ?? "0000-01-01";
+  itens.push({
+    item: "Valores de refer\xEAncia (valores-2026: impostos, sal\xE1rio m\xEDnimo, IAS, limiares)",
+    fonte: "references/valores-2026.md",
+    ultimaAtualizacao: cab.ultima ?? "(sem data)",
+    proximaRevisao: cab.proxima ?? "(sem data)",
+    desatualizado: h > proxima,
+    ...cab.proxima ? {} : { nota: "O ficheiro de valores n\xE3o tem a linha 'Pr\xF3xima revis\xE3o: AAAA-MM-DD'." }
+  });
+  const ult = TAXAS_SEMESTRAIS[TAXAS_SEMESTRAIS.length - 1];
+  const limite = limiteJuros(ult.ano, ult.semestre);
+  itens.push({
+    item: "Taxas de juros de mora (comerciais, por semestre)",
+    fonte: "Avisos da ETF no Di\xE1rio da Rep\xFAblica \u2014 calculators/juros.ts e scripts/juros_mora.py",
+    ultimaAtualizacao: `${ult.semestre}.\xBA semestre de ${ult.ano}`,
+    proximaRevisao: limite,
+    desatualizado: h >= limite,
+    ...h >= limite ? { nota: "Os semestres sem aviso registado usam a \xFAltima taxa conhecida (marcada como estimada)." } : {}
+  });
+  if (cab.juros && (cab.juros.ano !== ult.ano || cab.juros.semestre !== ult.semestre)) {
+    itens[itens.length - 1].nota = `valores-2026 diz ${cab.juros.semestre}.\xBA semestre de ${cab.juros.ano} e a tabela tem ${ult.semestre}.\xBA de ${ult.ano}: alinhar os dois.`;
+  }
+  for (const r of REVISOES_FIXAS) itens.push({ ...r, desatualizado: h > r.proximaRevisao });
+  return itens;
+}
+function textoAtualidade(itens, hoje = /* @__PURE__ */ new Date()) {
+  const h = hojeEmLisboa(hoje);
+  const fora = itens.filter((i) => i.desatualizado);
+  return [
+    `Atualidade do conte\xFAdo do plugin em ${h}: ${fora.length ? `${fora.length} item(ns) fora de prazo` : "tudo dentro do prazo de revis\xE3o"}.`,
+    "",
+    ...itens.map(
+      (i) => `- ${i.desatualizado ? "\u26A0\uFE0F DESATUALIZADO" : "\u2713"} ${i.item} \u2014 atualizado: ${i.ultimaAtualizacao}; pr\xF3xima revis\xE3o: ${i.proximaRevisao}; fonte: ${i.fonte}` + (i.nota ? ` (${i.nota})` : "")
+    ),
+    "",
+    fora.length ? "Atualiza o plugin (/plugin marketplace update juridico-pt) e, at\xE9 l\xE1, confirma estes valores nas fontes oficiais antes de os usar." : "Mesmo dentro do prazo, valores determinantes confirmam-se na fonte oficial (dre.pt, Portal das Finan\xE7as)."
+  ].join("\n");
 }
 
 // src/tools.ts
@@ -25153,7 +25351,7 @@ atualizado_em: ${p.campos.atualizado_em ?? "(sem data)"}` + (p.desatualizado ? "
     "guardar_perfil_empresa",
     {
       title: "Guardar perfil da empresa",
-      description: "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.juridico-pt/perfil-empresa.md; destino 'geral' -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito). Usa s\xF3 depois de o utilizador aceitar guardar e s\xF3 com dados da PR\xD3PRIA empresa \u2014 nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
+      description: "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.juridico-pt/perfil-empresa.md; destino 'geral' -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito). Usa s\xF3 depois de o utilizador aceitar guardar e s\xF3 com dados da PR\xD3PRIA empresa \u2014 nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas, cae, concelho, fim_periodo_tributacao (MM-DD), imoveis, viaturas (sim + meses da matr\xEDcula), setor_nis2, vendas_b2c, trabalhadores_estrangeiros, emite_faturas. EN: save the company profile.",
       inputSchema: {
         campos: external_exports.record(external_exports.string()).describe("Campos a gravar, ex.: {forma_juridica: 'Lda', setor: 'Restaura\xE7\xE3o', trabalhadores: '12'}"),
         destino: external_exports.enum(["projeto", "geral"]).default("projeto"),
@@ -25305,6 +25503,19 @@ Google Calendar: Defini\xE7\xF5es \u2192 Importar e exportar \u2192 Importar (es
       } catch (e) {
         return texto(`N\xE3o foi poss\xEDvel gerar o calend\xE1rio: ${e.message}`);
       }
+    }
+  );
+  server.registerTool(
+    "verificar_atualidade",
+    {
+      title: "Verificar se os valores do plugin est\xE3o atualizados",
+      description: "Lista os valores de refer\xEAncia (valores-2026), as taxas de juros de mora por semestre e outras tabelas do plugin com a data da \xFAltima atualiza\xE7\xE3o, a pr\xF3xima revis\xE3o e se j\xE1 passaram de prazo. Usa antes de dar um valor determinante numa data pr\xF3xima de uma mudan\xE7a (janeiro, julho, outubro) ou quando o utilizador pergunta se os n\xFAmeros est\xE3o em dia. EN: check whether the plugin's values and rates are up to date.",
+      inputSchema: {},
+      annotations: { readOnlyHint: true, openWorldHint: false }
+    },
+    async () => {
+      const hoje = /* @__PURE__ */ new Date();
+      return texto(textoAtualidade(verificarAtualidade({ hoje }), hoje));
     }
   );
   server.registerTool(

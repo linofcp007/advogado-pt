@@ -1,5 +1,5 @@
 ---
-description: Prazos em curso do projeto — registar, listar e marcar cumpridos, com aviso ao abrir a sessão. Running deadlines — save, list and mark done, with start-of-session reminders.
+description: Prazos em curso — registar, listar e marcar cumpridos, com aviso. Running deadlines — save, list, mark done.
 argument-hint: "[vazio para listar | 'registar <data> <o quê>' | 'cumprido <data> <o quê>']"
 ---
 

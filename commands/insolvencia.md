@@ -1,5 +1,5 @@
 ---
-description: Um cliente/devedor entrou em insolvência ou PER — reclamar créditos a tempo. A customer/debtor filed for insolvency or a restructuring — file your claim on time.
+description: Devedor em insolvência ou PER — reclamar créditos a tempo. Debtor insolvent or restructuring — file your claim.
 argument-hint: "[nome do devedor, tipo de processo e data da sentença/despacho]"
 ---
 

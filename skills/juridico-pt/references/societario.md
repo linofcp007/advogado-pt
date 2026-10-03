@@ -49,7 +49,7 @@
 - Vinculam **apenas** os subscritores (eficácia obrigacional), **não** a sociedade; úteis com investidores/co-sócios
 
 ## Obrigações Periódicas
-- **Prestação de contas** anual: aprovação até 31 de março (3 meses após o exercício)
+- **Prestação de contas** anual: aprovação em 3 meses após o fim do exercício (até 31 de março, se coincidir com o ano civil), ou 5 meses com contas consolidadas ou método da equivalência patrimonial (CSC, art. 65.º, n.º 5); template `ata-aprovacao-contas`
 - **IES** (Informação Empresarial Simplificada): entrega anual (até meados de julho) — contas, fiscal e estatística num só ato
 - **RCBE** (Registo Central do Beneficiário Efetivo): identificação de quem controla a sociedade; manter atualizado e confirmar anualmente
 

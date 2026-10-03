@@ -1,5 +1,5 @@
 ---
-description: Heranças e partilhas — referência, acordo de partilha e imposto do selo. Inheritance and estate division — reference, settlement deed and stamp duty.
+description: Heranças e partilhas — referência, acordo de partilha e imposto do selo. Inheritance, estate division, stamp duty.
 argument-hint: "[situação da herança]"
 ---
 

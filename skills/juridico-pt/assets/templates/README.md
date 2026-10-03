@@ -32,6 +32,7 @@ Esqueletos reais e reutilizáveis. Quando o utilizador pede um documento, **part
 ### Cobranças e dívidas
 - [carta-cobranca-amigavel.md](carta-cobranca-amigavel.md) — 1.º lembrete cordial
 - [carta-cobranca-formal-registada.md](carta-cobranca-formal-registada.md) — interpelação final com AR
+- [carta-cobranca-varias-faturas.md](carta-cobranca-varias-faturas.md) — interpelação com várias faturas: tabela por fatura, juros da `calc_juros_lote` e 40 € por fatura (DL 62/2013, art. 7.º)
 - [reconhecimento-divida.md](reconhecimento-divida.md) — reconhecimento de dívida (interrompe a prescrição; título executivo se autenticado)
 - [acordo-pagamento-faseado.md](acordo-pagamento-faseado.md) — plano de pagamentos com vencimento antecipado
 - [requerimento-injuncao.md](requerimento-injuncao.md) — guião de injunção (Citius/BNI)
@@ -65,6 +66,7 @@ Esqueletos reais e reutilizáveis. Quando o utilizador pede um documento, **part
 - [contrato-trabalho-sem-termo.md](contrato-trabalho-sem-termo.md)
 - [acordo-teletrabalho.md](acordo-teletrabalho.md)
 - [contrato-trabalho-termo-certo.md](contrato-trabalho-termo-certo.md) — contrato a termo certo (motivo justificativo)
+- [carta-caducidade-contrato-termo.md](carta-caducidade-contrato-termo.md) — caducidade do contrato a termo pelo empregador (⏰ 15 dias no termo certo; 7/30/60 no incerto — arts. 344.º e 345.º CT)
 - [nota-de-culpa.md](nota-de-culpa.md) — abertura de processo disciplinar
 - [carta-despedimento-justa-causa.md](carta-despedimento-justa-causa.md) — decisão final do processo disciplinar
 - [acordo-revogacao.md](acordo-revogacao.md) — cessação por mútuo acordo
@@ -101,6 +103,9 @@ Esqueletos reais e reutilizáveis. Quando o utilizador pede um documento, **part
 ### Sociedades
 - [pacto-social-unipessoal-lda.md](pacto-social-unipessoal-lda.md) — contrato de sociedade unipessoal por quotas (base para Lda)
 - [decisao-socio-unico.md](decisao-socio-unico.md) — decisões do sócio único (contas, gerência, sede, lucros)
+- [convocatoria-assembleia-geral.md](convocatoria-assembleia-geral.md) — convocatória de AG de Lda (carta registada, ⏰ 15 dias — art. 248.º CSC) e de SA (publicação, 1 mês / 21 dias — art. 377.º CSC)
+- [ata-aprovacao-contas.md](ata-aprovacao-contas.md) — ata de aprovação de contas e aplicação de resultados (arts. 63.º, 65.º, 217.º/294.º e 295.º CSC; IES até ao 15.º dia do 7.º mês)
+- [procuracao.md](procuracao.md) — procuração com poderes especiais ou gerais (arts. 262.º-269.º CC; forma do negócio; não é procuração forense)
 - [acordo-parassocial.md](acordo-parassocial.md) — acordo parassocial com vesting, good/bad leaver, tag/drag-along e impasse (Art. 17.º CSC)
 - [contrato-cessao-quotas.md](contrato-cessao-quotas.md) — cessão de quota (Arts. 228.º-231.º CSC; registo em 2 meses)
 
@@ -124,6 +129,15 @@ Esqueletos reais e reutilizáveis. Quando o utilizador pede um documento, **part
 
 ### Heranças
 - [acordo-partilha-extrajudicial.md](acordo-partilha-extrajudicial.md)
+
+### Contratação pública
+- [pedido-esclarecimentos-ccp.md](pedido-esclarecimentos-ccp.md) — esclarecimentos sobre as peças do procedimento (Art. 50.º CCP; ⏰ 1.º terço do prazo das propostas)
+- [lista-erros-omissoes-ccp.md](lista-erros-omissoes-ccp.md) — erros e omissões das peças (Art. 50.º CCP; ⏰ 1.º terço)
+- [pronuncia-audiencia-previa-ccp.md](pronuncia-audiencia-previa-ccp.md) — pronúncia sobre o relatório preliminar (Arts. 123.º e 147.º CCP)
+- [impugnacao-administrativa-ccp.md](impugnacao-administrativa-ccp.md) — reclamação ou recurso administrativo (Arts. 267.º-274.º CCP; ⏰ 5 dias úteis) e contencioso pré-contratual urgente
+
+### Consumo
+- [resposta-livro-reclamacoes.md](resposta-livro-reclamacoes.md) — resposta a reclamação no Livro de Reclamações (⏰ 15 dias úteis no eletrónico; original à entidade em 15 dias úteis no físico — DL 156/2005, arts. 5.º e 5.º-B)
 
 ### Processo e análise
 - [intake-caso.md](intake-caso.md) — ficha de recolha inicial de um caso novo

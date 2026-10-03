@@ -66,7 +66,7 @@
   - ficheiro SAF-T (PT) de faturação;
   - inserção direta no Portal das Finanças.
   Quem é obrigado a produzir SAF-T (PT) só pode usar as duas primeiras vias (n.º 3).
-- ⏰ **Prazo**: até ao **dia 5 do mês seguinte** ao da emissão (art. 3.º, n.º 2, na redação da Lei 12/2022; aplicável aos documentos emitidos desde 1/1/2023 — FAQ da AT, questão 4936).
+- ⏰ **Prazo**: até ao **dia 5 do mês seguinte** ao da emissão (art. 3.º, n.º 2, na redação atual; aplicável aos documentos emitidos desde 1/1/2023 — FAQ da AT, questão 4936).
 - ⏰ **Mês sem faturas**: comunica esse facto no mesmo prazo (art. 3.º, n.º 9).
 - Inclui faturas, documentos de conferência de mercadorias/serviços e recibos; o ATCUD é um dos campos comunicados (art. 3.º, n.º 4, al. p)).
 - Falta ou atraso na comunicação: contraordenação **grave** (RGIT, art. 117.º, n.º 9) — montantes em `valores-2026`.

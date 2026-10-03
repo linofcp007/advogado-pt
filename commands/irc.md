@@ -1,5 +1,5 @@
 ---
-description: IRC estimado da sociedade (taxa PME, derramas, tributação autónoma, prejuízos) e decisões fiscais do dia a dia. Corporate income tax estimate (SME rate, surcharges, autonomous taxation).
+description: IRC estimado (taxa PME, derramas, tributação autónoma, prejuízos). Corporate income tax estimate.
 argument-hint: "[lucro tributável, PME sim/não, município/derrama, viaturas e despesas de representação]"
 ---
 

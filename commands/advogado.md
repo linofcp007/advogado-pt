@@ -1,5 +1,5 @@
 ---
-description: Assistente jurídico geral de Portugal — ativa a skill e diagnostica a questão. General PT legal assistant — activates the skill and diagnoses the matter.
+description: Assistente jurídico geral de Portugal — diagnostica a questão. General PT legal assistant — diagnoses the matter.
 argument-hint: "[a tua questão jurídica]"
 ---
 

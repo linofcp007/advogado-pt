@@ -25,9 +25,9 @@
 
 ## Livro de Reclamações
 - Obrigatório para todos os estabelecimentos (físico e eletrónico)
-- Livro eletrónico: obrigatório para quem vende online (livroreclamacoes.pt)
-- Prazo de resposta: 15 dias úteis
-- Envio automático à entidade reguladora competente
+- Livro eletrónico (livroreclamacoes.pt): obrigatório para todos os fornecedores de bens e prestadores de serviços (DL 156/2005, art. 2.º, n.º 2), não só para quem vende online
+- Livro eletrónico: resposta ao consumidor em 15 dias úteis (art. 5.º-B, n.º 4); a reclamação segue automaticamente para a entidade competente
+- Livro físico: o fornecedor envia o original à entidade de controlo de mercado em 15 dias úteis (art. 5.º, n.º 1); não há prazo geral de resposta ao consumidor, salvo nos serviços públicos essenciais (art. 3.º, n.º 5)
 - Afixação obrigatória do letreiro
 
 ## Resolução Alternativa de Litígios (RAL)
@@ -51,5 +51,5 @@
 
 - Termos e Condições para loja online (conforme DL 24/2014) — `assets/templates/termos-condicoes-loja-online.md`
 - Política de devoluções e reembolsos (a pedido)
-- Resposta a reclamação no livro de reclamações (a pedido)
+- `resposta-livro-reclamacoes.md` — resposta a reclamação no Livro de Reclamações
 - Informação pré-contratual para vendas à distância (a pedido)

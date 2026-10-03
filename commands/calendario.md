@@ -1,5 +1,5 @@
 ---
-description: Calendário anual de obrigações legais da empresa (IVA, Modelo 22, IES, Segurança Social, contas, RCBE, Relatório Único…), exportável para o Google Calendar. Yearly compliance calendar for the company, exportable to Google Calendar.
+description: Calendário anual de obrigações da empresa, exportável (.ics). Yearly compliance calendar, exportable (.ics).
 argument-hint: "[ano | mês | 'exportar' para gerar o .ics | nome do perfil]"
 ---
 

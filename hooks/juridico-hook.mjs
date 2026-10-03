@@ -2,9 +2,11 @@
 // Dispatcher de hooks do plugin juridico-pt. Sem dependências (só node: builtins) e FAIL-OPEN:
 // qualquer erro -> exit 0 (nunca bloqueia o utilizador). Lê o payload JSON do Claude Code de stdin.
 //
-//   SessionStart  -> breve briefing de "advogado ativo" + perfil da empresa (o ativo, se houver
-//                    vários; senão o por defeito, projeto -> geral) ou instrução para o perguntar,
-//                    + aviso dos prazos em curso (.juridico-pt/prazos.md) vencidos ou a <= 7 dias.
+//   SessionStart  -> num projeto com .juridico-pt/: briefing do assistente jurídico + perfil da
+//                    empresa (o ativo, se houver vários; senão o por defeito, projeto -> geral) ou
+//                    instrução para o perguntar + prazos em curso vencidos ou a <= 7 dias; noutros
+//                    projetos, UMA linha com <= 200 caracteres. Em ambos, o aviso de conteúdo
+//                    desatualizado (topo de references/valores-2026.md).
 //   PostToolUse   -> ao gravar um INSTRUMENTO jurídico (detetado pela estrutura, não pelo
 //                    léxico — ver detetarDocumentoJuridico), lembra as cláusulas essenciais
 //                    e o disclaimer. Informativo, nunca bloqueia.
@@ -16,6 +18,7 @@ import { fileURLToPath } from "node:url";
 const EVENT = process.argv[2] || "";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const MCP_DIST = resolve(HERE, "..", "mcp-server", "dist", "index.js");
+const VALORES = resolve(HERE, "..", "skills", "juridico-pt", "references", "valores-2026.md");
 
 function emit(additionalContext) {
   if (!additionalContext) return;
@@ -56,7 +59,9 @@ function lerStdin() {
 // Leitor mínimo, alinhado com mcp-server/src/perfil.ts (o hook não importa o servidor).
 const CAMPOS_PERFIL = [
   "forma_juridica", "denominacao", "setor", "trabalhadores", "volume_negocios", "regime_iva",
-  "contabilidade", "clientes", "dados_pessoais", "linguas", "notas", "atualizado_em",
+  "contabilidade", "clientes", "dados_pessoais", "linguas", "notas",
+  "cae", "concelho", "fim_periodo_tributacao", "imoveis", "viaturas", "setor_nis2", "vendas_b2c",
+  "trabalhadores_estrangeiros", "emite_faturas", "atualizado_em",
 ];
 const MS_12_MESES = 365 * 24 * 60 * 60 * 1000;
 // O perfil é texto do utilizador (ou de um repositório de terceiros): entra no contexto como
@@ -177,17 +182,96 @@ function avisoPrazos(projeto, hoje) {
   }
 }
 
+// --- Atualidade do conteúdo -------------------------------------------------
+// Topo de references/valores-2026.md: "Próxima revisão: AAAA-MM-DD" e "Juros de mora: taxas oficiais
+// até ao N.º semestre de AAAA". Mesma leitura que mcp-server/src/atualidade.ts — manter alinhados.
+function lerTopo(f, bytes = 4096) {
+  const fd = openSync(f, "r");
+  try {
+    const buf = Buffer.alloc(bytes);
+    const n = readSync(fd, buf, 0, bytes, 0);
+    return buf.subarray(0, n).toString("utf8");
+  } finally {
+    closeSync(fd);
+  }
+}
+
+/** Partes do aviso de atualidade ([] se estiver tudo dentro do prazo ou o ficheiro faltar). */
+function partesAtualidade(hoje, valores = VALORES) {
+  try {
+    if (!existsSync(valores)) return [];
+    const topo = lerTopo(valores);
+    const h = hojeEmLisboa(hoje);
+    const partes = [];
+    const prox = /\*\*Próxima revisão:\*\*\s*(\d{4}-\d{2}-\d{2})/.exec(topo);
+    if (prox && h > prox[1]) partes.push(`valores de referência por rever desde ${prox[1]}`);
+    const j = /\*\*Juros de mora:\*\*[^\n]*?([12])\.º semestre de (\d{4})/.exec(topo);
+    if (j) {
+      const ano = Number(j[2]);
+      const sem = Number(j[1]);
+      const limite = sem === 1 ? `${ano}-07-15` : `${ano + 1}-01-15`;
+      if (h >= limite) {
+        partes.push(`falta a taxa de juros de mora do ${sem === 1 ? 2 : 1}.º semestre de ${sem === 1 ? ano : ano + 1}`);
+      }
+    }
+    return partes;
+  } catch {
+    return []; // fail-open
+  }
+}
+
+function avisoAtualidade(hoje) {
+  const partes = partesAtualidade(hoje);
+  if (partes.length === 0) return "";
+  return (
+    ` ⚠️ Conteúdo do plugin desatualizado: ${partes.join("; ")}. ` +
+    "Atualiza o plugin (/plugin marketplace update juridico-pt) e confirma esses valores na fonte oficial antes de os usar."
+  );
+}
+
+const LIMITE_LINHA = 200;
+
+/** Linha única (<= 200 caracteres) para projetos sem .juridico-pt/: junta as partes por prioridade. */
+function linhaCurta(home, hoje) {
+  const partes = ["⚖️ Jurídico PT (juridico-pt): assistente jurídico PT/EN — /advogado /cobrar /prazo. Não substitui advogado (OA)."];
+  if (partesAtualidade(hoje).length) partes.push("⚠️ Conteúdo desatualizado: atualiza o plugin.");
+  let geral = false;
+  try {
+    geral = existsSync(join(home, ".juridico-pt", "perfil-empresa.md")) || existsSync(join(home, ".juridico-pt", "perfis"));
+  } catch {
+    geral = false;
+  }
+  partes.push(
+    geral
+      ? "🏢 Perfil da empresa (geral) guardado: obter_perfil_empresa."
+      : "Sem perfil da empresa: pergunta o necessário e oferece guardar_perfil_empresa."
+  );
+  let linha = "";
+  for (const p of partes) {
+    const nova = linha ? `${linha} ${p}` : p;
+    if (nova.length <= LIMITE_LINHA) linha = nova;
+  }
+  return linha;
+}
+
 /** Mensagem do SessionStart (exportada para testes). Nunca lança. */
 export function mensagemSessionStart(opts = {}) {
-  let msg =
-    "⚖️ juridico-pt ativo — assessoria jurídica de Portugal · active — legal assistant for Portugal. " +
-    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /prazos /calendario /defesa /rgpd /despedir /salario /irc /fisco /compliance /insolvencia /perfil /diagnostico. " +
-    "Valores 2026 em valores-2026; confirma prazos a correr · check running deadlines. " +
-    "Orientação informativa, não substitui advogado da OA · informational guidance, not a substitute for a registered lawyer.";
+  const hoje = opts.hoje || new Date();
+  const projeto = opts.projeto || process.env.CLAUDE_PROJECT_DIR || process.cwd();
+  const home = opts.home || process.env.JURIDICO_PT_HOME || homedir();
+  let comDados = false;
   try {
-    const hoje = opts.hoje || new Date();
-    const projeto = opts.projeto || process.env.CLAUDE_PROJECT_DIR || process.cwd();
-    const home = opts.home || process.env.JURIDICO_PT_HOME || homedir();
+    comDados = existsSync(join(projeto, ".juridico-pt"));
+  } catch {
+    comDados = false;
+  }
+  if (!comDados) return linhaCurta(home, hoje);
+  let msg =
+    "⚖️ Jurídico PT ativo — assistente jurídico de Portugal · active — legal assistant for Portugal. " +
+    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /prazos /calendario /painel /defesa /rgpd /despedir /fisco /perfil /exportar /diagnostico. " +
+    "Valores em valores-2026; confirma prazos a correr · check running deadlines. " +
+    "Orientação informativa, não substitui advogado inscrito na OA · informational guidance, not a substitute for a registered lawyer.";
+  try {
     const p = lerPerfilAtivo(projeto, home, hoje);
     if (p) {
       const quem = p.nome ? ` '${p.nome}'` : "";
@@ -209,11 +293,11 @@ export function mensagemSessionStart(opts = {}) {
     /* fail-open: segue sem perfil */
   }
   try {
-    const projeto = opts.projeto || process.env.CLAUDE_PROJECT_DIR || process.cwd();
-    msg += avisoPrazos(projeto, opts.hoje || new Date());
+    msg += avisoPrazos(projeto, hoje);
   } catch {
     /* fail-open: segue sem prazos */
   }
+  msg += avisoAtualidade(hoje);
   return msg;
 }
 

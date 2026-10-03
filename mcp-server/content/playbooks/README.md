@@ -17,6 +17,9 @@
 - **[faturar-cliente-estrangeiro.md](faturar-cliente-estrangeiro.md)** — Faturar a um cliente da UE ou de fora: IVA, menção na fatura, VIES, OSS e declarações.
 - **[dissolucao-liquidacao.md](dissolucao-liquidacao.md)** — Fechar a empresa: dissolução e liquidação (imediata ou por fases), registos, Finanças, Segurança Social e responsabilidade dos sócios.
 - **[cliente-insolvente.md](cliente-insolvente.md)** — Um cliente entrou em insolvência/PER: reclamar créditos a tempo, garantias, IVA de créditos incobráveis e riscos de resolução.
+- **[faturacao-eletronica-2027.md](faturacao-eletronica-2027.md)** — Faturas em PDF deixam de valer como faturas eletrónicas a 1/1/2027: escolher selo ou assinatura eletrónica qualificada (ou EDI), adaptar o programa, tratar as faturas recebidas, contratos públicos (CIUS-PT) e arquivo.
+- **[recebi-pedido-devolucao-apoio.md](recebi-pedido-devolucao-apoio.md)** — Pedido de devolução de apoio PRR/Portugal 2030: projeto vs decisão final, audiência prévia (≥ 10 dias úteis), restituição em 30 dias úteis ou prestações, reclamação, recurso e ação no tribunal administrativo (3 meses).
+- **[vender-ao-estado.md](vender-ao-estado.md)** — Vender ao Estado: plataforma e assinatura qualificada, oportunidades (DR, BASE, JOUE), procedimento pelo valor (DL 177/2026), esclarecimentos e erros e omissões, audiência prévia, impugnação (5 dias úteis) e contencioso (1 mês), caução, fatura eletrónica e pagamento.
 
 ## Como usar
 

@@ -366,6 +366,12 @@ async function calendarioCmd(args) {
   console.log("\nConfirmar no Portal das Finanças / Segurança Social Direta (prorrogações por despacho).");
 }
 
+async function atualidadeCmd() {
+  const { verificarAtualidade, textoAtualidade } = await modulo("atualidade.js");
+  const hoje = new Date();
+  console.log(textoAtualidade(verificarAtualidade({ hoje }), hoje));
+}
+
 async function exportarCmd(args) {
   const dir = resolve(str(args, "--dir", process.cwd()));
   const ficheiro = str(args, "--ficheiro", undefined);
@@ -539,6 +545,9 @@ Uso:
   juridico-pt exportar --nome carta-cliente (--ficheiro documento.md | --template nome) [--dir <projeto>]
       Grava .juridico-pt/exportados/<nome>.docx (Word/LibreOffice), sem a lista "Antes de enviar".
 
+  juridico-pt atualidade
+      Valores de referência, taxas de juros e tabelas: última atualização, próxima revisão e o que está fora de prazo.
+
   juridico-pt prompt <nome> [--tipo template|playbook|checklist|referencia]
       Imprime um prompt autocontido (persona + rigor + conteúdo) para colar noutra IA.
 
@@ -555,6 +564,7 @@ async function main() {
   if (cmd === "calendario") return calendarioCmd(args);
   if (cmd === "prazos") return prazosCmd(args);
   if (cmd === "exportar") return exportarCmd(args);
+  if (cmd === "atualidade") return atualidadeCmd();
   if (cmd === "doctor") return doctor();
   console.log(HELP);
 }

@@ -111,7 +111,10 @@ Consulta os ficheiros de referência para orientações detalhadas por área:
   Contratos de prestação de serviços, SLAs, termos e condições, licenciamento de software, acordos de confidencialidade (NDA), contratos de distribuição/retalho, disputas contratuais
   
 - **Cobranças e Dívidas** → ler `references/cobrancas.md`
-  Faturas não pagas, injunções, PEAP, procedimentos extrajudiciais e judiciais, penhoras
+  Faturas não pagas (uma ou várias — `calc_juros_lote`), injunções, PEPEX, IVA de créditos incobráveis, PEAP, procedimentos extrajudiciais e judiciais, penhoras
+
+- **Faturação e Fatura Eletrónica** → ler `references/faturacao.md`
+  Requisitos das faturas (art. 36.º CIVA), programas certificados, ATCUD e código QR, comunicação à AT, faturas em PDF até 31/12/2026 e assinatura/selo eletrónico qualificado a partir de 1/1/2027, fatura eletrónica nos contratos públicos (CIUS-PT), arquivo
 
 - **Direito Laboral** → ler `references/laboral.md`
   Contratos de trabalho, despedimentos, subcontratação, trabalho remoto, assédio, não concorrência, obrigações do empregador (consoante o n.º de trabalhadores)
@@ -141,13 +144,16 @@ Consulta os ficheiros de referência para orientações detalhadas por área:
   Lei aplicável (Roma I), foro/arbitragem (Bruxelas I bis), CISG, cláusulas cross-border, clientes estrangeiros
 
 - **Direito Digital e Regulação UE** → ler `references/digital-ue.md`
-  AI Act (IA), NIS2 (cibersegurança), DSA, CRA, Data Act, ePrivacy/cookies — crítico para software/tech
+  AI Act (IA), NIS2 (cibersegurança — DL 125/2025; checklist `checklist-nis2`), DSA, CRA, Data Act, ePrivacy/cookies — crítico para software/tech
 
 - **Seguros** → ler `references/seguros.md`
   RC Profissional (E&O), ciber-risco, acidentes de trabalho, D&O, multirriscos; alinhar capital com caps contratuais
 
 - **Contratação Pública** → ler `references/contratacao-publica.md`
-  CCP, tipos de procedimento, plataformas eletrónicas, propostas, impugnações — concorrer a concursos públicos
+  CCP (limiares do DL 177/2026 — `calc_procedimento_ccp`), tipos de procedimento, plataformas eletrónicas, esclarecimentos e erros e omissões, audiência prévia, impugnações — concorrer a concursos públicos (playbook `vender-ao-estado`)
+
+- **Fundos Europeus (PRR e Portugal 2030)** → ler `references/fundos-europeus.md`
+  Obrigações do beneficiário, pedidos de pagamento, controlos, redução/revogação e devolução de apoios, audiência prévia e impugnação (playbook `recebi-pedido-devolucao-apoio`)
 
 - **Garantias e Crédito** → ler `references/garantias.md`
   Livrança, fiança, aval, penhor, hipoteca, reserva de propriedade, garantia bancária
@@ -205,6 +211,9 @@ Consulta os ficheiros de referência para orientações detalhadas por área:
 - **Glossário PT↔EN** → ler `references/glossario-pt-en.md`
   Terminologia para documentos bilingues e falsos amigos (injunção, coima, denúncia)
 
+- **Privacidade do próprio plugin** → ler `references/privacidade-plugin.md`
+  Que dados o plugin guarda (`.juridico-pt/`), onde, por quanto tempo, como apagá-los (`apagar_perfil`) e o papel do fornecedor do modelo
+
 ---
 
 ## Ferramentas da Skill
@@ -222,6 +231,7 @@ Para cálculos exatos (onde o erro é fácil), usa a tool MCP; sem MCP (ex.: cla
 | Cálculo | Tool MCP | Script (`scripts/`) |
 |---|---|---|
 | Juros de mora por tramos semestrais (com memória de cálculo) | `calc_juros_mora` | `juros_mora.py` |
+| Juros de várias faturas de uma vez (40 € por fatura comercial, totais por cliente) | `calc_juros_lote` | `juros_mora.py --lote` |
 | Prazo — `judicial` (CPC 138.º, férias judiciais), `corridos` ou `uteis` | `calc_prazo` | `prazos.py` |
 | Prescrição / caducidade (com as presuntivas) | `calc_prescricao` | `prescricao.py` |
 | Compensação por cessação do contrato de trabalho | `calc_compensacao_despedimento` | `compensacao_despedimento.py` |
@@ -235,14 +245,18 @@ Para cálculos exatos (onde o erro é fácil), usa a tool MCP; sem MCP (ex.: cla
 | Legítima e quota disponível | `calc_legitima` | `legitima.py` |
 | Taxa de justiça de uma ação (RCP, Tabela I) | `calc_taxa_justica` | `taxa_justica.py` |
 | Taxa de justiça da injunção | `calc_custas_injuncao` | `custas_injuncao.py` |
+| Procedimento de contratação pública pelo valor (DL 177/2026) | `calc_procedimento_ccp` | `procedimento_ccp.py` |
 
 Exemplos: `python scripts/prazos.py --inicio 2026-10-01 --dias 30 --tipo judicial` · `python scripts/juros_mora.py --capital 5000 --data-inicio 2025-03-01` · `python scripts/imt.py --valor 250000 --tipo hpp --jovem`. Cada script tem `--help`; índice completo em `scripts/README.md`.
 
-O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa` (vários perfis: `listar_perfis` / `ativar_perfil`).
+O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa` (vários perfis: `listar_perfis` / `ativar_perfil`; apagar: `apagar_perfil`). Num repositório git, oferece `acrescentar_gitignore` para os dados não irem para o repositório.
 
 ### Calendário de obrigações e prazos em curso
 - `calendario_obrigacoes` (CLI `calendario --ano 2026 [--ics]`) — calendário anual a partir do perfil (IVA, Modelo 22, IES, SS, contas, RCBE, Relatório Único, mapa de férias, RGPC…), com base legal por data e exportação `.ics` para Google Calendar/Outlook. Datas com perfil incompleto vêm "a confirmar".
-- `registar_prazo` / `listar_prazos` / `concluir_prazo` — prazos a correr em `.juridico-pt/prazos.md`; o hook avisa ao abrir a sessão os vencidos e os que terminam em 7 dias. **Sempre que calculares um prazo perentório do utilizador, oferece registá-lo.**
+- `registar_prazo` / `listar_prazos` / `concluir_prazo` — prazos a correr em `.juridico-pt/prazos.md` (com `perfil` no modo contabilista); o hook avisa ao abrir a sessão os vencidos e os que terminam em 7 dias. **Sempre que calculares um prazo perentório do utilizador, oferece registá-lo.**
+- `painel_clientes` (command `/painel`) — modo contabilista: obrigações e prazos dos próximos 30 dias de todos os perfis, por data e perfil; `calendario_obrigacoes` com `por_perfil` exporta um `.ics` por cliente.
+- `exportar_documento` (command `/exportar`) — grava um documento ou template em `.docx` (Word/LibreOffice) em `.juridico-pt/exportados/`, sem a lista "Antes de enviar".
+- `verificar_atualidade` — que valores, taxas de juros e tabelas do plugin já passaram da data de revisão; o hook também avisa ao abrir a sessão.
 
 Apresenta sempre o resultado como **estimativa de apoio**, com a ressalva indicada no output do script.
 
@@ -251,7 +265,7 @@ Para cenários comuns, segue a árvore de decisão correspondente (passo-a-passo
 
 | Situação | Playbook (`playbooks/`) | Tools a usar |
 |---|---|---|
-| Um cliente não paga uma fatura | `cliente-nao-paga.md` | `calc_juros_mora`, `calc_prescricao`, `calc_custas_injuncao` |
+| Um cliente não paga uma fatura (ou várias) | `cliente-nao-paga.md` | `calc_juros_mora`, `calc_juros_lote`, `calc_prescricao`, `calc_custas_injuncao` |
 | Recebi uma citação, injunção ou notificação do tribunal | `recebi-citacao-ou-injuncao.md` | `calc_prazo` (`judicial`), `registar_prazo` |
 | Recebi uma notificação das Finanças | `recebi-notificacao-at.md` | `calc_prazo` (`corridos`), `registar_prazo` |
 | Quero despedir / cessar um contrato | `quero-despedir.md` | `calc_compensacao_despedimento`, `calc_creditos_laborais` |
@@ -262,9 +276,12 @@ Para cenários comuns, segue a árvore de decisão correspondente (passo-a-passo
 | Um cliente ficou insolvente | `cliente-insolvente.md` | `registar_prazo` |
 | Faturar a um cliente estrangeiro | `faturar-cliente-estrangeiro.md` | `calc_iva_operacao` |
 | Dissolver ou liquidar a sociedade | `dissolucao-liquidacao.md` | — |
+| Faturas em PDF e o que muda a 1/1/2027 | `faturacao-eletronica-2027.md` | `registar_prazo`, `calendario_obrigacoes` |
+| Recebi um pedido de devolução de um apoio (PRR/PT2030) | `recebi-pedido-devolucao-apoio.md` | `calc_prazo` (`uteis`), `registar_prazo` |
+| Quero vender ao Estado / responder a um concurso | `vender-ao-estado.md` | `calc_procedimento_ccp`, `calc_prazo` (`uteis`), `registar_prazo` |
 
 ### Checklists (verificação) → `assets/checklists/`
-Listas acionáveis: `checklist-rgpd.md` · `checklist-due-diligence-imovel.md` · `checklist-constituicao-sociedade.md` · `checklist-revisao-contrato.md` · `checklist-predeploy-legal.md` · `checklist-registo-marca.md` · `checklist-loja-online.md` · `checklist-concorrencia.md` · `checklist-compliance-dimensao.md` · `checklist-seguranca-saude-trabalho.md`
+Listas acionáveis: `checklist-rgpd.md` · `checklist-due-diligence-imovel.md` · `checklist-constituicao-sociedade.md` · `checklist-revisao-contrato.md` · `checklist-predeploy-legal.md` · `checklist-registo-marca.md` · `checklist-loja-online.md` · `checklist-concorrencia.md` · `checklist-compliance-dimensao.md` · `checklist-seguranca-saude-trabalho.md` · `checklist-faturacao.md` · `checklist-nis2.md`
 
 ---
 

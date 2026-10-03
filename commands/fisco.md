@@ -1,5 +1,5 @@
 ---
-description: Recebi uma notificação das Finanças (AT) — prazos, meios de defesa e documentos. I got a tax authority (AT) notice — deadlines, remedies and documents.
+description: Notificação das Finanças (AT) — prazos, defesa e documentos. Tax authority (AT) notice — deadlines and remedies.
 argument-hint: "[tipo de notificação, data em que foi recebida e valor]"
 ---
 

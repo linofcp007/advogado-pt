@@ -6,7 +6,7 @@
 
 - ⏰ **72 HORAS para notificar a CNPD** (Art. 33.º RGPD), a contar do momento em que tomas **conhecimento** da violação — salvo se for improvável que resulte risco para os direitos e liberdades dos titulares. **O relógio já começou.** Se notificares depois das 72h, tens de justificar o atraso.
 - ⏰ **Notificação aos titulares** (Art. 34.º): **sem demora injustificada** se houver **risco elevado**.
-- ⏰ Se fores entidade abrangida por **NIS2**: *early warning* em **24h** e notificação em **72h** à autoridade (CNCS) — em paralelo com a CNPD. Ver `references/digital-ue.md`.
+- ⏰ Se fores entidade abrangida pela **NIS2** (DL 125/2025): notificação inicial ao CNCS em **24h**, atualização em **72h** quando necessário, notificação do fim do impacto em 24h e relatório final em **30 dias úteis** depois dela (arts. 41.º a 44.º) — em paralelo com a CNPD. Ver `assets/checklists/checklist-nis2.md`.
 - ⏰ Se houve **crime** (acesso ilegítimo, ransomware, burla/BEC): a queixa-crime tem prazo de **6 meses** (crimes semi-públicos) — mas **preserva a prova digital JÁ** (não limpes sistemas antes de cópia forense). Ver `references/penal-cibercrime.md`.
 
 ## Fluxo de decisão
@@ -27,14 +27,14 @@
 
 7. **Aciona o seguro cyber.** → tens apólice cyber? → se SIM: **participa o sinistro dentro do prazo da apólice** (frequentemente 8 dias) — cobre tipicamente notificação, forense, resposta a incidente e, por vezes, responsabilidade a terceiros. Confirma exclusões (falta de MFA/backups, atos de guerra). Ver `references/seguros.md` e `assets/templates/carta-participacao-sinistro.md`.
 
-8. **Revê obrigações de regulação digital UE.** → és **entidade essencial/importante NIS2** ou fornecedor TIC de quem o seja? → notifica também a autoridade NIS2 (24h/72h). Vendes **produtos digitais** (CRA)? → dever de comunicar vulnerabilidades exploradas. Ver `references/digital-ue.md`.
+8. **Revê obrigações de regulação digital UE.** → és **entidade essencial/importante NIS2** ou fornecedor TIC de quem o seja? → notifica também o CNCS (24h; atualização em 72h; relatório final em 30 dias úteis — DL 125/2025). Vendes **produtos digitais** (CRA)? → dever de comunicar vulnerabilidades exploradas. Ver `references/digital-ue.md`.
 
 9. **Avalia se há crime.** Houve **acesso ilegítimo, ransomware, exfiltração, BEC**? → se SIM: apresenta **queixa-crime** (PJ-UNC3T / queixaselectronicas.mai.gov.pt), preserva prova e considera constituir-te assistente. Passo-a-passo (incl. resposta a BEC/transferência desviada) em `references/penal-cibercrime.md`.
 
 ## Documentos a usar
 
 - `references/rgpd.md` — obrigações de violação de dados, Art. 33.º/34.º, procedimento interno, coimas
-- `references/digital-ue.md` — NIS2 (24h/72h), CRA, autoridade CNCS
+- `references/digital-ue.md` e `assets/checklists/checklist-nis2.md` — NIS2 (DL 125/2025: 24h, 72h, relatório final em 30 dias úteis), CRA, CNCS
 - `references/penal-cibercrime.md` — queixa-crime, BEC, preservação de prova, constituição de assistente
 - `references/seguros.md` — seguro cyber: coberturas, exclusões, prazos de participação
 - `assets/templates/carta-participacao-sinistro.md` — participação do sinistro à seguradora

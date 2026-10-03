@@ -1,5 +1,5 @@
 ---
-description: Ver ou atualizar o perfil da empresa (forma jurídica, setor, trabalhadores…) usado em todas as respostas. View or update the company profile used in every answer.
+description: Ver ou atualizar o perfil da empresa usado nas respostas. View or update the company profile.
 argument-hint: "[vazio para ver | dados a atualizar, ex.: 'somos uma Lda com 12 trabalhadores' | 'geral' para o perfil por defeito]"
 ---
 

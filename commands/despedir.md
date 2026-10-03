@@ -1,5 +1,5 @@
 ---
-description: Cessar contrato de trabalho — playbook, compensação e créditos laborais finais. End an employment contract — playbook, severance and final-pay calculation.
+description: Cessar contrato de trabalho — playbook, compensação e créditos finais. End an employment contract — severance.
 argument-hint: "[modalidade, retribuição e antiguidade]"
 ---
 

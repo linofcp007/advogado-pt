@@ -1,5 +1,5 @@
 ---
-description: Constituir sociedade ou transição ENI→Lda — referências e checklist. Incorporate a company or move sole-trader→Lda — references and checklist.
+description: Constituir sociedade ou passar de ENI a Lda — referências e checklist. Incorporate a company or move ENI→Lda.
 argument-hint: "[constituir Lda / transição ENI→Lda]"
 ---
 

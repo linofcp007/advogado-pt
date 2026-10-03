@@ -74,12 +74,12 @@ export function calcularProcedimentoCCP({ valor, tipo, inicio }: PedidoCCP): Res
   admissiveis.push({ procedimento: "concurso-limitado", nome: NOMES["concurso-limitado"], ate: null, base: `${base} — qualquer valor` });
 
   const notas = [
-    "O valor é o do contrato a celebrar, sem IVA, incluindo prorrogações e opções; dividir o contrato para ficar abaixo de um limiar não é permitido (CCP, art. 22.º).",
-    "O ajuste direto e a consulta prévia dependem da escolha da entidade adjudicante; há ainda escolhas por critérios materiais, independentes do valor (CCP, arts. 24.º a 27.º).",
+    "Conta o valor estimado do contrato (CCP, art. 17.º), sem IVA (art. 473.º); é proibido dividir o contrato para fugir a um procedimento e somam-se as prestações do mesmo tipo (art. 17.º-B).",
+    "O ajuste direto e a consulta prévia dependem da escolha da entidade adjudicante; há ainda escolhas por critérios materiais, independentes do valor (CCP, arts. 23.º a 30.º-A; ajuste direto nos arts. 24.º a 27.º).",
     "Acima dos limiares europeus, o anúncio do concurso é publicado também no Jornal Oficial da UE — confirmar os limiares em vigor.",
     anterior
       ? `Procedimento iniciado antes de ${INICIO_DL_177_2026}: aplicam-se os limiares anteriores ao DL 177/2026.`
-      : `Limiares do DL 177/2026, para procedimentos iniciados a partir de ${INICIO_DL_177_2026}.`,
+      : `Limiares do DL 177/2026 (em vigor a ${INICIO_DL_177_2026}; o diploma aplica-se aos procedimentos iniciados após a entrada em vigor — um procedimento iniciado nesse mesmo dia fica a confirmar).`,
   ];
   return { valor, tipo, regime: anterior ? "anterior ao DL 177/2026" : "DL 177/2026", admissiveis, notas };
 }

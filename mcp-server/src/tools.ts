@@ -38,6 +38,7 @@ import { gerarCalendario, exportarICS, formatarCalendario } from "./calendario.j
 import { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } from "./prazos-estado.js";
 import { exportarDocumento } from "./exportar.js";
 import { pedirPerfil, CAMPOS_FORMULARIO } from "./elicitacao.js";
+import { verificarAtualidade, textoAtualidade } from "./atualidade.js";
 
 const AVISO =
   "\n\n⚠️ Estimativa de apoio. Valores/taxas de 2026 — confirmar no ano corrente. Não substitui aconselhamento de advogado inscrito na OA.";
@@ -748,7 +749,7 @@ export function registerTools(servidor: McpServer): void {
     {
       title: "Guardar perfil da empresa",
       description:
-        "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.juridico-pt/perfil-empresa.md; destino 'geral' -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito). Usa só depois de o utilizador aceitar guardar e só com dados da PRÓPRIA empresa — nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
+        "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.juridico-pt/perfil-empresa.md; destino 'geral' -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito). Usa só depois de o utilizador aceitar guardar e só com dados da PRÓPRIA empresa — nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas, cae, concelho, fim_periodo_tributacao (MM-DD), imoveis, viaturas (sim + meses da matrícula), setor_nis2, vendas_b2c, trabalhadores_estrangeiros, emite_faturas. EN: save the company profile.",
       inputSchema: {
         campos: z
           .record(z.string())
@@ -927,6 +928,21 @@ export function registerTools(servidor: McpServer): void {
       } catch (e) {
         return texto(`Não foi possível gerar o calendário: ${(e as Error).message}`);
       }
+    }
+  );
+
+  server.registerTool(
+    "verificar_atualidade",
+    {
+      title: "Verificar se os valores do plugin estão atualizados",
+      description:
+        "Lista os valores de referência (valores-2026), as taxas de juros de mora por semestre e outras tabelas do plugin com a data da última atualização, a próxima revisão e se já passaram de prazo. Usa antes de dar um valor determinante numa data próxima de uma mudança (janeiro, julho, outubro) ou quando o utilizador pergunta se os números estão em dia. EN: check whether the plugin's values and rates are up to date.",
+      inputSchema: {},
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async () => {
+      const hoje = new Date();
+      return texto(textoAtualidade(verificarAtualidade({ hoje }), hoje));
     }
   );
 

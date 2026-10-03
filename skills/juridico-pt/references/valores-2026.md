@@ -5,7 +5,9 @@
 > **Como usar este ficheiro:** Este é o **ponto único de verdade** para montantes, taxas e limiares que mudam ao longo do tempo. Os outros ficheiros de referência remetem para aqui em vez de repetir valores. Antes de afirmar qualquer valor numa resposta ao utilizador, confirma aqui. Se o valor tiver mais de ~6 meses ou estiveres em dúvida, **verifica por web search** nas fontes oficiais (ver fundo do ficheiro).
 >
 > **Última atualização:** 2026-10 (v1.2: retenção de IRS, IRC, SS/DL 127/2025, custas, concorrência, INPI e os 18 valores antes por confirmar — todos com fonte oficial; juros de mora do 2.º semestre de 2026)
-> **Próxima revisão recomendada:** em janeiro de 2027 (Orçamento do Estado e juros de mora do 1.º semestre de 2027).
+> **Próxima revisão:** 2027-01-31 — Orçamento do Estado para 2027 e juros de mora do 1.º semestre de 2027 (o plugin avisa no início da sessão depois desta data).
+>
+> **Juros de mora:** taxas oficiais até ao 2.º semestre de 2026 (o aviso da ETF de cada semestre sai no início de janeiro e de julho).
 
 ---
 
@@ -102,8 +104,26 @@ Exemplos: 1.500 € (Tabela I, sem dependentes) -> 24,10% × 1.500 − 193,33 = 
 | Aquisições intracomunitárias de bens — limiar de não sujeição (isentos sem dedução, ex.: art. 53.º) | **10.000 €** por ano (salvo opção) | RITI art. 5.º, n.º 1, al. c) |
 | Regime transfronteiriço PME (isenção noutro Estado-Membro) | volume de negócios anual na UE ≤ **100.000 €** (e o limiar nacional do EM de destino) | CIVA art. 58.º-A, n.º 1, al. b) |
 | Vendas à distância e TBE a consumidores da UE — limiar comum; IOSS | **10.000 €**/ano; IOSS: remessas até **150 €** (ver também a secção Concorrência e UE) | CIVA art. 6.º-A; Lei 47/2020, Anexo I, art. 19.º |
+| Créditos incobráveis — pequenos créditos a particulares (regularização sem autorização prévia) | até **750 €** com IVA por fatura | CIVA art. 78.º-A, n.º 2, al. b) |
+| Créditos de cobrança duvidosa — deferimento tácito do pedido | créditos abaixo de **150.000 €** com IVA, por fatura | CIVA art. 78.º-B, n.º 4 |
+| Certificação por contabilista independente | regularização até **10.000 €** por pedido | CIVA art. 78.º-D, n.º 1, al. a) |
 
 > Nota: desde o DL 35/2025 (em vigor 01/07/2025), ter contabilidade organizada **deixou de impedir** a isenção do Art. 53.º.
+
+## Faturação 🔄
+
+| Item | Valor | Base legal |
+|---|---|---|
+| Faturas em PDF aceites como faturas eletrónicas | até **31/12/2026**; a partir de 1/1/2027 só com assinatura eletrónica qualificada, selo eletrónico qualificado ou EDI | Lei 73-A/2025 (OE 2026), art. 95.º, n.º 3; DL 28/2019, art. 12.º |
+| Programa de faturação certificado obrigatório | volume de negócios do ano anterior **> 50.000 €** (e outros casos do artigo) | DL 28/2019, art. 4.º, n.º 1, al. a) |
+| Fatura simplificada | retalhistas e vendedores ambulantes a não sujeitos passivos até **1.000 €**; outras operações até **100 €** | CIVA, art. 40.º, n.º 1 |
+| Comunicação das faturas à AT | até ao **dia 5** do mês seguinte (também os meses sem faturas) | DL 198/2012, art. 3.º, n.ºs 2 e 9 |
+| Fatura eletrónica nos contratos públicos — PME dispensadas | até **31/12/2026** | DL 111-B/2017, art. 9.º, n.º 4; Lei 73-A/2025, art. 260.º, n.º 2 |
+| Coima — não emitir fatura ou emitir fora de prazo | **150 € a 3.750 €** | RGIT, art. 123.º, n.º 1 |
+| Coima — não exigir ou não conservar | **75 € a 2.000 €** | RGIT, art. 123.º, n.º 2 |
+| Coima — falta de comunicação das faturas | **200 € a 10.000 €** | RGIT, art. 117.º, n.º 9 |
+| Coima — sem programa certificado | **1.500 € a 18.750 €** | RGIT, art. 128.º, n.º 2 |
+| Pessoas coletivas | limites das coimas acima **em dobro** | RGIT, art. 26.º, n.º 4 |
 
 ## Salário e Trabalho 🔄
 
@@ -161,6 +181,10 @@ Exemplos: 1.500 € (Tabela I, sem dependentes) -> 24,10% × 1.500 − 193,33 = 
 | Imposto do Selo na aquisição | **0,8%** sobre o maior de VPT/preço | |
 | IMI (prédios urbanos) | **0,3% a 0,45%** (taxa municipal) | rústicos 0,8% |
 | AIMI (adicional ao IMI) | sobre VPT > 600.000€ (por sujeito) | escalões progressivos |
+| IMI — prestações | até **100 €**: maio; **100 € a 500 €**: maio e novembro; **acima de 500 €**: maio, agosto e novembro | CIMI, art. 120.º, n.º 1 |
+| IUC — 2026 (regime anterior) | até ao fim do mês do aniversário da matrícula | CIUC, art. 17.º, n.º 2 (redação anterior ao DL 161/2026) |
+| IUC — 2027 (transitório) | até **500 €**: outubro; **acima de 500 €**: julho e outubro (ou tudo em julho) | DL 161/2026, art. 6.º |
+| IUC — desde 2028 | liquidação até 30 de abril; até **100 €**: abril; **100 € a 500 €**: abril e outubro; **acima de 500 €**: abril, julho e outubro | CIUC, art. 17.º (redação do DL 161/2026) |
 
 ### Tabela IMT 2026 — Continente (Ofício Circulado 40129/2026)
 
@@ -285,6 +309,17 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Ajuste direto (regime geral) | **75.000 €** | **150.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
 | Consulta prévia (mín. 3 entidades) | **130.000 €** | **1.000.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
 | Procedimentos iniciados até 30/9/2026 | AD 20.000 € · CP 75.000 € | AD 30.000 € · CP 150.000 € | redação anterior |
+| Ajuste direto simplificado | **5.000 €** | **10.000 €** | CCP, art. 128.º, n.º 1 (não alterado pelo DL 177/2026) |
+| Ajuste direto simplificado em emergência ou calamidade | **100.000 €** | **500.000 €** | CCP, art. 129.º-A |
+| Fundamentar a não divisão em lotes | acima de **250.000 €** | acima de **500.000 €** | CCP, art. 46.º-A, n.º 2 |
+| Limiares europeus desde 1/1/2026 | Estado **140.000 €**; outras entidades **216.000 €**; serviços sociais **750.000 €** | **5.404.000 €** | Reg. Delegado (UE) 2025/2152; CCP, art. 474.º (o texto republicado indica 139.000 € para o Estado — prevalece o regulamento) |
+
+| Outros valores do CCP | Valor | Base |
+|---|---|---|
+| Dispensa de caução | preço contratual inferior a **1.000.000 €** | CCP, art. 88.º, n.º 2, al. a) |
+| Caução — máximo | **5%** do preço (**10%** se o preço for anormalmente baixo) | CCP, art. 89.º |
+| Dívida fiscal ou contributiva tolerada | até **10.000 €** | CCP, art. 55.º, n.º 3, al. a) |
+| Contrato escrito dispensado | até **30.000 €** (bens e serviços); até **75.000 €** (empreitada de complexidade muito reduzida) | CCP, art. 95.º, n.º 1, als. a) e d) |
 
 ## Compliance, Denúncias, Dados e IA (coimas e limiares)
 
@@ -298,6 +333,30 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | RGPD — coimas | até **20 M€ ou 4%** do volume de negócios mundial (art. 83.º, n.º 5); até **10 M€ ou 2%** (n.º 4) | RGPD, art. 83.º |
 | Regulamento da IA (AI Act) — coimas | práticas proibidas: até **35 M€ ou 7%**; outras obrigações: até **15 M€ ou 3%**; informações incorretas: até **7,5 M€ ou 1%** (o mais elevado); **PME**: o montante mais baixo em todas (n.º 6); ***small mid caps***: o mais baixo só nas dos n.os 4 e 5 (n.º 6-A) | Reg. (UE) 2024/1689, art. 99.º (redação do Reg. (UE) 2026/1744) |
 | CSRD (relato de sustentabilidade) depois da "Omnibus I" | volume de negócios líquido > **450 M€ e** número médio > **1.000** empregados (cumulativos); transposição até **19/3/2027**; CSRD ainda **não transposta** em Portugal (EUR-Lex, medidas nacionais: 0) | Diretiva (UE) 2026/470, arts. 1.º (novo art. 19.º-A da Diretiva 2013/34/UE) e 5.º |
+
+## Cibersegurança — NIS2 (DL 125/2025)
+
+| Infração | Pessoa coletiva | Pessoa singular | Base |
+|---|---|---|---|
+| Muito grave — entidade essencial | **2.000 € a 10.000.000 €** ou 2% do volume de negócios mundial (o mais alto) | **350 € a 200.000 €** | DL 125/2025, art. 61.º, n.º 2 |
+| Muito grave — entidade importante | **1.250 € a 7.000.000 €** ou 1,4% | **350 € a 200.000 €** | DL 125/2025, art. 61.º, n.º 2 |
+| Grave — entidade essencial | **1.250 € a 5.000.000 €** ou 1% | **250 € a 125.000 €** | DL 125/2025, art. 62.º, n.º 2 |
+| Grave — entidade importante | **875 € a 3.500.000 €** ou 0,7% | **250 € a 125.000 €** | DL 125/2025, art. 62.º, n.º 2 |
+| Leve | **875 € a 45.000 €** | **250 € a 3.750 €** | DL 125/2025, art. 63.º, n.º 2 |
+| Sanção pecuniária compulsória | **500 €/dia** (máx. 30 dias) | **100 €/dia** | DL 125/2025, art. 68.º, n.ºs 3 e 4 |
+
+> Negligência: limites a metade (art. 64.º). Medidas, relatório anual e as coimas respetivas só se aplicam 24 meses após a regulamentação (art. 10.º, n.º 2). Dimensão das empresas: anexo III.
+
+## Fundos Europeus (Portugal 2030 e PRR)
+
+| Item | Valor | Base |
+|---|---|---|
+| Restituição de apoios | em **30 dias úteis**; juros de mora à taxa das dívidas ao Estado; depois, execução fiscal | DL 20-A/2023, art. 34.º; PRR: DL 29-B/2021, art. 10.º-A |
+| Pagamento em prestações (PT2030) | até **36** prestações, cada uma de pelo menos **200 €**, com juros à taxa legal; garantia dispensada se a prestação não passar a RMMG | DL 20-A/2023, art. 34.º, n.ºs 6 e 7 |
+| Pagamento em prestações (PRR) | até **36**, prestação mínima de **¼ UC** | OT 3/2021, ponto 5.3 |
+| Recuperação dispensável | até **100 €** por beneficiário e operação | DL 20-A/2023, art. 34.º, n.º 13 |
+| Adiantamentos | inicial até **10%**; adiantamentos e reembolsos até **95%** do aprovado | DL 20-A/2023, art. 28.º, n.ºs 2 e 5 |
+| Redução por falta de publicitação | até **3%** | DL 20-A/2023, art. 33.º, n.º 2, al. d) |
 
 ## Licenciamento Setorial
 
