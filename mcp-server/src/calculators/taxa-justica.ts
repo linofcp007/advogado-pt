@@ -12,6 +12,7 @@
  */
 
 import { formatarEuros } from "./format.js";
+import { r2 } from "./arredondar.js";
 
 export interface ResultadoTaxaJustica {
   ucValor: number;
@@ -29,7 +30,6 @@ const LIMITES = [2000, 8000, 16000, 24000, 30000, 40000, 60000, 80000, 100000, 1
 const UC_COLUNA_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16];
 const FATOR: Record<"A" | "B" | "C", number> = { A: 1, B: 0.5, C: 1.5 };
 
-const r2 = (x: number) => Math.round((x + Number.EPSILON) * 100) / 100;
 const fmt = (v: number) => formatarEuros(v).replace(/\s*€$/, "");
 
 export function calcularTaxaJustica(

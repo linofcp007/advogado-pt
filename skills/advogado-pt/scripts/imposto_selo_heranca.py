@@ -22,6 +22,7 @@ Exemplos de uso:
 """
 
 import argparse
+from decimal import ROUND_HALF_UP, Decimal
 
 TAXA_TRANSMISSAO = 0.10  # 10% — verba 1.2 TGIS
 TAXA_IMOVEL = 0.008      # 0,8% sobre o VPT do imóvel
@@ -32,7 +33,9 @@ HERDEIROS_ISENTOS = {"conjuge", "descendente", "ascendente"}
 
 def formatar_euros(valor):
     """Formata um valor numérico como euros no formato PT: '1.234,56 €'."""
-    inteiro = f"{valor:,.2f}"
+    # Meio para cima sobre a representação decimal mais curta (igual ao formatarEuros do TS).
+    arredondado = Decimal(repr(float(valor))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    inteiro = f"{arredondado:,.2f}"
     inteiro = inteiro.replace(",", "X").replace(".", ",").replace("X", ".")
     return f"{inteiro} €"
 

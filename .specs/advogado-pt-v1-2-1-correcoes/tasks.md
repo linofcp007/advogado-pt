@@ -234,7 +234,7 @@
   - _Depends: 2_
 
 ## História US-9 (P2): paridade e testes
-- [ ] 32. [US9] Arredondamento único em TS; `formatar_euros` meio para cima em Python; textos do decisor de IVA iguais; casos partilhados nos dois lados
+- [x] 32. [US9] Arredondamento único em TS; `formatar_euros` meio para cima em Python; textos do decisor de IVA iguais; casos partilhados nos dois lados
   - _Requirements: US-9.AC-1_
   - _Makes green: T-240, T-241_
   - _Implements: mcp-server/src/calculators/salario.ts, mcp-server/src/calculators/irc.ts, mcp-server/src/calculators/taxa-justica.ts, skills/advogado-pt/scripts/iva_operacao.py_

@@ -673,9 +673,27 @@
       ],
       "task": "[US8] Atualizar o SDK do MCP e as transitivas (`npm audit fix`) e regenerar o bundle; teste contra `bin/`",
       "verify": "npm --prefix mcp-server audit --omit=dev --audit-level=high"
+    },
+    "32": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-240\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241",
+      "exitCode": 0,
+      "summary": "T-240 1/1 e T241 OK. r2 único (arredondar.ts) em salário, IRC e taxa de justiça e no formatarEuros; formatar_euros meio para cima nos 12 scripts Python; decidir_iva do Python reescrito como porta fiel do TS (mesmos textos e avisos). Suite: 155 testes, 146 passam, 7 falham (tarefas 33-39); Python 47/47.",
+      "at": "2026-10-03T22:02:32.317Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-240\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241",
+          "exitCode": 0,
+          "summary": "T-240 1/1 e T241 OK. r2 único (arredondar.ts) em salário, IRC e taxa de justiça e no formatarEuros; formatar_euros meio para cima nos 12 scripts Python; decidir_iva do Python reescrito como porta fiel do TS (mesmos textos e avisos). Suite: 155 testes, 146 passam, 7 falham (tarefas 33-39); Python 47/47.",
+          "at": "2026-10-03T22:02:32.317Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] Arredondamento único em TS; `formatar_euros` meio para cima em Python; textos do decisor de IVA iguais; casos partilhados nos dois lados",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-240\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241"
     }
   },
-  "lastTickAt": "2026-10-03T22:00:33.176Z",
+  "lastTickAt": "2026-10-03T22:02:32.317Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -707,6 +725,7 @@
     "28": "2026-10-03T21:54:00.850Z",
     "29": "2026-10-03T21:59:02.442Z",
     "30": "2026-10-03T22:00:33.176Z",
-    "31": "2026-10-03T21:59:05.121Z"
+    "31": "2026-10-03T21:59:05.121Z",
+    "32": "2026-10-03T22:02:32.317Z"
   }
 }

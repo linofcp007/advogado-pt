@@ -21690,9 +21690,25 @@ var StdioServerTransport = class {
   }
 };
 
+// src/calculators/arredondar.ts
+function r2(x) {
+  if (!Number.isFinite(x)) return x;
+  const negativo = x < 0;
+  const texto2 = String(Math.abs(x));
+  if (/e/i.test(texto2)) {
+    return Math.abs(x) < 1 ? 0 : x;
+  }
+  const [inteiro, fracao = ""] = texto2.split(".");
+  if (fracao.length <= 2) return x;
+  let centimos = BigInt(inteiro + fracao.slice(0, 2));
+  if (fracao.charCodeAt(2) - 48 >= 5) centimos += 1n;
+  const v = Number(centimos) / 100;
+  return negativo && v !== 0 ? -v : v;
+}
+
 // src/calculators/format.ts
 function formatarEuros(valor) {
-  const fixo = valor.toFixed(2);
+  const fixo = r2(valor).toFixed(2);
   const negativo = fixo.startsWith("-");
   const semSinal = negativo ? fixo.slice(1) : fixo;
   const [parteInteira, parteDecimal] = semSinal.split(".");
@@ -22545,7 +22561,6 @@ var TABELAS = {
     ]
   }
 };
-var r2 = (x) => Math.round((x + Number.EPSILON) * 100) / 100;
 function retencao(r, tabela, dependentes) {
   const t = TABELAS[tabela];
   const e = t.escaloes.find((x) => r <= x.ate);
@@ -22605,7 +22620,6 @@ function calcularCustoTrabalhador(p) {
 }
 
 // src/calculators/irc.ts
-var r22 = (x) => Math.round((x + Number.EPSILON) * 100) / 100;
 var VIATURA_LIMITES = [37500, 45e3];
 var VIATURA_ELETRICA_LIMITE = 62500;
 var TAXAS_VIATURA = {
@@ -22640,18 +22654,18 @@ function calcularIRC(p) {
   }
   const taxaGeral = taxaGeralIRC(p.ano ?? 2026);
   const prejuizos = naoNeg("prejuizosDedutiveis", p.prejuizosDedutiveis);
-  const deducaoPrejuizos = lucro > 0 ? r22(Math.min(prejuizos, lucro * 0.65)) : 0;
-  const materiaColetavel = r22(Math.max(0, lucro - deducaoPrejuizos));
-  const irc = p.pme ? r22(Math.min(materiaColetavel, 5e4) * 0.15 + Math.max(0, materiaColetavel - 5e4) * (taxaGeral / 100)) : r22(materiaColetavel * (taxaGeral / 100));
-  const derramaMunicipal = lucro > 0 ? r22(lucro * dm) : 0;
-  const derramaEstadual = r22(
+  const deducaoPrejuizos = lucro > 0 ? r2(Math.min(prejuizos, lucro * 0.65)) : 0;
+  const materiaColetavel = r2(Math.max(0, lucro - deducaoPrejuizos));
+  const irc = p.pme ? r2(Math.min(materiaColetavel, 5e4) * 0.15 + Math.max(0, materiaColetavel - 5e4) * (taxaGeral / 100)) : r2(materiaColetavel * (taxaGeral / 100));
+  const derramaMunicipal = lucro > 0 ? r2(lucro * dm) : 0;
+  const derramaEstadual = r2(
     Math.max(0, Math.min(lucro, 75e5) - 15e5) * 0.03 + Math.max(0, Math.min(lucro, 35e6) - 75e5) * 0.05 + Math.max(0, lucro - 35e6) * 0.09
   );
   const agravamento = lucro < 0 && !p.isentoAgravamento ? 10 : 0;
   const ta = (base, taxa) => taxa > 0 ? base * ((taxa + agravamento) / 100) : 0;
   let tributacaoAutonoma = ta(naoNeg("despesasRepresentacao", p.despesasRepresentacao), 10) + ta(naoNeg("ajudasCusto", p.ajudasCusto), 5) + ta(naoNeg("despesasNaoDocumentadas", p.despesasNaoDocumentadas), 50);
   for (const v of p.viaturas ?? []) tributacaoAutonoma += ta(naoNeg("encargos", v.encargos), taxaViatura(v));
-  tributacaoAutonoma = r22(tributacaoAutonoma);
+  tributacaoAutonoma = r2(tributacaoAutonoma);
   return {
     materiaColetavel,
     deducaoPrejuizos,
@@ -22659,7 +22673,7 @@ function calcularIRC(p) {
     derramaMunicipal,
     derramaEstadual,
     tributacaoAutonoma,
-    total: r22(irc + derramaMunicipal + derramaEstadual + tributacaoAutonoma),
+    total: r2(irc + derramaMunicipal + derramaEstadual + tributacaoAutonoma),
     taxaGeral
   };
 }
@@ -22669,7 +22683,6 @@ var UC_20262 = 102;
 var LIMITES = [2e3, 8e3, 16e3, 24e3, 3e4, 4e4, 6e4, 8e4, 1e5, 15e4, 2e5, 25e4, 275e3];
 var UC_COLUNA_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16];
 var FATOR = { A: 1, B: 0.5, C: 1.5 };
-var r23 = (x) => Math.round((x + Number.EPSILON) * 100) / 100;
 var fmt = (v) => formatarEuros(v).replace(/\s*€$/, "");
 function calcularTaxaJustica(valorAcao, opts = {}) {
   const valor = Number(valorAcao);
@@ -22685,7 +22698,7 @@ function calcularTaxaJustica(valorAcao, opts = {}) {
   const totalUC = taxaInicialUC + remanescenteUC;
   const escalao = i === -1 ? "Acima de 275.000,00 \u20AC" : idx === 0 ? "At\xE9 2.000,00 \u20AC" : `De ${fmt(LIMITES[idx - 1] + 0.01)} \u20AC a ${fmt(LIMITES[idx])} \u20AC`;
   const reducao = opts.reducaoEletronica ? 0.9 : 1;
-  const taxaInicialEuros = r23(taxaInicialUC * uc * reducao);
+  const taxaInicialEuros = r2(taxaInicialUC * uc * reducao);
   return {
     ucValor: uc,
     escalao,
@@ -22693,7 +22706,7 @@ function calcularTaxaJustica(valorAcao, opts = {}) {
     remanescenteUC,
     totalUC,
     taxaInicialEuros,
-    totalEuros: r23(taxaInicialEuros + remanescenteUC * uc)
+    totalEuros: r2(taxaInicialEuros + remanescenteUC * uc)
   };
 }
 

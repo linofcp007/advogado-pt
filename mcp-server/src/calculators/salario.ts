@@ -12,6 +12,8 @@
  * Igual a skills/advogado-pt/scripts/salario_liquido.py.
  */
 
+import { r2 } from "./arredondar.js";
+
 export type TabelaRetencao = "I" | "II" | "III";
 
 export interface ParamsSalario {
@@ -92,7 +94,6 @@ const TABELAS: Record<TabelaRetencao, Tabela> = {
   },
 };
 
-const r2 = (x: number) => Math.round((x + Number.EPSILON) * 100) / 100;
 
 function retencao(r: number, tabela: TabelaRetencao, dependentes: number): { valor: number; taxa: number } {
   const t = TABELAS[tabela];

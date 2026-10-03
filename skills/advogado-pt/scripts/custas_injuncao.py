@@ -21,13 +21,16 @@ Exemplos de uso:
 """
 
 import argparse
+from decimal import ROUND_HALF_UP, Decimal
 
 UC_2026 = 102.0  # Unidade de Conta para 2026, em euros.
 
 
 def formatar_euros(valor):
     """Formata um valor numérico como euros no formato PT: '1.234,56 €'."""
-    inteiro = f"{valor:,.2f}"
+    # Meio para cima sobre a representação decimal mais curta (igual ao formatarEuros do TS).
+    arredondado = Decimal(repr(float(valor))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    inteiro = f"{arredondado:,.2f}"
     inteiro = inteiro.replace(",", "X").replace(".", ",").replace("X", ".")
     return f"{inteiro} €"
 

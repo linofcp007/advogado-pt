@@ -30,6 +30,7 @@ except (AttributeError, ValueError):
     pass
 
 import argparse
+from decimal import ROUND_HALF_UP, Decimal
 
 # Coeficientes do regime simplificado (CIRS, art. 31.º, n.º 1, als. a) a d)).
 COEFICIENTES = {
@@ -42,7 +43,9 @@ COEFICIENTES = {
 
 def formatar_euros(valor):
     """Formata um valor numérico como euros no formato PT: '1.234,56 €'."""
-    inteiro = f"{valor:,.2f}"
+    # Meio para cima sobre a representação decimal mais curta (igual ao formatarEuros do TS).
+    arredondado = Decimal(repr(float(valor))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    inteiro = f"{arredondado:,.2f}"
     inteiro = inteiro.replace(",", "X").replace(".", ",").replace("X", ".")
     return f"{inteiro} €"
 
