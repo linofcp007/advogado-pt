@@ -2,7 +2,8 @@
      Nacional de Injunções (BNI) via portal Citius (https://www.citius.mj.pt). Este guião organiza
      os dados a preencher no formulário e o texto da exposição dos factos. Base: DL 269/98.
      Indicada para dívidas (em regra até 15.000€ para transações sem prazo; sem limite nas
-     transações comerciais ao abrigo do DL 62/2013). Custas: ver references/valores-2026.md. -->
+     transações comerciais ao abrigo do DL 62/2013). Custas: ver references/valores-2026.md.
+     Âmbito: nacional -->
 
 # Requerimento de Injunção — Guião de Preenchimento
 
@@ -46,3 +47,15 @@ Requer-se a notificação do requerido para pagar ao requerente a quantia total 
 - [ ] Comprovativo de comunicação de faturas / outros
 
 <!-- Se o requerido se opuser, o processo é remetido ao tribunal e segue como ação (eventualmente com necessidade de advogado se o valor exceder a alçada — ver references/contencioso.md). -->
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Apresentar com pelo menos 5 dias de margem antes do fim da prescrição: a notificação do requerido interrompe-a e, se não for feita em 5 dias por causa não imputável ao requerente, a prescrição tem-se por interrompida ao fim desses 5 dias (art. 323.º, n.os 1 e 2, CC) — verificar com `calc_prescricao`.
+- [ ] Submissão eletrónica no BNI via Citius, com autenticação (certificado digital/Chave Móvel Digital) e pagamento da taxa de justiça — calcular com `calc_custas_injuncao` (UC em `references/valores-2026.md`).
+- [ ] Tipo de transação: "transação comercial" (DL 62/2013, sem limite de valor) só entre empresas; nos restantes casos, confirmar o limite de valor do regime da injunção (DL 269/98 e `references/valores-2026.md`).
+- [ ] Juros por tramos semestrais com `calc_juros_mora` / `scripts/juros_mora.py`; os 40 € de custos de cobrança (art. 7.º DL 62/2013) só em transações comerciais.
+- [ ] ⏰ Notificado, o requerido tem 15 dias para se opor: havendo oposição, o processo segue como ação e pode exigir advogado (valor acima da alçada — `references/contencioso.md`); sem oposição, requerer a execução com base na fórmula executória.

@@ -20,7 +20,9 @@ import unittest
 # diretório de trabalho a partir do qual se corra o ficheiro.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from juros_mora import calcular_juros
+from juros_mora import calcular_juros, memoria_juros
+from creditos_laborais import calcular_creditos
+from legitima import calcular_legitima
 from imt import calcular_imt
 from compensacao_despedimento import calcular_compensacao
 from prescricao import calcular_prazo, add_anos, add_meses
@@ -28,15 +30,136 @@ from irs_simplificado import calcular_rendimento_tributavel
 
 
 class TestJurosMora(unittest.TestCase):
-    def test_comercial_5000_365_dias(self):
-        inicio = datetime.date(2025, 1, 1)
-        fim = datetime.date(2026, 1, 1)  # 365 dias (2025 não é bissexto)
-        dias, taxa, juros, total = calcular_juros(
-            5000, inicio, fim, "comercial")
-        self.assertEqual(dias, 365)
-        self.assertAlmostEqual(taxa, 0.1015)
-        self.assertAlmostEqual(juros, 507.50, places=2)
-        self.assertAlmostEqual(total, 5507.50, places=2)
+    """T18 — juros por tramos semestrais (mesmos casos que T-01..T-08 em TS)."""
+
+    def test_T18_dois_semestres(self):
+        r = calcular_juros(5000, datetime.date(2025, 1, 1),
+                           datetime.date(2026, 1, 1), "comercial")
+        self.assertAlmostEqual(r["juros"], 532.29, places=2)
+        self.assertEqual(r["dias"], 365)
+        self.assertEqual([(t["inicio"], t["fim"], t["dias"], t["taxa"])
+                          for t in r["tramos"]],
+                         [("2025-01-01", "2025-07-01", 181, 0.1115),
+                          ("2025-07-01", "2026-01-01", 184, 0.1015)])
+
+    def test_T18_mesmo_semestre_2026(self):
+        r = calcular_juros(10000, datetime.date(2026, 7, 1),
+                           datetime.date(2026, 10, 1), "comercial")
+        self.assertAlmostEqual(r["juros"], 262.14, places=2)
+        self.assertAlmostEqual(r["tramos"][0]["taxa"], 0.104)
+        self.assertIn("16623/2026", r["tramos"][0]["fonte"])
+
+    def test_T18_comercial_geral_varios_anos(self):
+        r = calcular_juros(1000, datetime.date(2022, 3, 15),
+                           datetime.date(2024, 3, 15), "comercial-geral")
+        self.assertAlmostEqual(r["juros"], 181.88, places=2)
+        self.assertEqual([(t["dias"], t["taxa"]) for t in r["tramos"]],
+                         [(108, 0.07), (184, 0.07), (181, 0.095),
+                          (184, 0.11), (74, 0.115)])
+
+    def test_T18_civil(self):
+        r = calcular_juros(1000, datetime.date(2025, 1, 1),
+                           datetime.date(2026, 1, 1), "civil")
+        self.assertAlmostEqual(r["juros"], 40.0, places=2)
+
+    def test_T18_semestre_futuro_estimado(self):
+        r = calcular_juros(2000, datetime.date(2026, 12, 1),
+                           datetime.date(2027, 3, 1), "comercial")
+        self.assertAlmostEqual(r["juros"], 51.29, places=2)
+        self.assertEqual([t["estimado"] for t in r["tramos"]], [False, True])
+
+    def test_T18_erros(self):
+        with self.assertRaisesRegex(ValueError, "2013-07-01"):
+            calcular_juros(1000, datetime.date(2012, 1, 1),
+                           datetime.date(2014, 1, 1), "comercial")
+        with self.assertRaisesRegex(ValueError, "anterior"):
+            calcular_juros(1000, datetime.date(2026, 5, 1),
+                           datetime.date(2026, 4, 1), "comercial")
+
+    def test_T18_memoria(self):
+        r = calcular_juros(5000, datetime.date(2025, 1, 1),
+                           datetime.date(2026, 1, 1), "comercial")
+        m = memoria_juros(5000, r, "comercial")
+        for s in ("2025-01-01 a 2025-07-01", "181 dias", "11,15%",
+                  "10,15%", "532,29", "40,00 €", "DL 62/2013"):
+            self.assertIn(s, m)
+        rc = calcular_juros(1000, datetime.date(2025, 1, 1),
+                            datetime.date(2026, 1, 1), "civil")
+        # Os juros civis deste caso são 40,00 €; o que não pode aparecer é a
+        # nota da indemnização por custos de cobrança (só no comercial).
+        self.assertNotIn("custos de cobrança", memoria_juros(1000, rc, "civil"))
+
+
+class TestCreditosLaborais(unittest.TestCase):
+    """T19 — mesmos casos que T-09..T-12 em TS."""
+
+    def test_T19_referencia(self):
+        r = calcular_creditos(1500, datetime.date(2020, 3, 1),
+                              datetime.date(2026, 6, 30),
+                              ferias_vencidas_nao_gozadas=5,
+                              subsidio_ferias_vencido_em_falta=True)
+        self.assertEqual(r["dias_servico_ano"], 181)
+        self.assertAlmostEqual(r["proporcional_ferias"], 743.84, places=2)
+        self.assertAlmostEqual(r["ferias_vencidas"], 340.91, places=2)
+        self.assertAlmostEqual(r["total"], 4072.42, places=2)
+        self.assertFalse(r["limite_245_n3"])
+
+    def test_T19_limite_245_n3_e_bissexto(self):
+        r = calcular_creditos(1000, datetime.date(2025, 9, 1),
+                              datetime.date(2026, 3, 31))
+        self.assertTrue(r["limite_245_n3"])
+        self.assertAlmostEqual(r["total"], 739.73, places=2)
+        b = calcular_creditos(1200, datetime.date(2028, 2, 1),
+                              datetime.date(2028, 8, 31), diuturnidades=50)
+        self.assertEqual(b["dias_ano"], 366)
+        self.assertAlmostEqual(b["total"], 2182.38, places=2)
+
+    def test_T19_erros(self):
+        with self.assertRaisesRegex(ValueError, "(?i)retribui"):
+            calcular_creditos(-1, datetime.date(2020, 1, 1),
+                              datetime.date(2026, 1, 1))
+        with self.assertRaisesRegex(ValueError, "(?i)cessa"):
+            calcular_creditos(1000, datetime.date(2026, 5, 1),
+                              datetime.date(2026, 4, 1))
+
+
+class TestLegitima(unittest.TestCase):
+    """T20 — mesmos casos que T-13..T-17 em TS."""
+
+    def test_T20_conjuge_dois_filhos(self):
+        r = calcular_legitima(300000, conjuge=True, filhos=2)
+        self.assertAlmostEqual(r["legitima"], 200000, places=2)
+        self.assertAlmostEqual(r["quota_disponivel"], 100000, places=2)
+        for p in r["partes"]:
+            self.assertAlmostEqual(p["valor"], 66666.67, places=2)
+
+    def test_T20_conjuge_cinco_filhos(self):
+        r = calcular_legitima(120000, conjuge=True, filhos=5)
+        conj = [p for p in r["partes"] if "njuge" in p["herdeiro"]][0]
+        self.assertAlmostEqual(conj["valor"], 20000, places=2)
+
+    def test_T20_combinacoes(self):
+        self.assertAlmostEqual(
+            calcular_legitima(100000, False, 1)["legitima"], 50000, places=2)
+        self.assertAlmostEqual(
+            calcular_legitima(90000, False, 2)["legitima"], 60000, places=2)
+        so = calcular_legitima(100000, True, 0, doacoes=20000, dividas=30000)
+        self.assertAlmostEqual(so["valor_heranca"], 90000, places=2)
+        self.assertAlmostEqual(so["legitima"], 45000, places=2)
+        cp = calcular_legitima(90000, True, 0, ascendentes="pais")
+        self.assertAlmostEqual(cp["legitima"], 60000, places=2)
+        self.assertAlmostEqual(
+            calcular_legitima(90000, False, 0, ascendentes="outros")["legitima"],
+            30000, places=2)
+
+    def test_T20_sem_herdeiros_e_erros(self):
+        r = calcular_legitima(50000, False, 0)
+        self.assertAlmostEqual(r["legitima"], 0, places=2)
+        self.assertAlmostEqual(r["quota_disponivel_pct"], 100, places=2)
+        with self.assertRaisesRegex(ValueError, "(?i)bens"):
+            calcular_legitima(-1, True, 1)
+        with self.assertRaisesRegex(ValueError, "(?i)filhos"):
+            calcular_legitima(1000, True, -2)
 
 
 class TestIMT(unittest.TestCase):

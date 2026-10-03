@@ -28,7 +28,17 @@ const juros = await client.callTool({
   name: "calc_juros_mora",
   arguments: { capital: 5000, data_inicio: "2025-01-01", data_fim: "2026-01-01", tipo: "comercial" },
 });
-check("calc_juros_mora 5000/365d => 507,50", juros.content[0].text.includes("507,50"));
+// 2 tramos: 181 d a 11,15% + 184 d a 10,15% (antes da v1.1 dava 507,50 com taxa única — errado).
+check("calc_juros_mora 5000/365d por tramos => 532,29", juros.content[0].text.includes("532,29"));
+
+const perfil = await client.callTool({ name: "obter_perfil_empresa", arguments: {} });
+check("obter_perfil_empresa responde", /perfil/i.test(perfil.content[0].text));
+
+const leg = await client.callTool({
+  name: "calc_legitima",
+  arguments: { bens: 300000, conjuge: true, filhos: 2 },
+});
+check("calc_legitima 300000 cônjuge+2 => 200.000,00", leg.content[0].text.includes("200.000,00"));
 
 const ref = await client.readResource({ uri: "advogado-pt://references/valores-2026" });
 check("readResource valores-2026", (ref.contents[0].text ?? "").length > 500, `${(ref.contents[0].text ?? "").length} chars`);

@@ -1,6 +1,7 @@
 <!-- Template: formulário de recolha inicial (intake) de um caso novo. Preencher com o utilizador no
      início de cada assunto jurídico. Espelha a secção "Recolha Inicial de Informação" do SKILL.md.
-     Serve para montar a cronologia e detetar prazos de imediato. -->
+     Serve para montar a cronologia e detetar prazos de imediato.
+     Âmbito: nacional -->
 
 # Ficha de Caso — Intake
 
@@ -42,3 +43,15 @@
 - Posição jurídica: {{forte / média / fraca}}
 - Próximo passo recomendado: {{PASSO}}
 - Recomenda advogado presencial? {{SIM/NÃO — porquê}}
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Identificar no próprio dia todos os prazos já a correr e calculá-los com `calc_prazo` / `calc_prescricao`; havendo prazo judicial, recomendar advogado de imediato.
+- [ ] Confirmar a data efetiva de receção de cada notificação (AR, carimbo, data de acesso no Citius ou na caixa postal eletrónica) — é a partir dela que os prazos se contam.
+- [ ] Recolher cópias dos documentos assinalados na secção 4 antes de avaliar a posição e anotar o que falta.
+- [ ] Registar o perfil da empresa (forma jurídica, n.º de trabalhadores, volume de negócios, B2B/B2C) em `.advogado-pt/perfil-empresa.md` — muda o regime aplicável.
+- [ ] A ficha contém dados pessoais de terceiros: guardá-la com acesso restrito e não a partilhar fora do âmbito do caso (RGPD).

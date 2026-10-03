@@ -6,7 +6,8 @@
  */
 
 export { formatarEuros } from "./format.js";
-export { calcularJuros } from "./juros.js";
+export { calcularJuros, memoriaJuros, taxaDoSemestre, TAXAS_SEMESTRAIS } from "./juros.js";
+export type { TipoJuros, ResultadoJuros, TramoJuros } from "./juros.js";
 export { contarPrazo } from "./prazos.js";
 export {
   calcularCompensacao,
@@ -22,3 +23,5 @@ export {
   PRESCRICAO_TIPOS,
 } from "./prescricao.js";
 export { calcularIRSSimplificado } from "./irs.js";
+export { calcularCreditosCessacao } from "./creditos.js";
+export { calcularLegitima } from "./legitima.js";

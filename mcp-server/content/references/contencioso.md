@@ -1,5 +1,7 @@
 # Contencioso Civil e Resolução de Litígios
 
+> **Âmbito:** nacional
+>
 > 💶 **Taxa de justiça, custas processuais, valor das alçadas e limiares de competência:** ver `references/valores-2026.md` (ponto único de verdade). Os prazos processuais abaixo são estruturais (fixados na lei); os montantes mudam.
 
 ## Legislação Base

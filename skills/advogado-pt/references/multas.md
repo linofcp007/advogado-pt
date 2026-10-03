@@ -1,5 +1,7 @@
 # Multas e Contraordenações
 
+> **Âmbito:** nacional
+
 ## Legislação Base
 - RGCO: Regime Geral das Contraordenações (DL 433/82)
 - Código da Estrada (CE): contraordenações rodoviárias
@@ -17,7 +19,7 @@
 ### Fase 1: Notificação
 - Ler atentamente: facto imputado, norma violada, coima aplicável, prazo de defesa
 - Verificar: notificação válida? Prazo a correr? Factos corretos?
-- **Prazo de defesa**: geralmente 15 dias úteis (verificar na notificação)
+- **Prazo de defesa**: o indicado na notificação — varia com o regime (trânsito e laboral: 15 dias úteis; contraordenações fiscais: 30 dias — art. 70.º RGIT)
 
 ### Fase 2: Defesa Escrita
 - Identificação do arguido
@@ -29,7 +31,7 @@
 
 ### Fase 3: Decisão Administrativa
 - Se desfavorável: recurso para o tribunal judicial
-- **Prazo de recurso**: 20 dias úteis após notificação da decisão
+- **Prazo de recurso**: 20 dias após a notificação da decisão (art. 59.º, n.º 3, RGCO; suspende-se aos sábados, domingos e feriados — art. 60.º); contraordenações fiscais: 30 dias (art. 80.º RGIT)
 - Recurso suspende a execução da coima (regra geral)
 
 ### Fase 4: Recurso Judicial
@@ -48,8 +50,10 @@
 - AT: Autoridade Tributária
 - Falta de entrega de declarações, falta de pagamento de impostos, erros declarativos
 - Coimas: mínimos e máximos definidos por tipo de infração
-- Atenuação: pagamento antecipado com redução (Art. 29º e 30º RGIT)
-- Regularização espontânea: sem coima se antes de qualquer procedimento de inspeção
+- ⏰ Defesa: 30 dias após a notificação (art. 70.º RGIT); recurso da decisão para o tribunal tributário: 30 dias (art. 80.º RGIT)
+- Redução de coima a pedido, com regularização, antes de qualquer procedimento inspetivo (arts. 29.º a 31.º RGIT — percentagens a confirmar na versão em vigor)
+- Pagamento antecipado da coima antes da decisão (art. 75.º RGIT) e dispensa de coima em certas condições (art. 32.º RGIT)
+- Ver `playbooks/recebi-notificacao-at.md` e `references/contencioso-tributario.md`
 
 ## Contraordenações Laborais (ACT)
 - ACT: Autoridade para as Condições do Trabalho

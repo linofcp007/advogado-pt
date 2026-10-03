@@ -2982,7 +2982,7 @@ var require_compile = __commonJS({
       const schOrFunc = root.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve2.call(this, root, ref);
+      let _sch = resolve3.call(this, root, ref);
       if (_sch === void 0) {
         const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
@@ -3009,7 +3009,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve2(root, ref) {
+    function resolve3(root, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -3640,7 +3640,7 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve2(baseURI, relativeURI, options) {
+    function resolve3(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const resolved = resolveComponent(parse3(baseURI, schemelessOptions), parse3(relativeURI, schemelessOptions), schemelessOptions, true);
       schemelessOptions.skipEscape = true;
@@ -3898,7 +3898,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve2,
+      resolve: resolve3,
       resolveComponent,
       equal,
       serialize,
@@ -18978,7 +18978,7 @@ var Protocol = class {
           return;
         }
         const pollInterval = task2.pollInterval ?? this._options?.defaultTaskPollInterval ?? 1e3;
-        await new Promise((resolve2) => setTimeout(resolve2, pollInterval));
+        await new Promise((resolve3) => setTimeout(resolve3, pollInterval));
         options?.signal?.throwIfAborted();
       }
     } catch (error2) {
@@ -18995,7 +18995,7 @@ var Protocol = class {
    */
   request(request, resultSchema, options) {
     const { relatedRequestId, resumptionToken, onresumptiontoken, task, relatedTask } = options ?? {};
-    return new Promise((resolve2, reject) => {
+    return new Promise((resolve3, reject) => {
       const earlyReject = (error2) => {
         reject(error2);
       };
@@ -19073,7 +19073,7 @@ var Protocol = class {
           if (!parseResult.success) {
             reject(parseResult.error);
           } else {
-            resolve2(parseResult.data);
+            resolve3(parseResult.data);
           }
         } catch (error2) {
           reject(error2);
@@ -19334,12 +19334,12 @@ var Protocol = class {
       }
     } catch {
     }
-    return new Promise((resolve2, reject) => {
+    return new Promise((resolve3, reject) => {
       if (signal.aborted) {
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
         return;
       }
-      const timeoutId = setTimeout(resolve2, interval);
+      const timeoutId = setTimeout(resolve3, interval);
       signal.addEventListener("abort", () => {
         clearTimeout(timeoutId);
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
@@ -20670,7 +20670,7 @@ var McpServer = class {
     let task = createTaskResult.task;
     const pollInterval = task.pollInterval ?? 5e3;
     while (task.status !== "completed" && task.status !== "failed" && task.status !== "cancelled") {
-      await new Promise((resolve2) => setTimeout(resolve2, pollInterval));
+      await new Promise((resolve3) => setTimeout(resolve3, pollInterval));
       const updatedTask = await extra.taskStore.getTask(taskId);
       if (!updatedTask) {
         throw new McpError(ErrorCode.InternalError, `Task ${taskId} not found during polling`);
@@ -21343,12 +21343,12 @@ var StdioServerTransport = class {
     this.onclose?.();
   }
   send(message) {
-    return new Promise((resolve2) => {
+    return new Promise((resolve3) => {
       const json = serializeMessage(message);
       if (this._stdout.write(json)) {
-        resolve2();
+        resolve3();
       } else {
-        this._stdout.once("drain", resolve2);
+        this._stdout.once("drain", resolve3);
       }
     });
   }
@@ -21369,38 +21369,134 @@ function formatarEuros(valor) {
 }
 
 // src/calculators/juros.ts
-var TAXAS = {
-  comercial: 0.1015,
-  // 10,15%/ano — DL 62/2013, transações comerciais
-  civil: 0.04
-  // 4%/ano — Portaria 291/2003
-};
+var H = (ano, semestre, geral, aviso) => ({
+  ano,
+  semestre,
+  geral,
+  aviso
+});
+var TAXAS_SEMESTRAIS = [
+  H(2013, 2, 0.075, "Aviso n.\xBA 10478/2013"),
+  H(2014, 1, 0.0725, "Aviso n.\xBA 1019/2014"),
+  H(2014, 2, 0.0715, "Aviso n.\xBA 8266/2014"),
+  H(2015, 1, 0.0705, "Aviso n.\xBA 563/2015"),
+  H(2015, 2, 0.0705, "Aviso n.\xBA 7758/2015"),
+  H(2016, 1, 0.0705, "Aviso n.\xBA 890/2016"),
+  H(2016, 2, 0.07, "Aviso n.\xBA 8671/2016"),
+  H(2017, 1, 0.07, "Aviso n.\xBA 2583/2017"),
+  H(2017, 2, 0.07, "Aviso n.\xBA 8544/2017"),
+  H(2018, 1, 0.07, "Aviso n.\xBA 1989/2018"),
+  H(2018, 2, 0.07, "Aviso n.\xBA 9939/2018"),
+  H(2019, 1, 0.07, "Aviso n.\xBA 2553/2019"),
+  H(2019, 2, 0.07, "Aviso n.\xBA 11571/2019"),
+  H(2020, 1, 0.07, "Aviso n.\xBA 1568/2020"),
+  H(2020, 2, 0.07, "Aviso n.\xBA 10974/2020"),
+  H(2021, 1, 0.07, "Aviso n.\xBA 2239/2021"),
+  H(2021, 2, 0.07, "Aviso n.\xBA 13486/2021"),
+  H(2022, 1, 0.07, "Aviso n.\xBA 1535/2022"),
+  H(2022, 2, 0.07, "Aviso n.\xBA 13997/2022"),
+  H(2023, 1, 0.095, "Aviso n.\xBA 1672/2023"),
+  H(2023, 2, 0.11, "Aviso n.\xBA 14922/2023"),
+  H(2024, 1, 0.115, "Aviso n.\xBA 1850/2024"),
+  H(2024, 2, 0.1125, "Aviso n.\xBA 14751/2024/2"),
+  H(2025, 1, 0.1015, "Aviso n.\xBA 1278/2025/2"),
+  H(2025, 2, 0.0915, "Aviso n.\xBA 16792/2025/2"),
+  H(2026, 1, 0.0915, "Aviso n.\xBA 822/2026/2"),
+  H(2026, 2, 0.094, "Aviso n.\xBA 16623/2026/2")
+];
+var TAXA_CIVIL = 0.04;
+var INICIO_TABELA = "2013-07-01";
 var MS_POR_DIA = 24 * 60 * 60 * 1e3;
-function diasCorridos(inicio, fim) {
-  const inicioUTC = Date.UTC(
-    inicio.getUTCFullYear(),
-    inicio.getUTCMonth(),
-    inicio.getUTCDate()
-  );
-  const fimUTC = Date.UTC(
-    fim.getUTCFullYear(),
-    fim.getUTCMonth(),
-    fim.getUTCDate()
-  );
-  return Math.round((fimUTC - inicioUTC) / MS_POR_DIA);
+function iso(ms) {
+  return new Date(ms).toISOString().slice(0, 10);
+}
+function utcDia(d) {
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+function r4(x) {
+  return Math.round(x * 1e4) / 1e4;
+}
+function taxaDoSemestre(tipo, ano, semestre) {
+  if (tipo === "civil") return { taxa: TAXA_CIVIL, estimado: false, fonte: "Portaria 291/2003" };
+  if (tipo !== "comercial" && tipo !== "comercial-geral") {
+    throw new Error(`Tipo de juros desconhecido: ${tipo}`);
+  }
+  const chave = ano * 10 + semestre;
+  let linha = TAXAS_SEMESTRAIS.find((t) => t.ano * 10 + t.semestre === chave);
+  let estimado = false;
+  if (!linha) {
+    const ultima = TAXAS_SEMESTRAIS[TAXAS_SEMESTRAIS.length - 1];
+    if (chave < TAXAS_SEMESTRAIS[0].ano * 10 + TAXAS_SEMESTRAIS[0].semestre) {
+      throw new Error(`Sem taxa comercial antes de ${INICIO_TABELA}.`);
+    }
+    linha = ultima;
+    estimado = true;
+  }
+  const taxa = tipo === "comercial" ? r4(linha.geral + 0.01) : linha.geral;
+  return { taxa, estimado, fonte: estimado ? `${linha.aviso} (\xFAltima conhecida)` : linha.aviso };
 }
 function calcularJuros(capital, dataInicio, dataFim, tipo) {
-  if (!(tipo in TAXAS)) {
-    throw new Error(`Tipo desconhecido: ${tipo}`);
+  if (tipo !== "comercial" && tipo !== "comercial-geral" && tipo !== "civil") {
+    throw new Error(`Tipo de juros desconhecido: ${tipo}`);
   }
-  const dias = diasCorridos(dataInicio, dataFim);
-  if (dias < 0) {
-    throw new Error("A data de fim \xE9 anterior \xE0 data de in\xEDcio.");
+  if (!(capital >= 0)) throw new Error("O capital tem de ser um valor positivo.");
+  const ini = utcDia(dataInicio);
+  const fim = utcDia(dataFim);
+  if (fim < ini) throw new Error("A data de fim \xE9 anterior \xE0 data de in\xEDcio.");
+  if (tipo !== "civil" && ini < Date.parse(INICIO_TABELA)) {
+    throw new Error(
+      `A tabela de taxas comerciais come\xE7a em ${INICIO_TABELA} (DL 62/2013); para mora anterior, calcular \xE0 parte com os avisos da \xE9poca.`
+    );
   }
-  const taxa = TAXAS[tipo];
-  const juros = capital * taxa * (dias / 365);
-  const total = capital + juros;
-  return { dias, taxa, juros, total };
+  const tramos = [];
+  let cursor = ini;
+  while (cursor < fim) {
+    const d = new Date(cursor);
+    const ano = d.getUTCFullYear();
+    const semestre = d.getUTCMonth() < 6 ? 1 : 2;
+    const corte = semestre === 1 ? Date.UTC(ano, 6, 1) : Date.UTC(ano + 1, 0, 1);
+    const ate = Math.min(corte, fim);
+    const dias2 = Math.round((ate - cursor) / MS_POR_DIA);
+    const { taxa, estimado, fonte } = taxaDoSemestre(tipo, ano, semestre);
+    tramos.push({
+      inicio: iso(cursor),
+      fim: iso(ate),
+      dias: dias2,
+      taxa,
+      juros: capital * taxa * dias2 / 365,
+      estimado,
+      fonte
+    });
+    cursor = ate;
+  }
+  const dias = Math.round((fim - ini) / MS_POR_DIA);
+  const juros = tramos.reduce((s, t) => s + t.juros, 0);
+  return { dias, juros, total: capital + juros, tramos };
+}
+function pct(taxa) {
+  return (taxa * 100).toFixed(2).replace(".", ",") + "%";
+}
+var eur = formatarEuros;
+function memoriaJuros(capital, r, tipo) {
+  const base = tipo === "comercial" ? "art. 102.\xBA \xA75 CCom / DL 62/2013" : tipo === "comercial-geral" ? "art. 102.\xBA \xA73 CCom" : "Portaria 291/2003";
+  const linhas = [
+    `Mem\xF3ria de c\xE1lculo \u2014 juros de mora (${tipo}; ${base})`,
+    `Capital: ${eur(capital)}`,
+    ...r.tramos.map(
+      (t) => `- ${t.inicio} a ${t.fim}: ${t.dias} dias \xD7 ${pct(t.taxa)}${t.estimado ? " (estimada)" : ""} = ${eur(t.juros)}  [${t.fonte}]`
+    ),
+    `Juros: ${eur(r.juros)} (${r.dias} dias)`,
+    `TOTAL (capital + juros): ${eur(r.total)}`
+  ];
+  if (r.tramos.some((t) => t.estimado)) {
+    linhas.push("Nota: h\xE1 tramos com taxa estimada (semestre ainda sem aviso) \u2014 recalcular quando sair o aviso.");
+  }
+  if (tipo === "comercial") {
+    linhas.push(
+      "Acresce a indemniza\xE7\xE3o m\xEDnima de 40,00 \u20AC por custos de cobran\xE7a (art. 7.\xBA do DL 62/2013), devida sem interpela\xE7\xE3o."
+    );
+  }
+  return linhas.join("\n");
 }
 
 // src/calculators/prazos.ts
@@ -21753,6 +21849,121 @@ function calcularIRSSimplificado(rendimento, tipo) {
   return { coeficiente, tributavel: rendimento * coeficiente };
 }
 
+// src/calculators/creditos.ts
+var MS_POR_DIA3 = 24 * 60 * 60 * 1e3;
+function utcDia2(d) {
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+function bissexto(ano) {
+  return ano % 4 === 0 && ano % 100 !== 0 || ano % 400 === 0;
+}
+function calcularCreditosCessacao(p) {
+  const diut = p.diuturnidades ?? 0;
+  const feriasDias = p.feriasVencidasNaoGozadas ?? 0;
+  if (!(p.retribuicaoBase >= 0)) throw new Error("A retribui\xE7\xE3o base tem de ser um valor positivo.");
+  if (!(diut >= 0)) throw new Error("As diuturnidades n\xE3o podem ser negativas.");
+  if (!(feriasDias >= 0)) throw new Error("Os dias de f\xE9rias vencidas n\xE3o podem ser negativos.");
+  const adm = utcDia2(p.dataAdmissao);
+  const ces = utcDia2(p.dataCessacao);
+  if (ces < adm) throw new Error("A data de cessa\xE7\xE3o \xE9 anterior \xE0 data de admiss\xE3o.");
+  const anoCes = new Date(ces).getUTCFullYear();
+  const anoAdm = new Date(adm).getUTCFullYear();
+  const inicioAno = Math.max(Date.UTC(anoCes, 0, 1), adm);
+  const diasServicoAno = Math.round((ces - inicioAno) / MS_POR_DIA3) + 1;
+  const diasAno = bissexto(anoCes) ? 366 : 365;
+  const fracao = diasServicoAno / diasAno;
+  const base = p.retribuicaoBase + diut;
+  const proporcional = base * fracao;
+  const feriasVencidas = base / 22 * feriasDias;
+  const subsidioFeriasVencido = p.subsidioFeriasVencidoEmFalta ? base : 0;
+  const dAdm = new Date(adm);
+  const doze = Date.UTC(dAdm.getUTCFullYear() + 1, dAdm.getUTCMonth(), dAdm.getUTCDate());
+  const limite245n3 = anoCes === anoAdm + 1 || anoCes === anoAdm || ces < doze;
+  return {
+    diasServicoAno,
+    diasAno,
+    fracao,
+    proporcionalFerias: proporcional,
+    proporcionalSubsidioFerias: proporcional,
+    proporcionalSubsidioNatal: proporcional,
+    feriasVencidas,
+    subsidioFeriasVencido,
+    total: 3 * proporcional + feriasVencidas + subsidioFeriasVencido,
+    limite245n3
+  };
+}
+
+// src/calculators/legitima.ts
+function calcularLegitima(p) {
+  const doacoes = p.doacoes ?? 0;
+  const dividas = p.dividas ?? 0;
+  const asc = p.ascendentes ?? "nenhum";
+  if (!(p.bens >= 0)) throw new Error("O valor dos bens tem de ser positivo.");
+  if (!(doacoes >= 0)) throw new Error("O valor das doa\xE7\xF5es n\xE3o pode ser negativo.");
+  if (!(dividas >= 0)) throw new Error("O valor das d\xEDvidas n\xE3o pode ser negativo.");
+  if (!Number.isInteger(p.filhos) || p.filhos < 0) {
+    throw new Error("O n\xFAmero de filhos tem de ser um inteiro >= 0.");
+  }
+  if (!["nenhum", "pais", "outros"].includes(asc)) {
+    throw new Error(`Ascendentes inv\xE1lidos: ${asc} (usa nenhum, pais ou outros).`);
+  }
+  const avisos = [];
+  let valorHeranca = p.bens + doacoes - dividas;
+  if (valorHeranca < 0) {
+    avisos.push("As d\xEDvidas excedem bens + doa\xE7\xF5es: valor da heran\xE7a considerado 0.");
+    valorHeranca = 0;
+  }
+  let fracaoLegitima = 0;
+  let fundamento = "Sem herdeiros legitim\xE1rios: toda a heran\xE7a \xE9 quota dispon\xEDvel.";
+  const partes = [];
+  if (p.filhos > 0 && p.conjuge) {
+    fracaoLegitima = 2 / 3;
+    fundamento = "C\xF4njuge e filhos: leg\xEDtima de 2/3 (art. 2159.\xBA, n.\xBA 1, CC); divis\xE3o por cabe\xE7a com m\xEDnimo de 1/4 para o c\xF4njuge (art. 2139.\xBA, n.\xBA 1).";
+    const cab = 1 / (p.filhos + 1);
+    const fConj = Math.max(cab, 1 / 4);
+    const fFilho = (1 - fConj) / p.filhos;
+    partes.push({ herdeiro: "c\xF4njuge", fracaoDaLegitima: fConj });
+    for (let i = 1; i <= p.filhos; i++) partes.push({ herdeiro: `filho ${i}`, fracaoDaLegitima: fFilho });
+  } else if (p.filhos > 0) {
+    fracaoLegitima = p.filhos === 1 ? 1 / 2 : 2 / 3;
+    fundamento = `S\xF3 filhos (${p.filhos}): leg\xEDtima de ${p.filhos === 1 ? "1/2" : "2/3"} (art. 2159.\xBA, n.\xBA 2, CC); divis\xE3o em partes iguais.`;
+    for (let i = 1; i <= p.filhos; i++) partes.push({ herdeiro: `filho ${i}`, fracaoDaLegitima: 1 / p.filhos });
+  } else if (p.conjuge && asc !== "nenhum") {
+    fracaoLegitima = 2 / 3;
+    fundamento = "C\xF4njuge e ascendentes: leg\xEDtima de 2/3 (art. 2161.\xBA, n.\xBA 1, CC); 2/3 para o c\xF4njuge e 1/3 para os ascendentes (art. 2142.\xBA, n.\xBA 1).";
+    partes.push({ herdeiro: "c\xF4njuge", fracaoDaLegitima: 2 / 3 });
+    partes.push({ herdeiro: "ascendentes", fracaoDaLegitima: 1 / 3 });
+  } else if (p.conjuge) {
+    fracaoLegitima = 1 / 2;
+    fundamento = "S\xF3 c\xF4njuge: leg\xEDtima de 1/2 (art. 2158.\xBA CC).";
+    partes.push({ herdeiro: "c\xF4njuge", fracaoDaLegitima: 1 });
+  } else if (asc !== "nenhum") {
+    fracaoLegitima = asc === "pais" ? 1 / 2 : 1 / 3;
+    fundamento = `S\xF3 ascendentes (${asc === "pais" ? "pais" : "2.\xBA grau e seguintes"}): leg\xEDtima de ${asc === "pais" ? "1/2" : "1/3"} (art. 2161.\xBA, n.\xBA 2, CC).`;
+    partes.push({ herdeiro: "ascendentes", fracaoDaLegitima: 1 });
+  }
+  const legitima = valorHeranca * fracaoLegitima;
+  const quotaDisponivel = valorHeranca - legitima;
+  if (p.filhos > 0) {
+    avisos.push(
+      "Se algum filho j\xE1 faleceu, os seus descendentes herdam por representa\xE7\xE3o a parte dele (contar como 1 estirpe)."
+    );
+  }
+  avisos.push(
+    "Estimativa: n\xE3o trata rep\xFAdio, indignidade, cola\xE7\xE3o nem a imputa\xE7\xE3o das doa\xE7\xF5es na leg\xEDtima \u2014 confirmar com advogado/not\xE1rio."
+  );
+  return {
+    valorHeranca,
+    fracaoLegitima,
+    legitima,
+    quotaDisponivel,
+    quotaDisponivelPct: (1 - fracaoLegitima) * 100,
+    partes: partes.map((x) => ({ ...x, valor: legitima * x.fracaoDaLegitima })),
+    fundamento,
+    avisos
+  };
+}
+
 // src/content.ts
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -21777,7 +21988,7 @@ function dir(cat) {
 function listar(cat) {
   const d = dir(cat);
   if (!existsSync(d)) return [];
-  return readdirSync(d).filter((f) => f.endsWith(".md")).map((f) => f.slice(0, -3)).sort();
+  return readdirSync(d).filter((f) => f.endsWith(".md") && f.toLowerCase() !== "readme.md").map((f) => f.slice(0, -3)).sort();
 }
 function ler(cat, nome) {
   const limpo = nome.replace(/\.md$/i, "").replace(/[\\/]/g, "");
@@ -21795,7 +22006,7 @@ function procurar(query, maxFicheiros = 12) {
       if (!texto2) continue;
       if (!texto2.toLowerCase().includes(q)) continue;
       const linhas = texto2.split("\n").filter((l) => l.toLowerCase().includes(q)).slice(0, 3).map((l) => l.trim());
-      out.push({ categoria: cat, nome, linhas });
+      out.push({ categoria: cat, nome, linhas, ambito: lerAmbito(texto2) });
       if (out.length >= maxFicheiros) return out;
     }
   }
@@ -21810,6 +22021,165 @@ function listarTudo() {
   }
   return out;
 }
+var RE_AMBITO = /Âmbito:\**\s*(nacional|ue|misto)\b/i;
+var NL = "\n";
+function lerAmbito(texto2) {
+  const topo = texto2.split(NL).slice(0, 15).join(NL);
+  const m = RE_AMBITO.exec(topo);
+  return m ? m[1].toLowerCase() : null;
+}
+function listarComAmbito(cat) {
+  return listar(cat).map((nome) => ({ nome, ambito: lerAmbito(ler(cat, nome) ?? "") }));
+}
+var TITULO_GRUPO = {
+  references: "Refer\xEAncias",
+  templates: "Templates",
+  playbooks: "Playbooks",
+  checklists: "Checklists"
+};
+var ORDEM_GRUPOS = ["references", "templates", "playbooks", "checklists"];
+function formatarProcura(res) {
+  const blocos = [];
+  for (const cat of ORDEM_GRUPOS) {
+    const itens = res.filter((r) => r.categoria === cat);
+    if (itens.length === 0) continue;
+    const linhas = itens.map(
+      (r) => `\u2022 ${r.nome}${r.ambito ? ` (${r.ambito})` : ""}${NL}   ${r.linhas.join(NL + "   ")}`
+    );
+    blocos.push(`## ${TITULO_GRUPO[cat]}${NL}${linhas.join(NL)}`);
+  }
+  return blocos.join(NL + NL);
+}
+
+// src/perfil.ts
+import { existsSync as existsSync2, mkdirSync, readFileSync as readFileSync2, statSync, writeFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join as join2, resolve as resolve2 } from "node:path";
+var CAMPOS_PERFIL = [
+  "forma_juridica",
+  "denominacao",
+  "setor",
+  "trabalhadores",
+  "volume_negocios",
+  "regime_iva",
+  "contabilidade",
+  "clientes",
+  "dados_pessoais",
+  "linguas",
+  "notas",
+  "atualizado_em"
+];
+var ROTULOS = {
+  forma_juridica: "Forma jur\xEDdica (ENI, Unipessoal Lda, Lda, SA, associa\xE7\xE3o, particular\u2026)",
+  denominacao: "Denomina\xE7\xE3o / firma",
+  setor: "Setor de atividade (e CAE principal, se souber)",
+  trabalhadores: "N\xFAmero de trabalhadores",
+  volume_negocios: "Volume de neg\xF3cios anual (escal\xE3o)",
+  regime_iva: "Regime de IVA (normal mensal/trimestral, isen\xE7\xE3o art. 53.\xBA\u2026)",
+  contabilidade: "Contabilidade (organizada / regime simplificado)",
+  clientes: "Clientes (B2B/B2C; nacionais, UE, fora da UE)",
+  dados_pessoais: "Dados pessoais tratados (clientes, trabalhadores, sa\xFAde\u2026)",
+  linguas: "L\xEDnguas de trabalho",
+  notas: "Notas (licen\xE7as, setor regulado, s\xF3cios\u2026)"
+};
+var PASTA = ".advogado-pt";
+var FICHEIRO = "perfil-empresa.md";
+var MS_12_MESES = 365 * 24 * 60 * 60 * 1e3;
+function dirProjeto(o) {
+  return resolve2(o.projeto ?? process.env.CLAUDE_PROJECT_DIR ?? process.cwd());
+}
+function dirHome(o) {
+  return resolve2(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
+}
+function caminhoPerfil(base) {
+  return join2(base, PASTA, FICHEIRO);
+}
+function parsePerfil(texto2) {
+  const campos = {};
+  for (const linha of texto2.split(/\r?\n/)) {
+    const m = /^\s*([a-z_]+)\s*:\s*(.*?)\s*$/.exec(linha);
+    if (!m) continue;
+    if (CAMPOS_PERFIL.includes(m[1]) && m[2] !== "") campos[m[1]] = m[2];
+  }
+  return campos;
+}
+function estaDesatualizado(campos, hoje) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(campos.atualizado_em ?? "");
+  if (!m) return true;
+  const data = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  return hoje.getTime() - data > MS_12_MESES;
+}
+function lerDe(caminho, origem, hoje) {
+  try {
+    if (!existsSync2(caminho)) return null;
+    const campos = parsePerfil(readFileSync2(caminho, "utf8"));
+    const reconhecidos = Object.keys(campos).filter((k) => k !== "atualizado_em");
+    if (reconhecidos.length === 0) return null;
+    return { origem, caminho, campos, desatualizado: estaDesatualizado(campos, hoje) };
+  } catch {
+    return null;
+  }
+}
+function lerPerfil(opts = {}) {
+  const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
+  return lerDe(caminhoPerfil(dirProjeto(opts)), "projeto", hoje) ?? lerDe(caminhoPerfil(dirHome(opts)), "geral", hoje);
+}
+function umaLinha(v) {
+  return String(v).replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim();
+}
+function serializar(campos) {
+  const linhas = [
+    "# Perfil da empresa \u2014 advogado-pt",
+    "",
+    "<!-- Gerido pelo advogado-pt. Podes editar \xE0 m\xE3o: uma linha `campo: valor` por campo.",
+    "     N\xE3o guardes aqui dados pessoais de trabalhadores ou clientes. -->",
+    ""
+  ];
+  for (const c of CAMPOS_PERFIL) if (campos[c]) linhas.push(`${c}: ${campos[c]}`);
+  return linhas.join("\n") + "\n";
+}
+function guardarPerfil(novos, destino, opts = {}) {
+  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
+  if (!existsSync2(base) || !statSync(base).isDirectory()) {
+    throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
+  }
+  const caminho = caminhoPerfil(base);
+  let atuais = {};
+  try {
+    if (existsSync2(caminho)) atuais = parsePerfil(readFileSync2(caminho, "utf8"));
+  } catch {
+    atuais = {};
+  }
+  const campos = { ...atuais };
+  for (const [k, v] of Object.entries(novos ?? {})) {
+    if (k === "atualizado_em") continue;
+    if (!CAMPOS_PERFIL.includes(k)) continue;
+    const valor = umaLinha(v ?? "");
+    if (valor) campos[k] = valor;
+  }
+  const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
+  campos.atualizado_em = hoje.toISOString().slice(0, 10);
+  mkdirSync(join2(base, PASTA), { recursive: true });
+  writeFileSync(caminho, serializar(campos), "utf8");
+  return { origem: destino, caminho, campos, desatualizado: false };
+}
+function resumoPerfil(p) {
+  return CAMPOS_PERFIL.filter((c) => c !== "atualizado_em" && p.campos[c]).map((c) => `${c}: ${p.campos[c]}`).join(" \xB7 ");
+}
+function textoPerguntasPerfil() {
+  const itens = CAMPOS_PERFIL.filter((c) => c !== "atualizado_em").map(
+    (c) => `- ${c} \u2014 ${ROTULOS[c]}`
+  );
+  return [
+    "Sem perfil da empresa guardado. Pergunta APENAS os campos relevantes para a quest\xE3o em curso:",
+    ...itens,
+    "",
+    "Depois oferece guardar com `guardar_perfil_empresa`, \xE0 escolha do utilizador:",
+    '- destino "projeto" -> <projeto>/.advogado-pt/perfil-empresa.md (esta empresa/pasta)',
+    '- destino "geral" -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito em todas as pastas)',
+    "Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador."
+  ].join("\n");
+}
 
 // src/tools.ts
 var AVISO = "\n\n\u26A0\uFE0F Estimativa de apoio. Valores/taxas de 2026 \u2014 confirmar no ano corrente. N\xE3o substitui aconselhamento de advogado inscrito na OA.";
@@ -21821,34 +22191,34 @@ function parseData(s) {
   if (!m) throw new Error(`Data inv\xE1lida: '${s}'. Usa YYYY-MM-DD.`);
   return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])));
 }
-function iso(d) {
+function iso2(d) {
   return d.toISOString().slice(0, 10);
+}
+function listagem(cat) {
+  return listarComAmbito(cat).map((i) => `- ${i.nome}${i.ambito ? ` \u2014 ${i.ambito}` : ""}`).join("\n");
 }
 function registerTools(server) {
   server.registerTool(
     "calc_juros_mora",
     {
       title: "Calcular juros de mora",
-      description: "Calcula juros de mora (comercial: 10,15% em 2026, DL 62/2013; ou civil: 4%) entre duas datas. Usa quando o utilizador quer saber quanto deve de juros sobre uma fatura ou d\xEDvida em atraso ('quanto rende de juros', 'juros de mora', 'juros de atraso', 'mora'). EN: how much interest is owed on an overdue invoice/debt.",
+      description: "Calcula juros de mora por TRAMOS SEMESTRAIS (cada semestre com a taxa do seu aviso, 2.\xBA sem. 2013 a 2026) e devolve a mem\xF3ria de c\xE1lculo pronta a anexar. Tipos: comercial (transa\xE7\xF5es comerciais, DL 62/2013 / art. 102.\xBA \xA75 CCom), comercial-geral (art. 102.\xBA \xA73 CCom) ou civil (4%). Usa quando o utilizador quer saber quanto deve de juros sobre uma fatura ou d\xEDvida em atraso ('quanto rende de juros', 'juros de mora', 'juros de atraso', 'mora'). EN: late-payment interest owed on an overdue invoice/debt, split by semester.",
       inputSchema: {
         capital: external_exports.number().describe("Capital em d\xEDvida (\u20AC)"),
         data_inicio: external_exports.string().describe("Data de in\xEDcio da mora (YYYY-MM-DD)"),
         data_fim: external_exports.string().optional().describe("Data final (YYYY-MM-DD); por defeito, hoje"),
-        tipo: external_exports.enum(["comercial", "civil"]).default("comercial")
+        tipo: external_exports.enum(["comercial", "comercial-geral", "civil"]).default("comercial")
       },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ capital, data_inicio, data_fim, tipo }) => {
       const fim = data_fim ? parseData(data_fim) : /* @__PURE__ */ new Date();
-      const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
-      return texto(
-        `Juros de mora (${tipo})
-Capital: ${formatarEuros(capital)}
-Per\xEDodo: ${data_inicio} a ${data_fim ?? iso(fim)} (${r.dias} dias)
-Taxa: ${(r.taxa * 100).toFixed(2).replace(".", ",")}%/ano
-Juros: ${formatarEuros(r.juros)}
-TOTAL: ${formatarEuros(r.total)}` + AVISO
-      );
+      try {
+        const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
+        return texto(memoriaJuros(capital, r, tipo) + AVISO);
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
@@ -21868,7 +22238,7 @@ TOTAL: ${formatarEuros(r.total)}` + AVISO
       return texto(
         `Prazo de ${dias} dias ${tipo}
 In\xEDcio: ${inicio}
-DATA-LIMITE: ${iso(r.dataLimite)}
+DATA-LIMITE: ${iso2(r.dataLimite)}
 
 ${r.nota}`
       );
@@ -21979,7 +22349,7 @@ TOTAL impostos: ${formatarEuros(r.total)}` + AVISO
 Base: ${r.base}
 Prazo: ${r.prazoTexto}
 In\xEDcio: ${inicio}
-DATA-LIMITE: ${iso(r.limite)}
+DATA-LIMITE: ${iso2(r.limite)}
 
 Nota: a prescri\xE7\xE3o interrompe-se com cita\xE7\xE3o/notifica\xE7\xE3o judicial ou reconhecimento da d\xEDvida (Arts. 323.\xBA/325.\xBA CC).` + AVISO
       );
@@ -22013,6 +22383,76 @@ RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
     }
   );
   server.registerTool(
+    "calc_creditos_laborais",
+    {
+      title: "Calcular cr\xE9ditos laborais na cessa\xE7\xE3o",
+      description: "Calcula os cr\xE9ditos laborais devidos quando um contrato de trabalho termina: proporcionais de f\xE9rias, subs\xEDdio de f\xE9rias e subs\xEDdio de Natal do ano da cessa\xE7\xE3o, f\xE9rias vencidas e n\xE3o gozadas e subs\xEDdio de f\xE9rias em falta (estimativa bruta, CT arts. 245.\xBA e 263.\xBA). Usa quando h\xE1 despedimento, demiss\xE3o, fim de contrato a termo ou acordo de revoga\xE7\xE3o e se quer saber 'quanto tenho de pagar/receber', 'acerto de contas', 'proporcionais', 'f\xE9rias n\xE3o gozadas'. N\xE3o inclui a compensa\xE7\xE3o (calc_compensacao_despedimento). EN: final-pay entitlements on termination.",
+      inputSchema: {
+        retribuicao_base: external_exports.number().describe("Retribui\xE7\xE3o base mensal (\u20AC)"),
+        diuturnidades: external_exports.number().optional().describe("Diuturnidades mensais (\u20AC)"),
+        data_admissao: external_exports.string().describe("Data de admiss\xE3o (YYYY-MM-DD)"),
+        data_cessacao: external_exports.string().describe("Data de cessa\xE7\xE3o (YYYY-MM-DD)"),
+        ferias_vencidas_nao_gozadas: external_exports.number().optional().describe("Dias \xFAteis de f\xE9rias vencidas e n\xE3o gozadas"),
+        subsidio_ferias_vencido_em_falta: external_exports.boolean().optional().describe("O subs\xEDdio de f\xE9rias das f\xE9rias vencidas ainda n\xE3o foi pago")
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false }
+    },
+    async (a) => {
+      try {
+        const r = calcularCreditosCessacao({
+          retribuicaoBase: a.retribuicao_base,
+          diuturnidades: a.diuturnidades,
+          dataAdmissao: parseData(a.data_admissao),
+          dataCessacao: parseData(a.data_cessacao),
+          feriasVencidasNaoGozadas: a.ferias_vencidas_nao_gozadas,
+          subsidioFeriasVencidoEmFalta: a.subsidio_ferias_vencido_em_falta
+        });
+        return texto(
+          `Cr\xE9ditos laborais na cessa\xE7\xE3o (estimativa bruta)
+Dias de servi\xE7o no ano da cessa\xE7\xE3o: ${r.diasServicoAno}/${r.diasAno}
+Proporcional de f\xE9rias: ${formatarEuros(r.proporcionalFerias)}
+Proporcional de subs\xEDdio de f\xE9rias: ${formatarEuros(r.proporcionalSubsidioFerias)}
+Proporcional de subs\xEDdio de Natal: ${formatarEuros(r.proporcionalSubsidioNatal)}
+F\xE9rias vencidas n\xE3o gozadas: ${formatarEuros(r.feriasVencidas)}
+Subs\xEDdio de f\xE9rias vencido em falta: ${formatarEuros(r.subsidioFeriasVencido)}
+TOTAL BRUTO: ${formatarEuros(r.total)}` + (r.limite245n3 ? "\n\u26A0\uFE0F Contrato at\xE9 12 meses ou cessa\xE7\xE3o no ano seguinte ao da admiss\xE3o: aplica-se o limite do art. 245.\xBA, n.\xBA 3, CT \u2014 rever as f\xE9rias \xE0 m\xE3o." : "") + "\n(N\xE3o inclui a retribui\xE7\xE3o do m\xEAs em curso, a compensa\xE7\xE3o \u2014 calc_compensacao_despedimento \u2014, forma\xE7\xE3o n\xE3o prestada nem descontos de IRS/SS.)" + AVISO
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
+    }
+  );
+  server.registerTool(
+    "calc_legitima",
+    {
+      title: "Calcular leg\xEDtima e quota dispon\xEDvel",
+      description: "Calcula a leg\xEDtima (parte da heran\xE7a reservada aos herdeiros legitim\xE1rios \u2014 c\xF4njuge, filhos, ascendentes) e a quota dispon\xEDvel (o que se pode deixar livremente por testamento ou doa\xE7\xE3o), com a divis\xE3o da leg\xEDtima por herdeiro (CC arts. 2156.\xBA-2162.\xBA, 2139.\xBA, 2142.\xBA). Usa em heran\xE7as, testamentos, doa\xE7\xF5es a filhos/terceiros ('quanto posso deixar a\u2026', 'parte leg\xEDtima', 'quota dispon\xEDvel', 'herdeiros for\xE7osos'). EN: forced heirship share and freely disposable portion.",
+      inputSchema: {
+        bens: external_exports.number().describe("Valor dos bens \xE0 data da morte (\u20AC)"),
+        doacoes: external_exports.number().optional().describe("Valor dos bens doados em vida (\u20AC)"),
+        dividas: external_exports.number().optional().describe("D\xEDvidas da heran\xE7a (\u20AC)"),
+        conjuge: external_exports.boolean().describe("H\xE1 c\xF4njuge sobrevivo?"),
+        filhos: external_exports.number().int().describe("N\xFAmero de filhos (estirpes)"),
+        ascendentes: external_exports.enum(["nenhum", "pais", "outros"]).default("nenhum")
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false }
+    },
+    async (a) => {
+      try {
+        const r = calcularLegitima(a);
+        return texto(
+          `Leg\xEDtima e quota dispon\xEDvel
+Valor da heran\xE7a (art. 2162.\xBA CC): ${formatarEuros(r.valorHeranca)}
+Leg\xEDtima: ${formatarEuros(r.legitima)}
+Quota dispon\xEDvel: ${formatarEuros(r.quotaDisponivel)} (${r.quotaDisponivelPct.toFixed(2).replace(".", ",")}%)
+` + (r.partes.length ? "Divis\xE3o da leg\xEDtima:\n" + r.partes.map((p) => `  - ${p.herdeiro}: ${formatarEuros(p.valor)}`).join("\n") + "\n" : "") + r.fundamento + "\n" + r.avisos.map((x) => `Nota: ${x}`).join("\n") + AVISO
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
+    }
+  );
+  server.registerTool(
     "listar_areas_juridicas",
     {
       title: "Listar \xE1reas jur\xEDdicas",
@@ -22020,7 +22460,7 @@ RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
       inputSchema: {},
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async () => texto("\xC1reas de refer\xEAncia:\n- " + listar("references").join("\n- "))
+    async () => texto("\xC1reas de refer\xEAncia (nome \u2014 \xE2mbito):\n" + listagem("references"))
   );
   const obter = (cat, rotulo) => async ({ nome }) => {
     const t = ler(cat, nome);
@@ -22055,7 +22495,7 @@ RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
       inputSchema: {},
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async () => texto("Templates:\n- " + listar("templates").join("\n- "))
+    async () => texto("Templates (nome \u2014 \xE2mbito):\n" + listagem("templates"))
   );
   server.registerTool(
     "obter_template",
@@ -22139,13 +22579,51 @@ RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
     async ({ query }) => {
       const res = procurar(query);
       if (res.length === 0) return texto(`Sem resultados para '${query}'.`);
-      const linhas = res.map(
-        (r) => `\u2022 [${r.categoria}] ${r.nome}
-   ${r.linhas.join("\n   ")}`
-      );
-      return texto(`Resultados para '${query}':
+      return texto(`Resultados para '${query}' (agrupados por tipo; \xE2mbito entre par\xEAnteses):
 
-` + linhas.join("\n\n"));
+` + formatarProcura(res));
+    }
+  );
+  server.registerTool(
+    "obter_perfil_empresa",
+    {
+      title: "Obter perfil da empresa",
+      description: "L\xEA o perfil da empresa do utilizador (forma jur\xEDdica, setor, trabalhadores, volume de neg\xF3cios, IVA, clientes\u2026) guardado em <projeto>/.advogado-pt/perfil-empresa.md ou, na falta, no perfil geral ~/.advogado-pt/perfil-empresa.md. Usa no in\xEDcio de qualquer quest\xE3o empresarial para adaptar a resposta \xE0 empresa ('a minha empresa', 'somos uma Lda', 'temos trabalhadores'). Sem perfil, devolve as perguntas a fazer. EN: read the saved company profile.",
+      inputSchema: {
+        diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (por defeito, o do cliente/cwd)")
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false }
+    },
+    async ({ diretorio }) => {
+      const p = lerPerfil({ projeto: diretorio });
+      if (!p) return texto(textoPerguntasPerfil());
+      return texto(
+        `Perfil da empresa (${p.origem}) \u2014 ${p.caminho}
+` + resumoPerfil(p) + `
+atualizado_em: ${p.campos.atualizado_em ?? "(sem data)"}` + (p.desatualizado ? "\n\u26A0\uFE0F Perfil com mais de 12 meses (ou sem data): confirma os dados com o utilizador antes de os usar." : "")
+      );
+    }
+  );
+  server.registerTool(
+    "guardar_perfil_empresa",
+    {
+      title: "Guardar perfil da empresa",
+      description: "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.advogado-pt/perfil-empresa.md; destino 'geral' -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito). Usa s\xF3 depois de o utilizador aceitar guardar e s\xF3 com dados da PR\xD3PRIA empresa \u2014 nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
+      inputSchema: {
+        campos: external_exports.record(external_exports.string()).describe("Campos a gravar, ex.: {forma_juridica: 'Lda', setor: 'Restaura\xE7\xE3o', trabalhadores: '12'}"),
+        destino: external_exports.enum(["projeto", "geral"]).default("projeto"),
+        diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto quando destino = projeto (por defeito, cwd)")
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false }
+    },
+    async ({ campos, destino, diretorio }) => {
+      try {
+        const p = guardarPerfil(campos, destino, { projeto: diretorio });
+        return texto(`Perfil guardado (${p.origem}) em ${p.caminho}
+${resumoPerfil(p)}`);
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel guardar o perfil: ${e.message}`);
+      }
     }
   );
   void COMPENSACAO_MODALIDADES;
@@ -22192,9 +22670,9 @@ function registerResources(server) {
 }
 
 // src/persona.ts
-var PERSONA = `\xC9s o advogado pessoal e empresarial do utilizador, especializado em DIREITO PORTUGU\xCAS.
+var PERSONA = `\xC9s o advogado pessoal e empresarial do utilizador, especializado em DIREITO PORTUGU\xCAS, para qualquer tipo de empresa (ENI, Unipessoal Lda, Lda, SA, associa\xE7\xE3o, cooperativa) de qualquer setor e dimens\xE3o, e para particulares.
 
-PERFIL DO UTILIZADOR: atua em tecnologia/software/retalho/servi\xE7os/consultoria; \xE9 Empres\xE1rio em Nome Individual (ENI), com poss\xEDvel transi\xE7\xE3o para Sociedade Unipessoal por Quotas (Lda); tem clientes nacionais e internacionais; trabalha em PT e EN.
+PERFIL DA EMPRESA: n\xE3o assumas o perfil. L\xEA o perfil guardado (tool "obter_perfil_empresa": <projeto>/.advogado-pt/perfil-empresa.md, ou o perfil geral ~/.advogado-pt/perfil-empresa.md). Se n\xE3o houver, pergunta s\xF3 o que for relevante para a quest\xE3o (forma jur\xEDdica, setor, n.\xBA de trabalhadores, volume de neg\xF3cios, B2B/B2C, clientes UE/fora da UE) e oferece guardar com "guardar_perfil_empresa" (destino projeto ou geral). Se tiver mais de 12 meses, confirma-o. Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador. Trabalha em PT e EN.
 
 TOM: formal e juridicamente preciso nos documentos; direto e pr\xE1tico na estrat\xE9gia. Responde na l\xEDngua do utilizador (PT/EN).
 
@@ -22286,7 +22764,7 @@ async function main() {
   const server = new McpServer(
     {
       name: "advogado-pt",
-      version: "1.0.5"
+      version: "1.1.0"
     },
     {
       // Muitos clientes MCP injetam estas instruções como contexto do servidor,

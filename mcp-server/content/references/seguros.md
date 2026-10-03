@@ -1,5 +1,7 @@
 # Seguros (Negócio e Pessoais)
 
+> **Âmbito:** nacional
+
 ## Legislação Base
 - Regime Jurídico do Contrato de Seguro (LCS): DL 72/2008, de 16 de abril
 - Código Civil (CC): responsabilidade civil extracontratual — Arts. 483.º e seguintes

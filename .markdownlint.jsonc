@@ -12,5 +12,8 @@
   "MD029": false,                  // ol-prefix (numeração de passos não-sequencial)
   "MD009": false,                  // trailing-spaces
   "MD060": false,                  // table-column-style (tabelas de valores)
+  "MD035": false,                  // hr-style (linhas de assinatura "____" + separador "---" do "Antes de enviar")
+  "MD036": false,                  // no-emphasis-as-heading (nota "_(Lista para quem envia…)_")
+  "MD031": false,                  // blanks-around-fences (blocos de exemplo dentro de listas/playbooks)
   "MD024": { "siblings_only": true } // headings repetidos OK se não forem irmãos diretos
 }

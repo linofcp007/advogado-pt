@@ -1,5 +1,7 @@
 # Fiscalidade Empresarial
 
+> **Âmbito:** misto
+>
 > 💶 **Valores, taxas e limiares:** consulta sempre `references/valores-2026.md` (ponto único de verdade). Os números abaixo são estruturais; os montantes concretos mudam anualmente.
 
 ## Legislação Base
@@ -92,6 +94,6 @@
 ## Reclamações e Impugnações Fiscais
 - **Reclamação graciosa**: 120 dias após notificação (Art. 70º CPPT)
 - **Recurso hierárquico**: 30 dias após decisão da reclamação
-- **Impugnação judicial**: 90 dias (Art. 102º CPPT)
+- **Impugnação judicial**: 3 meses (Art. 102.º, n.º 1, CPPT) — ver `references/contencioso-tributario.md`
 - **Revisão do ato tributário**: 4 anos (Art. 78º LGT)
 - Sempre pedir fundamentação detalhada e verificar se houve erro da AT

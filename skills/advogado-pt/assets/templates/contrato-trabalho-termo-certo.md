@@ -1,7 +1,8 @@
 <!-- Template: contrato de trabalho a termo certo. Base: Código do Trabalho (Lei 7/2009),
      Arts. 139.º-149.º. O MOTIVO JUSTIFICATIVO é obrigatório e tem de ser concreto (Art. 141.º);
      a sua omissão/insuficiência converte o contrato em SEM TERMO. Máx. 2 anos; renovações
-     limitadas (Art. 148.º). Compensação na caducidade: ver references/valores-2026.md. -->
+     limitadas (Art. 148.º). Compensação na caducidade: ver references/valores-2026.md.
+     Âmbito: nacional -->
 
 # CONTRATO DE TRABALHO A TERMO CERTO
 
@@ -41,3 +42,15 @@ Em tudo o omisso aplica-se o Código do Trabalho e {{IRCT aplicável / nenhum in
 O Empregador: __________________   O Trabalhador: __________________
 
 <!-- Comunicar a admissão à Segurança Social ANTES do início; seguro de acidentes de trabalho desde o 1.º dia. -->
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Caducidade: comunicar a não renovação por escrito 15 dias (empregador) ou 8 dias (trabalhador) antes do termo (art. 344.º, n.º 1, CT); sem essa comunicação o contrato renova-se.
+- [ ] Forma escrita obrigatória com motivo justificativo concreto e os factos que o integram (art. 141.º CT), sob pena de o contrato se considerar sem termo; renovações dentro do art. 148.º CT (até 3, com duração total das renovações não superior à do período inicial — a confirmar).
+- [ ] ⏰ Comunicar a celebração (com o motivo) e a cessação à comissão de trabalhadores e à associação sindical do trabalhador, em 5 dias úteis; na não renovação de trabalhadora grávida, puérpera ou lactante, ou de trabalhador em licença parental, comunicar o motivo à CITE (art. 144.º CT — confirmar prazos na redação em vigor).
+- [ ] Comunicação de admissão à Segurança Social antes do início, seguro de acidentes de trabalho desde o 1.º dia e retribuição não inferior à RMMG (`references/valores-2026.md`).
+- [ ] Compensação por caducidade (24 dias por ano, salvo se a caducidade resultar de declaração do trabalhador): calcular com `calc_compensacao_despedimento` e valores em `references/valores-2026.md`.

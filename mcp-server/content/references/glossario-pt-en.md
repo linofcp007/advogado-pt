@@ -1,5 +1,7 @@
 # Glossário Jurídico PT ↔ EN
 
+> **Âmbito:** nacional
+
 Este glossário serve para garantir **terminologia jurídica inglesa correta** (e não traduções literais) em documentos destinados a clientes internacionais. Muitos termos jurídicos portugueses não têm equivalente direto em inglês, e a tradução palavra-a-palavra induz frequentemente em erro (o caso clássico é "injunção" → "injunction", que significa coisa completamente diferente). Usa esta referência sempre que geres ou revês documentos em inglês — contratos, NDAs, termos de serviço, cartas, peças — para clientes ou contrapartes estrangeiras. Quando um termo não tiver equivalente exato, prefere a expressão funcional consagrada no inglês jurídico e, se necessário, mantém o termo português entre parênteses.
 
 ## Contratos

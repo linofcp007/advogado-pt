@@ -1,5 +1,7 @@
 # Contratação Pública (Vender ao Estado)
 
+> **Âmbito:** misto
+>
 > 💶 **Limiares dos procedimentos, valores de caução e taxas de justiça do contencioso pré-contratual:** ver `references/valores-2026.md` e o CCP (os limiares são atualizados, designadamente pelas diretivas UE). Cláusulas contratuais gerais em `references/contratos.md`; consórcios e vertente internacional em `references/contratos-internacionais.md`.
 
 ## Legislação Base

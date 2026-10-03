@@ -1,5 +1,7 @@
 # Direito da Família
 
+> **Âmbito:** nacional
+>
 > 💶 **Custos de registo, emolumentos e quaisquer montantes:** consulta `references/valores-2026.md`. Esta área articula-se com a sucessão — efeitos do regime de bens na herança em `references/herancas.md`.
 
 ## Legislação Base

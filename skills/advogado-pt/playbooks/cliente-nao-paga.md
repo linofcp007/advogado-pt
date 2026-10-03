@@ -24,7 +24,7 @@
    ```
    - Entre empresas: taxa comercial (BCE + 8 p.p., DL 62/2013). Com consumidor: taxa civil. O script escolhe via `--tipo` (`comercial`|`civil`).
 
-6. **O cliente mostra boa-fé / quer pagar mas não consegue de uma vez?** → se SIM: propõe **acordo de pagamento faseado** (`assets/templates/acordo-pagamento-faseado.md`) com cronograma e cláusula de vencimento antecipado, e/ou faz assinar um **reconhecimento de dívida** (`assets/templates/reconhecimento-divida.md`) — que, além de título, **interrompe a prescrição** · se NÃO (silêncio ou recusa): passo 7.
+6. **O cliente mostra boa-fé / quer pagar mas não consegue de uma vez?** → se SIM: propõe **acordo de pagamento faseado** (`assets/templates/acordo-pagamento-faseado.md`) com cronograma e cláusula de vencimento antecipado, e/ou faz assinar um **reconhecimento de dívida** (`assets/templates/reconhecimento-divida.md`) — que **interrompe a prescrição** e, se **autenticado** por notário, advogado ou solicitador, é também título executivo · se NÃO (silêncio ou recusa): passo 7.
 
 7. **Qual o valor da dívida?**
    - **≤ 15.000€** → **Injunção** (DL 269/98): requerimento eletrónico no Citius (balcaoj). Rápido e barato. Estima a taxa de justiça:
@@ -36,7 +36,7 @@
 
 8. **O devedor opôs-se à injunção?** → se SIM: a injunção segue para os termos de ação (distribuída como processo declarativo) · se NÃO: obtiveste título executivo → passo 9.
 
-9. **Tens título executivo** (injunção com fórmula executória, sentença, documento com reconhecimento de assinatura, fatura assinada)? → **Ação executiva**: penhora de contas, bens e salários (ver `references/cobrancas.md`).
+9. **Tens título executivo** (injunção com fórmula executória, sentença, documento de reconhecimento de dívida **autenticado** por notário, advogado ou solicitador — art. 703.º, n.º 1, al. b), CPC; uma fatura ou um documento só com assinatura, mesmo reconhecida, já não basta)? → **Ação executiva**: penhora de contas, bens e salários (ver `references/cobrancas.md`).
 
 ### Ramo — Cliente insolvente ou em PER
 

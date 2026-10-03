@@ -1,5 +1,7 @@
 # Direito do Consumo
 
+> **Âmbito:** misto
+
 ## Legislação Base
 - Lei 24/96: Lei de Defesa do Consumidor
 - DL 24/2014: contratos à distância e fora do estabelecimento
@@ -9,9 +11,9 @@
 
 ## Garantias (DL 84/2021 — regime atual)
 - **Bens novos**: 3 anos de garantia legal
-- **Bens usados**: mínimo 18 meses (pode ser reduzido por acordo até 1 ano)
+- **Bens usados**: 3 anos, que o acordo das partes pode reduzir até **18 meses** (art. 12.º, n.º 3, DL 84/2021)
 - **Conteúdos/serviços digitais**: conformidade durante todo o período de fornecimento contínuo; no fornecimento único, responsabilidade pela falta de conformidade que se manifeste no prazo legal (DL 84/2021 — confirmar o prazo concreto aplicável)
-- Presunção de falta de conformidade: 1 ano (bens) desde a entrega
+- Presunção de falta de conformidade: a que se manifeste nos **2 anos** seguintes à entrega presume-se existente à data da entrega (art. 13.º, n.º 1, DL 84/2021)
 - Hierarquia de remédios: reparação/substituição → redução preço → resolução contrato
 
 ## Vendas à Distância e Online (DL 24/2014)
@@ -31,7 +33,7 @@
 ## Resolução Alternativa de Litígios (RAL)
 - Centros de arbitragem de consumo (CNIACC lista os centros)
 - Informação sobre RAL obrigatória nos T&C e no livro de reclamações
-- Plataforma ODR da UE para litígios online transfronteiriços
+- A plataforma europeia de resolução de litígios em linha (ODR) foi encerrada em 20/07/2025 (Reg. (UE) 2024/3228) — retirar a ligação dos sites; manter a informação sobre as entidades RAL (art. 18.º Lei 144/2015). Ver `assets/checklists/checklist-loja-online.md`
 
 ## Para o Contexto do Utilizador (Retalho + TI)
 - **E-commerce**: cumprir DL 24/2014, informação clara sobre preços, portes, prazos de entrega

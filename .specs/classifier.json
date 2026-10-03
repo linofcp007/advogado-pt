@@ -1,0 +1,6 @@
+{
+  "signals": [
+    {"track":"privacy","word":"rgpd","effect":"off","count":1,"origin":"learned","lastAt":"2026-10-03T16:51:35.168Z"},
+    {"track":"tdd","word":"concorrência","effect":"strong","count":1,"origin":"learned","lastAt":"2026-10-03T16:51:35.168Z"}
+  ]
+}

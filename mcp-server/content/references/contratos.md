@@ -1,5 +1,7 @@
 # Contratos e Disputas Contratuais
 
+> **Âmbito:** nacional
+
 ## Legislação Base
 - Código Civil (CC): Arts. 217º-294º (declaração negocial), 397º-812º (obrigações/contratos)
 - Código Comercial: contratos mercantis

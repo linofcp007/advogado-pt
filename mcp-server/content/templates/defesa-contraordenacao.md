@@ -4,7 +4,10 @@
      e defesa) e 25.º e ss. (prescrição). Prazo típico de defesa: 15 dias úteis a contar da
      notificação (confirmar prazo indicado na própria notificação, que prevalece). Enviar por
      CORREIO REGISTADO (de preferência com aviso de receção) dentro do prazo. NÃO confundir com o
-     recurso judicial de impugnação da decisão final (esse vai a juízo). -->
+     recurso judicial de impugnação da decisão final (esse vai a juízo).
+     COIMAS FISCAIS (AT): regime próprio do RGIT — defesa em 30 dias (art. 70.º) e recurso em
+     30 dias (art. 80.º); ver playbooks/recebi-notificacao-at.md e adaptar a base legal.
+     Âmbito: nacional -->
 
 # DEFESA EM PROCESSO DE CONTRAORDENAÇÃO
 
@@ -57,3 +60,16 @@ _______________________________
 
 <!-- Remeter por correio registado (idealmente com aviso de receção) dentro do prazo de defesa.
      Conservar comprovativo do registo como prova da tempestividade. -->
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Confirmar o prazo de defesa indicado na notificação (prevalece e varia consoante o regime: laboral, rodoviário, fiscal, RGPD) e contá-lo a partir da notificação com `calc_prazo`.
+- [ ] Enviar por correio registado com AR (ou pelo meio eletrónico indicado na notificação) e guardar o comprovativo de registo como prova da tempestividade.
+- [ ] Verificar a prescrição do procedimento (arts. 27.º e 27.º-A RGCO ou regime setorial) e se a notificação contém os elementos necessários à defesa (art. 50.º RGCO).
+- [ ] Se atuar mandatário, juntar procuração; numerar os documentos e indicar as testemunhas com moradas completas.
+- [ ] ⏰ Se a decisão final for desfavorável: impugnação judicial em 20 dias após o seu conhecimento, apresentada à autoridade que aplicou a coima (art. 59.º, n.º 3, RGCO); o prazo suspende-se aos sábados, domingos e feriados (art. 60.º RGCO).
+- [ ] Ponderar o pagamento voluntário/pelo mínimo quando o regime setorial o permita (confirmar os efeitos sobre a defesa); montantes das coimas: confirmar no diploma setorial e em `references/valores-2026.md`.

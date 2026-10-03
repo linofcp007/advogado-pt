@@ -5,7 +5,8 @@
      seguintes do Código Civil. Imposto do selo (verba 1.2 TGIS): herdeiros legitimários diretos
      (cônjuge/unido de facto, descendentes, ascendentes) isentos; restantes a 10% — confirmar em
      references/herancas.md e references/valores-2026.md (secção Heranças / Imposto do Selo).
-     As tornas estão sujeitas a IMT/IS conforme o caso — verificar. -->
+     As tornas estão sujeitas a IMT/IS conforme o caso — verificar.
+     Âmbito: nacional -->
 
 # ACORDO DE PARTILHA EXTRAJUDICIAL DE HERANÇA
 
@@ -53,7 +54,7 @@ Por o valor dos bens adjudicados a {{HERDEIRO_BENEFICIADO}} exceder o seu quinh�
 Os outorgantes declaram que, com as adjudicações e o pagamento das tornas acordadas, ficam integralmente preenchidos os respetivos quinhões, dando entre si plena e recíproca quitação, nada mais tendo a reclamar uns dos outros quanto à presente herança e partilha.
 
 ## Cláusula 6.ª (Obrigações fiscais)
-Os outorgantes declaram estar cientes das obrigações fiscais decorrentes da transmissão, designadamente a participação à Autoridade Tributária (Modelo 1 do Imposto do Selo, no prazo de 3 meses após o óbito) e o imposto do selo eventualmente devido, beneficiando da isenção legalmente aplicável aos herdeiros legitimários diretos.
+Os outorgantes declaram estar cientes das obrigações fiscais decorrentes da transmissão, designadamente a participação à Autoridade Tributária (Modelo 1 do Imposto do Selo, até ao final do 3.º mês seguinte ao do óbito — Art. 26.º CIS) e o imposto do selo eventualmente devido, beneficiando da isenção legalmente aplicável aos herdeiros legitimários diretos.
 <!-- Confirmar enquadramento e prazos em references/herancas.md e references/valores-2026.md
      (secção Heranças / Imposto do Selo). Não inventar taxas. -->
 
@@ -69,3 +70,15 @@ Os outorgantes:
 
 <!-- Formalizar por escritura pública / balcão Heranças do IRN. Havendo imóveis, promover o
      registo predial das adjudicações na Conservatória. -->
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ A participação às Finanças (Modelo 1 do Imposto do Selo) é devida até ao final do 3.º mês seguinte ao do óbito (art. 26.º CIS) — se já foi ultrapassado, regularizar antes de formalizar a partilha.
+- [ ] Confirmar que há habilitação de herdeiros prévia e que **todos** os herdeiros assinam; havendo herdeiro menor ou incapaz, obter a autorização legalmente exigida antes de outorgar (Ministério Público/tribunal — a confirmar).
+- [ ] Forma: escritura pública ou balcão Heranças do IRN (documento particular autenticado — a confirmar se admissível no caso); havendo imóveis, pedir o registo predial das adjudicações dentro do prazo de registo obrigatório (a confirmar no Código do Registo Predial).
+- [ ] Tornas e adjudicações acima do quinhão: verificar IMT e Imposto do Selo sobre o excesso (a confirmar no CIMT) e as taxas/isenções em `references/valores-2026.md` (secção Heranças / Imposto do Selo) — usar `calc_imposto_selo_heranca` / `calc_imt`.
+- [ ] Os valores atribuídos aos bens (nos imóveis, pelo menos o VPT da caderneta predial) devem ser coerentes com a relação de bens declarada à AT.

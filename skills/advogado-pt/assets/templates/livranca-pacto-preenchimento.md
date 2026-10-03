@@ -2,7 +2,8 @@
      contratos comerciais e financiamentos. Base: Lei Uniforme sobre Letras e Livranças (LULL).
      A livrança subscrita (e avalizada) constitui TÍTULO EXECUTIVO. O pacto de preenchimento define
      em que condições o credor pode preencher o valor/data em branco — é a salvaguarda do subscritor.
-     Ver references/garantias.md. -->
+     Ver references/garantias.md.
+     Âmbito: nacional -->
 
 # LIVRANÇA E PACTO DE PREENCHIMENTO
 
@@ -40,3 +41,15 @@ Entre **{{BENEFICIARIO_NOME}}** (credor/portador) e **{{SUBSCRITOR_NOME}}** (sub
 O Credor: __________________   O Subscritor: __________________   O Avalista: __________________
 
 <!-- O aval responsabiliza o avalista pessoalmente e de forma autónoma (não beneficia da excussão prévia da fiança). Atenção: avais de sócios furam a responsabilidade limitada da Lda. -->
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ As ações contra o subscritor (e o avalista) prescrevem em 3 anos a contar do vencimento (arts. 70.º e 77.º LULL) — a data de vencimento que se preencher marca o início desse prazo.
+- [ ] Usar o impresso oficial de livrança e garantir os requisitos do título (palavra "livrança", promessa de pagar, vencimento, lugar de pagamento, beneficiário, local e data de emissão, assinatura — art. 75.º LULL, a confirmar); a Parte I é só o texto a transpor.
+- [ ] Imposto do selo sobre a livrança: confirmar a verba da TGIS e o valor — não consta de `references/valores-2026.md` [VERIFICAR — valores-2026].
+- [ ] O pacto de preenchimento deve ser assinado pelo subscritor **e** pelos avalistas; se o subscritor for sociedade, assinam os gerentes com poderes, com indicação dessa qualidade.
+- [ ] Antes de preencher: interpelar subscritor e avalistas por carta registada com AR com a antecedência do ponto 3 e preencher só pelo valor efetivamente em dívida (o preenchimento abusivo pode ser oposto ao portador — a confirmar).

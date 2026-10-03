@@ -1,5 +1,7 @@
 # Estrangeiros — Imigração, Vistos e Contratação (Empregador/Contratante)
 
+> **Âmbito:** misto
+>
 > 🔗 Para o regime do contrato de trabalho, deveres do empregador e segurança social na ótica laboral, ver `references/laboral.md`. Para implicações fiscais (residência fiscal, retenções, estabelecimento estável) ver `references/fiscal.md`. Taxas/emolumentos e limiares, ver `references/valores-2026.md` (a confirmar).
 
 ## Legislação Base

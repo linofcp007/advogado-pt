@@ -1,6 +1,7 @@
 <!-- Template: Acordo de Tratamento de Dados / Data Processing Agreement (Art. 28.º RGPD).
      Usar quando o utilizador trata dados pessoais POR CONTA de um cliente (é subcontratante/processor),
-     ou quando contrata um subcontratante. Anexo ao contrato principal. -->
+     ou quando contrata um subcontratante. Anexo ao contrato principal.
+     Âmbito: ue -->
 
 # ACORDO DE TRATAMENTO DE DADOS / DATA PROCESSING AGREEMENT (DPA)
 
@@ -40,3 +41,16 @@ Aplica-se o regime do RGPD e a lei portuguesa (Lei 58/2019). Foro/arbitragem con
 {{LOCAL}}, {{DATA}}
 
 Controller: __________________   Processor: __________________
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Assinar antes de o subcontratante começar a tratar dados (idealmente com o contrato principal) e fixar em `{{HORAS}}` um prazo de notificação de violações compatível com as 72 horas que o responsável tem para notificar a CNPD (art. 33.º RGPD) — p. ex. 24 a 48 horas.
+- [ ] Forma escrita, admitindo-se a forma eletrónica (art. 28.º, n.º 9, RGPD); assinatura por representantes com poderes de ambas as partes.
+- [ ] Anexar a lista de sub-subcontratantes autorizados e a descrição das medidas técnicas e organizativas de segurança (art. 32.º RGPD) — o template não as inclui.
+- [ ] Transferências para fora do EEE: escolher o módulo certo das Cláusulas Contratuais-Tipo (Decisão (UE) 2021/914) ou confirmar a certificação do destinatário no EU-US Data Privacy Framework, e documentar a avaliação da transferência.
+- [ ] Acrescentar cláusula de prevalência linguística (PT ou EN) para o caso de divergência entre as versões.
+- [ ] Refletir o tratamento no registo de atividades de tratamento de cada parte (art. 30.º RGPD).

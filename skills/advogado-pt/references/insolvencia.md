@@ -1,5 +1,7 @@
 # Insolvência e Recuperação de Empresas
 
+> **Âmbito:** nacional
+>
 > 💶 **Valores, taxas, custas e prazos de natureza monetária:** consulta `references/valores-2026.md` (ponto único de verdade). Os prazos processuais abaixo são estruturais (fixados na lei); os montantes mudam.
 
 ## Legislação Base
@@ -15,7 +17,7 @@
 
 ### Reclamação de créditos
 - Prazo: o **fixado na sentença** de declaração de insolvência (até 30 dias — Art. 36.º al. j) CIRE)
-- Apresenta-se ao **administrador da insolvência** (AI), por requerimento (eletronicamente via Citius)
+- Apresenta-se ao **administrador da insolvência** (AI), por requerimento: com advogado, por via eletrónica; sem advogado, também por entrega em mão, e-mail ou carta registada (art. 128.º CIRE) — template `assets/templates/reclamacao-creditos-insolvencia.md`; passo a passo em `playbooks/cliente-insolvente.md`
 - Conteúdo: identificação do crédito, proveniência, data de vencimento, montante de capital e juros, garantias e natureza
 - Mesmo créditos já reconhecidos/constantes da contabilidade do devedor **devem ser reclamados**
 
@@ -40,7 +42,7 @@
 ### PER — Processo Especial de Revitalização (empresas/ENI)
 - **Pressuposto**: situação **económica difícil** ou insolvência **meramente iminente** — mas **não** insolvência atual (Art. 17.º-A CIRE)
 - Inicia-se por declaração escrita do devedor + um ou mais credores que representem % mínima de créditos, ou negociação prévia (RERE → PER)
-- **Efeito standstill**: com o despacho de nomeação do administrador judicial provisório, suspendem-se ações executivas e de insolvência pendentes/futuras durante as negociações
+- **Efeito standstill**: com o despacho de nomeação do administrador judicial provisório, suspendem-se as ações executivas e de insolvência pendentes/futuras por **4 meses**, prorrogáveis uma vez por **1 mês** (art. 17.º-E CIRE, na redação da Lei 9/2022)
 - Prazo de negociações: **2 meses**, prorrogável uma vez por 1 mês
 - **Plano de recuperação** aprovado pelos credores e homologado pelo juiz → vincula todos os credores (mesmo os que votaram contra)
 - Bloqueio: durante o PER o devedor não pode iniciar novo PER nos **2 anos** seguintes
@@ -80,6 +82,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Requerimento de reclamação de créditos na insolvência (para apresentar ao AI via Citius)
+- `assets/templates/reclamacao-creditos-insolvencia.md` — reclamação de créditos ao AI (insolvência) ou ao administrador judicial provisório (PER/PEAP)
 - Nota/guião de apresentação de PER (declaração do devedor e pressupostos a verificar)
 - Carta de credor a pedir constituição de garantia antes do agravamento

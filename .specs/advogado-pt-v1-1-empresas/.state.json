@@ -1,0 +1,964 @@
+{
+  "lang": "pt",
+  "size": "m",
+  "tracks": [
+    "core",
+    "tdd"
+  ],
+  "approvals": {
+    "classification": {
+      "at": "2026-10-03T17:05:44.201Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "59874143a8095582399ee1c0987d1f8e6ecb094f",
+      "batch": true
+    },
+    "requirements": {
+      "at": "2026-10-03T17:05:44.230Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "35fa7ec3a81c0f3376421a3de5854d58bacde9dc",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "batch": true
+    },
+    "design": {
+      "at": "2026-10-03T17:05:44.250Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "e71b554a91c184887290ca4f0e6364d9b297604e",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "batch": true
+    },
+    "test-plan": {
+      "at": "2026-10-03T17:05:44.278Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "db12932c6f37d94b5564c30ed4f7dbf1f681aa84",
+      "batch": true
+    },
+    "tests": {
+      "at": "2026-10-03T17:10:51.168Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    "tasks": {
+      "at": "2026-10-03T17:54:18.851Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "f77262bba0fbb45f95df8b479cbc976d09ce5902"
+    },
+    "execution": {
+      "at": "2026-10-03T17:54:21.836Z",
+      "by": "Carlos Pereira"
+    }
+  },
+  "createdAt": "2026-10-03T16:51:35.146Z",
+  "approvalHistory": [
+    {
+      "phase": "classification",
+      "at": "2026-10-03T17:05:44.201Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "59874143a8095582399ee1c0987d1f8e6ecb094f",
+      "batch": true,
+      "snapshot": ".history/classification@1.md"
+    },
+    {
+      "phase": "requirements",
+      "at": "2026-10-03T17:05:44.230Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "35fa7ec3a81c0f3376421a3de5854d58bacde9dc",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "batch": true,
+      "snapshot": ".history/requirements@1.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-03T17:05:44.250Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "e71b554a91c184887290ca4f0e6364d9b297604e",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "batch": true,
+      "snapshot": ".history/design@1.md"
+    },
+    {
+      "phase": "test-plan",
+      "at": "2026-10-03T17:05:44.278Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "db12932c6f37d94b5564c30ed4f7dbf1f681aa84",
+      "batch": true,
+      "snapshot": ".history/test-plan@1.md"
+    },
+    {
+      "phase": "tests",
+      "at": "2026-10-03T17:10:51.168Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    {
+      "phase": "tasks",
+      "at": "2026-10-03T17:10:51.197Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "6415ffbacef238b0a01cf645d43c4fca5e2c39b8",
+      "batch": true,
+      "snapshot": ".history/tasks@1.md"
+    },
+    {
+      "phase": "tasks",
+      "at": "2026-10-03T17:54:18.851Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "f77262bba0fbb45f95df8b479cbc976d09ce5902",
+      "snapshot": ".history/tasks@2.md"
+    },
+    {
+      "phase": "execution",
+      "at": "2026-10-03T17:54:21.836Z",
+      "by": "Carlos Pereira"
+    }
+  ],
+  "lastApprovedPhase": "execution",
+  "evidence": {
+    "1": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exitCode": 0,
+      "summary": "feat/v1.1-empresas; commit cbba0c0 com specs + testes a vermelho",
+      "at": "2026-10-03T17:12:12.111Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "git rev-parse --abbrev-ref HEAD",
+          "exitCode": 0,
+          "summary": "feat/v1.1-empresas; commit cbba0c0 com specs + testes a vermelho",
+          "at": "2026-10-03T17:12:12.111Z",
+          "observed": true
+        }
+      ],
+      "task": "[shared] Criar o branch `feat/v1.1-empresas` e fazer commit dos specs e dos testes a falhar (`test(v1.1): scaffold failing tests`)",
+      "verify": "git rev-parse --abbrev-ref HEAD"
+    },
+    "2": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(30|31)\" mcp-server/test/content.test.mjs",
+      "exitCode": 0,
+      "summary": "T-30, T-31 green (2/2); build OK",
+      "at": "2026-10-03T17:17:05.637Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(30|31)\" mcp-server/test/content.test.mjs",
+          "exitCode": 0,
+          "summary": "T-30, T-31 green (2/2); build OK",
+          "at": "2026-10-03T17:17:05.637Z",
+          "observed": true
+        }
+      ],
+      "task": "[shared] `content.ts`: `lerAmbito`, `listarComAmbito`, `formatarProcura`, `listar` sem README; `procurar` devolve `ambito`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(30|31)\" mcp-server/test/content.test.mjs"
+    },
+    "3": {
+      "command": "node --test --test-name-pattern=\"T-23\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-23 green (1/1); frase errada removida, nota arts. 323.º/325.º CC + opção 40 € (art. 7.º DL 62/2013)",
+      "at": "2026-10-03T17:12:14.075Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-23\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-23 green (1/1); frase errada removida, nota arts. 323.º/325.º CC + opção 40 € (art. 7.º DL 62/2013)",
+          "at": "2026-10-03T17:12:14.075Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1][P] Corrigir a frase da prescrição no template de cobrança formal (arts. 323.º/325.º CC)",
+      "verify": "node --test --test-name-pattern=\"T-23\" mcp-server/test/plugin.test.mjs"
+    },
+    "4": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(01|02|03|04|05|06|07|08)\" mcp-server/test/calculators.test.mjs",
+      "exitCode": 0,
+      "summary": "T-01..T-08 green (8/8). Nota: asserção civil do T-08 corrigida para a intenção do plano (nota dos 40 € só no comercial) — o caso de teste dava juros de 40,00 € por coincidência.",
+      "at": "2026-10-03T17:18:46.650Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(01|02|03|04|05|06|07|08)\" mcp-server/test/calculators.test.mjs",
+          "exitCode": 0,
+          "summary": "T-01..T-08 green (8/8). Nota: asserção civil do T-08 corrigida para a intenção do plano (nota dos 40 € só no comercial) — o caso de teste dava juros de 40,00 € por coincidência.",
+          "at": "2026-10-03T17:18:46.650Z",
+          "observed": true
+        }
+      ],
+      "task": "[US1] Juros em TS: tabela semestral, tramos, `comercial-geral`, estimada, erros, `memoriaJuros`; `calc_juros_mora` e `cli calc juros` com a memória",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(01|02|03|04|05|06|07|08)\" mcp-server/test/calculators.test.mjs"
+    },
+    "5": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py -k T18",
+      "exitCode": 0,
+      "summary": "T18: 7/7 OK (mesmos valores que T-01..T-08 em TS)",
+      "at": "2026-10-03T17:19:25.703Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py -k T18",
+          "exitCode": 0,
+          "summary": "T18: 7/7 OK (mesmos valores que T-01..T-08 em TS)",
+          "at": "2026-10-03T17:19:25.703Z",
+          "observed": true
+        }
+      ],
+      "task": "[US1][P] Juros em Python: a mesma tabela, `calcular_juros` com tramos e `memoria_juros`, CLI argparse com `comercial-geral`",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py -k T18"
+    },
+    "6": {
+      "command": "node --test --test-name-pattern=\"T-24\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-24 green (1/1); 2.º sem. 2026 9,40%/10,40% Aviso 16623/2026/2, 40 €, última atualização 2026-10",
+      "at": "2026-10-03T17:12:15.728Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-24\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-24 green (1/1); 2.º sem. 2026 9,40%/10,40% Aviso 16623/2026/2, 40 €, última atualização 2026-10",
+          "at": "2026-10-03T17:12:15.728Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1][P] `valores-2026.md`: taxas do 2.º semestre de 2026 (Aviso n.º 16623/2026/2), \"Última atualização\" 2026-10, nota de que a tabela histórica vive nas calculadoras",
+      "verify": "node --test --test-name-pattern=\"T-24\" mcp-server/test/plugin.test.mjs"
+    },
+    "7": {
+      "command": "node --test --test-name-pattern=\"T-22\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-22 green; âmbito nas 26 referências existentes (9 misto, 17 nacional)",
+      "at": "2026-10-03T17:28:46.939Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-22\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-22 green; âmbito nas 26 referências existentes (9 misto, 17 nacional)",
+          "at": "2026-10-03T17:28:46.939Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2][P] Linha `Âmbito:` nas 25 referências existentes",
+      "verify": "node --test --test-name-pattern=\"T-22\" mcp-server/test/plugin.test.mjs"
+    },
+    "8": {
+      "command": "node --test --test-name-pattern=\"T-(21|22)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-21, T-22 green; 28 templates existentes com Âmbito + 'Antes de enviar — verificar' (5-6 itens específicos cada)",
+      "at": "2026-10-03T17:28:49.087Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(21|22)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-21, T-22 green; 28 templates existentes com Âmbito + 'Antes de enviar — verificar' (5-6 itens específicos cada)",
+          "at": "2026-10-03T17:28:49.087Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2][P] Bloco `## Antes de enviar — verificar` específico de cada documento + `Âmbito:` nos 29 templates existentes",
+      "verify": "node --test --test-name-pattern=\"T-(21|22)\" mcp-server/test/plugin.test.mjs"
+    },
+    "9": {
+      "command": "node --test --test-name-pattern=\"T-28\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-28 green; README de templates + SKILL.md documentam {{CAMPO}}/[VERIFICAR]/(a confirmar) e entrega separada; listar_* com âmbito (tarefa 23)",
+      "at": "2026-10-03T17:29:23.265Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-28\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-28 green; README de templates + SKILL.md documentam {{CAMPO}}/[VERIFICAR]/(a confirmar) e entrega separada; listar_* com âmbito (tarefa 23)",
+          "at": "2026-10-03T17:29:23.265Z",
+          "observed": true
+        }
+      ],
+      "task": "[US2] Convenção `{{CAMPO}}` vs `[VERIFICAR]` e entrega separada do \"Antes de enviar\" no README de templates e no SKILL.md; `listar_*` mostram o âmbito",
+      "verify": "node --test --test-name-pattern=\"T-28\" mcp-server/test/plugin.test.mjs"
+    },
+    "10": {
+      "command": "node --test --test-name-pattern=\"T-(26|43)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-26, T-43 green; persona genérica em persona.ts, SKILL.md, AGENTS.md, GEMINI.md e 5 integrations; secção '## Perfil da Empresa'; prazos comuns corrigidos (impugnação 3 meses, RGCO 20 dias)",
+      "at": "2026-10-03T17:29:29.851Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(26|43)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-26, T-43 green; persona genérica em persona.ts, SKILL.md, AGENTS.md, GEMINI.md e 5 integrations; secção '## Perfil da Empresa'; prazos comuns corrigidos (impugnação 3 meses, RGCO 20 dias)",
+          "at": "2026-10-03T17:29:29.851Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Persona genérica nos 8 sítios + secção \"Perfil da Empresa\" no SKILL.md (projeto → geral, só o necessário, nunca dados de outra entidade, confirmar se > 12 meses)",
+      "verify": "node --test --test-name-pattern=\"T-(26|43)\" mcp-server/test/plugin.test.mjs"
+    },
+    "11": {
+      "command": "npm --prefix mcp-server run build && node --test mcp-server/test/perfil.test.mjs",
+      "exitCode": 0,
+      "summary": "T-37..T-40 green (4/4); tools obter_perfil_empresa e guardar_perfil_empresa registadas",
+      "at": "2026-10-03T17:20:19.057Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test mcp-server/test/perfil.test.mjs",
+          "exitCode": 0,
+          "summary": "T-37..T-40 green (4/4); tools obter_perfil_empresa e guardar_perfil_empresa registadas",
+          "at": "2026-10-03T17:20:19.057Z",
+          "observed": true
+        }
+      ],
+      "task": "[US3] `perfil.ts` (lerPerfil, guardarPerfil, textoPerguntasPerfil) + tools `obter_perfil_empresa` e `guardar_perfil_empresa`",
+      "verify": "npm --prefix mcp-server run build && node --test mcp-server/test/perfil.test.mjs"
+    },
+    "12": {
+      "command": "node --test --test-name-pattern=\"T-(41|42)\" mcp-server/test/hooks.test.mjs",
+      "exitCode": 0,
+      "summary": "T-41, T-42 green; suite de hooks 11/11; chamada real SessionStart OK (exit 0). Asserção de desatualização do T-41 apertada para a frase do aviso (a mensagem base já continha 'confirma prazos').",
+      "at": "2026-10-03T17:21:05.065Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(41|42)\" mcp-server/test/hooks.test.mjs",
+          "exitCode": 0,
+          "summary": "T-41, T-42 green; suite de hooks 11/11; chamada real SessionStart OK (exit 0). Asserção de desatualização do T-41 apertada para a frase do aviso (a mensagem base já continha 'confirma prazos').",
+          "at": "2026-10-03T17:21:05.065Z",
+          "observed": true
+        }
+      ],
+      "task": "[US3] Hook SessionStart com o perfil (`mensagemSessionStart`, fail-open)",
+      "verify": "node --test --test-name-pattern=\"T-(41|42)\" mcp-server/test/hooks.test.mjs"
+    },
+    "13": {
+      "command": "node --test --test-name-pattern=\"T-(22|29)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-22, T-29 green; 4 referências novas (contencioso-tributario, bancario, concorrencia, uniao-europeia) com citações verificadas no texto consolidado (pgdlisboa/portaldasfinancas/EUR-Lex)",
+      "at": "2026-10-03T17:43:32.506Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(22|29)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-22, T-29 green; 4 referências novas (contencioso-tributario, bancario, concorrencia, uniao-europeia) com citações verificadas no texto consolidado (pgdlisboa/portaldasfinancas/EUR-Lex)",
+          "at": "2026-10-03T17:43:32.506Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3][P] Referências novas: `contencioso-tributario`, `bancario`, `concorrencia`, `uniao-europeia`",
+      "verify": "node --test --test-name-pattern=\"T-(22|29)\" mcp-server/test/plugin.test.mjs"
+    },
+    "14": {
+      "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-21, T-22, T-29 green; 4 templates fiscais + playbook recebi-notificacao-at (CPPT/LGT/RGIT/RCPITA verificados)",
+      "at": "2026-10-03T17:43:34.682Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-21, T-22, T-29 green; 4 templates fiscais + playbook recebi-notificacao-at (CPPT/LGT/RGIT/RCPITA verificados)",
+          "at": "2026-10-03T17:43:34.682Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3][P] Fisco: templates `reclamacao-graciosa`, `direito-audicao-previa`, `pedido-pagamento-prestacoes-at`, `pedido-informacao-vinculativa` + playbook `recebi-notificacao-at`",
+      "verify": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs"
+    },
+    "15": {
+      "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-21, T-22, T-29 green; pacto social unipessoal, decisão do sócio único, contrato de desenvolvimento de software, cease and desist PI, notice and takedown (DSA/Lei 12-A/2026), checklist registo de marca",
+      "at": "2026-10-03T17:43:37.234Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-21, T-22, T-29 green; pacto social unipessoal, decisão do sócio único, contrato de desenvolvimento de software, cease and desist PI, notice and takedown (DSA/Lei 12-A/2026), checklist registo de marca",
+          "at": "2026-10-03T17:43:37.234Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3][P] Sociedades e PI: `pacto-social-unipessoal-lda`, `decisao-socio-unico`, `contrato-desenvolvimento-software`, `carta-cessacao-violacao-pi`, `notificacao-remocao-conteudo` + checklist `checklist-registo-marca`",
+      "verify": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs"
+    },
+    "16": {
+      "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-21, T-22, T-29 green; playbook cliente-insolvente + reclamação de créditos + pacto de não concorrência (art. 136.º CT, sem alteração pela Lei 13/2023) + código contra o assédio",
+      "at": "2026-10-03T17:43:40.001Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-21, T-22, T-29 green; playbook cliente-insolvente + reclamação de créditos + pacto de não concorrência (art. 136.º CT, sem alteração pela Lei 13/2023) + código contra o assédio",
+          "at": "2026-10-03T17:43:40.001Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3][P] Insolvência e laboral: playbook `cliente-insolvente` + templates `reclamacao-creditos-insolvencia`, `pacto-nao-concorrencia`, `politica-prevencao-assedio`",
+      "verify": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs"
+    },
+    "17": {
+      "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-21, T-22, T-29 green; 5 templates (livre resolução, banco, RAT, resposta ao titular, queixa à Comissão) + checklists loja online e concorrência",
+      "at": "2026-10-03T17:43:41.995Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-21, T-22, T-29 green; 5 templates (livre resolução, banco, RAT, resposta ao titular, queixa à Comissão) + checklists loja online e concorrência",
+          "at": "2026-10-03T17:43:41.995Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3][P] Consumo, banca, RGPD, UE e concorrência: `formulario-livre-resolucao`, `reclamacao-banco-operacao-nao-autorizada`, `registo-atividades-tratamento`, `resposta-pedido-titular-dados`, `queixa-comissao-europeia` + checklists `checklist-loja-online`, `checklist-concorrencia`",
+      "verify": "node --test --test-name-pattern=\"T-(21|22|29)\" mcp-server/test/plugin.test.mjs"
+    },
+    "18": {
+      "command": "node --test --test-name-pattern=\"T-(25|27)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-25, T-27 green; índices de templates/checklists/playbooks, Áreas no SKILL.md e README atualizados; commands /fisco, /insolvencia, /perfil; cross-refs dos commands verdes",
+      "at": "2026-10-03T17:43:53.923Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(25|27)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-25, T-27 green; índices de templates/checklists/playbooks, Áreas no SKILL.md e README atualizados; commands /fisco, /insolvencia, /perfil; cross-refs dos commands verdes",
+          "at": "2026-10-03T17:43:53.923Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Índices (READMEs de templates/checklists/playbooks, Áreas de Competência no SKILL.md, README.md) + commands `fisco`, `insolvencia`, `perfil`",
+      "verify": "node --test --test-name-pattern=\"T-(25|27)\" mcp-server/test/plugin.test.mjs"
+    },
+    "19": {
+      "command": "node --test --test-name-pattern=\"T-29\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-29 green. Revisão: confirmadas na fonte (por mim) CPPT 39.º/10 (15.º dia), RGIT 70.º/80.º (30 dias), CDADC 43.º/44.º, Cód. Contributivo 29.º/2, CIS 60.º/2, CT 167.º, Lei 12-A/2026, DL 62/2013 art. 7.º; 16 erros em conteúdo antigo corrigidos; marcas [VERIFICAR] substituídas onde o valor entrou em valores-2026 (33); 18 ficam [VERIFICAR] por não confirmados.",
+      "at": "2026-10-03T17:45:08.400Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-29\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-29 green. Revisão: confirmadas na fonte (por mim) CPPT 39.º/10 (15.º dia), RGIT 70.º/80.º (30 dias), CDADC 43.º/44.º, Cód. Contributivo 29.º/2, CIS 60.º/2, CT 167.º, Lei 12-A/2026, DL 62/2013 art. 7.º; 16 erros em conteúdo antigo corrigidos; marcas [VERIFICAR] substituídas onde o valor entrou em valores-2026 (33); 18 ficam [VERIFICAR] por não confirmados.",
+          "at": "2026-10-03T17:45:08.400Z",
+          "observed": true
+        }
+      ],
+      "task": "[US3] Revisão jurídica das citações determinantes (prazos ⏰, artigos) dos conteúdos novos contra fonte oficial; o que não se confirmar fica \"(a confirmar)\"",
+      "verify": "node --test --test-name-pattern=\"T-29\" mcp-server/test/plugin.test.mjs"
+    },
+    "20": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(09|10|11|12)\" mcp-server/test/calculators.test.mjs",
+      "exitCode": 0,
+      "summary": "T-09..T-12 green (4/4); tool calc_creditos_laborais, cli calc creditos, /despedir cita a tool; Python creditos_laborais.py escrito (T-19 na tarefa 22)",
+      "at": "2026-10-03T17:22:33.383Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(09|10|11|12)\" mcp-server/test/calculators.test.mjs",
+          "exitCode": 0,
+          "summary": "T-09..T-12 green (4/4); tool calc_creditos_laborais, cli calc creditos, /despedir cita a tool; Python creditos_laborais.py escrito (T-19 na tarefa 22)",
+          "at": "2026-10-03T17:22:33.383Z",
+          "observed": true
+        }
+      ],
+      "task": "[US4] Créditos laborais: `creditos.ts` + `creditos_laborais.py` + tool `calc_creditos_laborais` + `cli calc creditos`; `/despedir` cita a tool",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(09|10|11|12)\" mcp-server/test/calculators.test.mjs"
+    },
+    "21": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(13|14|15|16|17|35|36)\" mcp-server/test/calculators.test.mjs mcp-server/test/plugin.test.mjs mcp-server/test/cli.test.mjs",
+      "exitCode": 0,
+      "summary": "T-13..T-17, T-35, T-36 green (7/7); tool calc_legitima, cli calc legitima, /herancas cita a tool",
+      "at": "2026-10-03T17:23:40.781Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(13|14|15|16|17|35|36)\" mcp-server/test/calculators.test.mjs mcp-server/test/plugin.test.mjs mcp-server/test/cli.test.mjs",
+          "exitCode": 0,
+          "summary": "T-13..T-17, T-35, T-36 green (7/7); tool calc_legitima, cli calc legitima, /herancas cita a tool",
+          "at": "2026-10-03T17:23:40.781Z",
+          "observed": true
+        }
+      ],
+      "task": "[US4] Legítima: `legitima.ts` + `legitima.py` + tool `calc_legitima` + `cli calc legitima`; `/herancas` cita a tool",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(13|14|15|16|17|35|36)\" mcp-server/test/calculators.test.mjs mcp-server/test/plugin.test.mjs mcp-server/test/cli.test.mjs"
+    },
+    "22": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py -k T19 -k T20",
+      "exitCode": 0,
+      "summary": "T19 + T20: 7/7 OK (mesmos valores que TS)",
+      "at": "2026-10-03T17:23:45.585Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py -k T19 -k T20",
+          "exitCode": 0,
+          "summary": "T19 + T20: 7/7 OK (mesmos valores que TS)",
+          "at": "2026-10-03T17:23:45.585Z",
+          "observed": true
+        }
+      ],
+      "task": "[US4] Python: créditos e legítima verdes no unittest",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py -k T19 -k T20"
+    },
+    "23": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-31\" mcp-server/test/content.test.mjs",
+      "exitCode": 0,
+      "summary": "T-31 green; procurar_conteudo usa formatarProcura; listar_* com âmbito; smoke MCP 9/9 OK (21 tools; juros 532,29)",
+      "at": "2026-10-03T17:24:43.132Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-31\" mcp-server/test/content.test.mjs",
+          "exitCode": 0,
+          "summary": "T-31 green; procurar_conteudo usa formatarProcura; listar_* com âmbito; smoke MCP 9/9 OK (21 tools; juros 532,29)",
+          "at": "2026-10-03T17:24:43.132Z",
+          "observed": true
+        }
+      ],
+      "task": "[US5] `procurar_conteudo` agrupado por tipo com âmbito (usa `formatarProcura`)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-31\" mcp-server/test/content.test.mjs"
+    },
+    "24": {
+      "command": "node --test --test-name-pattern=\"T-(32|33)\" mcp-server/test/cli.test.mjs",
+      "exitCode": 0,
+      "summary": "T-32, T-33 green; cli prompt <nome> [--tipo template|playbook|checklist|referencia] sem depender do build",
+      "at": "2026-10-03T17:25:11.923Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(32|33)\" mcp-server/test/cli.test.mjs",
+          "exitCode": 0,
+          "summary": "T-32, T-33 green; cli prompt <nome> [--tipo template|playbook|checklist|referencia] sem depender do build",
+          "at": "2026-10-03T17:25:11.923Z",
+          "observed": true
+        }
+      ],
+      "task": "[US5] `cli prompt <nome> [--tipo …]` com persona do `persona.ts` + erro com lista",
+      "verify": "node --test --test-name-pattern=\"T-(32|33)\" mcp-server/test/cli.test.mjs"
+    },
+    "25": {
+      "command": "node --test --test-name-pattern=\"T-34\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-34 green; README: exemplo trabalhado, perfil da empresa, novas áreas/contagens/comandos, changelog v1.1.0",
+      "at": "2026-10-03T17:30:37.700Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-34\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-34 green; README: exemplo trabalhado, perfil da empresa, novas áreas/contagens/comandos, changelog v1.1.0",
+          "at": "2026-10-03T17:30:37.700Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5] README.md: secção \"Exemplo trabalhado\" + novas tools, commands e perfil",
+      "verify": "node --test --test-name-pattern=\"T-34\" mcp-server/test/plugin.test.mjs"
+    },
+    "26": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "73/73 pass (build + bundle + content regenerados; T-44, T-45, T-46 green); versão 1.1.0 nos 6 sítios + CHANGELOG; python build.py -> advogado-pt.skill (106 ficheiros)",
+      "at": "2026-10-03T17:45:33.022Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "73/73 pass (build + bundle + content regenerados; T-44, T-45, T-46 green); versão 1.1.0 nos 6 sítios + CHANGELOG; python build.py -> advogado-pt.skill (106 ficheiros)",
+          "at": "2026-10-03T17:45:33.022Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Bump 1.1.0 nos 6 sítios + CHANGELOG + `npm run build` (bundle + content) + `python build.py`",
+      "verify": "npm --prefix mcp-server test"
+    },
+    "27": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Python 31/31 OK; npm test 73/73; cli doctor OK; smoke MCP 9/9 OK (21 tools)",
+      "at": "2026-10-03T17:45:42.952Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Python 31/31 OK; npm test 73/73; cli doctor OK; smoke MCP 9/9 OK (21 tools)",
+          "at": "2026-10-03T17:45:42.952Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Suites completas (MCP + Python), `cli doctor` e smoke do servidor MCP",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py"
+    },
+    "28": {
+      "command": "node --test --test-name-pattern=\"T-(21|22|23)\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "3/3 green (estrutura intacta). Correções confirmadas na fonte: CDADC 43.º/44.º (pgdlisboa), Cód. Contributivo 29.º/2 (informador.pt), CIS 60.º/2 (informador.pt), CT 167.º (informador.pt), CPC 703.º/1/b, CIS 26.º, CPI DL 110/2018 arts. 313.º ss.",
+      "at": "2026-10-03T17:29:08.777Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(21|22|23)\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "3/3 green (estrutura intacta). Correções confirmadas na fonte: CDADC 43.º/44.º (pgdlisboa), Cód. Contributivo 29.º/2 (informador.pt), CIS 60.º/2 (informador.pt), CT 167.º (informador.pt), CPC 703.º/1/b, CIS 26.º, CPI DL 110/2018 arts. 313.º ss.",
+          "at": "2026-10-03T17:29:08.777Z",
+          "observed": true
+        }
+      ],
+      "task": "[US3] Corrigir 7 erros jurídicos em conteúdo existente detetados na revisão e confirmados na fonte: título executivo (art. 703.º/1/b CPC), comunicação do arrendamento (art. 60.º/2 CIS), segredos comerciais (CPI DL 110/2018), forma da cessão de direitos de autor (arts. 43.º/44.º CDADC), teletrabalho (art. 167.º CT), Modelo 1 IS (art. 26.º CIS), admissão à SS (art. 29.º/2 Cód. Contributivo)",
+      "verify": "node --test --test-name-pattern=\"T-(21|22|23)\" mcp-server/test/plugin.test.mjs"
+    }
+  },
+  "lastTickAt": "2026-10-03T17:45:42.952Z",
+  "ticks": {
+    "1": "2026-10-03T17:12:12.111Z",
+    "2": "2026-10-03T17:17:05.637Z",
+    "3": "2026-10-03T17:12:14.075Z",
+    "4": "2026-10-03T17:18:46.650Z",
+    "5": "2026-10-03T17:19:25.703Z",
+    "6": "2026-10-03T17:12:15.728Z",
+    "7": "2026-10-03T17:28:46.939Z",
+    "8": "2026-10-03T17:28:49.087Z",
+    "9": "2026-10-03T17:29:23.265Z",
+    "10": "2026-10-03T17:29:29.851Z",
+    "11": "2026-10-03T17:20:19.057Z",
+    "12": "2026-10-03T17:21:05.065Z",
+    "13": "2026-10-03T17:43:32.506Z",
+    "14": "2026-10-03T17:43:34.682Z",
+    "15": "2026-10-03T17:43:37.234Z",
+    "16": "2026-10-03T17:43:40.001Z",
+    "17": "2026-10-03T17:43:41.995Z",
+    "18": "2026-10-03T17:43:53.923Z",
+    "19": "2026-10-03T17:45:08.400Z",
+    "20": "2026-10-03T17:22:33.383Z",
+    "21": "2026-10-03T17:23:40.781Z",
+    "22": "2026-10-03T17:23:45.585Z",
+    "23": "2026-10-03T17:24:43.132Z",
+    "24": "2026-10-03T17:25:11.923Z",
+    "25": "2026-10-03T17:30:37.700Z",
+    "26": "2026-10-03T17:45:33.022Z",
+    "27": "2026-10-03T17:45:42.952Z",
+    "28": "2026-10-03T17:29:08.777Z"
+  },
+  "finishChecks": {
+    "mcp-test": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "73/73 pass",
+      "at": "2026-10-03T17:45:44.620Z",
+      "observed": false,
+      "check": "npm --prefix mcp-server test",
+      "code": "14b8732ea23022444a228c69e58bd41a685fd56b",
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "73/73 pass",
+          "at": "2026-10-03T17:45:44.620Z",
+          "observed": false
+        }
+      ]
+    },
+    "py-test": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "31/31 OK",
+      "at": "2026-10-03T17:45:44.620Z",
+      "observed": false,
+      "check": "python skills/advogado-pt/scripts/test_scripts.py",
+      "code": "14b8732ea23022444a228c69e58bd41a685fd56b",
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "31/31 OK",
+          "at": "2026-10-03T17:45:44.620Z",
+          "observed": false
+        }
+      ]
+    }
+  },
+  "finished": {
+    "at": "2026-10-03T17:54:26.650Z",
+    "files": {
+      "mcp-server/src/content.ts": "385455ee5a318228f9462d3f823b55eb0fa571ca",
+      "skills/advogado-pt/assets/templates/carta-cobranca-formal-registada.md": "c65571d3f29e10a094771083126cb87c3e5bc6f3",
+      "mcp-server/src/calculators/juros.ts": "beaac050ed847b8e914f7153d44e82a5ab265ac1",
+      "mcp-server/src/calculators/index.ts": "587bf68f3890967b161ce61898c4c10643a5eb71",
+      "mcp-server/src/tools.ts": "ae1ad073e0b391af29337c746155660f50d913a0",
+      "cli/advogado-pt.mjs": "5bd18ff9407b48bf138118736017f6a2bc20a171",
+      "skills/advogado-pt/scripts/juros_mora.py": "dda1de49bd8e9b2246d5432ac7134983222a30d7",
+      "skills/advogado-pt/references/valores-2026.md": "3255bcf50746beb4b5fcd58038f96fd4e6e28960",
+      "skills/advogado-pt/references/arrendamento.md": "35ea4a6394f7bb81868082eb9504e789043030e0",
+      "skills/advogado-pt/references/bancario.md": "9722b8c88a88566a91e91a318284cb2681493657",
+      "skills/advogado-pt/references/cobrancas.md": "d7d7cfed4cadbcf41cd12d056ad7a7f64fec76fa",
+      "skills/advogado-pt/references/concorrencia.md": "bc8822537861d5a9dd67b5253ea69181ed8810e2",
+      "skills/advogado-pt/references/consumo.md": "c277ee8402937533d4cf6cd6ab3c0edaa3c870fd",
+      "skills/advogado-pt/references/contencioso-tributario.md": "e306c765b53231493907f5d39f91f4dd3ec27958",
+      "skills/advogado-pt/references/contencioso.md": "d21fc21f89737382d1cc9ec9ced5910f25391ca9",
+      "skills/advogado-pt/references/contratacao-publica.md": "11ca8fd088ae6f0c6a6acb64b2379a3dc435eb3c",
+      "skills/advogado-pt/references/contratos-internacionais.md": "8c91417db32333f9b3af045386b6e35f23f503f6",
+      "skills/advogado-pt/references/contratos.md": "75c5b514e46c343ba2e89107afcba8203d2d58a4",
+      "skills/advogado-pt/references/digital-ue.md": "7157fc8bc5e4cb65133cffa49e3869858b5b8942",
+      "skills/advogado-pt/references/estrangeiros.md": "f03e58f2a7a69b943d05114b056883f816e165ef",
+      "skills/advogado-pt/references/familia.md": "8525f52e9fa900d209739b562ff0afddc2f9c8ca",
+      "skills/advogado-pt/references/fiscal-pessoal.md": "69b6f61d0f9549f2640d56ffb7392431cee2b9ee",
+      "skills/advogado-pt/references/fiscal.md": "167e493e80c93a7451bb41b63616cc094d944277",
+      "skills/advogado-pt/references/garantias.md": "3bcb115079e285fc0a54a4fe95b22363a9becae1",
+      "skills/advogado-pt/references/glossario-pt-en.md": "4863fabc744d6fb354ecbd1f6d1d513c023a41c3",
+      "skills/advogado-pt/references/herancas.md": "b70887d18273833f941cb44fae40d5ce5a7a87ca",
+      "skills/advogado-pt/references/imobiliario.md": "6533f8e05543873ab514ac42b5d6a424f123212b",
+      "skills/advogado-pt/references/insolvencia.md": "8e7e794bd1803d1c569b4a164c59ca3352b8bd67",
+      "skills/advogado-pt/references/laboral.md": "05a7644f7a2bdf5e8a746dec70d0bd82c8c80592",
+      "skills/advogado-pt/references/multas.md": "53c91d43b431f03acdf3a609aed063dec1c00252",
+      "skills/advogado-pt/references/penal-cibercrime.md": "c32b93238e683c5bdc36698380ae157c20e7c8e1",
+      "skills/advogado-pt/references/pi.md": "c318acdc6bcf7b813b1e6629410e3c840e75f24a",
+      "skills/advogado-pt/references/rgpd.md": "5584c2c803e6b029a0365d92a8958fb72d32cac3",
+      "skills/advogado-pt/references/seguros.md": "4edf86187ef4f7b41f8926aadb58e4586b36bc50",
+      "skills/advogado-pt/references/societario.md": "a6de9228e992ac1d4eda997c851b07c9d871c1d9",
+      "skills/advogado-pt/references/sucessorio-internacional.md": "58f034f82d97e2a8cef7e5bbbbe362316855c27d",
+      "skills/advogado-pt/references/uniao-europeia.md": "c4980dedaa9e48813b769ac3a68c1a704f4d02ce",
+      "skills/advogado-pt/assets/templates/README.md": "b4d602bc4e22aa4ebb653216d461ce7a79a62b41",
+      "skills/advogado-pt/assets/templates/acordo-pagamento-faseado.md": "d28af85643d9c7d988aa9a38c63486da531956b6",
+      "skills/advogado-pt/assets/templates/acordo-partilha-extrajudicial.md": "e30a78cd71b8f12f7858d794e070bba52b3efb86",
+      "skills/advogado-pt/assets/templates/acordo-revogacao.md": "01790439475987fb880937987be53ae05c3b8135",
+      "skills/advogado-pt/assets/templates/acordo-teletrabalho.md": "44a631b455be98931fd072ab797714748b40a45d",
+      "skills/advogado-pt/assets/templates/carta-atualizacao-renda.md": "f3b15d299731b6dd70971e1f733d881e4fbbc2e6",
+      "skills/advogado-pt/assets/templates/carta-cessacao-violacao-pi.md": "6ede6b333d73e8758a3e881feaacc2ae16537fab",
+      "skills/advogado-pt/assets/templates/carta-cobranca-amigavel.md": "fd0616c92a8e6f281d63ce8bcf774a82d2911a60",
+      "skills/advogado-pt/assets/templates/carta-despedimento-justa-causa.md": "3028a88f260c21399d9f4227f364ae82e3124cd0",
+      "skills/advogado-pt/assets/templates/carta-interpelacao-incumprimento.md": "2c298687747dd0a692728e86230eaeb05e04dfaa",
+      "skills/advogado-pt/assets/templates/carta-participacao-sinistro.md": "eef810b713fa4d564d4e2b5205f475c7f2aafc47",
+      "skills/advogado-pt/assets/templates/contrato-arrendamento-habitacional.md": "d2177bc57e5ff01bbeda0e544d3e42efc27f170d",
+      "skills/advogado-pt/assets/templates/contrato-desenvolvimento-software.md": "8cd19f33d33fa489f82db4736d47f44c2c1bdd40",
+      "skills/advogado-pt/assets/templates/contrato-prestacao-servicos-ti.md": "172b62e97e6042e94951ba7fd7fcacd44675402d",
+      "skills/advogado-pt/assets/templates/contrato-promessa-compra-venda.md": "acd2e97e039c07547549da0ac4968497ec6ac5af",
+      "skills/advogado-pt/assets/templates/contrato-trabalho-sem-termo.md": "556e721272e8d0536ee4ec7019842b2a273f3e88",
+      "skills/advogado-pt/assets/templates/contrato-trabalho-termo-certo.md": "65f99226b4cc3587d7d501ee5207718f91a3c46d",
+      "skills/advogado-pt/assets/templates/cookie-policy.md": "68bb979efd50438818bea7637a598c972b607bfa",
+      "skills/advogado-pt/assets/templates/decisao-socio-unico.md": "156232c863edca06e8ac8e53846a3e184ac3d714",
+      "skills/advogado-pt/assets/templates/defesa-contraordenacao.md": "d4d23fab1e122af8847d8986a1839fc2c07b557c",
+      "skills/advogado-pt/assets/templates/direito-audicao-previa.md": "a1962ba2387ae1a553705cefea5f2712f563db6b",
+      "skills/advogado-pt/assets/templates/dpa-bilingue.md": "85f99a8ac098dc9b0c5a025c153c95014ce56103",
+      "skills/advogado-pt/assets/templates/formulario-livre-resolucao.md": "b73101543ae78eb244b10bcadf4caa20426148ce",
+      "skills/advogado-pt/assets/templates/intake-caso.md": "65334af17464082efd69861864b174cfcc881190",
+      "skills/advogado-pt/assets/templates/livranca-pacto-preenchimento.md": "251be2bcbd9c35553963c4a21cf1de70a563f8bd",
+      "skills/advogado-pt/assets/templates/nda-bilingue.md": "b2c5c28f896c4888c453601962691f14017ed49b",
+      "skills/advogado-pt/assets/templates/nota-de-culpa.md": "867c239b3681286e6cd90b61f87b7fb2c83b9dea",
+      "skills/advogado-pt/assets/templates/notificacao-remocao-conteudo.md": "dece8e6d92c6947c0899350af3846fd6614cfe7b",
+      "skills/advogado-pt/assets/templates/notificacao-resolucao-contrato.md": "a87fb18762b3f1e8a6dbc497da7e8c30da3c5e12",
+      "skills/advogado-pt/assets/templates/pacto-nao-concorrencia.md": "dd19b3e823c5454bb7f062f42e0f657afc10f237",
+      "skills/advogado-pt/assets/templates/pacto-social-unipessoal-lda.md": "c7a01242fa2f7e196464e11cff51c4308d7bf4a5",
+      "skills/advogado-pt/assets/templates/parecer-juridico.md": "e2fc082b538d35bf7ba9b9ad4b0293788a3b4952",
+      "skills/advogado-pt/assets/templates/pedido-informacao-vinculativa.md": "ed1416963e7158f800afe85c80133edb72c910fb",
+      "skills/advogado-pt/assets/templates/pedido-pagamento-prestacoes-at.md": "85ed7652fb3e8f5c17a1da607a0a39cdaba8b53b",
+      "skills/advogado-pt/assets/templates/politica-prevencao-assedio.md": "0be22bbed968f52aa09b70bf9e459793b48c6498",
+      "skills/advogado-pt/assets/templates/politica-privacidade.md": "7dfd32b505c6f4fe564ac9636a7cb18e3090c65f",
+      "skills/advogado-pt/assets/templates/queixa-comissao-europeia.md": "3deed4f58fc4d7de61f6d0efda95f4e95d58f4e5",
+      "skills/advogado-pt/assets/templates/reclamacao-banco-operacao-nao-autorizada.md": "b5e507e77d33bcf0ca4942eb99af3710b3676c52",
+      "skills/advogado-pt/assets/templates/reclamacao-creditos-insolvencia.md": "a89efdc6da1bbd8f2ffdc03fccfc1e30da66408e",
+      "skills/advogado-pt/assets/templates/reclamacao-graciosa.md": "02ecaa8614084c0860ee55d687552ecaac1dad11",
+      "skills/advogado-pt/assets/templates/reconhecimento-divida.md": "13f1de3b908ef403ee07c29445c71dcc4ece0a8b",
+      "skills/advogado-pt/assets/templates/registo-atividades-tratamento.md": "ce174535c427fcb3ba09d39d68aa0c0c64974a85",
+      "skills/advogado-pt/assets/templates/requerimento-injuncao.md": "4d3a68689381f7abf1a119f7741ffe6b69ee69e6",
+      "skills/advogado-pt/assets/templates/resposta-pedido-titular-dados.md": "218ceafef0c0ad420012390ec4036c6aebf394da",
+      "skills/advogado-pt/assets/templates/termos-condicoes-loja-online.md": "6f8ef0cc44a1de54b0719d62444ef42fa9348141",
+      "skills/advogado-pt/SKILL.md": "485687a2e3b2a6426ab5d7038eb351ba10ac8bd2",
+      "mcp-server/src/persona.ts": "0d8b51f699be74af15dfde380d183b1c773a0d23",
+      "AGENTS.md": "2f54a7ab5bc1de56fa1942e641c84e9571b3cad3",
+      "GEMINI.md": "ee31efd25fd531de2a1ac3403162e6467cc3f6ec",
+      "integrations/README.md": "1797586ab47f82279d603c009a9238ef31f4b7a2",
+      "integrations/chatgpt/README.md": "39fd1eabf1767489dcf2f5d5de527c6b73f6ae93",
+      "integrations/chatgpt/custom-gpt-instructions.md": "8f9991734295dca54b96ea71784c61a7893634c2",
+      "integrations/claude-desktop/README.md": "3ad1e302af6b945f039683549154347206eb1388",
+      "integrations/claude-desktop/claude_desktop_config.snippet.json": "53af344333ea974949116d2c45cbb6ffc2ef327d",
+      "integrations/codex/AGENTS.md": "b2b23d069dd2a5d3c2a96dbfd393946b83cfa725",
+      "integrations/codex/README.md": "235c19f120298420b0417b9f0fe1e428c7305716",
+      "integrations/codex/config.snippet.toml": "2cda868848242d04474d4f25da80a23a25f1f14b",
+      "integrations/cursor/README.md": "be7d32a517f4fc15add704a41cd82bcce27f3718",
+      "integrations/cursor/mcp.json": "53af344333ea974949116d2c45cbb6ffc2ef327d",
+      "integrations/cursor/rules/advogado-pt.mdc": "52f7e56f93b9623290a78cebd9ec2de83c09cdf6",
+      "integrations/gemini-cli/GEMINI.md": "8fa60933ef6545ed0452a17cb6b51ee78d90b43e",
+      "integrations/gemini-cli/README.md": "33f4e240df3dc7a9339a081e54f2463c2411104b",
+      "integrations/gemini-cli/settings.snippet.json": "53af344333ea974949116d2c45cbb6ffc2ef327d",
+      "integrations/windsurf/.windsurfrules": "7c27d4a4b2b86fb31e94d86ee99a9cdbaa38a119",
+      "integrations/windsurf/README.md": "4c3fa0b7f83c8cbc8105b59d2dc62692fa218395",
+      "integrations/windsurf/mcp_config.json": "53af344333ea974949116d2c45cbb6ffc2ef327d",
+      "mcp-server/src/perfil.ts": "1dc1d87a9d160480187a686c5a1c30cf9463cec5",
+      "hooks/advogado-hook.mjs": "200afb25030fb8bb4fc96e76528947d11e695ad3",
+      "skills/advogado-pt/playbooks/README.md": "c85eb9b1d8648b1f8b0fb602ad6a4a50aafc5b2f",
+      "skills/advogado-pt/playbooks/cliente-insolvente.md": "41d00f797afebe5e39ef05343d30093c9702f8c0",
+      "skills/advogado-pt/playbooks/cliente-nao-paga.md": "32189d42f07737171c8e082269cab76c77893171",
+      "skills/advogado-pt/playbooks/comprar-imovel.md": "b9390e61fde252895eb03aef00407ca00ac95302",
+      "skills/advogado-pt/playbooks/data-breach.md": "4b1c2f08e2edcb803c227726b0303ec7df780352",
+      "skills/advogado-pt/playbooks/quero-despedir.md": "582a6c8dde7c9825f48b6727addab159e696279e",
+      "skills/advogado-pt/playbooks/recebi-citacao-ou-injuncao.md": "5766159894e77312a8671954517a15e9bb24512d",
+      "skills/advogado-pt/playbooks/recebi-notificacao-at.md": "2619369c03f6aca111cf24c4fe11de75a9164e1e",
+      "skills/advogado-pt/assets/checklists/README.md": "cf20c3a4747f95257ed1908b2277b32672e26ac1",
+      "skills/advogado-pt/assets/checklists/checklist-concorrencia.md": "687e2f9e6d29cc74786521285bf63a8b531ee2d7",
+      "skills/advogado-pt/assets/checklists/checklist-constituicao-sociedade.md": "5c5e8e415d286e31b5c549655c04178bfaa27afd",
+      "skills/advogado-pt/assets/checklists/checklist-due-diligence-imovel.md": "d92a6a450fb23f2e196622a26fb6dd8f1f4e04fb",
+      "skills/advogado-pt/assets/checklists/checklist-loja-online.md": "b860762fd1a46b394a0d0f989de71dfc602b9c92",
+      "skills/advogado-pt/assets/checklists/checklist-predeploy-legal.md": "67157c0a308487c83b8edf340e028ce096471a97",
+      "skills/advogado-pt/assets/checklists/checklist-registo-marca.md": "b45f4d7ace32ac00534e50ea676ad725b539a77a",
+      "skills/advogado-pt/assets/checklists/checklist-revisao-contrato.md": "e26ee56f6ee3b40da356d1b8e18a9effcb25b914",
+      "skills/advogado-pt/assets/checklists/checklist-rgpd.md": "4d61e12cbbdaced55207c32fbf6c94b706892465",
+      "README.md": "62c344db1bfdfd11cd25425727650442f363f55b",
+      "commands/adv.md": "0254fcd7bd1e650ba8a7350d6ff9012c2b429fc1",
+      "commands/advogado.md": "62de1cb5983cc2f700a365642ceb2c3f6774a345",
+      "commands/arrendamento.md": "994f47de7bc608799e8d8e58323c1566479d98cd",
+      "commands/citacao.md": "d93bb746639e92db9fdc6a0767ff260a3594b1dc",
+      "commands/cobrar.md": "12462e369d395306941b5f4692f615950aa6f73c",
+      "commands/comprar-imovel.md": "3ed44d53fbf9b5da51508abd79532e7564efc446",
+      "commands/contrato.md": "a0eb8f8863b59743be3361c12c5f85a786b0c285",
+      "commands/defesa.md": "203b37c45b60e83502ca2cde8afe68ecef2aa605",
+      "commands/despedir.md": "4e48faa9c10c960fb1c1c80adb3744efeede923d",
+      "commands/doctor.md": "55ec9f58b219f49de0f95fc4948b2d2d72902560",
+      "commands/fisco.md": "b00b2b46e9bcd84e26db9b9a5813746791ab7b59",
+      "commands/herancas.md": "bc70d52c8a454073406b03c8d19529889b40b3cf",
+      "commands/imt.md": "4ab7564cdad30a617637f52e8b37001fe6e8d0c5",
+      "commands/insolvencia.md": "870d4a2797c98c8342b0fb12202d7a051324df7c",
+      "commands/intake.md": "a6cd2fca5d0e9f28ff67ed5035cb72608c049f37",
+      "commands/juros.md": "0611f6731f3890304d2950b9377bc3b763b345ee",
+      "commands/parecer.md": "565c4dc06538d84e539ad3ec601ed2fb6ea31de6",
+      "commands/perfil.md": "ac09d909a4e05881c20dd3a0da09ddd8c70b6230",
+      "commands/prazo.md": "3233d684daee3c644eeafd56a5fb953e496f64ed",
+      "commands/prescricao.md": "952e2d2ddf84f22dd2c8f3d70734520dbfa13346",
+      "commands/procurar.md": "d76daa7a9b854509afcc327a26f21675d91bd547",
+      "commands/referencia.md": "d0dec2a0ee38ffdc18b85390f95dbf8c9415dde7",
+      "commands/rgpd.md": "0e43c46fb4e5416bccd7f36152c8d8ce655b74cd",
+      "commands/sociedade.md": "7d830a7e3ee34db012a32f9087ea5575492969a8",
+      "commands/template.md": "3fbd2f5d311725654e28cd28312f31af7caa0154",
+      "mcp-server/src/calculators/creditos.ts": "6dbd82d56d05ace6faa93e572e10e1a843dce696",
+      "skills/advogado-pt/scripts/creditos_laborais.py": "f6514e6f680462e3a65d4b108ea4672c53b5ad57",
+      "mcp-server/src/calculators/legitima.ts": "7e4597b92590eded36e058d9c4fdabd9c540591f",
+      "skills/advogado-pt/scripts/legitima.py": "3bc6ab4837ba9ad3d9f19f9bb39c7e9c1456a515",
+      ".claude-plugin/plugin.json": "54938c0e27c1d0a63966af503096b7cff6d9f603",
+      ".claude-plugin/marketplace.json": "301e5c4f96a0a76b8018e73c212b72556a2de847",
+      "package.json": "536628f4205f916109caf4b261a631b62cf40eec",
+      "mcp-server/package.json": "940f9cc3bff20667e41b1df30b040b8ece82e598",
+      "mcp-server/src/index.ts": "6d2830fdcb38721965bd60ac38cb0194990cacbd",
+      "CHANGELOG.md": "586801935c8f03f811f9d2ed27f2d4d712ae0725",
+      "mcp-server/dist/index.js": "608bcda3cc8ff4bfec1388a126925a66aabfca9b",
+      "mcp-server/content/BUNDLE.json": "4a8ae7e33b6427b8ada3c4aebdcfec926df8ef32",
+      "mcp-server/content/SKILL.md": "485687a2e3b2a6426ab5d7038eb351ba10ac8bd2",
+      "mcp-server/content/checklists/README.md": "cf20c3a4747f95257ed1908b2277b32672e26ac1",
+      "mcp-server/content/checklists/checklist-concorrencia.md": "687e2f9e6d29cc74786521285bf63a8b531ee2d7",
+      "mcp-server/content/checklists/checklist-constituicao-sociedade.md": "5c5e8e415d286e31b5c549655c04178bfaa27afd",
+      "mcp-server/content/checklists/checklist-due-diligence-imovel.md": "d92a6a450fb23f2e196622a26fb6dd8f1f4e04fb",
+      "mcp-server/content/checklists/checklist-loja-online.md": "b860762fd1a46b394a0d0f989de71dfc602b9c92",
+      "mcp-server/content/checklists/checklist-predeploy-legal.md": "67157c0a308487c83b8edf340e028ce096471a97",
+      "mcp-server/content/checklists/checklist-registo-marca.md": "b45f4d7ace32ac00534e50ea676ad725b539a77a",
+      "mcp-server/content/checklists/checklist-revisao-contrato.md": "e26ee56f6ee3b40da356d1b8e18a9effcb25b914",
+      "mcp-server/content/checklists/checklist-rgpd.md": "4d61e12cbbdaced55207c32fbf6c94b706892465",
+      "mcp-server/content/playbooks/README.md": "c85eb9b1d8648b1f8b0fb602ad6a4a50aafc5b2f",
+      "mcp-server/content/playbooks/cliente-insolvente.md": "41d00f797afebe5e39ef05343d30093c9702f8c0",
+      "mcp-server/content/playbooks/cliente-nao-paga.md": "32189d42f07737171c8e082269cab76c77893171",
+      "mcp-server/content/playbooks/comprar-imovel.md": "b9390e61fde252895eb03aef00407ca00ac95302",
+      "mcp-server/content/playbooks/data-breach.md": "4b1c2f08e2edcb803c227726b0303ec7df780352",
+      "mcp-server/content/playbooks/quero-despedir.md": "582a6c8dde7c9825f48b6727addab159e696279e",
+      "mcp-server/content/playbooks/recebi-citacao-ou-injuncao.md": "5766159894e77312a8671954517a15e9bb24512d",
+      "mcp-server/content/playbooks/recebi-notificacao-at.md": "2619369c03f6aca111cf24c4fe11de75a9164e1e",
+      "mcp-server/content/references/arrendamento.md": "35ea4a6394f7bb81868082eb9504e789043030e0",
+      "mcp-server/content/references/bancario.md": "9722b8c88a88566a91e91a318284cb2681493657",
+      "mcp-server/content/references/cobrancas.md": "d7d7cfed4cadbcf41cd12d056ad7a7f64fec76fa",
+      "mcp-server/content/references/concorrencia.md": "bc8822537861d5a9dd67b5253ea69181ed8810e2",
+      "mcp-server/content/references/consumo.md": "c277ee8402937533d4cf6cd6ab3c0edaa3c870fd",
+      "mcp-server/content/references/contencioso-tributario.md": "e306c765b53231493907f5d39f91f4dd3ec27958",
+      "mcp-server/content/references/contencioso.md": "d21fc21f89737382d1cc9ec9ced5910f25391ca9",
+      "mcp-server/content/references/contratacao-publica.md": "11ca8fd088ae6f0c6a6acb64b2379a3dc435eb3c",
+      "mcp-server/content/references/contratos-internacionais.md": "8c91417db32333f9b3af045386b6e35f23f503f6",
+      "mcp-server/content/references/contratos.md": "75c5b514e46c343ba2e89107afcba8203d2d58a4",
+      "mcp-server/content/references/digital-ue.md": "7157fc8bc5e4cb65133cffa49e3869858b5b8942",
+      "mcp-server/content/references/estrangeiros.md": "f03e58f2a7a69b943d05114b056883f816e165ef",
+      "mcp-server/content/references/familia.md": "8525f52e9fa900d209739b562ff0afddc2f9c8ca",
+      "mcp-server/content/references/fiscal-pessoal.md": "69b6f61d0f9549f2640d56ffb7392431cee2b9ee",
+      "mcp-server/content/references/fiscal.md": "167e493e80c93a7451bb41b63616cc094d944277",
+      "mcp-server/content/references/garantias.md": "3bcb115079e285fc0a54a4fe95b22363a9becae1",
+      "mcp-server/content/references/glossario-pt-en.md": "4863fabc744d6fb354ecbd1f6d1d513c023a41c3",
+      "mcp-server/content/references/herancas.md": "b70887d18273833f941cb44fae40d5ce5a7a87ca",
+      "mcp-server/content/references/imobiliario.md": "6533f8e05543873ab514ac42b5d6a424f123212b",
+      "mcp-server/content/references/insolvencia.md": "8e7e794bd1803d1c569b4a164c59ca3352b8bd67",
+      "mcp-server/content/references/laboral.md": "05a7644f7a2bdf5e8a746dec70d0bd82c8c80592",
+      "mcp-server/content/references/multas.md": "53c91d43b431f03acdf3a609aed063dec1c00252",
+      "mcp-server/content/references/penal-cibercrime.md": "c32b93238e683c5bdc36698380ae157c20e7c8e1",
+      "mcp-server/content/references/pi.md": "c318acdc6bcf7b813b1e6629410e3c840e75f24a",
+      "mcp-server/content/references/rgpd.md": "5584c2c803e6b029a0365d92a8958fb72d32cac3",
+      "mcp-server/content/references/seguros.md": "4edf86187ef4f7b41f8926aadb58e4586b36bc50",
+      "mcp-server/content/references/societario.md": "a6de9228e992ac1d4eda997c851b07c9d871c1d9",
+      "mcp-server/content/references/sucessorio-internacional.md": "58f034f82d97e2a8cef7e5bbbbe362316855c27d",
+      "mcp-server/content/references/uniao-europeia.md": "c4980dedaa9e48813b769ac3a68c1a704f4d02ce",
+      "mcp-server/content/references/valores-2026.md": "3255bcf50746beb4b5fcd58038f96fd4e6e28960",
+      "mcp-server/content/templates/README.md": "b4d602bc4e22aa4ebb653216d461ce7a79a62b41",
+      "mcp-server/content/templates/acordo-pagamento-faseado.md": "d28af85643d9c7d988aa9a38c63486da531956b6",
+      "mcp-server/content/templates/acordo-partilha-extrajudicial.md": "e30a78cd71b8f12f7858d794e070bba52b3efb86",
+      "mcp-server/content/templates/acordo-revogacao.md": "01790439475987fb880937987be53ae05c3b8135",
+      "mcp-server/content/templates/acordo-teletrabalho.md": "44a631b455be98931fd072ab797714748b40a45d",
+      "mcp-server/content/templates/carta-atualizacao-renda.md": "f3b15d299731b6dd70971e1f733d881e4fbbc2e6",
+      "mcp-server/content/templates/carta-cessacao-violacao-pi.md": "6ede6b333d73e8758a3e881feaacc2ae16537fab",
+      "mcp-server/content/templates/carta-cobranca-amigavel.md": "fd0616c92a8e6f281d63ce8bcf774a82d2911a60",
+      "mcp-server/content/templates/carta-cobranca-formal-registada.md": "c65571d3f29e10a094771083126cb87c3e5bc6f3",
+      "mcp-server/content/templates/carta-despedimento-justa-causa.md": "3028a88f260c21399d9f4227f364ae82e3124cd0",
+      "mcp-server/content/templates/carta-interpelacao-incumprimento.md": "2c298687747dd0a692728e86230eaeb05e04dfaa",
+      "mcp-server/content/templates/carta-participacao-sinistro.md": "eef810b713fa4d564d4e2b5205f475c7f2aafc47",
+      "mcp-server/content/templates/contrato-arrendamento-habitacional.md": "d2177bc57e5ff01bbeda0e544d3e42efc27f170d",
+      "mcp-server/content/templates/contrato-desenvolvimento-software.md": "8cd19f33d33fa489f82db4736d47f44c2c1bdd40",
+      "mcp-server/content/templates/contrato-prestacao-servicos-ti.md": "172b62e97e6042e94951ba7fd7fcacd44675402d",
+      "mcp-server/content/templates/contrato-promessa-compra-venda.md": "acd2e97e039c07547549da0ac4968497ec6ac5af",
+      "mcp-server/content/templates/contrato-trabalho-sem-termo.md": "556e721272e8d0536ee4ec7019842b2a273f3e88",
+      "mcp-server/content/templates/contrato-trabalho-termo-certo.md": "65f99226b4cc3587d7d501ee5207718f91a3c46d",
+      "mcp-server/content/templates/cookie-policy.md": "68bb979efd50438818bea7637a598c972b607bfa",
+      "mcp-server/content/templates/decisao-socio-unico.md": "156232c863edca06e8ac8e53846a3e184ac3d714",
+      "mcp-server/content/templates/defesa-contraordenacao.md": "d4d23fab1e122af8847d8986a1839fc2c07b557c",
+      "mcp-server/content/templates/direito-audicao-previa.md": "a1962ba2387ae1a553705cefea5f2712f563db6b",
+      "mcp-server/content/templates/dpa-bilingue.md": "85f99a8ac098dc9b0c5a025c153c95014ce56103",
+      "mcp-server/content/templates/formulario-livre-resolucao.md": "b73101543ae78eb244b10bcadf4caa20426148ce",
+      "mcp-server/content/templates/intake-caso.md": "65334af17464082efd69861864b174cfcc881190",
+      "mcp-server/content/templates/livranca-pacto-preenchimento.md": "251be2bcbd9c35553963c4a21cf1de70a563f8bd",
+      "mcp-server/content/templates/nda-bilingue.md": "b2c5c28f896c4888c453601962691f14017ed49b",
+      "mcp-server/content/templates/nota-de-culpa.md": "867c239b3681286e6cd90b61f87b7fb2c83b9dea",
+      "mcp-server/content/templates/notificacao-remocao-conteudo.md": "dece8e6d92c6947c0899350af3846fd6614cfe7b",
+      "mcp-server/content/templates/notificacao-resolucao-contrato.md": "a87fb18762b3f1e8a6dbc497da7e8c30da3c5e12",
+      "mcp-server/content/templates/pacto-nao-concorrencia.md": "dd19b3e823c5454bb7f062f42e0f657afc10f237",
+      "mcp-server/content/templates/pacto-social-unipessoal-lda.md": "c7a01242fa2f7e196464e11cff51c4308d7bf4a5",
+      "mcp-server/content/templates/parecer-juridico.md": "e2fc082b538d35bf7ba9b9ad4b0293788a3b4952",
+      "mcp-server/content/templates/pedido-informacao-vinculativa.md": "ed1416963e7158f800afe85c80133edb72c910fb",
+      "mcp-server/content/templates/pedido-pagamento-prestacoes-at.md": "85ed7652fb3e8f5c17a1da607a0a39cdaba8b53b",
+      "mcp-server/content/templates/politica-prevencao-assedio.md": "0be22bbed968f52aa09b70bf9e459793b48c6498",
+      "mcp-server/content/templates/politica-privacidade.md": "7dfd32b505c6f4fe564ac9636a7cb18e3090c65f",
+      "mcp-server/content/templates/queixa-comissao-europeia.md": "3deed4f58fc4d7de61f6d0efda95f4e95d58f4e5",
+      "mcp-server/content/templates/reclamacao-banco-operacao-nao-autorizada.md": "b5e507e77d33bcf0ca4942eb99af3710b3676c52",
+      "mcp-server/content/templates/reclamacao-creditos-insolvencia.md": "a89efdc6da1bbd8f2ffdc03fccfc1e30da66408e",
+      "mcp-server/content/templates/reclamacao-graciosa.md": "02ecaa8614084c0860ee55d687552ecaac1dad11",
+      "mcp-server/content/templates/reconhecimento-divida.md": "13f1de3b908ef403ee07c29445c71dcc4ece0a8b",
+      "mcp-server/content/templates/registo-atividades-tratamento.md": "ce174535c427fcb3ba09d39d68aa0c0c64974a85",
+      "mcp-server/content/templates/requerimento-injuncao.md": "4d3a68689381f7abf1a119f7741ffe6b69ee69e6",
+      "mcp-server/content/templates/resposta-pedido-titular-dados.md": "218ceafef0c0ad420012390ec4036c6aebf394da",
+      "mcp-server/content/templates/termos-condicoes-loja-online.md": "6f8ef0cc44a1de54b0719d62444ef42fa9348141"
+    }
+  }
+}

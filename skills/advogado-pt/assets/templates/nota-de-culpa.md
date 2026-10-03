@@ -4,7 +4,8 @@
      fundamentar o despedimento. Entregar por carta registada com AR ou contra recibo. Antes,
      ponderar a prescrição da infração (Art. 329.º CT) e o caráter recente dos factos (60 dias).
      Em micro/pequena empresa ou face a representante sindical, há especificidades (suspensão,
-     comissão de trabalhadores) — confirmar. -->
+     comissão de trabalhadores) — confirmar.
+     Âmbito: nacional -->
 
 # NOTA DE CULPA
 
@@ -52,3 +53,15 @@ _______________________________
 
 <!-- Recebido pelo trabalhador em ___/___/______. Assinatura: _______________________
      (ou enviar por carta registada com aviso de receção e guardar comprovativos). -->
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Instaurar o procedimento nos 60 dias seguintes ao conhecimento da infração pelo empregador ou superior com poder disciplinar (art. 329.º, n.º 2, CT) e dentro de 1 ano da sua prática (art. 329.º, n.º 1, CT — a confirmar); a notificação da nota de culpa interrompe estes prazos (art. 353.º, n.º 3, CT).
+- [ ] Entregar em mão contra recibo datado ou por carta registada com AR; enviar cópia à comissão de trabalhadores e, sendo representante sindical, à associação sindical (art. 353.º, n.º 2, CT — a confirmar).
+- [ ] ⏰ O trabalhador tem 10 dias úteis, a contar da receção, para consultar o processo e responder (art. 355.º CT); depois das diligências e pareceres, a decisão (`carta-despedimento-justa-causa.md`) tem de ser proferida em 30 dias (art. 357.º CT).
+- [ ] Descrever os factos de forma circunstanciada (data, hora, local, conduta): factos que não constem da nota de culpa não podem fundamentar o despedimento.
+- [ ] Suspensão preventiva (art. 354.º CT): manter a retribuição e fundamentar; trabalhadora grávida, puérpera ou lactante exige parecer prévio da CITE (a confirmar) e a microempresa tem regras próprias.

@@ -1,5 +1,7 @@
 # Fiscalidade Pessoal (IRS)
 
+> **Âmbito:** nacional
+>
 > 💶 Os limites de deduções, escalões e benefícios abaixo **mudam anualmente** — confirma os valores do ano em `references/valores-2026.md` ou no Portal das Finanças antes de citar.
 
 ## Legislação Base
@@ -33,7 +35,7 @@
 ## Reclamações e Recursos
 - **Reclamação graciosa**: 120 dias após notificação da liquidação
 - **Revisão do ato tributário**: 4 anos (Art. 78º LGT)
-- **Impugnação judicial**: 90 dias (CPPT)
+- **Impugnação judicial**: 3 meses (Art. 102.º, n.º 1, CPPT) — ver `references/contencioso-tributario.md`
 - **Garantia bancária/caução**: para suspender execução fiscal
 
 ## Dicas Práticas

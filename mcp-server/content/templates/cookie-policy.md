@@ -1,6 +1,7 @@
 <!-- Template: Política de Cookies para website/app. Base: Lei 41/2004 (ePrivacy) + RGPD.
      Cookies não essenciais só após consentimento prévio (banner com opções granulares).
-     Cross-ref: assets/templates/politica-privacidade.md e references/digital-ue.md. -->
+     Cross-ref: assets/templates/politica-privacidade.md e references/digital-ue.md.
+     Âmbito: misto -->
 
 # Política de Cookies
 
@@ -32,3 +33,15 @@ Os cookies têm prazos de validade variáveis (de sessão a {{ex. 12 meses}}); o
 
 ## 7. Mais informação
 O tratamento de dados pessoais associado rege-se pela nossa [Política de Privacidade]({{URL_PRIVACIDADE}}). Autoridade de controlo: **CNPD** (www.cnpd.pt).
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Publicar antes de ativar cookies não essenciais e rever sempre que se acrescente uma ferramenta (analítica, pixel, vídeo incorporado), atualizando a data.
+- [ ] Banner com consentimento prévio, livre e granular por categoria, "rejeitar" tão fácil como "aceitar" e sem opções pré-assinaladas (Lei 41/2004, art. 5.º — a confirmar; arts. 4.º, ponto 11, e 7.º RGPD).
+- [ ] Preencher a tabela com os cookies reais (nome, fornecedor, finalidade, duração) a partir de uma análise técnica do site — não publicar com exemplos genéricos.
+- [ ] Guardar registo dos consentimentos: o responsável tem de os conseguir demonstrar (art. 7.º, n.º 1, RGPD).
+- [ ] Ferramentas de terceiros fora do EEE (ex.: analítica norte-americana): confirmar a base da transferência (Data Privacy Framework ou cláusulas-tipo) e refleti-la na `politica-privacidade.md`.

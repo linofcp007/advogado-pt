@@ -1,5 +1,7 @@
 # Direito Societário (ENI → Lda e Gestão de Quotas)
 
+> **Âmbito:** nacional
+>
 > 💶 **Capital social, custos de constituição, taxas de registo e limiares fiscais:** consulta `references/valores-2026.md`. A vertente fiscal da transição está em `references/fiscal.md`.
 
 ## Legislação Base
@@ -38,7 +40,7 @@
 - **Suprimentos** (Arts. 243.º-245.º CSC): empréstimos do sócio à sociedade com caráter de permanência; **restituíveis** (dívida da sociedade), mas **subordinados** em insolvência (ver `insolvencia.md`)
 
 ## Distribuição de Lucros e Reservas
-- **Reserva legal**: constituição obrigatória de pelo menos 5% do lucro até atingir 20% do capital (Arts. 218.º, 295.º CSC)
+- **Reserva legal**: constituição obrigatória de pelo menos 5% do lucro até atingir 20% do capital, nunca menos de **2.500 €** nas Lda (Arts. 218.º, n.º 2, e 295.º CSC) — com capital de 1 €, a reserva tem de chegar aos 2.500 €
 - Só são distribuíveis lucros depois de cobertas perdas e dotada a reserva legal (Art. 33.º CSC)
 - Deliberação de distribuição por **ata**; retenção na fonte sobre dividendos — ver `references/fiscal.md`
 

@@ -60,5 +60,5 @@
 ## Obrigações periódicas
 - [ ] Prestação de contas anual (aprovação até 31 de março)
 - [ ] IES — Informação Empresarial Simplificada (entrega anual, meados de julho)
-- [ ] Reserva legal (mínimo 5% do lucro até 20% do capital)
+- [ ] Reserva legal (5% do lucro até 20% do capital, com o mínimo de 2.500 € nas Lda — art. 218.º, n.º 2, CSC)
 - [ ] Calendarizar deliberações por ata (distribuição de lucros, etc.)

@@ -1,5 +1,7 @@
 # Sucessões Internacionais (Transfronteiriças)
 
+> **Âmbito:** misto
+>
 > 🔗 Para o regime sucessório interno (ordem de herdeiros, legítima, habilitação, partilha, repúdio), ver `references/herancas.md`. Para o **imposto do selo** sobre transmissões gratuitas e isenções (cônjuge/descendentes/ascendentes), ver `references/herancas.md` e `references/valores-2026.md`.
 
 ## Legislação Base

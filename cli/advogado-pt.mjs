@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-// CLI universal do advogado-pt. Duas funções:
+// CLI universal do advogado-pt:
 //   advogado-pt mcp-config <host> [--npx]   -> imprime o bloco de config MCP pronto a colar
 //   advogado-pt calc <calc> [args]          -> corre uma calculadora jurídica
+//   advogado-pt prompt <nome> [--tipo …]    -> exporta um template/playbook como prompt para outras IAs
 // Sem dependências externas (só node: builtins + as calculadoras compiladas do mcp-server).
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "..");
@@ -92,13 +93,10 @@ async function calc(args) {
     }
     case "juros": {
       const fim = str(rest, "--fim", "");
-      const r = c.calcularJuros(
-        num(rest, "--capital", 0),
-        new Date(str(rest, "--inicio", "")),
-        fim ? new Date(fim) : new Date(),
-        str(rest, "--tipo", "comercial")
-      );
-      console.log(`Juros: ${fmt(r.juros)} | Total: ${fmt(r.total)} (${r.dias} dias)`);
+      const capital = num(rest, "--capital", 0);
+      const tipo = str(rest, "--tipo", "comercial");
+      const r = c.calcularJuros(capital, new Date(str(rest, "--inicio", "")), fim ? new Date(fim) : new Date(), tipo);
+      console.log(c.memoriaJuros(capital, r, tipo));
       break;
     }
     case "prazo": {
@@ -141,10 +139,122 @@ async function calc(args) {
       console.log(`IRS rendimento tributável: ${fmt(r.tributavel)} (coeficiente ${r.coeficiente})`);
       break;
     }
+    case "creditos": {
+      const r = c.calcularCreditosCessacao({
+        retribuicaoBase: num(rest, "--retribuicao", 0),
+        diuturnidades: num(rest, "--diuturnidades", 0),
+        dataAdmissao: new Date(str(rest, "--admissao", "")),
+        dataCessacao: new Date(str(rest, "--cessacao", "")),
+        feriasVencidasNaoGozadas: num(rest, "--ferias-vencidas", 0),
+        subsidioFeriasVencidoEmFalta: rest.includes("--sf-em-falta"),
+      });
+      console.log(
+        `Proporcionais (férias + SF + SN): ${fmt(3 * r.proporcionalFerias)} (${r.diasServicoAno}/${r.diasAno} dias)\n` +
+          `Férias vencidas: ${fmt(r.feriasVencidas)} | SF vencido: ${fmt(r.subsidioFeriasVencido)}\n` +
+          `TOTAL BRUTO: ${fmt(r.total)}` +
+          (r.limite245n3 ? "\n-> Atenção: limite do art. 245.º, n.º 3, CT (contrato até 12 meses)." : "")
+      );
+      break;
+    }
+    case "legitima": {
+      const r = c.calcularLegitima({
+        bens: num(rest, "--bens", 0),
+        doacoes: num(rest, "--doacoes", 0),
+        dividas: num(rest, "--dividas", 0),
+        conjuge: rest.includes("--conjuge"),
+        filhos: num(rest, "--filhos", 0),
+        ascendentes: str(rest, "--ascendentes", "nenhum"),
+      });
+      console.log(
+        `Valor da herança (art. 2162.º CC): ${fmt(r.valorHeranca)}\n` +
+          `Legítima: ${fmt(r.legitima)} | Quota disponível: ${fmt(r.quotaDisponivel)} (${r.quotaDisponivelPct.toFixed(2).replace(".", ",")}%)\n` +
+          r.partes.map((p) => `  - ${p.herdeiro}: ${fmt(p.valor)}`).join("\n")
+      );
+      break;
+    }
     default:
-      console.error("calc <imt|juros|prazo|prescricao|compensacao|custas|selo|irs> [--flags]");
+      console.error("calc <imt|juros|prazo|prescricao|compensacao|custas|selo|irs|creditos|legitima> [--flags]");
       process.exit(1);
   }
+}
+
+// --- prompt: exporta conteúdo como prompt autocontido para outras IAs ---------
+// Lê os .md da skill (fonte versionada) e a persona de mcp-server/src/persona.ts —
+// não depende do build do MCP, por isso funciona logo após clonar/instalar.
+const SKILL_DIR = resolve(repo, "skills", "advogado-pt");
+const TIPOS_PROMPT = {
+  template: { dir: ["assets", "templates"], rotulo: "TEMPLATE" },
+  playbook: { dir: ["playbooks"], rotulo: "PLAYBOOK" },
+  checklist: { dir: ["assets", "checklists"], rotulo: "CHECKLIST" },
+  referencia: { dir: ["references"], rotulo: "REFERÊNCIA" },
+};
+const TAREFA_PROMPT = {
+  template:
+    "TAREFA: Redige o documento a partir do template abaixo. Pergunta-me os dados em falta para cada {{CAMPO}} " +
+    "(um bloco de perguntas de cada vez). Marca [VERIFICAR] tudo o que não consigas confirmar. Entrega o documento " +
+    "final limpo (sem os comentários <!-- -->) e, SEPARADO do documento, a lista \"Antes de enviar — verificar\".",
+  playbook:
+    "TAREFA: Segue o playbook abaixo como árvore de decisão. Faz-me as perguntas de cada passo, uma de cada vez, " +
+    "destaca os prazos com ⏰ e no fim dá-me os próximos passos e os documentos a preparar.",
+  checklist:
+    "TAREFA: Percorre a checklist abaixo comigo, item a item. Para cada item diz-me se está cumprido, o que falta e " +
+    "o risco de não o fazer. No fim, resume as prioridades.",
+  referencia:
+    "TAREFA: Usa a referência abaixo como base para responder às minhas perguntas sobre esta área. Cita os diplomas " +
+    "e artigos que lá estão; se precisares de algo que não esteja, diz que é preciso confirmar em dre.pt.",
+};
+
+function lerPersona() {
+  try {
+    const src = readFileSync(resolve(repo, "mcp-server", "src", "persona.ts"), "utf8");
+    const m = /PERSONA\s*=\s*`([\s\S]*?)`;/.exec(src);
+    if (m) return m[1];
+  } catch {
+    /* segue para o fallback */
+  }
+  return (
+    "És um assistente jurídico especializado em DIREITO PORTUGUÊS. RIGOR: nunca inventes artigos ou jurisprudência; " +
+    "confirma valores do ano corrente; não substituis advogado inscrito na Ordem dos Advogados."
+  );
+}
+
+function promptCmd(args) {
+  const nome = (args.find((a) => !a.startsWith("--")) || "").replace(/\.md$/i, "");
+  const tipo = str(args, "--tipo", "template");
+  const def = TIPOS_PROMPT[tipo];
+  if (!def) {
+    console.error(`Tipo desconhecido: ${tipo}. Opções: ${Object.keys(TIPOS_PROMPT).join(", ")}.`);
+    process.exit(1);
+  }
+  const dir = resolve(SKILL_DIR, ...def.dir);
+  const disponiveis = existsSync(dir)
+    ? readdirSync(dir)
+        .filter((f) => f.endsWith(".md") && f.toLowerCase() !== "readme.md")
+        .map((f) => f.slice(0, -3))
+        .sort()
+    : [];
+  if (!nome || /[\\/]|\.\./.test(nome) || !disponiveis.includes(nome)) {
+    console.error(
+      `${nome ? `'${nome}' não encontrado` : "Indica um nome"} (${tipo}). Disponíveis:\n- ${disponiveis.join("\n- ")}`
+    );
+    process.exit(1);
+  }
+  const conteudo = readFileSync(resolve(dir, `${nome}.md`), "utf8");
+  console.log(
+    [
+      "=== advogado-pt -> prompt para colar noutra IA (ChatGPT, Gemini, Copilot, …) ===",
+      "",
+      lerPersona(),
+      "",
+      "PERFIL DA MINHA EMPRESA: pergunta-me primeiro a forma jurídica, o setor, o n.º de trabalhadores e o volume de negócios, se forem relevantes.",
+      "",
+      TAREFA_PROMPT[tipo],
+      "",
+      `--- ${def.rotulo}: ${nome} ---`,
+      conteudo.trim(),
+      `--- FIM DO ${def.rotulo} ---`,
+    ].join("\n")
+  );
 }
 
 function doctor() {
@@ -177,13 +287,19 @@ Uso:
       Imprime o bloco de configuração MCP (node + caminho local) para esse cliente.
 
   advogado-pt calc imt --valor 250000 [--tipo hpp|secundaria] [--jovem]
-  advogado-pt calc juros --capital 5000 --inicio 2025-03-01 [--fim YYYY-MM-DD] [--tipo comercial|civil]
+  advogado-pt calc juros --capital 5000 --inicio 2025-03-01 [--fim YYYY-MM-DD] [--tipo comercial|comercial-geral|civil]
+      (memória de cálculo por tramos semestrais)
   advogado-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo uteis|corridos]
   advogado-pt calc prescricao --inicio 2025-01-15 --tipo creditos-comerciais
   advogado-pt calc compensacao --retribuicao 1500 --anos 4 [--modalidade sem-termo]
   advogado-pt calc custas --valor 8000
   advogado-pt calc selo --valor 100000 [--herdeiro conjuge|descendente|ascendente|outro] [--imovel --vpt N]
   advogado-pt calc irs --rendimento 60000 [--tipo mercadorias|servicos-151|servicos-outros|propriedade-intelectual]
+  advogado-pt calc creditos --retribuicao 1500 --admissao 2020-03-01 --cessacao 2026-06-30 [--diuturnidades N] [--ferias-vencidas DIAS] [--sf-em-falta]
+  advogado-pt calc legitima --bens 300000 [--doacoes N] [--dividas N] [--conjuge] [--filhos N] [--ascendentes nenhum|pais|outros]
+
+  advogado-pt prompt <nome> [--tipo template|playbook|checklist|referencia]
+      Imprime um prompt autocontido (persona + rigor + conteúdo) para colar noutra IA.
 
   advogado-pt doctor
       Verifica pré-requisitos (Node, build do MCP, conteúdo empacotado).
@@ -194,6 +310,7 @@ async function main() {
   const [cmd, ...args] = process.argv.slice(2);
   if (cmd === "mcp-config") return mcpConfig(args);
   if (cmd === "calc") return calc(args);
+  if (cmd === "prompt") return promptCmd(args);
   if (cmd === "doctor") return doctor();
   console.log(HELP);
 }

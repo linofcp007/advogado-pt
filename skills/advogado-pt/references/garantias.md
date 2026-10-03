@@ -1,5 +1,7 @@
 # Garantias das Obrigações e do Crédito
 
+> **Âmbito:** nacional
+>
 > 🔗 Para a execução de garantias e graduação de créditos em insolvência, ver `references/insolvencia.md`; para cobrança e títulos executivos na recuperação de dívidas, ver `references/cobrancas.md`. Emolumentos de registo (hipoteca) e juros, ver `references/valores-2026.md` (a confirmar).
 
 ## Legislação Base

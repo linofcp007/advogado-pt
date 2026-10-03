@@ -1,9 +1,10 @@
 <!-- Template: contrato de arrendamento urbano para habitação. Base: NRAU (Lei 6/2006, de 27 fev)
      e Arts. 1022.º e seguintes do Código Civil. Forma escrita obrigatória (Art. 1069.º CC).
      Prazo certo mínimo de 1 ano para habitação permanente; renovação automática salvo oposição.
-     Comunicar/registar o contrato nas Finanças no prazo de 30 dias (Modelo 2 do Imposto do Selo;
+     Comunicar/registar o contrato nas Finanças até ao fim do mês seguinte ao do início do arrendamento (Art. 60.º, n.º 2, CIS; Modelo 2 do Imposto do Selo;
      recibos de renda eletrónicos). Caução máxima e coeficiente de atualização: confirmar em
-     references/valores-2026.md. -->
+     references/valores-2026.md.
+     Âmbito: nacional -->
 
 # CONTRATO DE ARRENDAMENTO URBANO PARA HABITAÇÃO
 
@@ -45,7 +46,7 @@ São da responsabilidade do Arrendatário os consumos de água, eletricidade, g�
 As obras de conservação ordinária e as reparações decorrentes do uso normal cabem ao Senhorio. O Arrendatário não pode realizar obras ou benfeitorias sem autorização escrita do Senhorio, respondendo pelos danos que cause ao imóvel para além do desgaste normal (Arts. 1073.º e 1074.º CC).
 
 ## Cláusula 9.ª (Comunicação às Finanças)
-O Senhorio obriga-se a comunicar/declarar o presente contrato à Autoridade Tributária no prazo de **30 dias** a contar da sua celebração, nos termos legais.
+O Senhorio obriga-se a comunicar o presente contrato à Autoridade Tributária até ao **fim do mês seguinte ao do início do arrendamento**, nos termos do Art. 60.º do Código do Imposto do Selo.
 
 ## Cláusula 10.ª (Resolução)
 O contrato pode ser resolvido por qualquer das partes com fundamento em incumprimento que, pela sua gravidade ou reiteração, torne inexigível a manutenção do arrendamento (Art. 1083.º CC), designadamente a falta de pagamento da renda, a utilização do imóvel para fim diverso do contratado ou a realização de obras não autorizadas. A falta de pagamento de renda confere ao Senhorio o direito de resolução nos termos e prazos do Art. 1083.º, n.º 3, do CC.
@@ -58,3 +59,15 @@ O presente contrato é feito em duplicado, ficando um exemplar na posse de cada 
 {{LOCAL}}, {{DATA}}
 
 O Senhorio: _______________________   O Arrendatário: _______________________
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Comunicar o contrato à AT (Modelo 2 do Imposto do Selo) até ao fim do mês seguinte ao do início do arrendamento (art. 60.º, n.º 2, CIS) e liquidar o imposto do selo (taxa em `references/valores-2026.md`).
+- [ ] Forma escrita (art. 1069.º CC), em duplicado, identificando a licença de utilização e o certificado energético válidos; anexar inventário e fotografias datadas do estado do imóvel.
+- [ ] Caução e rendas antecipadas dentro do limite legal (art. 1076.º CC; ver `references/valores-2026.md`).
+- [ ] Prazo e renovação: a oposição do senhorio à primeira renovação só produz efeitos 3 anos após a celebração (art. 1097.º, n.º 3, CC); confirmar o período supletivo de renovação e o estado atual das medidas da Lei 56/2023 (Mais Habitação) (a confirmar).
+- [ ] Emitir recibos de renda eletrónicos todos os meses e declarar as rendas no IRS (categoria F).

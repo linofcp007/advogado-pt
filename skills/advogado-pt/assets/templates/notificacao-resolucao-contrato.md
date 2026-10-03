@@ -1,6 +1,7 @@
 <!-- Template: declaração de resolução do contrato por incumprimento definitivo (Art. 432.º e ss. CC).
      Usar DEPOIS de interpelação admonitória sem resposta (ver carta-interpelacao-incumprimento.md).
-     A resolução opera por declaração à outra parte (Art. 436.º CC). Enviar por registada com AR. -->
+     A resolução opera por declaração à outra parte (Art. 436.º CC). Enviar por registada com AR.
+     Âmbito: nacional -->
 
 {{REMETENTE_NOME}}
 {{REMETENTE_MORADA}} — NIF {{REMETENTE_NIF}}
@@ -32,3 +33,15 @@ Com os melhores cumprimentos,
 
 _______________________________
 {{REMETENTE_NOME}}
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Enviar só depois de terminado o prazo suplementar da interpelação (contado da receção da carta anterior — ver o AR) e de confirmar que não houve cumprimento entretanto.
+- [ ] A resolução opera por declaração à outra parte (art. 436.º CC): carta registada com AR para a morada contratual; guardar talão, AR e cópia.
+- [ ] Rever o contrato antes de enviar: cláusula resolutiva expressa, pré-avisos, efeitos da cessação, devolução de dados/equipamentos e lei/foro aplicáveis.
+- [ ] Efeitos: nos contratos de execução continuada ou periódica, a resolução, em regra, não abrange as prestações já efetuadas (art. 434.º, n.º 2, CC — a confirmar); ajustar os pedidos de restituição e indemnização.
+- [ ] Quantificar a indemnização (ou indicar "a liquidar") e, havendo créditos em dinheiro, calcular juros com `calc_juros_mora` (taxas em `references/valores-2026.md`).

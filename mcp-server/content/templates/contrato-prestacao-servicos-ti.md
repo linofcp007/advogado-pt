@@ -1,6 +1,7 @@
 <!-- Template: Contrato de prestação de serviços de tecnologia/consultoria (Art. 1154.º CC).
      Pontos críticos para TI: propriedade do output, SLA, cap de responsabilidade, exit plan, RGPD.
-     Para clientes internacionais, ver também references/contratos-internacionais.md. -->
+     Para clientes internacionais, ver também references/contratos-internacionais.md.
+     Âmbito: misto -->
 
 # CONTRATO DE PRESTAÇÃO DE SERVIÇOS
 
@@ -21,7 +22,7 @@ Preço: {{VALOR}} {{REGIME: por projeto / por hora / mensal}}, acrescido de IVA 
 
 ## 5. Propriedade intelectual
 {{OPCAO_PI:
- (A) Cessão: o Prestador cede ao Cliente, após pagamento integral, os direitos patrimoniais de autor sobre os entregáveis desenvolvidos especificamente para este contrato.
+ (A) Cessão: o Prestador cede ao Cliente, após pagamento integral, os direitos patrimoniais de autor sobre os entregáveis desenvolvidos especificamente para este contrato. A cessão parcial exige documento escrito com reconhecimento notarial das assinaturas (Art. 43.º CDADC) e a transmissão total e definitiva exige escritura pública com identificação da obra e do preço (Art. 44.º CDADC), sob pena de nulidade — [VERIFICAR] a forma adotada; para software feito por encomenda ver também o Art. 14.º CDADC e o DL 252/94 (a confirmar).
  (B) Licença: o Prestador concede ao Cliente uma licença {{exclusiva/não exclusiva}} de uso, retendo a titularidade.}}
 O Prestador mantém a titularidade de ferramentas, bibliotecas e know-how preexistentes (*background IP*), concedendo ao Cliente o direito de uso necessário ao funcionamento dos entregáveis.
 
@@ -53,3 +54,16 @@ O Prestador: __________________   O Cliente: __________________
 ---
 **ANEXO I — Âmbito, Entregáveis e Prazos**
 {{DETALHE_ANEXO}}
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Preencher prazos concretos: dias de aceitação (cl. 3), prazo de pagamento (cl. 4) e prazo de sanação (cl. 11); entre empresas, o prazo de pagamento tem limites no DL 62/2013 (a confirmar) e os juros comerciais estão em `references/valores-2026.md`.
+- [ ] Propriedade intelectual (cl. 5): a transmissão total e definitiva de direitos patrimoniais de autor exige escritura pública (art. 44.º CDADC) e a parcial documento escrito com reconhecimento notarial das assinaturas (art. 43.º, n.º 2, CDADC) — a cláusula já o diz; confirmar a aplicação ao software (DL 252/94) e, na dúvida, preferir a opção (B) licença ou o template `contrato-desenvolvimento-software.md`.
+- [ ] Dados pessoais: se o Prestador tratar dados por conta do Cliente, assinar em simultâneo o `dpa-bilingue.md` (art. 28.º RGPD).
+- [ ] Cap de responsabilidade (cl. 8): não cobre dolo nem culpa grave (art. 809.º CC e art. 18.º DL 446/85 — a confirmar) e deve estar alinhado com o capital da RC profissional (`references/seguros.md`).
+- [ ] Cliente estrangeiro: rever lei aplicável e foro/arbitragem (`references/contratos-internacionais.md`) e IVA/retenção na fonte (`references/fiscal.md`); numa versão bilingue, acrescentar cláusula de prevalência linguística.
+- [ ] Assinatura por quem obriga cada parte (certidão permanente ou registo do cliente); a assinatura eletrónica qualificada (Cartão de Cidadão/Chave Móvel Digital) serve à distância.
