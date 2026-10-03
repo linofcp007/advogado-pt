@@ -131,7 +131,7 @@ Vê ou atualiza com `/perfil` (ou as tools `obter_perfil_empresa` / `guardar_per
 ## Privacidade e dados guardados
 
 - **Que dados e onde:** só ficheiros de texto no teu computador, na pasta `.juridico-pt/` do projeto (perfil, perfis de clientes, `prazos.md`, calendários `.ics`, documentos exportados) e em `~/.juridico-pt/` (perfil geral). O plugin não tem servidores, não envia estes ficheiros a ninguém e não tem telemetria.
-- **Por quanto tempo:** os prazos cumpridos há mais de **12 meses** saem na escrita seguinte; perfis, calendários e documentos ficam até os apagares; um perfil sem atualização há mais de 12 meses é assinalado no início da sessão.
+- **Por quanto tempo:** os prazos cumpridos com data-limite há mais de **12 meses** saem na escrita seguinte; perfis, calendários e documentos ficam até os apagares; um perfil sem atualização há mais de 12 meses é assinalado no início da sessão.
 - **Apagar:** `apagar_perfil` apaga um perfil e os prazos e calendários dele; para apagar tudo, apaga as pastas `.juridico-pt/`. Num repositório git, o plugin avisa se o `.gitignore` não exclui `.juridico-pt/`.
 - **Conversas:** o conteúdo das conversas é tratado pelo **fornecedor do modelo** que escolheste (ex.: a Anthropic no Claude), nos termos que aceitaste com ele — não pelo plugin.
 

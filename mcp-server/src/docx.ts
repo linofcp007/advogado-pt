@@ -69,6 +69,7 @@ function celulas(linha: string): string[] {
 function tabela(linhas: string[]): string {
   const linhasDados = linhas.filter((l) => !/^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(l));
   const rows = linhasDados.map(celulas);
+  if (rows.length === 0) return "";
   const ncol = Math.max(1, ...rows.map((r) => r.length));
   const borda = (lado: string) => `<w:${lado} w:val="single" w:sz="4" w:space="0" w:color="808080"/>`;
   const tblPr =

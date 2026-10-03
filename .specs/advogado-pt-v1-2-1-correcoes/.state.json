@@ -912,13 +912,13 @@
     "mcp-test": {
       "command": "npm --prefix mcp-server test",
       "exitCode": 0,
-      "summary": "156 testes: 154 passam, 0 falham, 2 saltados (externos opcionais); SMOKE OK",
-      "at": "2026-10-03T22:19:44.021Z",
-      "commit": "4422e96",
+      "summary": "192 testes: 190 pass, 0 fail, 2 skipped (externos); SMOKE OK",
+      "at": "2026-10-03T23:44:12.227Z",
+      "commit": "4e0bd36",
       "dirty": false,
       "observed": false,
       "check": "npm --prefix mcp-server test",
-      "code": "734e638e228926d89977a1023a400a663f48efcb",
+      "code": "4cae220f58f8b8a25d1759d7675e0630d8d79067",
       "history": [
         {
           "command": "npm --prefix mcp-server test",
@@ -928,26 +928,35 @@
           "commit": "4422e96",
           "dirty": false,
           "observed": false
+        },
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "192 testes: 190 pass, 0 fail, 2 skipped (externos); SMOKE OK",
+          "at": "2026-10-03T23:44:12.227Z",
+          "commit": "4e0bd36",
+          "dirty": false,
+          "observed": false
         }
       ]
     },
     "py-test": {
-      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "command": "python skills/juridico-pt/scripts/test_scripts.py",
       "exitCode": 0,
-      "summary": "Ran 49 tests — OK",
-      "at": "2026-10-03T22:19:44.021Z",
-      "commit": "4422e96",
+      "summary": "Ran 51 tests OK",
+      "at": "2026-10-03T23:44:12.227Z",
+      "commit": "4e0bd36",
       "dirty": false,
       "observed": false,
-      "check": "python skills/advogado-pt/scripts/test_scripts.py",
-      "code": "734e638e228926d89977a1023a400a663f48efcb",
+      "check": "python skills/juridico-pt/scripts/test_scripts.py",
+      "code": "4cae220f58f8b8a25d1759d7675e0630d8d79067",
       "history": [
         {
-          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "command": "python skills/juridico-pt/scripts/test_scripts.py",
           "exitCode": 0,
-          "summary": "Ran 49 tests — OK",
-          "at": "2026-10-03T22:19:44.021Z",
-          "commit": "4422e96",
+          "summary": "Ran 51 tests OK",
+          "at": "2026-10-03T23:44:12.227Z",
+          "commit": "4e0bd36",
           "dirty": false,
           "observed": false
         }

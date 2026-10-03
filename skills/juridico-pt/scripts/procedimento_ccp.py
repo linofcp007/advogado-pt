@@ -15,6 +15,7 @@ Exemplos de uso:
 import argparse
 from decimal import ROUND_HALF_UP, Decimal
 import datetime
+import math
 import sys
 
 INICIO_DL_177_2026 = datetime.date(2026, 10, 1)
@@ -38,6 +39,16 @@ NOMES = {
 }
 
 
+NOTAS = [
+    "Conta o valor estimado do contrato (CCP, art. 17.º), sem IVA (art. 473.º); é proibido dividir o "
+    "contrato para fugir a um procedimento e somam-se as prestações do mesmo tipo (art. 17.º-B).",
+    "O ajuste direto e a consulta prévia dependem da escolha da entidade adjudicante; há ainda escolhas por "
+    "critérios materiais, independentes do valor (CCP, arts. 23.º a 30.º-A; ajuste direto nos arts. 24.º a 27.º).",
+    "Acima dos limiares europeus, o anúncio do concurso é publicado também no Jornal Oficial da UE — "
+    "confirmar os limiares em vigor.",
+]
+
+
 def formatar_euros(valor):
     """Formata um valor numérico como euros no formato PT: '1.234,56 €'."""
     arredondado = Decimal(repr(float(valor))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
@@ -48,7 +59,7 @@ def formatar_euros(valor):
 
 def calcular_procedimento_ccp(valor, tipo, inicio=None):
     """Devolve {"valor", "tipo", "regime", "admissiveis": [{"procedimento", "nome", "ate", "base"}]}."""
-    if not isinstance(valor, (int, float)) or isinstance(valor, bool) or valor < 0:
+    if not isinstance(valor, (int, float)) or isinstance(valor, bool) or not math.isfinite(valor) or valor < 0:
         raise ValueError("O valor do contrato tem de ser um número positivo (sem IVA).")
     if tipo not in ("bens-servicos", "empreitada"):
         raise ValueError(f"Tipo de contrato desconhecido: '{tipo}' (usa bens-servicos ou empreitada).")
@@ -95,6 +106,9 @@ def main():
     for a in r["admissiveis"]:
         ate = f" (abaixo de {formatar_euros(a['ate'])})" if a["ate"] is not None else ""
         print(f"- {a['nome']}{ate} — {a['base']}")
+    print()
+    for nota in NOTAS:
+        print(f"• {nota}")
     print()
     print("AVISO: Estimativa de apoio — confirmar no texto do CCP publicado no Diário da República. "
           "Não substitui aconselhamento de advogado inscrito na OA.")

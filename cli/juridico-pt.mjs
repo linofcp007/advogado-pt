@@ -329,7 +329,7 @@ async function calc(args) {
       break;
     }
     default:
-      console.error("calc <imt|juros|prazo|prescricao|compensacao|custas|selo|irs|creditos|legitima|salario|custo|irc|iva|taxa-justica> [--flags]");
+      console.error("calc <imt|juros|lote|prazo|prescricao|compensacao|custas|selo|irs|creditos|legitima|salario|custo|irc|iva|taxa-justica|ccp> [--flags]");
       process.exit(1);
   }
 }
@@ -395,7 +395,10 @@ async function prazosCmd(args) {
   const { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } = await modulo("prazos-estado.js");
   const sub = args[0];
   if (sub === "add") {
-    const p = registarPrazo({ data: str(args, "--data", ""), descricao: str(args, "--descricao", ""), origem: str(args, "--origem", undefined) }, dir);
+    const p = registarPrazo(
+      { data: str(args, "--data", ""), descricao: str(args, "--descricao", ""), origem: str(args, "--origem", undefined), perfil: str(args, "--perfil", undefined) },
+      dir
+    );
     console.log(`Registado: ${p.data} — ${p.descricao}`);
     return;
   }
@@ -539,7 +542,7 @@ Uso:
 
   juridico-pt calendario --ano 2026 [--dir <projeto>] [--mes N] [--perfil nome] [--ics]
       Calendário de obrigações a partir do perfil da empresa; --ics grava .juridico-pt/calendario-<ano>.ics.
-  juridico-pt prazos [add --data AAAA-MM-DD --descricao "…" [--origem "…"] | done --data … --descricao "…"] [--dir <projeto>]
+  juridico-pt prazos [add --data AAAA-MM-DD --descricao "…" [--origem "…"] [--perfil nome] | done --data … --descricao "…"] [--dir <projeto>]
       Prazos em curso do projeto (.juridico-pt/prazos.md).
 
   juridico-pt calc salario --bruto 1500 [--tabela I|II|III] [--dependentes N] [--refeicao 8 --dias 22] [--cartao]

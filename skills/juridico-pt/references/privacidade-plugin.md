@@ -29,7 +29,7 @@ O plugin **não envia** estes ficheiros para nenhum servidor seu, não tem telem
 
 ## Por quanto tempo
 
-- **Prazos cumpridos há mais de 12 meses** saem de `prazos.md` na escrita seguinte; prazos em aberto nunca saem sozinhos.
+- **Prazos cumpridos com data-limite há mais de 12 meses** saem de `prazos.md` na escrita seguinte (conta a data-limite registada, não o dia em que foi cumprido); prazos em aberto nunca saem sozinhos.
 - **Perfis, calendários `.ics` e documentos exportados** ficam até o utilizador os apagar.
 - **Perfil sem atualização há mais de 12 meses**: é assinalado como desatualizado no início da sessão (para confirmar os dados), mas não é apagado.
 

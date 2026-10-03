@@ -32,16 +32,24 @@ export function lerCabecalhoValores(texto: string): { proxima: string | null; ul
   return { proxima, ultima, juros: j ? { ano: Number(j[2]), semestre: Number(j[1]) as 1 | 2 } : null };
 }
 
-// Revisões fixas fora do ficheiro de valores (calendário de manutenção do CLAUDE.md).
-const REVISOES_FIXAS: Array<Omit<ItemAtualidade, "desatualizado">> = [
-  {
+/**
+ * Coeficiente de atualização das rendas, lido da tabela do ficheiro de valores: a linha mais recente
+ * "Coeficiente de atualização anual de rendas para AAAA | **x,xxxx** …". Enquanto tiver "(a confirmar)",
+ * a revisão é a 31/10 do ano anterior (o Aviso sai no DR até 30/10); confirmado, a próxima é a 31/10 desse ano.
+ */
+export function itemRendas(texto: string): Omit<ItemAtualidade, "desatualizado"> | null {
+  const m = [...texto.matchAll(/Coeficiente de atualização anual de rendas para (\d{4})\s*\|\s*\*\*([\d,]+)\*\*([^\n]*)/g)].pop();
+  if (!m) return null;
+  const ano = Number(m[1]);
+  const aConfirmar = /a confirmar/i.test(m[3]);
+  return {
     item: "Coeficiente de atualização das rendas",
     fonte: "INE e Aviso no Diário da República (valores-2026, secção Arrendamento)",
-    ultimaAtualizacao: "2027: 1,0256 (INE, 10/9/2026; a confirmar com o Aviso no DR)",
-    proximaRevisao: "2026-10-31",
-    nota: "Confirmar o Aviso publicado até 30/10/2026 e retirar o '(a confirmar)'.",
-  },
-];
+    ultimaAtualizacao: `${ano}: ${m[2]}${aConfirmar ? " (a confirmar com o Aviso no DR)" : ""}`,
+    proximaRevisao: aConfirmar ? `${ano - 1}-10-31` : `${ano}-10-31`,
+    ...(aConfirmar ? { nota: `Confirmar o Aviso publicado até 30/10/${ano - 1} e retirar o '(a confirmar)'.` } : {}),
+  };
+}
 
 /** Lista os valores, as taxas e as tabelas com a data e o estado (desatualizado = passou a revisão). */
 export function verificarAtualidade(opts: { hoje?: Date; textoValores?: string } = {}): ItemAtualidade[] {
@@ -75,7 +83,8 @@ export function verificarAtualidade(opts: { hoje?: Date; textoValores?: string }
       `valores-2026 diz ${cab.juros.semestre}.º semestre de ${cab.juros.ano} e a tabela tem ${ult.semestre}.º de ${ult.ano}: alinhar os dois.`;
   }
 
-  for (const r of REVISOES_FIXAS) itens.push({ ...r, desatualizado: h > r.proximaRevisao });
+  const rendas = itemRendas(texto);
+  if (rendas) itens.push({ ...rendas, desatualizado: h > rendas.proximaRevisao });
   return itens;
 }
 

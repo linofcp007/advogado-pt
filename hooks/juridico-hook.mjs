@@ -232,8 +232,9 @@ function avisoAtualidade(hoje) {
 const LIMITE_LINHA = 200;
 
 /** Linha única (<= 200 caracteres) para projetos sem .juridico-pt/: junta as partes por prioridade. */
-function linhaCurta(home, hoje) {
+function linhaCurta(home, hoje, mcpEmFalta = false) {
   const partes = ["⚖️ Jurídico PT (juridico-pt): assistente jurídico PT/EN — /advogado /cobrar /prazo. Não substitui advogado (OA)."];
+  if (mcpEmFalta) partes.push("⚠️ MCP por construir: npm run setup.");
   if (partesAtualidade(hoje).length) partes.push("⚠️ Conteúdo desatualizado: atualiza o plugin.");
   let geral = false;
   try {
@@ -265,7 +266,7 @@ export function mensagemSessionStart(opts = {}) {
   } catch {
     comDados = false;
   }
-  if (!comDados) return linhaCurta(home, hoje);
+  if (!comDados) return linhaCurta(home, hoje, opts.mcpEmFalta === true);
   let msg =
     "⚖️ Jurídico PT ativo — assistente jurídico de Portugal · active — legal assistant for Portugal. " +
     "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /prazos /calendario /painel /defesa /rgpd /despedir /fisco /perfil /exportar /diagnostico. " +
@@ -302,8 +303,10 @@ export function mensagemSessionStart(opts = {}) {
 }
 
 function sessionStart() {
-  let msg = mensagemSessionStart();
-  if (!existsSync(MCP_DIST)) {
+  const mcpEmFalta = !existsSync(MCP_DIST);
+  let msg = mensagemSessionStart({ mcpEmFalta });
+  // Sem .juridico-pt/ a linha curta já inclui o aviso (e fica em <= 200 caracteres).
+  if (mcpEmFalta && msg.length > LIMITE_LINHA) {
     msg +=
       " ⚠️ Servidor MCP por construir: corre `npm run setup` na raiz do plugin · " +
       "MCP server not built: run `npm run setup` at the plugin root.";

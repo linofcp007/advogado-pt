@@ -490,9 +490,10 @@ const REGRAS: Regra[] = [
     base: "CSC, art. 65.º, n.º 5 (SA: art. 376.º, n.º 1); art. 67.º",
     fonte: PGDL_CSC,
     transferivel: false,
-    nota: "3 meses após o fecho do exercício; 5 meses (31/5) se houver contas consolidadas ou método da equivalência patrimonial. Sem contas nos 2 meses seguintes, qualquer sócio pode pedir inquérito judicial (art. 67.º).",
+    nota: "3 meses após o fecho do exercício; 5 meses se houver contas consolidadas ou método da equivalência patrimonial. Sem contas nos 2 meses seguintes, qualquer sócio pode pedir inquérito judicial (art. 67.º).",
     aplica: (p) => formaEm(p, ["sociedade"]),
-    datas: (a) => [{ data: iso(a, 3, 31), periodo: `exercício de ${a - 1}` }],
+    datas: (a, p) =>
+      p.fimPeriodo ? apos(a, p.fimPeriodo, 3, (ano, m) => fimMes(ano, m)) : [{ data: iso(a, 3, 31), periodo: `exercício de ${a - 1}` }],
   },
   {
     id: "rcbe_confirmacao_anual",

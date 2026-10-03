@@ -235,13 +235,19 @@ def calcular_juros_lote(faturas, data_fim):
                                    nota=f"Ainda não vencida a {data_fim.isoformat()} "
                                         f"(vence a {venc.isoformat()})."))
             continue
-        r = calcular_juros(capital, venc, data_fim, tipo)
+        try:
+            r = calcular_juros(capital, venc, data_fim, tipo)
+        except ValueError as e:
+            raise ValueError(f"{fatura}: {e}") from e
         juros = _r2(r["juros"])
         indemnizacao = INDEMNIZACAO_COBRANCA if tipo == "comercial" else 0.0
-        resultados.append(dict(base, vencida=True, dias=r["dias"], juros=juros,
-                               indemnizacao40=indemnizacao,
-                               total=_r2(base["capital"] + juros + indemnizacao),
-                               tramos=r["tramos"]))
+        item = dict(base, vencida=True, dias=r["dias"], juros=juros,
+                    indemnizacao40=indemnizacao,
+                    total=_r2(base["capital"] + juros + indemnizacao),
+                    tramos=r["tramos"])
+        if any(t["estimado"] for t in r["tramos"]):
+            item["nota"] = "Inclui semestres com taxa estimada (aviso ainda não publicado)."
+        resultados.append(item)
 
     def somar(acc, f):
         acc["capital"] = _r2(acc["capital"] + f["capital"])
@@ -276,8 +282,9 @@ def memoria_juros_lote(r):
                     extra += f" + indemnização {formatar_euros(f['indemnizacao40'])}"
             else:
                 extra = "não vencida"
+            nota = f" ({f['nota']})" if f["vencida"] and f.get("nota") else ""
             linhas.append(f"- {f['fatura']} ({f['tipo']}, vence {f['vencimento']}): capital "
-                          f"{formatar_euros(f['capital'])}; {extra} -> {formatar_euros(f['total'])}")
+                          f"{formatar_euros(f['capital'])}; {extra} -> {formatar_euros(f['total'])}{nota}")
         linhas.append(f"  Subtotal: capital {formatar_euros(c['capital'])} + juros "
                       f"{formatar_euros(c['juros'])} + indemnizações "
                       f"{formatar_euros(c['indemnizacao'])} = {formatar_euros(c['total'])}")

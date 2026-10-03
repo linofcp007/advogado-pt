@@ -5,7 +5,7 @@
 // O hook (hooks/juridico-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { PASTA_DADOS, NOME_PERFIL_RE, dirHome as dirHomeBase, validarNomePerfil } from "./dados.js";
+import { PASTA_DADOS, NOME_PERFIL_RE, avisoGitignore, dirHome as dirHomeBase, validarNomePerfil } from "./dados.js";
 import { apagarSeguro, dirProjeto as dirProjetoBase, escreverSeguro, listarSeguro } from "./fs-seguro.js";
 import { removerPrazosDoPerfil } from "./prazos-estado.js";
 
@@ -226,46 +226,15 @@ export function guardarPerfil(
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
   // Escrita segura: recusa ligações (symlink/junction) e grava por temporário + renomeação.
   escreverSeguro(base, nome ? [PASTA, "perfis", `${nome}.md`] : [PASTA, FICHEIRO], serializar(campos));
-  const avisoGitignore = destino === "projeto" ? verificarGitignore(base, opts.acrescentarGitignore === true) : undefined;
+  const aviso = destino === "projeto" ? avisoGitignore(base, opts.acrescentarGitignore === true) : undefined;
   return {
     origem: destino, caminho, campos, desatualizado: false,
     ...(nome ? { nome } : {}),
-    ...(avisoGitignore ? { avisoGitignore } : {}),
+    ...(aviso ? { avisoGitignore: aviso } : {}),
   };
 }
 
 // --- v2.0: privacidade (US-11) ---
-
-const LINHA_GITIGNORE = `${PASTA}/`;
-
-/** O .gitignore exclui a pasta de dados? (linhas `.juridico-pt`, `/.juridico-pt/`, `.juridico-pt/*`…) */
-function gitignoreExclui(texto: string): boolean {
-  return texto.split(/\r?\n/).some((l) => /^\/?\.juridico-pt(\/\*{0,2})?\s*$/.test(l.trim()));
-}
-
-/**
- * Num repositório git (pasta `.git`), avisa se o .gitignore não exclui `.juridico-pt/` — os dados da
- * empresa e os prazos podiam ser publicados por engano. Com `acrescentar`, junta a linha uma só vez.
- */
-function verificarGitignore(base: string, acrescentar: boolean): string | undefined {
-  try {
-    if (!existsSync(join(base, ".git"))) return undefined;
-    const f = join(base, ".gitignore");
-    const atual = existsSync(f) ? readFileSync(f, "utf8") : "";
-    if (gitignoreExclui(atual)) return undefined;
-    if (acrescentar) {
-      const sep = atual === "" || atual.endsWith("\n") ? "" : "\n";
-      escreverSeguro(base, [".gitignore"], `${atual}${sep}${LINHA_GITIGNORE}\n`);
-      return undefined;
-    }
-  } catch {
-    return undefined; // nunca falha a gravação do perfil por causa do aviso
-  }
-  return (
-    `Este projeto é um repositório git e o .gitignore não exclui ${LINHA_GITIGNORE}: o perfil da empresa e os prazos ` +
-    `podem ser publicados por engano. Acrescenta a linha \`${LINHA_GITIGNORE}\` ao .gitignore (ou grava de novo com acrescentar_gitignore).`
-  );
-}
 
 /**
  * Apaga um perfil e o que lhe pertence (direito ao apagamento, RGPD art. 17.º): o ficheiro do perfil,
@@ -287,7 +256,7 @@ export function apagarPerfil(
     const k = removerPrazosDoPerfil(n, base);
     if (k > 0) apagados.push(`${k} prazo(s) do perfil '${n}' em ${PASTA}/prazos.md`);
   }
-  const ics = new RegExp(`^calendario-\\d{4}-${n}\\.ics$`);
+  const ics = n === "perfil-empresa" ? /^calendario-\d{4}\.ics$/ : new RegExp(`^calendario-\\d{4}-${n}\\.ics$`);
   for (const nomeF of listarSeguro(base, [PASTA]).filter((x) => ics.test(x))) {
     const c = apagarSeguro(base, [PASTA, nomeF]);
     if (c) apagados.push(c);
@@ -301,9 +270,15 @@ export function apagarPerfil(
 
 /** Resumo de uma linha para o contexto ("forma_juridica: Lda · setor: …"). */
 export function resumoPerfil(p: Perfil): string {
-  return CAMPOS_PERFIL.filter((c) => c !== "atualizado_em" && p.campos[c])
-    .map((c) => `${c}: ${p.campos[c]}`)
+  // Mesmos limites que o hook (200 por campo, 1500 no total): o perfil pode vir de um repositório de terceiros.
+  const limpo = (v: string) => v.replace(/[\u0000-\u001f\u007f]+/g, " ").trim();
+  const r = CAMPOS_PERFIL.filter((c) => c !== "atualizado_em" && p.campos[c])
+    .map((c) => {
+      const v = limpo(p.campos[c]);
+      return `${c}: ${v.length > 200 ? v.slice(0, 199) + "…" : v}`;
+    })
     .join(" · ");
+  return r.length > 1500 ? r.slice(0, 1499) + "…" : r;
 }
 
 /** O que perguntar quando não há perfil (só o que for relevante para a questão). */

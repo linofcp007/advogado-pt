@@ -77,7 +77,12 @@ export function calcularJurosLote(faturas: FaturaLote[], dataFim: Date): Resulta
         nota: `Ainda não vencida a ${fim} (vence a ${venc}).`,
       };
     }
-    const r = calcularJuros(f.capital, vencimento, dataFim, tipo);
+    let r;
+    try {
+      r = calcularJuros(f.capital, vencimento, dataFim, tipo);
+    } catch (e) {
+      throw new Error(`${fatura}: ${(e as Error).message}`);
+    }
     const juros = r2(r.juros);
     const indemnizacao40 = tipo === "comercial" ? INDEMNIZACAO_COBRANCA : 0;
     return {
