@@ -1,28 +1,17 @@
 ---
 name: advogado-pt
 description: >
-  Advogado pessoal e empresarial em Portugal. Usa esta skill SEMPRE que o utilizador mencionar
-  qualquer tema jurídico, legal, contratual, fiscal, laboral, cobranças, disputas, RGPD, 
-  propriedade intelectual, arrendamento, heranças, multas, IRS, IRC, tribunais, notificações,
-  reclamações de clientes, dívidas, contratos, termos de serviço, políticas de privacidade,
-  acordos comerciais, constituição de sociedade, passagem de ENI a Lda, direito do consumo,
-  insolvência, PER, recuperação de empresas, direito societário, quotas, gerência,
-  contratos internacionais, arbitragem, inteligência artificial, AI Act, cibersegurança,
-  NIS2, regulação digital, cálculo de juros, prazos legais, compensação por despedimento,
-  ou qualquer situação onde precise de aconselhamento ou documentos legais.
-  Também ativa quando o utilizador diz coisas como "tenho um problema com um cliente",
-  "preciso de um contrato", "querem processar-me", "não me pagaram", "quero cobrar uma dívida",
-  "recebi uma carta do tribunal", "tenho uma multa", "questão de heranças", "quero abrir uma empresa",
-  "querem despedir-me" ou "quero despedir um trabalhador", "o senhorio quer despejar-me",
-  "comprei/vou comprar uma casa", "o fornecedor não cumpriu", "preciso de termos e condições",
-  "tive uma fuga de dados", "fui à falência" ou "um cliente meu está insolvente", "quero fazer um testamento",
-  "preciso de ajuda legal", "o que diz a lei sobre", "quais são os meus direitos" — mesmo sem termos técnicos.
-  EN — also activates on: "they haven't paid me", "I need a contract / NDA / terms of service",
-  "they want to sue me" / "I'm being sued", "I got a court letter / summons", "I have a fine",
-  "inheritance question", "I want to set up a company", "I need to fire/dismiss an employee",
-  "my landlord wants to evict me", "I'm buying property", "GDPR / data breach / privacy policy",
-  "what does the law say about…", "what are my rights", "calculate the interest / a deadline / the IMT".
-  Funciona em Português (PT) e Inglês / Works in Portuguese and English.
+  Assessoria jurídica de Portugal, pessoal e empresarial, em PT e EN. Usa quando o utilizador
+  tem uma questão de direito português: cobranças e dívidas, contratos e termos de serviço,
+  trabalho e despedimentos, arrendamento e compra de casa (IMT), impostos (IRS, IRC, IVA,
+  notificações das Finanças), sociedades e insolvência, heranças, multas e contraordenações,
+  RGPD, propriedade intelectual, consumo, AI Act e NIS2, ou quer calcular juros, prazos,
+  prescrição ou compensações — mesmo sem termos técnicos ("não me pagaram", "recebi uma carta
+  do tribunal", "quero despedir um trabalhador", "o senhorio quer despejar-me", "o que diz a
+  lei sobre"). EN: Portuguese law — unpaid invoices, contracts, dismissals, leases, taxes,
+  GDPR, court letters, deadlines. Não usar para direito de outros países sem ligação a
+  Portugal, nem para "contratos" técnicos de software (APIs, interfaces, SLAs de código).
+  Não substitui advogado inscrito na OA: recomenda-o com prazos judiciais a correr.
 ---
 
 # Advogado PT — Assessor Jurídico Pessoal e Empresarial

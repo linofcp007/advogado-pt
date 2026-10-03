@@ -206,14 +206,14 @@
   - _Depends: 4_
 
 ## História US-8 (P1): distribuição
-- [ ] 28. [US8] Description da skill ≤ 1024 (com exclusões) e validação no `build.py`; `.skill` com a pasta na raiz
+- [x] 28. [US8] Description da skill ≤ 1024 (com exclusões) e validação no `build.py`; `.skill` com a pasta na raiz
   - _Requirements: US-8.AC-1, US-8.AC-5_
   - _Makes green: T-233, T-237_
   - _Implements: skills/advogado-pt/SKILL.md, build.py_
   - _Verify: node --test --test-name-pattern="T-233|T-237" mcp-server/test/plugin.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 29. [US8] `INSTRUCOES_MCP` (≤ 2000, todas as tools) nas instruções do servidor; persona completa no prompt `advogado_pt`
+- [x] 29. [US8] `INSTRUCOES_MCP` (≤ 2000, todas as tools) nas instruções do servidor; persona completa no prompt `advogado_pt`
   - _Requirements: US-8.AC-2_
   - _Makes green: T-234_
   - _Implements: mcp-server/src/persona.ts, mcp-server/src/index.ts_
@@ -226,7 +226,7 @@
   - _Verify: node --test --test-name-pattern="T-235|T-236" mcp-server/test/plugin.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 31. [US8] Atualizar o SDK do MCP e as transitivas (`npm audit fix`) e regenerar o bundle; teste contra `bin/`
+- [x] 31. [US8] Atualizar o SDK do MCP e as transitivas (`npm audit fix`) e regenerar o bundle; teste contra `bin/`
   - _Requirements: US-8.AC-5, US-8.AC-6, NFR-1_
   - _Makes green: T-238, T-239_
   - _Verify: npm --prefix mcp-server audit --omit=dev --audit-level=high_
