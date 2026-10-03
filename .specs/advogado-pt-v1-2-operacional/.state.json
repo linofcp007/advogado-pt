@@ -700,13 +700,13 @@
     "mcp-test": {
       "command": "npm --prefix mcp-server test",
       "exitCode": 0,
-      "summary": "107/107 pass (calculadoras, plugin, conteúdo, hooks, perfil, v12 T-101..T-135, factos T-130)",
-      "at": "2026-10-03T19:19:08.768Z",
-      "commit": "6173d4f",
-      "dirty": true,
+      "summary": "107/107 pass",
+      "at": "2026-10-03T19:35:24.480Z",
+      "commit": "1f8ff85",
+      "dirty": false,
       "observed": false,
       "check": "npm --prefix mcp-server test",
-      "code": "95967c435e9462618cbd1d5198f3e56124ae5974",
+      "code": "645559ae9986878d2edf503a756432617bf825fe",
       "history": [
         {
           "command": "npm --prefix mcp-server test",
@@ -716,6 +716,15 @@
           "commit": "6173d4f",
           "dirty": true,
           "observed": false
+        },
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "107/107 pass",
+          "at": "2026-10-03T19:35:24.480Z",
+          "commit": "1f8ff85",
+          "dirty": false,
+          "observed": false
         }
       ]
     },
@@ -723,12 +732,12 @@
       "command": "python skills/advogado-pt/scripts/test_scripts.py",
       "exitCode": 0,
       "summary": "Ran 38 tests OK",
-      "at": "2026-10-03T19:19:08.768Z",
-      "commit": "6173d4f",
-      "dirty": true,
+      "at": "2026-10-03T19:35:24.480Z",
+      "commit": "1f8ff85",
+      "dirty": false,
       "observed": false,
       "check": "python skills/advogado-pt/scripts/test_scripts.py",
-      "code": "95967c435e9462618cbd1d5198f3e56124ae5974",
+      "code": "645559ae9986878d2edf503a756432617bf825fe",
       "history": [
         {
           "command": "python skills/advogado-pt/scripts/test_scripts.py",
@@ -737,6 +746,15 @@
           "at": "2026-10-03T19:19:08.768Z",
           "commit": "6173d4f",
           "dirty": true,
+          "observed": false
+        },
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 38 tests OK",
+          "at": "2026-10-03T19:35:24.480Z",
+          "commit": "1f8ff85",
+          "dirty": false,
           "observed": false
         }
       ]

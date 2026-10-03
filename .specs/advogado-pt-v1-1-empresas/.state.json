@@ -668,11 +668,13 @@
     "mcp-test": {
       "command": "npm --prefix mcp-server test",
       "exitCode": 0,
-      "summary": "73/73 pass",
-      "at": "2026-10-03T17:45:44.620Z",
+      "summary": "107/107 pass",
+      "at": "2026-10-03T19:35:26.356Z",
+      "commit": "1f8ff85",
+      "dirty": false,
       "observed": false,
       "check": "npm --prefix mcp-server test",
-      "code": "14b8732ea23022444a228c69e58bd41a685fd56b",
+      "code": "3e0a9a0fb878fc18edc7d1970cf96abf8d81dc3c",
       "history": [
         {
           "command": "npm --prefix mcp-server test",
@@ -680,23 +682,43 @@
           "summary": "73/73 pass",
           "at": "2026-10-03T17:45:44.620Z",
           "observed": false
+        },
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "107/107 pass",
+          "at": "2026-10-03T19:35:26.356Z",
+          "commit": "1f8ff85",
+          "dirty": false,
+          "observed": false
         }
       ]
     },
     "py-test": {
       "command": "python skills/advogado-pt/scripts/test_scripts.py",
       "exitCode": 0,
-      "summary": "31/31 OK",
-      "at": "2026-10-03T17:45:44.620Z",
+      "summary": "Ran 38 tests OK",
+      "at": "2026-10-03T19:35:26.356Z",
+      "commit": "1f8ff85",
+      "dirty": false,
       "observed": false,
       "check": "python skills/advogado-pt/scripts/test_scripts.py",
-      "code": "14b8732ea23022444a228c69e58bd41a685fd56b",
+      "code": "3e0a9a0fb878fc18edc7d1970cf96abf8d81dc3c",
       "history": [
         {
           "command": "python skills/advogado-pt/scripts/test_scripts.py",
           "exitCode": 0,
           "summary": "31/31 OK",
           "at": "2026-10-03T17:45:44.620Z",
+          "observed": false
+        },
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 38 tests OK",
+          "at": "2026-10-03T19:35:26.356Z",
+          "commit": "1f8ff85",
+          "dirty": false,
           "observed": false
         }
       ]
