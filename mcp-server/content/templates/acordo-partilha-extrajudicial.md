@@ -2,8 +2,9 @@
      acordo. Formaliza-se por ESCRITURA PÚBLICA (notário) ou no balcão "Heranças" do IRN; quando
      envolve imóveis exige título sujeito a registo. Pressupõe HABILITAÇÃO DE HERDEIROS PRÉVIA
      (escritura ou Heranças online) que determina quem são os herdeiros. Base: Arts. 2101.º e
-     seguintes do Código Civil. Imposto do selo (verba 1.2 TGIS): herdeiros legitimários diretos
-     (cônjuge/unido de facto, descendentes, ascendentes) isentos; restantes a 10% — confirmar em
+     seguintes do Código Civil. Imposto do selo (verba 1.2 TGIS): isentos o cônjuge ou unido de facto,
+     os descendentes e os ascendentes (art. 6.º, al. e), CIS); restantes a 10%. Atenção: o unido de
+     facto não é herdeiro legitimário (CC, art. 2157.º) — só herda por testamento. Confirmar em
      references/herancas.md e references/valores-2026.md (secção Heranças / Imposto do Selo).
      As tornas estão sujeitas a IMT/IS conforme o caso — verificar.
      Âmbito: nacional -->
@@ -54,7 +55,7 @@ Por o valor dos bens adjudicados a {{HERDEIRO_BENEFICIADO}} exceder o seu quinh�
 Os outorgantes declaram que, com as adjudicações e o pagamento das tornas acordadas, ficam integralmente preenchidos os respetivos quinhões, dando entre si plena e recíproca quitação, nada mais tendo a reclamar uns dos outros quanto à presente herança e partilha.
 
 ## Cláusula 6.ª (Obrigações fiscais)
-Os outorgantes declaram estar cientes das obrigações fiscais decorrentes da transmissão, designadamente a participação à Autoridade Tributária (Modelo 1 do Imposto do Selo, até ao final do 3.º mês seguinte ao do óbito — Art. 26.º CIS) e o imposto do selo eventualmente devido, beneficiando da isenção legalmente aplicável aos herdeiros legitimários diretos.
+Os outorgantes declaram estar cientes das obrigações fiscais decorrentes da transmissão, designadamente a participação à Autoridade Tributária (Modelo 1 do Imposto do Selo, até ao final do 3.º mês seguinte ao do óbito — Art. 26.º CIS) e o imposto do selo eventualmente devido, beneficiando, quando aplicável, da isenção do cônjuge ou unido de facto, descendentes e ascendentes (Art. 6.º, al. e), do CIS).
 <!-- Confirmar enquadramento e prazos em references/herancas.md e references/valores-2026.md
      (secção Heranças / Imposto do Selo). Não inventar taxas. -->
 

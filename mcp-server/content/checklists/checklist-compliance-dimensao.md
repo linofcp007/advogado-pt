@@ -63,7 +63,7 @@
 - [ ] Preparado o **plano de avaliação das diferenças remuneratórias** para o caso de a ACT notificar a empresa: entrega em **120 dias** e execução durante **12 meses** (Lei 60/2018, arts. 5.º e 18.º, n.º 3)
 - [ ] Acompanhada a transposição da Diretiva (UE) 2023/970 (transparência remuneratória; projeto de alteração à Lei 60/2018 em apreciação pública em agosto de 2026 — a confirmar se já está em vigor): faixas salariais aos candidatos, proibição de perguntar o histórico salarial, direito à informação
 - [ ] Despedimento coletivo: o limiar passa a **5** trabalhadores em 3 meses (CT art. 359.º, n.º 1) — ver `playbooks/despedimento-coletivo.md`
-- [ ] **NIS2** (DL 125/2025 — a confirmar): se a empresa atua num setor dos anexos e é média (50 ou mais trabalhadores, ou acima dos limiares financeiros), verificar se é entidade essencial ou importante, o registo junto do CNCS e o reporte de incidentes — ver `references/digital-ue.md`
+- [ ] **NIS2** (DL 125/2025, em vigor desde 3/4/2026): se a empresa atua num setor dos anexos e é média (50 ou mais trabalhadores, ou acima dos limiares financeiros), verificar se é entidade essencial ou importante, o registo junto do CNCS e o reporte de incidentes — ver `references/digital-ue.md`
 
 ## 75 ou mais trabalhadores
 - [ ] **Quota de 1 %** de trabalhadores com deficiência (grau de incapacidade igual ou superior a 60 %) (Lei 4/2019, art. 5.º, n.º 1). Os períodos de transição do n.º 5 já terminaram; uma empresa que **acabe de atingir** o limiar tem mais 2 anos para se adaptar (n.º 7 — a confirmar a contagem)

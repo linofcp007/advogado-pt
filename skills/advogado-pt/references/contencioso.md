@@ -15,7 +15,7 @@
 ## Vias de resolução (do mais leve ao mais formal)
 - **Negociação direta** → carta de interpelação, proposta de acordo
 - **Mediação / RAL** (resolução alternativa de litígios): voluntária, confidencial, acordo com força executiva se homologado
-- **Julgados de Paz**: competência cível até **15.000€** (valor da alçada da 1.ª instância); mais informal, rápido e barato; mediação prévia incorporada
+- **Julgados de Paz**: competência cível até **15.000€** (Lei 78/2001, art. 8.º) — não confundir com a alçada da 1.ª instância (LOSJ, art. 44.º; valor em `references/valores-2026.md`); mais informal, rápido e barato; mediação prévia incorporada
 - **Tribunal judicial** — ação declarativa comum (declara/condena num direito)
 - **Ação executiva**: quando já existe título executivo (cross-ref `references/cobrancas.md`)
 
@@ -23,7 +23,7 @@
 1. **Petição inicial** (PI) — autor expõe factos, formula o pedido e indica o valor da causa
 2. **Citação** do réu
 3. **Contestação** — réu defende-se no prazo de **30 dias** (Art. 569.º CPC); pode deduzir reconvenção
-4. **Réplica** — apenas quando há reconvenção ou exceções a contraditar
+4. **Réplica** — só quando o réu deduziu reconvenção (ou nas ações de simples apreciação negativa) — CPC, art. 584.º; às exceções o autor responde na audiência prévia ou no início da audiência final (CPC, art. 3.º, n.º 4)
 5. **Audiência prévia** — saneamento, identificação do objeto do litígio e dos temas da prova
 6. **Audiência de julgamento** — produção de prova oral
 7. **Sentença** — decisão de mérito
@@ -58,5 +58,5 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Nota orientadora para preparar uma petição inicial (factos / pedido / valor da causa / prova)
-- Guião de requerimento de providência cautelar (pressupostos, fundamentação do periculum, pedido)
+- Nota orientadora para preparar uma petição inicial (factos / pedido / valor da causa / prova) (a pedido)
+- Guião de requerimento de providência cautelar (pressupostos, fundamentação do periculum, pedido) (a pedido)

@@ -459,14 +459,14 @@ test("T-133 todos os itens pedidos indexados; commands novos nomeiam tools reais
   }
 });
 
-test("T-134 versão 1.2.0 em todos os manifestos + CHANGELOG", () => {
-  const V = "1.2.0";
-  assert.equal(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version, V);
+// v1.2.1: a versão corrente é verificada pelo T-45 (coerência) e pelo T-249; aqui fica só o
+// registo da 1.2.0 no CHANGELOG e uma versão >= 1.2.0 nos manifestos.
+test("T-134 versão 1.2.0 registada no CHANGELOG e manifestos em 1.2.0 ou posterior", () => {
+  const maior = (v) => v.split(".").map(Number).reduce((acc, n) => acc * 1000 + n, 0) >= 1002000;
+  assert.ok(maior(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version));
   const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
-  assert.equal(mk.metadata.version, V);
-  assert.equal(mk.plugins[0].version, V);
-  assert.equal(JSON.parse(lerMd(r("package.json"))).version, V);
-  assert.equal(JSON.parse(lerMd(r("mcp-server", "package.json"))).version, V);
-  assert.match(lerMd(r("mcp-server", "src", "index.ts")), /version:\s*"1\.2\.0"/);
+  assert.ok(maior(mk.metadata.version) && maior(mk.plugins[0].version));
+  assert.ok(maior(JSON.parse(lerMd(r("package.json"))).version));
+  assert.ok(maior(JSON.parse(lerMd(r("mcp-server", "package.json"))).version));
   assert.match(lerMd(r("CHANGELOG.md")), /^## \[1\.2\.0\]/m);
 });

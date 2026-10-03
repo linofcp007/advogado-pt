@@ -6,6 +6,8 @@
 
 ## Legislação Base
 - **Lei 23/2007**, de 4 de julho (regime jurídico de entrada, permanência, saída e afastamento de estrangeiros do território nacional) e alterações posteriores
+- **DL 37-A/2024**: acabou com o regime da "manifestação de interesse" — quem entra como turista ou sem visto adequado deixou de poder pedir autorização de residência para trabalhar; o caminho normal é o **visto consular** (regime transitório para os processos pendentes)
+- **Lei 61/2025**: alterações à Lei 23/2007 (entre outras, reagrupamento familiar e vistos para procura de trabalho) (a confirmar o âmbito e a entrada em vigor)
 - **AIMA** — Agência para a Integração, Migrações e Asilo (sucessora do SEF nas competências administrativas de imigração)
 - Código do Trabalho (Lei 7/2009) — cross-ref `references/laboral.md`
 - **Regulamento (CE) 883/2004** (coordenação de segurança social na UE) e Reg. 987/2009 (aplicação)
@@ -54,6 +56,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- **Checklist de contratação de nacional de país terceiro** (verificar título habilitante → promessa/contrato → comunicação à SS → inscrição AT/SS → cópia de documentos → cumprimento de condições do visto)
-- **Carta-convite / promessa de contrato de trabalho** para efeitos de instrução de visto (identificação das partes, função, retribuição, duração, condição suspensiva da concessão do visto)
-- Checklist de avaliação de risco (EE + SS) para contratação de trabalhador remoto no estrangeiro
+- **Checklist de contratação de nacional de país terceiro** (verificar título habilitante → promessa/contrato → comunicação à SS → inscrição AT/SS → cópia de documentos → cumprimento de condições do visto) (a pedido)
+- **Carta-convite / promessa de contrato de trabalho** para efeitos de instrução de visto (identificação das partes, função, retribuição, duração, condição suspensiva da concessão do visto) (a pedido)
+- Checklist de avaliação de risco (EE + SS) para contratação de trabalhador remoto no estrangeiro (a pedido)

@@ -17,10 +17,10 @@ O Trabalhador é admitido para exercer as funções de **{{CATEGORIA}}**, com o 
 
 ## 3. Termo e motivo justificativo (Art. 141.º CT)
 O presente contrato é celebrado a **termo certo** pelo período de **{{DURACAO}}**, com início em {{DATA_INICIO}} e termo em {{DATA_FIM}}.
-**Motivo justificativo concreto:** {{MOTIVO: ex. acréscimo excecional e temporário de atividade resultante de … / execução da tarefa/obra/projeto definido … / substituição de trabalhador ausente …}}, com a indicação dos factos que o concretizam: {{FACTOS}}.
+**Motivo justificativo concreto:** {{MOTIVO: ex. acréscimo excecional e temporário de atividade resultante de … / execução da tarefa/obra/projeto definido … / substituição de trabalhador ausente …}}, com a indicação dos factos que o concretizam: {{FACTOS}}. **Relação entre o motivo e o termo estipulado** (Art. 141.º, n.º 3, CT): {{RELACAO: ex. o acréscimo de atividade decorre da encomenda X, com entrega prevista até DATA_FIM}}.
 
 ## 4. Renovação
-Não havendo oposição escrita de qualquer das partes com a antecedência legal, o contrato renova-se por períodos {{iguais/de DURACAO}}, dentro dos limites do Art. 148.º CT (duração máxima e número de renovações).
+Não havendo oposição escrita de qualquer das partes com a antecedência legal, o contrato renova-se por períodos {{iguais/de DURACAO}}, até 3 renovações e 2 anos de duração total (Art. 148.º CT), não podendo a duração total das renovações exceder a do período inicial (Art. 149.º, n.º 4, CT); a renovação exige que o motivo justificativo se mantenha (Art. 149.º, n.º 3, CT).
 
 ## 5. Período normal de trabalho
 {{HORAS}} horas semanais, {{HORARIO}}.
@@ -50,7 +50,7 @@ O Empregador: __________________   O Trabalhador: __________________
 _(Lista para quem envia — não faz parte do documento.)_
 
 - [ ] ⏰ Caducidade: comunicar a não renovação por escrito 15 dias (empregador) ou 8 dias (trabalhador) antes do termo (art. 344.º, n.º 1, CT); sem essa comunicação o contrato renova-se.
-- [ ] Forma escrita obrigatória com motivo justificativo concreto e os factos que o integram (art. 141.º CT), sob pena de o contrato se considerar sem termo; renovações dentro do art. 148.º CT (até 3, com duração total das renovações não superior à do período inicial — a confirmar).
+- [ ] Forma escrita obrigatória com motivo justificativo concreto e os factos que o integram (art. 141.º CT), sob pena de o contrato se considerar sem termo; renovações dentro do art. 148.º CT (até 3), com duração total das renovações não superior à do período inicial (art. 149.º, n.º 4, CT).
 - [ ] ⏰ Comunicar a celebração (com o motivo) e a cessação à comissão de trabalhadores e à associação sindical do trabalhador, em 5 dias úteis; na não renovação de trabalhadora grávida, puérpera ou lactante, ou de trabalhador em licença parental, comunicar o motivo à CITE (art. 144.º CT — confirmar prazos na redação em vigor).
 - [ ] Comunicação de admissão à Segurança Social antes do início, seguro de acidentes de trabalho desde o 1.º dia e retribuição não inferior à RMMG (`references/valores-2026.md`).
 - [ ] Compensação por caducidade (24 dias por ano, salvo se a caducidade resultar de declaração do trabalhador): calcular com `calc_compensacao_despedimento` e valores em `references/valores-2026.md`.

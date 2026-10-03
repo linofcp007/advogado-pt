@@ -1,0 +1,995 @@
+{
+  "lang": "pt",
+  "size": "m",
+  "tracks": [
+    "core",
+    "tdd",
+    "sec"
+  ],
+  "approvals": {
+    "classification": {
+      "at": "2026-10-03T21:00:42.016Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "8a5074e8e092a014570d079ce6c7e96e52aee361",
+      "batch": true
+    },
+    "requirements": {
+      "at": "2026-10-03T21:00:42.081Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "919fc21b502904cebcb366085ad576537baa1bea",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "batch": true
+    },
+    "design": {
+      "at": "2026-10-03T21:00:42.137Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "4258195f1cf296e105bb32e0886af7bcb44022fd",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "batch": true
+    },
+    "test-plan": {
+      "at": "2026-10-03T21:00:42.200Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "322f2039c38a96515c3836330766804c8c4eec2a",
+      "batch": true
+    },
+    "tests": {
+      "at": "2026-10-03T21:19:17.134Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    "tasks": {
+      "at": "2026-10-03T21:19:17.236Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "95a3a8b54a2bbabef35e501e752a73cc9257f33d",
+      "batch": true
+    },
+    "execution": {
+      "at": "2026-10-03T22:25:29.235Z",
+      "by": "Carlos Pereira"
+    }
+  },
+  "createdAt": "2026-10-03T20:44:27.929Z",
+  "approvalHistory": [
+    {
+      "phase": "classification",
+      "at": "2026-10-03T21:00:42.016Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "8a5074e8e092a014570d079ce6c7e96e52aee361",
+      "batch": true,
+      "snapshot": ".history/classification@1.md"
+    },
+    {
+      "phase": "requirements",
+      "at": "2026-10-03T21:00:42.081Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "919fc21b502904cebcb366085ad576537baa1bea",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "batch": true,
+      "snapshot": ".history/requirements@1.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-03T21:00:42.137Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "4258195f1cf296e105bb32e0886af7bcb44022fd",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "batch": true,
+      "snapshot": ".history/design@1.md"
+    },
+    {
+      "phase": "test-plan",
+      "at": "2026-10-03T21:00:42.200Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "322f2039c38a96515c3836330766804c8c4eec2a",
+      "batch": true,
+      "snapshot": ".history/test-plan@1.md"
+    },
+    {
+      "phase": "tests",
+      "at": "2026-10-03T21:19:17.134Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    {
+      "phase": "tasks",
+      "at": "2026-10-03T21:19:17.236Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "95a3a8b54a2bbabef35e501e752a73cc9257f33d",
+      "batch": true,
+      "snapshot": ".history/tasks@1.md"
+    },
+    {
+      "phase": "execution",
+      "at": "2026-10-03T22:25:29.235Z",
+      "by": "Carlos Pereira"
+    }
+  ],
+  "lastApprovedPhase": "execution",
+  "evidence": {
+    "1": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exitCode": 0,
+      "summary": "fix/v1.2.1-correcoes; specs v1.2.1 e v2.0 commitadas",
+      "at": "2026-10-03T21:01:03.885Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "git rev-parse --abbrev-ref HEAD",
+          "exitCode": 0,
+          "summary": "fix/v1.2.1-correcoes; specs v1.2.1 e v2.0 commitadas",
+          "at": "2026-10-03T21:01:03.885Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Branch `fix/v1.2.1-correcoes` a partir do `main`; commit da spec aprovada",
+      "verify": "git rev-parse --abbrev-ref HEAD"
+    },
+    "2": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 1,
+      "summary": "Vermelho esperado: 153 testes, 105 passam, 48 falham — T-201..T-205, T-207, T-209..T-227, T-229..T-237, T-239, T-240, T-242..T-249 e T-130 (factos v121-). T-228 e T-250 já passam (sem stack traces hoje; hook < 300 ms). Python: python skills/advogado-pt/scripts/test_scripts.py -> exit 1 (T206, T208, T241 e o teste antigo da prescrição 2030 -> 2027).",
+      "at": "2026-10-03T21:18:47.832Z",
+      "expected": "fail",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 1,
+          "summary": "Vermelho esperado: 153 testes, 105 passam, 48 falham — T-201..T-205, T-207, T-209..T-227, T-229..T-237, T-239, T-240, T-242..T-249 e T-130 (factos v121-). T-228 e T-250 já passam (sem stack traces hoje; hook < 300 ms). Python: python skills/advogado-pt/scripts/test_scripts.py -> exit 1 (T206, T208, T241 e o teste antigo da prescrição 2030 -> 2027).",
+          "at": "2026-10-03T21:18:47.832Z",
+          "expected": "fail",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Escrever os testes a falhar: `mcp-server/test/v121.test.mjs` (T-201 a T-250 exceto T-206, T-208, T-241, T-243), os novos casos de `plugin.test.mjs` (T-233 a T-237, T-239, T-244, T-249), `test_scripts.py` (T-206, T-208, T-241), `fixtures/paridade.json` e os factos `v121-` esperados",
+      "verify": "npm --prefix mcp-server test"
+    },
+    "3": {
+      "command": "npm --prefix mcp-server run build",
+      "exitCode": 0,
+      "summary": "tsc + esbuild OK (dist/index.js). fs-seguro: grava por tmp+rename, recusa junction em .advogado-pt e symlink no ficheiro, recusa '..'; r2 igual ao Decimal(repr(x)) ROUND_HALF_UP em 9 casos (135,795 -> 135,80).",
+      "at": "2026-10-03T21:20:49.700Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build",
+          "exitCode": 0,
+          "summary": "tsc + esbuild OK (dist/index.js). fs-seguro: grava por tmp+rename, recusa junction em .advogado-pt e symlink no ficheiro, recusa '..'; r2 igual ao Decimal(repr(x)) ROUND_HALF_UP em 9 casos (135,795 -> 135,80).",
+          "at": "2026-10-03T21:20:49.700Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] `fs-seguro.ts` (`dirProjeto`, `escreverSeguro`: `lstat` em cada componente, recusa de links, tmp + `rename`) e `calculators/arredondar.ts` (r2 meio para cima)",
+      "verify": "npm --prefix mcp-server run build"
+    },
+    "4": {
+      "command": "npm --prefix mcp-server run build",
+      "exitCode": 0,
+      "summary": "Build OK. parseDataEstrita recusa 2026-02-30, 2025-13-01 e 01/02/2026 nomeando o campo; aceita 2024-02-29; hojeLisboa(2026-10-01T23:30Z) = 2026-10-02. T-232 fica verde só com a tarefa 26 (tools.ts).",
+      "at": "2026-10-03T21:21:14.801Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build",
+          "exitCode": 0,
+          "summary": "Build OK. parseDataEstrita recusa 2026-02-30, 2025-13-01 e 01/02/2026 nomeando o campo; aceita 2024-02-29; hojeLisboa(2026-10-01T23:30Z) = 2026-10-02. T-232 fica verde só com a tarefa 26 (tools.ts).",
+          "at": "2026-10-03T21:21:14.801Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Helper de datas estrito (AAAA-MM-DD com verificação de calendário) partilhado por tools e CLI",
+      "verify": "npm --prefix mcp-server run build"
+    },
+    "5": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-201|T-202|T-203|T-205\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "4/4 (T-201, T-202, T-203, T-205). Suite completa: 155 testes, 109 passam, 44 falham (todos dos testes novos ainda por implementar), nenhum teste antes verde ficou vermelho.",
+      "at": "2026-10-03T21:23:36.484Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-201|T-202|T-203|T-205\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "4/4 (T-201, T-202, T-203, T-205). Suite completa: 155 testes, 109 passam, 44 falham (todos dos testes novos ainda por implementar), nenhum teste antes verde ficou vermelho.",
+          "at": "2026-10-03T21:23:36.484Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] `contarPrazo` com `judicial` (art. 138.º CPC, férias judiciais da LOSJ, urgente, transferência) e `corridos` com transferência e data legal; `calc_prazo` com `judicial`, `urgente` e default `corridos`; CLI `calc prazo --tipo judicial [--urgente]`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-201|T-202|T-203|T-205\" mcp-server/test/v121.test.mjs"
+    },
+    "6": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py -k T206",
+      "exitCode": 0,
+      "summary": "3/3 OK (casos partilhados de paridade.json, default corridos, entradas inválidas). CLI prazos.py --tipo judicial/--urgente; notas iguais às do TS.",
+      "at": "2026-10-03T21:24:48.193Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py -k T206",
+          "exitCode": 0,
+          "summary": "3/3 OK (casos partilhados de paridade.json, default corridos, entradas inválidas). CLI prazos.py --tipo judicial/--urgente; notas iguais às do TS.",
+          "at": "2026-10-03T21:24:48.193Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] `prazos.py` com os mesmos tipos e casos",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py -k T206"
+    },
+    "7": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-204\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1 (T-204: calc_prazo com judicial e default corridos; factos v121-prazos- verdes). SKILL.md com 'Regras de contagem' por meio de defesa; playbooks recebi-citacao (judicial, férias, 728.º, 785.º, 139.º n.º 5) e recebi-notificacao-at atualizados.",
+      "at": "2026-10-03T21:27:16.479Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-204\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1 (T-204: calc_prazo com judicial e default corridos; factos v121-prazos- verdes). SKILL.md com 'Regras de contagem' por meio de defesa; playbooks recebi-citacao (judicial, férias, 728.º, 785.º, 139.º n.º 5) e recebi-notificacao-at atualizados.",
+          "at": "2026-10-03T21:27:16.479Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Tipo de contagem por meio de defesa no SKILL.md, na description da tool e nos playbooks (`recebi-citacao-ou-injuncao`, `recebi-notificacao-at`, `cliente-nao-paga`); factos `v121-prazos-`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-204\" mcp-server/test/v121.test.mjs"
+    },
+    "8": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-207\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T208",
+      "exitCode": 0,
+      "summary": "T-207 1/1; T208 OK; T-243 (prescrição 2025 -> 2027, presuntiva) e test_servicos_profissionais verdes. Tabela por tipos do CC (309.º; 310.º b)/d)/g); 317.º b)/c) presuntivas com aviso) em TS e Python; calc_prescricao com datas estritas e try/catch.",
+      "at": "2026-10-03T21:29:32.577Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-207\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T208",
+          "exitCode": 0,
+          "summary": "T-207 1/1; T208 OK; T-243 (prescrição 2025 -> 2027, presuntiva) e test_servicos_profissionais verdes. Tabela por tipos do CC (309.º; 310.º b)/d)/g); 317.º b)/c) presuntivas com aviso) em TS e Python; calc_prescricao com datas estritas e try/catch.",
+          "at": "2026-10-03T21:29:32.577Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2] Tabela de prescrição por tipos do CC (309.º, 310.º b)/d)/g), 317.º b)/c) presuntivas com aviso) em TS e Python; tool com os tipos novos",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-207\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T208"
+    },
+    "9": {
+      "command": "node --test --test-name-pattern=\"T-209\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1 (factos v121-prescricao- verdes). cliente-nao-paga: 20 anos B2B (309.º), 2 anos presuntivos (317.º b)/c)), 323.º n.º 2, 40 € (DL 62/2013 art. 7.º), injunção B2B independentemente do valor; SKILL.md já alinhado na tarefa 7.",
+      "at": "2026-10-03T21:30:34.153Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-209\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1 (factos v121-prescricao- verdes). cliente-nao-paga: 20 anos B2B (309.º), 2 anos presuntivos (317.º b)/c)), 323.º n.º 2, 40 € (DL 62/2013 art. 7.º), injunção B2B independentemente do valor; SKILL.md já alinhado na tarefa 7.",
+          "at": "2026-10-03T21:30:34.153Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2] `cliente-nao-paga.md` e SKILL.md alinhados com a calculadora; factos `v121-prescricao-`",
+      "verify": "node --test --test-name-pattern=\"T-209\" mcp-server/test/v121.test.mjs"
+    },
+    "10": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-210\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-210 1/1. Regra reconfirmada no texto do DL 48-A/2024 (pgdlisboa.pt): CIS art. 7.º-A n.º 1 — dedução à coleta da verba 1.1 até 0,8% do limite do 1.º escalão -> 400.000 €: IMT 5.556,88 + Selo 555,69 = 6.112,57. TS, Python, tool, CLI e conteúdo (valores-2026, comprar-imovel, scripts/README) alinhados.",
+      "at": "2026-10-03T21:32:32.859Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-210\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-210 1/1. Regra reconfirmada no texto do DL 48-A/2024 (pgdlisboa.pt): CIS art. 7.º-A n.º 1 — dedução à coleta da verba 1.1 até 0,8% do limite do 1.º escalão -> 400.000 €: IMT 5.556,88 + Selo 555,69 = 6.112,57. TS, Python, tool, CLI e conteúdo (valores-2026, comprar-imovel, scripts/README) alinhados.",
+          "at": "2026-10-03T21:32:32.859Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Imposto do Selo com a isenção do IMT Jovem (total e parcial) em TS e Python — reconfirmar a regra da isenção parcial em fonte oficial",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-210\" mcp-server/test/v121.test.mjs"
+    },
+    "11": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-211\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-211 1/1. Coeficientes CIRS art. 31.º n.º 1 (0,15/0,75/0,35/0,95) em TS, Python e tool; dedução 4.587,09 € (8,54 × IAS) em valores-2026; fiscal.md sem 4.104 e com 0,35/0,95.",
+      "at": "2026-10-03T21:35:07.532Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-211\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-211 1/1. Coeficientes CIRS art. 31.º n.º 1 (0,15/0,75/0,35/0,95) em TS, Python e tool; dedução 4.587,09 € (8,54 × IAS) em valores-2026; fiscal.md sem 4.104 e com 0,35/0,95.",
+          "at": "2026-10-03T21:35:07.532Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Coeficientes do IRS simplificado e dedução de 4.587,09 € em TS, Python, `valores-2026.md` e `fiscal.md`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-211\" mcp-server/test/v121.test.mjs"
+    },
+    "12": {
+      "command": "node --test --test-name-pattern=\"T-212\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-212 1/1 (factos v121-ss-): ENI/EIRL 25,2%, TI 21,4%, base 1/3 do rendimento relevante trimestral (70% serviços/20% vendas), mínimo 20 €, MOE art. 69.º — em valores-2026.md e fiscal.md.",
+      "at": "2026-10-03T21:35:10.048Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-212\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-212 1/1 (factos v121-ss-): ENI/EIRL 25,2%, TI 21,4%, base 1/3 do rendimento relevante trimestral (70% serviços/20% vendas), mínimo 20 €, MOE art. 69.º — em valores-2026.md e fiscal.md.",
+          "at": "2026-10-03T21:35:10.048Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3][P] Segurança Social do ENI (25,2%, base, mínimo 20 €) e MOE (art. 69.º) em `valores-2026.md` e `fiscal.md`; factos `v121-ss-`",
+      "verify": "node --test --test-name-pattern=\"T-212\" mcp-server/test/v121.test.mjs"
+    },
+    "13": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-213\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-213 1/1. Escalão >15.000 € sem 'segue forma de ação' (DL 62/2013, art. 10.º) em TS e Python, com validação de valor positivo; tool com try/catch; cobrancas.md e playbook (tarefa 9) com a injunção B2B independentemente do valor.",
+      "at": "2026-10-03T21:35:59.878Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-213\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-213 1/1. Escalão >15.000 € sem 'segue forma de ação' (DL 62/2013, art. 10.º) em TS e Python, com validação de valor positivo; tool com try/catch; cobrancas.md e playbook (tarefa 9) com a injunção B2B independentemente do valor.",
+          "at": "2026-10-03T21:35:59.878Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Injunção nas transações comerciais sem limite de valor: playbook, `cobrancas.md`, calculadora de custas (TS e Python)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-213\" mcp-server/test/v121.test.mjs"
+    },
+    "14": {
+      "command": "node --test --test-name-pattern=\"T-214\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-214 1/1. Reconfirmado: CPPT 38.º-A n.º 4 (NCEPF, 5.º dia) vs 39.º (ViaCTT, 15.º dia). multas.md: Lei 107/2009 (15 dias contínuos, 20 dias, efeito devolutivo), RGCO 27.º 5/3/1 ano; template de defesa com 27.º/27.º-A; playbook da AT com o 5.º dia.",
+      "at": "2026-10-03T21:37:25.044Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-214\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-214 1/1. Reconfirmado: CPPT 38.º-A n.º 4 (NCEPF, 5.º dia) vs 39.º (ViaCTT, 15.º dia). multas.md: Lei 107/2009 (15 dias contínuos, 20 dias, efeito devolutivo), RGCO 27.º 5/3/1 ano; template de defesa com 27.º/27.º-A; playbook da AT com o 5.º dia.",
+          "at": "2026-10-03T21:37:25.044Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Notificações eletrónicas da AT (5.º dia) e contraordenações laborais/RGCO; factos `v121-notif-`, `v121-coima-`",
+      "verify": "node --test --test-name-pattern=\"T-214\" mcp-server/test/v121.test.mjs"
+    },
+    "15": {
+      "command": "node --test --test-name-pattern=\"T-215\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-215 1/1 (factos v121-arrend-). arrendamento.md: 1096.º renovação 3 anos; 1097.º 240/120/60 e n.º 3 (3 anos); 1098.º 120/90/60 e denúncia antecipada; 1100.º 120/60; 1101.º c) 5 anos; 1083.º mora igual ou superior a 3 meses.",
+      "at": "2026-10-03T21:38:13.796Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-215\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-215 1/1 (factos v121-arrend-). arrendamento.md: 1096.º renovação 3 anos; 1097.º 240/120/60 e n.º 3 (3 anos); 1098.º 120/90/60 e denúncia antecipada; 1100.º 120/60; 1101.º c) 5 anos; 1083.º mora igual ou superior a 3 meses.",
+          "at": "2026-10-03T21:38:13.796Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] `arrendamento.md` (arts. 1083.º, 1096.º a 1101.º CC); factos `v121-arrend-`",
+      "verify": "node --test --test-name-pattern=\"T-215\" mcp-server/test/v121.test.mjs"
+    },
+    "16": {
+      "command": "node --test --test-name-pattern=\"T-216\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-216 1/1 (17 factos v121-atual-). CISG desde 1/10/2021; CRA art. 14.º 11/9/2026 e 11/12/2027; social scoring público ou privado; CCP com DL 177/2026 (limiares AD 75.000/150.000, CP 130.000/1.000.000 — confirmados em 3 fontes secundárias, marcados para confirmar no DR) e secção Contratação Pública em valores-2026; NIS2 DL 125/2025 desde 3/4/2026; DL 67/2003, 290-D/99 e 281/99 revogados; AUJ 4/2014; laboral 112.º/149.º n.º 4; 7 ou 30 dias; réplica 584.º; Lei 147/2015, DL 159/99; CP 368.º-A.",
+      "at": "2026-10-03T21:40:54.089Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-216\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-216 1/1 (17 factos v121-atual-). CISG desde 1/10/2021; CRA art. 14.º 11/9/2026 e 11/12/2027; social scoring público ou privado; CCP com DL 177/2026 (limiares AD 75.000/150.000, CP 130.000/1.000.000 — confirmados em 3 fontes secundárias, marcados para confirmar no DR) e secção Contratação Pública em valores-2026; NIS2 DL 125/2025 desde 3/4/2026; DL 67/2003, 290-D/99 e 281/99 revogados; AUJ 4/2014; laboral 112.º/149.º n.º 4; 7 ou 30 dias; réplica 584.º; Lei 147/2015, DL 159/99; CP 368.º-A.",
+          "at": "2026-10-03T21:40:54.089Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Afirmações desatualizadas (CISG, CRA, CCP com o DL 177/2026 e secção de contratação pública em `valores-2026.md`, NIS2, diplomas revogados, ICE, IFICI, laboral, réplica, retenção, seguros, 368.º-A, social scoring); factos `v121-atual-`",
+      "verify": "node --test --test-name-pattern=\"T-216\" mcp-server/test/v121.test.mjs"
+    },
+    "17": {
+      "command": "node --test --test-name-pattern=\"T-217\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-217 1/1 (11 factos v121-contra-). Julgados de Paz vs alçada; graduação 749.º/751.º/CIRE 97.º; coima fiscal a 75% só depois de fixada (RGIT 78.º, confirmado em fonte); marca INPI remete para valores; B2C/OSS e 'IVA - autoliquidação' com remissão para iva-internacional.md; FGCT retirado; aviso obsoleto removido.",
+      "at": "2026-10-03T21:42:15.511Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-217\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-217 1/1 (11 factos v121-contra-). Julgados de Paz vs alçada; graduação 749.º/751.º/CIRE 97.º; coima fiscal a 75% só depois de fixada (RGIT 78.º, confirmado em fonte); marca INPI remete para valores; B2C/OSS e 'IVA - autoliquidação' com remissão para iva-internacional.md; FGCT retirado; aviso obsoleto removido.",
+          "at": "2026-10-03T21:42:15.511Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Contradições entre ficheiros; factos `v121-contra-`",
+      "verify": "node --test --test-name-pattern=\"T-217\" mcp-server/test/v121.test.mjs"
+    },
+    "18": {
+      "command": "node --test --test-name-pattern=\"T-218\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-218 1/1 (factos v121-playbook-). quero-despedir: CT 329.º (60 dias/1 ano), 355.º, 357.º n.º 1 (30 dias), 387.º n.º 2 (60 dias), 63.º (CITE); citação (728.º, 785.º, 139.º n.º 5) e cobrança (323.º n.º 2, 40 €) já feitas nas tarefas 7 e 9.",
+      "at": "2026-10-03T21:42:55.961Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-218\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-218 1/1 (factos v121-playbook-). quero-despedir: CT 329.º (60 dias/1 ano), 355.º, 357.º n.º 1 (30 dias), 387.º n.º 2 (60 dias), 63.º (CITE); citação (728.º, 785.º, 139.º n.º 5) e cobrança (323.º n.º 2, 40 €) já feitas nas tarefas 7 e 9.",
+          "at": "2026-10-03T21:42:55.961Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Prazos em falta nos playbooks; factos `v121-playbook-`",
+      "verify": "node --test --test-name-pattern=\"T-218\" mcp-server/test/v121.test.mjs"
+    },
+    "19": {
+      "command": "node --test --test-name-pattern=\"T-219\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-219 1/1. Rendas 2027: 1,0256 (+2,56%) apurado pelo INE a 10/9/2026, '(a confirmar)' até ao Aviso no DR (NRAU art. 24.º). Marcas fechadas onde a revisão confirmou (NIS2/DL 125/2025 em compliance e checklist); as restantes '(a confirmar)' mantêm-se com fonte.",
+      "at": "2026-10-03T21:43:41.265Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-219\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-219 1/1. Rendas 2027: 1,0256 (+2,56%) apurado pelo INE a 10/9/2026, '(a confirmar)' até ao Aviso no DR (NRAU art. 24.º). Marcas fechadas onde a revisão confirmou (NIS2/DL 125/2025 em compliance e checklist); as restantes '(a confirmar)' mantêm-se com fonte.",
+          "at": "2026-10-03T21:43:41.265Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4] Marcas: fechar as já confirmadas pela revisão; o que não se confirmar fica \"(a confirmar)\" com fonte; coeficiente de rendas 2027 conforme o aviso no DR (ou \"a confirmar\" até sair)",
+      "verify": "node --test --test-name-pattern=\"T-219\" mcp-server/test/v121.test.mjs"
+    },
+    "20": {
+      "command": "node --test --test-name-pattern=\"T-220\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-220 1/1 (factos v121-tpl-nulo-). CPCV: execução específica inafastável (830.º n.º 3), eficácia real só com forma e registo (413.º), forma do 410.º n.º 3 como requisito; acordo de revogação sem quitação total (CT 337.º n.º 3, 349.º n.º 5); SaaS sem resolução por insolvência (CIRE 119.º).",
+      "at": "2026-10-03T21:44:49.483Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-220\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-220 1/1 (factos v121-tpl-nulo-). CPCV: execução específica inafastável (830.º n.º 3), eficácia real só com forma e registo (413.º), forma do 410.º n.º 3 como requisito; acordo de revogação sem quitação total (CT 337.º n.º 3, 349.º n.º 5); SaaS sem resolução por insolvência (CIRE 119.º).",
+          "at": "2026-10-03T21:44:49.483Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5][P] Retirar as cláusulas nulas ou ineficazes (CPCV, acordo de revogação, SaaS, eficácia real)",
+      "verify": "node --test --test-name-pattern=\"T-220\" mcp-server/test/v121.test.mjs"
+    },
+    "21": {
+      "command": "node --test --test-name-pattern=\"T-221\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-221 1/1 (factos v121-tpl-req-). CITE (CT 63.º, 381.º d)); motivo–termo (141.º n.º 3) e renovações (148.º, 149.º n.os 3 e 4); cônjuge (1682.º-A, 1687.º) em trespasse, arrendamentos e pacto; DPA com o art. 28.º n.º 3 completo (apagar/devolver, auditorias); TI com dolo/culpa grave e danos pessoais (809.º CC, DL 446/85 art. 18.º); loja online com rejeição (DL 84/2021 art. 16.º), Roma I art. 6.º n.º 2, custo da devolução e botão da Diretiva 2023/2673 [VERIFICAR transposição].",
+      "at": "2026-10-03T21:46:31.342Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-221\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-221 1/1 (factos v121-tpl-req-). CITE (CT 63.º, 381.º d)); motivo–termo (141.º n.º 3) e renovações (148.º, 149.º n.os 3 e 4); cônjuge (1682.º-A, 1687.º) em trespasse, arrendamentos e pacto; DPA com o art. 28.º n.º 3 completo (apagar/devolver, auditorias); TI com dolo/culpa grave e danos pessoais (809.º CC, DL 446/85 art. 18.º); loja online com rejeição (DL 84/2021 art. 16.º), Roma I art. 6.º n.º 2, custo da devolução e botão da Diretiva 2023/2673 [VERIFICAR transposição].",
+          "at": "2026-10-03T21:46:31.342Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5][P] Acrescentar os requisitos (CITE, motivo–termo, cônjuge, art. 28.º RGPD no DPA, ressalva de dolo/culpa grave, loja online)",
+      "verify": "node --test --test-name-pattern=\"T-221\" mcp-server/test/v121.test.mjs"
+    },
+    "22": {
+      "command": "node --test --test-name-pattern=\"T-222\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-222 1/1 (factos v121-tpl-cit-). Teletrabalho 169.º-B; nota de culpa 98.º e 356.º; segredos comerciais CPI 313.º; reconhecimento de dívida sem epígrafe enganadora; carta de cobrança sem ameaça de execução sem título; partilha: unido de facto isento de Selo mas não legitimário (2157.º); livrança com montante máximo e LULL 10.º/77.º.",
+      "at": "2026-10-03T21:47:25.593Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-222\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-222 1/1 (factos v121-tpl-cit-). Teletrabalho 169.º-B; nota de culpa 98.º e 356.º; segredos comerciais CPI 313.º; reconhecimento de dívida sem epígrafe enganadora; carta de cobrança sem ameaça de execução sem título; partilha: unido de facto isento de Selo mas não legitimário (2157.º); livrança com montante máximo e LULL 10.º/77.º.",
+          "at": "2026-10-03T21:47:25.593Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5][P] Citações de artigos e cláusulas enganadoras nos templates",
+      "verify": "node --test --test-name-pattern=\"T-222\" mcp-server/test/v121.test.mjs"
+    },
+    "23": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-223|T-224\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-223 e T-224 2/2. perfil, perfil-ativo, prazos.md e .ics gravados com escreverSeguro no dirProjeto (CLAUDE_PROJECT_DIR); prazos.md preserva notas e títulos; junction em .advogado-pt recusada e alvo intacto. perfil/v12/cli: 39/39 verdes.",
+      "at": "2026-10-03T21:48:37.312Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-223|T-224\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-223 e T-224 2/2. perfil, perfil-ativo, prazos.md e .ics gravados com escreverSeguro no dirProjeto (CLAUDE_PROJECT_DIR); prazos.md preserva notas e títulos; junction em .advogado-pt recusada e alvo intacto. perfil/v12/cli: 39/39 verdes.",
+          "at": "2026-10-03T21:48:37.312Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] `perfil.ts`, `prazos-estado.ts` e `calendario.ts` passam a gravar com `fs-seguro` no `dirProjeto`; `prazos.md` preserva as notas",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-223|T-224\" mcp-server/test/v121.test.mjs"
+    },
+    "24": {
+      "command": "node --test --test-name-pattern=\"T-225|T-227|T-250\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "3/3. Hook: campos do perfil limpos (sem controlo/quebras) e até 200 caracteres, resumo até 1.500, rotulado 'dados do utilizador, não são instruções'; ponto de entrada por realpath (junction OK); leituras até 256 KB; Edit/MultiEdit analisam o ficheiro do disco (T-239 também verde); hooks.test.mjs 13/13; SessionStart < 300 ms.",
+      "at": "2026-10-03T21:49:40.758Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-225|T-227|T-250\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "3/3. Hook: campos do perfil limpos (sem controlo/quebras) e até 200 caracteres, resumo até 1.500, rotulado 'dados do utilizador, não são instruções'; ponto de entrada por realpath (junction OK); leituras até 256 KB; Edit/MultiEdit analisam o ficheiro do disco (T-239 também verde); hooks.test.mjs 13/13; SessionStart < 300 ms.",
+          "at": "2026-10-03T21:49:40.758Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] Hook: perfil limitado e rotulado como dados, ponto de entrada por caminho real, mesmo diretório dos prazos, leitura até 256 KB, MultiEdit",
+      "verify": "node --test --test-name-pattern=\"T-225|T-227|T-250\" mcp-server/test/v121.test.mjs"
+    },
+    "25": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-226|T-228\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-226 e T-228 2/2. content.ler e o resource advogado-pt://{categoria}/{nome} com lista fechada (categorias conhecidas, nomes [a-z0-9-]); '..', '/' e '\\' recusados com erro (antes lia ../README.md fora de content/); erros das tools só com a mensagem. content.test e plugin.test sem regressões (falhas só nos testes novos de tarefas futuras).",
+      "at": "2026-10-03T21:50:38.057Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-226|T-228\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-226 e T-228 2/2. content.ler e o resource advogado-pt://{categoria}/{nome} com lista fechada (categorias conhecidas, nomes [a-z0-9-]); '..', '/' e '\\' recusados com erro (antes lia ../README.md fora de content/); erros das tools só com a mensagem. content.test e plugin.test sem regressões (falhas só nos testes novos de tarefas futuras).",
+          "at": "2026-10-03T21:50:38.057Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] Resources com lista fechada de categorias e nomes; erros sem stack trace nem caminhos; sem segredos",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-226|T-228\" mcp-server/test/v121.test.mjs"
+    },
+    "26": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-229|T-231|T-232\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "3/3. Todas as tools passam por comErrosTratados (try/catch, mensagem sem stack nem caminhos, montantes negativos recusados nomeando o campo, exceto lucro_tributavel); datas por parseDataEstrita com o nome do campo; juros sem data_fim usam hojeLisboa(). Suite completa: 155 testes, 139 passam, 14 falham (todos de tarefas por fazer).",
+      "at": "2026-10-03T21:52:03.264Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-229|T-231|T-232\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "3/3. Todas as tools passam por comErrosTratados (try/catch, mensagem sem stack nem caminhos, montantes negativos recusados nomeando o campo, exceto lucro_tributavel); datas por parseDataEstrita com o nome do campo; juros sem data_fim usam hojeLisboa(). Suite completa: 155 testes, 139 passam, 14 falham (todos de tarefas por fazer).",
+          "at": "2026-10-03T21:52:03.264Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] Tools: datas estritas, montantes não negativos, `try/catch` em todas, juros com a data de Lisboa",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-229|T-231|T-232\" mcp-server/test/v121.test.mjs"
+    },
+    "27": {
+      "command": "node --test --test-name-pattern=\"T-230\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-230 1/1 (e T-205 e cli.test 3/3 verdes). CLI com argumentos estritos: obrigatórios nomeados, números validados, negativos recusados (exceto --lucro), datas por parseDataEstrita, juros sem --fim usam hojeLisboa; erro -> exit 1 sem NaN/undefined.",
+      "at": "2026-10-03T21:53:11.200Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-230\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-230 1/1 (e T-205 e cli.test 3/3 verdes). CLI com argumentos estritos: obrigatórios nomeados, números validados, negativos recusados (exceto --lucro), datas por parseDataEstrita, juros sem --fim usam hojeLisboa; erro -> exit 1 sem NaN/undefined.",
+          "at": "2026-10-03T21:53:11.200Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] CLI: argumentos estritos, códigos de saída, sem `NaN`/`undefined`",
+      "verify": "node --test --test-name-pattern=\"T-230\" mcp-server/test/v121.test.mjs"
+    },
+    "28": {
+      "command": "node --test --test-name-pattern=\"T-233|T-237\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "2/2. Description da skill com 974 caracteres (era 2008), sem < nem >, com exclusões (outros países, contratos técnicos de software); build.py valida name/description/bin e empacota com a pasta advogado-pt/ na raiz do .skill.",
+      "at": "2026-10-03T21:54:00.850Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-233|T-237\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "2/2. Description da skill com 974 caracteres (era 2008), sem < nem >, com exclusões (outros países, contratos técnicos de software); build.py valida name/description/bin e empacota com a pasta advogado-pt/ na raiz do .skill.",
+          "at": "2026-10-03T21:54:00.850Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] Description da skill ≤ 1024 (com exclusões) e validação no `build.py`; `.skill` com a pasta na raiz",
+      "verify": "node --test --test-name-pattern=\"T-233|T-237\" mcp-server/test/plugin.test.mjs"
+    },
+    "29": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-234\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-234 1/1. INSTRUCOES_MCP com 1.505 caracteres e as 32 tools; PERSONA completa só no prompt advogado_pt. Calço em index.ts para prompts/get sem arguments (bug do SDK 1.31, corrigido no 1.32).",
+      "at": "2026-10-03T21:59:02.442Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-234\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-234 1/1. INSTRUCOES_MCP com 1.505 caracteres e as 32 tools; PERSONA completa só no prompt advogado_pt. Calço em index.ts para prompts/get sem arguments (bug do SDK 1.31, corrigido no 1.32).",
+          "at": "2026-10-03T21:59:02.442Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] `INSTRUCOES_MCP` (≤ 2000, todas as tools) nas instruções do servidor; persona completa no prompt `advogado_pt`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-234\" mcp-server/test/plugin.test.mjs"
+    },
+    "30": {
+      "command": "node --test --test-name-pattern=\"T-235|T-236\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "2/2. commands/doctor.md -> diagnostico.md (git mv), sem mandar compilar; scripts citados com ${CLAUDE_PLUGIN_ROOT}/skills/advogado-pt/scripts/; /prazo com o tipo judicial; hook e README com /diagnostico; README e INSTALL sem 'npm run setup' para quem instala (só para desenvolver). plugin+hooks: 37/39 (faltam T-244 e T-249, tarefas 34 e 39).",
+      "at": "2026-10-03T22:00:33.176Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-235|T-236\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "2/2. commands/doctor.md -> diagnostico.md (git mv), sem mandar compilar; scripts citados com ${CLAUDE_PLUGIN_ROOT}/skills/advogado-pt/scripts/; /prazo com o tipo judicial; hook e README com /diagnostico; README e INSTALL sem 'npm run setup' para quem instala (só para desenvolver). plugin+hooks: 37/39 (faltam T-244 e T-249, tarefas 34 e 39).",
+          "at": "2026-10-03T22:00:33.176Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] `/doctor` → `/diagnostico`; `${CLAUDE_PLUGIN_ROOT}` nos commands; README sem `npm run setup` para quem instala pelo marketplace",
+      "verify": "node --test --test-name-pattern=\"T-235|T-236\" mcp-server/test/plugin.test.mjs"
+    },
+    "31": {
+      "command": "npm --prefix mcp-server audit --omit=dev --audit-level=high",
+      "exitCode": 0,
+      "summary": "found 0 vulnerabilities. SDK MCP 1.29.0 -> 1.31.0 (1.32.0 adiado: publicado há menos de 72 h, aviso do dev-guardian); npm audit fix: fast-uri 3.1.2 -> 3.1.8 (a vulnerabilidade alta, único transitivo no bundle), esbuild 0.28.2; bundle regenerado. T-239 (sem bin/, MultiEdit) verde desde a tarefa 24.",
+      "at": "2026-10-03T21:59:05.121Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server audit --omit=dev --audit-level=high",
+          "exitCode": 0,
+          "summary": "found 0 vulnerabilities. SDK MCP 1.29.0 -> 1.31.0 (1.32.0 adiado: publicado há menos de 72 h, aviso do dev-guardian); npm audit fix: fast-uri 3.1.2 -> 3.1.8 (a vulnerabilidade alta, único transitivo no bundle), esbuild 0.28.2; bundle regenerado. T-239 (sem bin/, MultiEdit) verde desde a tarefa 24.",
+          "at": "2026-10-03T21:59:05.121Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] Atualizar o SDK do MCP e as transitivas (`npm audit fix`) e regenerar o bundle; teste contra `bin/`",
+      "verify": "npm --prefix mcp-server audit --omit=dev --audit-level=high"
+    },
+    "32": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-240\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241",
+      "exitCode": 0,
+      "summary": "T-240 1/1 e T241 OK. r2 único (arredondar.ts) em salário, IRC e taxa de justiça e no formatarEuros; formatar_euros meio para cima nos 12 scripts Python; decidir_iva do Python reescrito como porta fiel do TS (mesmos textos e avisos). Suite: 155 testes, 146 passam, 7 falham (tarefas 33-39); Python 47/47.",
+      "at": "2026-10-03T22:02:32.317Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-240\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241",
+          "exitCode": 0,
+          "summary": "T-240 1/1 e T241 OK. r2 único (arredondar.ts) em salário, IRC e taxa de justiça e no formatarEuros; formatar_euros meio para cima nos 12 scripts Python; decidir_iva do Python reescrito como porta fiel do TS (mesmos textos e avisos). Suite: 155 testes, 146 passam, 7 falham (tarefas 33-39); Python 47/47.",
+          "at": "2026-10-03T22:02:32.317Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] Arredondamento único em TS; `formatar_euros` meio para cima em Python; textos do decisor de IVA iguais; casos partilhados nos dois lados",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-240\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241"
+    },
+    "33": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "155 testes: 153 passam, 0 falham, 2 saltados (T-238/T-251, externos opcionais); SMOKE OK (smoke-client agora no npm test). T-242 (contarPrazo úteis, custas 4.000/12.000, Selo nas heranças) e T-243 (testes que fixavam o erro substituídos) verdes.",
+      "at": "2026-10-03T22:10:28.180Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "155 testes: 153 passam, 0 falham, 2 saltados (T-238/T-251, externos opcionais); SMOKE OK (smoke-client agora no npm test). T-242 (contarPrazo úteis, custas 4.000/12.000, Selo nas heranças) e T-243 (testes que fixavam o erro substituídos) verdes.",
+          "at": "2026-10-03T22:10:28.180Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] Testes em falta (`contarPrazo`, custas, Selo nas heranças), smoke no `npm test`, substituição dos testes que fixavam o erro",
+      "verify": "npm --prefix mcp-server test"
+    },
+    "34": {
+      "command": "node --test --test-name-pattern=\"T-244\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-244 1/1. laboral.md: 'Especificidades por forma jurídica do empregador' (ENI / sociedade) a remeter para o perfil guardado; fiscal.md já sem 'Regime Atual — ENI' (tarefa 11). Nenhuma reference/checklist/playbook com perfil fixo.",
+      "at": "2026-10-03T22:03:18.029Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-244\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-244 1/1. laboral.md: 'Especificidades por forma jurídica do empregador' (ENI / sociedade) a remeter para o perfil guardado; fiscal.md já sem 'Regime Atual — ENI' (tarefa 11). Nenhuma reference/checklist/playbook com perfil fixo.",
+          "at": "2026-10-03T22:03:18.029Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10][P] Perfil genérico nas references e checklists; teste estendido",
+      "verify": "node --test --test-name-pattern=\"T-244\" mcp-server/test/plugin.test.mjs"
+    },
+    "35": {
+      "command": "node --test --test-name-pattern=\"T-245\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-245 1/1. SKILL.md: tabela Cálculo | Tool MCP | Script com os 15 calc_*; tabela Situação | Playbook | Tools (11 playbooks); Regras de contagem (tarefa 7); secção Superfícies (Claude Code, claude.ai/Desktop, outras IAs). scripts/README.md com os 14 scripts, tools e exemplos (antes só 8, com o mínimo de 3 meses e default uteis desatualizados). Índice de templates conferido: 62/62.",
+      "at": "2026-10-03T22:04:48.103Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-245\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-245 1/1. SKILL.md: tabela Cálculo | Tool MCP | Script com os 15 calc_*; tabela Situação | Playbook | Tools (11 playbooks); Regras de contagem (tarefa 7); secção Superfícies (Claude Code, claude.ai/Desktop, outras IAs). scripts/README.md com os 14 scripts, tools e exemplos (antes só 8, com o mínimo de 3 meses e default uteis desatualizados). Índice de templates conferido: 62/62.",
+          "at": "2026-10-03T22:04:48.103Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] SKILL.md: tabela cálculo → tool → script, encaminhamento, regras de contagem, superfícies; `scripts/README.md` e índice de templates corrigidos",
+      "verify": "node --test --test-name-pattern=\"T-245\" mcp-server/test/v121.test.mjs"
+    },
+    "36": {
+      "command": "node --test --test-name-pattern=\"T-246\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-246 1/1. fiscal-pessoal.md sem montantes (remete para valores-2026); valores-2026 ganha a tabela de deduções à coleta (CIRS 78.º-B a 78.º-E e 84.º) — a dedução das rendas estava desatualizada (502 €): 900 € em 2026 / 1.000 € em 2027, marcada '(a confirmar)'. Nenhum montante ≥ 100 € nas references fora do valores-2026.",
+      "at": "2026-10-03T22:05:42.183Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-246\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-246 1/1. fiscal-pessoal.md sem montantes (remete para valores-2026); valores-2026 ganha a tabela de deduções à coleta (CIRS 78.º-B a 78.º-E e 84.º) — a dedução das rendas estava desatualizada (502 €): 900 € em 2026 / 1.000 € em 2027, marcada '(a confirmar)'. Nenhum montante ≥ 100 € nas references fora do valores-2026.",
+          "at": "2026-10-03T22:05:42.183Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10][P] Montantes duplicados → remissões; teste dos montantes que ficam",
+      "verify": "node --test --test-name-pattern=\"T-246\" mcp-server/test/v121.test.mjs"
+    },
+    "37": {
+      "command": "node --test --test-name-pattern=\"T-247\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-247 1/1. mcp-server/scripts/gerar-integracoes.mjs copia PERSONA_INTEGRACOES (fonte única em src/persona.ts) para AGENTS.md, Codex, Gemini CLI, Cursor e ChatGPT entre marcadores; --check sai 0 (em dia). README com 32 tools; GEMINI.md e mcp-server/README.md sem '8 calculadoras'. npm script 'integracoes' e nota no CLAUDE.md.",
+      "at": "2026-10-03T22:07:27.584Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-247\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-247 1/1. mcp-server/scripts/gerar-integracoes.mjs copia PERSONA_INTEGRACOES (fonte única em src/persona.ts) para AGENTS.md, Codex, Gemini CLI, Cursor e ChatGPT entre marcadores; --check sai 0 (em dia). README com 32 tools; GEMINI.md e mcp-server/README.md sem '8 calculadoras'. npm script 'integracoes' e nota no CLAUDE.md.",
+          "at": "2026-10-03T22:07:27.584Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] Gerador das integrações a partir da fonte única; contagens da documentação",
+      "verify": "node --test --test-name-pattern=\"T-247\" mcp-server/test/v121.test.mjs"
+    },
+    "38": {
+      "command": "node --test --test-name-pattern=\"T-248\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-248 1/1. 26 references: 41 bullets ligados ao template/checklist/playbook existente (caminho verificado) e os restantes marcados '(a pedido)'. Teste T-248 alargado para aceitar caminhos existentes de assets/checklists/ e playbooks/, como diz o US-10.AC-5 ('nomes de ficheiro existentes').",
+      "at": "2026-10-03T22:08:56.155Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-248\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-248 1/1. 26 references: 41 bullets ligados ao template/checklist/playbook existente (caminho verificado) e os restantes marcados '(a pedido)'. Teste T-248 alargado para aceitar caminhos existentes de assets/checklists/ e playbooks/, como diz o US-10.AC-5 ('nomes de ficheiro existentes').",
+          "at": "2026-10-03T22:08:56.155Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10][P] Secções `## Templates` das references com nomes de ficheiro ou \"(a pedido)\"",
+      "verify": "node --test --test-name-pattern=\"T-248\" mcp-server/test/v121.test.mjs"
+    },
+    "39": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "153/155 (2 externos saltados), SMOKE OK. Versão 1.2.1 em plugin.json, marketplace.json (metadata e plugins[0]), package.json, mcp-server/package.json, index.ts e package-lock (T-249 verde); CHANGELOG ## [1.2.1] com os achados corrigidos; bundle e content regenerados; .skill com 136 ficheiros sob advogado-pt/. Tags locais v1.1.0 (fb6da1c) e v1.2.0 (1f8ff85) criadas; v1.2.1 fica para o merge, após a aprovação final.",
+      "at": "2026-10-03T22:10:31.329Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "153/155 (2 externos saltados), SMOKE OK. Versão 1.2.1 em plugin.json, marketplace.json (metadata e plugins[0]), package.json, mcp-server/package.json, index.ts e package-lock (T-249 verde); CHANGELOG ## [1.2.1] com os achados corrigidos; bundle e content regenerados; .skill com 136 ficheiros sob advogado-pt/. Tags locais v1.1.0 (fb6da1c) e v1.2.0 (1f8ff85) criadas; v1.2.1 fica para o merge, após a aprovação final.",
+          "at": "2026-10-03T22:10:31.329Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Bump 1.2.1 (6 sítios + `package-lock.json`), CHANGELOG com a lista dos achados corrigidos, bundle e conteúdo regenerados, `.skill`, tags `v1.1.0`, `v1.2.0` e `v1.2.1`",
+      "verify": "npm --prefix mcp-server test"
+    },
+    "40": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Python 47/47 OK. npm test 153/155 (2 externos saltados por defeito) + SMOKE OK; com ADVOGADO_PT_TESTES_EXTERNOS=1, T-238 (npm audit --omit=dev: 0 vulnerabilidades) e T-251 (claude plugin validate: passed; aviso informativo sobre o CLAUDE.md de manutenção na raiz) verdes. Hook SessionStart p50 3,6 ms, máx. 27 ms (500 prazos). dev-guardian: gitleaks 0 segredos (16 commits + working tree); Bandit 0 achados; Semgrep não correu em local_only (sem regras locais) — cobertura parcial do JS/TS.",
+      "at": "2026-10-03T22:11:39.864Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Python 47/47 OK. npm test 153/155 (2 externos saltados por defeito) + SMOKE OK; com ADVOGADO_PT_TESTES_EXTERNOS=1, T-238 (npm audit --omit=dev: 0 vulnerabilidades) e T-251 (claude plugin validate: passed; aviso informativo sobre o CLAUDE.md de manutenção na raiz) verdes. Hook SessionStart p50 3,6 ms, máx. 27 ms (500 prazos). dev-guardian: gitleaks 0 segredos (16 commits + working tree); Bandit 0 achados; Semgrep não correu em local_only (sem regras locais) — cobertura parcial do JS/TS.",
+          "at": "2026-10-03T22:11:39.864Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Suites completas, smoke, validador oficial do plugin, `npm audit`, desempenho do hook e scan local de segurança",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py"
+    },
+    "41": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "154/156 (2 externos opcionais saltados) + SMOKE OK; Python 49/49. Revisão final por dois revisores independentes contra os relatórios 1, 2, 4 e 5 de 3/10 (o 3 é de funcionalidades novas -> v2.0): os críticos estavam todos corrigidos; os 12 importantes ainda abertos e o Selo de 0,8% nas heranças foram corrigidos nesta tarefa (+6 factos v121-final). Quickstart automatizado OK (2/11/2026, 16/9/2026, 20 anos, IMT Jovem 0/0, junction recusada, CLI estrito, diagnóstico). Ficam para a v2.0: SKILL.md mais curto (I9) e melhorias menores do relatório 4 (regex do calendário, UID do .ics, maiúsculas em concluirPrazo, código morto).",
+      "at": "2026-10-03T22:19:23.714Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "154/156 (2 externos opcionais saltados) + SMOKE OK; Python 49/49. Revisão final por dois revisores independentes contra os relatórios 1, 2, 4 e 5 de 3/10 (o 3 é de funcionalidades novas -> v2.0): os críticos estavam todos corrigidos; os 12 importantes ainda abertos e o Selo de 0,8% nas heranças foram corrigidos nesta tarefa (+6 factos v121-final). Quickstart automatizado OK (2/11/2026, 16/9/2026, 20 anos, IMT Jovem 0/0, junction recusada, CLI estrito, diagnóstico). Ficam para a v2.0: SKILL.md mais curto (I9) e melhorias menores do relatório 4 (regex do calendário, UID do .ics, maiúsculas em concluirPrazo, código morto).",
+          "at": "2026-10-03T22:19:23.714Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Revisão final contra os cinco relatórios de 3/10/2026 (cada achado corrigido ou \"(a confirmar)\" com fonte) e quickstart no que for automatizável",
+      "verify": "npm --prefix mcp-server test"
+    }
+  },
+  "lastTickAt": "2026-10-03T22:19:23.714Z",
+  "ticks": {
+    "1": "2026-10-03T21:01:03.885Z",
+    "2": "2026-10-03T21:18:47.832Z",
+    "3": "2026-10-03T21:20:49.700Z",
+    "4": "2026-10-03T21:21:14.801Z",
+    "5": "2026-10-03T21:23:36.484Z",
+    "6": "2026-10-03T21:24:48.193Z",
+    "7": "2026-10-03T21:27:16.479Z",
+    "8": "2026-10-03T21:29:32.577Z",
+    "9": "2026-10-03T21:30:34.153Z",
+    "10": "2026-10-03T21:32:32.859Z",
+    "11": "2026-10-03T21:35:07.532Z",
+    "12": "2026-10-03T21:35:10.048Z",
+    "13": "2026-10-03T21:35:59.878Z",
+    "14": "2026-10-03T21:37:25.044Z",
+    "15": "2026-10-03T21:38:13.796Z",
+    "16": "2026-10-03T21:40:54.089Z",
+    "17": "2026-10-03T21:42:15.511Z",
+    "18": "2026-10-03T21:42:55.961Z",
+    "19": "2026-10-03T21:43:41.265Z",
+    "20": "2026-10-03T21:44:49.483Z",
+    "21": "2026-10-03T21:46:31.342Z",
+    "22": "2026-10-03T21:47:25.593Z",
+    "23": "2026-10-03T21:48:37.312Z",
+    "24": "2026-10-03T21:49:40.758Z",
+    "25": "2026-10-03T21:50:38.057Z",
+    "26": "2026-10-03T21:52:03.264Z",
+    "27": "2026-10-03T21:53:11.200Z",
+    "28": "2026-10-03T21:54:00.850Z",
+    "29": "2026-10-03T21:59:02.442Z",
+    "30": "2026-10-03T22:00:33.176Z",
+    "31": "2026-10-03T21:59:05.121Z",
+    "32": "2026-10-03T22:02:32.317Z",
+    "33": "2026-10-03T22:10:28.180Z",
+    "34": "2026-10-03T22:03:18.029Z",
+    "35": "2026-10-03T22:04:48.103Z",
+    "36": "2026-10-03T22:05:42.183Z",
+    "37": "2026-10-03T22:07:27.584Z",
+    "38": "2026-10-03T22:08:56.155Z",
+    "39": "2026-10-03T22:10:31.329Z",
+    "40": "2026-10-03T22:11:39.864Z",
+    "41": "2026-10-03T22:19:23.714Z"
+  },
+  "finishChecks": {
+    "mcp-test": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "156 testes: 154 passam, 0 falham, 2 saltados (externos opcionais); SMOKE OK",
+      "at": "2026-10-03T22:19:44.021Z",
+      "commit": "4422e96",
+      "dirty": false,
+      "observed": false,
+      "check": "npm --prefix mcp-server test",
+      "code": "734e638e228926d89977a1023a400a663f48efcb",
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "156 testes: 154 passam, 0 falham, 2 saltados (externos opcionais); SMOKE OK",
+          "at": "2026-10-03T22:19:44.021Z",
+          "commit": "4422e96",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    },
+    "py-test": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Ran 49 tests — OK",
+      "at": "2026-10-03T22:19:44.021Z",
+      "commit": "4422e96",
+      "dirty": false,
+      "observed": false,
+      "check": "python skills/advogado-pt/scripts/test_scripts.py",
+      "code": "734e638e228926d89977a1023a400a663f48efcb",
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 49 tests — OK",
+          "at": "2026-10-03T22:19:44.021Z",
+          "commit": "4422e96",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    }
+  },
+  "finished": {
+    "at": "2026-10-03T22:19:44.261Z",
+    "files": {
+      "mcp-server/test/v121.test.mjs": "4f459e607e001b554034ac99a3de193fea5841ce",
+      "mcp-server/test/plugin.test.mjs": "9cd3c7410f488ab954ed258704ad70a124e5c546",
+      "mcp-server/test/fixtures/paridade.json": "9008a5e3137fd0528c53051133961ca6d4c0a116",
+      "skills/advogado-pt/scripts/test_scripts.py": "f719de72a9b946b6704b4e203092a31a8ec3fe48",
+      "mcp-server/src/fs-seguro.ts": "74c574708e42b68b0d583591b4c7d5686307a203",
+      "mcp-server/src/calculators/arredondar.ts": "700d46fe71c518a0eb56759d3855bfd31082de63",
+      "mcp-server/src/calculators/datas.ts": "d7b9bcfbf7ca108e71122c19d66d1be599b24c74",
+      "mcp-server/src/calculators/prazos.ts": "0a896ea3609ec93669cea3fd1b169cb1f063cca4",
+      "mcp-server/src/tools.ts": "8f15b6bf2ff8b88778f921516759b698aa37ea3c",
+      "cli/advogado-pt.mjs": "a4d7616d533760315bd5c7d113ad2280fb6ccc29",
+      "skills/advogado-pt/scripts/prazos.py": "e1bd4f9a2e5048969099076fcb4a1712d937c77a",
+      "mcp-server/src/calculators/prescricao.ts": "6777ced32c4bc451678ce6e6a6aba26dc8d8d149",
+      "skills/advogado-pt/scripts/prescricao.py": "8ca8ca99e262985f26016b4ee8d095890d8035fe",
+      "mcp-server/src/calculators/imt.ts": "22b6ae6b27b11a00044dd53a4ca3dbd9a806a9ad",
+      "skills/advogado-pt/scripts/imt.py": "a39a022d7662b27431aad1d70b33dec5c6878259",
+      "mcp-server/src/calculators/irs.ts": "69b4ed726c3fa10816276a3be2cc65ba14f246ef",
+      "skills/advogado-pt/scripts/irs_simplificado.py": "3b5c0f25cb9404e08c44340202e00a911aba6c78",
+      "mcp-server/src/calculators/injuncao.ts": "11f4c742d8303593f44f48510432d92851944a4b",
+      "skills/advogado-pt/scripts/custas_injuncao.py": "e7bfe4ad24ac01e276de8d96fa3b6dc0a6898dbf",
+      "mcp-server/src/perfil.ts": "c1266c1521ce21aea4cb8ca32085165d5eef2848",
+      "mcp-server/src/prazos-estado.ts": "563cd30456c8ed090c77f1c6abf8c46c51dc52fc",
+      "mcp-server/src/calendario.ts": "7163fd4cd54a23ae77c1284ce5531f02166193bb",
+      "hooks/advogado-hook.mjs": "adfc4d848275d3e8d8d0320dea5888c279b7bd5b",
+      "mcp-server/src/resources.ts": "3039114e4f0a65b56445a8605ac3e8d2909a0c48",
+      "skills/advogado-pt/SKILL.md": "0edd4cfaabca5614bccb6d977b37c8e042384e5a",
+      "build.py": "c3ee78568c094388f0fcd31e57dda73f27b918d3",
+      "mcp-server/src/persona.ts": "4f4f22ec6f2d5590b377b5c5faea3fab992d5386",
+      "mcp-server/src/index.ts": "8aaf686ffbd0e25dfd70113694b648901b11db6f",
+      "mcp-server/src/calculators/salario.ts": "1ac4c3b613028f83a505eec673034bce03125351",
+      "mcp-server/src/calculators/irc.ts": "89dd36f6f4c9d884ebcff37fc7b3bebffc81bf17",
+      "mcp-server/src/calculators/taxa-justica.ts": "1ea03d4a7876abbe8c8a78276462ed2d7f731be0",
+      "skills/advogado-pt/scripts/iva_operacao.py": "9b562267ad0833a3b086c4a5fa151c6f523e268d",
+      "mcp-server/scripts/gerar-integracoes.mjs": "f16148a646fdaf0e4d22fb7e8e7331d49a2bf279"
+    }
+  }
+}

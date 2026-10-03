@@ -111,6 +111,8 @@ A sociedade designa um revisor oficial de contas sempre que a tal esteja obrigad
 O sócio único,
 
 _______________________________
+
+{{CONSENTIMENTO_CONJUGE: opcional — se o sócio for casado num regime que não seja o de separação de bens: «{{CONJUGE_NOME}}, cônjuge de {{SOCIO_NOME}}, declara dar o seu consentimento ao presente ato, quanto à entrada em espécie de imóvel ou estabelecimento, nos termos do art. 1682.º-A do Código Civil.» Cônjuge: _______________________________}}
 {{SOCIO_NOME}} {{SE_PESSOA_COLETIVA: representada por {{REPRESENTANTE}}}}
 
 <!-- Reconhecimento presencial da assinatura (art. 7.º, n.º 1, CSC), salvo constituição nos serviços de registo
@@ -154,5 +156,6 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Realização das entradas: na opção (B), o sócio confirma a entrega na primeira assembleia/decisão anual seguinte ao fim do 1.º exercício (art. 202.º, n.º 6); diferimento contratual de entradas em dinheiro só em datas certas ou factos determinados (art. 203.º).
 - [ ] Reserva legal: confirmar o limite mínimo absoluto do art. 218.º, n.º 2, CSC (ver `references/valores-2026.md`).
 - [ ] Entrada em espécie (incluindo o estabelecimento do ENI): relatório de ROC independente (art. 28.º CSC); inventário anexo; regime fiscal do art. 38.º CIRS, IVA e cessão dos contratos com clientes — `references/fiscal.md` e `assets/checklists/checklist-constituicao-sociedade.md`.
+- [ ] Cônjuge: se o sócio for casado num regime que não seja o de separação de bens, a entrada em espécie de imóvel ou de estabelecimento comercial (incluindo o do ENI) é uma alienação que exige o consentimento de ambos os cônjuges (CC, art. 1682.º-A, n.º 1, als. a) e b)), sob pena de anulabilidade (art. 1687.º).
 - [ ] Gerente não sócio: para o registo, declaração de aceitação e de inexistência de inibições, se não constar do pacto (art. 252.º, n.º 3, CSC).
 - [ ] Depois da constituição: início de atividade, Segurança Social, contabilidade certificada e conta bancária — `assets/checklists/checklist-constituicao-sociedade.md`; decisões anuais do sócio — `assets/templates/decisao-socio-unico.md`.

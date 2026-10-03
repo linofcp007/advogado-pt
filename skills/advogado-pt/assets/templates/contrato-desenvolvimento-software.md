@@ -4,7 +4,7 @@
      Base legal: CC — arts. 405.º, 428.º, 800.º, 809.º, 810.º, 1154.º e 1207.º e ss. (prestação de serviço / empreitada —
      a qualificação do desenvolvimento de software é discutida [VERIFICAR]); DL 252/94 (programas de computador) — arts.
      1.º, 3.º, 5.º, 9.º e 11.º; CDADC (DL 63/85) — arts. 14.º, 40.º-44.º, 56.º; DL 446/85 (cláusulas contratuais gerais) —
-     arts. 1.º, 5.º, 6.º e 18.º; DL 49/2018 (segredos comerciais); RGPD, art. 28.º; Lei 63/2011 (arbitragem voluntária);
+     arts. 1.º, 5.º, 6.º e 18.º; CPI (DL 110/2018), arts. 313.º e seguintes (segredos comerciais); RGPD, art. 28.º; Lei 63/2011 (arbitragem voluntária);
      Reg. (CE) 593/2008 (Roma I) e Reg. (UE) 1215/2012 (Bruxelas I bis) em contratos internacionais.
      Uso:
      - TITULARIDADE POR DEFEITO: no programa criado por encomenda, os direitos pertencem ao destinatário (o Cliente),

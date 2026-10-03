@@ -16,9 +16,9 @@
 - Depósito/caução: máximo 2 meses de renda (Art. 1076º CC)
 
 ## Tipos de Contrato
-- **Duração indeterminada**: denúncia pelo senhorio com antecedência (mínimo 2 anos se arrendamento ≤ 6 anos; 1 ano se > 6 anos; verificar atualizações)
-- **Prazo certo**: mínimo 1 ano (regra geral), renovável automaticamente por períodos iguais
-- **Habitação não permanente** e **fins não habitacionais**: regras específicas
+- **Prazo certo** (habitação): em regra entre 1 e 30 anos (CC, art. 1095.º); salvo estipulação em contrário, **renova-se automaticamente** no termo por períodos iguais ou de **3 anos**, se o prazo for inferior (CC, art. 1096.º, n.º 1)
+- **Duração indeterminada**: o senhorio só pode denunciar com fundamento (habitação própria ou de descendente em 1.º grau; demolição ou obras profundas) ou, sem fundamento, com **antecedência mínima de 5 anos** (CC, art. 1101.º, al. c))
+- **Habitação não permanente** e **fins não habitacionais**: regras específicas (no não habitacional prevalece o acordado — CC, arts. 1108.º e seguintes)
 
 ## Atualização de Rendas
 - Coeficiente anual fixado pelo INE (publicado em outubro para o ano seguinte)
@@ -33,14 +33,15 @@
 
 ## Cessação
 ### Pelo Senhorio
-- Denúncia (com antecedência legal e fundamento)
-- Resolução por incumprimento: mora > 3 meses ou falta de pagamento reiterada
-- Oposição à renovação: comunicação com antecedência mínima legal
+- **Oposição à renovação** (prazo certo — CC, art. 1097.º, n.º 1): antecedência de 240 dias (prazo ≥ 6 anos), 120 dias (1 a 6 anos), 60 dias (6 meses a 1 ano) ou 1/3 do prazo (< 6 meses). ⚠️ A oposição à **primeira renovação** só produz efeitos **3 anos depois da celebração** — o contrato mantém-se até lá (art. 1097.º, n.º 3), salvo necessidade de habitação própria ou de descendente (n.º 4)
+- **Denúncia** (duração indeterminada — CC, art. 1101.º): habitação própria/descendentes ou obras profundas (com os requisitos dos arts. 1102.º e 1103.º); sem fundamento, com antecedência mínima de **5 anos**
+- **Resolução por incumprimento** (CC, art. 1083.º): mora **igual ou superior a 3 meses** no pagamento da renda, encargos ou despesas (n.º 3), ou atrasos superiores a 8 dias mais de 4 vezes em 12 meses (n.º 4); o arrendatário pode pôr fim à mora nos termos do art. 1084.º
 - Necessidade do imóvel para habitação própria ou de familiares (requisitos específicos)
 
 ### Pelo Arrendatário
-- Denúncia: aviso prévio de 120 dias (contratos indeterminados, primeiros 6 anos) ou 60 dias (após 6 anos)
-- Oposição à renovação: antecedência de 120 dias do termo
+- **Oposição à renovação** (prazo certo — CC, art. 1098.º, n.º 1): antecedência de 120 dias (prazo ≥ 6 anos), **90 dias** (1 a 6 anos), 60 dias (6 meses a 1 ano) ou 1/3 do prazo (< 6 meses)
+- **Denúncia antecipada** (prazo certo): depois de decorrido 1/3 do prazo inicial ou da renovação, com antecedência de 120 dias (prazo ≥ 1 ano) ou 60 dias (< 1 ano) — CC, art. 1098.º, n.º 3
+- **Denúncia** (duração indeterminada — CC, art. 1100.º): antecedência de 120 dias (contrato com 1 ano ou mais) ou 60 dias (menos de 1 ano)
 - Resolução por incumprimento do senhorio
 
 ## Despejo
@@ -52,9 +53,9 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Contrato de arrendamento habitacional
-- Contrato de arrendamento não habitacional (escritório)
-- Carta de atualização de renda
-- Carta de denúncia pelo senhorio
-- Carta de oposição à renovação
-- Notificação de resolução por falta de pagamento
+- Contrato de arrendamento habitacional — `assets/templates/contrato-arrendamento-habitacional.md`
+- Contrato de arrendamento não habitacional (escritório) — `assets/templates/contrato-arrendamento-nao-habitacional.md`
+- Carta de atualização de renda — `assets/templates/carta-atualizacao-renda.md`
+- Carta de denúncia pelo senhorio (a pedido)
+- Carta de oposição à renovação (a pedido)
+- Notificação de resolução por falta de pagamento (a pedido)

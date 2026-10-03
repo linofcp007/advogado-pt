@@ -10,32 +10,34 @@
 - Lei 102/2009: regime de segurança e saúde no trabalho
 - Lei 105/2009: regulamentação do CT
 
-## Especificidades para ENI e Futura Unipessoal Lda
+## Especificidades por forma jurídica do empregador
 
-### Como ENI (situação atual)
+> Adapta ao perfil da empresa guardado (`.advogado-pt/perfil-empresa.md`); se não houver, pergunta a forma jurídica.
+
+### Empresário em nome individual (ENI)
 - Pode contratar trabalhadores normalmente
 - Responsabilidade pessoal e ilimitada pelas obrigações laborais
 - Contribuições SS: taxa contributiva de 23,75% (entidade empregadora) + 11% (trabalhador)
 - Seguro de acidentes de trabalho obrigatório
 - Comunicação de admissão à SS antes do início da atividade
 
-### Como Unipessoal Lda (futuro)
+### Sociedade (Unipessoal Lda, Lda, SA)
 - Responsabilidade limitada ao património da sociedade
 - Mesmas obrigações laborais do CT
-- Obrigação de relatório único anual
-- Considerar: gerente pode acumular funções, mas atenção à qualificação do vínculo
+- Relatório Único anual — obrigatório para qualquer empregador com trabalhadores
+- Gerente ou administrador: pode acumular funções com um contrato de trabalho, mas atenção à qualificação do vínculo e ao regime dos membros de órgãos estatutários na Segurança Social (`references/valores-2026.md`)
 
 ## Contratação
 
 ### Tipos de Contrato
 - **Sem termo** (regra geral): não exige forma escrita mas é recomendável
-- **A termo certo**: máx. 2 anos, renovável até 3x, motivo justificativo obrigatório (Art. 140º CT)
-- **A termo incerto**: para substituição ou tarefa definida
+- **A termo certo**: máx. 2 anos, renovável até 3x, motivo justificativo obrigatório (Art. 140º CT); a duração total das renovações não pode exceder a do período inicial (CT, art. 149.º, n.º 4)
+- **A termo incerto**: para substituição ou tarefa definida; duração máxima de 4 anos (CT, art. 148.º)
 - **Tempo parcial**: por escrito, com indicação do período normal de trabalho
 - **Teletrabalho**: acordo escrito obrigatório (Arts. 165º-171º CT, Lei 83/2021)
 
 ### Período Experimental
-- Sem termo: 90 dias (regra), 180 dias (cargos complexos), 240 dias (direção/quadros superiores)
+- Sem termo: 90 dias (regra), 180 dias (cargos complexos e trabalhador à procura do primeiro emprego ou desempregado de longa duração — CT, art. 112.º, n.º 1, al. b)), 240 dias (direção/quadros superiores)
 - A termo ≥ 6 meses: 30 dias
 - A termo < 6 meses: 15 dias
 
@@ -82,10 +84,10 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Contrato de trabalho sem termo
-- Contrato de trabalho a termo certo
-- Acordo de teletrabalho
-- Nota de culpa (processo disciplinar)
-- Carta de despedimento com justa causa
-- Acordo de revogação (cessação por mútuo acordo)
-- Carta de denúncia pelo trabalhador
+- Contrato de trabalho sem termo — `assets/templates/contrato-trabalho-sem-termo.md`
+- Contrato de trabalho a termo certo — `assets/templates/contrato-trabalho-termo-certo.md`
+- Acordo de teletrabalho — `assets/templates/acordo-teletrabalho.md`
+- Nota de culpa (processo disciplinar) — `assets/templates/nota-de-culpa.md`
+- Carta de despedimento com justa causa — `assets/templates/carta-despedimento-justa-causa.md`
+- Acordo de revogação (cessação por mútuo acordo) — `assets/templates/acordo-revogacao.md`
+- Carta de denúncia pelo trabalhador (a pedido)

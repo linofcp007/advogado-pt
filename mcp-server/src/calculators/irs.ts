@@ -15,12 +15,14 @@ type TipoAtividade =
   | "servicos-outros"
   | "propriedade-intelectual";
 
-// Coeficientes do regime simplificado (Art. 31.º CIRS).
+// Coeficientes do regime simplificado (CIRS, art. 31.º, n.º 1): al. a) mercadorias 0,15;
+// al. b) atividades da tabela do art. 151.º 0,75; al. c) restantes serviços 0,35;
+// al. d) cessão ou utilização temporária de propriedade intelectual ou industrial 0,95.
 const COEFICIENTES: Record<TipoAtividade, number> = {
   mercadorias: 0.15,
   "servicos-151": 0.75,
   "servicos-outros": 0.35,
-  "propriedade-intelectual": 0.5,
+  "propriedade-intelectual": 0.95,
 };
 
 export function calcularIRSSimplificado(

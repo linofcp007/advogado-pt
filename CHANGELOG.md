@@ -4,6 +4,39 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [1.2.1] - 2026-10
+
+**Correções da revisão completa de 3/10/2026.** Sem funcionalidades novas: prazos, prescrição, impostos e conteúdo jurídico corrigidos e reconfirmados em fonte; escrita de ficheiros e hook endurecidos; distribuição alinhada com as regras do Claude Code e do claude.ai. Cada correção jurídica ficou protegida por um facto de referência (`factos.json`, ids `v121-`) com o texto errado em `naoContem`.
+
+### Fixed
+
+- **Prazos** (`calc_prazo`, `prazos.py`, CLI): novo tipo `judicial` (CPC, art. 138.º) — contínuo, suspenso nas **férias judiciais** (LOSJ, art. 28.º), processo `urgente`, termo em dia não útil transferido; `corridos` passa a transferir o termo e a mostrar o termo legal; o tipo por defeito passa a `corridos` (era `uteis`). Exemplo: 30 dias desde 1/10/2026 → 2/11/2026 (antes 13/11/2026 em dias úteis). SKILL.md com as **regras de contagem** por meio de defesa; playbooks de citação/injunção (embargos 728.º, penhora 785.º, multa do 139.º, n.º 5) e da AT atualizados.
+- **Prescrição** (`calc_prescricao`, `prescricao.py`): faturas entre empresas **20 anos** (CC, art. 309.º — antes 5 anos); serviços de profissões liberais e vendas a não comerciantes **2 anos presuntivos** (art. 317.º, als. b) e c)), com aviso; rendas, juros e prestações periódicas pelas alíneas certas do art. 310.º; Lei 23/96 nos serviços essenciais. Playbook `cliente-nao-paga` alinhado (CC 323.º, n.º 2; indemnização de 40 € do DL 62/2013).
+- **IMT Jovem**: também isenta o **Imposto do Selo** (dedução à coleta do art. 7.º-A CIS, DL 48-A/2024) — 400.000 €: Selo 555,69 € (antes 3.200 €).
+- **IRS simplificado**: propriedade intelectual com coeficiente **0,95** (CIRS, art. 31.º, n.º 1, al. d) — antes 0,50); dedução de **4.587,09 €**; tabela das deduções à coleta no `valores-2026.md` (rendas: 900 € em 2026, a confirmar — antes 502 €).
+- **Segurança Social**: ENI e EIRL a **25,2%**, base de 1/3 do rendimento relevante, mínimo de 20 €; MOE no art. 69.º do Código Contributivo.
+- **Injunção**: nas transações comerciais **sem limite de valor** (DL 62/2013, art. 10.º) — calculadora e conteúdo.
+- **Notificações da AT** na área reservada do Portal das Finanças: 5.º dia (CPPT, art. 38.º-A, n.º 4); **coimas laborais** pela Lei 107/2009 (15 dias contínuos, impugnação em 20 dias com efeito devolutivo); prescrição do RGCO (art. 27.º: 5, 3 ou 1 ano); coima fiscal a 75% só depois de fixada (RGIT, art. 78.º).
+- **Arrendamento** pelos arts. 1083.º e 1096.º a 1101.º CC (renovação por 3 anos, oposição à 1.ª renovação, antecedências 240/120/90/60, denúncia com 5 anos, mora igual ou superior a 3 meses).
+- **Afirmações desatualizadas**: CISG em vigor em Portugal desde 1/10/2021; CRA com comunicação de vulnerabilidades desde 11/9/2026; social scoring proibido também a privados; **CCP com o DL 177/2026** e nova secção Contratação Pública no `valores-2026.md`; NIS2 pelo DL 125/2025; DL 67/2003, DL 290-D/99 e DL 281/99 revogados; ICE e IFICI; período experimental de 180 dias (1.º emprego); renovações do termo (CT 149.º, n.º 4); aviso de 7 ou 30 dias no período experimental; réplica (CPC 584.º); Lei 147/2015 e DL 159/99; branqueamento no CP 368.º-A; AUJ 4/2014.
+- **Contradições entre ficheiros** (alçada vs Julgados de Paz, graduação de créditos, IVA B2C/autoliquidação, FGCT) e **prazos em falta** no `quero-despedir` (CT 329.º, 357.º, 387.º, CITE).
+- **Templates**: retiradas cláusulas nulas ou ineficazes (afastar a execução específica no CPCV, quitação total no acordo de revogação — CT 337.º, n.º 3 —, resolução por insolvência no SaaS — CIRE 119.º); acrescentados requisitos (parecer da CITE, relação motivo–termo, consentimento do cônjuge — CC 1682.º-A —, conteúdo do art. 28.º, n.º 3, RGPD no DPA, dolo/culpa grave e danos pessoais na limitação de responsabilidade, direito de rejeição, Roma I e custo da devolução na loja online); citações corrigidas (teletrabalho 169.º-B, poder disciplinar 98.º, segredos comerciais no CPI, unido de facto não é herdeiro legitimário, montante máximo na livrança).
+- Coeficiente de atualização das rendas para 2027 (1,0256, a confirmar com o aviso no DR).
+
+### Security
+
+- Escrita de perfil, perfil ativo, prazos e calendário por um módulo único (`fs-seguro.ts`): mesmo diretório que o hook lê (`CLAUDE_PROJECT_DIR`), ficheiro temporário + renomeação, **recusa de symlinks e junctions**; `prazos.md` preserva as notas escritas à mão.
+- Hook: perfil injetado limitado (200 caracteres por campo, 1.500 no total, sem quebras de linha) e rotulado como **dados do utilizador, não instruções**; ponto de entrada por caminho real (funciona através de junctions); leituras até 256 KB; Edit/MultiEdit analisam o ficheiro gravado.
+- Resources MCP com lista fechada de categorias e nomes (antes era possível ler `../README.md` fora do conteúdo); erros sem stack trace nem caminhos.
+- Tools: datas estritas (2026-02-30 recusada, com o nome do campo), montantes negativos recusados, todas com tratamento de erros; juros sem data de fim usam a data de Lisboa. CLI com argumentos estritos (sem `NaN`/`undefined`, código de saída 1).
+- SDK MCP 1.29 → 1.31 e `npm audit fix` (fast-uri, vulnerabilidade alta) — `npm audit --omit=dev` sem vulnerabilidades. O 1.32 fica para quando tiver mais de 72 h publicado.
+
+### Changed
+
+- **Distribuição**: description da skill com 974 caracteres (limite 1024) e validação no `build.py`; o `.skill` tem a pasta `advogado-pt/` na raiz; instruções do servidor MCP com até 2.000 caracteres e todas as tools (persona completa no prompt `advogado_pt`); **`/doctor` passa a `/diagnostico`** (`/doctor` é nativo do Claude Code); commands com `${CLAUDE_PLUGIN_ROOT}`; instalação pelo marketplace sem compilar nada.
+- **Paridade TS/Python**: arredondamento único meio para cima nos dois lados (`r2` e `formatar_euros`), decisor de IVA com os mesmos textos, casos partilhados (`fixtures/paridade.json`); smoke end-to-end no `npm test`.
+- SKILL.md com a tabela cálculo → tool → script, a tabela situação → playbook e as superfícies (Claude Code, claude.ai, outras IAs); referências e checklists sem perfil fixo; montantes só no `valores-2026.md`; secções `## Templates` com ficheiros reais ou "(a pedido)"; integrações geradas a partir de uma fonte única (`gerar-integracoes.mjs`).
+
 ## [1.2.0] - 2026-10
 
 **Advogado operacional.** O plugin passa de responder a perguntas a acompanhar a empresa no dia a dia: calendário de obrigações a partir do perfil, prazos em curso com aviso, pacote do empregador, fisco internacional, mais contratos e setores regulados — e os valores e pontos de doutrina que estavam por confirmar foram verificados.

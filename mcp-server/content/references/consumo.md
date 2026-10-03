@@ -5,7 +5,7 @@
 ## Legislação Base
 - Lei 24/96: Lei de Defesa do Consumidor
 - DL 24/2014: contratos à distância e fora do estabelecimento
-- DL 67/2003: venda de bens de consumo e garantias (atualizado pelo DL 84/2021)
+- DL 67/2003: antigo regime da venda de bens de consumo — **revogado pelo DL 84/2021**; só releva para contratos celebrados antes de 1/1/2022
 - DL 84/2021: direitos do consumidor na compra e venda de bens, conteúdos e serviços digitais
 - DL 446/85: cláusulas contratuais gerais
 
@@ -49,7 +49,7 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Termos e Condições para loja online (conforme DL 24/2014)
-- Política de devoluções e reembolsos
-- Resposta a reclamação no livro de reclamações
-- Informação pré-contratual para vendas à distância
+- Termos e Condições para loja online (conforme DL 24/2014) — `assets/templates/termos-condicoes-loja-online.md`
+- Política de devoluções e reembolsos (a pedido)
+- Resposta a reclamação no livro de reclamações (a pedido)
+- Informação pré-contratual para vendas à distância (a pedido)

@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
 """Contador de prazos legais (Portugal).
 
-Conta um prazo a partir de uma data de início, em dias úteis ou em dias
-corridos, e devolve a data-limite.
+Conta um prazo a partir de uma data de início e devolve a data-limite e o termo
+legal. Três tipos (os mesmos do port TypeScript, `calculators/prazos.ts`):
+  judicial  — prazos de processos em tribunal (CPC, art. 138.º): contínuo,
+              suspende-se nas férias judiciais (LOSJ, art. 28.º: 22/12 a 3/1,
+              Domingo de Ramos a Segunda-feira de Páscoa, 16/7 a 31/8), salvo
+              processos urgentes ou prazos de 6 meses ou mais; termo em dia não
+              útil passa para o 1.º dia útil seguinte.
+  corridos  — dias seguidos (CC, art. 279.º), por defeito; termo em dia não útil
+              passa para o 1.º dia útil seguinte, com a data legal à parte.
+  uteis     — só contam os dias úteis (ex.: CPA, art. 87.º).
 
 Para dias úteis, salta sábados, domingos e feriados nacionais de Portugal:
   Fixos: 1 jan, 25 abr, 1 mai, 10 jun, 15 ago, 5 out, 1 nov, 1 dez,
@@ -16,8 +24,9 @@ A contagem de dias úteis começa no dia útil seguinte à data de início
 (o dia de início não conta), seguindo a regra processual comum.
 
 Exemplos de uso:
-  python scripts/prazos.py --inicio 2026-03-02 --dias 10
-  python scripts/prazos.py --inicio 2026-03-02 --dias 30 --tipo corridos
+  python scripts/prazos.py --inicio 2026-10-01 --dias 30 --tipo judicial
+  python scripts/prazos.py --inicio 2026-08-10 --dias 15 --tipo judicial --urgente
+  python scripts/prazos.py --inicio 2026-03-02 --dias 30
   python scripts/prazos.py --inicio 2026-01-05 --dias 15 --tipo uteis
 """
 
@@ -28,8 +37,8 @@ import datetime
 def formatar_data_pt(data):
     """Formata uma data como 'YYYY-MM-DD (dia-da-semana)' em português."""
     dias_semana = [
-        "segunda-feira", "terca-feira", "quarta-feira", "quinta-feira",
-        "sexta-feira", "sabado", "domingo",
+        "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira",
+        "sexta-feira", "sábado", "domingo",
     ]
     return f"{data.isoformat()} ({dias_semana[data.weekday()]})"
 
@@ -94,46 +103,129 @@ def contar_dias_uteis(inicio, n_dias):
     return data
 
 
+MAX_DIAS = 3650
+TIPOS = ("judicial", "corridos", "uteis")
+
+
+def em_ferias_judiciais(data):
+    """Férias judiciais (LOSJ — Lei 62/2013, art. 28.º)."""
+    if (data.month == 12 and data.day >= 22) or (data.month == 1 and data.day <= 3):
+        return True
+    if (data.month == 7 and data.day >= 16) or data.month == 8:
+        return True
+    pascoa = domingo_pascoa(data.year)
+    return pascoa - datetime.timedelta(days=7) <= data <= pascoa + datetime.timedelta(days=1)
+
+
+def contar_prazo(inicio, dias, tipo="corridos", urgente=False):
+    """Conta um prazo (o dia de início não conta — CC, art. 279.º, al. b)).
+
+    Devolve um dict: data_limite, data_legal, transferido, dias_suspensos, nota.
+    """
+    if not isinstance(inicio, datetime.date):
+        raise ValueError("Data de início inválida. Usa AAAA-MM-DD.")
+    if isinstance(dias, bool) or not isinstance(dias, int) or dias < 0 or dias > MAX_DIAS:
+        raise ValueError(f"O número de dias tem de ser um inteiro entre 0 e {MAX_DIAS}.")
+    if tipo not in TIPOS:
+        raise ValueError(f"Tipo de prazo desconhecido: '{tipo}'. Usa judicial, corridos ou uteis.")
+    um_dia = datetime.timedelta(days=1)
+    cache = {}
+    # Prazos de 6 meses ou mais não se suspendem nas férias (CPC, art. 138.º, n.º 1).
+    suspende = tipo == "judicial" and not urgente and dias < 180
+    suspensos = 0
+    if tipo == "uteis":
+        legal = contar_dias_uteis(inicio, dias)
+    elif not suspende:
+        legal = inicio + datetime.timedelta(days=dias)
+    else:
+        legal = inicio
+        contados = 0
+        while contados < dias:
+            legal += um_dia
+            if em_ferias_judiciais(legal):
+                suspensos += 1
+            else:
+                contados += 1
+    limite = legal
+    while not eh_dia_util(limite, cache) or (suspende and em_ferias_judiciais(limite)):
+        limite += um_dia
+    transferido = limite != legal
+    dia_legal = formatar_data_pt(legal)
+
+    if tipo == "judicial":
+        if urgente:
+            nota = ("Processo urgente: o prazo corre também nas férias judiciais "
+                    "(CPC, art. 138.º, n.º 1). ")
+        else:
+            nota = ("Prazo judicial (CPC, art. 138.º): contínuo, suspende-se nas férias judiciais "
+                    "(LOSJ, art. 28.º: 22/12 a 3/1, Domingo de Ramos a Segunda-feira de Páscoa, "
+                    "16/7 a 31/8)"
+                    + (", exceto nos prazos de 6 meses ou mais, como este" if dias >= 180 else "")
+                    + (f" — {suspensos} dias de férias não contaram" if suspensos else "")
+                    + ". ")
+        if transferido:
+            nota += (f"O termo legal, {dia_legal}, passa para o 1.º dia útil seguinte "
+                     "(art. 138.º, n.º 2). ")
+        nota += ("O ato pode ainda ser praticado nos 3 dias úteis seguintes, com multa "
+                 "(CPC, art. 139.º, n.º 5). Feriados municipais não estão incluídos.")
+    elif tipo == "corridos":
+        nota = "Prazo em dias seguidos (CC, art. 279.º): o dia de início não conta. "
+        if transferido:
+            nota += (f"O termo legal é {dia_legal}; se o ato tiver de ser praticado num tribunal "
+                     "ou serviço encerrado nesse dia, passa para o 1.º dia útil seguinte "
+                     "(CC, art. 279.º, al. e); CPA, art. 87.º). ")
+        nota += ("Para prazos de processos em tribunal (contestação, oposição, recurso) usa o "
+                 "tipo 'judicial'. Feriados municipais não estão incluídos.")
+    else:
+        nota = ("Contagem em dias úteis (ex.: procedimento administrativo — CPA, art. 87.º): "
+                "saltam-se sábados, domingos e feriados nacionais. Para prazos de processos em "
+                "tribunal usa o tipo 'judicial'. Feriados municipais não estão incluídos.")
+    return {"data_limite": limite, "data_legal": legal, "transferido": transferido,
+            "dias_suspensos": suspensos, "nota": nota}
+
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Conta prazos legais (dias úteis ou corridos) em Portugal.",
+        description="Conta prazos legais em Portugal (judicial, corridos ou úteis).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
         "--inicio", required=True,
-        help="Data de início do prazo (YYYY-MM-DD)",
+        help="Data de início do prazo (AAAA-MM-DD); o dia de início não conta",
     )
     parser.add_argument(
         "--dias", type=int, required=True,
         help="Número de dias do prazo",
     )
     parser.add_argument(
-        "--tipo", choices=["uteis", "corridos"], default="uteis",
-        help="Tipo de contagem: uteis (default) ou corridos.",
+        "--tipo", choices=list(TIPOS), default="corridos",
+        help="judicial (CPC 138.º, férias judiciais), corridos (default) ou uteis.",
+    )
+    parser.add_argument(
+        "--urgente", action="store_true",
+        help="Processo urgente: o prazo judicial corre nas férias.",
     )
     args = parser.parse_args()
 
     try:
         inicio = datetime.date.fromisoformat(args.inicio)
     except ValueError:
-        parser.error(f"Data inválida: '{args.inicio}'. Usa YYYY-MM-DD.")
+        parser.error(f"Data inválida em --inicio: '{args.inicio}'. Usa AAAA-MM-DD.")
 
-    if args.dias < 0:
-        parser.error("O número de dias não pode ser negativo.")
+    try:
+        r = contar_prazo(inicio, args.dias, args.tipo, urgente=args.urgente)
+    except ValueError as e:
+        parser.error(str(e))
 
-    if args.tipo == "corridos":
-        limite = inicio + datetime.timedelta(days=args.dias)
-    else:
-        limite = contar_dias_uteis(inicio, args.dias)
-
+    sufixo = ", urgente" if args.urgente else ""
     print("=== Contagem de Prazo ===")
     print(f"Data de início: {formatar_data_pt(inicio)}")
-    print(f"Prazo:          {args.dias} dias {args.tipo}")
-    print(f"DATA-LIMITE:    {formatar_data_pt(limite)}")
+    print(f"Prazo:          {args.dias} dias ({args.tipo}{sufixo})")
+    if r["transferido"]:
+        print(f"Termo legal:    {formatar_data_pt(r['data_legal'])}")
+    print(f"DATA-LIMITE:    {formatar_data_pt(r['data_limite'])}")
     print()
-    print("Nota: Regra geral processual: se o prazo terminar em dia não útil, "
-          "transfere-se para o 1.º dia útil seguinte (Art. 138.º CPC). "
-          "Feriados municipais não estão incluídos.")
+    print(f"Nota: {r['nota']}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,4032 @@
+{
+  "_nota": "Casos partilhados TS/Python (v1.2.1, T-240/T-241). salario/custo: referência = arredondamento meio para cima (Python Decimal). iva/irc/taxaJustica: textos e valores canónicos do TS. prazos/prescricao/imt/irs/injuncao: calculados à mão a partir da lei.",
+  "salario": [
+    {
+      "in": {
+        "bruto": 1500,
+        "tabela": "I",
+        "dependentes": 0,
+        "subsidioRefeicaoDia": 0,
+        "diasRefeicao": 0,
+        "refeicaoCartao": false
+      },
+      "out": {
+        "segurancaSocial": 165,
+        "retencaoIRS": 168.17,
+        "liquido": 1166.83,
+        "refeicaoTributavel": 0
+      }
+    },
+    {
+      "in": {
+        "bruto": 1000,
+        "tabela": "I",
+        "dependentes": 0,
+        "subsidioRefeicaoDia": 0,
+        "diasRefeicao": 0,
+        "refeicaoCartao": false
+      },
+      "out": {
+        "segurancaSocial": 110,
+        "retencaoIRS": 36,
+        "liquido": 854,
+        "refeicaoTributavel": 0
+      }
+    },
+    {
+      "in": {
+        "bruto": 1234.5,
+        "tabela": "I",
+        "dependentes": 0,
+        "subsidioRefeicaoDia": 0,
+        "diasRefeicao": 0,
+        "refeicaoCartao": false
+      },
+      "out": {
+        "segurancaSocial": 135.8,
+        "retencaoIRS": 104.18,
+        "liquido": 994.52,
+        "refeicaoTributavel": 0
+      }
+    },
+    {
+      "in": {
+        "bruto": 2000,
+        "tabela": "III",
+        "dependentes": 2,
+        "subsidioRefeicaoDia": 0,
+        "diasRefeicao": 0,
+        "refeicaoCartao": false
+      },
+      "out": {
+        "segurancaSocial": 220,
+        "retencaoIRS": 88.35,
+        "liquido": 1691.65,
+        "refeicaoTributavel": 0
+      }
+    },
+    {
+      "in": {
+        "bruto": 2000,
+        "tabela": "II",
+        "dependentes": 3,
+        "subsidioRefeicaoDia": 0,
+        "diasRefeicao": 0,
+        "refeicaoCartao": false
+      },
+      "out": {
+        "segurancaSocial": 220,
+        "retencaoIRS": 178.47,
+        "liquido": 1601.53,
+        "refeicaoTributavel": 0
+      }
+    },
+    {
+      "in": {
+        "bruto": 1500,
+        "tabela": "I",
+        "dependentes": 0,
+        "subsidioRefeicaoDia": 8,
+        "diasRefeicao": 22,
+        "refeicaoCartao": false
+      },
+      "out": {
+        "segurancaSocial": 169.48,
+        "retencaoIRS": 177.98,
+        "liquido": 1328.54,
+        "refeicaoTributavel": 40.7
+      }
+    },
+    {
+      "in": {
+        "bruto": 1500,
+        "tabela": "I",
+        "dependentes": 0,
+        "subsidioRefeicaoDia": 10,
+        "diasRefeicao": 22,
+        "refeicaoCartao": true
+      },
+      "out": {
+        "segurancaSocial": 165,
+        "retencaoIRS": 168.17,
+        "liquido": 1386.83,
+        "refeicaoTributavel": 0
+      }
+    },
+    {
+      "in": {
+        "bruto": 3333.33,
+        "tabela": "II",
+        "dependentes": 1,
+        "subsidioRefeicaoDia": 7.5,
+        "diasRefeicao": 21,
+        "refeicaoCartao": false
+      },
+      "out": {
+        "segurancaSocial": 369.78,
+        "retencaoIRS": 768.34,
+        "liquido": 2352.71,
+        "refeicaoTributavel": 28.35
+      }
+    }
+  ],
+  "custo": [
+    {
+      "in": {
+        "base": 1500,
+        "diuturnidades": 0,
+        "subsidioRefeicaoDia": 6,
+        "diasRefeicaoMes": 22,
+        "mesesRefeicao": 11,
+        "refeicaoCartao": false,
+        "taxaSeguroAT": 0.01
+      },
+      "out": {
+        "retribuicaoAnual": 21000,
+        "tsuAnual": 4987.5,
+        "refeicaoAnual": 1452,
+        "seguroAnual": 210,
+        "total": 27649.5
+      }
+    },
+    {
+      "in": {
+        "base": 1234.5,
+        "diuturnidades": 0,
+        "subsidioRefeicaoDia": 0,
+        "diasRefeicaoMes": 22,
+        "mesesRefeicao": 11,
+        "refeicaoCartao": false,
+        "taxaSeguroAT": 0
+      },
+      "out": {
+        "retribuicaoAnual": 17283,
+        "tsuAnual": 4104.71,
+        "refeicaoAnual": 0,
+        "seguroAnual": 0,
+        "total": 21387.71
+      }
+    },
+    {
+      "in": {
+        "base": 1500,
+        "diuturnidades": 0,
+        "subsidioRefeicaoDia": 8,
+        "diasRefeicaoMes": 22,
+        "mesesRefeicao": 11,
+        "refeicaoCartao": false,
+        "taxaSeguroAT": 0.01
+      },
+      "out": {
+        "retribuicaoAnual": 21000,
+        "tsuAnual": 5093.83,
+        "refeicaoAnual": 1936,
+        "seguroAnual": 210,
+        "total": 28239.83
+      }
+    },
+    {
+      "in": {
+        "base": 987.65,
+        "diuturnidades": 33.21,
+        "subsidioRefeicaoDia": 9,
+        "diasRefeicaoMes": 21,
+        "mesesRefeicao": 11,
+        "refeicaoCartao": true,
+        "taxaSeguroAT": 0.0123
+      },
+      "out": {
+        "retribuicaoAnual": 14292.04,
+        "tsuAnual": 3394.36,
+        "refeicaoAnual": 2079,
+        "seguroAnual": 175.79,
+        "total": 19941.19
+      }
+    }
+  ],
+  "iva": [
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro de chegada (aquisição intracomunitária do cliente)",
+        "liquida": "O cliente, no país dele",
+        "codigo": "M16",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "RITI, art. 14.º, n.º 1, al. a), e art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES antes de faturar e guardar a prova do transporte (Reg. 282/2011, art. 45.º-A).",
+          "Sem recapitulativa correta não há isenção (RITI, art. 14.º, n.º 2)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do RITI"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro de chegada (aquisição intracomunitária do cliente)",
+        "liquida": "O cliente, no país dele",
+        "codigo": "M16",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "RITI, art. 14.º, n.º 1, al. a), e art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES antes de faturar e guardar a prova do transporte (Reg. 282/2011, art. 45.º-A).",
+          "Sem recapitulativa correta não há isenção (RITI, art. 14.º, n.º 2)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do RITI"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "RITI, art. 14.º, n.º 1, al. a) e n.º 2 (sem NIF válido no VIES não há isenção)",
+        "avisos": [
+          "Pede o NIF de IVA do cliente e valida-o no VIES: com ele (e prova do transporte) a venda fica isenta (M16)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "RITI, art. 14.º, n.º 1, al. a) e n.º 2 (sem NIF válido no VIES não há isenção)",
+        "avisos": [
+          "Pede o NIF de IVA do cliente e valida-o no VIES: com ele (e prova do transporte) a venda fica isenta (M16)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º-A (abaixo do limiar comum UE, sem opção)",
+        "avisos": [
+          "Podes optar pela tributação no destino (fica pelo menos 2 anos — art. 6.º-A, n.º 4)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do consumidor (vendas à distância acima do limiar comum UE)",
+        "liquida": "O fornecedor (tu), com a taxa do Estado-Membro do consumidor, declarada no OSS",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração OSS — regime da União (trimestral; Lei 47/2020)",
+          "Declaração periódica de IVA (operações não localizadas em PT)"
+        ],
+        "base": "CIVA, art. 6.º-A; RITI, art. 10.º, al. a); Lei 47/2020 (OSS)",
+        "avisos": [
+          "A mudança dá-se na operação em que o limiar é ultrapassado (art. 6.º-A, n.º 3). Sem OSS: registo em cada Estado-Membro."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º-A (abaixo do limiar comum UE, sem opção)",
+        "avisos": [
+          "Podes optar pela tributação no destino (fica pelo menos 2 anos — art. 6.º-A, n.º 4)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do consumidor (vendas à distância acima do limiar comum UE)",
+        "liquida": "O fornecedor (tu), com a taxa do Estado-Membro do consumidor, declarada no OSS",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração OSS — regime da União (trimestral; Lei 47/2020)",
+          "Declaração periódica de IVA (operações não localizadas em PT)"
+        ],
+        "base": "CIVA, art. 6.º-A; RITI, art. 10.º, al. a); Lei 47/2020 (OSS)",
+        "avisos": [
+          "A mudança dá-se na operação em que o limiar é ultrapassado (art. 6.º-A, n.º 3). Sem OSS: registo em cada Estado-Membro."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "bens",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Isento em Portugal — exportação (o país de destino cobra na importação)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M05",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 14.º, n.º 1, al. a), e art. 29.º, n.º 8",
+        "avisos": [
+          "Guardar a prova aduaneira da saída (DAU/e-DA certificado)."
+        ],
+        "mencaoFatura": "Isento artigo 14.º do CIVA"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28).",
+          "Serviço B2B localizado no país do cliente (art. 6.º, n.º 6, al. a)): o cliente autoliquida; acrescentar 'IVA - autoliquidação' à menção (a confirmar)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28).",
+          "Serviço B2B localizado no país do cliente (art. 6.º, n.º 6, al. a)): o cliente autoliquida; acrescentar 'IVA - autoliquidação' à menção (a confirmar)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do cliente",
+        "liquida": "O cliente (autoliquidação / reverse charge)",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 7 e Quadro 04)",
+          "Declaração recapitulativa (RITI, art. 30.º)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º",
+        "avisos": [
+          "Validar o NIF no VIES: sem sujeito passivo, a regra é a do consumidor (IVA português)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28).",
+          "Serviço B2B localizado no país do cliente (art. 6.º, n.º 6, al. a)): o cliente autoliquida; acrescentar 'IVA - autoliquidação' à menção (a confirmar)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28).",
+          "Serviço B2B localizado no país do cliente (art. 6.º, n.º 6, al. a)): o cliente autoliquida; acrescentar 'IVA - autoliquidação' à menção (a confirmar)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "empresa",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (não tributado cá)",
+        "liquida": "Segundo as regras do país do cliente",
+        "codigo": "M40",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. a), a contrário",
+        "avisos": [
+          "M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."
+        ],
+        "mencaoFatura": "IVA - autoliquidação"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "PT",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, arts. 1.º e 6.º, n.º 1 (bens) / n.º 6 (serviços)",
+        "avisos": [
+          "Setores com autoliquidação interna (construção civil, sucata, emissões...): art. 2.º, n.º 1, als. i) a n), CIVA."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º-A (TBE abaixo do limiar comum UE)",
+        "avisos": [
+          "Podes optar pela tributação no destino (fica pelo menos 2 anos — art. 6.º-A, n.º 4)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do consumidor (TBE acima do limiar comum UE)",
+        "liquida": "O fornecedor (tu), com a taxa do Estado-Membro do consumidor, declarada no OSS",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração OSS — regime da União (trimestral; Lei 47/2020)",
+          "Declaração periódica de IVA (operações não localizadas em PT)"
+        ],
+        "base": "CIVA, art. 6.º-A e art. 6.º, n.º 9, al. h); Lei 47/2020 (OSS)",
+        "avisos": [
+          "Guardar 2 elementos de prova do país do consumidor (morada, IP, banco/cartão, SIM)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º-A (TBE abaixo do limiar comum UE)",
+        "avisos": [
+          "Podes optar pela tributação no destino (fica pelo menos 2 anos — art. 6.º-A, n.º 4)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "No Estado-Membro do consumidor (TBE acima do limiar comum UE)",
+        "liquida": "O fornecedor (tu), com a taxa do Estado-Membro do consumidor, declarada no OSS",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração OSS — regime da União (trimestral; Lei 47/2020)",
+          "Declaração periódica de IVA (operações não localizadas em PT)"
+        ],
+        "base": "CIVA, art. 6.º-A e art. 6.º, n.º 9, al. h); Lei 47/2020 (OSS)",
+        "avisos": [
+          "Guardar 2 elementos de prova do país do consumidor (morada, IP, banco/cartão, SIM)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [
+          "Se o serviço for da lista do art. 6.º, n.º 11 (consultoria, publicidade, advogados, informática/dados, direitos de autor...), não é tributado em PT: usa servico='lista-art6-11' (M44)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [
+          "Se o serviço for da lista do art. 6.º, n.º 11 (consultoria, publicidade, advogados, informática/dados, direitos de autor...), não é tributado em PT: usa servico='lista-art6-11' (M44)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [
+          "Se o serviço for da lista do art. 6.º, n.º 11 (consultoria, publicidade, advogados, informática/dados, direitos de autor...), não é tributado em PT: usa servico='lista-art6-11' (M44)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "geral",
+        "regime53": true
+      },
+      "out": {
+        "tributacao": "Isento em Portugal (regime de isenção do art. 53.º CIVA)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M10",
+        "declaracoes": [],
+        "base": "CIVA, arts. 53.º e 57.º, n.º 2",
+        "avisos": [
+          "Isento sem direito à dedução; dispensado da declaração recapitulativa (Ofício-Circulado 25062/2025, ponto 28)."
+        ],
+        "mencaoFatura": "IVA - regime de isenção"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "geral",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Portugal (IVA português)",
+        "liquida": "O fornecedor (tu), à taxa portuguesa",
+        "codigo": null,
+        "declaracoes": [
+          "Declaração periódica de IVA"
+        ],
+        "base": "CIVA, art. 6.º, n.º 6, al. b)",
+        "avisos": [
+          "Se o serviço for da lista do art. 6.º, n.º 11 (consultoria, publicidade, advogados, informática/dados, direitos de autor...), não é tributado em PT: usa servico='lista-art6-11' (M44)."
+        ],
+        "mencaoFatura": null
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (TBE a consumidor de fora da UE)",
+        "liquida": "Segundo as regras do país do cliente (alguns exigem registo de prestadores digitais)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 9, al. h)",
+        "avisos": [
+          "Salvo utilização efetiva em Portugal (art. 6.º, n.ºs 12, al. d), e 14)."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (TBE a consumidor de fora da UE)",
+        "liquida": "Segundo as regras do país do cliente (alguns exigem registo de prestadores digitais)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 9, al. h)",
+        "avisos": [
+          "Salvo utilização efetiva em Portugal (art. 6.º, n.ºs 12, al. d), e 14)."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (TBE a consumidor de fora da UE)",
+        "liquida": "Segundo as regras do país do cliente (alguns exigem registo de prestadores digitais)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 9, al. h)",
+        "avisos": [
+          "Salvo utilização efetiva em Portugal (art. 6.º, n.ºs 12, al. d), e 14)."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "eletronico",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (TBE a consumidor de fora da UE)",
+        "liquida": "Segundo as regras do país do cliente (alguns exigem registo de prestadores digitais)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 9, al. h)",
+        "avisos": [
+          "Salvo utilização efetiva em Portugal (art. 6.º, n.ºs 12, al. d), e 14)."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "imovel",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Onde está o imóvel / tem lugar o evento / é executado o serviço ou percurso (regra especial)",
+        "liquida": "Segundo a lei desse país (pode obrigar a registo lá; muitos países aplicam autoliquidação B2B)",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.ºs 7 e 8",
+        "avisos": [
+          "Transporte internacional de passageiros: isento (art. 14.º, n.º 1, al. r)), código M05."
+        ],
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º"
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (serviço da lista do art. 6.º, n.º 11, a consumidor de fora da UE)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 11",
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º",
+        "avisos": []
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": true,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (serviço da lista do art. 6.º, n.º 11, a consumidor de fora da UE)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 11",
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º",
+        "avisos": []
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 0,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (serviço da lista do art. 6.º, n.º 11, a consumidor de fora da UE)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 11",
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º",
+        "avisos": []
+      }
+    },
+    {
+      "in": {
+        "tipo": "servicos",
+        "cliente": "consumidor",
+        "destino": "fora-UE",
+        "nifVIES": false,
+        "vendasDistanciaUE": 15000,
+        "servico": "lista-art6-11",
+        "regime53": false
+      },
+      "out": {
+        "tributacao": "Fora de Portugal (serviço da lista do art. 6.º, n.º 11, a consumidor de fora da UE)",
+        "liquida": "Ninguém em Portugal",
+        "codigo": "M44",
+        "declaracoes": [
+          "Declaração periódica de IVA (campo 8)"
+        ],
+        "base": "CIVA, art. 6.º, n.º 11",
+        "mencaoFatura": "IVA - Regras específicas - artigo 6.º",
+        "avisos": []
+      }
+    }
+  ],
+  "irc": [
+    {
+      "in": {
+        "lucroTributavel": 100000,
+        "pme": true,
+        "derramaMunicipal": 0.015,
+        "despesasRepresentacao": 2000,
+        "viaturas": [
+          {
+            "custoAquisicao": 30000,
+            "tipo": "combustao",
+            "encargos": 5000
+          }
+        ]
+      },
+      "out": {
+        "materiaColetavel": 100000,
+        "deducaoPrejuizos": 0,
+        "irc": 17000,
+        "derramaMunicipal": 1500,
+        "derramaEstadual": 0,
+        "tributacaoAutonoma": 600,
+        "total": 19100,
+        "taxaGeral": 19
+      }
+    },
+    {
+      "in": {
+        "lucroTributavel": 2000000,
+        "pme": false,
+        "derramaMunicipal": 0.015
+      },
+      "out": {
+        "materiaColetavel": 2000000,
+        "deducaoPrejuizos": 0,
+        "irc": 380000,
+        "derramaMunicipal": 30000,
+        "derramaEstadual": 15000,
+        "tributacaoAutonoma": 0,
+        "total": 425000,
+        "taxaGeral": 19
+      }
+    },
+    {
+      "in": {
+        "lucroTributavel": 100000,
+        "prejuizosDedutiveis": 80000,
+        "pme": true,
+        "derramaMunicipal": 0.015
+      },
+      "out": {
+        "materiaColetavel": 35000,
+        "deducaoPrejuizos": 65000,
+        "irc": 5250,
+        "derramaMunicipal": 1500,
+        "derramaEstadual": 0,
+        "tributacaoAutonoma": 0,
+        "total": 6750,
+        "taxaGeral": 19
+      }
+    },
+    {
+      "in": {
+        "lucroTributavel": -50000,
+        "pme": true,
+        "derramaMunicipal": 0.015,
+        "despesasRepresentacao": 1000
+      },
+      "out": {
+        "materiaColetavel": 0,
+        "deducaoPrejuizos": 0,
+        "irc": 0,
+        "derramaMunicipal": 0,
+        "derramaEstadual": 0,
+        "tributacaoAutonoma": 200,
+        "total": 200,
+        "taxaGeral": 19
+      }
+    },
+    {
+      "in": {
+        "lucroTributavel": 123456.78,
+        "pme": true,
+        "derramaMunicipal": 0.012,
+        "ajudasCusto": 999.99
+      },
+      "out": {
+        "materiaColetavel": 123456.78,
+        "deducaoPrejuizos": 0,
+        "irc": 21456.79,
+        "derramaMunicipal": 1481.48,
+        "derramaEstadual": 0,
+        "tributacaoAutonoma": 50,
+        "total": 22988.27,
+        "taxaGeral": 19
+      }
+    }
+  ],
+  "taxaJustica": [
+    {
+      "in": {
+        "valor": 1500
+      },
+      "out": {
+        "ucValor": 102,
+        "escalao": "Até 2.000,00 €",
+        "taxaInicialUC": 1,
+        "remanescenteUC": 0,
+        "totalUC": 1,
+        "taxaInicialEuros": 102,
+        "totalEuros": 102
+      }
+    },
+    {
+      "in": {
+        "valor": 30000
+      },
+      "out": {
+        "ucValor": 102,
+        "escalao": "De 24.000,01 € a 30.000,00 €",
+        "taxaInicialUC": 5,
+        "remanescenteUC": 0,
+        "totalUC": 5,
+        "taxaInicialEuros": 510,
+        "totalEuros": 510
+      }
+    },
+    {
+      "in": {
+        "valor": 300000
+      },
+      "out": {
+        "ucValor": 102,
+        "escalao": "Acima de 275.000,00 €",
+        "taxaInicialUC": 16,
+        "remanescenteUC": 3,
+        "totalUC": 19,
+        "taxaInicialEuros": 1632,
+        "totalEuros": 1938
+      }
+    },
+    {
+      "in": {
+        "valor": 310000
+      },
+      "out": {
+        "ucValor": 102,
+        "escalao": "Acima de 275.000,00 €",
+        "taxaInicialUC": 16,
+        "remanescenteUC": 6,
+        "totalUC": 22,
+        "taxaInicialEuros": 1632,
+        "totalEuros": 2244
+      }
+    }
+  ],
+  "imt": [
+    {
+      "in": {
+        "valor": 300000,
+        "tipo": "hpp",
+        "jovem": true
+      },
+      "out": {
+        "imt": 0,
+        "selo": 0,
+        "total": 0
+      }
+    },
+    {
+      "in": {
+        "valor": 400000,
+        "tipo": "hpp",
+        "jovem": true
+      },
+      "out": {
+        "imt": 5556.88,
+        "selo": 555.69,
+        "total": 6112.57
+      }
+    },
+    {
+      "in": {
+        "valor": 200000,
+        "tipo": "hpp",
+        "jovem": false
+      },
+      "out": {
+        "imt": 3542.04,
+        "selo": 1600,
+        "total": 5142.04
+      }
+    }
+  ],
+  "irs": [
+    {
+      "in": {
+        "rendimento": 100000,
+        "tipo": "propriedade-intelectual"
+      },
+      "out": {
+        "coeficiente": 0.95,
+        "tributavel": 95000
+      }
+    },
+    {
+      "in": {
+        "rendimento": 100000,
+        "tipo": "servicos-outros"
+      },
+      "out": {
+        "coeficiente": 0.35,
+        "tributavel": 35000
+      }
+    },
+    {
+      "in": {
+        "rendimento": 100000,
+        "tipo": "servicos-151"
+      },
+      "out": {
+        "coeficiente": 0.75,
+        "tributavel": 75000
+      }
+    },
+    {
+      "in": {
+        "rendimento": 100000,
+        "tipo": "mercadorias"
+      },
+      "out": {
+        "coeficiente": 0.15,
+        "tributavel": 15000
+      }
+    }
+  ],
+  "injuncao": [
+    {
+      "in": {
+        "valor": 4000
+      },
+      "out": {
+        "taxa": 51
+      }
+    },
+    {
+      "in": {
+        "valor": 12000
+      },
+      "out": {
+        "taxa": 102
+      }
+    },
+    {
+      "in": {
+        "valor": 40000
+      },
+      "out": {
+        "taxa": 153
+      }
+    }
+  ],
+  "prazos": [
+    {
+      "in": {
+        "inicio": "2026-10-01",
+        "dias": 30,
+        "tipo": "judicial"
+      },
+      "out": {
+        "dataLimite": "2026-11-02",
+        "dataLegal": "2026-10-31"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2026-07-01",
+        "dias": 30,
+        "tipo": "judicial"
+      },
+      "out": {
+        "dataLimite": "2026-09-16"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2026-08-10",
+        "dias": 15,
+        "tipo": "judicial"
+      },
+      "out": {
+        "dataLimite": "2026-09-15"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2026-08-10",
+        "dias": 15,
+        "tipo": "judicial",
+        "urgente": true
+      },
+      "out": {
+        "dataLimite": "2026-08-25"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2026-12-15",
+        "dias": 10,
+        "tipo": "judicial"
+      },
+      "out": {
+        "dataLimite": "2027-01-07"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2027-03-15",
+        "dias": 10,
+        "tipo": "judicial"
+      },
+      "out": {
+        "dataLimite": "2027-04-05"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2026-10-01",
+        "dias": 30,
+        "tipo": "corridos"
+      },
+      "out": {
+        "dataLimite": "2026-11-02",
+        "dataLegal": "2026-10-31"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2026-10-01",
+        "dias": 10,
+        "tipo": "uteis"
+      },
+      "out": {
+        "dataLimite": "2026-10-16"
+      }
+    }
+  ],
+  "prescricao": [
+    {
+      "in": {
+        "inicio": "2020-01-10",
+        "tipo": "creditos-comerciais"
+      },
+      "out": {
+        "limite": "2040-01-10",
+        "presuntiva": false,
+        "base": "309.º"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2024-01-10",
+        "tipo": "servicos-profissionais"
+      },
+      "out": {
+        "limite": "2026-01-10",
+        "presuntiva": true,
+        "base": "317.º, al. c)"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2024-01-10",
+        "tipo": "vendas-a-consumidor"
+      },
+      "out": {
+        "limite": "2026-01-10",
+        "presuntiva": true,
+        "base": "317.º, al. b)"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2020-01-10",
+        "tipo": "rendas"
+      },
+      "out": {
+        "limite": "2025-01-10",
+        "presuntiva": false,
+        "base": "310.º, al. b)"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2020-01-10",
+        "tipo": "juros"
+      },
+      "out": {
+        "limite": "2025-01-10",
+        "presuntiva": false,
+        "base": "310.º, al. d)"
+      }
+    },
+    {
+      "in": {
+        "inicio": "2020-01-10",
+        "tipo": "prestacoes-periodicas"
+      },
+      "out": {
+        "limite": "2025-01-10",
+        "presuntiva": false,
+        "base": "310.º, al. g)"
+      }
+    }
+  ]
+}

@@ -700,5 +700,906 @@
     ],
     "naoContem": [],
     "fonte": "Comissão Europeia, autoridades do AI Act (7/9/2026); ANACOM, Relatório de Regulação 2025"
+  },
+  {
+    "id": "v121-prazos-skill",
+    "pergunta": "Como se conta um prazo processual (CPC)?",
+    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "contem": [
+      "judicial",
+      "138\\.º"
+    ],
+    "naoContem": [
+      "prazos legais \\(dias úteis/feriados PT\\)"
+    ],
+    "fonte": "CPC art. 138.º; LOSJ art. 28.º"
+  },
+  {
+    "id": "v121-prazos-citacao",
+    "pergunta": "Em que tipo de dias se conta a oposição à injunção?",
+    "ficheiro": "skills/advogado-pt/playbooks/recebi-citacao-ou-injuncao.md",
+    "contem": [
+      "--tipo judicial",
+      "férias judiciais"
+    ],
+    "naoContem": [
+      "--dias 15 --tipo uteis"
+    ],
+    "fonte": "CPC art. 138.º; DL 269/98, art. 12.º"
+  },
+  {
+    "id": "v121-prescricao-playbook",
+    "pergunta": "Em quanto tempo prescreve uma fatura entre empresas?",
+    "ficheiro": "skills/advogado-pt/playbooks/cliente-nao-paga.md",
+    "contem": [
+      "20 anos",
+      "317\\.º"
+    ],
+    "naoContem": [
+      "\\*\\*Prescrição: 5 anos\\*\\* para prestação de serviços, créditos comerciais",
+      "aproximar-se dos 5 anos"
+    ],
+    "fonte": "CC arts. 309.º, 310.º e 317.º"
+  },
+  {
+    "id": "v121-prescricao-skill",
+    "pergunta": "A skill distingue a prescrição presuntiva?",
+    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "contem": [
+      "presuntiva"
+    ],
+    "naoContem": [],
+    "fonte": "CC arts. 312.º a 317.º"
+  },
+  {
+    "id": "v121-irs-valores",
+    "pergunta": "Que coeficiente tem a propriedade intelectual e qual a dedução?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "propriedade intelectual[^\\n]{0,20}0,95",
+      "4\\.587,09"
+    ],
+    "naoContem": [
+      "Coeficiente — propriedade intelectual \\| 0,50",
+      "4\\.104€"
+    ],
+    "fonte": "CIRS arts. 25.º e 31.º"
+  },
+  {
+    "id": "v121-irs-fiscal",
+    "pergunta": "Coeficientes do regime simplificado em fiscal.md",
+    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "contem": [
+      "0,35",
+      "0,95"
+    ],
+    "naoContem": [
+      "4\\.104",
+      "Prestação de serviços \\(geral\\): 0,75"
+    ],
+    "fonte": "CIRS art. 31.º, n.º 1"
+  },
+  {
+    "id": "v121-ss-valores",
+    "pergunta": "Qual a taxa contributiva do ENI?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "25,2%"
+    ],
+    "naoContem": [
+      "Taxa contributiva ENI \\(trabalhador independente\\) \\| 21,4%"
+    ],
+    "fonte": "Código Contributivo art. 168.º"
+  },
+  {
+    "id": "v121-ss-fiscal",
+    "pergunta": "Base e mínimo das contribuições do ENI",
+    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "contem": [
+      "25,2%",
+      "20 ?€"
+    ],
+    "naoContem": [
+      "Contribuição mínima: sobre 1 IAS",
+      "Base de incidência: 70% do rendimento relevante"
+    ],
+    "fonte": "Código Contributivo arts. 162.º a 168.º"
+  },
+  {
+    "id": "v121-ss-moe",
+    "pergunta": "Onde estão as taxas dos MOE?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "Código Contributivo, art\\. 69\\.º"
+    ],
+    "naoContem": [
+      "MOE\\)[^\\n]*art\\. 53\\.º"
+    ],
+    "fonte": "Código Contributivo art. 69.º"
+  },
+  {
+    "id": "v121-injuncao-playbook",
+    "pergunta": "Há limite de valor para a injunção entre empresas?",
+    "ficheiro": "skills/advogado-pt/playbooks/cliente-nao-paga.md",
+    "contem": [
+      "independentemente do valor|qualquer que seja o valor"
+    ],
+    "naoContem": [
+      "\\*\\*> 15\\.000€\\*\\* ou dívida contestada → \\*\\*Ação declarativa\\*\\*"
+    ],
+    "fonte": "DL 62/2013, art. 10.º"
+  },
+  {
+    "id": "v121-injuncao-cobrancas",
+    "pergunta": "cobrancas.md sobre o limite da injunção",
+    "ficheiro": "skills/advogado-pt/references/cobrancas.md",
+    "contem": [
+      "62/2013"
+    ],
+    "naoContem": [
+      "recomendada para dívidas até 15\\.000€\\)"
+    ],
+    "fonte": "DL 62/2013, art. 10.º"
+  },
+  {
+    "id": "v121-notif-playbook",
+    "pergunta": "Quando se considera feita a notificação no Portal das Finanças?",
+    "ficheiro": "skills/advogado-pt/playbooks/recebi-notificacao-at.md",
+    "contem": [
+      "5\\.º dia",
+      "38\\.º-A"
+    ],
+    "naoContem": [],
+    "fonte": "CPPT arts. 38.º-A, n.º 4, e 191.º, n.º 6"
+  },
+  {
+    "id": "v121-notif-skill",
+    "pergunta": "O SKILL.md distingue o 5.º e o 15.º dia?",
+    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "contem": [
+      "5\\.º dia"
+    ],
+    "naoContem": [
+      "consideram-se feitas no 15\\.º dia após a disponibilização \\(art\\. 39\\.º, n\\.º 10, CPPT\\)"
+    ],
+    "fonte": "CPPT arts. 38.º-A e 39.º"
+  },
+  {
+    "id": "v121-coima-multas",
+    "pergunta": "Prazo e efeito da defesa e impugnação nas coimas laborais",
+    "ficheiro": "skills/advogado-pt/references/multas.md",
+    "contem": [
+      "devolutivo",
+      "107/2009",
+      "1, 3 ou 5 anos|5, 3 ou 1 ano"
+    ],
+    "naoContem": [
+      "Recurso suspende a execução da coima \\(regra geral\\)",
+      "Defesa: 15 dias úteis após notificação",
+      "regra geral 3-5 anos"
+    ],
+    "fonte": "Lei 107/2009, arts. 6.º, 17.º, 33.º e 35.º; RGCO art. 27.º"
+  },
+  {
+    "id": "v121-coima-skill",
+    "pergunta": "O SKILL.md não diz 15 dias úteis nas coimas laborais",
+    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "contem": [],
+    "naoContem": [
+      "trânsito/laboral: 15 dias úteis"
+    ],
+    "fonte": "Lei 107/2009, art. 6.º"
+  },
+  {
+    "id": "v121-coima-template",
+    "pergunta": "Prescrição e prazo no template de defesa",
+    "ficheiro": "skills/advogado-pt/assets/templates/defesa-contraordenacao.md",
+    "contem": [
+      "27\\.º"
+    ],
+    "naoContem": [
+      "25\\.º e ss\\. \\(prescrição\\)",
+      "Prazo típico de defesa: 15 dias úteis"
+    ],
+    "fonte": "RGCO art. 27.º"
+  },
+  {
+    "id": "v121-arrend-denuncia",
+    "pergunta": "Antecedência da denúncia pelo senhorio",
+    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "contem": [
+      "5 anos",
+      "1101\\.º"
+    ],
+    "naoContem": [
+      "mínimo 2 anos se arrendamento ≤ 6 anos"
+    ],
+    "fonte": "CC art. 1101.º, al. c)"
+  },
+  {
+    "id": "v121-arrend-arrendatario",
+    "pergunta": "Avisos do arrendatário",
+    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "contem": [
+      "1100\\.º",
+      "1098\\.º",
+      "90 dias"
+    ],
+    "naoContem": [
+      "120 dias \\(contratos indeterminados, primeiros 6 anos\\)",
+      "Oposição à renovação: antecedência de 120 dias do termo"
+    ],
+    "fonte": "CC arts. 1098.º e 1100.º"
+  },
+  {
+    "id": "v121-arrend-renovacao",
+    "pergunta": "Renovação e mora no arrendamento",
+    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "contem": [
+      "1096\\.º",
+      "1097\\.º",
+      "igual ou superior a 3 meses"
+    ],
+    "naoContem": [
+      "mora > 3 meses"
+    ],
+    "fonte": "CC arts. 1083.º, 1096.º e 1097.º"
+  },
+  {
+    "id": "v121-atual-cisg",
+    "pergunta": "Portugal é parte da CISG?",
+    "ficheiro": "skills/advogado-pt/references/contratos-internacionais.md",
+    "contem": [
+      "1/10/2021|1 de outubro de 2021"
+    ],
+    "naoContem": [
+      "Portugal \\*\\*não\\*\\* é parte"
+    ],
+    "fonte": "UNCITRAL, estado da CISG"
+  },
+  {
+    "id": "v121-atual-cra",
+    "pergunta": "Desde quando há obrigações do CRA?",
+    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "contem": [
+      "11/9/2026|11/09/2026"
+    ],
+    "naoContem": [
+      "obrigações principais a partir de \\*\\*2027\\*\\* \\(verificar\\)"
+    ],
+    "fonte": "Reg. (UE) 2024/2847, arts. 14.º e 71.º"
+  },
+  {
+    "id": "v121-atual-scoring",
+    "pergunta": "O social scoring proibido é só público?",
+    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "contem": [],
+    "naoContem": [
+      "\\*social scoring\\* por entidades públicas,"
+    ],
+    "fonte": "Reg. (UE) 2024/1689, art. 5.º"
+  },
+  {
+    "id": "v121-atual-ccp",
+    "pergunta": "A contratação pública reflete o DL 177/2026?",
+    "ficheiro": "skills/advogado-pt/references/contratacao-publica.md",
+    "contem": [
+      "177/2026"
+    ],
+    "naoContem": [],
+    "fonte": "DL 177/2026"
+  },
+  {
+    "id": "v121-atual-ccp-valores",
+    "pergunta": "Os limiares do CCP estão no valores-2026?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "## Contratação Pública"
+    ],
+    "naoContem": [],
+    "fonte": "DL 177/2026; CCP arts. 19.º a 21.º"
+  },
+  {
+    "id": "v121-atual-nis2",
+    "pergunta": "A NIS2 está transposta?",
+    "ficheiro": "skills/advogado-pt/references/compliance.md",
+    "contem": [
+      "3/4/2026"
+    ],
+    "naoContem": [
+      "transpõe a NIS2\\) \\(a confirmar\\)"
+    ],
+    "fonte": "DL 125/2025"
+  },
+  {
+    "id": "v121-atual-consumo",
+    "pergunta": "O DL 67/2003 ainda está em vigor?",
+    "ficheiro": "skills/advogado-pt/references/consumo.md",
+    "contem": [
+      "84/2021"
+    ],
+    "naoContem": [
+      "DL 67/2003: venda de bens de consumo e garantias \\(atualizado pelo DL 84/2021\\)"
+    ],
+    "fonte": "DL 84/2021, art. 54.º"
+  },
+  {
+    "id": "v121-atual-contratos",
+    "pergunta": "Que diploma rege a assinatura eletrónica?",
+    "ficheiro": "skills/advogado-pt/references/contratos.md",
+    "contem": [
+      "12/2021"
+    ],
+    "naoContem": [
+      "DL 290-D/99: documentos eletrónicos e assinatura digital"
+    ],
+    "fonte": "DL 12/2021"
+  },
+  {
+    "id": "v121-atual-imobiliario",
+    "pergunta": "A escritura exige licença de utilização? Execução específica afastável?",
+    "ficheiro": "skills/advogado-pt/references/imobiliario.md",
+    "contem": [
+      "10/2024",
+      "4/2014"
+    ],
+    "naoContem": [
+      "DL 281/99: exigência de licença de utilização para atos sobre prédios urbanos",
+      "afastada se houver sinal e convenção em contrário"
+    ],
+    "fonte": "DL 10/2024; CC art. 830.º, n.º 3; AUJ 4/2014"
+  },
+  {
+    "id": "v121-atual-comprar",
+    "pergunta": "Playbook de compra de imóvel atualizado",
+    "ficheiro": "skills/advogado-pt/playbooks/comprar-imovel.md",
+    "contem": [
+      "4/2014"
+    ],
+    "naoContem": [
+      "isenção de IMT por reinvestimento",
+      "comprometido — DL 281/99"
+    ],
+    "fonte": "DL 10/2024; AUJ 4/2014"
+  },
+  {
+    "id": "v121-atual-duediligence",
+    "pergunta": "Checklist de due diligence atualizada",
+    "ficheiro": "skills/advogado-pt/assets/checklists/checklist-due-diligence-imovel.md",
+    "contem": [
+      "10/2024"
+    ],
+    "naoContem": [],
+    "fonte": "DL 10/2024"
+  },
+  {
+    "id": "v121-atual-fiscal",
+    "pergunta": "Benefícios fiscais atuais",
+    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "contem": [
+      "ICE",
+      "IFICI"
+    ],
+    "naoContem": [
+      "Remuneração convencional do capital social \\(Lda\\): dedução de 7%"
+    ],
+    "fonte": "EBF arts. 43.º-D e 58.º-A"
+  },
+  {
+    "id": "v121-atual-laboral",
+    "pergunta": "Período experimental de 1.º emprego e renovações",
+    "ficheiro": "skills/advogado-pt/references/laboral.md",
+    "contem": [
+      "180 dias[^\\n]{0,120}(primeiro emprego|1\\.º emprego|desempregad)",
+      "149\\.º, n\\.º 4"
+    ],
+    "naoContem": [],
+    "fonte": "CT arts. 112.º e 149.º"
+  },
+  {
+    "id": "v121-atual-experimental",
+    "pergunta": "Aviso prévio na denúncia no período experimental",
+    "ficheiro": "skills/advogado-pt/playbooks/quero-despedir.md",
+    "contem": [
+      "7 ou 30 dias"
+    ],
+    "naoContem": [
+      "aviso prévio aplicável \\(7 ou 15 dias"
+    ],
+    "fonte": "CT art. 114.º, n.º 3"
+  },
+  {
+    "id": "v121-atual-replica",
+    "pergunta": "Quando há réplica?",
+    "ficheiro": "skills/advogado-pt/references/contencioso.md",
+    "contem": [
+      "584\\.º"
+    ],
+    "naoContem": [
+      "reconvenção ou exceções a contraditar"
+    ],
+    "fonte": "CPC art. 584.º"
+  },
+  {
+    "id": "v121-atual-seguros",
+    "pergunta": "Diploma da atividade seguradora e AT dos independentes",
+    "ficheiro": "skills/advogado-pt/references/seguros.md",
+    "contem": [
+      "Lei 147/2015",
+      "159/99"
+    ],
+    "naoContem": [
+      "regime no DL 147/2015"
+    ],
+    "fonte": "Lei 147/2015; DL 159/99"
+  },
+  {
+    "id": "v121-atual-penal",
+    "pergunta": "Onde está o crime de branqueamento?",
+    "ficheiro": "skills/advogado-pt/references/penal-cibercrime.md",
+    "contem": [
+      "368\\.º-A"
+    ],
+    "naoContem": [
+      "\\*\\*Branqueamento\\*\\* \\(Lei 83/2017\\)"
+    ],
+    "fonte": "CP art. 368.º-A"
+  },
+  {
+    "id": "v121-contra-alcada",
+    "pergunta": "15.000 € é a alçada da 1.ª instância?",
+    "ficheiro": "skills/advogado-pt/references/contencioso.md",
+    "contem": [],
+    "naoContem": [
+      "15\\.000€\\*\\* \\(valor da alçada da 1\\.ª instância\\)"
+    ],
+    "fonte": "Lei 78/2001, art. 8.º; LOSJ art. 44.º"
+  },
+  {
+    "id": "v121-contra-graduacao",
+    "pergunta": "Ordem de pagamento dos credores",
+    "ficheiro": "skills/advogado-pt/references/garantias.md",
+    "contem": [
+      "751\\.º"
+    ],
+    "naoContem": [
+      "Hierarquia típica: privilégios creditórios → garantias reais registadas \\(por ordem de registo\\) → credores comuns"
+    ],
+    "fonte": "CC arts. 749.º e 751.º; CIRE art. 97.º"
+  },
+  {
+    "id": "v121-contra-coima75",
+    "pergunta": "Quando se paga a coima fiscal a 75%?",
+    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "contem": [
+      "78\\.º"
+    ],
+    "naoContem": [
+      "ou, até à decisão, pagamento voluntário \\(art\\. 70\\.º"
+    ],
+    "fonte": "RGIT art. 78.º, n.º 2"
+  },
+  {
+    "id": "v121-contra-coima75-playbook",
+    "pergunta": "Pagamento voluntário no playbook da AT",
+    "ficheiro": "skills/advogado-pt/playbooks/recebi-notificacao-at.md",
+    "contem": [],
+    "naoContem": [
+      "Até à decisão: \\*\\*pagamento voluntário\\*\\*"
+    ],
+    "fonte": "RGIT art. 78.º, n.º 2"
+  },
+  {
+    "id": "v121-contra-marca",
+    "pergunta": "Taxa da marca nacional fora do valores-2026",
+    "ficheiro": "skills/advogado-pt/references/pi.md",
+    "contem": [],
+    "naoContem": [
+      "Marca nacional: ~200€"
+    ],
+    "fonte": "valores-2026.md"
+  },
+  {
+    "id": "v121-contra-b2c",
+    "pergunta": "Limiar das vendas B2C",
+    "ficheiro": "skills/advogado-pt/references/uniao-europeia.md",
+    "contem": [
+      "iva-internacional\\.md"
+    ],
+    "naoContem": [
+      "vendas à distância e serviços a consumidores noutros Estados-Membros\\): acima do limiar"
+    ],
+    "fonte": "CIVA art. 6.º-A"
+  },
+  {
+    "id": "v121-contra-autoliq",
+    "pergunta": "Menção na fatura de serviços B2B UE",
+    "ficheiro": "skills/advogado-pt/references/contratos-internacionais.md",
+    "contem": [
+      "IVA - autoliquidação",
+      "iva-internacional\\.md"
+    ],
+    "naoContem": [
+      "menção da isenção/reverse charge na fatura"
+    ],
+    "fonte": "CIVA art. 36.º, n.º 13"
+  },
+  {
+    "id": "v121-contra-fgct",
+    "pergunta": "FGCT no despedimento coletivo",
+    "ficheiro": "skills/advogado-pt/playbooks/despedimento-coletivo.md",
+    "contem": [],
+    "naoContem": [
+      "sem prejuízo do FGCT"
+    ],
+    "fonte": "DL 115/2023, art. 4.º"
+  },
+  {
+    "id": "v121-contra-aviso",
+    "pergunta": "Aviso obsoleto sobre fiscal.md",
+    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "contem": [],
+    "naoContem": [
+      "ainda indica \"90 dias\""
+    ],
+    "fonte": "—"
+  },
+  {
+    "id": "v121-contra-loja-iva",
+    "pergunta": "A loja online remete o IVA para iva-internacional",
+    "ficheiro": "skills/advogado-pt/assets/templates/termos-condicoes-loja-online.md",
+    "contem": [
+      "iva-internacional\\.md"
+    ],
+    "naoContem": [],
+    "fonte": "CIVA art. 6.º-A; Lei 47/2020"
+  },
+  {
+    "id": "v121-contra-ti-iva",
+    "pergunta": "O contrato TI remete o IVA para iva-internacional",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-prestacao-servicos-ti.md",
+    "contem": [
+      "iva-internacional\\.md"
+    ],
+    "naoContem": [],
+    "fonte": "CIVA art. 6.º"
+  },
+  {
+    "id": "v121-playbook-citacao",
+    "pergunta": "Prazos de embargos, penhora e multa",
+    "ficheiro": "skills/advogado-pt/playbooks/recebi-citacao-ou-injuncao.md",
+    "contem": [
+      "728\\.º",
+      "785\\.º",
+      "139\\.º, n\\.º 5"
+    ],
+    "naoContem": [],
+    "fonte": "CPC arts. 139.º, 728.º e 785.º"
+  },
+  {
+    "id": "v121-playbook-despedir",
+    "pergunta": "Prazos do procedimento disciplinar",
+    "ficheiro": "skills/advogado-pt/playbooks/quero-despedir.md",
+    "contem": [
+      "357\\.º",
+      "329\\.º",
+      "387\\.º",
+      "CITE"
+    ],
+    "naoContem": [],
+    "fonte": "CT arts. 63.º, 329.º, 357.º e 387.º"
+  },
+  {
+    "id": "v121-playbook-cobrar",
+    "pergunta": "Injunção antes da prescrição e indemnização de 40 €",
+    "ficheiro": "skills/advogado-pt/playbooks/cliente-nao-paga.md",
+    "contem": [
+      "323\\.º, n\\.º 2",
+      "40 ?€"
+    ],
+    "naoContem": [],
+    "fonte": "CC art. 323.º, n.º 2; DL 62/2013, art. 7.º"
+  },
+  {
+    "id": "v121-tpl-nulo-cpcv",
+    "pergunta": "O CPCV deixa afastar a execução específica?",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-promessa-compra-venda.md",
+    "contem": [
+      "830\\.º, n\\.º 3"
+    ],
+    "naoContem": [
+      "\\{\\{convencionam / afastam\\}\\}",
+      "\\{\\{ATRIBUEM / NÃO ATRIBUEM\\}\\} eficácia real"
+    ],
+    "fonte": "CC arts. 410.º, 413.º e 830.º"
+  },
+  {
+    "id": "v121-tpl-nulo-cpcv-forma",
+    "pergunta": "Reconhecimento presencial é requisito",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-promessa-compra-venda.md",
+    "contem": [],
+    "naoContem": [
+      "— recomendado para garantir a eficácia"
+    ],
+    "fonte": "CC art. 410.º, n.º 3"
+  },
+  {
+    "id": "v121-tpl-nulo-revogacao",
+    "pergunta": "Quitação total no acordo de revogação",
+    "ficheiro": "skills/advogado-pt/assets/templates/acordo-revogacao.md",
+    "contem": [
+      "337\\.º"
+    ],
+    "naoContem": [
+      "plena e recíproca quitação, nada mais tendo a reclamar"
+    ],
+    "fonte": "CT art. 337.º, n.º 3"
+  },
+  {
+    "id": "v121-tpl-nulo-saas",
+    "pergunta": "Resolução por insolvência no SaaS",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-saas-b2b.md",
+    "contem": [],
+    "naoContem": [
+      "ou de imediato em caso de insolvência da outra parte"
+    ],
+    "fonte": "CIRE art. 119.º"
+  },
+  {
+    "id": "v121-tpl-req-cite",
+    "pergunta": "Parecer da CITE na carta de despedimento",
+    "ficheiro": "skills/advogado-pt/assets/templates/carta-despedimento-justa-causa.md",
+    "contem": [
+      "CITE",
+      "63\\.º"
+    ],
+    "naoContem": [],
+    "fonte": "CT arts. 63.º e 381.º, al. d)"
+  },
+  {
+    "id": "v121-tpl-req-termo",
+    "pergunta": "Relação motivo–termo",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-trabalho-termo-certo.md",
+    "contem": [
+      "141\\.º, n\\.º 3"
+    ],
+    "naoContem": [],
+    "fonte": "CT arts. 141.º e 147.º"
+  },
+  {
+    "id": "v121-tpl-req-conjuge-trespasse",
+    "pergunta": "Consentimento do cônjuge no trespasse",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-trespasse.md",
+    "contem": [
+      "1682\\.º-A"
+    ],
+    "naoContem": [],
+    "fonte": "CC arts. 1682.º-A e 1687.º"
+  },
+  {
+    "id": "v121-tpl-req-conjuge-arrend-h",
+    "pergunta": "Consentimento do cônjuge no arrendamento habitacional",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-arrendamento-habitacional.md",
+    "contem": [
+      "1682\\.º-A"
+    ],
+    "naoContem": [],
+    "fonte": "CC art. 1682.º-A"
+  },
+  {
+    "id": "v121-tpl-req-conjuge-arrend-nh",
+    "pergunta": "Consentimento do cônjuge no arrendamento não habitacional",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-arrendamento-nao-habitacional.md",
+    "contem": [
+      "1682\\.º-A"
+    ],
+    "naoContem": [],
+    "fonte": "CC art. 1682.º-A"
+  },
+  {
+    "id": "v121-tpl-req-conjuge-pacto",
+    "pergunta": "Consentimento do cônjuge na entrada em espécie",
+    "ficheiro": "skills/advogado-pt/assets/templates/pacto-social-unipessoal-lda.md",
+    "contem": [
+      "1682\\.º-A"
+    ],
+    "naoContem": [],
+    "fonte": "CC art. 1682.º-A"
+  },
+  {
+    "id": "v121-tpl-req-dpa",
+    "pergunta": "Conteúdo obrigatório do DPA",
+    "ficheiro": "skills/advogado-pt/assets/templates/dpa-bilingue.md",
+    "contem": [
+      "28\\.º, n\\.º 3",
+      "auditori",
+      "eliminar|apagar|devolver"
+    ],
+    "naoContem": [],
+    "fonte": "RGPD art. 28.º"
+  },
+  {
+    "id": "v121-tpl-req-ti",
+    "pergunta": "Ressalvas na limitação de responsabilidade",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-prestacao-servicos-ti.md",
+    "contem": [
+      "809\\.º",
+      "danos pessoais|dano pessoal"
+    ],
+    "naoContem": [],
+    "fonte": "CC art. 809.º; DL 446/85, art. 18.º"
+  },
+  {
+    "id": "v121-tpl-req-loja",
+    "pergunta": "Termos da loja online B2C",
+    "ficheiro": "skills/advogado-pt/assets/templates/termos-condicoes-loja-online.md",
+    "contem": [
+      "rejeição|rejeitar",
+      "593/2008|Roma I",
+      "custo d[ae] devolução",
+      "2023/2673"
+    ],
+    "naoContem": [],
+    "fonte": "DL 24/2014; DL 84/2021; Reg. 593/2008; Diretiva 2023/2673"
+  },
+  {
+    "id": "v121-tpl-cit-teletrabalho",
+    "pergunta": "Artigo do teletrabalho",
+    "ficheiro": "skills/advogado-pt/assets/templates/acordo-teletrabalho.md",
+    "contem": [
+      "169\\.º-B"
+    ],
+    "naoContem": [
+      "169\\.º-A"
+    ],
+    "fonte": "CT art. 169.º-B"
+  },
+  {
+    "id": "v121-tpl-cit-notaculpa",
+    "pergunta": "Artigos da nota de culpa",
+    "ficheiro": "skills/advogado-pt/assets/templates/nota-de-culpa.md",
+    "contem": [
+      "98\\.º"
+    ],
+    "naoContem": [
+      "poder disciplinar \\(Art\\. 328\\.º",
+      "356\\.º, n\\.º 4"
+    ],
+    "fonte": "CT arts. 98.º e 356.º"
+  },
+  {
+    "id": "v121-tpl-cit-software",
+    "pergunta": "Segredos comerciais no contrato de software",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-desenvolvimento-software.md",
+    "contem": [
+      "313\\.º"
+    ],
+    "naoContem": [
+      "DL 49/2018 \\(segredos comerciais\\)"
+    ],
+    "fonte": "CPI arts. 313.º e ss."
+  },
+  {
+    "id": "v121-tpl-cit-termo",
+    "pergunta": "Renovações do contrato a termo certo",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-trabalho-termo-certo.md",
+    "contem": [
+      "149\\.º"
+    ],
+    "naoContem": [
+      "dentro dos limites do Art\\. 148\\.º CT \\(duração máxima e número de renovações\\)"
+    ],
+    "fonte": "CT art. 149.º"
+  },
+  {
+    "id": "v121-tpl-cit-reconhecimento",
+    "pergunta": "Epígrafe do reconhecimento de dívida",
+    "ficheiro": "skills/advogado-pt/assets/templates/reconhecimento-divida.md",
+    "contem": [],
+    "naoContem": [
+      "## Cláusula 5\\.ª \\(Título executivo\\)"
+    ],
+    "fonte": "CPC art. 703.º"
+  },
+  {
+    "id": "v121-tpl-cit-cobranca",
+    "pergunta": "Ameaça de ação executiva só com fatura",
+    "ficheiro": "skills/advogado-pt/assets/templates/carta-cobranca-formal-registada.md",
+    "contem": [],
+    "naoContem": [
+      "procedimento de injunção e/ou ação executiva"
+    ],
+    "fonte": "CPC art. 703.º"
+  },
+  {
+    "id": "v121-tpl-cit-partilha",
+    "pergunta": "O unido de facto é herdeiro legitimário?",
+    "ficheiro": "skills/advogado-pt/assets/templates/acordo-partilha-extrajudicial.md",
+    "contem": [
+      "2157\\.º|não é herdeiro legitimário"
+    ],
+    "naoContem": [
+      "herdeiros legitimários diretos[\\s\\S]{0,20}\\(cônjuge/unido de facto"
+    ],
+    "fonte": "CC art. 2157.º"
+  },
+  {
+    "id": "v121-tpl-cit-livranca",
+    "pergunta": "Teto no pacto de preenchimento",
+    "ficheiro": "skills/advogado-pt/assets/templates/livranca-pacto-preenchimento.md",
+    "contem": [
+      "montante máximo|limite máximo"
+    ],
+    "naoContem": [],
+    "fonte": "LULL arts. 10.º e 77.º; DL 446/85"
+  },
+  {
+    "id": "v121-final-selo-heranca",
+    "pergunta": "A herança de um imóvel paga os 0,8% da verba 1.1?",
+    "ficheiro": "skills/advogado-pt/references/herancas.md",
+    "contem": [
+      "doação"
+    ],
+    "naoContem": [
+      "imposto do selo de 0,8% sobre o VPT \\(adicional ao IS de 10% quando aplicável\\)"
+    ],
+    "fonte": "TGIS verbas 1.1 e 1.2; CIS art. 6.º, al. e)"
+  },
+  {
+    "id": "v121-final-saas-en",
+    "pergunta": "A versão EN do SaaS ainda resolve por insolvência?",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-saas-b2b.md",
+    "contem": [
+      "119"
+    ],
+    "naoContem": [
+      "or immediately upon the other Party's insolvency"
+    ],
+    "fonte": "CIRE art. 119.º"
+  },
+  {
+    "id": "v121-final-insolvencia-graduacao",
+    "pergunta": "Graduação na insolvência alinhada com o CC",
+    "ficheiro": "skills/advogado-pt/references/insolvencia.md",
+    "contem": [
+      "751\\.º",
+      "749\\.º"
+    ],
+    "naoContem": [],
+    "fonte": "CC arts. 749.º, 751.º e 759.º; CIRE arts. 97.º, 174.º e 175.º"
+  },
+  {
+    "id": "v121-final-pi-software",
+    "pergunta": "Software criado por trabalhador",
+    "ficheiro": "skills/advogado-pt/references/pi.md",
+    "contem": [
+      "2009/24"
+    ],
+    "naoContem": [
+      "\\(Art\\. 14º Diretiva\\)"
+    ],
+    "fonte": "Diretiva 2009/24/CE art. 2.º, n.º 3; DL 252/94 art. 3.º, n.º 3"
+  },
+  {
+    "id": "v121-final-amlr",
+    "pergunta": "Limite europeu de numerário (AMLR)",
+    "ficheiro": "skills/advogado-pt/references/bancario.md",
+    "contem": [
+      "10/7/2027"
+    ],
+    "naoContem": [
+      "a confirmar data e valor"
+    ],
+    "fonte": "Reg. (UE) 2024/1624, art. 80.º"
+  },
+  {
+    "id": "v121-final-iva-mensal",
+    "pergunta": "Limiar do IVA mensal em fiscal.md",
+    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "contem": [],
+    "naoContem": [
+      "mensal se volume negócios > 650\\.000€"
+    ],
+    "fonte": "CIVA art. 41.º"
   }
 ]

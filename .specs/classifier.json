@@ -1,6 +1,8 @@
 {
   "signals": [
+    {"track":"ai","word":"assistente","effect":"strong","count":1,"origin":"learned","lastAt":"2026-10-03T20:44:29.882Z"},
     {"track":"privacy","word":"rgpd","effect":"off","count":1,"origin":"learned","lastAt":"2026-10-03T16:51:35.168Z"},
+    {"track":"sec","word":"segurança","effect":"strong","count":1,"origin":"learned","lastAt":"2026-10-03T20:44:27.944Z"},
     {"track":"tdd","word":"concorrência","effect":"strong","count":1,"origin":"learned","lastAt":"2026-10-03T16:51:35.168Z"}
   ]
 }

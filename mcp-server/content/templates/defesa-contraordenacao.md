@@ -1,8 +1,9 @@
 <!-- Template: defesa escrita (impugnação administrativa) contra contraordenação, na fase
      administrativa, perante a autoridade que levantou o auto/instaura o processo. Base: Regime Geral
      das Contraordenações (RGCO — DL 433/82, de 27 out), em especial Arts. 50.º (direito de audição
-     e defesa) e 25.º e ss. (prescrição). Prazo típico de defesa: 15 dias úteis a contar da
-     notificação (confirmar prazo indicado na própria notificação, que prevalece). Enviar por
+     e defesa), 27.º e 27.º-A (prescrição do procedimento). Prazo de defesa: o indicado na própria
+     notificação, que prevalece (laborais: 15 dias seguidos — Lei 107/2009, arts. 6.º e 17.º;
+     trânsito: 15 dias úteis). Enviar por
      CORREIO REGISTADO (de preferência com aviso de receção) dentro do prazo. NÃO confundir com o
      recurso judicial de impugnação da decisão final (esse vai a juízo).
      COIMAS FISCAIS (AT): regime próprio do RGIT — defesa em 30 dias (art. 70.º) e recurso em

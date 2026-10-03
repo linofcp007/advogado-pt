@@ -65,6 +65,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Ata de deliberações de sócio único (decisões da unipessoal)
-- Contrato de cessão de quotas (com cláusula de consentimento e preço)
-- Ata de distribuição de lucros / aplicação de resultados
+- Ata de deliberações de sócio único (decisões da unipessoal) — `assets/templates/decisao-socio-unico.md`
+- Contrato de cessão de quotas (com cláusula de consentimento e preço) — `assets/templates/contrato-cessao-quotas.md`
+- Ata de distribuição de lucros / aplicação de resultados (a pedido)

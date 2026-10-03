@@ -54,6 +54,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Cláusula de **professio juris** em testamento (escolha expressa da lei portuguesa ao abrigo do Art. 22.º Reg. 650/2012) — guião
-- **Pedido de Certificado Sucessório Europeu** (guião: requerente, qualidade invocada, identificação do falecido e da última residência habitual, bens, Estados onde será usado)
-- Inventário internacional de ativos (mapa de bens por país, incl. ativos digitais)
+- Cláusula de **professio juris** em testamento (escolha expressa da lei portuguesa ao abrigo do Art. 22.º Reg. 650/2012) — guião (a pedido)
+- **Pedido de Certificado Sucessório Europeu** (guião: requerente, qualidade invocada, identificação do falecido e da última residência habitual, bens, Estados onde será usado) (a pedido)
+- Inventário internacional de ativos (mapa de bens por país, incl. ativos digitais) (a pedido)

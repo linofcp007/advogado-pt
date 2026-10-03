@@ -7,15 +7,20 @@ calendário: somar N anos/meses leva ao mesmo dia do mês de destino; se esse
 dia não existir (ex.: 29 de fevereiro -> ano não bissexto, ou dia 31 num mês
 de 30 dias), usa-se o ÚLTIMO dia do mês de destino.
 
-Tipos e prazos:
-  - civil-geral            = 20 anos  (Art. 309.º CC)
-  - servicos-profissionais = 5 anos   (Art. 310.º CC)
-  - creditos-comerciais    = 5 anos   (Art. 310.º al. e) CC)
-  - juros                  = 5 anos   (Art. 310.º al. d) CC)
-  - rendas                 = 5 anos   (Art. 310.º al. a) CC)
-  - telecom-energia-agua   = 6 meses  (legislação setorial)
-  - queixa-crime-semipublico = 6 meses (Art. 115.º CP)
-  - garantia-bens-consumo  = 3 anos   (DL 84/2021)
+Tipos e prazos (os mesmos do port TypeScript, `calculators/prescricao.ts`):
+  - civil-geral              = 20 anos (CC, art. 309.º)
+  - creditos-comerciais      = 20 anos (CC, art. 309.º) — faturas entre empresas
+  - servicos-profissionais   = 2 anos, presuntiva (CC, art. 317.º, al. c))
+  - vendas-a-consumidor      = 2 anos, presuntiva (CC, art. 317.º, al. b))
+  - rendas                   = 5 anos (CC, art. 310.º, al. b))
+  - juros                    = 5 anos (CC, art. 310.º, al. d))
+  - prestacoes-periodicas    = 5 anos (CC, art. 310.º, al. g))
+  - telecom-energia-agua     = 6 meses (Lei 23/96, art. 10.º, n.º 1)
+  - queixa-crime-semipublico = 6 meses (CP, art. 115.º, n.º 1) — caducidade
+  - garantia-bens-consumo    = 3 anos (DL 84/2021)
+
+As prescrições presuntivas (arts. 312.º a 317.º CC) assentam numa presunção de
+pagamento, que o credor só afasta com a confissão do devedor (arts. 313.º e 314.º).
 
 Exemplos de uso:
   python scripts/prescricao.py --inicio 2025-01-01 --tipo servicos-profissionais
@@ -31,30 +36,51 @@ except (AttributeError, ValueError):
     pass
 
 import argparse
+from decimal import ROUND_HALF_UP, Decimal
 import calendar
 import datetime
 
-# (descrição, prazo_em_anos, prazo_em_meses, base_legal). Usa-se anos OU meses.
+# (descrição, anos, meses, base_legal, presuntiva). Usa-se anos OU meses.
+# Ids estáveis (o CLI e o MCP usam-nos); prazos e bases revistos na v1.2.1.
 PRAZOS = {
-    "civil-geral": ("Prescrição civil geral", 20, 0, "Art. 309.º CC"),
-    "servicos-profissionais": (
-        "Serviços profissionais", 5, 0, "Art. 310.º CC"),
+    "civil-geral": ("Prescrição ordinária (regra geral)", 20, 0, "CC, art. 309.º", False),
     "creditos-comerciais": (
-        "Créditos comerciais", 5, 0, "Art. 310.º al. e) CC"),
-    "juros": ("Juros", 5, 0, "Art. 310.º al. d) CC"),
-    "rendas": ("Rendas", 5, 0, "Art. 310.º al. a) CC"),
+        "Créditos comerciais entre empresas (ex.: faturas B2B) — prazo ordinário",
+        20, 0, "CC, art. 309.º", False),
+    "servicos-profissionais": (
+        "Serviços prestados no exercício de profissões liberais (prescrição presuntiva)",
+        2, 0, "CC, art. 317.º, al. c)", True),
+    "vendas-a-consumidor": (
+        "Vendas e fornecimentos de comerciantes/industriais a quem não é comerciante "
+        "nem os destina ao seu comércio (prescrição presuntiva)",
+        2, 0, "CC, art. 317.º, al. b)", True),
+    "rendas": ("Rendas e alugueres devidos pelo locatário", 5, 0, "CC, art. 310.º, al. b)", False),
+    "juros": ("Juros convencionais ou legais", 5, 0, "CC, art. 310.º, al. d)", False),
+    "prestacoes-periodicas": (
+        "Prestações periodicamente renováveis (ex.: quotas de condomínio)",
+        5, 0, "CC, art. 310.º, al. g)", False),
     "telecom-energia-agua": (
-        "Telecomunicações / energia / água", 0, 6, "legislação setorial"),
+        "Preço de serviços públicos essenciais (telecomunicações, energia, água)",
+        0, 6, "Lei 23/96, art. 10.º, n.º 1", False),
     "queixa-crime-semipublico": (
-        "Queixa-crime (crime semipúblico)", 0, 6, "Art. 115.º CP"),
+        "Direito de queixa por crime semipúblico (caducidade)",
+        0, 6, "CP, art. 115.º, n.º 1", False),
     "garantia-bens-consumo": (
-        "Garantia de bens de consumo", 3, 0, "DL 84/2021"),
+        "Garantia legal de bens de consumo (bens móveis)", 3, 0, "DL 84/2021", False),
 }
+
+AVISO_PRESUNTIVA = (
+    "Prescrição presuntiva (CC, arts. 312.º a 317.º): ao fim do prazo presume-se que a dívida "
+    "foi paga; o credor só afasta essa presunção com a confissão do devedor, expressa ou tácita "
+    "(arts. 313.º e 314.º). Se o devedor admitir que não pagou, a presunção cai."
+)
 
 
 def formatar_euros(valor):
     """Formata um valor numérico como euros no formato PT: '1.234,56 €'."""
-    inteiro = f"{valor:,.2f}"
+    # Meio para cima sobre a representação decimal mais curta (igual ao formatarEuros do TS).
+    arredondado = Decimal(repr(float(valor))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    inteiro = f"{arredondado:,.2f}"
     inteiro = inteiro.replace(",", "X").replace(".", ",").replace("X", ".")
     return f"{inteiro} €"
 
@@ -88,18 +114,29 @@ def add_anos(data, anos):
     return add_meses(data, anos * 12)
 
 
-def calcular_prazo(inicio, tipo):
-    """Calcula a data-limite. Devolve (descricao, texto_prazo, base, limite)."""
+def calcular_prescricao(inicio, tipo):
+    """Calcula a data-limite. Devolve um dict: descricao, prazo_texto, base,
+    limite, presuntiva, aviso (o mesmo resultado do port TypeScript)."""
+    if not isinstance(inicio, datetime.date):
+        raise ValueError("Data de início inválida. Usa AAAA-MM-DD.")
     if tipo not in PRAZOS:
-        raise ValueError(f"Tipo desconhecido: {tipo}")
-    descricao, anos, meses, base = PRAZOS[tipo]
+        raise ValueError(f"Tipo desconhecido: {tipo}. Tipos: {', '.join(sorted(PRAZOS))}.")
+    descricao, anos, meses, base, presuntiva = PRAZOS[tipo]
     if anos:
         limite = add_anos(inicio, anos)
         texto_prazo = f"{anos} ano(s)"
     else:
         limite = add_meses(inicio, meses)
         texto_prazo = f"{meses} mese(s)"
-    return descricao, texto_prazo, base, limite
+    return {"descricao": descricao, "prazo_texto": texto_prazo, "base": base,
+            "limite": limite, "presuntiva": presuntiva,
+            "aviso": AVISO_PRESUNTIVA if presuntiva else ""}
+
+
+def calcular_prazo(inicio, tipo):
+    """Compatibilidade: devolve (descricao, texto_prazo, base, limite)."""
+    r = calcular_prescricao(inicio, tipo)
+    return r["descricao"], r["prazo_texto"], r["base"], r["limite"]
 
 
 def main():
@@ -117,18 +154,22 @@ def main():
     )
     args = parser.parse_args()
 
-    descricao, texto_prazo, base, limite = calcular_prazo(args.inicio, args.tipo)
+    r = calcular_prescricao(args.inicio, args.tipo)
 
     print("=== Prazo de Prescrição / Caducidade ===")
-    print(f"Tipo:           {args.tipo} ({descricao})")
-    print(f"Base legal:     {base}")
-    print(f"Prazo:          {texto_prazo}")
+    print(f"Tipo:           {args.tipo} ({r['descricao']})")
+    print(f"Base legal:     {r['base']}")
+    print(f"Prazo:          {r['prazo_texto']}{' (presuntiva)' if r['presuntiva'] else ''}")
     print(f"Data de início: {args.inicio.isoformat()}")
-    print(f"DATA-LIMITE:    {limite.isoformat()}")
+    print(f"DATA-LIMITE:    {r['limite'].isoformat()}")
     print()
-    print("Nota: A prescrição interrompe-se com citação/notificação judicial "
-          "ou reconhecimento da dívida (Arts. 323.º/325.º CC), reiniciando a "
-          "contagem. Caducidade não se interrompe em regra.")
+    if r["aviso"]:
+        print(r["aviso"])
+        print()
+    print("Nota: A prescrição interrompe-se com a citação ou notificação judicial "
+          "(ex.: injunção) ou com o reconhecimento da dívida (arts. 323.º e 325.º CC), "
+          "reiniciando a contagem; uma carta ou email de cobrança não a interrompe. "
+          "A caducidade não se interrompe, em regra.")
     print()
     print("AVISO: Estimativa. Confirmar o regime concreto; existem causas de "
           "suspensão/interrupção.")

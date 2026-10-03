@@ -201,7 +201,7 @@
 - `assets/templates/contrato-promessa-compra-venda.md` — compra de imóvel para a atividade (inclui a menção ao título urbanístico)
 - `assets/templates/politica-privacidade.md` — informação aos hóspedes e clientes sobre dados pessoais
 - `assets/checklists/checklist-due-diligence-imovel.md` — verificação do imóvel antes de comprar
-- Contrato de mediação imobiliária (usa um modelo aprovado pelo IMPIC — art. 16.º, n.º 4, Lei 15/2013)
-- Contrato de subempreitada (Lei 41/2015, art. 26.º; CC, art. 1213.º)
-- Contrato entre operador de TVDE e motorista (Lei 45/2018, art. 10.º)
-- Regulamento interno do AL para hóspedes (regras da casa, ruído, condomínio)
+- Contrato de mediação imobiliária (usa um modelo aprovado pelo IMPIC — art. 16.º, n.º 4, Lei 15/2013) (a pedido)
+- Contrato de subempreitada (Lei 41/2015, art. 26.º; CC, art. 1213.º) (a pedido)
+- Contrato entre operador de TVDE e motorista (Lei 45/2018, art. 10.º) (a pedido)
+- Regulamento interno do AL para hóspedes (regras da casa, ruído, condomínio) (a pedido)

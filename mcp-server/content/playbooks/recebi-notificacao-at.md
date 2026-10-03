@@ -7,13 +7,14 @@
 - ⏰ **Primeiro, fixa a data em que a notificação se considera feita** (art. 39.º CPPT) — é daí que contam os prazos:
   - **Carta registada** (sem aviso de receção): presume-se feita no **3.º dia posterior ao registo** (ou no 1.º dia útil seguinte, se esse não for útil) — art. 39.º, n.º 1.
   - **Carta registada com aviso de receção**: na **data da assinatura** do aviso, mesmo que assinado por outra pessoa no domicílio — art. 39.º, n.º 3. Recusar ou não levantar a carta não trava o prazo (art. 39.º, n.os 5 e 6).
+  - **Área reservada do Portal das Finanças** (Notificações e Citações Eletrónicas no Portal das Finanças — NCEPF, por adesão): considera-se feita no **5.º dia posterior ao registo da disponibilização** — art. 38.º-A, n.º 4 (citações: art. 191.º, n.º 6). É o canal com o prazo mais curto: verifica se aderiste.
   - **Domicílio fiscal eletrónico** (caixa postal eletrónica / ViaCTT, ou serviço público de notificações eletrónicas da morada única digital): considera-se feita no **15.º dia posterior à disponibilização**, começando a contagem no 1.º dia útil seguinte — art. 39.º, n.º 10. Por prudência, se a abrires antes, conta também a partir da abertura e usa a data-limite mais cedo (a confirmar caso a caso).
   - Sociedades (IRC) e sujeitos passivos de IVA no regime normal são **obrigados** a ter caixa postal eletrónica (art. 19.º, n.º 12, LGT): os prazos correm **mesmo que ninguém a abra**. Confirma no perfil `.advogado-pt/perfil-empresa.md` quem a consulta e com que frequência.
 - ⏰ **Como se contam:**
   - Procedimento tributário e impugnação judicial: **dias seguidos** (art. 279.º CC); se o último dia calhar em dia em que os serviços ou tribunais estejam encerrados, passa para o **1.º dia útil seguinte** (art. 20.º, n.º 1, CPPT; art. 57.º, n.º 3, LGT). Prazos em **meses** terminam no dia correspondente do último mês (art. 279.º, al. c), CC).
   - Atos dentro de processo judicial (ex.: oposição à execução, reclamação de atos do órgão de execução fiscal): regras do Código de Processo Civil (art. 20.º, n.º 2, CPPT) — a suspensão em férias judiciais deve ser confirmada caso a caso com advogado (a confirmar). Contraordenações fiscais: RGIT, com o regime geral das contraordenações como direito subsidiário (art. 3.º, al. b), RGIT) — regra de contagem a confirmar.
   - **Na dúvida, conta em dias seguidos e sem suspensões** — dá-te sempre a data mais cedo.
-  - Conta com a calculadora (dias corridos; faz à mão o ajuste para o dia útil seguinte e os prazos em meses):
+  - Conta com a calculadora: `tipo=corridos` para o procedimento tributário (já passa o termo para o dia útil seguinte e mostra o termo legal); `tipo=judicial` só para atos dentro de processo judicial, se confirmares que se suspendem nas férias judiciais. Os prazos em **meses** (ex.: impugnação judicial, 3 meses) contam-se à mão, até ao dia correspondente do último mês:
     ```
     calc_prazo  inicio=<AAAA-MM-DD da notificação>  dias=120  tipo=corridos
     python scripts/prazos.py --inicio <AAAA-MM-DD> --dias 30 --tipo corridos
@@ -86,7 +87,7 @@
    - **Dispensa de coima**: se a infração não causou prejuízo efetivo à receita e a falta está regularizada, pedida no prazo de defesa (art. 29.º, n.os 2 a 4, RGIT).
    - **Atenuação especial**: reconhecer a responsabilidade e regularizar no prazo de defesa (art. 32.º RGIT).
    - **Defesa escrita**: `assets/templates/defesa-contraordenacao.md` — o modelo é genérico (RGCO); adapta a base legal (art. 70.º RGIT), o prazo (30 dias) e a entidade (dirigente do serviço tributário).
-   - Até à decisão: **pagamento voluntário** a 75% do montante fixado, nunca abaixo do mínimo (art. 78.º RGIT).
+   - Depois de fixada a coima: ⏰ **pagamento voluntário** em 15 dias após a notificação, com redução para 75% do montante fixado, nunca abaixo do mínimo (art. 78.º, n.os 1 e 2, RGIT).
    - Decisão de aplicação de coima → **recurso judicial** ⏰ 30 dias, entregue no serviço de finanças onde corre o processo (art. 80.º RGIT).
    - Falta de entrega de IVA ou de retenções na fonte acima de certo valor pode ser **crime** (abuso de confiança fiscal — art. 105.º RGIT; limiar em (ver `references/valores-2026.md`)) → advogado penalista. Se recebeste uma notificação para pagar a prestação declarada, com juros e coima, ⏰ em **30 dias** (art. 105.º, n.º 4, al. b), RGIT), é a última oportunidade: pagar nesse prazo afasta a punição. Gerentes e, em certas condições, contabilistas certificados podem responder subsidiariamente pelas coimas da empresa (art. 8.º RGIT). Mais contexto em `references/multas.md`.
 

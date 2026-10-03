@@ -87,16 +87,16 @@
 ## Coimas
 - Até 20 milhões € ou 4% do volume de negócios global (infrações graves)
 - Até 10 milhões € ou 2% do volume de negócios global (infrações menos graves)
-- Lei 58/2019 prevê molduras reduzidas para PMEs em Portugal
+- A Lei 58/2019 prevê molduras reduzidas para PME, mas a CNPD declarou que desaplica essas normas por contrariarem o RGPD (Deliberação 2019/494) — não contar com elas (a confirmar a prática atual)
 - CNPD tem aplicado coimas crescentes — tendência de maior enforcement
 
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Política de privacidade para website (PT)
-- Privacy Policy para SaaS (EN)
-- Data Processing Agreement (DPA) bilíngue
-- Registo de atividades de tratamento
-- Template de resposta a exercício de direitos
-- Procedimento interno de data breach
-- Cookie policy
+- Política de privacidade para website (PT) — `assets/templates/politica-privacidade.md`
+- Privacy Policy para SaaS (EN) (a pedido)
+- Data Processing Agreement (DPA) bilíngue — `assets/templates/dpa-bilingue.md`
+- Registo de atividades de tratamento — `assets/templates/registo-atividades-tratamento.md`
+- Template de resposta a exercício de direitos — `assets/templates/resposta-pedido-titular-dados.md`
+- Procedimento interno de data breach — `playbooks/data-breach.md`
+- Cookie policy — `assets/templates/cookie-policy.md`

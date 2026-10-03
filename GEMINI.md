@@ -1,6 +1,6 @@
 # GEMINI.md — Advogado PT
 
-O Gemini CLI lê este ficheiro; ver [`AGENTS.md`](./AGENTS.md) para a persona completa e o mapa de ferramentas (intenção → tool/command + as 8 calculadoras). O servidor MCP `advogado-pt` está configurado em `.gemini/settings.json`.
+O Gemini CLI lê este ficheiro; ver [`AGENTS.md`](./AGENTS.md) para a persona completa e o mapa de ferramentas (intenção → tool/command + as calculadoras). O servidor MCP `advogado-pt` está configurado em `.gemini/settings.json`.
 
 ## Persona (resumo)
 

@@ -31,7 +31,7 @@ Por aval ao subscritor: {{AVALISTA_NOME}}, NIF {{AVALISTA_NIF}}
 Entre **{{BENEFICIARIO_NOME}}** (credor/portador) e **{{SUBSCRITOR_NOME}}** (subscritor){{, e {{AVALISTA_NOME}} (avalista),}} acorda-se o seguinte quanto ao preenchimento da livrança acima, entregue em branco quanto a {{valor e/ou data de vencimento}}:
 
 1. **Finalidade**: a livrança garante o cumprimento das obrigações emergentes de {{CONTRATO/RELAÇÃO}} de {{DATA}}.
-2. **Valor**: o portador fica autorizado a preencher a livrança pelo montante correspondente a **todas as quantias em dívida** ao abrigo do contrato (capital, juros de mora à taxa legal, despesas e encargos) à data do preenchimento.
+2. **Valor**: o portador fica autorizado a preencher a livrança pelo montante correspondente às quantias em dívida ao abrigo do contrato (capital, juros de mora à taxa legal, despesas e encargos) à data do preenchimento, até ao **montante máximo** de **{{MONTANTE_MAXIMO}}**.
 3. **Data de vencimento**: o portador fica autorizado a fixar como data de vencimento a data que entender, **após o incumprimento** e mediante comunicação ao subscritor com a antecedência de {{DIAS}} dias.
 4. **Comunicação**: o preenchimento será precedido de interpelação ao subscritor para regularização.
 5. **Vigência**: o pacto mantém-se enquanto subsistirem obrigações garantidas.
@@ -52,4 +52,4 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Usar o impresso oficial de livrança e garantir os requisitos do título (palavra "livrança", promessa de pagar, vencimento, lugar de pagamento, beneficiário, local e data de emissão, assinatura — art. 75.º LULL, a confirmar); a Parte I é só o texto a transpor.
 - [ ] Imposto do selo sobre a livrança: 0,5% do valor da livrança, com mínimo de 1 € (TGIS, verba 23.2) — ver `references/valores-2026.md`.
 - [ ] O pacto de preenchimento deve ser assinado pelo subscritor **e** pelos avalistas; se o subscritor for sociedade, assinam os gerentes com poderes, com indicação dessa qualidade.
-- [ ] Antes de preencher: interpelar subscritor e avalistas por carta registada com AR com a antecedência do ponto 3 e preencher só pelo valor efetivamente em dívida (o preenchimento abusivo pode ser oposto ao portador — a confirmar).
+- [ ] Antes de preencher: interpelar subscritor e avalistas por carta registada com AR com a antecedência do ponto 3 e preencher só pelo valor efetivamente em dívida (o preenchimento abusivo pode ser oposto ao portador que seja parte no pacto ou que tenha adquirido a livrança de má-fé ou com falta grave — LULL, arts. 10.º e 77.º).

@@ -2,7 +2,7 @@
 // com autocomplete (complete) dos argumentos para clientes que o suportam.
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { listarTudo, listar, ler, CATEGORIAS, type Categoria } from "./content.js";
+import { listarTudo, listar, ler, itemValido, CATEGORIAS, type Categoria } from "./content.js";
 
 function comeca(value: string | undefined, nome: string): boolean {
   return nome.toLowerCase().startsWith((value || "").toLowerCase());
@@ -38,9 +38,13 @@ export function registerResources(server: McpServer): void {
         "Referências por área, templates de documentos, playbooks e checklists de direito português. Categorias: references, templates, checklists, playbooks.",
     },
     async (uri, variables) => {
-      const categoria = String(variables.categoria) as Categoria;
+      const categoria = String(variables.categoria);
       const nome = String(variables.nome);
-      const txt = ler(categoria, nome) ?? `(não encontrado: ${categoria}/${nome})`;
+      // Lista fechada: categoria conhecida e nome existente; "..", "/" e "\" são recusados.
+      const txt = itemValido(categoria, nome) ? ler(categoria, nome) : null;
+      if (txt === null) {
+        throw new Error(`Recurso desconhecido: ${categoria.slice(0, 40)}/${nome.slice(0, 80)}`);
+      }
       return {
         contents: [{ uri: uri.href, mimeType: "text/markdown", text: txt }],
       };

@@ -129,4 +129,4 @@ Esqueletos reais e reutilizáveis. Quando o utilizador pede um documento, **part
 - [intake-caso.md](intake-caso.md) — ficha de recolha inicial de um caso novo
 - [parecer-juridico.md](parecer-juridico.md) — estrutura de parecer (situação→opções→recomendação)
 
-> Outros documentos listados nos ficheiros de referência (ex.: licença de software proprietário, contrato a termo certo, recurso judicial de contraordenação) são gerados a pedido, seguindo o mesmo estilo e convenções destes templates.
+> Outros documentos listados nos ficheiros de referência (ex.: licença de software proprietário, contrato de fiança, recurso judicial de contraordenação) são gerados a pedido, seguindo o mesmo estilo e convenções destes templates.

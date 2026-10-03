@@ -121,7 +121,7 @@
 
 ### IVA intracomunitário, VIES e OSS (resumo)
 - **B2B**: valida o NIF IVA do cliente no **VIES**. A regra geral é a autoliquidação pelo cliente (*reverse charge*), com declaração recapitulativa
-- **B2C** (vendas à distância e serviços a consumidores noutros Estados-Membros): acima do limiar da UE aplica-se o IVA do Estado-Membro do consumidor, declarado através do **OSS** (balcão único). Limiar → (ver `references/valores-2026.md`)
+- **B2C** (vendas à distância intracomunitárias de bens e serviços de telecomunicações, radiodifusão e eletrónicos a consumidores noutros Estados-Membros): acima do limiar anual da UE aplica-se o IVA do Estado-Membro do consumidor, declarado através do **OSS** (balcão único); os restantes serviços B2C seguem, em regra, a sede do prestador — regras em `references/iva-internacional.md` e limiar em `references/valores-2026.md`
 - Desenvolvimento em `references/fiscal.md` e `references/contratos-internacionais.md`
 
 ## Cobrança transfronteiriça na UE
@@ -158,4 +158,4 @@
 
 ## Templates
 - `assets/templates/queixa-comissao-europeia.md` — queixa à Comissão Europeia por incumprimento do direito da UE por um Estado-Membro (art. 258.º TFUE)
-- Gerados a pedido, neste estilo: requerimento ao juiz para reenvio prejudicial (com as questões propostas); queixa ao Provedor de Justiça Europeu; descrição de caso para o SOLVIT; guião de preenchimento do formulário A da injunção de pagamento europeia
+- Gerados a pedido, neste estilo: requerimento ao juiz para reenvio prejudicial (com as questões propostas); queixa ao Provedor de Justiça Europeu; descrição de caso para o SOLVIT; guião de preenchimento do formulário A da injunção de pagamento europeia (a pedido)

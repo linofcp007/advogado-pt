@@ -25,10 +25,10 @@ As partes acordam revogar o contrato de trabalho celebrado entre si, cessando o 
 A título de compensação pela cessação do contrato, o Empregador pagará ao Trabalhador a quantia global de **{{VALOR_COMPENSACAO}}** ({{VALOR_EXTENSO}}), {{MODO_PAGAMENTO: ex. por transferência para o IBAN XXXX até DATA / com o processamento das contas finais}}.
 
 ## Cláusula 3.ª (Créditos laborais e contas finais)
-Com o pagamento referido na cláusula anterior e o processamento das contas finais (retribuições vencidas, proporcionais de férias, subsídio de férias e de Natal e demais créditos vencidos até à data de cessação), as partes declaram encontrar-se integralmente pagos e saldados todos os créditos emergentes do contrato e da sua cessação.
+Com o pagamento referido na cláusula anterior, o Empregador processa as contas finais (retribuições vencidas, proporcionais de férias, subsídio de férias e de Natal e demais créditos vencidos até à data de cessação), discriminadas em documento entregue ao Trabalhador. A compensação pecuniária global presume-se incluir os créditos vencidos à data da cessação ou exigíveis em virtude desta (Art. 349.º, n.º 5, do Código do Trabalho).
 
-## Cláusula 4.ª (Quitação recíproca)
-As partes dão entre si plena e recíproca quitação, nada mais tendo a reclamar uma da outra, seja a que título for, em razão do contrato de trabalho ou da sua cessação.
+## Cláusula 4.ª (Créditos do Trabalhador)
+O presente acordo não vale como renúncia do Trabalhador a créditos emergentes do contrato de trabalho, da sua violação ou cessação, que só pode ocorrer por transação judicial (**Art. 337.º, n.º 3, do Código do Trabalho**).
 
 ## Cláusula 5.ª (Direito de revogação do acordo)
 O Trabalhador pode **revogar este acordo no prazo de 7 (sete) dias** seguidos a contar da data da sua assinatura, mediante comunicação escrita ao Empregador, nos termos do **Art. 350.º do Código do Trabalho**, devendo, nesse caso, restituir as quantias eventualmente recebidas a título de compensação.

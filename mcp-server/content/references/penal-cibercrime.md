@@ -49,7 +49,7 @@
 - **Burla / burla informática**: induzir alguém em erro para obter enriquecimento — distinguir de mero incumprimento contratual
 - **Abuso de confiança fiscal e à SS** (Arts. 105.º e 107.º RGIT): **não entrega** ao Estado de IVA liquidado ou de retenções (IRS/SS) efetivamente deduzidas — é crime, não simples dívida; existem patamares e prazos de regularização
 - **Insolvência dolosa / culposa**: dissipação de bens em pré-insolvência (cross-ref `references/insolvencia.md`)
-- **Branqueamento** (Lei 83/2017): movimentar fundos de origem ilícita; deveres de identificação/comunicação
+- **Branqueamento** (CP, art. 368.º-A): converter, transferir ou dissimular vantagens de origem ilícita; os deveres preventivos de identificação e comunicação estão na Lei 83/2017
 - **Distinção essencial**: o **incumprimento civil** (não pagar uma fatura por dificuldade) **não é crime**; só há crime quando há dolo de enganar, apropriação ou não entrega de valores do Estado
 
 ## Para o contexto do utilizador (ENI / Unipessoal Lda)
@@ -61,7 +61,7 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Queixa-crime (modelo: identificação do queixoso, factos, qualificação jurídica, prova, pedido)
-- Denúncia de cibercrime (guião para queixaselectronicas.mai.gov.pt / PJ-UNC3T)
-- Pedido de indemnização civil em processo penal (guião de dedução por adesão)
-- Requerimento de constituição de assistente
+- Queixa-crime (modelo: identificação do queixoso, factos, qualificação jurídica, prova, pedido) (a pedido)
+- Denúncia de cibercrime (guião para queixaselectronicas.mai.gov.pt / PJ-UNC3T) (a pedido)
+- Pedido de indemnização civil em processo penal (guião de dedução por adesão) (a pedido)
+- Requerimento de constituição de assistente (a pedido)

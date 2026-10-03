@@ -68,13 +68,35 @@ function mcpConfig(args) {
   console.log(renderConfig(host));
 }
 
-function num(args, flag, def) {
+// Argumentos estritos: um valor em falta, não numérico ou negativo termina com erro (exit 1)
+// nomeando a flag — nunca se calcula com NaN nem se imprime "undefined".
+const OBRIGATORIO = Symbol("obrigatorio");
+
+function valorDe(args, flag) {
   const i = args.indexOf(flag);
-  return i >= 0 && args[i + 1] !== undefined ? Number(args[i + 1]) : def;
+  if (i < 0) return undefined;
+  const v = args[i + 1];
+  if (v === undefined || v.startsWith("--")) throw new Error(`Falta o valor de ${flag}.`);
+  return v;
+}
+function num(args, flag, def = OBRIGATORIO, { negativo = false } = {}) {
+  const v = valorDe(args, flag);
+  if (v === undefined) {
+    if (def === OBRIGATORIO) throw new Error(`Falta o argumento obrigatório ${flag}.`);
+    return def;
+  }
+  const n = Number(v.trim().replace(",", "."));
+  if (v.trim() === "" || !Number.isFinite(n)) throw new Error(`Valor inválido em ${flag}: '${v}' (usa um número).`);
+  if (n < 0 && !negativo) throw new Error(`Valor inválido em ${flag}: não pode ser negativo.`);
+  return n;
 }
 function str(args, flag, def) {
-  const i = args.indexOf(flag);
-  return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : def;
+  const v = valorDe(args, flag);
+  if (v === undefined) {
+    if (def === OBRIGATORIO) throw new Error(`Falta o argumento obrigatório ${flag}.`);
+    return def;
+  }
+  return v;
 }
 
 async function calc(args) {
@@ -86,40 +108,47 @@ async function calc(args) {
   const which = args[0];
   const rest = args.slice(1);
   const fmt = c.formatarEuros;
+  const data = (flag, def = OBRIGATORIO) => c.parseDataEstrita(str(rest, flag, def), flag);
   switch (which) {
     case "imt": {
-      const r = c.calcularIMT(num(rest, "--valor", 0), str(rest, "--tipo", "hpp"), rest.includes("--jovem"));
+      const r = c.calcularIMT(num(rest, "--valor"), str(rest, "--tipo", "hpp"), rest.includes("--jovem"));
       console.log(`IMT: ${fmt(r.imt)} | Selo: ${fmt(r.selo)} | Total: ${fmt(r.total)} (${r.regime})`);
       break;
     }
     case "juros": {
-      const fim = str(rest, "--fim", "");
-      const capital = num(rest, "--capital", 0);
+      const capital = num(rest, "--capital");
+      const inicio = data("--inicio");
+      const fim = data("--fim", c.hojeLisboa());
       const tipo = str(rest, "--tipo", "comercial");
-      const r = c.calcularJuros(capital, new Date(str(rest, "--inicio", "")), fim ? new Date(fim) : new Date(), tipo);
+      const r = c.calcularJuros(capital, inicio, fim, tipo);
       console.log(c.memoriaJuros(capital, r, tipo));
       break;
     }
     case "prazo": {
-      const r = c.contarPrazo(new Date(str(rest, "--inicio", "")), num(rest, "--dias", 0), str(rest, "--tipo", "uteis"));
+      const inicio = data("--inicio");
+      const r = c.contarPrazo(inicio, num(rest, "--dias"), str(rest, "--tipo", "corridos"), {
+        urgente: rest.includes("--urgente"),
+      });
+      if (r.transferido) console.log(`Termo legal: ${r.dataLegal.toISOString().slice(0, 10)}`);
       console.log(`Data-limite: ${r.dataLimite.toISOString().slice(0, 10)}`);
+      console.log(r.nota);
       break;
     }
     case "prescricao": {
-      const r = c.calcularPrescricao(new Date(str(rest, "--inicio", "")), str(rest, "--tipo", "creditos-comerciais"));
-      console.log(`${r.descricao}: limite ${r.limite.toISOString().slice(0, 10)} (${r.prazoTexto})`);
+      const r = c.calcularPrescricao(data("--inicio"), str(rest, "--tipo", "creditos-comerciais"));
+      console.log(`${r.descricao}: limite ${r.limite.toISOString().slice(0, 10)} (${r.prazoTexto}; ${r.base})`);
+      if (r.aviso) console.log(r.aviso);
       break;
     }
     case "compensacao": {
-      const adm = str(rest, "--admissao", "");
-      const ces = str(rest, "--cessacao", "");
+      const temDatas = rest.includes("--admissao") || rest.includes("--cessacao");
       const mod = str(rest, "--modalidade", "sem-termo");
-      if (adm && ces) {
+      if (temDatas) {
         const r = c.calcularCompensacaoPorDatas({
-          retribuicaoBase: num(rest, "--retribuicao", 0),
+          retribuicaoBase: num(rest, "--retribuicao"),
           diuturnidades: num(rest, "--diuturnidades", 0),
-          dataAdmissao: new Date(adm),
-          dataCessacao: new Date(ces),
+          dataAdmissao: data("--admissao"),
+          dataCessacao: data("--cessacao"),
           modalidade: mod === "termo" ? "termo" : "sem-termo",
         });
         console.log(
@@ -128,36 +157,37 @@ async function calc(args) {
         );
         break;
       }
-      const r = c.calcularCompensacao(num(rest, "--retribuicao", 0), num(rest, "--diuturnidades", 0), num(rest, "--anos", 0), mod);
+      const r = c.calcularCompensacao(num(rest, "--retribuicao"), num(rest, "--diuturnidades", 0), num(rest, "--anos"), mod);
       console.log(`Compensação: ${fmt(r.bruto)} (${r.diasAno} dias/ano${r.tetoAplicado ? ", teto aplicado" : ""}) -> se a antiguidade começou antes de 1/5/2023, usa --admissao/--cessacao`);
       break;
     }
     case "custas": {
-      const r = c.custasInjuncao(num(rest, "--valor", 0));
+      const r = c.custasInjuncao(num(rest, "--valor"));
       console.log(`Custas injunção: ${fmt(r.taxa)} (${r.escalao})`);
       break;
     }
     case "selo": {
       const r = c.impostoSeloHeranca(
-        num(rest, "--valor", 0),
+        num(rest, "--valor"),
         str(rest, "--herdeiro", "outro"),
         rest.includes("--imovel"),
-        num(rest, "--vpt", 0)
+        num(rest, "--vpt", 0),
+        rest.includes("--doacao")
       );
       console.log(`Imposto do selo: ${fmt(r.total)} (transmissão: ${r.isento ? "isento" : fmt(r.isTransmissao)})`);
       break;
     }
     case "irs": {
-      const r = c.calcularIRSSimplificado(num(rest, "--rendimento", 0), str(rest, "--tipo", "servicos-151"));
+      const r = c.calcularIRSSimplificado(num(rest, "--rendimento"), str(rest, "--tipo", "servicos-151"));
       console.log(`IRS rendimento tributável: ${fmt(r.tributavel)} (coeficiente ${r.coeficiente})`);
       break;
     }
     case "creditos": {
       const r = c.calcularCreditosCessacao({
-        retribuicaoBase: num(rest, "--retribuicao", 0),
+        retribuicaoBase: num(rest, "--retribuicao"),
         diuturnidades: num(rest, "--diuturnidades", 0),
-        dataAdmissao: new Date(str(rest, "--admissao", "")),
-        dataCessacao: new Date(str(rest, "--cessacao", "")),
+        dataAdmissao: data("--admissao"),
+        dataCessacao: data("--cessacao"),
         feriasVencidasNaoGozadas: num(rest, "--ferias-vencidas", 0),
         subsidioFeriasVencidoEmFalta: rest.includes("--sf-em-falta"),
       });
@@ -171,7 +201,7 @@ async function calc(args) {
     }
     case "legitima": {
       const r = c.calcularLegitima({
-        bens: num(rest, "--bens", 0),
+        bens: num(rest, "--bens"),
         doacoes: num(rest, "--doacoes", 0),
         dividas: num(rest, "--dividas", 0),
         conjuge: rest.includes("--conjuge"),
@@ -187,7 +217,7 @@ async function calc(args) {
     }
     case "salario": {
       const r = c.calcularSalarioLiquido({
-        bruto: num(rest, "--bruto", 0),
+        bruto: num(rest, "--bruto"),
         tabela: str(rest, "--tabela", "I"),
         dependentes: num(rest, "--dependentes", 0),
         subsidioRefeicaoDia: num(rest, "--refeicao", 0),
@@ -204,7 +234,7 @@ async function calc(args) {
     }
     case "custo": {
       const r = c.calcularCustoTrabalhador({
-        base: num(rest, "--base", 0),
+        base: num(rest, "--base"),
         diuturnidades: num(rest, "--diuturnidades", 0),
         subsidioRefeicaoDia: num(rest, "--refeicao", 0),
         diasRefeicaoMes: num(rest, "--dias", 22),
@@ -223,11 +253,16 @@ async function calc(args) {
       for (let i = 0; i < rest.length; i++) {
         if (rest[i] === "--viatura" && rest[i + 1]) {
           const [custo, tipo, encargos] = rest[i + 1].split(":");
-          viaturas.push({ custoAquisicao: Number(custo), tipo, encargos: Number(encargos) });
+          const custoN = Number(custo);
+          const encargosN = Number(encargos ?? 0);
+          if (!Number.isFinite(custoN) || custoN < 0 || !tipo || !Number.isFinite(encargosN) || encargosN < 0) {
+            throw new Error(`Valor inválido em --viatura: '${rest[i + 1]}' (usa custo:tipo:encargos).`);
+          }
+          viaturas.push({ custoAquisicao: custoN, tipo, encargos: encargosN });
         }
       }
       const r = c.calcularIRC({
-        lucroTributavel: num(rest, "--lucro", 0),
+        lucroTributavel: num(rest, "--lucro", OBRIGATORIO, { negativo: true }),
         pme: rest.includes("--pme"),
         derramaMunicipal: num(rest, "--derrama", 0.015),
         prejuizosDedutiveis: num(rest, "--prejuizos", 0),
@@ -264,7 +299,7 @@ async function calc(args) {
       break;
     }
     case "taxa-justica": {
-      const r = c.calcularTaxaJustica(num(rest, "--valor", 0), {
+      const r = c.calcularTaxaJustica(num(rest, "--valor"), {
         tabela: str(rest, "--tabela", "A"),
         reducaoEletronica: rest.includes("--reducao-eletronica"),
       });
@@ -292,9 +327,9 @@ async function modulo(f) {
 }
 
 async function calendarioCmd(args) {
-  const ano = Number(str(args, "--ano", String(new Date().getFullYear())));
+  const ano = num(args, "--ano", new Date().getFullYear());
   const dir = resolve(str(args, "--dir", process.cwd()));
-  const mes = args.includes("--mes") ? Number(str(args, "--mes", "0")) : undefined;
+  const mes = args.includes("--mes") ? num(args, "--mes") : undefined;
   const { gerarCalendario, formatarCalendario, exportarICS } = await modulo("calendario.js");
   const { lerPerfil } = await modulo("perfil.js");
   const perfil = lerPerfil({ projeto: dir, perfil: str(args, "--perfil", undefined) });
@@ -444,12 +479,14 @@ Uso:
   advogado-pt calc imt --valor 250000 [--tipo hpp|secundaria] [--jovem]
   advogado-pt calc juros --capital 5000 --inicio 2025-03-01 [--fim YYYY-MM-DD] [--tipo comercial|comercial-geral|civil]
       (memória de cálculo por tramos semestrais)
-  advogado-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo uteis|corridos]
+  advogado-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo judicial|corridos|uteis] [--urgente]
+      (judicial: CPC 138.º com férias judiciais; corridos por defeito)
   advogado-pt calc prescricao --inicio 2025-01-15 --tipo creditos-comerciais
   advogado-pt calc compensacao --retribuicao 1500 --admissao 2015-05-01 --cessacao 2024-04-30 [--modalidade sem-termo|termo]
       (ou --anos N para a regra atual; regime transitório por períodos com as datas)
   advogado-pt calc custas --valor 8000
-  advogado-pt calc selo --valor 100000 [--herdeiro conjuge|descendente|ascendente|outro] [--imovel --vpt N]
+  advogado-pt calc selo --valor 100000 [--herdeiro conjuge|descendente|ascendente|outro] [--imovel --vpt N] [--doacao]
+      (0,8% sobre o VPT só na doação de imóveis; na herança só a verba 1.2)
   advogado-pt calc irs --rendimento 60000 [--tipo mercadorias|servicos-151|servicos-outros|propriedade-intelectual]
   advogado-pt calc creditos --retribuicao 1500 --admissao 2020-03-01 --cessacao 2026-06-30 [--diuturnidades N] [--ferias-vencidas DIAS] [--sf-em-falta]
   advogado-pt calc legitima --bens 300000 [--doacoes N] [--dividas N] [--conjuge] [--filhos N] [--ascendentes nenhum|pais|outros]

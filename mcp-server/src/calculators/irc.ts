@@ -14,6 +14,8 @@
  * Igual a skills/advogado-pt/scripts/irc.py.
  */
 
+import { r2 } from "./arredondar.js";
+
 export interface Viatura {
   custoAquisicao: number;
   tipo: "combustao" | "phev" | "gnv" | "eletrico";
@@ -48,7 +50,6 @@ export interface ResultadoIRC {
   taxaGeral: number;
 }
 
-const r2 = (x: number) => Math.round((x + Number.EPSILON) * 100) / 100;
 
 export const VIATURA_LIMITES = [37500, 45000] as const;
 export const VIATURA_ELETRICA_LIMITE = 62500;

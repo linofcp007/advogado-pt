@@ -2,8 +2,9 @@
 // Uma linha por prazo:  "- [ ] 2026-10-20 — Oposição à execução fiscal — art. 203.º CPPT"
 //                        caixa · data-limite · descrição · origem (opcional)
 // Concluído = "- [x]". O hook (hooks/advogado-hook.mjs) tem um leitor equivalente — manter alinhados.
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { dirProjeto, escreverSeguro } from "./fs-seguro.js";
 
 export interface PrazoRegistado {
   data: string;
@@ -21,8 +22,9 @@ const CABECALHO =
   "<!-- advogado-pt: uma linha por prazo — \"- [ ] AAAA-MM-DD — descrição — origem\". " +
   "Marca [x] quando cumprido. O aviso aparece ao abrir a sessão (vencidos e próximos 7 dias). -->\n\n";
 
+// Mesmo diretório que o hook lê: o indicado, senão CLAUDE_PROJECT_DIR, senão o cwd.
 function dirBase(dir?: string): string {
-  return resolve(dir ?? process.cwd());
+  return dirProjeto(dir);
 }
 
 function caminho(dir?: string): string {
@@ -74,16 +76,44 @@ export function lerPrazos(dir?: string): PrazoRegistado[] {
   return out;
 }
 
+/**
+ * Grava os prazos preservando tudo o que não é linha de prazo (títulos, notas escritas à mão):
+ * as linhas de prazo, ordenadas, ocupam o lugar da primeira que existia (ou vão para o fim).
+ */
 function gravar(prazos: PrazoRegistado[], dir?: string): void {
-  const base = dirBase(dir);
-  if (!existsSync(base) || !statSync(base).isDirectory()) {
-    throw new Error(`O diretório '${base}' não existe.`);
-  }
-  mkdirSync(join(base, PASTA), { recursive: true });
   const ordenados = [...prazos].sort(
     (a, b) => Number(a.concluido) - Number(b.concluido) || a.data.localeCompare(b.data)
   );
-  writeFileSync(caminho(dir), CABECALHO + ordenados.map(linhaDe).join("\n") + "\n", "utf8");
+  const novas = ordenados.map(linhaDe);
+  let atual: string | null = null;
+  try {
+    const f = caminho(dir);
+    if (existsSync(f)) atual = readFileSync(f, "utf8");
+  } catch {
+    atual = null;
+  }
+  let texto: string;
+  if (atual === null) {
+    texto = CABECALHO + novas.join("\n") + "\n";
+  } else {
+    const saida: string[] = [];
+    let inseridas = false;
+    for (const linha of atual.split(/\r?\n/)) {
+      if (parseLinha(linha)) {
+        if (!inseridas) {
+          saida.push(...novas);
+          inseridas = true;
+        }
+        continue;
+      }
+      saida.push(linha);
+    }
+    while (saida.length && saida[saida.length - 1].trim() === "") saida.pop();
+    if (!inseridas) saida.push("", ...novas);
+    texto = saida.join("\n") + "\n";
+  }
+  // Escrita segura: recusa ligações (symlink/junction) e grava por temporário + renomeação.
+  escreverSeguro(dirBase(dir), [PASTA, FICHEIRO], texto);
 }
 
 /** Regista um prazo (data AAAA-MM-DD obrigatória e válida). */

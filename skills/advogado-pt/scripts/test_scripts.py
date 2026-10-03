@@ -12,7 +12,9 @@ não executa nada.
 """
 
 import datetime
+import json
 import os
+import re
 import sys
 import unittest
 
@@ -29,8 +31,31 @@ from salario_liquido import calcular_salario_liquido, calcular_custo_trabalhador
 from irc import calcular_irc
 from taxa_justica import calcular_taxa_justica
 from iva_operacao import decidir_iva
-from prescricao import calcular_prazo, add_anos, add_meses
+from prescricao import calcular_prazo, calcular_prescricao, add_anos, add_meses
 from irs_simplificado import calcular_rendimento_tributavel
+from prazos import contar_prazo
+from custas_injuncao import estimar_taxa
+from imposto_selo_heranca import calcular_is
+
+# Casos partilhados com o TypeScript (mcp-server/test/fixtures/paridade.json).
+_FIXTURE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..",
+                        "mcp-server", "test", "fixtures", "paridade.json")
+
+
+def _paridade():
+    if not os.path.exists(_FIXTURE):
+        raise unittest.SkipTest("fixtures/paridade.json não disponível (fora do repositório)")
+    with open(_FIXTURE, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _snake(nome):
+    """retencaoIRS -> retencao_irs; nifVIES -> nif_vies."""
+    return re.sub(r"(?<=[a-z0-9])([A-Z]+)", r"_\1", nome).lower()
+
+
+def _d(texto):
+    return datetime.date.fromisoformat(texto)
 
 
 class TestJurosMora(unittest.TestCase):
@@ -325,9 +350,11 @@ class TestIRCIVATaxa(unittest.TestCase):
 
 class TestPrescricao(unittest.TestCase):
     def test_servicos_profissionais(self):
+        # Prescrição presuntiva de 2 anos (CC, art. 317.º, al. c)) — a v1.2
+        # dava 5 anos (erro corrigido na v1.2.1).
         descricao, prazo, base, limite = calcular_prazo(
             datetime.date(2025, 1, 1), "servicos-profissionais")
-        self.assertEqual(limite, datetime.date(2030, 1, 1))
+        self.assertEqual(limite, datetime.date(2027, 1, 1))
 
     def test_civil_geral_20_anos(self):
         _, _, _, limite = calcular_prazo(
@@ -360,6 +387,118 @@ class TestIRSSimplificado(unittest.TestCase):
         coef, trib = calcular_rendimento_tributavel(50000, "mercadorias")
         self.assertAlmostEqual(coef, 0.15)
         self.assertAlmostEqual(trib, 7500.0, places=2)
+
+
+class TestV121Prazos(unittest.TestCase):
+    """T206 — prazos judiciais (CPC, art. 138.º), corridos e úteis: os casos de T-201 a T-203 e T-205."""
+
+    def test_T206_casos_partilhados(self):
+        for c in _paridade()["prazos"]:
+            e = c["in"]
+            r = contar_prazo(_d(e["inicio"]), e["dias"], e["tipo"],
+                             urgente=bool(e.get("urgente")))
+            self.assertEqual(r["data_limite"].isoformat(), c["out"]["dataLimite"], msg=str(e))
+            if "dataLegal" in c["out"]:
+                self.assertEqual(r["data_legal"].isoformat(), c["out"]["dataLegal"], msg=str(e))
+
+    def test_T206_default_corridos(self):
+        a = contar_prazo(_d("2026-10-01"), 30)
+        b = contar_prazo(_d("2026-10-01"), 30, "corridos")
+        self.assertEqual(a["data_limite"], b["data_limite"])
+
+    def test_T206_entradas_invalidas(self):
+        with self.assertRaisesRegex(ValueError, "(?i)dias"):
+            contar_prazo(_d("2026-10-01"), -1, "corridos")
+        with self.assertRaisesRegex(ValueError, "(?i)dias"):
+            contar_prazo(_d("2026-10-01"), 4000, "uteis")
+        with self.assertRaisesRegex(ValueError, "(?i)tipo"):
+            contar_prazo(_d("2026-10-01"), 10, "xpto")
+
+
+class TestV121Prescricao(unittest.TestCase):
+    """T208 — prescrição pelos tipos do CC (arts. 309.º, 310.º e 317.º): os mesmos casos de T-207."""
+
+    def test_T208_casos_partilhados(self):
+        for c in _paridade()["prescricao"]:
+            r = calcular_prescricao(_d(c["in"]["inicio"]), c["in"]["tipo"])
+            self.assertEqual(r["limite"].isoformat(), c["out"]["limite"], msg=c["in"]["tipo"])
+            self.assertEqual(r["presuntiva"], c["out"]["presuntiva"], msg=c["in"]["tipo"])
+            self.assertIn(c["out"]["base"], r["base"], msg=c["in"]["tipo"])
+            if c["out"]["presuntiva"]:
+                self.assertRegex(r.get("aviso") or "", "(?i)presun")
+
+
+class TestV121Paridade(unittest.TestCase):
+    """T241 — paridade Python <-> TypeScript nos casos de fixtures/paridade.json."""
+
+    def setUp(self):
+        self.fx = _paridade()
+
+    def _comparar(self, obtido, esperado, ctx, tol=0.0001):
+        for k, v in esperado.items():
+            chave = _snake(k)
+            self.assertIn(chave, obtido, msg=f"{ctx}: falta '{chave}'")
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                self.assertAlmostEqual(obtido[chave], v, delta=tol, msg=f"{ctx}: {chave}")
+            else:
+                self.assertEqual(obtido[chave], v, msg=f"{ctx}: {chave}")
+
+    def test_T241_salario_e_custo(self):
+        for c in self.fx["salario"]:
+            kw = {_snake(k): v for k, v in c["in"].items()}
+            r = calcular_salario_liquido(kw.pop("bruto"), kw.pop("tabela"), kw.pop("dependentes"), **kw)
+            self._comparar(r, c["out"], f"salario {c['in']}")
+        for c in self.fx["custo"]:
+            kw = {_snake(k): v for k, v in c["in"].items()}
+            self._comparar(calcular_custo_trabalhador(kw.pop("base"), **kw), c["out"], f"custo {c['in']}")
+
+    def test_T241_iva_textos_iguais(self):
+        for c in self.fx["iva"]:
+            kw = {_snake(k): v for k, v in c["in"].items()}
+            r = decidir_iva(kw.pop("tipo"), kw.pop("cliente"), kw.pop("destino"), **kw)
+            self._comparar(r, c["out"], f"iva {c['in']}")
+
+    def test_T241_irc_e_taxa_justica(self):
+        for c in self.fx["irc"]:
+            kw = {_snake(k): v for k, v in c["in"].items()}
+            if "viaturas" in kw:
+                kw["viaturas"] = [{_snake(k): v for k, v in x.items()} for x in kw["viaturas"]]
+            r = calcular_irc(kw.pop("lucro_tributavel"), kw.pop("pme"), kw.pop("derrama_municipal"), **kw)
+            self._comparar(r, c["out"], f"irc {c['in']}")
+        for c in self.fx["taxaJustica"]:
+            r = calcular_taxa_justica(c["in"]["valor"])
+            numericos = {k: v for k, v in c["out"].items() if isinstance(v, (int, float))}
+            self._comparar(r, numericos, f"taxa de justiça {c['in']}")
+
+    def test_T241_imt_jovem_com_selo(self):
+        for c in self.fx["imt"]:
+            r = calcular_imt(c["in"]["valor"], c["in"]["tipo"], jovem=c["in"]["jovem"])
+            self._comparar(r, c["out"], f"imt {c['in']}", tol=0.006)
+
+    def test_T241_irs_e_injuncao(self):
+        for c in self.fx["irs"]:
+            coef, trib = calcular_rendimento_tributavel(c["in"]["rendimento"], c["in"]["tipo"])
+            self.assertAlmostEqual(coef, c["out"]["coeficiente"], msg=c["in"]["tipo"])
+            self.assertAlmostEqual(trib, c["out"]["tributavel"], places=2, msg=c["in"]["tipo"])
+        for c in self.fx["injuncao"]:
+            _, _, taxa = estimar_taxa(c["in"]["valor"])
+            self.assertAlmostEqual(taxa, c["out"]["taxa"], places=2, msg=str(c["in"]))
+
+
+class TestV121Selo(unittest.TestCase):
+    """T242 — Imposto do Selo: 0,8% (verba 1.1) só nas doações de imóveis (igual ao TS)."""
+
+    def test_T242_heranca_sem_verba_1_1(self):
+        _, isento, is_imovel, total = calcular_is(80000, "descendente", True, 120000)
+        self.assertTrue(isento)
+        self.assertAlmostEqual(is_imovel, 0.0)
+        self.assertAlmostEqual(total, 0.0)
+
+    def test_T242_doacao_com_verba_1_1(self):
+        _, _, is_imovel, total = calcular_is(80000, "descendente", True, 120000, doacao=True)
+        self.assertAlmostEqual(is_imovel, 960.0, places=2)
+        self.assertAlmostEqual(total, 960.0, places=2)
+        self.assertAlmostEqual(calcular_is(80000, "outro", True, 120000, True)[3], 8960.0, places=2)
 
 
 if __name__ == "__main__":

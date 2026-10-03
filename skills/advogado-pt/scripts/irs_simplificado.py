@@ -8,13 +8,13 @@ acresce aos restantes rendimentos do agregado), NÃO o imposto final.
 
   rendimento_tributavel = rendimento_bruto * coeficiente
 
-Coeficientes (Art. 31.º CIRS):
-  - mercadorias            = 0,15  (venda de mercadorias e produtos)
-  - servicos-151           = 0,75  (serviços do Art. 151.º — tabela de
-                                     atividades profissionais)
-  - servicos-outros        = 0,35  (restantes prestações de serviços)
-  - propriedade-intelectual = 0,50 (rendimentos de propriedade intelectual /
-                                     industrial)
+Coeficientes (CIRS, art. 31.º, n.º 1):
+  - mercadorias             = 0,15 (al. a): venda de mercadorias e produtos)
+  - servicos-151            = 0,75 (al. b): atividades profissionais da
+                                     tabela do art. 151.º)
+  - servicos-outros         = 0,35 (al. c): restantes prestações de serviços)
+  - propriedade-intelectual = 0,95 (al. d): cessão ou utilização temporária
+                                     da propriedade intelectual ou industrial)
 
 Exemplos de uso:
   python scripts/irs_simplificado.py --rendimento 30000 --tipo servicos-151
@@ -30,19 +30,22 @@ except (AttributeError, ValueError):
     pass
 
 import argparse
+from decimal import ROUND_HALF_UP, Decimal
 
-# Coeficientes do regime simplificado (Art. 31.º CIRS).
+# Coeficientes do regime simplificado (CIRS, art. 31.º, n.º 1, als. a) a d)).
 COEFICIENTES = {
     "mercadorias": 0.15,
     "servicos-151": 0.75,
     "servicos-outros": 0.35,
-    "propriedade-intelectual": 0.50,
+    "propriedade-intelectual": 0.95,
 }
 
 
 def formatar_euros(valor):
     """Formata um valor numérico como euros no formato PT: '1.234,56 €'."""
-    inteiro = f"{valor:,.2f}"
+    # Meio para cima sobre a representação decimal mais curta (igual ao formatarEuros do TS).
+    arredondado = Decimal(repr(float(valor))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    inteiro = f"{arredondado:,.2f}"
     inteiro = inteiro.replace(",", "X").replace(".", ",").replace("X", ".")
     return f"{inteiro} €"
 

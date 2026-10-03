@@ -60,6 +60,8 @@ O presente contrato é feito em duplicado, ficando um exemplar na posse de cada 
 
 O Senhorio: _______________________   O Arrendatário: _______________________
 
+{{CONSENTIMENTO_CONJUGE: opcional — se o Senhorio for casado num regime que não seja o de separação de bens: «{{CONJUGE_NOME}}, cônjuge de {{SENHORIO_NOME}}, declara dar o seu consentimento ao presente contrato de arrendamento, nos termos do art. 1682.º-A do Código Civil.» Cônjuge: _______________________________}} <!-- Casa de morada de família: consentimento sempre necessário, qualquer que seja o regime (art. 1682.º-A, n.º 2). -->
+
 ---
 
 ## Antes de enviar — verificar
@@ -70,4 +72,5 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Forma escrita (art. 1069.º CC), em duplicado, identificando a licença de utilização e o certificado energético válidos; anexar inventário e fotografias datadas do estado do imóvel.
 - [ ] Caução e rendas antecipadas dentro do limite legal (art. 1076.º CC; ver `references/valores-2026.md`).
 - [ ] Prazo e renovação: a oposição do senhorio à primeira renovação só produz efeitos 3 anos após a celebração (art. 1097.º, n.º 3, CC); confirmar o período supletivo de renovação e o estado atual das medidas da Lei 56/2023 (Mais Habitação) (a confirmar).
+- [ ] Cônjuge: se o Senhorio for casado num regime que não seja o de separação de bens, o arrendamento de imóvel próprio ou comum exige o consentimento de ambos os cônjuges (CC, art. 1682.º-A, n.º 1, al. a)), sob pena de anulabilidade (art. 1687.º); sendo a casa de morada de família, o consentimento é sempre necessário, qualquer que seja o regime (n.º 2).
 - [ ] Emitir recibos de renda eletrónicos todos os meses e declarar as rendas no IRS (categoria F).

@@ -52,4 +52,5 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Envio por carta registada com AR (ou entrega em mão contra recibo datado); enviar cópia à comissão de trabalhadores e, sendo representante sindical, à associação sindical (art. 357.º CT — a confirmar o número).
 - [ ] ⏰ O trabalhador tem 60 dias, a contar da receção da decisão (ou da cessação, se posterior), para se opor ao despedimento (art. 387.º, n.º 2, CT) — conservar o processo disciplinar completo como prova.
 - [ ] Contas finais: processar créditos vencidos e proporcionais, entregar certificado de trabalho e declaração de situação de desemprego e comunicar a cessação à Segurança Social (prazo a confirmar).
+- [ ] ⏰ Trabalhadora grávida, puérpera ou lactante, ou trabalhador em licença parental: pedir o **parecer prévio da CITE** antes da decisão (art. 63.º CT); sem esse pedido o despedimento é ilícito (art. 381.º, al. d), CT) e, se o parecer for desfavorável, só o tribunal pode reconhecer o motivo.
 - [ ] Microempresa: verificar o procedimento simplificado (art. 358.º CT — a confirmar); em caso de dúvida, validar com advogado antes de enviar.

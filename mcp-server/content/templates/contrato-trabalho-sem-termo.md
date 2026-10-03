@@ -1,8 +1,9 @@
 <!-- Template: contrato de trabalho por tempo indeterminado (sem termo). Base: Código do Trabalho
      (Lei 7/2009, de 12 fev). Forma escrita não é obrigatória para o contrato sem termo, mas é
      altamente recomendada como prova. Confirmar RMMG e taxas em references/valores-2026.md.
-     Período experimental: 90 dias (regra geral), 180 dias (cargos de complexidade técnica/confiança),
-     240 dias (cargos de direção/quadros superiores) — Art. 112.º CT (confirmar enquadramento).
+     Período experimental: 90 dias (regra geral), 180 dias (cargos de complexidade técnica/confiança e
+     trabalhador à procura do primeiro emprego ou desempregado de longa duração), 240 dias (cargos de
+     direção/quadros superiores) — Art. 112.º CT (confirmar enquadramento).
      Âmbito: nacional -->
 
 # CONTRATO DE TRABALHO POR TEMPO INDETERMINADO
@@ -33,7 +34,7 @@ O Trabalhador auferirá a retribuição base mensal ilíquida de **{{RETRIBUICAO
 {{SUBSIDIO_ALIMENTACAO: ex. Acresce subsídio de refeição de XX€ por cada dia de trabalho efetivo.}}
 
 ## Cláusula 5.ª (Período experimental)
-As partes acordam um período experimental de **{{DIAS_EXPERIENCIA}} dias**, nos termos do Art. 112.º do Código do Trabalho. <!-- 90 dias (regra geral); 180 dias para cargos de complexidade técnica, elevado grau de responsabilidade ou especial confiança; 240 dias para cargos de direção/quadros superiores. Confirmar enquadramento. -->
+As partes acordam um período experimental de **{{DIAS_EXPERIENCIA}} dias**, nos termos do Art. 112.º do Código do Trabalho. <!-- 90 dias (regra geral); 180 dias para cargos de complexidade técnica, elevado grau de responsabilidade ou especial confiança, e para trabalhador à procura do primeiro emprego ou desempregado de longa duração (Art. 112.º, n.º 1, al. b), CT); 240 dias para cargos de direção/quadros superiores. Confirmar enquadramento. -->
 Durante o período experimental, qualquer das partes pode denunciar o contrato sem aviso prévio (ou com o aviso prévio legalmente exigível em função da sua duração) e sem necessidade de invocação de justa causa, não havendo lugar a indemnização, salvo o disposto na lei.
 
 ## Cláusula 6.ª (Início e duração)

@@ -16,14 +16,14 @@
 - Duração: vida do autor + 70 anos (pessoa singular) / 70 anos desde publicação (pessoa coletiva)
 
 ### Titularidade
-- Software criado por trabalhador no âmbito do contrato: presume-se que pertence ao empregador (Art. 14º Diretiva)
+- Software criado por trabalhador no exercício das suas funções ou segundo instruções do empregador: os direitos patrimoniais pertencem ao empregador, salvo estipulação em contrário (Diretiva 2009/24/CE, art. 2.º, n.º 3; DL 252/94, art. 3.º, n.º 3)
 - Software feito por encomenda (freelancer/fornecedor): por defeito os direitos pertencem ao destinatário/cliente, salvo estipulação em contrário ou se outra coisa resultar das finalidades do contrato (art. 3.º, n.º 3, DL 252/94) — mesmo assim, definir sempre por contrato (template `contrato-desenvolvimento-software.md`); para documentação/design aplica-se o CDADC (art. 14.º e forma dos arts. 43.º/44.º)
 - Software criado em coautoria: direitos conjuntos, decisões por unanimidade
 - **Cláusula essencial em todos os contratos de desenvolvimento**: assignment ou licença clara
 
 ## Marcas (INPI)
 - Registo no INPI (Instituto Nacional da Propriedade Industrial)
-- Marca nacional: ~200€ (classe única online), válida 10 anos, renovável
+- Marca nacional: taxas do INPI em `references/valores-2026.md` (pedido online por classe + concessão); válida 10 anos, renovável
 - Marca da UE: via EUIPO (~850€ classe única), protege em toda a UE
 - *(Custos aproximados — ver `references/valores-2026.md`, Emolumentos)*
 - Pesquisa prévia obrigatória: TMView (gratuito)
@@ -43,7 +43,7 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Acordo de cessão de direitos de autor (PT/EN)
-- Licença de software proprietário
-- NDA com cláusula de PI
-- Política interna de propriedade intelectual
+- Acordo de cessão de direitos de autor (PT/EN) (a pedido)
+- Licença de software proprietário (a pedido)
+- NDA com cláusula de PI — `assets/templates/nda-bilingue.md`
+- Política interna de propriedade intelectual (a pedido)

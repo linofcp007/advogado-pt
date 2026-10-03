@@ -39,22 +39,35 @@
 | Item | Valor 2026 | Notas |
 |---|---|---|
 | Limiar regime simplificado | até **200.000€**/ano de rendimento | acima → contabilidade organizada obrigatória |
-| Coeficiente — venda de mercadorias | 0,15 | tributa 15% do bruto |
-| Coeficiente — prestação de serviços (Art. 151.º) | 0,75 | |
-| Coeficiente — serviços não previstos / outros | 0,35 | |
-| Coeficiente — propriedade intelectual | 0,50 | |
-| Dedução específica (despesas gerais presumidas) | 4.104€ (ou despesa efetiva, se superior) | |
+| Coeficiente — venda de mercadorias e produtos | 0,15 | tributa 15% do bruto — CIRS art. 31.º, n.º 1, al. a) |
+| Coeficiente — atividades profissionais (tabela do art. 151.º) | 0,75 | al. b) |
+| Coeficiente — restantes prestações de serviços | 0,35 | al. c) |
+| Coeficiente — propriedade intelectual | 0,95 | cessão ou utilização temporária de propriedade intelectual ou industrial — al. d) |
+| Dedução específica da Cat. A (também considerada nas despesas do art. 31.º, n.º 2) | **4.587,09 €** (8,54 × IAS) | CIRS art. 25.º, n.º 1, al. a) |
 | Escalões e taxas progressivas IRS | **🔄 confirmar tabela do ano** | mudam quase todos os anos no OE |
+
+**Deduções à coleta de IRS (por sujeito passivo, salvo indicação)**
+
+| Dedução | Limite 2026 | Base |
+|---|---|---|
+| Despesas gerais familiares (35%) | **250 €** | CIRS art. 78.º-B |
+| Saúde (15%) | **1.000 €** por agregado | CIRS art. 78.º-C |
+| Educação e formação (30%) | **800 €** por agregado | CIRS art. 78.º-D |
+| Rendas de habitação permanente (15%) | **900 €** em 2026 (1.000 € a partir de 2027) **(a confirmar)** no CIRS em vigor | CIRS art. 78.º-E |
+| Juros de crédito à habitação própria (contratos até 31/12/2011) (15%) | **296 €** | CIRS art. 78.º-E |
+| Lares e apoio domiciliário (25%) | **403,75 €** | CIRS art. 84.º |
 
 ## Segurança Social 🔄
 
 | Item | Valor 2026 | Notas |
 |---|---|---|
 | IAS (Indexante dos Apoios Sociais) | **537,13€** (era 522,50€ em 2025) | base de muitos limiares |
-| Taxa contributiva ENI (trabalhador independente) | 21,4% (regra geral) | sobre 70% do rendimento relevante |
+| Taxa contributiva — trabalhador independente | 21,4% | Código Contributivo art. 168.º; base mensal = 1/3 do rendimento relevante do trimestre (70% dos serviços, 20% das vendas — arts. 162.º e 163.º) |
+| Taxa contributiva — empresário em nome individual (ENI) e titular de EIRL | **25,2%** | Código Contributivo art. 168.º |
+| Contribuição mínima do trabalhador independente | **20 €** por mês | Código Contributivo |
 | Taxa contributiva — entidade empregadora | 23,75% | |
 | Taxa contributiva — trabalhador (TSU) | 11% | |
-| Membros de órgãos estatutários (MOE) | 20,3% (entidade) + 9,3% (MOE); com funções de gerência: 23,75% + 11% | Código Contributivo, art. 53.º (Guia ISS 1001) |
+| Membros de órgãos estatutários (MOE) | 20,3% (entidade) + 9,3% (MOE); com funções de gerência: 23,75% + 11% | Código Contributivo, art. 69.º (Guia ISS 1001) |
 | Pagamento das contribuições (empresas) | entre o **dia 1 e o dia 25** do mês seguinte (agosto: até 31) | Código Contributivo, art. 43.º (DL 127/2025, desde 1/1/2026) |
 | Declaração/confirmação de remunerações | até dia **10** (modelo antigo) ou confirmação até dia **20** (novo modelo; obrigatório a partir de 1/1/2027) | Código Contributivo, art. 40.º (DL 127/2025, art. 5.º) |
 | Comunicação de admissão | **até ao início da execução do contrato** (excecionalmente 24 h depois) | Código Contributivo, art. 29.º, n.º 2 (DL 127/2025) |
@@ -143,7 +156,7 @@ Exemplos: 1.500 € (Tabela I, sem dependentes) -> 24,10% × 1.500 − 193,33 = 
 | IMT — isenção habitação própria permanente (HPP) | até **106.346€** | escalões atualizados +2% no OE 2026 |
 | IMT — taxas HPP | progressivas de **2% a 8%** | acima do último escalão: taxa única 6% ou 7,5% |
 | **IMT Jovem** (≤ 35 anos, 1.ª HPP) — isenção total | até **330.539€** | também isento de Imposto do Selo na compra |
-| IMT Jovem — isenção parcial | entre **330.539€ e 660.982€** | IMT só sobre o excesso a 330.539€, à taxa de 8% |
+| IMT Jovem — isenção parcial | entre **330.539€ e 660.982€** | IMT só sobre o excesso a 330.539€, à taxa de 8%; Imposto do Selo só sobre o mesmo excesso, a 0,8% (CIS, art. 7.º-A) |
 | IMT Jovem — sem isenção | valor > **660.982€** | |
 | Imposto do Selo na aquisição | **0,8%** sobre o maior de VPT/preço | |
 | IMI (prédios urbanos) | **0,3% a 0,45%** (taxa municipal) | rústicos 0,8% |
@@ -179,13 +192,14 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 
 > A parcela a abater de cada escalão marginal deriva-se por continuidade. Cálculo automático em `scripts/imt.py`. Prédios rústicos: 5%. Açores/Madeira têm tabelas próprias.
 
-> Requisitos IMT Jovem: idade ≤ 35 anos à data da escritura, 1.ª habitação própria e permanente, não ser dependente para IRS no ano. Isenção total até 330.539€; entre 330.539€ e 660.982€ isenta a parte até 330.539€ e tributa o excesso a 8%; acima de 660.982€ sem isenção. Confirmar no Portal das Finanças (IMT Jovem).
+> Requisitos IMT Jovem: idade ≤ 35 anos à data da escritura, 1.ª habitação própria e permanente, não ser dependente para IRS no ano. Isenção total até 330.539€; entre 330.539€ e 660.982€ isenta a parte até 330.539€ e tributa o excesso a 8% (IMT) e a 0,8% (Imposto do Selo — dedução à coleta do art. 7.º-A CIS, aditado pelo DL 48-A/2024); acima de 660.982€ sem isenção. Confirmar no Portal das Finanças (IMT Jovem).
 
 ## Arrendamento 🔄
 
 | Item | Valor 2026 | Base legal |
 |---|---|---|
 | Coeficiente de atualização anual de rendas | **1,0224** (+2,24%) | Aviso 23174/2025/2 (INE) |
+| Coeficiente de atualização anual de rendas para 2027 | **1,0256** (+2,56%) — apurado pelo INE a 10/9/2026 (IPC sem habitação, 12 meses até agosto); **(a confirmar)** com o Aviso no Diário da República, publicado até 30/10/2026 | NRAU (Lei 6/2006), art. 24.º; INE |
 | Caução máxima | 2 meses de renda | Art. 1076.º CC |
 | Imposto do selo sobre arrendamento | **10%** sobre 1 mês de renda; encargo legal do **senhorio** | TGIS verba 2; CIS art. 3.º, n.º 3, al. b) |
 | Retenção na fonte de IRS sobre rendas (arrendatário com contabilidade organizada) | **25%** | CIRS art. 101.º, n.º 1, al. e) |
@@ -197,7 +211,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 |---|---|---|
 | Imposto do selo — transmissão gratuita | **10%** (verba 1.2 TGIS) | |
 | Isenção — cônjuge/unido de facto, descendentes, ascendentes | **isentos** | |
-| Imposto do selo adicional sobre imóveis | 0,8% sobre VPT | |
+| Imposto do selo sobre imóveis — **doação** (verba 1.1) | 0,8% sobre o VPT | também para cônjuge, descendentes e ascendentes; **não** se aplica às heranças (sucessão por morte) |
 | Prazo Modelo 1 do IS (participação) | até ao fim do 3.º mês seguinte ao do óbito | art. 26.º CIS |
 
 ---
@@ -261,6 +275,16 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Coimas do DL 166/2013 (práticas individuais restritivas) | muito graves: micro 2.500-50.000 € … grande 5.000-2.500.000 €; graves: micro 500-10.000 € … grande 2.500-500.000 € (dimensão = n.º de trabalhadores) | DL 166/2013, arts. 9.º-10.º; RJCE (DL 9/2021) art. 19.º |
 
 > Os limiares de concentrações são fixados na lei (não mudam todos os anos), mas ficam aqui por serem montantes. Confirmar sempre a versão consolidada em pgdlisboa.pt / dre.pt.
+
+## Contratação Pública 🔄
+
+> CCP após o **DL 177/2026** (17.ª alteração; em vigor a 1/10/2026, aplica-se aos procedimentos iniciados a partir dessa data). Valores do contrato **inferiores** a (sem IVA). Confirmar no texto publicado no Diário da República antes de decidir o procedimento.
+
+| Procedimento | Bens e serviços | Empreitadas | Base |
+|---|---|---|---|
+| Ajuste direto (regime geral) | **75.000 €** | **150.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
+| Consulta prévia (mín. 3 entidades) | **130.000 €** | **1.000.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
+| Procedimentos iniciados até 30/9/2026 | AD 20.000 € · CP 75.000 € | AD 30.000 € · CP 150.000 € | redação anterior |
 
 ## Compliance, Denúncias, Dados e IA (coimas e limiares)
 

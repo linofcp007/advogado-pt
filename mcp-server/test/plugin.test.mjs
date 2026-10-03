@@ -2,8 +2,8 @@
  * Testes de estrutura do plugin advogado-pt (JavaScript puro, runner node:test).
  *
  * Valida a coerência entre os slash commands, as tools registadas no servidor MCP,
- * o manifesto do plugin e o conteúdo da skill. Não depende da compilação (lê o .ts
- * fonte e os .md diretamente), pelo que corre tanto com:
+ * o manifesto do plugin e o conteúdo da skill. Lê o .ts fonte e os .md diretamente
+ * (só o T-234 usa o bundle `mcp-server/dist/index.js`), pelo que corre tanto com:
  *   node --test mcp-server/test/plugin.test.mjs      (a partir da raiz do repo)
  *   node --test test/plugin.test.mjs                 (a partir de mcp-server/)
  *
@@ -13,9 +13,13 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync, existsSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { readFileSync, readdirSync, existsSync, mkdtempSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "..", ".."); // raiz do repositório
@@ -344,4 +348,166 @@ test("T-46 o bundle mcp-server/content tem os conteúdos novos", () => {
   for (const n of NOVOS_PLAYBOOKS) if (!existsSync(C("playbooks", `${n}.md`))) faltas.push(`playbooks/${n}`);
   for (const n of NOVAS_CHECKLISTS) if (!existsSync(C("checklists", `${n}.md`))) faltas.push(`checklists/${n}`);
   assert.equal(faltas.length, 0, "em falta no bundle:\n" + faltas.join("\n"));
+});
+
+// ---------------- v1.2.1 (distribuição e coerência) ----------------
+
+const PY = process.env.PYTHON || "python";
+const tmpDir = (p) => mkdtempSync(join(tmpdir(), p));
+
+// Lê `name` e `description` do frontmatter YAML (aceita os escalares `>` e `|`).
+function frontmatter(texto) {
+  const m = /^---\r?\n([\s\S]*?)\r?\n---/.exec(texto);
+  assert.ok(m, "SKILL.md sem frontmatter");
+  const linhas = m[1].split(/\r?\n/);
+  const campos = {};
+  for (let i = 0; i < linhas.length; i++) {
+    const c = /^([a-z_-]+):\s*(.*)$/.exec(linhas[i]);
+    if (!c) continue;
+    let valor = c[2].trim();
+    if ([">", "|", ">-", "|-"].includes(valor)) {
+      const partes = [];
+      while (i + 1 < linhas.length && /^\s+\S/.test(linhas[i + 1])) partes.push(linhas[++i].trim());
+      valor = partes.join(valor.startsWith(">") ? " " : "\n");
+    }
+    campos[c[1]] = valor.replace(/^["']|["']$/g, "");
+  }
+  return campos;
+}
+
+test("T-233 SKILL.md: name no padrão e description com até 1024 caracteres, sem < nem >; build.py valida", () => {
+  const fm = frontmatter(lerMd(SKILL("SKILL.md")));
+  assert.match(fm.name, /^[a-z0-9-]{1,64}$/);
+  assert.ok(fm.description.length <= 1024, `description com ${fm.description.length} caracteres`);
+  assert.doesNotMatch(fm.description, /[<>]/);
+  const validar = (desc) =>
+    spawnSync(PY, ["-c", "import sys, build; build.validar_skill_md(sys.stdin.read())"], {
+      cwd: repo,
+      input: `---\nname: advogado-pt\ndescription: ${desc}\n---\n# X\n`,
+      encoding: "utf8",
+    });
+  assert.equal(validar("Assessoria jurídica de Portugal.").status, 0, "build.validar_skill_md recusou uma description válida");
+  const longa = validar("x".repeat(1100));
+  assert.notEqual(longa.status, 0, "build.validar_skill_md aceitou uma description com 1100 caracteres");
+  assert.match(longa.stderr + longa.stdout, /1024/);
+});
+
+test("T-234 instruções do servidor com até 2000 caracteres e todas as tools; persona completa no prompt advogado_pt", async () => {
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: [r("mcp-server", "dist", "index.js")],
+    cwd: tmpDir("adv-instr-"),
+    stderr: "pipe",
+  });
+  const client = new Client({ name: "t234", version: "1.0.0" });
+  await client.connect(transport);
+  try {
+    const instr = client.getInstructions() || "";
+    assert.ok(instr.length > 0 && instr.length <= 2000, `instruções com ${instr.length} caracteres`);
+    const { tools } = await client.listTools();
+    const faltam = tools.map((t) => t.name).filter((n) => !instr.includes(n));
+    assert.deepEqual(faltam, [], `tools sem menção nas instruções: ${faltam.join(", ")}`);
+    const p = await client.getPrompt({ name: "advogado_pt" });
+    const texto = p.messages.map((m) => m.content?.text || "").join("\n");
+    assert.match(texto, /RIGOR/);
+    assert.match(texto, /SIN[ÓO]NIMOS/);
+    assert.ok(texto.length > instr.length, "o prompt advogado_pt devia ter a persona completa");
+  } finally {
+    await client.close();
+  }
+});
+
+const NATIVOS = [
+  "add-dir", "agents", "bug", "clear", "compact", "config", "context", "cost", "doctor", "export", "help",
+  "hooks", "ide", "init", "login", "logout", "mcp", "memory", "model", "permissions", "plugin", "pr-comments",
+  "release-notes", "resume", "review", "rewind", "security-review", "status", "statusline", "terminal-setup",
+  "todos", "upgrade", "usage", "vim",
+];
+
+test("T-235 nenhum command com nome de comando nativo; /diagnostico no hook e no README", () => {
+  const nomes = lerCommands().map((c) => c.nome.replace(/\.md$/, ""));
+  const colisoes = nomes.filter((n) => NATIVOS.includes(n));
+  assert.deepEqual(colisoes, [], `commands que colidem com comandos nativos: ${colisoes.join(", ")}`);
+  assert.ok(nomes.includes("diagnostico"), "falta commands/diagnostico.md");
+  const hook = lerMd(r("hooks", "advogado-hook.mjs"));
+  assert.match(hook, /\/diagnostico\b/);
+  assert.doesNotMatch(hook, /\/doctor\b/);
+  const readme = lerMd(r("README.md"));
+  assert.match(readme, /`\/diagnostico`/);
+  assert.doesNotMatch(readme, /`\/doctor`/);
+});
+
+test("T-236 commands citam ficheiros do plugin com ${CLAUDE_PLUGIN_ROOT} e não mandam compilar", () => {
+  const falhas = [];
+  for (const { nome, texto } of lerCommands()) {
+    for (const m of texto.matchAll(/(\S*?)((?:scripts|cli|mcp-server|hooks|skills)\/[\w./-]+?\.(?:py|mjs|js|md))\b/g)) {
+      if (!m[1].endsWith("${CLAUDE_PLUGIN_ROOT}/")) falhas.push(`${nome}: '${m[2]}' sem \${CLAUDE_PLUGIN_ROOT}`);
+    }
+    if (/npm (run build|install)/.test(texto)) falhas.push(`${nome}: manda compilar ou instalar`);
+  }
+  assert.deepEqual(falhas, [], falhas.join("\n"));
+});
+
+test("T-237 o .skill gerado tem a pasta advogado-pt na raiz", () => {
+  const out = tmpDir("adv-skill-");
+  const b = spawnSync(PY, [r("build.py"), "--out", out], { cwd: repo, encoding: "utf8" });
+  assert.equal(b.status, 0, b.stderr || b.stdout);
+  const z = spawnSync(
+    PY,
+    ["-c", "import sys, zipfile; print(chr(10).join(zipfile.ZipFile(sys.argv[1]).namelist()))", join(out, "advogado-pt.skill")],
+    { encoding: "utf8" }
+  );
+  assert.equal(z.status, 0, z.stderr);
+  const nomes = z.stdout.split(/\r?\n/).filter(Boolean);
+  assert.ok(nomes.includes("advogado-pt/SKILL.md"), "o .skill não tem advogado-pt/SKILL.md");
+  assert.deepEqual(nomes.filter((n) => !n.startsWith("advogado-pt/")), []);
+});
+
+test("T-239 não existe bin/ na raiz; o hook analisa os edits do MultiEdit", () => {
+  assert.ok(!existsSync(r("bin")), "existe um diretório bin/ na raiz (o Claude Desktop recusa o plugin)");
+  const ficheiro = join(tmpDir("adv-multi-"), "contrato-cliente.md");
+  writeFileSync(
+    ficheiro,
+    "# CONTRATO DE PRESTAÇÃO DE SERVIÇOS\n\nPRIMEIRA OUTORGANTE: ...\n\n## Cláusula 1.ª (Objeto)\nO presente contrato ...\n"
+  );
+  const payload = {
+    tool_name: "MultiEdit",
+    tool_input: {
+      file_path: ficheiro,
+      edits: [{ old_string: "## Cláusula 1.ª", new_string: "## Cláusula 1.ª (Objeto)" }],
+    },
+  };
+  const out = spawnSync(process.execPath, [r("hooks", "advogado-hook.mjs"), "PostToolUse"], {
+    input: JSON.stringify(payload),
+    encoding: "utf8",
+  });
+  assert.equal(out.status, 0);
+  assert.match(out.stdout, /Documento jur[íi]dico detetado/);
+});
+
+test("T-244 nenhuma referência, checklist ou playbook com perfil fixo do utilizador", () => {
+  const FIXO = /Como ENI \(situa[çc][ãa]o atual\)|Regime Atual — ENI|Unipessoal Lda \(futuro\)/;
+  const falhas = [];
+  for (const sub of [["references"], ["assets", "checklists"], ["playbooks"]]) {
+    const dir = SKILL(...sub);
+    for (const f of readdirSync(dir).filter((n) => n.endsWith(".md"))) {
+      if (FIXO.test(lerMd(resolve(dir, f)))) falhas.push(`${sub.join("/")}/${f}`);
+    }
+  }
+  assert.deepEqual(falhas, [], `perfil fixo em: ${falhas.join(", ")}`);
+});
+
+test("T-249 versão 1.2.1 nos 6 sítios e no package-lock; CHANGELOG com ## [1.2.1]", () => {
+  const V = "1.2.1";
+  assert.equal(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version, V);
+  const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
+  assert.equal(mk.metadata.version, V);
+  assert.equal(mk.plugins[0].version, V);
+  assert.equal(JSON.parse(lerMd(r("package.json"))).version, V);
+  assert.equal(JSON.parse(lerMd(r("mcp-server", "package.json"))).version, V);
+  assert.ok(lerMd(r("mcp-server", "src", "index.ts")).includes(`version: "${V}"`));
+  const lock = JSON.parse(lerMd(r("mcp-server", "package-lock.json")));
+  assert.equal(lock.version, V);
+  assert.equal(lock.packages[""].version, V);
+  assert.ok(lerMd(r("CHANGELOG.md")).includes(`## [${V}]`));
 });

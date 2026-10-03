@@ -20,6 +20,8 @@ import {
   calcularTaxaJustica,
   decidirIVA,
   formatarEuros,
+  parseDataEstrita,
+  hojeLisboa,
   PRESCRICAO_TIPOS,
   COMPENSACAO_MODALIDADES,
 } from "./calculators/index.js";
@@ -36,10 +38,53 @@ function texto(s: string) {
   return { content: [{ type: "text" as const, text: s }] };
 }
 
-function parseData(s: string): Date {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());
-  if (!m) throw new Error(`Data inválida: '${s}'. Usa YYYY-MM-DD.`);
-  return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])));
+/** Mensagem de erro para o utilizador: só o texto, sem stack trace nem caminhos do sistema. */
+function mensagemErro(e: unknown): string {
+  const m = e instanceof Error ? e.message : String(e);
+  return m
+    .replace(/[A-Za-z]:\\[^\s'"]+/g, "(caminho)")
+    .replace(/(^|[\s'"(])\/(?:[\w.-]+\/)+[\w.-]*/g, "$1(caminho)")
+    .split("\n")[0]
+    .slice(0, 300);
+}
+
+// Montantes que podem ser negativos (prejuízo fiscal); os restantes números têm de ser >= 0.
+const PODEM_SER_NEGATIVOS = new Set(["lucro_tributavel"]);
+
+function numeroNegativo(args: unknown, prefixo = ""): string | null {
+  if (!args || typeof args !== "object") return null;
+  for (const [k, v] of Object.entries(args as Record<string, unknown>)) {
+    if (typeof v === "number" && v < 0 && !PODEM_SER_NEGATIVOS.has(k)) return prefixo + k;
+    if (v && typeof v === "object") {
+      const r = numeroNegativo(v, `${prefixo}${k}.`);
+      if (r) return r;
+    }
+  }
+  return null;
+}
+
+/**
+ * Todas as tools passam por aqui: montantes negativos são recusados nomeando o campo e
+ * qualquer exceção vira uma resposta de texto (sem stack trace) — nunca falha o pedido.
+ */
+function comErrosTratados(server: McpServer): McpServer {
+  const original = server.registerTool.bind(server) as (...args: unknown[]) => unknown;
+  const envolvido = Object.create(server) as McpServer;
+  (envolvido as unknown as { registerTool: unknown }).registerTool = (
+    nome: string,
+    config: unknown,
+    handler: (...a: unknown[]) => unknown
+  ) =>
+    original(nome, config, async (...a: unknown[]) => {
+      try {
+        const negativo = numeroNegativo(a[0]);
+        if (negativo) return texto(`Valor inválido em '${negativo}': não pode ser negativo.`);
+        return await handler(...a);
+      } catch (e) {
+        return texto(`Não foi possível concluir: ${mensagemErro(e)}`);
+      }
+    });
+  return envolvido;
 }
 
 function iso(d: Date): string {
@@ -53,7 +98,8 @@ function listagem(cat: Categoria): string {
     .join("\n");
 }
 
-export function registerTools(server: McpServer): void {
+export function registerTools(servidor: McpServer): void {
+  const server = comErrosTratados(servidor);
   // ---------------- Calculadoras ----------------
 
   server.registerTool(
@@ -74,9 +120,10 @@ export function registerTools(server: McpServer): void {
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ capital, data_inicio, data_fim, tipo }) => {
-      const fim = data_fim ? parseData(data_fim) : new Date();
       try {
-        const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
+        // Sem data de fim: hoje em Lisboa (não a data UTC do servidor).
+        const fim = parseDataEstrita(data_fim ?? hojeLisboa(), "data_fim");
+        const r = calcularJuros(capital, parseDataEstrita(data_inicio, "data_inicio"), fim, tipo);
         return texto(memoriaJuros(capital, r, tipo) + AVISO);
       } catch (e) {
         return texto(`Não foi possível calcular: ${(e as Error).message}`);
@@ -89,21 +136,32 @@ export function registerTools(server: McpServer): void {
     {
       title: "Contar prazo legal",
       description:
-        "Conta um prazo legal em dias úteis (salta fins-de-semana e feriados nacionais de Portugal) ou dias corridos, devolvendo a data-limite. Usa quando há um prazo a contar a partir de uma data ('até quando tenho para', 'contestação', 'oposição', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline in business/calendar days.",
+        "Conta um prazo legal e devolve a data-limite e o termo legal. Tipos: 'judicial' para prazos de processos em tribunal (contestação, oposição à execução, recurso, resposta — CPC, art. 138.º: contínuo, suspende-se nas férias judiciais, termo em dia não útil passa para o dia útil seguinte; 'urgente' para processos urgentes); 'corridos' (por defeito) para prazos civis e contratuais em dias seguidos (CC, art. 279.º); 'uteis' para prazos em dias úteis (ex.: CPA, art. 87.º). Usa quando há um prazo a contar a partir de uma data ('até quando tenho para', 'contestação', 'oposição', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline (court, calendar or business days).",
       inputSchema: {
-        inicio: z.string().describe("Data de início (YYYY-MM-DD)"),
-        dias: z.number().int().describe("Número de dias do prazo"),
-        tipo: z.enum(["uteis", "corridos"]).default("uteis"),
+        inicio: z.string().describe("Data de início (AAAA-MM-DD) — o dia em que se considera feita a citação/notificação; não conta"),
+        dias: z.number().int().describe("Número de dias do prazo (0 a 3650)"),
+        tipo: z
+          .enum(["judicial", "corridos", "uteis"])
+          .default("corridos")
+          .describe("judicial (CPC 138.º, férias judiciais) | corridos (CC 279.º) | uteis (ex.: CPA 87.º)"),
+        urgente: z.boolean().default(false).describe("Processo urgente: o prazo judicial corre nas férias"),
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ inicio, dias, tipo }) => {
-      const r = contarPrazo(parseData(inicio), dias, tipo);
-      return texto(
-        `Prazo de ${dias} dias ${tipo}\n` +
-          `Início: ${inicio}\n` +
-          `DATA-LIMITE: ${iso(r.dataLimite)}\n\n${r.nota}`
-      );
+    async ({ inicio, dias, tipo, urgente }) => {
+      try {
+        const r = contarPrazo(parseDataEstrita(inicio, "inicio"), dias, tipo, { urgente });
+        const termoLegal = r.transferido ? `Termo legal: ${iso(r.dataLegal)}\n` : "";
+        return texto(
+          `Prazo de ${dias} dias (${tipo}${tipo === "judicial" && urgente ? ", processo urgente" : ""})\n` +
+            `Início: ${inicio}\n` +
+            termoLegal +
+            `⏰ DATA-LIMITE: ${iso(r.dataLimite)}\n\n${r.nota}` +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível contar o prazo: ${(e as Error).message}`);
+      }
     }
   );
 
@@ -131,8 +189,8 @@ export function registerTools(server: McpServer): void {
           const r = calcularCompensacaoPorDatas({
             retribuicaoBase: retribuicao_base,
             diuturnidades,
-            dataAdmissao: parseData(data_admissao),
-            dataCessacao: parseData(data_cessacao),
+            dataAdmissao: parseDataEstrita(data_admissao, "data_admissao"),
+            dataCessacao: parseDataEstrita(data_cessacao, "data_cessacao"),
             modalidade: modalidade === "termo" ? "termo" : "sem-termo",
           });
           return texto(
@@ -173,18 +231,22 @@ export function registerTools(server: McpServer): void {
     {
       title: "Taxa de justiça de injunção",
       description:
-        "Estima a taxa de justiça de um requerimento de injunção (UC 2026 = 102€). Usa quando o utilizador vai avançar com a cobrança judicial de uma dívida e quer saber o custo ('quanto custa uma injunção', 'taxa de justiça', 'custas', 'cobrar judicialmente'). EN: court fee for a payment-order (injunção).",
+        "Estima a taxa de justiça de um requerimento de injunção (UC 2026 = 102€). A injunção serve para dívidas até 15.000€ e, entre empresas (transações comerciais), para qualquer valor (DL 62/2013, art. 10.º). Usa quando o utilizador vai avançar com a cobrança judicial de uma dívida e quer saber o custo ('quanto custa uma injunção', 'taxa de justiça', 'custas', 'cobrar judicialmente'). EN: court fee for a payment-order (injunção).",
       inputSchema: { valor: z.number().describe("Valor da dívida (€)") },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ valor }) => {
-      const r = custasInjuncao(valor);
-      return texto(
-        `Injunção — valor ${formatarEuros(valor)}\n` +
-          `Escalão: ${r.escalao}\n` +
-          `Taxa de justiça estimada: ${formatarEuros(r.taxa)}` +
-          AVISO
-      );
+      try {
+        const r = custasInjuncao(valor);
+        return texto(
+          `Injunção — valor ${formatarEuros(valor)}\n` +
+            `Escalão: ${r.escalao}\n` +
+            `Taxa de justiça estimada: ${formatarEuros(r.taxa)}` +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
     }
   );
 
@@ -193,7 +255,7 @@ export function registerTools(server: McpServer): void {
     {
       title: "Imposto do selo em herança",
       description:
-        "Calcula o imposto do selo numa herança/transmissão gratuita (10%; isento para cônjuge/descendente/ascendente) + 0,8% sobre VPT de imóveis. Usa em partilhas e heranças quando se quer saber o imposto a pagar ('quanto pago de imposto na herança', 'partilha', 'doação', 'herdar'). EN: stamp duty on an inheritance or gift.",
+        "Calcula o imposto do selo numa herança ou doação (verba 1.2: 10%; isentos cônjuge/unido de facto, descendentes e ascendentes). Na DOAÇÃO de imóveis acresce 0,8% sobre o VPT (verba 1.1), mesmo para os isentos; na herança não. Usa em partilhas e heranças quando se quer saber o imposto a pagar ('quanto pago de imposto na herança', 'partilha', 'doação', 'herdar'). EN: stamp duty on an inheritance or gift.",
       inputSchema: {
         valor: z.number().describe("Valor dos bens (€)"),
         herdeiro: z
@@ -201,15 +263,20 @@ export function registerTools(server: McpServer): void {
           .default("outro"),
         inclui_imovel: z.boolean().default(false),
         vpt_imovel: z.number().default(0),
+        doacao: z.boolean().default(false).describe("true para doação (acresce 0,8% sobre o VPT dos imóveis); false para herança"),
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ valor, herdeiro, inclui_imovel, vpt_imovel }) => {
-      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel);
+    async ({ valor, herdeiro, inclui_imovel, vpt_imovel, doacao }) => {
+      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel, doacao);
       return texto(
-        `Imposto do selo — herança (herdeiro: ${herdeiro})\n` +
-          `IS transmissão (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}\n` +
-          (inclui_imovel ? `IS imóvel (0,8% VPT): ${formatarEuros(r.isImovel)}\n` : "") +
+        `Imposto do selo — ${doacao ? "doação" : "herança"} (beneficiário: ${herdeiro})\n` +
+          `IS transmissão (10%, verba 1.2): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}\n` +
+          (inclui_imovel
+            ? doacao
+              ? `IS imóvel (0,8% VPT, verba 1.1): ${formatarEuros(r.isImovel)}\n`
+              : "IS imóvel: não se aplica na herança (a verba 1.1 só abrange a aquisição onerosa ou por doação)\n"
+            : "") +
           `TOTAL: ${formatarEuros(r.total)}` +
           AVISO
       );
@@ -221,7 +288,7 @@ export function registerTools(server: McpServer): void {
     {
       title: "Calcular IMT (compra de imóvel)",
       description:
-        "Calcula o IMT 2026 (Continente, imposto na compra de imóvel) incl. IMT Jovem, mais o Imposto do Selo de 0,8%. Usa quando o utilizador vai comprar casa/imóvel e quer saber os impostos da aquisição ('quanto pago de IMT', 'impostos na compra de casa', 'comprar imóvel'). EN: property transfer tax (IMT) on a home purchase.",
+        "Calcula o IMT 2026 (Continente, imposto na compra de imóvel) incl. IMT Jovem, mais o Imposto do Selo de 0,8% (no IMT Jovem o Selo também é isento até 330.539 € e, acima, só incide sobre o excedente — CIS, art. 7.º-A). Usa quando o utilizador vai comprar casa/imóvel e quer saber os impostos da aquisição ('quanto pago de IMT', 'impostos na compra de casa', 'comprar imóvel'). EN: property transfer tax (IMT) on a home purchase.",
       inputSchema: {
         valor: z.number().describe("Maior entre preço e VPT (€)"),
         tipo: z.enum(["hpp", "secundaria"]).default("hpp"),
@@ -230,16 +297,21 @@ export function registerTools(server: McpServer): void {
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ valor, tipo, jovem }) => {
-      const r = calcularIMT(valor, tipo, jovem);
-      return texto(
-        `IMT 2026 (${tipo}${jovem ? " + IMT Jovem" : ""})\n` +
-          `Valor: ${formatarEuros(valor)}\n` +
-          `Regime: ${r.regime}\n` +
-          `IMT: ${formatarEuros(r.imt)}\n` +
-          `Imposto do Selo (0,8%): ${formatarEuros(r.selo)}\n` +
-          `TOTAL impostos: ${formatarEuros(r.total)}` +
-          AVISO
-      );
+      try {
+        const r = calcularIMT(valor, tipo, jovem);
+        const seloTxt = jovem && tipo === "hpp" ? "Imposto do Selo (IMT Jovem — CIS, art. 7.º-A)" : "Imposto do Selo (0,8%)";
+        return texto(
+          `IMT 2026 (${tipo}${jovem ? " + IMT Jovem" : ""})\n` +
+            `Valor: ${formatarEuros(valor)}\n` +
+            `Regime: ${r.regime}\n` +
+            `IMT: ${formatarEuros(r.imt)}\n` +
+            `${seloTxt}: ${formatarEuros(r.selo)}\n` +
+            `TOTAL impostos: ${formatarEuros(r.total)}` +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
     }
   );
 
@@ -247,7 +319,7 @@ export function registerTools(server: McpServer): void {
     "calc_prescricao",
     {
       title: "Prazo de prescrição/caducidade",
-      description: `Calcula a data-limite de prescrição/caducidade de um direito ou dívida. Usa quando o utilizador pergunta 'ainda posso cobrar/reclamar?', 'já prescreveu?', 'há quanto tempo é a dívida', 'caducou?' ou se um prazo legal já expirou. Tipos: ${PRESCRICAO_TIPOS.join(", ")}. EN: limitation/time-bar deadline (is the claim still enforceable?).`,
+      description: `Calcula a data-limite de prescrição/caducidade de um direito ou dívida. Usa quando o utilizador pergunta 'ainda posso cobrar/reclamar?', 'já prescreveu?', 'há quanto tempo é a dívida', 'caducou?' ou se um prazo legal já expirou. Faturas entre empresas: 'creditos-comerciais' (20 anos, art. 309.º CC); serviços de profissões liberais e vendas a quem não é comerciante: 2 anos presuntivos (art. 317.º CC); rendas, juros e prestações periódicas: 5 anos (art. 310.º CC). Tipos: ${PRESCRICAO_TIPOS.join(", ")}. EN: limitation/time-bar deadline (is the claim still enforceable?).`,
       inputSchema: {
         inicio: z.string().describe("Data de início da contagem (YYYY-MM-DD)"),
         tipo: z.enum(PRESCRICAO_TIPOS as [string, ...string[]]),
@@ -255,16 +327,21 @@ export function registerTools(server: McpServer): void {
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ inicio, tipo }) => {
-      const r = calcularPrescricao(parseData(inicio), tipo);
-      return texto(
-        `Prescrição/caducidade — ${r.descricao}\n` +
-          `Base: ${r.base}\n` +
-          `Prazo: ${r.prazoTexto}\n` +
-          `Início: ${inicio}\n` +
-          `DATA-LIMITE: ${iso(r.limite)}\n\n` +
-          "Nota: a prescrição interrompe-se com citação/notificação judicial ou reconhecimento da dívida (Arts. 323.º/325.º CC)." +
-          AVISO
-      );
+      try {
+        const r = calcularPrescricao(parseDataEstrita(inicio, "inicio"), tipo);
+        return texto(
+          `Prescrição/caducidade — ${r.descricao}\n` +
+            `Base: ${r.base}\n` +
+            `Prazo: ${r.prazoTexto}${r.presuntiva ? " (presuntiva)" : ""}\n` +
+            `Início: ${inicio}\n` +
+            `⏰ DATA-LIMITE: ${iso(r.limite)}\n\n` +
+            (r.aviso ? `${r.aviso}\n\n` : "") +
+            "Nota: a prescrição interrompe-se com a citação ou notificação judicial (ex.: injunção) ou com o reconhecimento da dívida (arts. 323.º e 325.º CC); uma carta ou email de cobrança não a interrompe." +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
     }
   );
 
@@ -273,7 +350,7 @@ export function registerTools(server: McpServer): void {
     {
       title: "IRS — rendimento tributável (regime simplificado)",
       description:
-        "Calcula o rendimento tributável no regime simplificado (Cat. B/ENI), aplicando o coeficiente ao rendimento bruto (não calcula o imposto final, pois os escalões mudam anualmente). Usa para estimativas de IRS de trabalhador independente/recibos verdes ('quanto pago de IRS como independente', 'regime simplificado', 'recibos verdes', 'ENI'). EN: simplified-regime taxable income for the self-employed.",
+        "Calcula o rendimento tributável no regime simplificado (Cat. B/ENI), aplicando o coeficiente ao rendimento bruto (não calcula o imposto final, pois os escalões mudam anualmente). Usa para estimativas de IRS de trabalhador independente/recibos verdes ('quanto pago de IRS como independente', 'regime simplificado', 'recibos verdes', 'ENI'). Coeficientes (CIRS, art. 31.º): mercadorias 0,15; atividades da tabela do art. 151.º 0,75; restantes serviços 0,35; propriedade intelectual 0,95. EN: simplified-regime taxable income for the self-employed.",
       inputSchema: {
         rendimento: z.number().describe("Rendimento bruto anual (€)"),
         tipo: z.enum([
@@ -286,15 +363,19 @@ export function registerTools(server: McpServer): void {
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ rendimento, tipo }) => {
-      const r = calcularIRSSimplificado(rendimento, tipo);
-      return texto(
-        `IRS simplificado (${tipo})\n` +
-          `Rendimento bruto: ${formatarEuros(rendimento)}\n` +
-          `Coeficiente: ${r.coeficiente}\n` +
-          `RENDIMENTO TRIBUTÁVEL: ${formatarEuros(r.tributavel)}\n` +
-          "(Acresce aos restantes rendimentos e é tributado pelos escalões progressivos de IRS.)" +
-          AVISO
-      );
+      try {
+        const r = calcularIRSSimplificado(rendimento, tipo);
+        return texto(
+          `IRS simplificado (${tipo})\n` +
+            `Rendimento bruto: ${formatarEuros(rendimento)}\n` +
+            `Coeficiente: ${String(r.coeficiente).replace(".", ",")} (CIRS, art. 31.º, n.º 1)\n` +
+            `RENDIMENTO TRIBUTÁVEL: ${formatarEuros(r.tributavel)}\n` +
+            "(Acresce aos restantes rendimentos e é tributado pelos escalões progressivos de IRS.)" +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
     }
   );
 
@@ -325,8 +406,8 @@ export function registerTools(server: McpServer): void {
         const r = calcularCreditosCessacao({
           retribuicaoBase: a.retribuicao_base,
           diuturnidades: a.diuturnidades,
-          dataAdmissao: parseData(a.data_admissao),
-          dataCessacao: parseData(a.data_cessacao),
+          dataAdmissao: parseDataEstrita(a.data_admissao, "data_admissao"),
+          dataCessacao: parseDataEstrita(a.data_cessacao, "data_cessacao"),
           feriasVencidasNaoGozadas: a.ferias_vencidas_nao_gozadas,
           subsidioFeriasVencidoEmFalta: a.subsidio_ferias_vencido_em_falta,
         });

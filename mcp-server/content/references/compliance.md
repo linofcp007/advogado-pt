@@ -19,7 +19,7 @@
 - **RGPD** (Regulamento (UE) 2016/679): art. 30.º, n.º 5 (registo de atividades) e art. 37.º (encarregado de proteção de dados, DPO). **Lei 58/2019**: execução nacional.
 - **Lei 83/2017** (branqueamento) e **Lei 89/2017** (RCBE): ver `references/bancario.md`.
 - **Relato de sustentabilidade**: CSRD, Diretiva (UE) 2022/2464, alterada pela Diretiva "Omnibus I" (UE) 2026/470, de 24/2/2026. Ainda **não transposta** em Portugal (EUR-Lex, medidas nacionais de transposição, consultado em 3/10/2026).
-- **DL 125/2025** (Regime Jurídico da Cibersegurança, que transpõe a NIS2) (a confirmar): ver `references/digital-ue.md`.
+- **DL 125/2025** (Regime Jurídico da Cibersegurança, que transpõe a NIS2 — Diretiva (UE) 2022/2555), em vigor desde **3/4/2026**: ver `references/digital-ue.md`.
 
 ## Quem conta como "empresa com N trabalhadores"
 - **RGPC, art. 2.º, n.º 1**: aplica-se às **pessoas coletivas com sede em Portugal que empreguem 50 ou mais trabalhadores** e às **sucursais em Portugal** de pessoas coletivas estrangeiras com 50 ou mais trabalhadores. O MENAC esclarece que o critério é **só o número de trabalhadores**, e não o setor nem as funções (FAQ RGPC, n.º 3).
@@ -36,7 +36,7 @@
 | **1** | Seguro de acidentes de trabalho, SST (serviço externo, ou o próprio empregador se tiver até 9 trabalhadores), formação contínua, registo dos tempos de trabalho, RGPD, política remuneratória transparente, **procedimento disciplinar sempre que haja suspeita de assédio** | CT art. 127.º, n.º 1, al. l); Lei 102/2009; Lei 60/2018, art. 4.º |
 | **7** | **Código de boa conduta para prevenção e combate ao assédio** | CT art. 127.º, n.º 1, al. k), e n.º 7 (contraordenação grave) |
 | **10** | Deixa de ser microempresa: o empregador já **não pode** assegurar ele próprio a segurança no trabalho (só é possível até 9 trabalhadores, com autorização) | CT art. 100.º; Lei 102/2009, art. 81.º, n.º 1 |
-| **50** | **RGPC** completo (PPR, código de conduta, formação, canal, responsável) + **canal de denúncia interna** (Lei 93/2021) + plano de avaliação das diferenças remuneratórias quando a ACT notifica + despedimento coletivo passa a exigir 5 trabalhadores (até 49 bastam 2) + NIS2 para médias empresas dos setores abrangidos (a confirmar) | RGPC art. 2.º; Lei 93/2021, art. 8.º; Lei 60/2018, arts. 5.º e 18.º, n.º 3; CT art. 359.º; DL 125/2025 |
+| **50** | **RGPC** completo (PPR, código de conduta, formação, canal, responsável) + **canal de denúncia interna** (Lei 93/2021) + plano de avaliação das diferenças remuneratórias quando a ACT notifica + despedimento coletivo passa a exigir 5 trabalhadores (até 49 bastam 2) + NIS2 para médias empresas dos setores abrangidos (DL 125/2025) | RGPC art. 2.º; Lei 93/2021, art. 8.º; Lei 60/2018, arts. 5.º e 18.º, n.º 3; CT art. 359.º; DL 125/2025 |
 | **75** | Quota de **1 %** de trabalhadores com deficiência (grau de incapacidade ≥ 60 %) | Lei 4/2019, art. 5.º, n.º 1 |
 | **100 / 150** | Relatório de disparidades salariais entre homens e mulheres: com 150 ou mais trabalhadores a partir de 2027, com 100 ou mais a partir de 2031 (Diretiva 2023/970, art. 9.º — depende da transposição, a confirmar) | Diretiva (UE) 2023/970 |
 | **250** | Grande empresa: quota de **2 %**; fim da dispensa de registo de atividades de tratamento (que, aliás, quase nunca se aplica a quem tem trabalhadores); o canal deixa de poder ser partilhado com outras entidades (a partilha de recursos só é possível entre 50 e 249); relatório **anual** de disparidades salariais (Diretiva 2023/970, a confirmar) | Lei 4/2019, art. 5.º, n.º 2; RGPD art. 30.º, n.º 5; Lei 93/2021, art. 8.º, n.º 2 |
@@ -245,4 +245,4 @@
 - `assets/templates/regulamento-interno.md` — regulamento interno de empresa (CT art. 99.º)
 - `assets/checklists/checklist-compliance-dimensao.md` — o que é obrigatório por escalão de trabalhadores
 - `assets/checklists/checklist-seguranca-saude-trabalho.md` — organização da SST por dimensão e risco
-- Gerados a pedido, neste estilo: código de conduta do RGPC (art. 7.º), relatório de infração (art. 7.º, n.º 3), plano de formação (art. 9.º), política de ofertas e conflitos de interesses, questionário de due diligence de terceiros (art. 18.º), nomeação do responsável pelo cumprimento normativo
+- Gerados a pedido, neste estilo: código de conduta do RGPC (art. 7.º), relatório de infração (art. 7.º, n.º 3), plano de formação (art. 9.º), política de ofertas e conflitos de interesses, questionário de due diligence de terceiros (art. 18.º), nomeação do responsável pelo cumprimento normativo (a pedido)

@@ -39,10 +39,19 @@ export function listar(cat: Categoria): string[] {
     .sort();
 }
 
-/** Lê o markdown de um item; devolve null se não existir. */
+// Nomes de conteúdo: só letras, algarismos e hífens (sem pontos nem separadores — nada sai de content/).
+const NOME_CONTEUDO = /^[a-z0-9][a-z0-9-]{0,80}$/i;
+
+/** Indica se `cat`/`nome` são uma categoria conhecida e um nome válido (lista fechada). */
+export function itemValido(cat: string, nome: string): cat is Categoria {
+  return (CATEGORIAS as string[]).includes(cat) && NOME_CONTEUDO.test(String(nome ?? "").replace(/\.md$/i, ""));
+}
+
+/** Lê o markdown de um item; devolve null se a categoria, o nome ou o ficheiro não existirem. */
 export function ler(cat: Categoria, nome: string): string | null {
-  // normaliza: aceita com ou sem .md, e ignora caminhos
-  const limpo = nome.replace(/\.md$/i, "").replace(/[\\/]/g, "");
+  // Aceita com ou sem .md; recusa categorias desconhecidas e nomes com "..", "/" ou "\".
+  const limpo = String(nome ?? "").trim().replace(/\.md$/i, "");
+  if (!itemValido(cat, limpo)) return null;
   const caminho = join(dir(cat), `${limpo}.md`);
   if (!existsSync(caminho)) return null;
   return readFileSync(caminho, "utf8");

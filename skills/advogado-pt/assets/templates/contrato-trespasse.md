@@ -152,6 +152,8 @@ O Trespassante: _______________________________
 
 O Trespassário: _______________________________
 
+{{CONSENTIMENTO_CONJUGE: opcional — se o Trespassante for casado num regime que não seja o de separação de bens: «{{CONJUGE_NOME}}, cônjuge de {{TRESPASSANTE_NOME}}, declara dar o seu consentimento ao presente trespasse, nos termos do art. 1682.º-A do Código Civil.» Cônjuge: _______________________________}}
+
 **Anexos:** I — Equipamentos e utensílios · II — Existências · III — Nome, insígnia, marcas, domínios e contas · IV — Contratos transmitidos · V — Licenças e autorizações · VI — Trabalhadores e datas de informação/consulta · VII — Passivo assumido e ónus · {{ANEXO_VIII: VIII — Volume de negócios (opcional)}}
 
 ---
@@ -166,4 +168,5 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Há mesmo trespasse? Confirmar que se transmitem em conjunto os elementos essenciais do estabelecimento e que o ramo se mantém (art. 1112.º, n.º 2, CC); se mudar o ramo ou se for só o espaço, é cessão da posição de arrendatário e precisa de autorização do senhorio.
 - [ ] Fiscal: Imposto do Selo, verba 27.1 da TGIS — taxa em `references/valores-2026.md`, declaração e prazo de entrega pelo trespassante [VERIFICAR]; ausência de IVA (art. 3.º, n.º 4, CIVA) só se o trespassário for ou passar a ser sujeito passivo — confirmar o início/alteração de atividade antes da data de efeitos; mais-valia do trespassante em IRS ou IRC — `references/fiscal.md`; imóvel incluído → escritura/DPA, IMT e Imposto do Selo (`calc_imt`, `references/imobiliario.md`).
 - [ ] Due diligence do trespassário: certidões de não dívida do trespassante (AT e Segurança Social), certidão permanente, recibos de renda, licenças (algumas são pessoais e não se transmitem — confirmar caso a caso junto da câmara ou da entidade setorial [VERIFICAR]), registo das marcas no INPI e averbamento da transmissão.
+- [ ] Cônjuge: se o Trespassante for casado num regime que não seja o de separação de bens, a alienação do estabelecimento comercial próprio ou comum exige o consentimento de ambos os cônjuges (CC, art. 1682.º-A, n.º 1, al. b)), sob pena de anulabilidade (art. 1687.º).
 - [ ] Contratos do Anexo IV: a cessão da posição contratual exige o consentimento do outro contraente (art. 424.º CC) — pedir antes da data de efeitos; dados de clientes: base de licitude e informação aos titulares (`references/rgpd.md`).

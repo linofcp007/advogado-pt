@@ -52,7 +52,7 @@
    - **Tetos**: RB+D considerada até **20 × RMMG**; montante global até **12 × RB+D** ou, se aplicado o teto anterior, **240 × RMMG** (art. 366.º, n.º 2, als. a) e b)). RMMG em `references/valores-2026.md`.
    - **Não há mínimo de 3 meses**, salvo a garantia transitória para contratos sem termo anteriores a 1/11/2011 (Lei 69/2013, art. 5.º).
    - Contratos a termo e temporários abrangidos: compensação dos arts. 344.º, n.º 2, e 345.º, n.º 4 (24 dias), com os mesmos tetos (art. 366.º, n.º 6).
-   - O empregador paga a totalidade, sem prejuízo do FGCT (n.º 3). Receber a **totalidade** da compensação faz **presumir a aceitação** do despedimento; o trabalhador só a afasta devolvendo-a em simultâneo (n.os 4 e 5).
+   - O empregador paga a totalidade da compensação (n.º 3). Receber a **totalidade** da compensação faz **presumir a aceitação** do despedimento; o trabalhador só a afasta devolvendo-a em simultâneo (n.os 4 e 5).
    - **Calcula** com a tool `calc_compensacao_despedimento` (modalidade `coletivo`) e os créditos finais (férias, subsídios proporcionais) com `calc_creditos_laborais`. Confirma que o resultado aplica o regime acima (14 dias desde 1/5/2023, tramos anteriores, tetos).
 
 9. **Depois do despedimento**:

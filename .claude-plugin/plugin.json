@@ -2,7 +2,7 @@
   "name": "advogado-pt",
   "displayName": "Advogado PT",
   "description": "Advogado pessoal e empresarial em Portugal, para qualquer empresa (ENI, Lda, SA; qualquer setor) com perfil da empresa guardado: referências por área (contratos, laboral, fiscal e defesa perante a AT, RGPD, societário, cobranças, insolvência, bancário, concorrência, direito da UE, imobiliário, heranças…), templates com verificação final, playbooks, checklists e calculadoras jurídicas (juros por semestre, IMT, prazos, prescrição, compensação, créditos laborais, legítima, salário líquido e custo do trabalhador, IRC, IVA internacional, taxa de justiça), calendário de obrigações exportável para o Google Calendar, prazos em curso com aviso e vários perfis de empresa. PT/EN. Personal & business lawyer for Portugal — legal references, document templates, playbooks and calculators.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": {
     "name": "Carlos Pereira",
     "email": "carlospereira@prodigitalkey.com"

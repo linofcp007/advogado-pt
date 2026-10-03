@@ -8,7 +8,11 @@ var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  try {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  } catch (e) {
+    throw mod = 0, e;
+  }
 };
 var __export = (target, all) => {
   for (var name in all)
@@ -2982,7 +2986,7 @@ var require_compile = __commonJS({
       const schOrFunc = root.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve5.call(this, root, ref);
+      let _sch = resolve4.call(this, root, ref);
       if (_sch === void 0) {
         const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
@@ -3009,7 +3013,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve5(root, ref) {
+    function resolve4(root, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -3107,9 +3111,28 @@ var require_utils = __commonJS({
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
+    var isPort = RegExp.prototype.test.bind(/^\d*$/u);
     var isHexPair = RegExp.prototype.test.bind(/^[\da-f]{2}$/iu);
     var isUnreserved = RegExp.prototype.test.bind(/^[\da-z\-._~]$/iu);
-    var isPathCharacter = RegExp.prototype.test.bind(/^[\da-z\-._~!$&'()*+,;=:@/]$/iu);
+    var isPathCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:@/]$/u);
+    var isQueryFragmentCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:@/?]$/u);
+    var isUserinfoCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:]$/u);
+    var BYTE_HEX = new Array(256);
+    {
+      const HEX_DIGITS = "0123456789ABCDEF";
+      for (let i = 0; i < 256; i++) {
+        BYTE_HEX[i] = "%" + HEX_DIGITS[i >> 4] + HEX_DIGITS[i & 15];
+      }
+    }
+    function percentEncodeNonAscii(cp) {
+      if (cp < 2048) {
+        return BYTE_HEX[192 | cp >> 6] + BYTE_HEX[128 | cp & 63];
+      }
+      if (cp < 65536) {
+        return BYTE_HEX[224 | cp >> 12] + BYTE_HEX[128 | cp >> 6 & 63] + BYTE_HEX[128 | cp & 63];
+      }
+      return BYTE_HEX[240 | cp >> 18] + BYTE_HEX[128 | cp >> 12 & 63] + BYTE_HEX[128 | cp >> 6 & 63] + BYTE_HEX[128 | cp & 63];
+    }
     function stringArrayToHexStripped(input) {
       let acc = "";
       let code = 0;
@@ -3134,91 +3157,105 @@ var require_utils = __commonJS({
       }
       return acc;
     }
+    var isHextet = RegExp.prototype.test.bind(/^[\dA-Fa-f]{1,4}$/);
+    var isIPvFuture = RegExp.prototype.test.bind(/^[vV][\dA-Fa-f]+\.[A-Za-z\d\-._~!$&'()*+,;=:]+$/);
+    var isZoneCharacter = RegExp.prototype.test.bind(/^[A-Za-z\d\-._~]$/);
     var nonSimpleDomain = RegExp.prototype.test.bind(/[^!"$&'()*+,\-.;=_`a-z{}~]/u);
-    function consumeIsZone(buffer) {
-      buffer.length = 0;
-      return true;
-    }
-    function consumeHextets(buffer, address, output) {
-      if (buffer.length) {
-        const hex = stringArrayToHexStripped(buffer);
-        if (hex !== "") {
-          address.push(hex);
-        } else {
-          output.error = true;
-          return false;
+    function isZoneIdentifier(zone) {
+      if (zone.length === 0) return false;
+      for (let i = 0; i < zone.length; i++) {
+        if (isZoneCharacter(zone[i])) continue;
+        if (zone[i] === "%" && i + 2 < zone.length && isHexPair(zone.slice(i + 1, i + 3))) {
+          i += 2;
+          continue;
         }
-        buffer.length = 0;
+        return false;
       }
       return true;
     }
-    function getIPV6(input) {
-      let tokenCount = 0;
-      const output = { error: false, address: "", zone: "" };
-      const address = [];
-      const buffer = [];
-      let endipv6Encountered = false;
-      let endIpv6 = false;
-      let consume = consumeHextets;
-      for (let i = 0; i < input.length; i++) {
-        const cursor = input[i];
-        if (cursor === "[" || cursor === "]") {
-          continue;
-        }
-        if (cursor === ":") {
-          if (endipv6Encountered === true) {
-            endIpv6 = true;
+    function compressIPv6ZeroRun(hextets) {
+      let bestStart = -1;
+      let bestLength = 0;
+      let runStart = -1;
+      let runLength = 0;
+      for (let i = 0; i < hextets.length; i++) {
+        if (hextets[i] === "0") {
+          if (runStart === -1) runStart = i;
+          runLength++;
+          if (runLength > bestLength) {
+            bestLength = runLength;
+            bestStart = runStart;
           }
-          if (!consume(buffer, address, output)) {
-            break;
-          }
-          if (++tokenCount > 7) {
-            output.error = true;
-            break;
-          }
-          if (i > 0 && input[i - 1] === ":") {
-            endipv6Encountered = true;
-          }
-          address.push(":");
-          continue;
-        } else if (cursor === "%") {
-          if (!consume(buffer, address, output)) {
-            break;
-          }
-          consume = consumeIsZone;
         } else {
-          buffer.push(cursor);
-          continue;
+          runStart = -1;
+          runLength = 0;
         }
       }
-      if (buffer.length) {
-        if (consume === consumeIsZone) {
-          output.zone = buffer.join("");
-        } else if (endIpv6) {
-          address.push(buffer.join(""));
-        } else {
-          address.push(stringArrayToHexStripped(buffer));
-        }
+      if (bestLength < 2) return hextets.join(":");
+      const head = hextets.slice(0, bestStart).join(":");
+      const tail = hextets.slice(bestStart + bestLength).join(":");
+      return head + "::" + tail;
+    }
+    function normalizeIPv6Address(input) {
+      const compression = input.indexOf("::");
+      if (compression !== -1 && input.indexOf("::", compression + 1) !== -1) return void 0;
+      const left = compression === -1 ? input.split(":") : input.slice(0, compression).split(":");
+      const right = compression === -1 ? [] : input.slice(compression + 2).split(":");
+      if (compression !== -1) {
+        if (left.length === 1 && left[0] === "") left.length = 0;
+        if (right.length === 1 && right[0] === "") right.length = 0;
       }
-      output.address = address.join("");
-      return output;
+      const parts = left.concat(right);
+      let hextetCount = 0;
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i];
+        if (part === "") return void 0;
+        if (part.indexOf(".") !== -1) {
+          if (i !== parts.length - 1 || compression !== -1 && right.length === 0 || !isIPv4(part)) return void 0;
+          hextetCount += 2;
+          continue;
+        }
+        if (!isHextet(part)) return void 0;
+        parts[i] = parseInt(part, 16).toString(16);
+        hextetCount++;
+      }
+      if (compression === -1) {
+        if (hextetCount !== 8) return void 0;
+        return compressIPv6ZeroRun(parts);
+      }
+      if (hextetCount >= 8) return void 0;
+      const expanded = parts.slice(0, left.length);
+      for (let i = hextetCount; i < 8; i++) expanded.push("0");
+      for (let i = left.length; i < parts.length; i++) expanded.push(parts[i]);
+      return compressIPv6ZeroRun(expanded);
     }
     function normalizeIPv6(host) {
-      if (findToken(host, ":") < 2) {
-        return { host, isIPV6: false };
+      const bracketed = host[0] === "[" && host[host.length - 1] === "]";
+      const hasBracket = host[0] === "[" || host[host.length - 1] === "]";
+      if (hasBracket && !bracketed) return { host, isIPV6: false, error: true };
+      let input = bracketed ? host.slice(1, -1) : host;
+      if (bracketed && isIPvFuture(input)) {
+        input = input.toLowerCase();
+        return { host: `[${input}]`, escapedHost: input, isIPV6: false, isIPVFuture: true };
       }
-      const ipv62 = getIPV6(host);
-      if (!ipv62.error) {
-        let newHost = ipv62.address;
-        let escapedHost = ipv62.address;
-        if (ipv62.zone) {
-          newHost += "%" + ipv62.zone;
-          escapedHost += "%25" + ipv62.zone;
-        }
-        return { host: newHost, isIPV6: true, escapedHost };
-      } else {
-        return { host, isIPV6: false };
+      if (findToken(input, ":") < 2) {
+        return { host, isIPV6: false, error: bracketed };
       }
+      let zoneIdentifier = "";
+      const zoneSeparator = input.indexOf("%");
+      if (zoneSeparator !== -1) {
+        const separatorLength = input.slice(zoneSeparator, zoneSeparator + 3).toLowerCase() === "%25" ? 3 : 1;
+        zoneIdentifier = input.slice(zoneSeparator + separatorLength);
+        if (!isZoneIdentifier(zoneIdentifier)) return { host, isIPV6: false, error: true };
+        input = input.slice(0, zoneSeparator);
+      }
+      const address = normalizeIPv6Address(input);
+      if (address === void 0) return { host, isIPV6: false, error: true };
+      return {
+        host: address + (zoneIdentifier ? "%" + zoneIdentifier : ""),
+        escapedHost: address + (zoneIdentifier ? "%25" + zoneIdentifier : ""),
+        isIPV6: true
+      };
     }
     function findToken(str, token) {
       let ind = 0;
@@ -3337,7 +3374,8 @@ var require_utils = __commonJS({
     function normalizePathEncoding(input) {
       let output = "";
       for (let i = 0; i < input.length; i++) {
-        if (input[i] === "%" && i + 2 < input.length) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
           const hex = input.slice(i + 1, i + 3);
           if (isHexPair(hex)) {
             const normalizedHex = hex.toUpperCase();
@@ -3351,10 +3389,152 @@ var require_utils = __commonJS({
             continue;
           }
         }
-        if (isPathCharacter(input[i])) {
-          output += input[i];
+        if (isPathCharacter(ch)) {
+          output += ch;
         } else {
-          output += escape(input[i]);
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += isEscapeSafe(code) ? ch : BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
+        }
+      }
+      return output;
+    }
+    function serializePathEncoding(input, pathNoScheme = false) {
+      let output = "";
+      let firstSegment = pathNoScheme && input[0] !== "/";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            output += "%" + hex.toUpperCase();
+            i += 2;
+            continue;
+          }
+        }
+        if (ch === "/") {
+          firstSegment = false;
+        }
+        if (isPathCharacter(ch) && (ch !== ":" || !firstSegment)) {
+          output += ch;
+        } else {
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
+        }
+      }
+      return output;
+    }
+    function encodeComponent(input, isAllowed) {
+      let output = "";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            output += "%" + hex.toUpperCase();
+            i += 2;
+            continue;
+          }
+        }
+        if (isAllowed(ch)) {
+          output += ch;
+        } else {
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
+        }
+      }
+      return output;
+    }
+    function encodeUserinfo(input) {
+      return encodeComponent(input, isUserinfoCharacter);
+    }
+    function encodeQuery(input) {
+      return encodeComponent(input, isQueryFragmentCharacter);
+    }
+    function encodeFragment(input) {
+      return encodeComponent(input, isQueryFragmentCharacter);
+    }
+    function isEscapeSafe(cp) {
+      return cp >= 48 && cp <= 57 || cp >= 65 && cp <= 90 || cp >= 97 && cp <= 122 || cp === 42 || cp === 43 || cp === 45 || cp === 46 || cp === 47 || cp === 64 || cp === 95;
+    }
+    function normalizeQueryFragmentEncoding(input) {
+      let output = "";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            const normalizedHex = hex.toUpperCase();
+            const decoded = String.fromCharCode(parseInt(normalizedHex, 16));
+            if (isUnreserved(decoded)) {
+              output += decoded;
+            } else {
+              output += "%" + normalizedHex;
+            }
+            i += 2;
+            continue;
+          }
+        }
+        if (isQueryFragmentCharacter(ch)) {
+          output += ch;
+        } else {
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += isEscapeSafe(code) ? ch : BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
         }
       }
       return output;
@@ -3377,14 +3557,18 @@ var require_utils = __commonJS({
     function recomposeAuthority(component) {
       const uriTokens = [];
       if (component.userinfo !== void 0) {
-        uriTokens.push(component.userinfo);
+        uriTokens.push(encodeUserinfo(component.userinfo));
         uriTokens.push("@");
       }
       if (component.host !== void 0) {
-        let host = unescape(component.host);
+        let host = component.host;
         if (!isIPv4(host)) {
-          const ipV6res = normalizeIPv6(host);
-          if (ipV6res.isIPV6 === true) {
+          let ipV6res = normalizeIPv6(host);
+          if (ipV6res.isIPV6 !== true && ipV6res.isIPVFuture !== true) {
+            host = normalizePercentEncoding(host, true);
+            ipV6res = normalizeIPv6(host);
+          }
+          if (ipV6res.isIPV6 === true || ipV6res.isIPVFuture === true) {
             host = `[${ipV6res.escapedHost}]`;
           } else {
             host = reescapeHostDelimiters(host, false);
@@ -3393,8 +3577,12 @@ var require_utils = __commonJS({
         uriTokens.push(host);
       }
       if (typeof component.port === "number" || typeof component.port === "string") {
+        const port = String(component.port);
+        if (!isPort(port)) {
+          throw new TypeError("URI port is malformed.");
+        }
         uriTokens.push(":");
-        uriTokens.push(String(component.port));
+        uriTokens.push(port);
       }
       return uriTokens.length ? uriTokens.join("") : void 0;
     }
@@ -3404,6 +3592,11 @@ var require_utils = __commonJS({
       reescapeHostDelimiters,
       normalizePercentEncoding,
       normalizePathEncoding,
+      serializePathEncoding,
+      normalizeQueryFragmentEncoding,
+      encodeUserinfo,
+      encodeQuery,
+      encodeFragment,
       escapePreservingEscapes,
       removeDotSegments,
       isIPv4,
@@ -3419,7 +3612,7 @@ var require_schemes = __commonJS({
   "node_modules/fast-uri/lib/schemes.js"(exports, module) {
     "use strict";
     var { isUUID } = require_utils();
-    var URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu;
+    var URN_REG = /^([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-./:;=@]|%[\da-f]{2})+)$/iu;
     var supportedSchemeNames = (
       /** @type {const} */
       [
@@ -3480,9 +3673,10 @@ var require_schemes = __commonJS({
         wsComponent.secure = void 0;
       }
       if (wsComponent.resourceName) {
-        const [path, query] = wsComponent.resourceName.split("?");
+        const queryIndex = wsComponent.resourceName.indexOf("?");
+        const path = queryIndex === -1 ? wsComponent.resourceName : wsComponent.resourceName.slice(0, queryIndex);
         wsComponent.path = path && path !== "/" ? path : void 0;
-        wsComponent.query = query;
+        wsComponent.query = queryIndex === -1 ? void 0 : wsComponent.resourceName.slice(queryIndex + 1);
         wsComponent.resourceName = void 0;
       }
       wsComponent.fragment = void 0;
@@ -3494,7 +3688,7 @@ var require_schemes = __commonJS({
         return urnComponent;
       }
       const matches = urnComponent.path.match(URN_REG);
-      if (matches) {
+      if (matches && matches[0] === urnComponent.path) {
         const scheme = options.scheme || urnComponent.scheme || "urn";
         urnComponent.nid = matches[1].toLowerCase();
         urnComponent.nss = matches[2];
@@ -3628,8 +3822,17 @@ var require_schemes = __commonJS({
 var require_fast_uri = __commonJS({
   "node_modules/fast-uri/index.js"(exports, module) {
     "use strict";
-    var { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, escapePreservingEscapes, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = require_utils();
+    var { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, serializePathEncoding, normalizeQueryFragmentEncoding, encodeQuery, encodeFragment, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
+    var VALID_SCHEME = /^[A-Za-z][A-Za-z0-9+.-]*$/u;
+    var MALFORMED_SCHEME_ERROR = "URI scheme is malformed.";
+    function decodeValidScheme(scheme) {
+      const decodedScheme = unescape(String(scheme));
+      if (!VALID_SCHEME.test(decodedScheme)) {
+        throw new TypeError(MALFORMED_SCHEME_ERROR);
+      }
+      return decodedScheme;
+    }
     function normalize(uri, options) {
       if (typeof uri === "string") {
         uri = /** @type {T} */
@@ -3640,9 +3843,36 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve5(baseURI, relativeURI, options) {
+    function resolve4(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
-      const resolved = resolveComponent(parse3(baseURI, schemelessOptions), parse3(relativeURI, schemelessOptions), schemelessOptions, true);
+      const {
+        parsed: baseParsed,
+        malformedAuthorityOrPort: baseMalformed,
+        malformedPercentEncoding: baseMalformedPercentEncoding,
+        malformedSchemeSpecific: baseMalformedSchemeSpecific,
+        malformedHost: baseMalformedHost,
+        malformedScheme: baseMalformedScheme
+      } = parseWithStatus(baseURI, schemelessOptions);
+      const {
+        parsed: relativeParsed,
+        malformedAuthorityOrPort: relativeMalformed,
+        malformedPercentEncoding: relativeMalformedPercentEncoding,
+        malformedSchemeSpecific: relativeMalformedSchemeSpecific,
+        malformedHost: relativeMalformedHost,
+        malformedScheme: relativeMalformedScheme
+      } = parseWithStatus(relativeURI, schemelessOptions);
+      if (baseMalformed || relativeMalformed || baseMalformedPercentEncoding || relativeMalformedPercentEncoding || baseMalformedSchemeSpecific || relativeMalformedSchemeSpecific || baseMalformedHost || relativeMalformedHost || baseMalformedScheme || relativeMalformedScheme) {
+        throw new Error(baseParsed.error || relativeParsed.error || "URI is malformed.");
+      }
+      const resolved = resolveComponent(baseParsed, relativeParsed, schemelessOptions, true);
+      const resolvedSchemeHandler = getSchemeHandler(options && options.scheme || resolved.scheme);
+      const resolvedHost = resolved.host;
+      const resolvedHostIsIP = resolvedHost !== void 0 && resolvedHost !== "" && (isIPv4(resolvedHost) || normalizeIPv6(resolvedHost).isIPV6);
+      canonicalizeHost(resolved, options || {}, resolvedSchemeHandler, resolvedHostIsIP);
+      const encodedASCIIHost = resolvedHost && resolvedHost.indexOf("%") !== -1 && !new RegExp("\\P{ASCII}", "u").test(resolvedHost);
+      if (resolved.error && !encodedASCIIHost) {
+        throw new Error(resolved.error);
+      }
       schemelessOptions.skipEscape = true;
       return serialize(resolved, schemelessOptions);
     }
@@ -3702,7 +3932,7 @@ var require_fast_uri = __commonJS({
     function equal(uriA, uriB, options) {
       const normalizedA = normalizeComparableURI(uriA, options);
       const normalizedB = normalizeComparableURI(uriB, options);
-      return normalizedA !== void 0 && normalizedB !== void 0 && normalizedA.toLowerCase() === normalizedB.toLowerCase();
+      return normalizedA !== void 0 && normalizedB !== void 0 && normalizedA === normalizedB;
     }
     function serialize(cmpts, opts) {
       const component = {
@@ -3723,19 +3953,22 @@ var require_fast_uri = __commonJS({
       };
       const options = Object.assign({}, opts);
       const uriTokens = [];
+      if (component.scheme) {
+        component.scheme = decodeValidScheme(component.scheme);
+      }
       const schemeHandler = getSchemeHandler(options.scheme || component.scheme);
       if (schemeHandler && schemeHandler.serialize) schemeHandler.serialize(component, options);
+      const hasAuthority = component.userinfo !== void 0 || component.host !== void 0 || component.port !== void 0;
+      const pathNoScheme = !options.skipEscape && component.scheme === void 0 && !hasAuthority;
       if (component.path !== void 0) {
         if (!options.skipEscape) {
-          component.path = escapePreservingEscapes(component.path);
-          if (component.scheme !== void 0) {
-            component.path = component.path.split("%3A").join(":");
-          }
+          component.path = serializePathEncoding(component.path, pathNoScheme);
         } else {
           component.path = normalizePercentEncoding(component.path);
         }
       }
       if (options.reference !== "suffix" && component.scheme) {
+        component.scheme = decodeValidScheme(component.scheme);
         uriTokens.push(component.scheme, ":");
       }
       const authority = recomposeAuthority(component);
@@ -3753,20 +3986,25 @@ var require_fast_uri = __commonJS({
         if (!options.absolutePath && (!schemeHandler || !schemeHandler.absolutePath)) {
           s = removeDotSegments(s);
         }
+        if (pathNoScheme) {
+          s = serializePathEncoding(s, true);
+        }
         if (authority === void 0 && s[0] === "/" && s[1] === "/") {
           s = "/%2F" + s.slice(2);
         }
         uriTokens.push(s);
       }
       if (component.query !== void 0) {
-        uriTokens.push("?", component.query);
+        uriTokens.push("?", encodeQuery(component.query));
       }
       if (component.fragment !== void 0) {
-        uriTokens.push("#", component.fragment);
+        uriTokens.push("#", encodeFragment(component.fragment));
       }
       return uriTokens.join("");
     }
     var URI_PARSE = /^(?:([^#/:?]+):)?(?:\/\/((?:([^#/?@]*)@)?(\[[^#/?\]]+\]|[^#/:?]*)(?::(\d*))?))?([^#?]*)(?:\?([^#]*))?(?:#((?:.|[\n\r])*))?/u;
+    var AUTHORITY_PREFIX = /^(?:[^#/:?]+:)?\/\/([^/?#]*)/;
+    var AUTHORITY_INTRODUCER_REGION = /^(?:[^#/:?]+:)?([/\\\t\n\r]*)/;
     function getParseError(parsed, matches) {
       if (matches[2] !== void 0 && parsed.path && parsed.path[0] !== "/") {
         return 'URI path must start with "/" when authority is present.';
@@ -3775,6 +4013,35 @@ var require_fast_uri = __commonJS({
         return "URI port is malformed.";
       }
       return void 0;
+    }
+    function hasMalformedPercentEncoding(component) {
+      if (component === void 0) return false;
+      let percent = component.indexOf("%");
+      while (percent !== -1) {
+        if (percent + 2 >= component.length || !/^[\da-f]{2}$/iu.test(component.slice(percent + 1, percent + 3))) {
+          return true;
+        }
+        percent = component.indexOf("%", percent + 3);
+      }
+      return false;
+    }
+    function isIPLiteral(host) {
+      return host[0] === "[" && host[host.length - 1] === "]";
+    }
+    function hasMalformedComponentPercentEncoding(matches) {
+      const host = matches[4];
+      return hasMalformedPercentEncoding(matches[3]) || host !== void 0 && !isIPLiteral(host) && hasMalformedPercentEncoding(host) || hasMalformedPercentEncoding(matches[6]) || hasMalformedPercentEncoding(matches[7]) || hasMalformedPercentEncoding(matches[8]);
+    }
+    function canonicalizeHost(parsed, options, schemeHandler, isIP) {
+      if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport) && parsed.host && !isIPLiteral(parsed.host) && (options.domainHost || schemeHandler && schemeHandler.domainHost) && isIP === false && nonSimpleDomain(parsed.host)) {
+        try {
+          parsed.host = new URL("http://" + parsed.host).hostname;
+        } catch (e) {
+          parsed.error = parsed.error || "Host's domain name can not be converted to ASCII: " + e;
+          return true;
+        }
+      }
+      return false;
     }
     function parseWithStatus(uri, opts) {
       const options = Object.assign({}, opts);
@@ -3788,12 +4055,36 @@ var require_fast_uri = __commonJS({
         fragment: void 0
       };
       let malformedAuthorityOrPort = false;
+      let malformedPercentEncoding = false;
+      let malformedSchemeSpecific = false;
+      let malformedHost = false;
+      let malformedIPLiteral = false;
+      let malformedScheme = false;
       let isIP = false;
       if (options.reference === "suffix") {
         if (options.scheme) {
           uri = options.scheme + ":" + uri;
         } else {
           uri = "//" + uri;
+        }
+      }
+      const authorityMatch = uri.match(AUTHORITY_PREFIX);
+      if (authorityMatch !== null && authorityMatch[1].indexOf("\\") !== -1) {
+        parsed.error = "URI authority must not contain a literal backslash.";
+        malformedAuthorityOrPort = true;
+      }
+      const introducerMatch = uri.match(AUTHORITY_INTRODUCER_REGION);
+      if (introducerMatch !== null) {
+        const region = introducerMatch[1];
+        const normalizedRegion = region.replace(/[\t\n\r]/g, "");
+        if (normalizedRegion.length >= 2) {
+          if (normalizedRegion.slice(0, 2) !== "//") {
+            parsed.error = parsed.error || "URI authority must not contain a literal backslash.";
+            malformedAuthorityOrPort = true;
+          } else if (region.length !== normalizedRegion.length) {
+            parsed.error = parsed.error || "URI authority introducer must not contain whitespace.";
+            malformedAuthorityOrPort = true;
+          }
         }
       }
       const matches = uri.match(URI_PARSE);
@@ -3805,6 +4096,19 @@ var require_fast_uri = __commonJS({
         parsed.path = matches[6] || "";
         parsed.query = matches[7];
         parsed.fragment = matches[8];
+        if (parsed.scheme !== void 0) {
+          const decodedScheme = unescape(parsed.scheme);
+          if (VALID_SCHEME.test(decodedScheme)) {
+            parsed.scheme = decodedScheme.toLowerCase();
+          } else {
+            parsed.error = parsed.error || MALFORMED_SCHEME_ERROR;
+            malformedScheme = true;
+          }
+        }
+        malformedPercentEncoding = hasMalformedComponentPercentEncoding(matches);
+        if (malformedPercentEncoding) {
+          parsed.error = parsed.error || "URI contains malformed percent-encoding.";
+        }
         if (isNaN(parsed.port)) {
           parsed.port = matches[5];
         }
@@ -3816,9 +4120,16 @@ var require_fast_uri = __commonJS({
         if (parsed.host) {
           const ipv4result = isIPv4(parsed.host);
           if (ipv4result === false) {
+            const bracketedIPLiteral = isIPLiteral(parsed.host);
+            const hasIPLiteralBracket = parsed.host.indexOf("[") !== -1 || parsed.host.indexOf("]") !== -1;
             const ipv6result = normalizeIPv6(parsed.host);
-            parsed.host = ipv6result.host.toLowerCase();
-            isIP = ipv6result.isIPV6;
+            isIP = ipv6result.isIPV6 || ipv6result.isIPVFuture === true;
+            malformedIPLiteral = hasIPLiteralBracket && (!bracketedIPLiteral || ipv6result.error === true);
+            parsed.host = isIP ? ipv6result.host : ipv6result.host.toLowerCase();
+            if (malformedIPLiteral) {
+              parsed.error = parsed.error || "URI host is malformed.";
+              malformedAuthorityOrPort = true;
+            }
           } else {
             isIP = true;
           }
@@ -3836,42 +4147,37 @@ var require_fast_uri = __commonJS({
           parsed.error = parsed.error || "URI is not a " + options.reference + " reference.";
         }
         const schemeHandler = getSchemeHandler(options.scheme || parsed.scheme);
-        if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport)) {
-          if (parsed.host && (options.domainHost || schemeHandler && schemeHandler.domainHost) && isIP === false && nonSimpleDomain(parsed.host)) {
-            try {
-              parsed.host = URL.domainToASCII(parsed.host.toLowerCase());
-            } catch (e) {
-              parsed.error = parsed.error || "Host's domain name can not be converted to ASCII: " + e;
-            }
+        if (!malformedIPLiteral) {
+          malformedHost = canonicalizeHost(parsed, options, schemeHandler, isIP);
+        }
+        if (uri.indexOf("%") !== -1 && parsed.host !== void 0 && !malformedIPLiteral) {
+          let host = isIP ? parsed.host : normalizePercentEncoding(parsed.host, true);
+          if (!isIP) {
+            host = normalizePercentEncoding(host.toLowerCase());
           }
+          parsed.host = reescapeHostDelimiters(host, isIP);
         }
         if (!schemeHandler || schemeHandler && !schemeHandler.skipNormalize) {
-          if (uri.indexOf("%") !== -1) {
-            if (parsed.scheme !== void 0) {
-              parsed.scheme = unescape(parsed.scheme);
-            }
-            if (parsed.host !== void 0) {
-              parsed.host = reescapeHostDelimiters(unescape(parsed.host), isIP);
-            }
-          }
           if (parsed.path) {
             parsed.path = normalizePathEncoding(parsed.path);
           }
+          if (parsed.query) {
+            parsed.query = normalizeQueryFragmentEncoding(parsed.query);
+          }
           if (parsed.fragment) {
-            try {
-              parsed.fragment = encodeURI(decodeURIComponent(parsed.fragment));
-            } catch {
-              parsed.error = parsed.error || "URI malformed";
-            }
+            parsed.fragment = normalizeQueryFragmentEncoding(parsed.fragment);
           }
         }
         if (schemeHandler && schemeHandler.parse) {
           schemeHandler.parse(parsed, options);
+          if (schemeHandler === SCHEMES.urn && parsed.nid === void 0) {
+            malformedSchemeSpecific = true;
+          }
         }
       } else {
         parsed.error = parsed.error || "URI can not be parsed.";
       }
-      return { parsed, malformedAuthorityOrPort };
+      return { parsed, malformedAuthorityOrPort, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme };
     }
     function parse3(uri, opts) {
       return parseWithStatus(uri, opts).parsed;
@@ -3880,25 +4186,33 @@ var require_fast_uri = __commonJS({
       return normalizeStringWithStatus(uri, opts).normalized;
     }
     function normalizeStringWithStatus(uri, opts) {
-      const { parsed, malformedAuthorityOrPort } = parseWithStatus(uri, opts);
+      const { parsed, malformedAuthorityOrPort, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme } = parseWithStatus(uri, opts);
       return {
-        normalized: malformedAuthorityOrPort ? uri : serialize(parsed, opts),
-        malformedAuthorityOrPort
+        normalized: malformedAuthorityOrPort || malformedPercentEncoding || malformedSchemeSpecific || malformedHost || malformedScheme ? uri : serialize(parsed, opts),
+        malformedAuthorityOrPort,
+        malformedPercentEncoding,
+        malformedSchemeSpecific,
+        malformedHost,
+        malformedScheme
       };
     }
     function normalizeComparableURI(uri, opts) {
-      if (typeof uri === "string") {
-        const { normalized, malformedAuthorityOrPort } = normalizeStringWithStatus(uri, opts);
-        return malformedAuthorityOrPort ? void 0 : normalized;
+      if (typeof uri !== "string" && typeof uri !== "object") {
+        return void 0;
       }
-      if (typeof uri === "object") {
-        return serialize(uri, opts);
+      let value;
+      try {
+        value = typeof uri === "string" ? uri : serialize(uri, opts);
+      } catch {
+        return void 0;
       }
+      const { normalized, malformedAuthorityOrPort, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme } = normalizeStringWithStatus(value, opts);
+      return malformedAuthorityOrPort || malformedPercentEncoding || malformedSchemeSpecific || malformedHost || malformedScheme ? void 0 : normalized;
     }
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve5,
+      resolve: resolve4,
       resolveComponent,
       equal,
       serialize,
@@ -14861,16 +15175,32 @@ function normalizeObjectSchema(schema) {
   }
   return void 0;
 }
+function getDotPath(path) {
+  if (path.length === 0) {
+    return "object root";
+  }
+  return path.reduce((acc, seg, index) => {
+    if (index === 0) {
+      return String(seg);
+    }
+    if (typeof seg === "number") {
+      return `${acc}[${seg}]`;
+    }
+    return `${acc}.${seg}`;
+  }, "");
+}
 function getParseErrorMessage(error2) {
   if (error2 && typeof error2 === "object") {
+    if ("issues" in error2 && Array.isArray(error2.issues) && error2.issues.length > 0) {
+      return error2.issues.map((i) => {
+        if (!i.path?.length) {
+          return i.message;
+        }
+        return `${i.message} at ${getDotPath(i.path)}`;
+      }).join("\n");
+    }
     if ("message" in error2 && typeof error2.message === "string") {
       return error2.message;
-    }
-    if ("issues" in error2 && Array.isArray(error2.issues) && error2.issues.length > 0) {
-      const firstIssue = error2.issues[0];
-      if (firstIssue && typeof firstIssue === "object" && "message" in firstIssue) {
-        return String(firstIssue.message);
-      }
     }
     try {
       return JSON.stringify(error2);
@@ -18978,7 +19308,7 @@ var Protocol = class {
           return;
         }
         const pollInterval = task2.pollInterval ?? this._options?.defaultTaskPollInterval ?? 1e3;
-        await new Promise((resolve5) => setTimeout(resolve5, pollInterval));
+        await new Promise((resolve4) => setTimeout(resolve4, pollInterval));
         options?.signal?.throwIfAborted();
       }
     } catch (error2) {
@@ -18995,7 +19325,7 @@ var Protocol = class {
    */
   request(request, resultSchema, options) {
     const { relatedRequestId, resumptionToken, onresumptiontoken, task, relatedTask } = options ?? {};
-    return new Promise((resolve5, reject) => {
+    return new Promise((resolve4, reject) => {
       const earlyReject = (error2) => {
         reject(error2);
       };
@@ -19073,7 +19403,7 @@ var Protocol = class {
           if (!parseResult.success) {
             reject(parseResult.error);
           } else {
-            resolve5(parseResult.data);
+            resolve4(parseResult.data);
           }
         } catch (error2) {
           reject(error2);
@@ -19334,12 +19664,12 @@ var Protocol = class {
       }
     } catch {
     }
-    return new Promise((resolve5, reject) => {
+    return new Promise((resolve4, reject) => {
       if (signal.aborted) {
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
         return;
       }
-      const timeoutId = setTimeout(resolve5, interval);
+      const timeoutId = setTimeout(resolve4, interval);
       signal.addEventListener("abort", () => {
         clearTimeout(timeoutId);
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
@@ -19814,16 +20144,7 @@ var Server = class extends Protocol {
     if (!methodSchema) {
       throw new Error("Schema is missing a method literal");
     }
-    let methodValue;
-    if (isZ4Schema(methodSchema)) {
-      const v4Schema = methodSchema;
-      const v4Def = v4Schema._zod?.def;
-      methodValue = v4Def?.value ?? v4Schema.value;
-    } else {
-      const v3Schema = methodSchema;
-      const legacyDef = v3Schema._def;
-      methodValue = legacyDef?.value ?? v3Schema.value;
-    }
+    const methodValue = getLiteralValue(methodSchema);
     if (typeof methodValue !== "string") {
       throw new Error("Schema method literal must be a string");
     }
@@ -20670,7 +20991,7 @@ var McpServer = class {
     let task = createTaskResult.task;
     const pollInterval = task.pollInterval ?? 5e3;
     while (task.status !== "completed" && task.status !== "failed" && task.status !== "cancelled") {
-      await new Promise((resolve5) => setTimeout(resolve5, pollInterval));
+      await new Promise((resolve4) => setTimeout(resolve4, pollInterval));
       const updatedTask = await extra.taskStore.getTask(taskId);
       if (!updatedTask) {
         throw new McpError(ErrorCode.InternalError, `Task ${taskId} not found during polling`);
@@ -21266,8 +21587,17 @@ var EMPTY_COMPLETION_RESULT = {
 import process2 from "node:process";
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/shared/stdio.js
+var STDIO_DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
 var ReadBuffer = class {
+  constructor(options) {
+    this._maxBufferSize = options?.maxBufferSize ?? STDIO_DEFAULT_MAX_BUFFER_SIZE;
+  }
   append(chunk) {
+    const newSize = (this._buffer?.length ?? 0) + chunk.length;
+    if (newSize > this._maxBufferSize) {
+      this.clear();
+      throw new Error(`ReadBuffer exceeded maximum size of ${this._maxBufferSize} bytes`);
+    }
     this._buffer = this._buffer ? Buffer.concat([this._buffer, chunk]) : chunk;
   }
   readMessage() {
@@ -21295,18 +21625,24 @@ function serializeMessage(message) {
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
 var StdioServerTransport = class {
-  constructor(_stdin = process2.stdin, _stdout = process2.stdout) {
+  constructor(_stdin = process2.stdin, _stdout = process2.stdout, options) {
     this._stdin = _stdin;
     this._stdout = _stdout;
-    this._readBuffer = new ReadBuffer();
     this._started = false;
     this._ondata = (chunk) => {
-      this._readBuffer.append(chunk);
-      this.processReadBuffer();
+      try {
+        this._readBuffer.append(chunk);
+        this.processReadBuffer();
+      } catch (error2) {
+        this.onerror?.(error2);
+        this.close().catch(() => {
+        });
+      }
     };
     this._onerror = (error2) => {
       this.onerror?.(error2);
     };
+    this._readBuffer = new ReadBuffer({ maxBufferSize: options?.maxBufferSize });
   }
   /**
    * Starts listening for messages on stdin.
@@ -21343,20 +21679,36 @@ var StdioServerTransport = class {
     this.onclose?.();
   }
   send(message) {
-    return new Promise((resolve5) => {
+    return new Promise((resolve4) => {
       const json = serializeMessage(message);
       if (this._stdout.write(json)) {
-        resolve5();
+        resolve4();
       } else {
-        this._stdout.once("drain", resolve5);
+        this._stdout.once("drain", resolve4);
       }
     });
   }
 };
 
+// src/calculators/arredondar.ts
+function r2(x) {
+  if (!Number.isFinite(x)) return x;
+  const negativo = x < 0;
+  const texto2 = String(Math.abs(x));
+  if (/e/i.test(texto2)) {
+    return Math.abs(x) < 1 ? 0 : x;
+  }
+  const [inteiro, fracao = ""] = texto2.split(".");
+  if (fracao.length <= 2) return x;
+  let centimos = BigInt(inteiro + fracao.slice(0, 2));
+  if (fracao.charCodeAt(2) - 48 >= 5) centimos += 1n;
+  const v = Number(centimos) / 100;
+  return negativo && v !== 0 ? -v : v;
+}
+
 // src/calculators/format.ts
 function formatarEuros(valor) {
-  const fixo = valor.toFixed(2);
+  const fixo = r2(valor).toFixed(2);
   const negativo = fixo.startsWith("-");
   const semSinal = negativo ? fixo.slice(1) : fixo;
   const [parteInteira, parteDecimal] = semSinal.split(".");
@@ -21501,7 +21853,6 @@ function memoriaJuros(capital, r, tipo) {
 
 // src/calculators/prazos.ts
 var MS_POR_DIA2 = 24 * 60 * 60 * 1e3;
-var NOTA = "Regra geral processual: se o prazo terminar em dia n\xE3o \xFAtil, transfere-se para o 1.\xBA dia \xFAtil seguinte (Art. 138.\xBA CPC). Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
 function domingoPascoa(ano) {
   const a = ano % 19;
   const b = Math.floor(ano / 100);
@@ -21547,9 +21898,9 @@ function feriadosNacionais(ano) {
     // Natal
   ]);
   const { mes, dia } = domingoPascoa(ano);
-  const pascoaTs = Date.UTC(ano, mes - 1, dia);
-  feriados.add(chaveDia(pascoaTs - 2 * MS_POR_DIA2));
-  feriados.add(chaveDia(pascoaTs + 60 * MS_POR_DIA2));
+  const pascoaTs2 = Date.UTC(ano, mes - 1, dia);
+  feriados.add(chaveDia(pascoaTs2 - 2 * MS_POR_DIA2));
+  feriados.add(chaveDia(pascoaTs2 + 60 * MS_POR_DIA2));
   return feriados;
 }
 function ehDiaUtil(timestamp, cache) {
@@ -21585,22 +21936,91 @@ function contarDiasUteis(inicioTs, nDias) {
   }
   return ts;
 }
-function contarPrazo(inicio, dias, tipo) {
-  if (dias < 0) {
-    throw new Error("O n\xFAmero de dias n\xE3o pode ser negativo.");
+var MAX_DIAS = 3650;
+function pascoaTs(ano) {
+  const { mes, dia } = domingoPascoa(ano);
+  return Date.UTC(ano, mes - 1, dia);
+}
+function emFeriasJudiciais(timestamp) {
+  const d = new Date(timestamp);
+  const m = d.getUTCMonth() + 1;
+  const dia = d.getUTCDate();
+  if (m === 12 && dia >= 22 || m === 1 && dia <= 3) return true;
+  if (m === 7 && dia >= 16 || m === 8) return true;
+  const p = pascoaTs(d.getUTCFullYear());
+  return timestamp >= p - 7 * MS_POR_DIA2 && timestamp <= p + MS_POR_DIA2;
+}
+var DIAS_SEMANA = ["domingo", "segunda-feira", "ter\xE7a-feira", "quarta-feira", "quinta-feira", "sexta-feira", "s\xE1bado"];
+function isoDia(ts) {
+  return new Date(ts).toISOString().slice(0, 10);
+}
+function contarPrazo(inicio, dias, tipo = "corridos", opts = {}) {
+  if (!(inicio instanceof Date) || Number.isNaN(inicio.getTime())) {
+    throw new Error("Data de in\xEDcio inv\xE1lida. Usa AAAA-MM-DD.");
   }
-  const inicioTs = Date.UTC(
-    inicio.getUTCFullYear(),
-    inicio.getUTCMonth(),
-    inicio.getUTCDate()
-  );
-  let limiteTs;
-  if (tipo === "corridos") {
-    limiteTs = inicioTs + dias * MS_POR_DIA2;
+  if (!Number.isInteger(dias) || dias < 0 || dias > MAX_DIAS) {
+    throw new Error(`O n\xFAmero de dias tem de ser um inteiro entre 0 e ${MAX_DIAS}.`);
+  }
+  if (tipo !== "judicial" && tipo !== "corridos" && tipo !== "uteis") {
+    throw new Error(`Tipo de prazo desconhecido: '${String(tipo)}'. Usa judicial, corridos ou uteis.`);
+  }
+  const urgente = Boolean(opts.urgente);
+  const inicioTs = Date.UTC(inicio.getUTCFullYear(), inicio.getUTCMonth(), inicio.getUTCDate());
+  let legalTs;
+  let diasSuspensos = 0;
+  const suspende = tipo === "judicial" && !urgente && dias < 180;
+  if (tipo === "uteis") {
+    legalTs = contarDiasUteis(inicioTs, dias);
+  } else if (tipo === "corridos" || !suspende) {
+    legalTs = inicioTs + dias * MS_POR_DIA2;
   } else {
-    limiteTs = contarDiasUteis(inicioTs, dias);
+    legalTs = inicioTs;
+    let contados = 0;
+    while (contados < dias) {
+      legalTs += MS_POR_DIA2;
+      if (emFeriasJudiciais(legalTs)) diasSuspensos += 1;
+      else contados += 1;
+    }
   }
-  return { dataLimite: new Date(limiteTs), nota: NOTA };
+  let limiteTs = legalTs;
+  while (!ehDiaUtil(limiteTs, CACHE_FERIADOS) || suspende && emFeriasJudiciais(limiteTs)) {
+    limiteTs += MS_POR_DIA2;
+  }
+  const transferido = limiteTs !== legalTs;
+  const diaLegal = `${isoDia(legalTs)} (${DIAS_SEMANA[new Date(legalTs).getUTCDay()]})`;
+  let nota;
+  if (tipo === "judicial") {
+    nota = (urgente ? "Processo urgente: o prazo corre tamb\xE9m nas f\xE9rias judiciais (CPC, art. 138.\xBA, n.\xBA 1). " : "Prazo judicial (CPC, art. 138.\xBA): cont\xEDnuo, suspende-se nas f\xE9rias judiciais (LOSJ, art. 28.\xBA: 22/12 a 3/1, Domingo de Ramos a Segunda-feira de P\xE1scoa, 16/7 a 31/8)" + (dias >= 180 ? ", exceto nos prazos de 6 meses ou mais, como este" : "") + (diasSuspensos > 0 ? ` \u2014 ${diasSuspensos} dias de f\xE9rias n\xE3o contaram` : "") + ". ") + (transferido ? `O termo legal, ${diaLegal}, passa para o 1.\xBA dia \xFAtil seguinte (art. 138.\xBA, n.\xBA 2). ` : "") + "O ato pode ainda ser praticado nos 3 dias \xFAteis seguintes, com multa (CPC, art. 139.\xBA, n.\xBA 5). Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
+  } else if (tipo === "corridos") {
+    nota = "Prazo em dias seguidos (CC, art. 279.\xBA): o dia de in\xEDcio n\xE3o conta. " + (transferido ? `O termo legal \xE9 ${diaLegal}; se o ato tiver de ser praticado num tribunal ou servi\xE7o encerrado nesse dia, passa para o 1.\xBA dia \xFAtil seguinte (CC, art. 279.\xBA, al. e); CPA, art. 87.\xBA). ` : "") + "Para prazos de processos em tribunal (contesta\xE7\xE3o, oposi\xE7\xE3o, recurso) usa o tipo 'judicial'. Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
+  } else {
+    nota = "Contagem em dias \xFAteis (ex.: procedimento administrativo \u2014 CPA, art. 87.\xBA): saltam-se s\xE1bados, domingos e feriados nacionais. Para prazos de processos em tribunal usa o tipo 'judicial'. Feriados municipais n\xE3o est\xE3o inclu\xEDdos.";
+  }
+  return { dataLimite: new Date(limiteTs), dataLegal: new Date(legalTs), transferido, diasSuspensos, nota };
+}
+
+// src/calculators/datas.ts
+function parseDataEstrita(texto2, campo) {
+  const s = typeof texto2 === "string" ? texto2.trim() : "";
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (m) {
+    const [a, mes, dia] = [Number(m[1]), Number(m[2]), Number(m[3])];
+    const d = new Date(Date.UTC(a, mes - 1, dia));
+    if (d.getUTCFullYear() === a && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia) return d;
+  }
+  throw new Error(`Data inv\xE1lida em '${campo}': '${String(texto2).slice(0, 40)}'. Usa AAAA-MM-DD com uma data que exista.`);
+}
+function hojeLisboa(agora = /* @__PURE__ */ new Date()) {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Lisbon",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(agora);
+  } catch {
+    return agora.toISOString().slice(0, 10);
+  }
 }
 
 // src/calculators/compensacao.ts
@@ -21735,6 +22155,9 @@ function calcularCompensacaoPorDatas(p) {
 // src/calculators/injuncao.ts
 var UC_2026 = 102;
 function custasInjuncao(valor) {
+  if (!Number.isFinite(valor) || valor <= 0) {
+    throw new Error("O valor da d\xEDvida tem de ser um n\xFAmero positivo.");
+  }
   if (valor <= 5e3) {
     return { escalao: "D\xEDvida at\xE9 5.000\u20AC", taxa: 0.5 * UC_2026 };
   }
@@ -21745,7 +22168,7 @@ function custasInjuncao(valor) {
     };
   }
   return {
-    escalao: "D\xEDvida superior a 15.000\u20AC (em regra segue forma de a\xE7\xE3o)",
+    escalao: "D\xEDvida superior a 15.000\u20AC (s\xF3 em transa\xE7\xF5es comerciais \u2014 DL 62/2013, art. 10.\xBA)",
     taxa: 1.5 * UC_2026
   };
 }
@@ -21758,10 +22181,13 @@ var HERDEIROS_ISENTOS = /* @__PURE__ */ new Set([
   "descendente",
   "ascendente"
 ]);
-function impostoSeloHeranca(valor, herdeiro, incluiImovel, vptImovel) {
+function impostoSeloHeranca(valor, herdeiro, incluiImovel, vptImovel, doacao = false) {
+  if (!Number.isFinite(valor) || valor < 0 || !Number.isFinite(vptImovel) || vptImovel < 0) {
+    throw new Error("O valor dos bens e o VPT n\xE3o podem ser negativos.");
+  }
   const isento = HERDEIROS_ISENTOS.has(herdeiro);
   const isTransmissao = isento ? 0 : valor * TAXA_TRANSMISSAO;
-  const isImovel = incluiImovel ? vptImovel * TAXA_IMOVEL : 0;
+  const isImovel = doacao && incluiImovel ? vptImovel * TAXA_IMOVEL : 0;
   const total = isTransmissao + isImovel;
   return { isTransmissao, isImovel, total, isento };
 }
@@ -21808,7 +22234,9 @@ function calcularIMT(valor, tipo, jovem) {
   if (valor < 0) {
     throw new Error("O valor n\xE3o pode ser negativo.");
   }
-  const selo = valor * TAXA_SELO;
+  let selo = valor * TAXA_SELO;
+  const seloJovem = jovem && tipo === "hpp" && valor <= IMT_JOVEM_LIMITE;
+  if (seloJovem) selo = Math.max(0, valor - IMT_JOVEM_ISENCAO_TOTAL) * TAXA_SELO;
   const comTotais = (r) => ({ ...r, selo, total: r.imt + selo });
   if (jovem && tipo === "hpp") {
     if (valor <= IMT_JOVEM_ISENCAO_TOTAL) {
@@ -21817,7 +22245,7 @@ function calcularIMT(valor, tipo, jovem) {
         taxa: 0,
         parcela: 0,
         isento: true,
-        regime: "IMT Jovem \u2014 isen\xE7\xE3o total (valor <= 330.539 \u20AC)"
+        regime: "IMT Jovem \u2014 isen\xE7\xE3o total de IMT e de Imposto do Selo (valor <= 330.539 \u20AC)"
       });
     }
     if (valor <= IMT_JOVEM_LIMITE) {
@@ -21827,7 +22255,7 @@ function calcularIMT(valor, tipo, jovem) {
         taxa: IMT_JOVEM_TAXA,
         parcela: 0,
         isento: false,
-        regime: "IMT Jovem \u2014 isen\xE7\xE3o parcial: (valor - 330.539) * 8%"
+        regime: "IMT Jovem \u2014 isen\xE7\xE3o parcial: IMT = (valor - 330.539) * 8%; Selo = (valor - 330.539) * 0,8%"
       });
     }
   }
@@ -21874,35 +22302,54 @@ function calcularIMT(valor, tipo, jovem) {
 
 // src/calculators/prescricao.ts
 var PRAZOS = {
-  "civil-geral": ["Prescri\xE7\xE3o civil geral", 20, 0, "Art. 309.\xBA CC"],
-  "servicos-profissionais": [
-    "Servi\xE7os profissionais",
-    5,
-    0,
-    "Art. 310.\xBA CC"
-  ],
+  "civil-geral": ["Prescri\xE7\xE3o ordin\xE1ria (regra geral)", 20, 0, "CC, art. 309.\xBA", false],
   "creditos-comerciais": [
-    "Cr\xE9ditos comerciais",
+    "Cr\xE9ditos comerciais entre empresas (ex.: faturas B2B) \u2014 prazo ordin\xE1rio",
+    20,
+    0,
+    "CC, art. 309.\xBA",
+    false
+  ],
+  "servicos-profissionais": [
+    "Servi\xE7os prestados no exerc\xEDcio de profiss\xF5es liberais (prescri\xE7\xE3o presuntiva)",
+    2,
+    0,
+    "CC, art. 317.\xBA, al. c)",
+    true
+  ],
+  "vendas-a-consumidor": [
+    "Vendas e fornecimentos de comerciantes/industriais a quem n\xE3o \xE9 comerciante nem os destina ao seu com\xE9rcio (prescri\xE7\xE3o presuntiva)",
+    2,
+    0,
+    "CC, art. 317.\xBA, al. b)",
+    true
+  ],
+  rendas: ["Rendas e alugueres devidos pelo locat\xE1rio", 5, 0, "CC, art. 310.\xBA, al. b)", false],
+  juros: ["Juros convencionais ou legais", 5, 0, "CC, art. 310.\xBA, al. d)", false],
+  "prestacoes-periodicas": [
+    "Presta\xE7\xF5es periodicamente renov\xE1veis (ex.: quotas de condom\xEDnio)",
     5,
     0,
-    "Art. 310.\xBA al. e) CC"
+    "CC, art. 310.\xBA, al. g)",
+    false
   ],
-  juros: ["Juros", 5, 0, "Art. 310.\xBA al. d) CC"],
-  rendas: ["Rendas", 5, 0, "Art. 310.\xBA al. a) CC"],
   "telecom-energia-agua": [
-    "Telecomunica\xE7\xF5es / energia / \xE1gua",
+    "Pre\xE7o de servi\xE7os p\xFAblicos essenciais (telecomunica\xE7\xF5es, energia, \xE1gua)",
     0,
     6,
-    "legisla\xE7\xE3o setorial"
+    "Lei 23/96, art. 10.\xBA, n.\xBA 1",
+    false
   ],
   "queixa-crime-semipublico": [
-    "Queixa-crime (crime semip\xFAblico)",
+    "Direito de queixa por crime semip\xFAblico (caducidade)",
     0,
     6,
-    "Art. 115.\xBA CP"
+    "CP, art. 115.\xBA, n.\xBA 1",
+    false
   ],
-  "garantia-bens-consumo": ["Garantia de bens de consumo", 3, 0, "DL 84/2021"]
+  "garantia-bens-consumo": ["Garantia legal de bens de consumo (bens m\xF3veis)", 3, 0, "DL 84/2021", false]
 };
+var AVISO_PRESUNTIVA = "Prescri\xE7\xE3o presuntiva (CC, arts. 312.\xBA a 317.\xBA): ao fim do prazo presume-se que a d\xEDvida foi paga; o credor s\xF3 afasta essa presun\xE7\xE3o com a confiss\xE3o do devedor, expressa ou t\xE1cita (arts. 313.\xBA e 314.\xBA). Se o devedor admitir que n\xE3o pagou, a presun\xE7\xE3o cai.";
 var PRESCRICAO_TIPOS = Object.keys(PRAZOS).sort();
 function ultimoDiaDoMes(ano, mes) {
   return new Date(Date.UTC(ano, mes, 0)).getUTCDate();
@@ -21922,10 +22369,13 @@ function addAnos(data, anos) {
   return addMeses(data, anos * 12);
 }
 function calcularPrescricao(inicio, tipo) {
-  if (!(tipo in PRAZOS)) {
-    throw new Error(`Tipo desconhecido: ${tipo}`);
+  if (!(inicio instanceof Date) || Number.isNaN(inicio.getTime())) {
+    throw new Error("Data de in\xEDcio inv\xE1lida. Usa AAAA-MM-DD.");
   }
-  const [descricao, anos, meses, base] = PRAZOS[tipo];
+  if (!Object.prototype.hasOwnProperty.call(PRAZOS, tipo)) {
+    throw new Error(`Tipo desconhecido: ${tipo}. Tipos: ${PRESCRICAO_TIPOS.join(", ")}.`);
+  }
+  const [descricao, anos, meses, base, presuntiva] = PRAZOS[tipo];
   let limite;
   let prazoTexto;
   if (anos) {
@@ -21935,7 +22385,7 @@ function calcularPrescricao(inicio, tipo) {
     limite = addMeses(inicio, meses);
     prazoTexto = `${meses} mese(s)`;
   }
-  return { descricao, prazoTexto, base, limite };
+  return { descricao, prazoTexto, base, limite, presuntiva, aviso: presuntiva ? AVISO_PRESUNTIVA : "" };
 }
 
 // src/calculators/irs.ts
@@ -21943,7 +22393,7 @@ var COEFICIENTES = {
   mercadorias: 0.15,
   "servicos-151": 0.75,
   "servicos-outros": 0.35,
-  "propriedade-intelectual": 0.5
+  "propriedade-intelectual": 0.95
 };
 function calcularIRSSimplificado(rendimento, tipo) {
   if (!(tipo in COEFICIENTES)) {
@@ -22114,7 +22564,6 @@ var TABELAS = {
     ]
   }
 };
-var r2 = (x) => Math.round((x + Number.EPSILON) * 100) / 100;
 function retencao(r, tabela, dependentes) {
   const t = TABELAS[tabela];
   const e = t.escaloes.find((x) => r <= x.ate);
@@ -22174,7 +22623,6 @@ function calcularCustoTrabalhador(p) {
 }
 
 // src/calculators/irc.ts
-var r22 = (x) => Math.round((x + Number.EPSILON) * 100) / 100;
 var VIATURA_LIMITES = [37500, 45e3];
 var VIATURA_ELETRICA_LIMITE = 62500;
 var TAXAS_VIATURA = {
@@ -22209,18 +22657,18 @@ function calcularIRC(p) {
   }
   const taxaGeral = taxaGeralIRC(p.ano ?? 2026);
   const prejuizos = naoNeg("prejuizosDedutiveis", p.prejuizosDedutiveis);
-  const deducaoPrejuizos = lucro > 0 ? r22(Math.min(prejuizos, lucro * 0.65)) : 0;
-  const materiaColetavel = r22(Math.max(0, lucro - deducaoPrejuizos));
-  const irc = p.pme ? r22(Math.min(materiaColetavel, 5e4) * 0.15 + Math.max(0, materiaColetavel - 5e4) * (taxaGeral / 100)) : r22(materiaColetavel * (taxaGeral / 100));
-  const derramaMunicipal = lucro > 0 ? r22(lucro * dm) : 0;
-  const derramaEstadual = r22(
+  const deducaoPrejuizos = lucro > 0 ? r2(Math.min(prejuizos, lucro * 0.65)) : 0;
+  const materiaColetavel = r2(Math.max(0, lucro - deducaoPrejuizos));
+  const irc = p.pme ? r2(Math.min(materiaColetavel, 5e4) * 0.15 + Math.max(0, materiaColetavel - 5e4) * (taxaGeral / 100)) : r2(materiaColetavel * (taxaGeral / 100));
+  const derramaMunicipal = lucro > 0 ? r2(lucro * dm) : 0;
+  const derramaEstadual = r2(
     Math.max(0, Math.min(lucro, 75e5) - 15e5) * 0.03 + Math.max(0, Math.min(lucro, 35e6) - 75e5) * 0.05 + Math.max(0, lucro - 35e6) * 0.09
   );
   const agravamento = lucro < 0 && !p.isentoAgravamento ? 10 : 0;
   const ta = (base, taxa) => taxa > 0 ? base * ((taxa + agravamento) / 100) : 0;
   let tributacaoAutonoma = ta(naoNeg("despesasRepresentacao", p.despesasRepresentacao), 10) + ta(naoNeg("ajudasCusto", p.ajudasCusto), 5) + ta(naoNeg("despesasNaoDocumentadas", p.despesasNaoDocumentadas), 50);
   for (const v of p.viaturas ?? []) tributacaoAutonoma += ta(naoNeg("encargos", v.encargos), taxaViatura(v));
-  tributacaoAutonoma = r22(tributacaoAutonoma);
+  tributacaoAutonoma = r2(tributacaoAutonoma);
   return {
     materiaColetavel,
     deducaoPrejuizos,
@@ -22228,7 +22676,7 @@ function calcularIRC(p) {
     derramaMunicipal,
     derramaEstadual,
     tributacaoAutonoma,
-    total: r22(irc + derramaMunicipal + derramaEstadual + tributacaoAutonoma),
+    total: r2(irc + derramaMunicipal + derramaEstadual + tributacaoAutonoma),
     taxaGeral
   };
 }
@@ -22238,7 +22686,6 @@ var UC_20262 = 102;
 var LIMITES = [2e3, 8e3, 16e3, 24e3, 3e4, 4e4, 6e4, 8e4, 1e5, 15e4, 2e5, 25e4, 275e3];
 var UC_COLUNA_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16];
 var FATOR = { A: 1, B: 0.5, C: 1.5 };
-var r23 = (x) => Math.round((x + Number.EPSILON) * 100) / 100;
 var fmt = (v) => formatarEuros(v).replace(/\s*€$/, "");
 function calcularTaxaJustica(valorAcao, opts = {}) {
   const valor = Number(valorAcao);
@@ -22254,7 +22701,7 @@ function calcularTaxaJustica(valorAcao, opts = {}) {
   const totalUC = taxaInicialUC + remanescenteUC;
   const escalao = i === -1 ? "Acima de 275.000,00 \u20AC" : idx === 0 ? "At\xE9 2.000,00 \u20AC" : `De ${fmt(LIMITES[idx - 1] + 0.01)} \u20AC a ${fmt(LIMITES[idx])} \u20AC`;
   const reducao = opts.reducaoEletronica ? 0.9 : 1;
-  const taxaInicialEuros = r23(taxaInicialUC * uc * reducao);
+  const taxaInicialEuros = r2(taxaInicialUC * uc * reducao);
   return {
     ucValor: uc,
     escalao,
@@ -22262,7 +22709,7 @@ function calcularTaxaJustica(valorAcao, opts = {}) {
     remanescenteUC,
     totalUC,
     taxaInicialEuros,
-    totalEuros: r23(taxaInicialEuros + remanescenteUC * uc)
+    totalEuros: r2(taxaInicialEuros + remanescenteUC * uc)
   };
 }
 
@@ -22455,8 +22902,13 @@ function listar(cat) {
   if (!existsSync(d)) return [];
   return readdirSync(d).filter((f) => f.endsWith(".md") && f.toLowerCase() !== "readme.md").map((f) => f.slice(0, -3)).sort();
 }
+var NOME_CONTEUDO = /^[a-z0-9][a-z0-9-]{0,80}$/i;
+function itemValido(cat, nome) {
+  return CATEGORIAS.includes(cat) && NOME_CONTEUDO.test(String(nome ?? "").replace(/\.md$/i, ""));
+}
 function ler(cat, nome) {
-  const limpo = nome.replace(/\.md$/i, "").replace(/[\\/]/g, "");
+  const limpo = String(nome ?? "").trim().replace(/\.md$/i, "");
+  if (!itemValido(cat, limpo)) return null;
   const caminho2 = join(dir(cat), `${limpo}.md`);
   if (!existsSync(caminho2)) return null;
   return readFileSync(caminho2, "utf8");
@@ -22517,9 +22969,71 @@ function formatarProcura(res) {
 }
 
 // src/perfil.ts
-import { existsSync as existsSync2, mkdirSync, readFileSync as readFileSync2, readdirSync as readdirSync2, statSync, writeFileSync } from "node:fs";
+import { existsSync as existsSync2, readFileSync as readFileSync2, readdirSync as readdirSync2 } from "node:fs";
 import { homedir } from "node:os";
+import { join as join3, resolve as resolve3 } from "node:path";
+
+// src/fs-seguro.ts
+import { lstatSync, mkdirSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import { join as join2, resolve as resolve2 } from "node:path";
+import { randomBytes } from "node:crypto";
+function dirProjeto(projeto) {
+  return resolve2(projeto ?? process.env.CLAUDE_PROJECT_DIR ?? process.cwd());
+}
+function codigo(e) {
+  return e?.code;
+}
+function estado(caminho2, nome) {
+  let st;
+  try {
+    st = lstatSync(caminho2);
+  } catch (e) {
+    if (codigo(e) === "ENOENT") return "nenhum";
+    throw new Error(`N\xE3o foi poss\xEDvel verificar '${nome}'.`);
+  }
+  if (st.isSymbolicLink()) {
+    throw new Error(
+      `Escrita recusada: '${nome}' \xE9 uma liga\xE7\xE3o (symlink ou junction). Por seguran\xE7a, o plugin n\xE3o escreve atrav\xE9s de liga\xE7\xF5es \u2014 substitui-a por uma pasta normal.`
+    );
+  }
+  return st.isDirectory() ? "dir" : "ficheiro";
+}
+function escreverSeguro(base, partes, conteudo) {
+  if (partes.length === 0) throw new Error("Caminho de destino vazio.");
+  for (const p of partes) {
+    if (!p || p === "." || p === ".." || /[\\/]/.test(p) || p.includes("\0")) {
+      throw new Error(`Nome inv\xE1lido no caminho de destino: '${p}'.`);
+    }
+  }
+  const raiz = resolve2(base);
+  if (estado(raiz, raiz) !== "dir") throw new Error(`O diret\xF3rio '${raiz}' n\xE3o existe.`);
+  let atual = raiz;
+  const relativo = [];
+  for (const pasta of partes.slice(0, -1)) {
+    atual = join2(atual, pasta);
+    relativo.push(pasta);
+    const e = estado(atual, relativo.join("/"));
+    if (e === "nenhum") mkdirSync(atual);
+    else if (e !== "dir") throw new Error(`'${relativo.join("/")}' existe e n\xE3o \xE9 uma pasta.`);
+  }
+  const final = join2(atual, partes[partes.length - 1]);
+  if (estado(final, partes.join("/")) === "dir") throw new Error(`'${partes.join("/")}' \xE9 uma pasta.`);
+  const tmp = `${final}.${process.pid}.${randomBytes(4).toString("hex")}.tmp`;
+  try {
+    writeFileSync(tmp, conteudo, { encoding: "utf8", flag: "wx" });
+    renameSync(tmp, final);
+  } catch (e) {
+    try {
+      unlinkSync(tmp);
+    } catch {
+    }
+    if (e instanceof Error && /^(Escrita recusada|Nome inválido)/.test(e.message)) throw e;
+    throw new Error(`N\xE3o foi poss\xEDvel gravar '${partes.join("/")}' (${codigo(e) ?? "erro de escrita"}).`);
+  }
+  return final;
+}
+
+// src/perfil.ts
 var CAMPOS_PERFIL = [
   "forma_juridica",
   "denominacao",
@@ -22550,14 +23064,14 @@ var ROTULOS = {
 var PASTA = ".advogado-pt";
 var FICHEIRO = "perfil-empresa.md";
 var MS_12_MESES = 365 * 24 * 60 * 60 * 1e3;
-function dirProjeto(o) {
-  return resolve2(o.projeto ?? process.env.CLAUDE_PROJECT_DIR ?? process.cwd());
+function dirProjeto2(o) {
+  return dirProjeto(o.projeto);
 }
 function dirHome(o) {
-  return resolve2(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
+  return resolve3(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
 }
 function caminhoPerfil(base) {
-  return join2(base, PASTA, FICHEIRO);
+  return join3(base, PASTA, FICHEIRO);
 }
 var NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
 function validarNome(nome) {
@@ -22568,11 +23082,11 @@ function validarNome(nome) {
   return n;
 }
 function caminhoNomeado(base, nome) {
-  return join2(base, PASTA, "perfis", `${nome}.md`);
+  return join3(base, PASTA, "perfis", `${nome}.md`);
 }
 function nomeAtivoEm(base) {
   try {
-    const f = join2(base, PASTA, "perfil-ativo");
+    const f = join3(base, PASTA, "perfil-ativo");
     if (!existsSync2(f)) return null;
     const n = readFileSync2(f, "utf8").split(/\r?\n/)[0].trim().toLowerCase();
     return NOME_RE.test(n) ? n : null;
@@ -22607,14 +23121,14 @@ function lerDe(caminho2, origem, hoje) {
   }
 }
 function lerPorDefeito(opts, hoje) {
-  return lerDe(caminhoPerfil(dirProjeto(opts)), "projeto", hoje) ?? lerDe(caminhoPerfil(dirHome(opts)), "geral", hoje);
+  return lerDe(caminhoPerfil(dirProjeto2(opts)), "projeto", hoje) ?? lerDe(caminhoPerfil(dirHome(opts)), "geral", hoje);
 }
 function lerNomeado(nome, opts, hoje) {
-  const p = lerDe(caminhoNomeado(dirProjeto(opts), nome), "projeto", hoje) ?? lerDe(caminhoNomeado(dirHome(opts), nome), "geral", hoje);
+  const p = lerDe(caminhoNomeado(dirProjeto2(opts), nome), "projeto", hoje) ?? lerDe(caminhoNomeado(dirHome(opts), nome), "geral", hoje);
   return p ? { ...p, nome } : null;
 }
 function nomePerfilAtivo(opts = {}) {
-  return nomeAtivoEm(dirProjeto(opts)) ?? nomeAtivoEm(dirHome(opts));
+  return nomeAtivoEm(dirProjeto2(opts)) ?? nomeAtivoEm(dirHome(opts));
 }
 function lerPerfil(opts = {}) {
   const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
@@ -22643,10 +23157,7 @@ function serializar(campos) {
   return linhas.join("\n") + "\n";
 }
 function guardarPerfil(novos, destino, opts = {}) {
-  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
-  if (!existsSync2(base) || !statSync(base).isDirectory()) {
-    throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  }
+  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome(opts);
   const nome = opts.perfil ? validarNome(opts.perfil) : void 0;
   const caminho2 = nome ? caminhoNomeado(base, nome) : caminhoPerfil(base);
   let atuais = {};
@@ -22664,8 +23175,7 @@ function guardarPerfil(novos, destino, opts = {}) {
   }
   const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
-  mkdirSync(nome ? join2(base, PASTA, "perfis") : join2(base, PASTA), { recursive: true });
-  writeFileSync(caminho2, serializar(campos), "utf8");
+  escreverSeguro(base, nome ? [PASTA, "perfis", `${nome}.md`] : [PASTA, FICHEIRO], serializar(campos));
   return { origem: destino, caminho: caminho2, campos, desatualizado: false, ...nome ? { nome } : {} };
 }
 function resumoPerfil(p) {
@@ -22688,9 +23198,9 @@ function textoPerguntasPerfil() {
 function listarPerfis(opts = {}) {
   const ativo = nomePerfilAtivo(opts);
   const vistos = /* @__PURE__ */ new Map();
-  for (const [base, origem] of [[dirProjeto(opts), "projeto"], [dirHome(opts), "geral"]]) {
+  for (const [base, origem] of [[dirProjeto2(opts), "projeto"], [dirHome(opts), "geral"]]) {
     try {
-      const dir2 = join2(base, PASTA, "perfis");
+      const dir2 = join3(base, PASTA, "perfis");
       if (!existsSync2(dir2)) continue;
       for (const f of readdirSync2(dir2)) {
         const n = f.replace(/\.md$/i, "").toLowerCase();
@@ -22703,17 +23213,11 @@ function listarPerfis(opts = {}) {
 }
 function ativarPerfil(nome, destino, opts = {}) {
   const n = validarNome(nome);
-  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
-  if (!existsSync2(base) || !statSync(base).isDirectory()) {
-    throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  }
-  mkdirSync(join2(base, PASTA), { recursive: true });
-  writeFileSync(join2(base, PASTA, "perfil-ativo"), n + "\n", "utf8");
+  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome(opts);
+  escreverSeguro(base, [PASTA, "perfil-ativo"], n + "\n");
 }
 
 // src/calendario.ts
-import { existsSync as existsSync3, mkdirSync as mkdirSync2, statSync as statSync2, writeFileSync as writeFileSync2 } from "node:fs";
-import { join as join3, resolve as resolve3 } from "node:path";
 var AT_D = "https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/calendario_fiscal/documents/obrigacoes_declarativas.pdf";
 var AT_P = "https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/calendario_fiscal/documents/obrigacoes_pagamento.pdf";
 var DL127 = "https://files.diariodarepublica.pt/1s/2025/12/23600/0000200005.pdf";
@@ -23318,12 +23822,7 @@ function paraICS(obrigacoes, opts = {}) {
 }
 function exportarICS(ano, obrigacoes, dir2, hoje) {
   if (!Number.isInteger(ano) || ano < 2e3 || ano > 2100) throw new Error(`Ano inv\xE1lido: ${ano}`);
-  const base = resolve3(dir2 ?? process.cwd());
-  if (!existsSync3(base) || !statSync2(base).isDirectory()) throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  mkdirSync2(join3(base, ".advogado-pt"), { recursive: true });
-  const caminho2 = join3(base, ".advogado-pt", `calendario-${ano}.ics`);
-  writeFileSync2(caminho2, paraICS(obrigacoes, { hoje }), "utf8");
-  return caminho2;
+  return escreverSeguro(dirProjeto(dir2), [".advogado-pt", `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
 }
 function formatarCalendario(obrigacoes, opts = {}) {
   const lista = opts.mes ? obrigacoes.filter((o) => Number(o.data.slice(5, 7)) === opts.mes) : obrigacoes;
@@ -23346,15 +23845,15 @@ function formatarCalendario(obrigacoes, opts = {}) {
 }
 
 // src/prazos-estado.ts
-import { existsSync as existsSync4, mkdirSync as mkdirSync3, readFileSync as readFileSync3, statSync as statSync3, writeFileSync as writeFileSync3 } from "node:fs";
-import { join as join4, resolve as resolve4 } from "node:path";
+import { existsSync as existsSync3, readFileSync as readFileSync3 } from "node:fs";
+import { join as join4 } from "node:path";
 var PASTA2 = ".advogado-pt";
 var FICHEIRO2 = "prazos.md";
 var SEP = " \u2014 ";
 var LINHA_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
 var CABECALHO = '# Prazos em curso\n\n<!-- advogado-pt: uma linha por prazo \u2014 "- [ ] AAAA-MM-DD \u2014 descri\xE7\xE3o \u2014 origem". Marca [x] quando cumprido. O aviso aparece ao abrir a sess\xE3o (vencidos e pr\xF3ximos 7 dias). -->\n\n';
 function dirBase(dir2) {
-  return resolve4(dir2 ?? process.cwd());
+  return dirProjeto(dir2);
 }
 function caminho(dir2) {
   return join4(dirBase(dir2), PASTA2, FICHEIRO2);
@@ -23385,7 +23884,7 @@ function linhaDe(p) {
 }
 function lerPrazos(dir2) {
   const f = caminho(dir2);
-  if (!existsSync4(f)) return [];
+  if (!existsSync3(f)) return [];
   const out = [];
   for (const linha of readFileSync3(f, "utf8").split(/\r?\n/)) {
     const p = parseLinha(linha);
@@ -23394,15 +23893,38 @@ function lerPrazos(dir2) {
   return out;
 }
 function gravar(prazos, dir2) {
-  const base = dirBase(dir2);
-  if (!existsSync4(base) || !statSync3(base).isDirectory()) {
-    throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  }
-  mkdirSync3(join4(base, PASTA2), { recursive: true });
   const ordenados = [...prazos].sort(
     (a, b) => Number(a.concluido) - Number(b.concluido) || a.data.localeCompare(b.data)
   );
-  writeFileSync3(caminho(dir2), CABECALHO + ordenados.map(linhaDe).join("\n") + "\n", "utf8");
+  const novas = ordenados.map(linhaDe);
+  let atual = null;
+  try {
+    const f = caminho(dir2);
+    if (existsSync3(f)) atual = readFileSync3(f, "utf8");
+  } catch {
+    atual = null;
+  }
+  let texto2;
+  if (atual === null) {
+    texto2 = CABECALHO + novas.join("\n") + "\n";
+  } else {
+    const saida = [];
+    let inseridas = false;
+    for (const linha of atual.split(/\r?\n/)) {
+      if (parseLinha(linha)) {
+        if (!inseridas) {
+          saida.push(...novas);
+          inseridas = true;
+        }
+        continue;
+      }
+      saida.push(linha);
+    }
+    while (saida.length && saida[saida.length - 1].trim() === "") saida.pop();
+    if (!inseridas) saida.push("", ...novas);
+    texto2 = saida.join("\n") + "\n";
+  }
+  escreverSeguro(dirBase(dir2), [PASTA2, FICHEIRO2], texto2);
 }
 function registarPrazo(p, dir2) {
   const data = validarData(p.data);
@@ -23455,10 +23977,35 @@ var AVISO = "\n\n\u26A0\uFE0F Estimativa de apoio. Valores/taxas de 2026 \u2014 
 function texto(s) {
   return { content: [{ type: "text", text: s }] };
 }
-function parseData(s) {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());
-  if (!m) throw new Error(`Data inv\xE1lida: '${s}'. Usa YYYY-MM-DD.`);
-  return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])));
+function mensagemErro(e) {
+  const m = e instanceof Error ? e.message : String(e);
+  return m.replace(/[A-Za-z]:\\[^\s'"]+/g, "(caminho)").replace(/(^|[\s'"(])\/(?:[\w.-]+\/)+[\w.-]*/g, "$1(caminho)").split("\n")[0].slice(0, 300);
+}
+var PODEM_SER_NEGATIVOS = /* @__PURE__ */ new Set(["lucro_tributavel"]);
+function numeroNegativo(args, prefixo = "") {
+  if (!args || typeof args !== "object") return null;
+  for (const [k, v] of Object.entries(args)) {
+    if (typeof v === "number" && v < 0 && !PODEM_SER_NEGATIVOS.has(k)) return prefixo + k;
+    if (v && typeof v === "object") {
+      const r = numeroNegativo(v, `${prefixo}${k}.`);
+      if (r) return r;
+    }
+  }
+  return null;
+}
+function comErrosTratados(server) {
+  const original = server.registerTool.bind(server);
+  const envolvido = Object.create(server);
+  envolvido.registerTool = (nome, config2, handler) => original(nome, config2, async (...a) => {
+    try {
+      const negativo = numeroNegativo(a[0]);
+      if (negativo) return texto(`Valor inv\xE1lido em '${negativo}': n\xE3o pode ser negativo.`);
+      return await handler(...a);
+    } catch (e) {
+      return texto(`N\xE3o foi poss\xEDvel concluir: ${mensagemErro(e)}`);
+    }
+  });
+  return envolvido;
 }
 function iso4(d) {
   return d.toISOString().slice(0, 10);
@@ -23466,7 +24013,8 @@ function iso4(d) {
 function listagem(cat) {
   return listarComAmbito(cat).map((i) => `- ${i.nome}${i.ambito ? ` \u2014 ${i.ambito}` : ""}`).join("\n");
 }
-function registerTools(server) {
+function registerTools(servidor) {
+  const server = comErrosTratados(servidor);
   server.registerTool(
     "calc_juros_mora",
     {
@@ -23481,9 +24029,9 @@ function registerTools(server) {
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ capital, data_inicio, data_fim, tipo }) => {
-      const fim = data_fim ? parseData(data_fim) : /* @__PURE__ */ new Date();
       try {
-        const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
+        const fim = parseDataEstrita(data_fim ?? hojeLisboa(), "data_fim");
+        const r = calcularJuros(capital, parseDataEstrita(data_inicio, "data_inicio"), fim, tipo);
         return texto(memoriaJuros(capital, r, tipo) + AVISO);
       } catch (e) {
         return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
@@ -23494,23 +24042,30 @@ function registerTools(server) {
     "calc_prazo",
     {
       title: "Contar prazo legal",
-      description: "Conta um prazo legal em dias \xFAteis (salta fins-de-semana e feriados nacionais de Portugal) ou dias corridos, devolvendo a data-limite. Usa quando h\xE1 um prazo a contar a partir de uma data ('at\xE9 quando tenho para', 'contesta\xE7\xE3o', 'oposi\xE7\xE3o', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline in business/calendar days.",
+      description: "Conta um prazo legal e devolve a data-limite e o termo legal. Tipos: 'judicial' para prazos de processos em tribunal (contesta\xE7\xE3o, oposi\xE7\xE3o \xE0 execu\xE7\xE3o, recurso, resposta \u2014 CPC, art. 138.\xBA: cont\xEDnuo, suspende-se nas f\xE9rias judiciais, termo em dia n\xE3o \xFAtil passa para o dia \xFAtil seguinte; 'urgente' para processos urgentes); 'corridos' (por defeito) para prazos civis e contratuais em dias seguidos (CC, art. 279.\xBA); 'uteis' para prazos em dias \xFAteis (ex.: CPA, art. 87.\xBA). Usa quando h\xE1 um prazo a contar a partir de uma data ('at\xE9 quando tenho para', 'contesta\xE7\xE3o', 'oposi\xE7\xE3o', 'defesa', 'recurso', 'prazo para responder'). EN: count a legal deadline (court, calendar or business days).",
       inputSchema: {
-        inicio: external_exports.string().describe("Data de in\xEDcio (YYYY-MM-DD)"),
-        dias: external_exports.number().int().describe("N\xFAmero de dias do prazo"),
-        tipo: external_exports.enum(["uteis", "corridos"]).default("uteis")
+        inicio: external_exports.string().describe("Data de in\xEDcio (AAAA-MM-DD) \u2014 o dia em que se considera feita a cita\xE7\xE3o/notifica\xE7\xE3o; n\xE3o conta"),
+        dias: external_exports.number().int().describe("N\xFAmero de dias do prazo (0 a 3650)"),
+        tipo: external_exports.enum(["judicial", "corridos", "uteis"]).default("corridos").describe("judicial (CPC 138.\xBA, f\xE9rias judiciais) | corridos (CC 279.\xBA) | uteis (ex.: CPA 87.\xBA)"),
+        urgente: external_exports.boolean().default(false).describe("Processo urgente: o prazo judicial corre nas f\xE9rias")
       },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async ({ inicio, dias, tipo }) => {
-      const r = contarPrazo(parseData(inicio), dias, tipo);
-      return texto(
-        `Prazo de ${dias} dias ${tipo}
+    async ({ inicio, dias, tipo, urgente }) => {
+      try {
+        const r = contarPrazo(parseDataEstrita(inicio, "inicio"), dias, tipo, { urgente });
+        const termoLegal = r.transferido ? `Termo legal: ${iso4(r.dataLegal)}
+` : "";
+        return texto(
+          `Prazo de ${dias} dias (${tipo}${tipo === "judicial" && urgente ? ", processo urgente" : ""})
 In\xEDcio: ${inicio}
-DATA-LIMITE: ${iso4(r.dataLimite)}
+` + termoLegal + `\u23F0 DATA-LIMITE: ${iso4(r.dataLimite)}
 
-${r.nota}`
-      );
+${r.nota}` + AVISO
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel contar o prazo: ${e.message}`);
+      }
     }
   );
   server.registerTool(
@@ -23534,8 +24089,8 @@ ${r.nota}`
           const r3 = calcularCompensacaoPorDatas({
             retribuicaoBase: retribuicao_base,
             diuturnidades,
-            dataAdmissao: parseData(data_admissao),
-            dataCessacao: parseData(data_cessacao),
+            dataAdmissao: parseDataEstrita(data_admissao, "data_admissao"),
+            dataCessacao: parseDataEstrita(data_cessacao, "data_cessacao"),
             modalidade: modalidade === "termo" ? "termo" : "sem-termo"
           });
           return texto(
@@ -23563,39 +24118,44 @@ VALOR BRUTO: ${formatarEuros(r.bruto)}` + (r.tetoAplicado ? "\n(Aplicado o teto 
     "calc_custas_injuncao",
     {
       title: "Taxa de justi\xE7a de injun\xE7\xE3o",
-      description: "Estima a taxa de justi\xE7a de um requerimento de injun\xE7\xE3o (UC 2026 = 102\u20AC). Usa quando o utilizador vai avan\xE7ar com a cobran\xE7a judicial de uma d\xEDvida e quer saber o custo ('quanto custa uma injun\xE7\xE3o', 'taxa de justi\xE7a', 'custas', 'cobrar judicialmente'). EN: court fee for a payment-order (injun\xE7\xE3o).",
+      description: "Estima a taxa de justi\xE7a de um requerimento de injun\xE7\xE3o (UC 2026 = 102\u20AC). A injun\xE7\xE3o serve para d\xEDvidas at\xE9 15.000\u20AC e, entre empresas (transa\xE7\xF5es comerciais), para qualquer valor (DL 62/2013, art. 10.\xBA). Usa quando o utilizador vai avan\xE7ar com a cobran\xE7a judicial de uma d\xEDvida e quer saber o custo ('quanto custa uma injun\xE7\xE3o', 'taxa de justi\xE7a', 'custas', 'cobrar judicialmente'). EN: court fee for a payment-order (injun\xE7\xE3o).",
       inputSchema: { valor: external_exports.number().describe("Valor da d\xEDvida (\u20AC)") },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ valor }) => {
-      const r = custasInjuncao(valor);
-      return texto(
-        `Injun\xE7\xE3o \u2014 valor ${formatarEuros(valor)}
+      try {
+        const r = custasInjuncao(valor);
+        return texto(
+          `Injun\xE7\xE3o \u2014 valor ${formatarEuros(valor)}
 Escal\xE3o: ${r.escalao}
 Taxa de justi\xE7a estimada: ${formatarEuros(r.taxa)}` + AVISO
-      );
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
     "calc_imposto_selo_heranca",
     {
       title: "Imposto do selo em heran\xE7a",
-      description: "Calcula o imposto do selo numa heran\xE7a/transmiss\xE3o gratuita (10%; isento para c\xF4njuge/descendente/ascendente) + 0,8% sobre VPT de im\xF3veis. Usa em partilhas e heran\xE7as quando se quer saber o imposto a pagar ('quanto pago de imposto na heran\xE7a', 'partilha', 'doa\xE7\xE3o', 'herdar'). EN: stamp duty on an inheritance or gift.",
+      description: "Calcula o imposto do selo numa heran\xE7a ou doa\xE7\xE3o (verba 1.2: 10%; isentos c\xF4njuge/unido de facto, descendentes e ascendentes). Na DOA\xC7\xC3O de im\xF3veis acresce 0,8% sobre o VPT (verba 1.1), mesmo para os isentos; na heran\xE7a n\xE3o. Usa em partilhas e heran\xE7as quando se quer saber o imposto a pagar ('quanto pago de imposto na heran\xE7a', 'partilha', 'doa\xE7\xE3o', 'herdar'). EN: stamp duty on an inheritance or gift.",
       inputSchema: {
         valor: external_exports.number().describe("Valor dos bens (\u20AC)"),
         herdeiro: external_exports.enum(["conjuge", "descendente", "ascendente", "outro"]).default("outro"),
         inclui_imovel: external_exports.boolean().default(false),
-        vpt_imovel: external_exports.number().default(0)
+        vpt_imovel: external_exports.number().default(0),
+        doacao: external_exports.boolean().default(false).describe("true para doa\xE7\xE3o (acresce 0,8% sobre o VPT dos im\xF3veis); false para heran\xE7a")
       },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async ({ valor, herdeiro, inclui_imovel, vpt_imovel }) => {
-      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel);
+    async ({ valor, herdeiro, inclui_imovel, vpt_imovel, doacao }) => {
+      const r = impostoSeloHeranca(valor, herdeiro, inclui_imovel, vpt_imovel, doacao);
       return texto(
-        `Imposto do selo \u2014 heran\xE7a (herdeiro: ${herdeiro})
-IS transmiss\xE3o (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
-` + (inclui_imovel ? `IS im\xF3vel (0,8% VPT): ${formatarEuros(r.isImovel)}
-` : "") + `TOTAL: ${formatarEuros(r.total)}` + AVISO
+        `Imposto do selo \u2014 ${doacao ? "doa\xE7\xE3o" : "heran\xE7a"} (benefici\xE1rio: ${herdeiro})
+IS transmiss\xE3o (10%, verba 1.2): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
+` + (inclui_imovel ? doacao ? `IS im\xF3vel (0,8% VPT, verba 1.1): ${formatarEuros(r.isImovel)}
+` : "IS im\xF3vel: n\xE3o se aplica na heran\xE7a (a verba 1.1 s\xF3 abrange a aquisi\xE7\xE3o onerosa ou por doa\xE7\xE3o)\n" : "") + `TOTAL: ${formatarEuros(r.total)}` + AVISO
       );
     }
   );
@@ -23603,7 +24163,7 @@ IS transmiss\xE3o (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
     "calc_imt",
     {
       title: "Calcular IMT (compra de im\xF3vel)",
-      description: "Calcula o IMT 2026 (Continente, imposto na compra de im\xF3vel) incl. IMT Jovem, mais o Imposto do Selo de 0,8%. Usa quando o utilizador vai comprar casa/im\xF3vel e quer saber os impostos da aquisi\xE7\xE3o ('quanto pago de IMT', 'impostos na compra de casa', 'comprar im\xF3vel'). EN: property transfer tax (IMT) on a home purchase.",
+      description: "Calcula o IMT 2026 (Continente, imposto na compra de im\xF3vel) incl. IMT Jovem, mais o Imposto do Selo de 0,8% (no IMT Jovem o Selo tamb\xE9m \xE9 isento at\xE9 330.539 \u20AC e, acima, s\xF3 incide sobre o excedente \u2014 CIS, art. 7.\xBA-A). Usa quando o utilizador vai comprar casa/im\xF3vel e quer saber os impostos da aquisi\xE7\xE3o ('quanto pago de IMT', 'impostos na compra de casa', 'comprar im\xF3vel'). EN: property transfer tax (IMT) on a home purchase.",
       inputSchema: {
         valor: external_exports.number().describe("Maior entre pre\xE7o e VPT (\u20AC)"),
         tipo: external_exports.enum(["hpp", "secundaria"]).default("hpp"),
@@ -23612,22 +24172,27 @@ IS transmiss\xE3o (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ valor, tipo, jovem }) => {
-      const r = calcularIMT(valor, tipo, jovem);
-      return texto(
-        `IMT 2026 (${tipo}${jovem ? " + IMT Jovem" : ""})
+      try {
+        const r = calcularIMT(valor, tipo, jovem);
+        const seloTxt = jovem && tipo === "hpp" ? "Imposto do Selo (IMT Jovem \u2014 CIS, art. 7.\xBA-A)" : "Imposto do Selo (0,8%)";
+        return texto(
+          `IMT 2026 (${tipo}${jovem ? " + IMT Jovem" : ""})
 Valor: ${formatarEuros(valor)}
 Regime: ${r.regime}
 IMT: ${formatarEuros(r.imt)}
-Imposto do Selo (0,8%): ${formatarEuros(r.selo)}
+${seloTxt}: ${formatarEuros(r.selo)}
 TOTAL impostos: ${formatarEuros(r.total)}` + AVISO
-      );
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
     "calc_prescricao",
     {
       title: "Prazo de prescri\xE7\xE3o/caducidade",
-      description: `Calcula a data-limite de prescri\xE7\xE3o/caducidade de um direito ou d\xEDvida. Usa quando o utilizador pergunta 'ainda posso cobrar/reclamar?', 'j\xE1 prescreveu?', 'h\xE1 quanto tempo \xE9 a d\xEDvida', 'caducou?' ou se um prazo legal j\xE1 expirou. Tipos: ${PRESCRICAO_TIPOS.join(", ")}. EN: limitation/time-bar deadline (is the claim still enforceable?).`,
+      description: `Calcula a data-limite de prescri\xE7\xE3o/caducidade de um direito ou d\xEDvida. Usa quando o utilizador pergunta 'ainda posso cobrar/reclamar?', 'j\xE1 prescreveu?', 'h\xE1 quanto tempo \xE9 a d\xEDvida', 'caducou?' ou se um prazo legal j\xE1 expirou. Faturas entre empresas: 'creditos-comerciais' (20 anos, art. 309.\xBA CC); servi\xE7os de profiss\xF5es liberais e vendas a quem n\xE3o \xE9 comerciante: 2 anos presuntivos (art. 317.\xBA CC); rendas, juros e presta\xE7\xF5es peri\xF3dicas: 5 anos (art. 310.\xBA CC). Tipos: ${PRESCRICAO_TIPOS.join(", ")}. EN: limitation/time-bar deadline (is the claim still enforceable?).`,
       inputSchema: {
         inicio: external_exports.string().describe("Data de in\xEDcio da contagem (YYYY-MM-DD)"),
         tipo: external_exports.enum(PRESCRICAO_TIPOS)
@@ -23635,23 +24200,29 @@ TOTAL impostos: ${formatarEuros(r.total)}` + AVISO
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ inicio, tipo }) => {
-      const r = calcularPrescricao(parseData(inicio), tipo);
-      return texto(
-        `Prescri\xE7\xE3o/caducidade \u2014 ${r.descricao}
+      try {
+        const r = calcularPrescricao(parseDataEstrita(inicio, "inicio"), tipo);
+        return texto(
+          `Prescri\xE7\xE3o/caducidade \u2014 ${r.descricao}
 Base: ${r.base}
-Prazo: ${r.prazoTexto}
+Prazo: ${r.prazoTexto}${r.presuntiva ? " (presuntiva)" : ""}
 In\xEDcio: ${inicio}
-DATA-LIMITE: ${iso4(r.limite)}
+\u23F0 DATA-LIMITE: ${iso4(r.limite)}
 
-Nota: a prescri\xE7\xE3o interrompe-se com cita\xE7\xE3o/notifica\xE7\xE3o judicial ou reconhecimento da d\xEDvida (Arts. 323.\xBA/325.\xBA CC).` + AVISO
-      );
+` + (r.aviso ? `${r.aviso}
+
+` : "") + "Nota: a prescri\xE7\xE3o interrompe-se com a cita\xE7\xE3o ou notifica\xE7\xE3o judicial (ex.: injun\xE7\xE3o) ou com o reconhecimento da d\xEDvida (arts. 323.\xBA e 325.\xBA CC); uma carta ou email de cobran\xE7a n\xE3o a interrompe." + AVISO
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
     "calc_irs_simplificado",
     {
       title: "IRS \u2014 rendimento tribut\xE1vel (regime simplificado)",
-      description: "Calcula o rendimento tribut\xE1vel no regime simplificado (Cat. B/ENI), aplicando o coeficiente ao rendimento bruto (n\xE3o calcula o imposto final, pois os escal\xF5es mudam anualmente). Usa para estimativas de IRS de trabalhador independente/recibos verdes ('quanto pago de IRS como independente', 'regime simplificado', 'recibos verdes', 'ENI'). EN: simplified-regime taxable income for the self-employed.",
+      description: "Calcula o rendimento tribut\xE1vel no regime simplificado (Cat. B/ENI), aplicando o coeficiente ao rendimento bruto (n\xE3o calcula o imposto final, pois os escal\xF5es mudam anualmente). Usa para estimativas de IRS de trabalhador independente/recibos verdes ('quanto pago de IRS como independente', 'regime simplificado', 'recibos verdes', 'ENI'). Coeficientes (CIRS, art. 31.\xBA): mercadorias 0,15; atividades da tabela do art. 151.\xBA 0,75; restantes servi\xE7os 0,35; propriedade intelectual 0,95. EN: simplified-regime taxable income for the self-employed.",
       inputSchema: {
         rendimento: external_exports.number().describe("Rendimento bruto anual (\u20AC)"),
         tipo: external_exports.enum([
@@ -23664,14 +24235,18 @@ Nota: a prescri\xE7\xE3o interrompe-se com cita\xE7\xE3o/notifica\xE7\xE3o judic
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ rendimento, tipo }) => {
-      const r = calcularIRSSimplificado(rendimento, tipo);
-      return texto(
-        `IRS simplificado (${tipo})
+      try {
+        const r = calcularIRSSimplificado(rendimento, tipo);
+        return texto(
+          `IRS simplificado (${tipo})
 Rendimento bruto: ${formatarEuros(rendimento)}
-Coeficiente: ${r.coeficiente}
+Coeficiente: ${String(r.coeficiente).replace(".", ",")} (CIRS, art. 31.\xBA, n.\xBA 1)
 RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
 (Acresce aos restantes rendimentos e \xE9 tributado pelos escal\xF5es progressivos de IRS.)` + AVISO
-      );
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
@@ -23694,8 +24269,8 @@ RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
         const r = calcularCreditosCessacao({
           retribuicaoBase: a.retribuicao_base,
           diuturnidades: a.diuturnidades,
-          dataAdmissao: parseData(a.data_admissao),
-          dataCessacao: parseData(a.data_cessacao),
+          dataAdmissao: parseDataEstrita(a.data_admissao, "data_admissao"),
+          dataCessacao: parseDataEstrita(a.data_cessacao, "data_cessacao"),
           feriasVencidasNaoGozadas: a.ferias_vencidas_nao_gozadas,
           subsidioFeriasVencidoEmFalta: a.subsidio_ferias_vencido_em_falta
         });
@@ -24324,7 +24899,10 @@ function registerResources(server) {
     async (uri, variables) => {
       const categoria = String(variables.categoria);
       const nome = String(variables.nome);
-      const txt = ler(categoria, nome) ?? `(n\xE3o encontrado: ${categoria}/${nome})`;
+      const txt = itemValido(categoria, nome) ? ler(categoria, nome) : null;
+      if (txt === null) {
+        throw new Error(`Recurso desconhecido: ${categoria.slice(0, 40)}/${nome.slice(0, 80)}`);
+      }
       return {
         contents: [{ uri: uri.href, mimeType: "text/markdown", text: txt }]
       };
@@ -24353,6 +24931,18 @@ QUANDO USAR (inten\xE7\xE3o \u2192 ferramenta): cliente n\xE3o paga \u2192 playb
 SIN\xD3NIMOS/CAL\xC3O (traduz a linguagem do dia-a-dia para a \xE1rea certa): "recibos verdes" = trabalhador independente (Cat. B do IRS); "renda"/"aluguer" = arrendamento; "rescis\xE3o"/"mandar embora" = cessa\xE7\xE3o/despedimento do contrato de trabalho; "levei uma multa"/"coima" = contraordena\xE7\xE3o; "firma"/"abrir empresa" = constitui\xE7\xE3o de sociedade (societ\xE1rio); "fui \xE0 fal\xEAncia"/"estou insolvente" = insolv\xEAncia (CIRE/PER); "escritura"/"comprar casa" = compra e venda de im\xF3vel (imobili\xE1rio); "testamento"/"partilha" = heran\xE7as; "penhora"/"o tribunal tirou-me" = execu\xE7\xE3o; "processaram-me"/"vou a tribunal" = contencioso.
 
 DISCLAIMER (incluir na 1.\xAA resposta de cada novo tema): "Orienta\xE7\xE3o informativa baseada na legisla\xE7\xE3o portuguesa vigente; para a\xE7\xF5es judiciais ou situa\xE7\xF5es de elevada complexidade, recomendo valida\xE7\xE3o por advogado inscrito na Ordem dos Advogados."`;
+var INSTRUCOES_MCP = `advogado-pt \u2014 assessoria jur\xEDdica de Portugal (PT/EN), para empresas de qualquer forma e setor e para particulares.
+Rigor: nunca inventes artigos nem jurisprud\xEAncia (sem certeza, di-lo e sugere dre.pt / dgsi.pt); valores do ano em ler_referencia "valores-2026"; destaca os prazos com \u23F0; n\xE3o substituis advogado inscrito na OA \u2014 recomenda-o com prazos judiciais a correr, processo penal ou risco elevado.
+Perfil: obter_perfil_empresa antes de aconselhar uma empresa; sem perfil, pergunta s\xF3 o necess\xE1rio e oferece guardar_perfil_empresa; v\xE1rios clientes: listar_perfis / ativar_perfil.
+Inten\xE7\xE3o -> tool:
+- n\xE3o me pagaram: obter_playbook "cliente-nao-paga", calc_juros_mora, calc_custas_injuncao, calc_prescricao
+- prazo a correr: calc_prazo (tipo judicial nos processos em tribunal) e registar_prazo; listar_prazos / concluir_prazo
+- trabalho: calc_compensacao_despedimento, calc_creditos_laborais, calc_salario_liquido, calc_custo_trabalhador
+- impostos: calc_irs_simplificado, calc_irc, calc_iva_operacao; obriga\xE7\xF5es do ano: calendario_obrigacoes (exportar=true gera .ics)
+- im\xF3veis e heran\xE7as: calc_imt, calc_imposto_selo_heranca, calc_legitima
+- custo de uma a\xE7\xE3o: calc_taxa_justica
+- documentos: listar_templates / obter_template; enquadramento legal: listar_areas_juridicas / ler_referencia; passos por situa\xE7\xE3o: listar_playbooks / obter_playbook; listas de verifica\xE7\xE3o: listar_checklists / obter_checklist; n\xE3o sabes onde est\xE1: procurar_conteudo.
+Persona completa, tom e fluxo: prompt "advogado_pt".`;
 
 // src/prompts.ts
 function mensagem(texto2) {
@@ -24423,21 +25013,31 @@ Situa\xE7\xE3o: ${assunto}` : "")
 }
 
 // src/index.ts
+function argumentosOpcionaisNosPrompts(server) {
+  const handlers = server.server._requestHandlers;
+  const original = handlers?.get("prompts/get");
+  if (!handlers || !original) return;
+  handlers.set(
+    "prompts/get",
+    (pedido, extra) => original({ ...pedido, params: { ...pedido.params, arguments: pedido.params?.arguments ?? {} } }, extra)
+  );
+}
 async function main() {
   const server = new McpServer(
     {
       name: "advogado-pt",
-      version: "1.2.0"
+      version: "1.2.1"
     },
     {
-      // Muitos clientes MCP injetam estas instruções como contexto do servidor,
-      // melhorando a ativação e a seleção de ferramentas.
-      instructions: PERSONA
+      // Muitos clientes MCP injetam estas instruções como contexto do servidor (com um limite
+      // de tamanho): regras e mapa intenção -> tool. A persona completa está no prompt advogado_pt.
+      instructions: INSTRUCOES_MCP
     }
   );
   registerTools(server);
   registerResources(server);
   registerPrompts(server);
+  argumentosOpcionaisNosPrompts(server);
   const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error("advogado-pt MCP server ativo (stdio).");

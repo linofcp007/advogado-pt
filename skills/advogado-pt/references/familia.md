@@ -55,5 +55,5 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Convenção antenupcial (nota — outorgada por **notário**, sujeita a registo)
-- Acordo de partilha de bens do casal no divórcio
+- Convenção antenupcial (nota — outorgada por **notário**, sujeita a registo) (a pedido)
+- Acordo de partilha de bens do casal no divórcio (a pedido)

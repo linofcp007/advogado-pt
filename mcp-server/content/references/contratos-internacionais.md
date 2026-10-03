@@ -8,7 +8,7 @@
 - **Roma I** — Regulamento (CE) 593/2008: lei aplicável às **obrigações contratuais**
 - **Roma II** — Regulamento (CE) 864/2007: lei aplicável às obrigações **extracontratuais** (ex.: responsabilidade civil)
 - **Bruxelas I bis** — Regulamento (UE) 1215/2012: **competência judiciária** e reconhecimento/execução de decisões na UE
-- **CISG** — Convenção de Viena 1980: compra e venda **internacional de mercadorias** (Portugal **não** é parte; só se aplica por escolha das partes ou por remissão da lei de um Estado contratante)
+- **CISG** — Convenção de Viena 1980: compra e venda **internacional de mercadorias** (Portugal é parte desde **1/10/2021**: aplica-se automaticamente aos contratos de compra e venda de mercadorias entre partes com estabelecimento em Estados contratantes, salvo exclusão expressa no contrato — art. 6.º CISG)
 - **Convenção de Nova Iorque 1958**: reconhecimento e execução de **sentenças arbitrais** estrangeiras (Portugal é parte)
 
 ## Escolha da Lei Aplicável
@@ -37,7 +37,7 @@
 
 ## B2B Intracomunitário
 - **Reverse charge** de IVA na prestação de serviços B2B na UE (Art. 6.º CIVA / regra geral B2B): o IVA é autoliquidado pelo cliente — ver `references/fiscal.md`
-- Exige **número VIES** válido do cliente (verificar em [ec.europa.eu/taxation_customs/vies](https://ec.europa.eu/taxation_customs/vies)) e menção da isenção/reverse charge na fatura
+- Exige **número VIES** válido do cliente (verificar em [ec.europa.eu/taxation_customs/vies](https://ec.europa.eu/taxation_customs/vies)) e, na fatura, a menção **"IVA - autoliquidação"** (CIVA, art. 36.º, n.º 13) — regras de localização e códigos em `references/iva-internacional.md`
 - Declaração recapitulativa (Mod. recapitulativa) das operações intracomunitárias
 
 ## Serviços Digitais a Clientes Fora da UE/EUA — considerações práticas
@@ -59,6 +59,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Cláusula de lei aplicável e resolução de litígios (PT/EN) — variantes foro e arbitragem
-- MSA internacional (Master Services Agreement) — esqueleto (partes, serviços/SOW, preço, IP, confidencialidade, responsabilidade, lei e litígios, dados)
-- Cláusula fiscal cross-border (retenções, CDT, gross-up)
+- Cláusula de lei aplicável e resolução de litígios (PT/EN) — variantes foro e arbitragem (a pedido)
+- MSA internacional (Master Services Agreement) — esqueleto (partes, serviços/SOW, preço, IP, confidencialidade, responsabilidade, lei e litígios, dados) (a pedido)
+- Cláusula fiscal cross-border (retenções, CDT, gross-up) (a pedido)

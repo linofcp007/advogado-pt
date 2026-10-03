@@ -22,7 +22,7 @@ O pagamento será efetuado em {{Nº_PRESTACOES}} prestações mensais de {{VALOR
 ## Cláusula 4.ª (Vencimento antecipado)
 A falta de pagamento de qualquer prestação na data devida implica o **vencimento imediato de toda a dívida remanescente**, ficando o Credor habilitado a exigir a totalidade em falta, acrescida de juros de mora à taxa legal.
 
-## Cláusula 5.ª (Título executivo)
+## Cláusula 5.ª (Efeitos do reconhecimento)
 O presente documento constitui reconhecimento de dívida para todos os efeitos legais, designadamente para interrupção da prescrição (Art. 325.º do Código Civil). {{AUTENTICACAO: recomendado — Sendo autenticado por termo lavrado por notário, advogado ou solicitador, constitui título executivo nos termos do Art. 703.º, n.º 1, al. b), do Código de Processo Civil.}}
 
 {{LOCAL}}, {{DATA}}

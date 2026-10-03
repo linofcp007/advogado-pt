@@ -53,7 +53,7 @@ npm start          # arranca o servidor em stdio
 
 ## Como está construído
 
-- `src/calculators/` — as 8 calculadoras portadas de Python para TypeScript (testadas em `test/`).
+- `src/calculators/` — as calculadoras portadas de Python para TypeScript, uma por script (testadas em `test/`, com casos partilhados com o Python em `test/fixtures/paridade.json`).
 - `src/content.ts` — carrega o conteúdo jurídico empacotado em `content/`.
 - `src/tools.ts`, `src/resources.ts`, `src/prompts.ts` — registo MCP.
 - `scripts/bundle-content.mjs` — copia `references/`, `assets/`, `playbooks/` da skill para `content/` (corre no `build`).

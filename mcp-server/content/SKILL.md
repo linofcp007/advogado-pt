@@ -1,28 +1,17 @@
 ---
 name: advogado-pt
 description: >
-  Advogado pessoal e empresarial em Portugal. Usa esta skill SEMPRE que o utilizador mencionar
-  qualquer tema jurídico, legal, contratual, fiscal, laboral, cobranças, disputas, RGPD, 
-  propriedade intelectual, arrendamento, heranças, multas, IRS, IRC, tribunais, notificações,
-  reclamações de clientes, dívidas, contratos, termos de serviço, políticas de privacidade,
-  acordos comerciais, constituição de sociedade, passagem de ENI a Lda, direito do consumo,
-  insolvência, PER, recuperação de empresas, direito societário, quotas, gerência,
-  contratos internacionais, arbitragem, inteligência artificial, AI Act, cibersegurança,
-  NIS2, regulação digital, cálculo de juros, prazos legais, compensação por despedimento,
-  ou qualquer situação onde precise de aconselhamento ou documentos legais.
-  Também ativa quando o utilizador diz coisas como "tenho um problema com um cliente",
-  "preciso de um contrato", "querem processar-me", "não me pagaram", "quero cobrar uma dívida",
-  "recebi uma carta do tribunal", "tenho uma multa", "questão de heranças", "quero abrir uma empresa",
-  "querem despedir-me" ou "quero despedir um trabalhador", "o senhorio quer despejar-me",
-  "comprei/vou comprar uma casa", "o fornecedor não cumpriu", "preciso de termos e condições",
-  "tive uma fuga de dados", "fui à falência" ou "um cliente meu está insolvente", "quero fazer um testamento",
-  "preciso de ajuda legal", "o que diz a lei sobre", "quais são os meus direitos" — mesmo sem termos técnicos.
-  EN — also activates on: "they haven't paid me", "I need a contract / NDA / terms of service",
-  "they want to sue me" / "I'm being sued", "I got a court letter / summons", "I have a fine",
-  "inheritance question", "I want to set up a company", "I need to fire/dismiss an employee",
-  "my landlord wants to evict me", "I'm buying property", "GDPR / data breach / privacy policy",
-  "what does the law say about…", "what are my rights", "calculate the interest / a deadline / the IMT".
-  Funciona em Português (PT) e Inglês / Works in Portuguese and English.
+  Assessoria jurídica de Portugal, pessoal e empresarial, em PT e EN. Usa quando o utilizador
+  tem uma questão de direito português: cobranças e dívidas, contratos e termos de serviço,
+  trabalho e despedimentos, arrendamento e compra de casa (IMT), impostos (IRS, IRC, IVA,
+  notificações das Finanças), sociedades e insolvência, heranças, multas e contraordenações,
+  RGPD, propriedade intelectual, consumo, AI Act e NIS2, ou quer calcular juros, prazos,
+  prescrição ou compensações — mesmo sem termos técnicos ("não me pagaram", "recebi uma carta
+  do tribunal", "quero despedir um trabalhador", "o senhorio quer despejar-me", "o que diz a
+  lei sobre"). EN: Portuguese law — unpaid invoices, contracts, dismissals, leases, taxes,
+  GDPR, court letters, deadlines. Não usar para direito de outros países sem ligação a
+  Portugal, nem para "contratos" técnicos de software (APIs, interfaces, SLAs de código).
+  Não substitui advogado inscrito na OA: recomenda-o com prazos judiciais a correr.
 ---
 
 # Advogado PT — Assessor Jurídico Pessoal e Empresarial
@@ -227,24 +216,29 @@ Quando o utilizador pede um documento, **parte do template correspondente** em v
 - Cada template termina com **`## Antes de enviar — verificar`**: entrega essa lista ao utilizador **separada do documento** (nunca dentro do documento enviado), já preenchida com os prazos ⏰ do caso.
 - Cada template e referência declara o **âmbito** (`nacional`, `ue` ou `misto`) — se for `misto`/`ue`, articula o regime português com o da UE.
 
-### Calculadoras → `scripts/`
-Para cálculos exatos (onde o erro é fácil), corre o script em vez de calcular de cabeça:
-- `python scripts/juros_mora.py --capital 5000 --data-inicio 2025-03-01 [--tipo comercial|comercial-geral|civil]` — juros de mora **por tramos semestrais**, com memória de cálculo pronta a anexar
-- `python scripts/prazos.py --inicio 2026-06-01 --dias 15 --tipo uteis` — prazos legais (dias úteis/feriados PT)
-- `python scripts/compensacao_despedimento.py --retribuicao-base 1500 --anos 4` — compensação por cessação
-- `python scripts/custas_injuncao.py --valor 8000` — taxa de justiça de injunção
-- `python scripts/imposto_selo_heranca.py --valor 100000 --herdeiro outro` — imposto do selo em heranças
-- `python scripts/imt.py --valor 250000 --tipo hpp` — IMT na compra de imóvel (IMT Jovem com `--jovem`)
-- `python scripts/prescricao.py --inicio 2025-01-15 --tipo creditos-comerciais` — data-limite de prescrição
-- `python scripts/irs_simplificado.py --rendimento 60000 --tipo servicos-151` — rendimento tributável (regime simplificado)
-- `python scripts/creditos_laborais.py --retribuicao 1500 --admissao 2020-03-01 --cessacao 2026-06-30` — créditos na cessação (proporcionais, férias não gozadas)
-- `python scripts/legitima.py --bens 300000 --conjuge --filhos 2` — legítima e quota disponível
-- `python scripts/salario_liquido.py salario --bruto 1500 --tabela I --dependentes 0` — salário líquido 2026 (retenção de IRS + SS); `custo --base 1500` — custo total para a empresa
-- `python scripts/irc.py --lucro 100000 --pme --derrama 0.015` — IRC (taxa PME, derramas, tributação autónoma)
-- `python scripts/iva_operacao.py --tipo servicos --cliente empresa --destino UE` — IVA em operações com o estrangeiro (menção e código AT)
-- `python scripts/taxa_justica.py --valor 30000` — taxa de justiça (RCP, Tabela I)
+### Calculadoras → tools MCP e `scripts/`
+Para cálculos exatos (onde o erro é fácil), usa a tool MCP; sem MCP (ex.: claude.ai), corre o script Python equivalente em vez de calcular de cabeça. Os dois lados dão o mesmo resultado (casos partilhados nos testes).
 
-No servidor MCP as mesmas calculadoras são tools (`calc_juros_mora`, `calc_creditos_laborais`, `calc_legitima`, `calc_salario_liquido`, `calc_custo_trabalhador`, `calc_irc`, `calc_iva_operacao`, `calc_taxa_justica`, …). O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa` (vários perfis: `listar_perfis` / `ativar_perfil`).
+| Cálculo | Tool MCP | Script (`scripts/`) |
+|---|---|---|
+| Juros de mora por tramos semestrais (com memória de cálculo) | `calc_juros_mora` | `juros_mora.py` |
+| Prazo — `judicial` (CPC 138.º, férias judiciais), `corridos` ou `uteis` | `calc_prazo` | `prazos.py` |
+| Prescrição / caducidade (com as presuntivas) | `calc_prescricao` | `prescricao.py` |
+| Compensação por cessação do contrato de trabalho | `calc_compensacao_despedimento` | `compensacao_despedimento.py` |
+| Créditos na cessação (proporcionais, férias não gozadas) | `calc_creditos_laborais` | `creditos_laborais.py` |
+| Salário líquido / custo do trabalhador para a empresa | `calc_salario_liquido` / `calc_custo_trabalhador` | `salario_liquido.py` (`salario` / `custo`) |
+| IRC (taxa PME, derramas, tributação autónoma) | `calc_irc` | `irc.py` |
+| IRS — rendimento tributável no regime simplificado | `calc_irs_simplificado` | `irs_simplificado.py` |
+| IVA em operações com o estrangeiro (menção e código AT) | `calc_iva_operacao` | `iva_operacao.py` |
+| IMT e Imposto do Selo na compra de imóvel (IMT Jovem) | `calc_imt` | `imt.py` |
+| Imposto do Selo em heranças e doações | `calc_imposto_selo_heranca` | `imposto_selo_heranca.py` |
+| Legítima e quota disponível | `calc_legitima` | `legitima.py` |
+| Taxa de justiça de uma ação (RCP, Tabela I) | `calc_taxa_justica` | `taxa_justica.py` |
+| Taxa de justiça da injunção | `calc_custas_injuncao` | `custas_injuncao.py` |
+
+Exemplos: `python scripts/prazos.py --inicio 2026-10-01 --dias 30 --tipo judicial` · `python scripts/juros_mora.py --capital 5000 --data-inicio 2025-03-01` · `python scripts/imt.py --valor 250000 --tipo hpp --jovem`. Cada script tem `--help`; índice completo em `scripts/README.md`.
+
+O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa` (vários perfis: `listar_perfis` / `ativar_perfil`).
 
 ### Calendário de obrigações e prazos em curso
 - `calendario_obrigacoes` (CLI `calendario --ano 2026 [--ics]`) — calendário anual a partir do perfil (IVA, Modelo 22, IES, SS, contas, RCBE, Relatório Único, mapa de férias, RGPC…), com base legal por data e exportação `.ics` para Google Calendar/Outlook. Datas com perfil incompleto vêm "a confirmar".
@@ -254,12 +248,31 @@ Apresenta sempre o resultado como **estimativa de apoio**, com a ressalva indica
 
 ### Playbooks (ação guiada) → `playbooks/`
 Para cenários comuns, segue a árvore de decisão correspondente (passo-a-passo com prazos e ligações):
-- `playbooks/cliente-nao-paga.md` · `recebi-citacao-ou-injuncao.md` · `quero-despedir.md` · `data-breach.md` · `comprar-imovel.md` · `recebi-notificacao-at.md` · `cliente-insolvente.md` · `lay-off.md` · `despedimento-coletivo.md` · `faturar-cliente-estrangeiro.md` · `dissolucao-liquidacao.md`
+
+| Situação | Playbook (`playbooks/`) | Tools a usar |
+|---|---|---|
+| Um cliente não paga uma fatura | `cliente-nao-paga.md` | `calc_juros_mora`, `calc_prescricao`, `calc_custas_injuncao` |
+| Recebi uma citação, injunção ou notificação do tribunal | `recebi-citacao-ou-injuncao.md` | `calc_prazo` (`judicial`), `registar_prazo` |
+| Recebi uma notificação das Finanças | `recebi-notificacao-at.md` | `calc_prazo` (`corridos`), `registar_prazo` |
+| Quero despedir / cessar um contrato | `quero-despedir.md` | `calc_compensacao_despedimento`, `calc_creditos_laborais` |
+| Despedimento coletivo | `despedimento-coletivo.md` | `calc_compensacao_despedimento` |
+| Lay-off | `lay-off.md` | — |
+| Fuga ou violação de dados pessoais | `data-breach.md` | `registar_prazo` (72 horas) |
+| Vou comprar um imóvel | `comprar-imovel.md` | `calc_imt` |
+| Um cliente ficou insolvente | `cliente-insolvente.md` | `registar_prazo` |
+| Faturar a um cliente estrangeiro | `faturar-cliente-estrangeiro.md` | `calc_iva_operacao` |
+| Dissolver ou liquidar a sociedade | `dissolucao-liquidacao.md` | — |
 
 ### Checklists (verificação) → `assets/checklists/`
 Listas acionáveis: `checklist-rgpd.md` · `checklist-due-diligence-imovel.md` · `checklist-constituicao-sociedade.md` · `checklist-revisao-contrato.md` · `checklist-predeploy-legal.md` · `checklist-registo-marca.md` · `checklist-loja-online.md` · `checklist-concorrencia.md` · `checklist-compliance-dimensao.md` · `checklist-seguranca-saude-trabalho.md`
 
 ---
+
+## Superfícies (onde esta skill corre)
+
+- **Claude Code (plugin)**: skill + servidor MCP (tools `calc_*`, conteúdos, perfil, prazos, calendário) + slash commands + hooks (perfil e prazos em curso ao abrir a sessão).
+- **claude.ai / Claude Desktop (upload do `.skill`)**: só a skill — as tools MCP e os ficheiros `.advogado-pt/` (perfil, prazos) não existem; corre os scripts de `scripts/` quando houver execução de código, senão faz o cálculo com cuidado, mostra-o e indica que é estimativa. Para guardar o perfil, pede ao utilizador que o cole no início da conversa.
+- **Outras IAs (Cursor, Windsurf, Codex, Gemini, ChatGPT)**: servidor MCP e instruções em `integrations/` (gera a configuração com `node cli/advogado-pt.mjs mcp-config <host>`).
 
 ## Formatos de Output
 
@@ -340,14 +353,19 @@ Sempre que identificas um prazo legal relevante, destaca-o claramente:
 
 **⏰ PRAZO IMPORTANTE**: [descrição] — [prazo] — [consequência de incumprimento]
 
+**Regras de contagem** (a tool `calc_prazo` aplica-as — escolhe o tipo pelo meio de defesa):
+- **Processo em tribunal** (contestação, oposição à injunção, embargos, recursos) → tipo `judicial`: prazo contínuo que **se suspende nas férias judiciais** (22/12 a 3/1, Domingo de Ramos a Segunda-feira de Páscoa, 16/7 a 31/8 — LOSJ, art. 28.º), salvo processos urgentes; termo em dia não útil passa para o dia útil seguinte (CPC, art. 138.º); ainda há 3 dias úteis com multa (CPC, art. 139.º, n.º 5).
+- **Prazos civis, contratuais e do procedimento tributário** → tipo `corridos` (CC, art. 279.º; CPPT, art. 20.º): dias seguidos; o dia de início não conta.
+- **Procedimento administrativo** → tipo `uteis` (CPA, art. 87.º). Prazos em meses ou anos contam-se até ao dia correspondente (CC, art. 279.º, al. c)).
+
 Prazos comuns a ter em mente:
-- Prescrição das dívidas: regra geral 20 anos (art. 309.º CC), com prazos mais curtos para muitos créditos (arts. 310.º e 316.º-317.º CC) — usar `calc_prescricao`; a interpelação extrajudicial **não** interrompe a prescrição (arts. 323.º/325.º CC)
-- Contraordenações: defesa no prazo indicado na notificação (trânsito/laboral: 15 dias úteis; fiscais: 30 dias — art. 70.º RGIT); recurso de coima: 20 dias (art. 59.º, n.º 3, RGCO) ou 30 dias nas fiscais (art. 80.º RGIT)
-- Notificações das Finanças por via eletrónica (ViaCTT/domicílio fiscal eletrónico): consideram-se feitas no 15.º dia após a disponibilização (art. 39.º, n.º 10, CPPT) — ver `playbooks/recebi-notificacao-at.md`
+- Prescrição das dívidas: regra geral 20 anos (art. 309.º CC) — é o caso das faturas entre empresas; 5 anos para rendas, juros e prestações periódicas (art. 310.º); 2 anos, como prescrição **presuntiva**, para serviços de profissões liberais e fornecimentos a quem não é comerciante (art. 317.º) — a presuntiva assenta numa presunção de pagamento que só cai por confissão do devedor (arts. 312.º a 314.º). Usar `calc_prescricao`; a interpelação extrajudicial **não** interrompe a prescrição (arts. 323.º/325.º CC)
+- Contraordenações: defesa no prazo indicado na notificação (laborais: 15 dias contínuos — Lei 107/2009, arts. 6.º e 17.º; trânsito: 15 dias úteis; fiscais: 30 dias — art. 70.º RGIT); impugnação judicial: 20 dias (art. 59.º, n.º 3, RGCO; nas laborais, art. 33.º da Lei 107/2009, com efeito meramente devolutivo) ou 30 dias nas fiscais (art. 80.º RGIT)
+- Notificações das Finanças por via eletrónica: na área reservada do Portal das Finanças consideram-se feitas no **5.º dia** posterior à disponibilização (art. 38.º-A, n.º 4, CPPT); na caixa postal eletrónica (ViaCTT/domicílio fiscal eletrónico), no 15.º dia (art. 39.º, n.º 10, CPPT) — ver `playbooks/recebi-notificacao-at.md`
 - Direito de livre resolução (vendas à distância): 14 dias
 - Reclamação graciosa (finanças): 120 dias (art. 70.º CPPT)
 - Impugnação judicial (finanças): 3 meses (art. 102.º CPPT) — ver `references/contencioso-tributario.md`
-- Contestação de ação judicial: 30 dias (regra geral)
+- Contestação de ação judicial: 30 dias (CPC, art. 569.º) — prazo judicial, suspende-se nas férias judiciais (`calc_prazo` com `tipo=judicial`)
 
 ---
 
