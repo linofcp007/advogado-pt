@@ -288,7 +288,7 @@
   - _Verify: npm --prefix mcp-server test_
   - _Size: S_
   - _Depends: 19, 22, 25, 27, 31, 33, 37_
-- [ ] 40. [shared] Suites completas, smoke, validador oficial do plugin, `npm audit`, desempenho do hook e scan local de segurança
+- [x] 40. [shared] Suites completas, smoke, validador oficial do plugin, `npm audit`, desempenho do hook e scan local de segurança
   - _Requirements: NFR-3, NFR-4, SC-004, SC-005_
   - _Makes green: T-251_
   - _Verify: python skills/advogado-pt/scripts/test_scripts.py_

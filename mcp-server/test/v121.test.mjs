@@ -498,7 +498,7 @@ const EXTERNOS = process.env.ADVOGADO_PT_TESTES_EXTERNOS === "1";
 const SALTAR_EXTERNO = EXTERNOS ? false : "verificação externa: correr com ADVOGADO_PT_TESTES_EXTERNOS=1";
 
 test("T-238 npm audit (dependências de produção) sem vulnerabilidades altas", { skip: SALTAR_EXTERNO }, () => {
-  const out = spawnSync("npm", ["--prefix", r("mcp-server"), "audit", "--omit=dev", "--audit-level=high"], {
+  const out = spawnSync(`npm --prefix "${r("mcp-server")}" audit --omit=dev --audit-level=high`, {
     encoding: "utf8",
     shell: true,
   });
@@ -506,7 +506,7 @@ test("T-238 npm audit (dependências de produção) sem vulnerabilidades altas",
 });
 
 test("T-251 claude plugin validate passa no repositório", { skip: SALTAR_EXTERNO }, () => {
-  const out = spawnSync("claude", ["plugin", "validate", `"${repo}"`], { encoding: "utf8", shell: true });
+  const out = spawnSync(`claude plugin validate "${repo}"`, { encoding: "utf8", shell: true });
   assert.equal(out.status, 0, out.stdout + out.stderr);
 });
 

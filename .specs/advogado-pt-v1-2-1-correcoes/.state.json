@@ -817,9 +817,27 @@
       ],
       "task": "[shared] Bump 1.2.1 (6 sítios + `package-lock.json`), CHANGELOG com a lista dos achados corrigidos, bundle e conteúdo regenerados, `.skill`, tags `v1.1.0`, `v1.2.0` e `v1.2.1`",
       "verify": "npm --prefix mcp-server test"
+    },
+    "40": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Python 47/47 OK. npm test 153/155 (2 externos saltados por defeito) + SMOKE OK; com ADVOGADO_PT_TESTES_EXTERNOS=1, T-238 (npm audit --omit=dev: 0 vulnerabilidades) e T-251 (claude plugin validate: passed; aviso informativo sobre o CLAUDE.md de manutenção na raiz) verdes. Hook SessionStart p50 3,6 ms, máx. 27 ms (500 prazos). dev-guardian: gitleaks 0 segredos (16 commits + working tree); Bandit 0 achados; Semgrep não correu em local_only (sem regras locais) — cobertura parcial do JS/TS.",
+      "at": "2026-10-03T22:11:39.864Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Python 47/47 OK. npm test 153/155 (2 externos saltados por defeito) + SMOKE OK; com ADVOGADO_PT_TESTES_EXTERNOS=1, T-238 (npm audit --omit=dev: 0 vulnerabilidades) e T-251 (claude plugin validate: passed; aviso informativo sobre o CLAUDE.md de manutenção na raiz) verdes. Hook SessionStart p50 3,6 ms, máx. 27 ms (500 prazos). dev-guardian: gitleaks 0 segredos (16 commits + working tree); Bandit 0 achados; Semgrep não correu em local_only (sem regras locais) — cobertura parcial do JS/TS.",
+          "at": "2026-10-03T22:11:39.864Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Suites completas, smoke, validador oficial do plugin, `npm audit`, desempenho do hook e scan local de segurança",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py"
     }
   },
-  "lastTickAt": "2026-10-03T22:10:31.329Z",
+  "lastTickAt": "2026-10-03T22:11:39.864Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -859,6 +877,7 @@
     "36": "2026-10-03T22:05:42.183Z",
     "37": "2026-10-03T22:07:27.584Z",
     "38": "2026-10-03T22:08:56.155Z",
-    "39": "2026-10-03T22:10:31.329Z"
+    "39": "2026-10-03T22:10:31.329Z",
+    "40": "2026-10-03T22:11:39.864Z"
   }
 }
