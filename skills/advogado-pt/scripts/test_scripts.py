@@ -24,7 +24,11 @@ from juros_mora import calcular_juros, memoria_juros
 from creditos_laborais import calcular_creditos
 from legitima import calcular_legitima
 from imt import calcular_imt
-from compensacao_despedimento import calcular_compensacao
+from compensacao_despedimento import calcular_compensacao, calcular_compensacao_por_datas
+from salario_liquido import calcular_salario_liquido, calcular_custo_trabalhador
+from irc import calcular_irc
+from taxa_justica import calcular_taxa_justica
+from iva_operacao import decidir_iva
 from prescricao import calcular_prazo, add_anos, add_meses
 from irs_simplificado import calcular_rendimento_tributavel
 
@@ -219,13 +223,104 @@ class TestIMT(unittest.TestCase):
 
 
 class TestCompensacao(unittest.TestCase):
-    def test_sem_termo_minimo(self):
-        # 1500 * 14/30 * 4 = 2800 < mínimo 3 meses (4500) -> aplica 4500.
+    def test_sem_termo_sem_minimo(self):
+        # 1500 / 30 * 14 * 4 = 2800 — o art. 366.º em vigor não tem mínimo
+        # (corrigido na v1.2).
         dias_ano, bruto, minimo, base = calcular_compensacao(
             1500, 0, 4, "sem-termo")
         self.assertEqual(dias_ano, 14)
-        self.assertTrue(minimo)
-        self.assertAlmostEqual(bruto, 4500.0, places=2)
+        self.assertFalse(minimo)
+        self.assertAlmostEqual(bruto, 2800.0, places=2)
+
+
+class TestCompensacaoPorDatas(unittest.TestCase):
+    """T136 — mesmos casos do simulador da ACT que T-135 (TS)."""
+
+    def c(self, rb, adm, ces):
+        return calcular_compensacao_por_datas(
+            rb, datetime.date.fromisoformat(adm),
+            datetime.date.fromisoformat(ces), "sem-termo", rmmg=920)
+
+    def test_T136_casos_act(self):
+        for rb, adm, ces, esperado in [
+                (1500, "2015-05-01", "2024-04-30", 5500.00),
+                (1500, "2010-01-01", "2025-12-31", 12783.33),
+                (1500, "2011-10-31", "2013-01-31", 4500.00),
+                (1500, "2025-01-01", "2025-03-31", 175.00),
+                (2000, "2000-12-01", "2025-12-31", 24000.00),
+                (2000, "1995-01-01", "2025-12-31", 35666.67),
+                (25000, "2014-01-01", "2025-12-31", 91591.11),
+                (25000, "2005-11-01", "2025-12-31", 220800.00),
+                (1500, "2025-01-01", "2025-03-15", 145.83)]:
+            self.assertAlmostEqual(self.c(rb, adm, ces)["total"], esperado,
+                                   places=2, msg=f"{adm}..{ces}")
+
+    def test_T136_extincao_posto_14_dias(self):
+        dias_ano, bruto, _, _ = calcular_compensacao(
+            1500, 0, 4, "extincao-posto")
+        self.assertEqual(dias_ano, 14)
+        self.assertAlmostEqual(bruto, 2800.0, places=2)
+
+
+class TestSalario(unittest.TestCase):
+    """T131 — salário líquido e custo do trabalhador (mesmos casos que TS)."""
+
+    def test_T131_salario(self):
+        a = calcular_salario_liquido(1500, "I", 0)
+        self.assertAlmostEqual(a["retencao_irs"], 168.17, places=2)
+        self.assertAlmostEqual(a["seguranca_social"], 165.00, places=2)
+        self.assertAlmostEqual(a["liquido"], 1166.83, places=2)
+        self.assertAlmostEqual(
+            calcular_salario_liquido(1000, "I", 0)["retencao_irs"], 36.00, places=2)
+        self.assertAlmostEqual(
+            calcular_salario_liquido(900, "I", 0)["retencao_irs"], 0, places=2)
+        self.assertAlmostEqual(
+            calcular_salario_liquido(2000, "III", 2)["retencao_irs"], 88.35, places=2)
+        self.assertAlmostEqual(
+            calcular_salario_liquido(2000, "II", 3)["retencao_irs"], 178.47, places=2)
+        n = calcular_salario_liquido(1500, "I", 0, subsidio_refeicao_dia=8,
+                                     dias_refeicao=22)
+        self.assertAlmostEqual(n["liquido"], 1328.54, places=2)
+
+    def test_T131_custo(self):
+        c = calcular_custo_trabalhador(1500, subsidio_refeicao_dia=6,
+                                       taxa_seguro_at=0.01)
+        self.assertAlmostEqual(c["total"], 27649.50, places=2)
+        self.assertAlmostEqual(c["mensal_medio"], 2304.125, places=2)
+
+
+class TestIRCIVATaxa(unittest.TestCase):
+    """T132 — IRC, taxa de justiça e decisor de IVA (mesmos casos que TS)."""
+
+    def test_T132_irc(self):
+        p = calcular_irc(100000, True, 0.015, despesas_representacao=2000,
+                         viaturas=[{"custo_aquisicao": 30000,
+                                    "tipo": "combustao", "encargos": 5000}])
+        self.assertAlmostEqual(p["total"], 19100, places=2)
+        self.assertAlmostEqual(
+            calcular_irc(2000000, False, 0.015)["total"], 425000, places=2)
+        self.assertAlmostEqual(
+            calcular_irc(40e6, False, 0)["derrama_estadual"], 2005000, places=2)
+        q = calcular_irc(100000, True, 0.015, prejuizos_dedutiveis=80000)
+        self.assertAlmostEqual(q["irc"], 5250, places=2)
+        z = calcular_irc(-50000, True, 0.015, despesas_representacao=1000)
+        self.assertAlmostEqual(z["tributacao_autonoma"], 200, places=2)
+
+    def test_T132_taxa_justica(self):
+        self.assertAlmostEqual(calcular_taxa_justica(1500)["total_euros"], 102, places=2)
+        self.assertAlmostEqual(calcular_taxa_justica(30000)["total_euros"], 510, places=2)
+        self.assertEqual(calcular_taxa_justica(300000)["total_uc"], 19)
+        self.assertEqual(calcular_taxa_justica(310000)["total_uc"], 22)
+
+    def test_T132_iva(self):
+        self.assertEqual(decidir_iva("servicos", "empresa", "UE")["codigo"], "M40")
+        self.assertEqual(
+            decidir_iva("bens", "empresa", "UE", nif_vies=True)["codigo"], "M16")
+        self.assertIsNone(
+            decidir_iva("bens", "empresa", "UE", nif_vies=False)["codigo"])
+        self.assertEqual(decidir_iva("bens", "empresa", "fora-UE")["codigo"], "M05")
+        self.assertIn("OSS", " ".join(decidir_iva(
+            "bens", "consumidor", "UE", vendas_distancia_ue=15000)["declaracoes"]))
 
 
 class TestPrescricao(unittest.TestCase):

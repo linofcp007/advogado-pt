@@ -67,6 +67,14 @@ def calcular_compensacao(retribuicao_base, diuturnidades, anos, modalidade):
     return dias_ano, bruto, minimo_aplicado, base
 
 
+
+def calcular_compensacao_por_datas(retribuicao_base, data_admissao, data_cessacao,
+                                   modalidade="sem-termo", diuturnidades=0,
+                                   rmmg=920):
+    """Compensação por períodos de antiguidade (stub — Phase 4; tarefa 30)."""
+    raise NotImplementedError
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Calcula a compensação por cessação de contrato (Art. 366.º "

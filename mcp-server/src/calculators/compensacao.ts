@@ -55,3 +55,8 @@ export function calcularCompensacao(
 
   return { diasAno, bruto, minimoAplicado };
 }
+
+// --- v1.2 (stub — Phase 4; tarefa 30) ---
+export interface ParamsCompensacaoDatas { retribuicaoBase: number; diuturnidades?: number; dataAdmissao: Date; dataCessacao: Date; modalidade: "sem-termo" | "termo"; rmmg?: number }
+export interface ResultadoCompensacaoDatas { total: number; regime: "A" | "B" | "C" | "termo"; tetoAplicado: boolean; minimoAplicado: boolean; periodos: Array<{ de: string; ate: string; dias: number; valor: number }> }
+export function calcularCompensacaoPorDatas(_p: ParamsCompensacaoDatas): ResultadoCompensacaoDatas { throw new Error("não implementado"); }

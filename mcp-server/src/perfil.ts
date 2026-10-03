@@ -48,6 +48,8 @@ export interface Perfil {
 }
 
 export interface OpcoesPerfil {
+  /** Perfil nomeado (`.advogado-pt/perfis/<nome>.md`); omitido = perfil ativo ou o por defeito. */
+  perfil?: string;
   /** Diretório do projeto (default: CLAUDE_PROJECT_DIR ou cwd). */
   projeto?: string;
   /** Diretório "home" do perfil geral (default: ADVOGADO_PT_HOME ou homedir()). */
@@ -175,3 +177,7 @@ export function textoPerguntasPerfil(): string {
     "Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador.",
   ].join("\n");
 }
+
+// --- v1.2: vários perfis (stubs — Phase 4; tarefa 5) ---
+export function listarPerfis(_opts: OpcoesPerfil = {}): Array<{ nome: string; origem: "projeto" | "geral"; ativo: boolean }> { throw new Error("não implementado"); }
+export function ativarPerfil(_nome: string, _destino: "projeto" | "geral", _opts: OpcoesPerfil = {}): void { throw new Error("não implementado"); }

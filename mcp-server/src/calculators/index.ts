@@ -25,3 +25,8 @@ export {
 export { calcularIRSSimplificado } from "./irs.js";
 export { calcularCreditosCessacao } from "./creditos.js";
 export { calcularLegitima } from "./legitima.js";
+export { calcularCompensacaoPorDatas } from "./compensacao.js";
+export { calcularSalarioLiquido, calcularCustoTrabalhador } from "./salario.js";
+export { calcularIRC } from "./irc.js";
+export { calcularTaxaJustica } from "./taxa-justica.js";
+export { decidirIVA } from "./iva.js";
