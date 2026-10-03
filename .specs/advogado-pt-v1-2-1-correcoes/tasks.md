@@ -294,7 +294,7 @@
   - _Verify: python skills/advogado-pt/scripts/test_scripts.py_
   - _Size: S_
   - _Depends: 39_
-- [ ] 41. [shared] Revisão final contra os cinco relatórios de 3/10/2026 (cada achado corrigido ou "(a confirmar)" com fonte) e quickstart no que for automatizável
+- [x] 41. [shared] Revisão final contra os cinco relatórios de 3/10/2026 (cada achado corrigido ou "(a confirmar)" com fonte) e quickstart no que for automatizável
   - _Requirements: SC-001, SC-002, SC-003_
   - _Verify: npm --prefix mcp-server test_
   - _Size: S_

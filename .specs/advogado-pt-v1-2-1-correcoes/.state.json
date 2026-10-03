@@ -835,9 +835,27 @@
       ],
       "task": "[shared] Suites completas, smoke, validador oficial do plugin, `npm audit`, desempenho do hook e scan local de segurança",
       "verify": "python skills/advogado-pt/scripts/test_scripts.py"
+    },
+    "41": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "154/156 (2 externos opcionais saltados) + SMOKE OK; Python 49/49. Revisão final por dois revisores independentes contra os relatórios 1, 2, 4 e 5 de 3/10 (o 3 é de funcionalidades novas -> v2.0): os críticos estavam todos corrigidos; os 12 importantes ainda abertos e o Selo de 0,8% nas heranças foram corrigidos nesta tarefa (+6 factos v121-final). Quickstart automatizado OK (2/11/2026, 16/9/2026, 20 anos, IMT Jovem 0/0, junction recusada, CLI estrito, diagnóstico). Ficam para a v2.0: SKILL.md mais curto (I9) e melhorias menores do relatório 4 (regex do calendário, UID do .ics, maiúsculas em concluirPrazo, código morto).",
+      "at": "2026-10-03T22:19:23.714Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "154/156 (2 externos opcionais saltados) + SMOKE OK; Python 49/49. Revisão final por dois revisores independentes contra os relatórios 1, 2, 4 e 5 de 3/10 (o 3 é de funcionalidades novas -> v2.0): os críticos estavam todos corrigidos; os 12 importantes ainda abertos e o Selo de 0,8% nas heranças foram corrigidos nesta tarefa (+6 factos v121-final). Quickstart automatizado OK (2/11/2026, 16/9/2026, 20 anos, IMT Jovem 0/0, junction recusada, CLI estrito, diagnóstico). Ficam para a v2.0: SKILL.md mais curto (I9) e melhorias menores do relatório 4 (regex do calendário, UID do .ics, maiúsculas em concluirPrazo, código morto).",
+          "at": "2026-10-03T22:19:23.714Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Revisão final contra os cinco relatórios de 3/10/2026 (cada achado corrigido ou \"(a confirmar)\" com fonte) e quickstart no que for automatizável",
+      "verify": "npm --prefix mcp-server test"
     }
   },
-  "lastTickAt": "2026-10-03T22:11:39.864Z",
+  "lastTickAt": "2026-10-03T22:19:23.714Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -878,6 +896,91 @@
     "37": "2026-10-03T22:07:27.584Z",
     "38": "2026-10-03T22:08:56.155Z",
     "39": "2026-10-03T22:10:31.329Z",
-    "40": "2026-10-03T22:11:39.864Z"
+    "40": "2026-10-03T22:11:39.864Z",
+    "41": "2026-10-03T22:19:23.714Z"
+  },
+  "finishChecks": {
+    "mcp-test": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "156 testes: 154 passam, 0 falham, 2 saltados (externos opcionais); SMOKE OK",
+      "at": "2026-10-03T22:19:44.021Z",
+      "commit": "4422e96",
+      "dirty": false,
+      "observed": false,
+      "check": "npm --prefix mcp-server test",
+      "code": "734e638e228926d89977a1023a400a663f48efcb",
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "156 testes: 154 passam, 0 falham, 2 saltados (externos opcionais); SMOKE OK",
+          "at": "2026-10-03T22:19:44.021Z",
+          "commit": "4422e96",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    },
+    "py-test": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Ran 49 tests — OK",
+      "at": "2026-10-03T22:19:44.021Z",
+      "commit": "4422e96",
+      "dirty": false,
+      "observed": false,
+      "check": "python skills/advogado-pt/scripts/test_scripts.py",
+      "code": "734e638e228926d89977a1023a400a663f48efcb",
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 49 tests — OK",
+          "at": "2026-10-03T22:19:44.021Z",
+          "commit": "4422e96",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    }
+  },
+  "finished": {
+    "at": "2026-10-03T22:19:44.261Z",
+    "files": {
+      "mcp-server/test/v121.test.mjs": "4f459e607e001b554034ac99a3de193fea5841ce",
+      "mcp-server/test/plugin.test.mjs": "9cd3c7410f488ab954ed258704ad70a124e5c546",
+      "mcp-server/test/fixtures/paridade.json": "9008a5e3137fd0528c53051133961ca6d4c0a116",
+      "skills/advogado-pt/scripts/test_scripts.py": "f719de72a9b946b6704b4e203092a31a8ec3fe48",
+      "mcp-server/src/fs-seguro.ts": "74c574708e42b68b0d583591b4c7d5686307a203",
+      "mcp-server/src/calculators/arredondar.ts": "700d46fe71c518a0eb56759d3855bfd31082de63",
+      "mcp-server/src/calculators/datas.ts": "d7b9bcfbf7ca108e71122c19d66d1be599b24c74",
+      "mcp-server/src/calculators/prazos.ts": "0a896ea3609ec93669cea3fd1b169cb1f063cca4",
+      "mcp-server/src/tools.ts": "8f15b6bf2ff8b88778f921516759b698aa37ea3c",
+      "cli/advogado-pt.mjs": "a4d7616d533760315bd5c7d113ad2280fb6ccc29",
+      "skills/advogado-pt/scripts/prazos.py": "e1bd4f9a2e5048969099076fcb4a1712d937c77a",
+      "mcp-server/src/calculators/prescricao.ts": "6777ced32c4bc451678ce6e6a6aba26dc8d8d149",
+      "skills/advogado-pt/scripts/prescricao.py": "8ca8ca99e262985f26016b4ee8d095890d8035fe",
+      "mcp-server/src/calculators/imt.ts": "22b6ae6b27b11a00044dd53a4ca3dbd9a806a9ad",
+      "skills/advogado-pt/scripts/imt.py": "a39a022d7662b27431aad1d70b33dec5c6878259",
+      "mcp-server/src/calculators/irs.ts": "69b4ed726c3fa10816276a3be2cc65ba14f246ef",
+      "skills/advogado-pt/scripts/irs_simplificado.py": "3b5c0f25cb9404e08c44340202e00a911aba6c78",
+      "mcp-server/src/calculators/injuncao.ts": "11f4c742d8303593f44f48510432d92851944a4b",
+      "skills/advogado-pt/scripts/custas_injuncao.py": "e7bfe4ad24ac01e276de8d96fa3b6dc0a6898dbf",
+      "mcp-server/src/perfil.ts": "c1266c1521ce21aea4cb8ca32085165d5eef2848",
+      "mcp-server/src/prazos-estado.ts": "563cd30456c8ed090c77f1c6abf8c46c51dc52fc",
+      "mcp-server/src/calendario.ts": "7163fd4cd54a23ae77c1284ce5531f02166193bb",
+      "hooks/advogado-hook.mjs": "adfc4d848275d3e8d8d0320dea5888c279b7bd5b",
+      "mcp-server/src/resources.ts": "3039114e4f0a65b56445a8605ac3e8d2909a0c48",
+      "skills/advogado-pt/SKILL.md": "0edd4cfaabca5614bccb6d977b37c8e042384e5a",
+      "build.py": "c3ee78568c094388f0fcd31e57dda73f27b918d3",
+      "mcp-server/src/persona.ts": "4f4f22ec6f2d5590b377b5c5faea3fab992d5386",
+      "mcp-server/src/index.ts": "8aaf686ffbd0e25dfd70113694b648901b11db6f",
+      "mcp-server/src/calculators/salario.ts": "1ac4c3b613028f83a505eec673034bce03125351",
+      "mcp-server/src/calculators/irc.ts": "89dd36f6f4c9d884ebcff37fc7b3bebffc81bf17",
+      "mcp-server/src/calculators/taxa-justica.ts": "1ea03d4a7876abbe8c8a78276462ed2d7f731be0",
+      "skills/advogado-pt/scripts/iva_operacao.py": "9b562267ad0833a3b086c4a5fa151c6f523e268d",
+      "mcp-server/scripts/gerar-integracoes.mjs": "f16148a646fdaf0e4d22fb7e8e7331d49a2bf279"
+    }
   }
 }
