@@ -1,6 +1,6 @@
 # Jurídico PT — Skill de Assessoria Jurídica para Claude
 
-Skill personalizada para o Claude atuar como advogado pessoal e empresarial em Portugal — para **qualquer empresa** (ENI, Unipessoal Lda, Lda, SA; qualquer setor e dimensão) e para particulares, adaptando-se ao **perfil da empresa** guardado no projeto.
+Skill personalizada para o Claude atuar como assistente jurídico pessoal e empresarial em Portugal (não substitui advogado inscrito na Ordem dos Advogados) — para **qualquer empresa** (ENI, Unipessoal Lda, Lda, SA; qualquer setor e dimensão) e para particulares, adaptando-se ao **perfil da empresa** guardado no projeto.
 
 ## Disponível em todas as IAs
 
@@ -20,6 +20,17 @@ Além da Skill para Claude, o Jurídico PT corre como **servidor MCP** (`mcp-ser
 ```
 
 Não é preciso compilar nada: o servidor MCP vem empacotado no plugin. Se alguma coisa não responder, corre `/diagnostico`.
+
+**Vinhas do `advogado-pt`?** A 2.0 mudou de nome e não migra nada sozinha. Troca a instalação:
+
+```text
+/plugin uninstall advogado-pt@advogado-pt-marketplace
+/plugin marketplace remove advogado-pt-marketplace
+/plugin marketplace add linofcp007/juridico-pt
+/plugin install juridico-pt@juridico-pt
+```
+
+e renomeia à mão a pasta de dados `.advogado-pt/` para `.juridico-pt/` em cada projeto (e `~/.advogado-pt/` para `~/.juridico-pt/`). Detalhes no [CHANGELOG](CHANGELOG.md).
 
 Para **desenvolver** o plugin a partir de um clone: `npm run setup` (instala as dependências, compila o servidor MCP e corre o diagnóstico).
 

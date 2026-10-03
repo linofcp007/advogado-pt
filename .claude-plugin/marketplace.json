@@ -5,7 +5,7 @@
     "email": "carlospereira@prodigitalkey.com"
   },
   "metadata": {
-    "description": "Jurídico PT — assessoria jurídica pessoal e empresarial de Portugal",
+    "description": "Jurídico PT — assistente jurídico pessoal e empresarial de Portugal",
     "version": "1.2.1"
   },
   "plugins": [
@@ -13,7 +13,7 @@
       "name": "juridico-pt",
       "source": "./",
       "version": "1.2.1",
-      "description": "Advogado pessoal e empresarial em Portugal (PT/EN). Para qualquer empresa (ENI, Lda, SA; qualquer setor), com perfil da empresa guardado: contratos, cobranças (cliente não paga), RGPD/fuga de dados, laboral/despedimentos, fiscal e notificações das Finanças, imobiliário/IMT, heranças, sociedades, insolvência, banca, concorrência, direito da UE, compliance (RGPC, canal de denúncias), setores regulados e multas — com referências por área, templates de documentos, playbooks, checklists, calculadoras jurídicas (salário líquido, IRC, IVA internacional, taxa de justiça…), calendário de obrigações exportável para o Google Calendar e prazos em curso com aviso. Personal & business lawyer for Portugal.",
+      "description": "Assistente jurídico pessoal e empresarial de Portugal (PT/EN). Para qualquer empresa (ENI, Lda, SA; qualquer setor), com perfil da empresa guardado: contratos, cobranças (cliente não paga), RGPD/fuga de dados, laboral/despedimentos, fiscal e notificações das Finanças, imobiliário/IMT, heranças, sociedades, insolvência, banca, concorrência, direito da UE, compliance (RGPC, canal de denúncias), setores regulados e multas — com referências por área, templates de documentos, playbooks, checklists, calculadoras jurídicas (salário líquido, IRC, IVA internacional, taxa de justiça…), calendário de obrigações exportável para o Google Calendar e prazos em curso com aviso. Personal & business legal assistant for Portugal (not a substitute for a registered lawyer).",
       "category": "legal",
       "tags": ["advogado", "legal", "direito", "portugal", "contratos", "rgpd", "fiscal", "laboral"],
       "homepage": "https://github.com/linofcp007/juridico-pt",

@@ -39,7 +39,7 @@ Todas as operações são locais: sem rede, sem API key.
 
 4. **Recarrega o cliente MCP.** O servidor anuncia **17 tools** (8 calculadoras jurídicas + 9
    ferramentas de conteúdo), **resources** (todo o conteúdo jurídico em
-   `juridico-pt://{categoria}/{nome}`) e o **prompt** `assistente_juridico` (persona de advogado de Portugal).
+   `juridico-pt://{categoria}/{nome}`) e o **prompt** `assistente_juridico` (persona de assistente jurídico de Portugal).
 
 ## Notes
 

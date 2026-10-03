@@ -9,7 +9,7 @@ O **núcleo** deste projeto é um servidor **MCP (Model Context Protocol)** cham
 - **RESOURCES** — todo o conteúdo jurídico em markdown (referências por área, templates,
   playbooks, checklists).
 - **PROMPT** — um prompt reutilizável chamado `assistente_juridico` que carrega a persona do
-  advogado pessoal e empresarial em Portugal.
+  assistente jurídico de direito português.
 
 Como o protocolo é o mesmo em todo o lado, **o servidor liga-se a praticamente qualquer
 cliente de IA com suporte MCP**. Cada subpasta desta diretoria contém as instruções e os

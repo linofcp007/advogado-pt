@@ -51,13 +51,13 @@
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-301" mcp-server/test/plugin.test.mjs_
   - _Size: L_
   - _Depends: 5_
-- [ ] 7. [US1] Persona e textos de "assistente jurídico" em persona, instruções, SKILL.md, commands, agents e documentação; aviso da OA mantido
+- [x] 7. [US1] Persona e textos de "assistente jurídico" em persona, instruções, SKILL.md, commands, agents e documentação; aviso da OA mantido
   - _Requirements: US-1.AC-2_
   - _Makes green: T-302_
   - _Verify: node --test --test-name-pattern="T-302" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 6_
-- [ ] 8. [US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão
+- [x] 8. [US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão
   - _Requirements: US-1.AC-4, SC-001_
   - _Makes green: T-304_
   - _Verify: node --test --test-name-pattern="T-304" mcp-server/test/v20.test.mjs_

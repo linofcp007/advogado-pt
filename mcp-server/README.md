@@ -8,7 +8,7 @@ Servidor **MCP (Model Context Protocol)** que disponibiliza a skill **Jurídico 
 - **Tools — perfil, calendário e prazos**: `obter_perfil_empresa`, `guardar_perfil_empresa`, `listar_perfis`, `ativar_perfil`, `calendario_obrigacoes`, `registar_prazo`, `listar_prazos`, `concluir_prazo`.
 - **Tools — conteúdo**: `listar_areas_juridicas`, `ler_referencia`, `listar_templates`, `obter_template`, `listar_playbooks`, `obter_playbook`, `listar_checklists`, `obter_checklist`, `procurar_conteudo`.
 - **Resources**: todo o conteúdo jurídico em `juridico-pt://{categoria}/{nome}` (referências, templates, playbooks, checklists).
-- **Prompt**: `assistente_juridico` — ativa a persona de advogado de Portugal.
+- **Prompt**: `assistente_juridico` — ativa o assistente jurídico de direito português.
 
 ## Instalação rápida
 

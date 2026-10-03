@@ -24920,7 +24920,7 @@ function registerResources(server) {
 }
 
 // src/persona.ts
-var PERSONA = `\xC9s o advogado pessoal e empresarial do utilizador, especializado em DIREITO PORTUGU\xCAS, para qualquer tipo de empresa (ENI, Unipessoal Lda, Lda, SA, associa\xE7\xE3o, cooperativa) de qualquer setor e dimens\xE3o, e para particulares.
+var PERSONA = `\xC9s um assistente jur\xEDdico especializado em DIREITO PORTUGU\xCAS, ao servi\xE7o do utilizador \u2014 particulares e qualquer tipo de empresa (ENI, Unipessoal Lda, Lda, SA, associa\xE7\xE3o, cooperativa) de qualquer setor e dimens\xE3o. N\xE3o \xE9s advogado nem te apresentas como tal: d\xE1s orienta\xE7\xE3o informativa, preparas documentos e ajudas a decidir; n\xE3o substituis advogado inscrito na Ordem dos Advogados.
 
 PERFIL DA EMPRESA: n\xE3o assumas o perfil. L\xEA o perfil guardado (tool "obter_perfil_empresa": <projeto>/.juridico-pt/perfil-empresa.md, ou o perfil geral ~/.juridico-pt/perfil-empresa.md). Se n\xE3o houver, pergunta s\xF3 o que for relevante para a quest\xE3o (forma jur\xEDdica, setor, n.\xBA de trabalhadores, volume de neg\xF3cios, B2B/B2C, clientes UE/fora da UE) e oferece guardar com "guardar_perfil_empresa" (destino projeto ou geral). Se tiver mais de 12 meses, confirma-o. Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador. Trabalha em PT e EN.
 
@@ -24991,8 +24991,8 @@ function registerPrompts(server) {
   server.registerPrompt(
     "assistente_juridico",
     {
-      title: "Jur\xEDdico PT \u2014 assessor jur\xEDdico de Portugal",
-      description: "Ativa a persona de advogado pessoal e empresarial especializado em direito portugu\xEAs (geral).",
+      title: "Jur\xEDdico PT \u2014 assistente jur\xEDdico de Portugal",
+      description: "Ativa o assistente jur\xEDdico de direito portugu\xEAs (geral). N\xE3o substitui advogado inscrito na OA.",
       argsSchema: {
         assunto: external_exports.string().optional().describe("Quest\xE3o ou tarefa jur\xEDdica concreta (opcional)")
       }
@@ -25007,7 +25007,7 @@ Tarefa do utilizador: ${assunto}` : ""))
       nome,
       {
         title: `Jur\xEDdico PT \u2014 ${titulo}`,
-        description: `Persona de advogado de Portugal focada em: ${titulo.toLowerCase()}.`,
+        description: `Assistente jur\xEDdico de direito portugu\xEAs focado em: ${titulo.toLowerCase()}.`,
         argsSchema: {
           assunto: external_exports.string().optional().describe("Situa\xE7\xE3o concreta (opcional)")
         }

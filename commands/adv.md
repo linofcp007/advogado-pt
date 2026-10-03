@@ -1,5 +1,5 @@
 ---
-description: Atalho de /advogado — assessor jurídico geral de Portugal. Alias of /advogado — general PT legal advisor.
+description: Atalho de /advogado — assistente jurídico geral de Portugal. Alias of /advogado — general PT legal assistant.
 argument-hint: "[a tua questão jurídica]"
 ---
 

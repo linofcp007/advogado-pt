@@ -238,14 +238,52 @@
       ],
       "task": "[US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-301\" mcp-server/test/plugin.test.mjs"
+    },
+    "7": {
+      "command": "node --test --test-name-pattern=\"T-302\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-302 passa (pass 1, fail 0). Suite completa: 160 pass / 30 fail (só tarefas seguintes). Integrações regeneradas (8 alvos, incl. regras de editor da raiz) e --check OK",
+      "at": "2026-10-03T23:01:22.586Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-302\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-302 passa (pass 1, fail 0). Suite completa: 160 pass / 30 fail (só tarefas seguintes). Integrações regeneradas (8 alvos, incl. regras de editor da raiz) e --check OK",
+          "at": "2026-10-03T23:01:22.586Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Persona e textos de \"assistente jurídico\" em persona, instruções, SKILL.md, commands, agents e documentação; aviso da OA mantido",
+      "verify": "node --test --test-name-pattern=\"T-302\" mcp-server/test/v20.test.mjs"
+    },
+    "8": {
+      "command": "node --test --test-name-pattern=\"T-304\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-304 passa (pass 1, fail 0): CHANGELOG ## [2.0.0] com ### Migração (4 comandos /plugin, advogado-pt-marketplace, .advogado-pt/ -> .juridico-pt/); README com o mesmo bloco",
+      "at": "2026-10-03T23:02:08.820Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-304\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-304 passa (pass 1, fail 0): CHANGELOG ## [2.0.0] com ### Migração (4 comandos /plugin, advogado-pt-marketplace, .advogado-pt/ -> .juridico-pt/); README com o mesmo bloco",
+          "at": "2026-10-03T23:02:08.820Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão",
+      "verify": "node --test --test-name-pattern=\"T-304\" mcp-server/test/v20.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T22:59:25.736Z",
+  "lastTickAt": "2026-10-03T23:02:08.820Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
     "2": "2026-10-03T22:41:08.058Z",
     "3": "2026-10-03T22:48:16.978Z",
     "5": "2026-10-03T22:57:02.520Z",
-    "6": "2026-10-03T22:59:25.736Z"
+    "6": "2026-10-03T22:59:25.736Z",
+    "7": "2026-10-03T23:01:22.586Z",
+    "8": "2026-10-03T23:02:08.820Z"
   }
 }

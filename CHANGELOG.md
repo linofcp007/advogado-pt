@@ -1,8 +1,32 @@
 # Changelog
 
-Todas as alterações relevantes ao **advogado-pt**. O formato segue
+Todas as alterações relevantes ao **juridico-pt** (até à 1.2.1, **advogado-pt**). O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
+
+## [2.0.0] - 2026-10
+
+**O plugin passa a chamar-se `juridico-pt` ("Jurídico PT") e apresenta-se como assistente jurídico.** A renomeação é direta, sem migração automática (decisão D-1: só havia um utilizador).
+
+### Changed
+
+- **Nome novo em todo o lado**: plugin e marketplace `juridico-pt`, servidor MCP `juridico-pt`, skill em `skills/juridico-pt/`, CLI `cli/juridico-pt.mjs`, hook `hooks/juridico-hook.mjs`, URI dos resources `juridico-pt://`, pacote `juridico-pt.skill`. Não há atalhos com o nome antigo.
+- **Assistente jurídico, não advogado**: a persona, o prompt (`assistente_juridico`, antes `advogado_pt`), a skill, os commands e a documentação deixam de dizer "És o advogado"; mantém-se o aviso de que não substitui advogado inscrito na Ordem dos Advogados.
+- **Dados locais em `.juridico-pt/`** (projeto) e `~/.juridico-pt/` (perfil geral; a variável passa a `JURIDICO_PT_HOME`). A pasta `.advogado-pt/` nunca é lida nem apagada.
+- As regras de editor da raiz (`.cursor/`, `.windsurf/`) e `integrations/windsurf/.windsurfrules` passam a ser geradas a partir da persona única (`gerar-integracoes.mjs`); tinham um perfil fixo antigo.
+
+### Migração
+
+Quem tinha o `advogado-pt` instalado troca a instalação com estes comandos no Claude Code:
+
+```text
+/plugin uninstall advogado-pt@advogado-pt-marketplace
+/plugin marketplace remove advogado-pt-marketplace
+/plugin marketplace add linofcp007/juridico-pt
+/plugin install juridico-pt@juridico-pt
+```
+
+Depois, em cada projeto onde guardaste dados, renomeia à mão a pasta `.advogado-pt/` para `.juridico-pt/` (e `~/.advogado-pt/` para `~/.juridico-pt/` no perfil geral). Se usavas `ADVOGADO_PT_HOME`, passa a `JURIDICO_PT_HOME`.
 
 ## [1.2.1] - 2026-10
 

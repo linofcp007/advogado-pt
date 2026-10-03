@@ -3,7 +3,7 @@
   "version": "1.2.1",
   "private": true,
   "type": "module",
-  "description": "Advogado pessoal e empresarial em Portugal — uma skill do Claude Code + um servidor MCP local + integrações multi-plataforma (Cursor, Windsurf, Codex, Gemini, ChatGPT). Referências por área, templates de documentos, playbooks, checklists e calculadoras jurídicas (juros, IMT, prazos, prescrição, compensação). PT/EN.",
+  "description": "Assistente jurídico pessoal e empresarial de Portugal — uma skill do Claude Code + um servidor MCP local + integrações multi-plataforma (Cursor, Windsurf, Codex, Gemini, ChatGPT). Referências por área, templates de documentos, playbooks, checklists e calculadoras jurídicas (juros, IMT, prazos, prescrição, compensação). PT/EN.",
   "author": "Carlos Pereira <carlospereira@prodigitalkey.com>",
   "license": "MIT",
   "homepage": "https://github.com/linofcp007/juridico-pt#readme",
