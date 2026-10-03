@@ -2,9 +2,9 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 90%** ▰▰▰▰▰▰▰▰▰▱ · 3/4 features completas · 115/137 tasks feitas
+**Progresso: 91%** ▰▰▰▰▰▰▰▰▰▱ · 3/4 features completas · 118/137 tasks feitas
 
-_Velocidade: 284 ponto(s)/dia útil — 115 tarefa(s), 284 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 293 ponto(s)/dia útil — 118 tarefa(s), 293 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
@@ -18,7 +18,7 @@ Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
 | ✅ | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | concluída | 100% | 41/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | — | — |
 | ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
-| 🟡 | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | em execução | 59% | 16/38 | advogado-pt-v1-2-1-correcoes ✓ | #4 Conjunto de avaliação (`evals/`, ≥ 40 caso | 2026-10-06 |
+| 🟡 | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | em execução | 65% | 19/38 | advogado-pt-v1-2-1-correcoes ✓ | #4 Conjunto de avaliação (`evals/`, ≥ 40 caso | 2026-10-06 (10-05…10-06) |
 
 Previsão = pontos por fazer ÷ velocidade, em dias úteis (±25%) · `_Size: XS|S|M|L|XL_` numa tarefa = 1/2/3/5/8 pontos; uma tarefa sem tamanho conta como a mediana da sua feature (senão M) · uma feature à espera de uma dependência começa depois da previsão dessa.
 

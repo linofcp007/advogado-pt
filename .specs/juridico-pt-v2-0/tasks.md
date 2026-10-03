@@ -199,21 +199,21 @@
   - _Depends: 24_
 
 ## História US-10 (P2): formatos e instalação
-- [ ] 27. [US10] `zip.ts` + `docx.ts` + tool `exportar_documento` + CLI `exportar` + command `/exportar`
+- [x] 27. [US10] `zip.ts` + `docx.ts` + tool `exportar_documento` + CLI `exportar` + command `/exportar`
   - _Requirements: US-10.AC-1, EC-4, NFR-1_
   - _Makes green: T-328_
   - _Implements: mcp-server/src/zip.ts, mcp-server/src/docx.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-328" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 5_
-- [ ] 28. [US10] Elicitation do perfil com recurso a perguntas em texto
+- [x] 28. [US10] Elicitation do perfil com recurso a perguntas em texto
   - _Requirements: US-10.AC-2_
   - _Makes green: T-329_
   - _Implements: mcp-server/src/elicitacao.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-329" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 5_
-- [ ] 29. [US10] `build-mcpb.mjs` e pacote `.mcpb`
+- [x] 29. [US10] `build-mcpb.mjs` e pacote `.mcpb`
   - _Requirements: US-10.AC-3_
   - _Makes green: T-330_
   - _Implements: mcp-server/scripts/build-mcpb.mjs_

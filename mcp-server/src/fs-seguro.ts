@@ -84,7 +84,7 @@ export function listarSeguro(base: string, partes: string[]): string[] {
  * Recusa partes vazias, `.`/`..` ou com separadores, e qualquer componente que seja uma ligação.
  * Devolve o caminho final.
  */
-export function escreverSeguro(base: string, partes: string[], conteudo: string): string {
+export function escreverSeguro(base: string, partes: string[], conteudo: string | Uint8Array): string {
   if (partes.length === 0) throw new Error("Caminho de destino vazio.");
   for (const p of partes) {
     if (!p || p === "." || p === ".." || /[\\/]/.test(p) || p.includes("\0")) {
@@ -109,7 +109,7 @@ export function escreverSeguro(base: string, partes: string[], conteudo: string)
   const tmp = `${final}.${process.pid}.${randomBytes(4).toString("hex")}.tmp`;
   try {
     // "wx": criação exclusiva — nunca escreve num ficheiro (ou ligação) que já exista.
-    writeFileSync(tmp, conteudo, { encoding: "utf8", flag: "wx" });
+    writeFileSync(tmp, conteudo, typeof conteudo === "string" ? { encoding: "utf8", flag: "wx" } : { flag: "wx" });
     renameSync(tmp, final);
   } catch (e) {
     try {

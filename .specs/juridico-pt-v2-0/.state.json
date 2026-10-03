@@ -408,6 +408,60 @@
       "task": "[US9] Python `procedimento_ccp` com os mesmos casos",
       "verify": "python skills/juridico-pt/scripts/test_scripts.py -k T326"
     },
+    "27": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-328\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-328 passa: ZIP com CRC válido, XML bem formado, títulos/listas/negrito/escapes, sem 'Antes de enviar'. Aberto sem erros no LibreOffice (headless) e no Word (COM). Tool exportar_documento, CLI exportar e /exportar",
+      "at": "2026-10-03T23:17:57.418Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-328\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-328 passa: ZIP com CRC válido, XML bem formado, títulos/listas/negrito/escapes, sem 'Antes de enviar'. Aberto sem erros no LibreOffice (headless) e no Word (COM). Tool exportar_documento, CLI exportar e /exportar",
+          "at": "2026-10-03T23:17:57.418Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] `zip.ts` + `docx.ts` + tool `exportar_documento` + CLI `exportar` + command `/exportar`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-328\" mcp-server/test/v20.test.mjs"
+    },
+    "28": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-329\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-329 passa: cliente com elicitation recebe formulário (forma_juridica/regime_iva com enum) e o calendário usa os dados; sem suporte, texto com os campos a perguntar",
+      "at": "2026-10-03T23:20:41.936Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-329\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-329 passa: cliente com elicitation recebe formulário (forma_juridica/regime_iva com enum) e o calendário usa os dados; sem suporte, texto com os campos a perguntar",
+          "at": "2026-10-03T23:20:41.936Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] Elicitation do perfil com recurso a perguntas em texto",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-329\" mcp-server/test/v20.test.mjs"
+    },
+    "29": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-330\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-330 passa: .mcpb (125 ficheiros, stored, CRC válido) com manifest 0.3, server/index.js, package.json type module e content/; o servidor extraído arranca e responde. 'npx @anthropic-ai/mcpb validate': Manifest schema validation passes",
+      "at": "2026-10-03T23:19:38.178Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-330\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-330 passa: .mcpb (125 ficheiros, stored, CRC válido) com manifest 0.3, server/index.js, package.json type module e content/; o servidor extraído arranca e responde. 'npx @anthropic-ai/mcpb validate': Manifest schema validation passes",
+          "at": "2026-10-03T23:19:38.178Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] `build-mcpb.mjs` e pacote `.mcpb`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-330\" mcp-server/test/v20.test.mjs"
+    },
     "30": {
       "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-331\" mcp-server/test/v20.test.mjs",
       "exitCode": 0,
@@ -463,7 +517,7 @@
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T23:14:23.979Z",
+  "lastTickAt": "2026-10-03T23:20:41.936Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
     "2": "2026-10-03T22:41:08.058Z",
@@ -478,6 +532,9 @@
     "18": "2026-10-03T23:12:29.079Z",
     "24": "2026-10-03T23:09:11.511Z",
     "25": "2026-10-03T23:09:45.404Z",
+    "27": "2026-10-03T23:17:57.418Z",
+    "28": "2026-10-03T23:20:41.936Z",
+    "29": "2026-10-03T23:19:38.178Z",
     "30": "2026-10-03T23:14:22.081Z",
     "31": "2026-10-03T23:14:23.979Z",
     "34": "2026-10-03T23:12:31.188Z"

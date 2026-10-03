@@ -360,10 +360,22 @@ async function calendarioCmd(args) {
   if (perfil?.aviso) console.log(`AVISO: ${perfil.aviso}`);
   console.log(formatarCalendario(cal, { mes }));
   if (args.includes("--ics")) {
-    const caminho = exportarICS(ano, cal, dir);
+    const caminho = exportarICS(ano, cal, dir, undefined, perfil?.nome);
     console.log(`\nExportado: ${caminho} (Google Calendar: Definições -> Importar e exportar -> Importar)`);
   }
   console.log("\nConfirmar no Portal das Finanças / Segurança Social Direta (prorrogações por despacho).");
+}
+
+async function exportarCmd(args) {
+  const dir = resolve(str(args, "--dir", process.cwd()));
+  const ficheiro = str(args, "--ficheiro", undefined);
+  const template = str(args, "--template", undefined);
+  const nome = str(args, "--nome", OBRIGATORIO);
+  const { exportarDocumento } = await modulo("exportar.js");
+  const conteudo = ficheiro !== undefined ? readFileSync(resolve(ficheiro), "utf8") : undefined;
+  const r = exportarDocumento({ conteudo, template, nome, projeto: dir });
+  console.log(`Exportado: ${r.caminho} (${r.bytes} bytes)`);
+  if (r.placeholders) console.log(`AVISO: ainda tem ${r.placeholders} campo(s) {{...}} por preencher.`);
 }
 
 async function prazosCmd(args) {
@@ -524,6 +536,9 @@ Uso:
   juridico-pt calc iva --tipo bens|servicos --cliente empresa|consumidor --destino PT|UE|fora-UE [--vies] [--vendas-distancia N] [--servico eletronico|…]
   juridico-pt calc taxa-justica --valor 30000 [--tabela A|B|C] [--reducao-eletronica]
 
+  juridico-pt exportar --nome carta-cliente (--ficheiro documento.md | --template nome) [--dir <projeto>]
+      Grava .juridico-pt/exportados/<nome>.docx (Word/LibreOffice), sem a lista "Antes de enviar".
+
   juridico-pt prompt <nome> [--tipo template|playbook|checklist|referencia]
       Imprime um prompt autocontido (persona + rigor + conteúdo) para colar noutra IA.
 
@@ -539,6 +554,7 @@ async function main() {
   if (cmd === "prompt") return promptCmd(args);
   if (cmd === "calendario") return calendarioCmd(args);
   if (cmd === "prazos") return prazosCmd(args);
+  if (cmd === "exportar") return exportarCmd(args);
   if (cmd === "doctor") return doctor();
   console.log(HELP);
 }

@@ -4990,7 +4990,7 @@ var require_core2 = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     var id_1 = require_id();
     var ref_1 = require_ref();
-    var core = [
+    var core2 = [
       "$schema",
       "$id",
       "$defs",
@@ -5000,7 +5000,7 @@ var require_core2 = __commonJS({
       id_1.default,
       ref_1.default
     ];
-    exports.default = core;
+    exports.default = core2;
   }
 });
 
@@ -21716,8 +21716,8 @@ function formatarEuros(valor) {
     /\B(?=(\d{3})+(?!\d))/g,
     "."
   );
-  const corpo = `${inteiroComMilhares},${parteDecimal}`;
-  return `${negativo ? "-" : ""}${corpo} \u20AC`;
+  const corpo2 = `${inteiroComMilhares},${parteDecimal}`;
+  return `${negativo ? "-" : ""}${corpo2} \u20AC`;
 }
 
 // src/calculators/juros.ts
@@ -22642,8 +22642,8 @@ var TABELAS = {
     ]
   }
 };
-function retencao(r, tabela, dependentes) {
-  const t = TABELAS[tabela];
+function retencao(r, tabela2, dependentes) {
+  const t = TABELAS[tabela2];
   const e = t.escaloes.find((x) => r <= x.ate);
   if (e.taxa === 0) return { valor: 0, taxa: 0 };
   const taxa = dependentes >= 3 ? e.taxa - 1 : e.taxa;
@@ -23191,7 +23191,7 @@ function escreverSeguro(base, partes, conteudo) {
   if (estado(final, partes.join("/")) === "dir") throw new Error(`'${partes.join("/")}' \xE9 uma pasta.`);
   const tmp = `${final}.${process.pid}.${randomBytes(4).toString("hex")}.tmp`;
   try {
-    writeFileSync(tmp, conteudo, { encoding: "utf8", flag: "wx" });
+    writeFileSync(tmp, conteudo, typeof conteudo === "string" ? { encoding: "utf8", flag: "wx" } : { flag: "wx" });
     renameSync(tmp, final);
   } catch (e) {
     try {
@@ -24228,6 +24228,358 @@ function formatarCalendario(obrigacoes, opts = {}) {
   return linhas.join("\n").trim();
 }
 
+// src/zip.ts
+var TABELA_CRC = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 3988292384 ^ c >>> 1 : c >>> 1;
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+function crc32(dados) {
+  let c = 4294967295;
+  for (let i = 0; i < dados.length; i++) c = TABELA_CRC[(c ^ dados[i]) & 255] ^ c >>> 8;
+  return (c ^ 4294967295) >>> 0;
+}
+function dataDos(d) {
+  const ano = Math.max(1980, d.getUTCFullYear());
+  return {
+    hora: d.getUTCHours() << 11 | d.getUTCMinutes() << 5 | Math.floor(d.getUTCSeconds() / 2),
+    data: ano - 1980 << 9 | d.getUTCMonth() + 1 << 5 | d.getUTCDate()
+  };
+}
+var LIMITE = 4294967295;
+function criarZip(entradas, quando = new Date(Date.UTC(2026, 0, 1))) {
+  const enc = new TextEncoder();
+  const { hora, data } = dataDos(quando);
+  const locais = [];
+  const centrais = [];
+  let deslocamento = 0;
+  const vistos = /* @__PURE__ */ new Set();
+  for (const e of entradas) {
+    const nome = e.nome.replace(/\\/g, "/").replace(/^\/+/, "");
+    if (!nome || nome.split("/").some((p) => p === ".." || p === ".")) throw new Error(`Nome inv\xE1lido no ZIP: '${e.nome}'.`);
+    if (vistos.has(nome)) throw new Error(`Entrada repetida no ZIP: '${nome}'.`);
+    vistos.add(nome);
+    const nomeB = enc.encode(nome);
+    const bytes = typeof e.dados === "string" ? enc.encode(e.dados) : e.dados;
+    if (bytes.length >= LIMITE || deslocamento >= LIMITE) throw new Error("Arquivo demasiado grande (sem ZIP64).");
+    const crc = crc32(bytes);
+    const loc = new DataView(new ArrayBuffer(30));
+    loc.setUint32(0, 67324752, true);
+    loc.setUint16(4, 20, true);
+    loc.setUint16(6, 2048, true);
+    loc.setUint16(8, 0, true);
+    loc.setUint16(10, hora, true);
+    loc.setUint16(12, data, true);
+    loc.setUint32(14, crc, true);
+    loc.setUint32(18, bytes.length, true);
+    loc.setUint32(22, bytes.length, true);
+    loc.setUint16(26, nomeB.length, true);
+    loc.setUint16(28, 0, true);
+    locais.push(new Uint8Array(loc.buffer), nomeB, bytes);
+    const cen = new DataView(new ArrayBuffer(46));
+    cen.setUint32(0, 33639248, true);
+    cen.setUint16(4, 20, true);
+    cen.setUint16(6, 20, true);
+    cen.setUint16(8, 2048, true);
+    cen.setUint16(10, 0, true);
+    cen.setUint16(12, hora, true);
+    cen.setUint16(14, data, true);
+    cen.setUint32(16, crc, true);
+    cen.setUint32(20, bytes.length, true);
+    cen.setUint32(24, bytes.length, true);
+    cen.setUint16(28, nomeB.length, true);
+    cen.setUint16(30, 0, true);
+    cen.setUint16(32, 0, true);
+    cen.setUint16(34, 0, true);
+    cen.setUint16(36, 0, true);
+    cen.setUint32(38, 0, true);
+    cen.setUint32(42, deslocamento, true);
+    centrais.push(new Uint8Array(cen.buffer), nomeB);
+    deslocamento += 30 + nomeB.length + bytes.length;
+  }
+  const tamanhoCentral = centrais.reduce((s, b) => s + b.length, 0);
+  if (entradas.length > 65535 || deslocamento + tamanhoCentral >= LIMITE) throw new Error("Arquivo demasiado grande (sem ZIP64).");
+  const fim = new DataView(new ArrayBuffer(22));
+  fim.setUint32(0, 101010256, true);
+  fim.setUint16(4, 0, true);
+  fim.setUint16(6, 0, true);
+  fim.setUint16(8, entradas.length, true);
+  fim.setUint16(10, entradas.length, true);
+  fim.setUint32(12, tamanhoCentral, true);
+  fim.setUint32(16, deslocamento, true);
+  fim.setUint16(20, 0, true);
+  const partes = [...locais, ...centrais, new Uint8Array(fim.buffer)];
+  const total = partes.reduce((s, b) => s + b.length, 0);
+  const out = new Uint8Array(total);
+  let i = 0;
+  for (const p of partes) {
+    out.set(p, i);
+    i += p.length;
+  }
+  return out;
+}
+
+// src/docx.ts
+var NS = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
+function xml(s) {
+  return s.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F￾￿]/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function inline(texto2) {
+  const runs = [];
+  const re = /\*\*(.+?)\*\*|__(.+?)__|(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])|(?<![\w])_(?!\s)(.+?)(?<!\s)_(?![\w])|`([^`]+)`/g;
+  let ultimo = 0;
+  for (const m of texto2.matchAll(re)) {
+    const i = m.index ?? 0;
+    if (i > ultimo) runs.push({ texto: texto2.slice(ultimo, i) });
+    if (m[1] !== void 0 || m[2] !== void 0) {
+      for (const r of inline(m[1] ?? m[2] ?? "")) runs.push({ ...r, negrito: true });
+    } else if (m[3] !== void 0 || m[4] !== void 0) {
+      for (const r of inline(m[3] ?? m[4] ?? "")) runs.push({ ...r, italico: true });
+    } else runs.push({ texto: m[5] ?? "" });
+    ultimo = i + m[0].length;
+  }
+  if (ultimo < texto2.length) runs.push({ texto: texto2.slice(ultimo) });
+  return runs.filter((r) => r.texto !== "");
+}
+function runsXml(linhas) {
+  const out = [];
+  linhas.forEach((linha, n) => {
+    if (n > 0) out.push("<w:r><w:br/></w:r>");
+    for (const r of inline(linha)) {
+      const props = (r.negrito ? "<w:b/>" : "") + (r.italico ? "<w:i/>" : "");
+      out.push(`<w:r>${props ? `<w:rPr>${props}</w:rPr>` : ""}<w:t xml:space="preserve">${xml(r.texto)}</w:t></w:r>`);
+    }
+  });
+  return out.join("");
+}
+function paragrafo(linhas, opts = {}) {
+  const pPr = (opts.estilo ? `<w:pStyle w:val="${opts.estilo}"/>` : "") + (opts.recuo ? `<w:ind w:left="${opts.recuo}" w:hanging="284"/>` : "");
+  const conteudo = opts.prefixo ? [opts.prefixo + (linhas[0] ?? ""), ...linhas.slice(1)] : linhas;
+  return `<w:p>${pPr ? `<w:pPr>${pPr}</w:pPr>` : ""}${runsXml(conteudo)}</w:p>`;
+}
+function celulas(linha) {
+  return linha.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+}
+function tabela(linhas) {
+  const linhasDados = linhas.filter((l) => !/^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(l));
+  const rows = linhasDados.map(celulas);
+  const ncol = Math.max(1, ...rows.map((r) => r.length));
+  const borda = (lado) => `<w:${lado} w:val="single" w:sz="4" w:space="0" w:color="808080"/>`;
+  const tblPr = `<w:tblPr><w:tblW w:w="5000" w:type="pct"/><w:tblBorders>${["top", "left", "bottom", "right", "insideH", "insideV"].map(borda).join("")}</w:tblBorders></w:tblPr>`;
+  const grid = `<w:tblGrid>${Array.from({ length: ncol }, () => `<w:gridCol w:w="${Math.floor(9e3 / ncol)}"/>`).join("")}</w:tblGrid>`;
+  const trs = rows.map((r, i) => {
+    const tcs = Array.from({ length: ncol }, (_, c) => {
+      const t = r[c] ?? "";
+      return `<w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/></w:tcPr>${paragrafo([i === 0 && t ? `**${t.replace(/\*\*/g, "")}**` : t])}</w:tc>`;
+    });
+    return `<w:tr>${tcs.join("")}</w:tr>`;
+  }).join("");
+  return `<w:tbl>${tblPr}${grid}${trs}</w:tbl><w:p/>`;
+}
+function limparMarkdown(md) {
+  const semComentarios = md.replace(/\r\n?/g, "\n").replace(/<!--[\s\S]*?-->/g, "");
+  const out = [];
+  let corte = null;
+  for (const linha of semComentarios.split("\n")) {
+    const h = /^(#{1,6})\s+(.*)$/.exec(linha);
+    if (corte !== null) {
+      if (h && h[1].length <= corte) corte = null;
+      else continue;
+    }
+    if (h && /^Antes de enviar\b/i.test(h[2].trim())) {
+      corte = h[1].length;
+      continue;
+    }
+    out.push(linha);
+  }
+  return out.join("\n");
+}
+function corpo(md) {
+  const linhas = limparMarkdown(md).split("\n");
+  const blocos = [];
+  let par = [];
+  const fechar = () => {
+    if (par.length) blocos.push(paragrafo(par));
+    par = [];
+  };
+  for (let i = 0; i < linhas.length; i++) {
+    const linha = linhas[i].replace(/\s+$/, "");
+    if (!linha.trim()) {
+      fechar();
+      continue;
+    }
+    const h = /^(#{1,6})\s+(.*)$/.exec(linha);
+    if (h) {
+      fechar();
+      blocos.push(paragrafo([h[2].replace(/\s+#+\s*$/, "")], { estilo: `Heading${Math.min(3, h[1].length)}` }));
+      continue;
+    }
+    if (/^\s*\|/.test(linha)) {
+      fechar();
+      const t = [];
+      while (i < linhas.length && /^\s*\|/.test(linhas[i])) t.push(linhas[i++]);
+      i--;
+      blocos.push(tabela(t));
+      continue;
+    }
+    if (/^\s*([-*_])(\s*\1){2,}\s*$/.test(linha)) {
+      fechar();
+      blocos.push("<w:p/>");
+      continue;
+    }
+    const li = /^(\s*)[-*+]\s+(?:\[([ xX])\]\s+)?(.*)$/.exec(linha);
+    if (li) {
+      fechar();
+      const nivel = Math.min(4, Math.floor(li[1].replace(/\t/g, "  ").length / 2));
+      const prefixo = li[2] === void 0 ? "\u2022 " : li[2] === " " ? "\u2610 " : "\u2612 ";
+      blocos.push(paragrafo([li[3]], { recuo: 567 + nivel * 425, prefixo }));
+      continue;
+    }
+    const ol = /^(\s*)(\d{1,3})[.)]\s+(.*)$/.exec(linha);
+    if (ol) {
+      fechar();
+      const nivel = Math.min(4, Math.floor(ol[1].length / 2));
+      blocos.push(paragrafo([ol[3]], { recuo: 567 + nivel * 425, prefixo: `${ol[2]}. ` }));
+      continue;
+    }
+    const q = /^\s*>\s?(.*)$/.exec(linha);
+    if (q) {
+      fechar();
+      blocos.push(paragrafo([q[1]], { estilo: "Quote" }));
+      continue;
+    }
+    par.push(linha.trim());
+  }
+  fechar();
+  return blocos.join("");
+}
+var ESTILOS = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles ${NS}>
+<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri" w:eastAsia="Calibri"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:lang w:val="pt-PT"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="276" w:lineRule="auto"/><w:jc w:val="both"/></w:pPr></w:pPrDefault></w:docDefaults>
+<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style>
+<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="240" w:after="120"/><w:jc w:val="left"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/><w:szCs w:val="32"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="200" w:after="100"/><w:jc w:val="left"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="160" w:after="80"/><w:jc w:val="left"/><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:b/><w:sz w:val="23"/><w:szCs w:val="23"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="Quote"><w:name w:val="Quote"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:ind w:left="567"/></w:pPr><w:rPr><w:i/></w:rPr></w:style>
+</w:styles>`;
+var TIPOS = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+<Default Extension="xml" ContentType="application/xml"/>
+<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
+</Types>`;
+var RELS = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
+</Relationships>`;
+var DOC_RELS = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+</Relationships>`;
+function core(titulo, quando) {
+  const t = quando.toISOString().replace(/\.\d{3}Z$/, "Z");
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<dc:title>${xml(titulo)}</dc:title><dc:creator>juridico-pt</dc:creator>
+<dcterms:created xsi:type="dcterms:W3CDTF">${t}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${t}</dcterms:modified>
+</cp:coreProperties>`;
+}
+function gerarDocx(md, opts = {}) {
+  const quando = opts.quando ?? /* @__PURE__ */ new Date();
+  const titulo = opts.titulo ?? (/^#\s+(.+)$/m.exec(limparMarkdown(md))?.[1] ?? "Documento").trim();
+  const documento = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document ${NS}><w:body>${corpo(md)}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1418" w:right="1418" w:bottom="1418" w:left="1418" w:header="709" w:footer="709" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+  return criarZip(
+    [
+      { nome: "[Content_Types].xml", dados: TIPOS },
+      { nome: "_rels/.rels", dados: RELS },
+      { nome: "docProps/core.xml", dados: core(titulo, quando) },
+      { nome: "word/document.xml", dados: documento },
+      { nome: "word/styles.xml", dados: ESTILOS },
+      { nome: "word/_rels/document.xml.rels", dados: DOC_RELS }
+    ],
+    quando
+  );
+}
+
+// src/exportar.ts
+var NOME_RE2 = /^[a-z0-9][a-z0-9-]{0,60}$/;
+function exportarDocumento(p) {
+  const nome = String(p.nome ?? "").trim().toLowerCase().replace(/\.docx$/, "");
+  if (!NOME_RE2.test(nome)) throw new Error(`Nome de ficheiro inv\xE1lido: '${p.nome}' (usa letras min\xFAsculas, algarismos e h\xEDfens).`);
+  if (p.conteudo === void 0 === (p.template === void 0)) {
+    throw new Error("Indica o conte\xFAdo (Markdown) OU o nome de um template \u2014 um dos dois.");
+  }
+  let md = p.conteudo ?? "";
+  if (p.template !== void 0) {
+    const t = ler("templates", String(p.template).trim());
+    if (t === null) throw new Error(`Template n\xE3o encontrado: '${p.template}' (v\xEA listar_templates).`);
+    md = t;
+  }
+  if (!md.trim()) throw new Error("O documento est\xE1 vazio.");
+  const bytes = gerarDocx(md);
+  const caminho2 = escreverSeguro(dirProjeto(p.projeto), [PASTA_DADOS, "exportados", `${nome}.docx`], bytes);
+  const placeholders = (md.match(/\{\{[A-Z0-9_]+\}\}/g) ?? []).length;
+  return { caminho: caminho2, bytes: bytes.length, placeholders };
+}
+
+// src/elicitacao.ts
+var CAMPOS_FORMULARIO = ["forma_juridica", "regime_iva", "trabalhadores", "contabilidade"];
+var ESQUEMA = {
+  type: "object",
+  properties: {
+    forma_juridica: {
+      type: "string",
+      title: "Forma jur\xEDdica",
+      enum: ["ENI", "Unipessoal Lda", "Lda", "SA", "Associa\xE7\xE3o ou cooperativa", "Particular"]
+    },
+    regime_iva: {
+      type: "string",
+      title: "Regime de IVA",
+      enum: ["mensal", "trimestral", "isento (art. 53.\xBA)"]
+    },
+    trabalhadores: { type: "integer", title: "N.\xBA de trabalhadores", minimum: 0 },
+    contabilidade: { type: "string", title: "Contabilidade", enum: ["organizada", "simplificado"] },
+    guardar: {
+      type: "boolean",
+      title: "Guardar como perfil deste projeto (.juridico-pt/)",
+      default: false
+    }
+  },
+  required: ["forma_juridica", "regime_iva"]
+};
+function suportaFormulario(servidor) {
+  const e = servidor.server.getClientCapabilities()?.elicitation;
+  if (!e) return false;
+  return Object.keys(e).length === 0 || e.form !== void 0;
+}
+async function pedirPerfil(servidor, motivo) {
+  if (!suportaFormulario(servidor)) return null;
+  try {
+    const r = await servidor.server.elicitInput(
+      { mode: "form", message: `Para ${motivo}, preciso de alguns dados da empresa (s\xF3 os usados no c\xE1lculo).`, requestedSchema: ESQUEMA },
+      { timeout: 5 * 60 * 1e3 }
+    );
+    if (r.action !== "accept" || !r.content) return null;
+    const campos = {};
+    for (const k of CAMPOS_FORMULARIO) {
+      const v = r.content[k];
+      if (v !== void 0 && v !== null && String(v).trim() !== "") campos[k] = String(v).trim();
+    }
+    if (Object.keys(campos).length === 0) return null;
+    return { campos, guardar: r.content.guardar === true };
+  } catch {
+    return null;
+  }
+}
+
 // src/tools.ts
 var AVISO = "\n\n\u26A0\uFE0F Estimativa de apoio. Valores/taxas de 2026 \u2014 confirmar no ano corrente. N\xE3o substitui aconselhamento de advogado inscrito na OA.";
 function texto(s) {
@@ -24680,6 +25032,27 @@ Quota dispon\xEDvel: ${formatarEuros(r.quotaDisponivel)} (${r.quotaDisponivelPct
     obter("templates", "templates")
   );
   server.registerTool(
+    "exportar_documento",
+    {
+      title: "Exportar documento para Word (.docx)",
+      description: "Grava um documento em .docx (Word/LibreOffice) em .juridico-pt/exportados/<nome>.docx: o texto em Markdown j\xE1 preenchido (conteudo) ou um template tal como est\xE1 (template). Mant\xE9m t\xEDtulos, listas, tabelas e negrito; tira os coment\xE1rios e a sec\xE7\xE3o 'Antes de enviar \u2014 verificar'. Usa quando o utilizador quer a carta, o contrato ou a minuta em Word ('exporta para Word', 'quero o .docx', 'manda em formato edit\xE1vel'). EN: export a document to .docx.",
+      inputSchema: {
+        conteudo: external_exports.string().optional().describe("Documento em Markdown, j\xE1 preenchido"),
+        template: external_exports.string().optional().describe("Ou: nome de um template (ex.: 'carta-cobranca-amigavel')"),
+        nome: external_exports.string().describe("Nome do ficheiro, sem extens\xE3o (ex.: 'carta-cliente-x')"),
+        diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (por defeito, cwd)")
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false }
+    },
+    async ({ conteudo, template, nome, diretorio }) => {
+      const r = exportarDocumento({ conteudo, template, nome, projeto: diretorio });
+      return texto(
+        `Documento exportado: ${r.caminho} (${Math.ceil(r.bytes / 1024)} KB).` + (r.placeholders ? `
+\u26A0\uFE0F Ainda tem ${r.placeholders} campo(s) {{...}} por preencher.` : "") + "\nAbre no Word ou no LibreOffice e rev\xEA antes de enviar (a lista 'Antes de enviar \u2014 verificar' n\xE3o vai no ficheiro)."
+      );
+    }
+  );
+  server.registerTool(
     "listar_playbooks",
     {
       title: "Listar playbooks",
@@ -24903,11 +25276,21 @@ Importa cada .ics num calend\xE1rio pr\xF3prio (Google Calendar: Defini\xE7\xF5e
           );
         }
         const p = lerPerfil({ projeto: diretorio, perfil });
-        const cal = gerarCalendario(ano, p?.campos ?? null);
+        const form = p ? null : await pedirPerfil(servidor, `o calend\xE1rio de obriga\xE7\xF5es de ${ano}`);
+        let notaForm = "";
+        if (form?.guardar) {
+          const g = guardarPerfil(form.campos, "projeto", { projeto: diretorio });
+          notaForm = `Perfil guardado em ${g.caminho}.${g.avisoGitignore ? ` \u26A0\uFE0F ${g.avisoGitignore}` : ""}
+`;
+        }
+        const campos = p?.campos ?? form?.campos ?? null;
+        const cal = gerarCalendario(ano, campos);
         const nAc = cal.filter((o) => o.aConfirmar).length;
-        let out = `Calend\xE1rio de obriga\xE7\xF5es ${ano}` + (p ? ` \u2014 perfil${p.nome ? ` '${p.nome}'` : ""} (${p.origem})` : " \u2014 SEM perfil da empresa") + ` \xB7 ${cal.length} prazos${nAc ? ` (${nAc} a confirmar)` : ""}
+        const origem = p ? ` \u2014 perfil${p.nome ? ` '${p.nome}'` : ""} (${p.origem})` : form ? ` \u2014 dados do formul\xE1rio (${Object.entries(form.campos).map(([k, v]) => `${k}: ${v}`).join(" \xB7 ")})` : " \u2014 SEM perfil da empresa";
+        let out = `Calend\xE1rio de obriga\xE7\xF5es ${ano}${origem} \xB7 ${cal.length} prazos${nAc ? ` (${nAc} a confirmar)` : ""}
 ` + (p?.aviso ? `\u26A0\uFE0F ${p.aviso}
-` : "") + (!p ? "Sem perfil, as obriga\xE7\xF5es v\xEAm marcadas \u2753: grava o perfil (guardar_perfil_empresa) para um calend\xE1rio \xE0 medida.\n" : "") + formatarCalendario(cal, { mes });
+` : "") + notaForm + (!campos ? `Sem perfil da empresa, as obriga\xE7\xF5es v\xEAm marcadas \u2753. Pergunta ao utilizador: ${CAMPOS_FORMULARIO.join(", ")} (e s\xF3 o mais que for relevante) e oferece guardar com guardar_perfil_empresa para um calend\xE1rio \xE0 medida.
+` : "") + formatarCalendario(cal, { mes });
         if (exportar) {
           const caminho2 = exportarICS(ano, cal, diretorio, void 0, p?.nome);
           out += `
@@ -25019,18 +25402,18 @@ Confirma sempre a contagem com calc_prazo (dias \xFAteis, f\xE9rias judiciais, d
       },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async ({ bruto, tabela, dependentes, subsidio_refeicao_dia, dias_refeicao, refeicao_cartao }) => {
+    async ({ bruto, tabela: tabela2, dependentes, subsidio_refeicao_dia, dias_refeicao, refeicao_cartao }) => {
       try {
         const r = calcularSalarioLiquido({
           bruto,
-          tabela,
+          tabela: tabela2,
           dependentes,
           subsidioRefeicaoDia: subsidio_refeicao_dia,
           diasRefeicao: subsidio_refeicao_dia ? dias_refeicao : 0,
           refeicaoCartao: refeicao_cartao
         });
         return texto(
-          `Sal\xE1rio l\xEDquido (Continente, 2026) \u2014 bruto ${formatarEuros(bruto)}, tabela ${tabela}, ${dependentes} dependente(s)
+          `Sal\xE1rio l\xEDquido (Continente, 2026) \u2014 bruto ${formatarEuros(bruto)}, tabela ${tabela2}, ${dependentes} dependente(s)
 ` + (subsidio_refeicao_dia ? `Subs\xEDdio de refei\xE7\xE3o: ${formatarEuros(r.refeicaoIsenta + r.refeicaoTributavel)} (isento ${formatarEuros(r.refeicaoIsenta)}; tribut\xE1vel ${formatarEuros(r.refeicaoTributavel)})
 ` : "") + `Seguran\xE7a Social (11%): \u2212${formatarEuros(r.segurancaSocial)}
 Reten\xE7\xE3o de IRS (taxa ${pct2(r.taxaMarginal)}${dependentes >= 3 ? ", \u22121 p.p. por 3+ dependentes" : ""}): \u2212${formatarEuros(r.retencaoIRS)}
@@ -25192,11 +25575,11 @@ Base legal: ${r.base}
       },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
-    async ({ valor_acao, tabela, reducao_eletronica }) => {
+    async ({ valor_acao, tabela: tabela2, reducao_eletronica }) => {
       try {
-        const r = calcularTaxaJustica(valor_acao, { tabela, reducaoEletronica: reducao_eletronica });
+        const r = calcularTaxaJustica(valor_acao, { tabela: tabela2, reducaoEletronica: reducao_eletronica });
         return texto(
-          `Taxa de justi\xE7a \u2014 valor ${formatarEuros(valor_acao)} (${r.escalao}), coluna ${tabela}, UC ${formatarEuros(r.ucValor)}
+          `Taxa de justi\xE7a \u2014 valor ${formatarEuros(valor_acao)} (${r.escalao}), coluna ${tabela2}, UC ${formatarEuros(r.ucValor)}
 Taxa inicial: ${String(r.taxaInicialUC).replace(".", ",")} UC = ${formatarEuros(r.taxaInicialEuros)}${reducao_eletronica ? " (com redu\xE7\xE3o a 90%)" : ""}
 ` + (r.remanescenteUC ? `Remanescente (pago a final; o juiz pode dispensar \u2014 art. 6.\xBA, n.\xBA 7, RCP): ${String(r.remanescenteUC).replace(".", ",")} UC = ${formatarEuros(r.remanescenteUC * r.ucValor)}
 ` : "") + `TOTAL: ${String(r.totalUC).replace(".", ",")} UC = ${formatarEuros(r.totalEuros)}

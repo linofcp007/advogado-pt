@@ -36,6 +36,8 @@ import {
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import { gerarCalendario, exportarICS, formatarCalendario } from "./calendario.js";
 import { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } from "./prazos-estado.js";
+import { exportarDocumento } from "./exportar.js";
+import { pedirPerfil, CAMPOS_FORMULARIO } from "./elicitacao.js";
 
 const AVISO =
   "\n\n⚠️ Estimativa de apoio. Valores/taxas de 2026 — confirmar no ano corrente. Não substitui aconselhamento de advogado inscrito na OA.";
@@ -602,6 +604,30 @@ export function registerTools(servidor: McpServer): void {
   );
 
   server.registerTool(
+    "exportar_documento",
+    {
+      title: "Exportar documento para Word (.docx)",
+      description:
+        "Grava um documento em .docx (Word/LibreOffice) em .juridico-pt/exportados/<nome>.docx: o texto em Markdown já preenchido (conteudo) ou um template tal como está (template). Mantém títulos, listas, tabelas e negrito; tira os comentários e a secção 'Antes de enviar — verificar'. Usa quando o utilizador quer a carta, o contrato ou a minuta em Word ('exporta para Word', 'quero o .docx', 'manda em formato editável'). EN: export a document to .docx.",
+      inputSchema: {
+        conteudo: z.string().optional().describe("Documento em Markdown, já preenchido"),
+        template: z.string().optional().describe("Ou: nome de um template (ex.: 'carta-cobranca-amigavel')"),
+        nome: z.string().describe("Nome do ficheiro, sem extensão (ex.: 'carta-cliente-x')"),
+        diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
+    },
+    async ({ conteudo, template, nome, diretorio }) => {
+      const r = exportarDocumento({ conteudo, template, nome, projeto: diretorio });
+      return texto(
+        `Documento exportado: ${r.caminho} (${Math.ceil(r.bytes / 1024)} KB).` +
+          (r.placeholders ? `\n⚠️ Ainda tem ${r.placeholders} campo(s) {{...}} por preencher.` : "") +
+          "\nAbre no Word ou no LibreOffice e revê antes de enviar (a lista 'Antes de enviar — verificar' não vai no ficheiro)."
+      );
+    }
+  );
+
+  server.registerTool(
     "listar_playbooks",
     {
       title: "Listar playbooks",
@@ -863,14 +889,29 @@ export function registerTools(servidor: McpServer): void {
           );
         }
         const p = lerPerfil({ projeto: diretorio, perfil });
-        const cal = gerarCalendario(ano, p?.campos ?? null);
+        // Sem perfil: formulário (elicitation) se o cliente o suportar; senão, perguntas em texto.
+        const form = p ? null : await pedirPerfil(servidor, `o calendário de obrigações de ${ano}`);
+        let notaForm = "";
+        if (form?.guardar) {
+          const g = guardarPerfil(form.campos, "projeto", { projeto: diretorio });
+          notaForm = `Perfil guardado em ${g.caminho}.${g.avisoGitignore ? ` ⚠️ ${g.avisoGitignore}` : ""}\n`;
+        }
+        const campos = p?.campos ?? form?.campos ?? null;
+        const cal = gerarCalendario(ano, campos);
         const nAc = cal.filter((o) => o.aConfirmar).length;
+        const origem = p
+          ? ` — perfil${p.nome ? ` '${p.nome}'` : ""} (${p.origem})`
+          : form
+            ? ` — dados do formulário (${Object.entries(form.campos).map(([k, v]) => `${k}: ${v}`).join(" · ")})`
+            : " — SEM perfil da empresa";
         let out =
-          `Calendário de obrigações ${ano}` +
-          (p ? ` — perfil${p.nome ? ` '${p.nome}'` : ""} (${p.origem})` : " — SEM perfil da empresa") +
-          ` · ${cal.length} prazos${nAc ? ` (${nAc} a confirmar)` : ""}\n` +
+          `Calendário de obrigações ${ano}${origem} · ${cal.length} prazos${nAc ? ` (${nAc} a confirmar)` : ""}\n` +
           (p?.aviso ? `⚠️ ${p.aviso}\n` : "") +
-          (!p ? "Sem perfil, as obrigações vêm marcadas ❓: grava o perfil (guardar_perfil_empresa) para um calendário à medida.\n" : "") +
+          notaForm +
+          (!campos
+            ? `Sem perfil da empresa, as obrigações vêm marcadas ❓. Pergunta ao utilizador: ${CAMPOS_FORMULARIO.join(", ")} ` +
+              "(e só o mais que for relevante) e oferece guardar com guardar_perfil_empresa para um calendário à medida.\n"
+            : "") +
           formatarCalendario(cal, { mes });
         if (exportar) {
           const caminho = exportarICS(ano, cal, diretorio, undefined, p?.nome);

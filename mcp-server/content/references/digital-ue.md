@@ -7,6 +7,7 @@
 ## Legislação Base
 - **Regulamento (UE) 2024/1689** — Regulamento da Inteligência Artificial ("AI Act")
 - **Diretiva (UE) 2022/2555** — Cibersegurança ("NIS2")
+- **DL 125/2025**, de 4 de dezembro — Regime Jurídico da Cibersegurança (transposição da NIS2), em vigor desde 3/4/2026; revogou a Lei 46/2018 e o DL 65/2021. Regulamentado pelo **Regulamento do CNCS n.º 756/2026** (DR, 2.ª série, n.º 118, de 22/6/2026)
 - **Regulamento (UE) 2022/2065** — Serviços Digitais ("DSA")
 - **Regulamento (UE) 2022/1925** — Mercados Digitais ("DMA")
 - **Regulamento (UE) 2024/2847** — Ciber-resiliência ("CRA")
@@ -53,10 +54,29 @@ Cada Estado-Membro designa autoridade(s) (art. 70.º). Em Portugal o Governo man
 Eleva as exigências de cibersegurança para **entidades essenciais e importantes** em setores como energia, saúde, infraestrutura digital, **fornecedores de serviços TIC geridos e digitais**, etc. Mesmo PME podem ser abrangidas se prestarem serviços críticos ou forem **fornecedores numa cadeia** de uma entidade abrangida.
 
 - **Medidas de gestão de risco** (Art. 21.º): políticas de segurança, gestão de incidentes, continuidade, segurança da cadeia de fornecimento, cifra, controlo de acessos.
-- **Reporte de incidentes**: *early warning* em **24h**, notificação em **72h**, relatório final em 1 mês.
+- **Reporte de incidentes**: *early warning* em **24h**, notificação em **72h**, relatório final em 1 mês. É a regra da diretiva (art. 23.º); a lei portuguesa fixou prazos próprios, descritos abaixo.
 - **Responsabilidade da gestão**: os órgãos de administração respondem pela supervisão das medidas.
 - **Autoridade em Portugal**: CNCS — Centro Nacional de Cibersegurança. Transposição: **DL 125/2025** (Regime Jurídico da Cibersegurança — ver `references/compliance.md`); confirmar o âmbito setorial e a dimensão da entidade.
-- **Coimas**: significativas (entidades essenciais até 10 M€ ou 2% do volume de negócios mundial).
+- **Coimas**: significativas (entidades essenciais até 10 M€ ou 2% do volume de negócios mundial). Molduras portuguesas por tipo de entidade e por gravidade em `references/valores-2026.md`.
+
+### Em Portugal — DL 125/2025 (Regime Jurídico da Cibersegurança)
+- **Transposição**: o DL 125/2025, de 4 de dezembro (DR, 1.ª série, n.º 234), aprova o regime em anexo e está em vigor desde **3/4/2026** (art. 11.º do decreto-lei: 120 dias após a publicação). **Revogou a Lei 46/2018 e o DL 65/2021** (art. 9.º). Os artigos citados abaixo são do regime anexo.
+- **Âmbito** (arts. 3.º e 4.º): entidades dos tipos dos anexos I (10 setores de importância crítica) e II (7 outros setores críticos) que sejam **médias empresas ou maiores**. Algumas ficam abrangidas qualquer que seja a dimensão: comunicações eletrónicas, serviços de confiança, TLD, DNS, prestador único de serviço essencial e entidades críticas. Inclui ainda a Administração Pública, como "entidades públicas relevantes" dos grupos A e B (art. 7.º).
+- **Qualificação** (art. 6.º): são **essenciais**, entre outras, as entidades do anexo I acima dos limiares de média empresa e os prestadores qualificados de confiança, TLD e DNS de qualquer dimensão. As restantes entidades abrangidas são **importantes**. A qualificação é feita pelo CNCS depois da autoidentificação, com audiência prévia de 10 dias úteis (Regulamento 756/2026, art. 9.º).
+- ⏰ **Registo na plataforma MyCiber** (art. 8.º, n.º 1): 30 dias após o início da atividade ou, para quem já estava em atividade, 60 dias após a abertura da plataforma, contados em dias úteis. A plataforma abriu a 23/6/2026 e o prazo terminou a **15/9/2026** (CNCS).
+- **Governação** (arts. 25.º, 31.º e 32.º):
+  - o órgão de administração aprova e supervisiona as medidas e assegura formação regular;
+  - os administradores podem responder com dolo ou culpa grave;
+  - **responsável de cibersegurança** e **ponto de contacto permanente 24/7**, comunicados em 20 dias úteis após a notificação da qualificação final (Regulamento 756/2026, arts. 14.º e 15.º).
+- ⏰ **Incidentes significativos** (arts. 40.º a 44.º):
+  - notificação inicial **até 24 horas** depois de concluíres que há, ou pode haver, um incidente significativo;
+  - atualização até **72 horas**, quando necessário;
+  - notificação do **fim do impacto** até 24 horas depois de este terminar (se o incidente ficar resolvido em 2 horas, basta esta);
+  - **relatório final em 30 dias úteis** a contar da notificação do fim do impacto.
+  - Tudo é submetido na MyCiber. A notificação ao CNCS não dispensa a da CNPD (RGPD, 72 horas) — ver `playbooks/data-breach.md`.
+- **Medidas** (arts. 26.º a 30.º): as áreas mínimas do art. 27.º, n.º 1 (incidentes, continuidade, cadeia de abastecimento, desenvolvimento seguro, ciber-higiene e formação, criptografia, controlo de acessos, MFA) e as medidas mínimas do anexo III do Regulamento 756/2026, por nível de conformidade (básico, substancial ou elevado). ⏰ As medidas, a cadeia de abastecimento, o risco residual e o relatório anual, com as coimas respetivas, só produzem efeitos **24 meses após a regulamentação** (art. 10.º, n.º 2, do decreto-lei); segundo o CNCS, a contar de 22/6/2026 (a confirmar a data exata). A **lista de ativos acessíveis pela Internet** é devida até 31/1 do ano seguinte à qualificação, ou 6 meses depois desta, o que vencer primeiro (Regulamento, art. 32.º).
+- **Supervisão e sanções** (arts. 54.º a 69.º): supervisão *ex ante* para as essenciais e *ex post* para as importantes; contraordenações muito graves, graves e leves. Sem dolo, há **advertência prévia** antes de processo (art. 66.º, n.º 5). Durante 12 meses a contar da entrada em vigor, pode pedir-se a **dispensa de coimas** por falta de procedimento interno de adaptação (art. 65.º — a confirmar o alcance). A impugnação judicial das coimas é apresentada ao CNCS e decidida pelos tribunais judiciais (art. 80.º).
+- Checklist completa: `assets/checklists/checklist-nis2.md`.
 
 > Mesmo que não seja diretamente abrangido, é frequente que **clientes abrangidos pela NIS2 imponham contratualmente** requisitos de segurança aos seus fornecedores — antecipar nos contratos.
 
@@ -104,6 +124,7 @@ Checklist rápido de exposição regulatória:
 - [ ] **Usa ou vende IA?** → mapear o risco no AI Act; transparência (Art. 50.º) e medidas de literacia (Art. 4.º) — `assets/templates/politica-uso-ia.md`.
 - [ ] **Vende software/produtos digitais na UE?** → comunicação de vulnerabilidades e incidentes já obrigatória (desde 11/9/2026); conformidade CRA completa até 11/12/2027.
 - [ ] **É fornecedor TIC de entidades reguladas?** → antecipar requisitos NIS2 nos contratos.
+- [ ] **Atua num setor dos anexos do DL 125/2025 e é média ou grande empresa (ou presta serviços geridos, nuvem, centro de dados)?** → registo na MyCiber (prazo das entidades em atividade terminou a 15/9/2026), responsável de cibersegurança e incidentes em 24 horas — `assets/checklists/checklist-nis2.md`.
 - [ ] **Opera plataforma/marketplace?** → deveres do DSA (notice-and-action, KYBC).
 - [ ] **Usa cookies/marketing?** → consentimento ePrivacy + base RGPD.
 - [ ] **Cláusulas contratuais**: repercutir obrigações de segurança e IA nos contratos com clientes e fornecedores (ver `references/contratos-internacionais.md`).
@@ -113,3 +134,4 @@ Checklist rápido de exposição regulatória:
 - Cláusula contratual de cibersegurança e NIS2 para fornecedores (a pedido)
 - Política de gestão de vulnerabilidades (CRA) (a pedido)
 - Cookie banner / Cookie policy — `assets/templates/cookie-policy.md`
+- Checklist NIS2 (DL 125/2025) — `assets/checklists/checklist-nis2.md`

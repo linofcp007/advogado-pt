@@ -19,7 +19,7 @@
 - **RGPD** (Regulamento (UE) 2016/679): art. 30.º, n.º 5 (registo de atividades) e art. 37.º (encarregado de proteção de dados, DPO). **Lei 58/2019**: execução nacional.
 - **Lei 83/2017** (branqueamento) e **Lei 89/2017** (RCBE): ver `references/bancario.md`.
 - **Relato de sustentabilidade**: CSRD, Diretiva (UE) 2022/2464, alterada pela Diretiva "Omnibus I" (UE) 2026/470, de 24/2/2026. Ainda **não transposta** em Portugal (EUR-Lex, medidas nacionais de transposição, consultado em 3/10/2026).
-- **DL 125/2025** (Regime Jurídico da Cibersegurança, que transpõe a NIS2 — Diretiva (UE) 2022/2555), em vigor desde **3/4/2026**: ver `references/digital-ue.md`.
+- **DL 125/2025** (Regime Jurídico da Cibersegurança, que transpõe a NIS2 — Diretiva (UE) 2022/2555), em vigor desde **3/4/2026**: ver `references/digital-ue.md`. Revogou a Lei 46/2018 e o DL 65/2021 (art. 9.º do decreto-lei) e é regulamentado pelo **Regulamento do CNCS n.º 756/2026** (DR, 2.ª série, de 22/6/2026: plataforma MyCiber, medidas mínimas, níveis de conformidade). Checklist: `assets/checklists/checklist-nis2.md`.
 
 ## Quem conta como "empresa com N trabalhadores"
 - **RGPC, art. 2.º, n.º 1**: aplica-se às **pessoas coletivas com sede em Portugal que empreguem 50 ou mais trabalhadores** e às **sucursais em Portugal** de pessoas coletivas estrangeiras com 50 ou mais trabalhadores. O MENAC esclarece que o critério é **só o número de trabalhadores**, e não o setor nem as funções (FAQ RGPC, n.º 3).
@@ -232,6 +232,7 @@
 - **De 7 a 49**: código de boa conduta contra o assédio (obrigatório) e, a partir de 10, organização formal da SST. O RGPC e o canal da Lei 93/2021 ainda não são obrigatórios. Prepara-te se estiveres a crescer para perto dos 50: o salto obriga a montar um programa inteiro.
 - **De 50 a 249**: o programa completo do RGPC, o canal de denúncia interna (que pode ser partilhado com outras entidades ou ter a receção externalizada), o registo na Plataforma RGPC e a resposta a uma eventual notificação da ACT ao abrigo da Lei 60/2018. Calendário: abril e outubro.
 - **250 ou mais**: tudo o anterior, com o canal **só da empresa**, a quota de 2 %, as obrigações de transparência salarial (quando a diretiva for transposta) e a verificação da CSRD (só acima de 1000 trabalhadores, depois da Omnibus) e da NIS2 conforme o setor.
+- **NIS2 (DL 125/2025)**: depende do setor (anexos I e II) e, em regra, de a empresa ser média ou grande. Para as entidades já em atividade, o registo na plataforma MyCiber do CNCS terminou a **15/9/2026** (60 dias úteis após a abertura da plataforma — art. 8.º, n.º 1). Seguem-se o responsável de cibersegurança e o ponto de contacto permanente (20 dias úteis após a qualificação final) e a notificação de incidentes significativos em 24 horas. Ver `assets/checklists/checklist-nis2.md`.
 - **Contratação pública**: as entidades adjudicantes podem exigir ou valorizar o programa de compliance, e o RGPC exige manuais de controlo interno publicitados (art. 17.º, n.º 3). Ver `references/contratacao-publica.md`.
 - **Gerentes e administradores** respondem pessoalmente pelas coimas do RGPC (arts. 21.º e 22.º). O responsável pelo cumprimento normativo também, se souber e nada fizer.
 - **Recomenda advogado** se houver denúncia de corrupção ou crime contra a empresa, um processo do MENAC (nota de ilicitude: **15 dias úteis** para a defesa — art. 27.º, n.º 2 RGPC) ou suspeita de retaliação contra um denunciante.
@@ -245,4 +246,5 @@
 - `assets/templates/regulamento-interno.md` — regulamento interno de empresa (CT art. 99.º)
 - `assets/checklists/checklist-compliance-dimensao.md` — o que é obrigatório por escalão de trabalhadores
 - `assets/checklists/checklist-seguranca-saude-trabalho.md` — organização da SST por dimensão e risco
+- `assets/checklists/checklist-nis2.md` — cibersegurança NIS2 (DL 125/2025): âmbito, registo no CNCS, governação, incidentes e coimas
 - Gerados a pedido, neste estilo: código de conduta do RGPC (art. 7.º), relatório de infração (art. 7.º, n.º 3), plano de formação (art. 9.º), política de ofertas e conflitos de interesses, questionário de due diligence de terceiros (art. 18.º), nomeação do responsável pelo cumprimento normativo (a pedido)
