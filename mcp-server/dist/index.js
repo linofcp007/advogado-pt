@@ -22389,7 +22389,7 @@ function decidirIVA(p) {
       codigo: "M40",
       declaracoes: [`${DP} (campo 8)`],
       base: "CIVA, art. 6.\xBA, n.\xBA 6, al. a), a contr\xE1rio",
-      avisos: ["H\xE1 quem use M99 nestes casos \u2014 confirmar a men\xE7\xE3o com o contabilista (a confirmar)."]
+      avisos: ["M40 confirmado pela AT para clientes de pa\xEDses terceiros (informa\xE7\xF5es vinculativas 16210/2020 e 27890/2025; art. 36.\xBA, n.\xBA 13, CIVA)."]
     });
   }
   if (servico === "eletronico") {
@@ -22721,11 +22721,15 @@ var PGDL_CSC = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=524&
 var PGDL_CT = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=1047&tabela=leis";
 var PGDL_RGPC = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3543&tabela=leis";
 var RCBE = "https://justica.gov.pt/Guias/guia-do-registo-central-do-beneficiario-efetivo-rcbe";
-var RU = "https://www.relatoriounico.pt";
+var RU = "https://www.dgcp.mtsss.gov.pt/relatorio-unico";
 var PRORROGACOES = {
   "efatura_comunicacao@2026-01-05": { data: "2026-01-09", nota: "Prorrogado pelo Despacho SEAF 166/2025." },
   "efatura_comunicacao@2026-04-05": { data: "2026-04-08", nota: "Prorrogado pelo Despacho SEAF 40/2026." },
   "efatura_comunicacao@2026-05-05": { data: "2026-05-08", nota: "Prorrogado pelo Despacho SEAF 55/2026." },
+  "relatorio_unico@2026-04-15": {
+    data: "2026-06-12",
+    nota: "Em 2026 (dados de 2025) a recolha come\xE7ou mais tarde e foi alargada at\xE9 12/6/2026 (DGCP)."
+  },
   "modelo22@2026-05-31": {
     data: "2026-06-30",
     nota: "Prorrogado para 30/6/2026, com o pagamento, pelos Despachos SEAF 68/2026 e 81/2026."
@@ -23116,7 +23120,7 @@ var REGRAS = [
     base: "Portaria 55/2010, art. 4.\xBA",
     fonte: RU,
     transferivel: true,
-    nota: "Entrega de 16 de mar\xE7o a 15 de abril, sobre o ano anterior. O GEP tem adiado a janela (em 2026, para maio/junho): confirmar a data do ano em relatoriounico.pt.",
+    nota: "Regra: entrega de 16 de mar\xE7o a 15 de abril, sobre o ano anterior. A DGCP (ex-GEP) pode alterar a janela \u2014 confirmar a data do ano em dgcp.mtsss.gov.pt/relatorio-unico.",
     aplica: comTrabalhadores,
     datas: (a) => [{ data: iso3(a, 4, 15), periodo: `dados de ${a - 1}` }]
   },

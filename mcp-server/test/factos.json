@@ -563,5 +563,142 @@
     ],
     "naoContem": [],
     "fonte": "DL 128/2014, art. 13.º-A"
+  },
+  {
+    "id": "m40-servicos-fora-ue",
+    "pergunta": "Que código de isenção leva um serviço B2B a uma empresa fora da UE?",
+    "ficheiro": "skills/advogado-pt/references/iva-internacional.md",
+    "contem": [
+      "usa-se o \\*\\*M40\\*\\*"
+    ],
+    "naoContem": [
+      "há quem use M99"
+    ],
+    "fonte": "CIVA arts. 6.º, n.º 6, al. a), e 36.º, n.º 13; AT, informações vinculativas 16210/2020 e 27890/2025"
+  },
+  {
+    "id": "relatorio-unico-2026",
+    "pergunta": "Até quando se entregou o Relatório Único em 2026?",
+    "ficheiro": "mcp-server/src/calendario.ts",
+    "contem": [
+      "relatorio_unico@2026-04-15",
+      "2026-06-12"
+    ],
+    "naoContem": [],
+    "fonte": "Portaria 55/2010, art. 4.º; DGCP (dgcp.mtsss.gov.pt/relatorio-unico)"
+  },
+  {
+    "id": "tvde-taxa-sem-iva",
+    "pergunta": "Qual o máximo da taxa de intermediação das plataformas TVDE?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "\\*\\*25%\\*\\* do valor da viagem \\*\\*sem IVA\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 45/2018, art. 15.º, n.º 3 (Lei 59/2026)"
+  },
+  {
+    "id": "tvde-coimas",
+    "pergunta": "Quais as coimas do regime TVDE para empresas?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "pessoas coletivas \\*\\*5\\.000 € a 44\\.000 €\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 45/2018, art. 25.º, n.º 2 (Lei 59/2026)"
+  },
+  {
+    "id": "alvara-classe-1",
+    "pergunta": "Até que valor vai a classe 1 do alvará de construção?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "classe 1 até \\*\\*200\\.000 €\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "Portaria 212/2022, art. 1.º"
+  },
+  {
+    "id": "certificado-empreiteiro",
+    "pergunta": "Até quanto pode executar quem só tem certificado de empreiteiro?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "\\*\\*40\\.000 €\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 41/2015, arts. 7.º, n.º 2, e 25.º, n.º 2"
+  },
+  {
+    "id": "mediacao-seguro",
+    "pergunta": "Qual o seguro mínimo de uma empresa de mediação imobiliária?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "capital mínimo \\*\\*150\\.000 €\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 15/2013, art. 7.º, n.º 1"
+  },
+  {
+    "id": "rjue-dl108-vigor",
+    "pergunta": "Quando entrou em vigor o novo RJUE (DL 108/2026)?",
+    "ficheiro": "skills/advogado-pt/references/licenciamento-setorial.md",
+    "contem": [
+      "em vigor desde 1/10/2026\\*\\* \\(DL 108/2026"
+    ],
+    "naoContem": [],
+    "fonte": "DL 108/2026, art. 13.º; DL 155-B/2026, art. 2.º"
+  },
+  {
+    "id": "csrd-omnibus-450",
+    "pergunta": "A que empresas se aplica a CSRD depois da Omnibus I?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "> \\*\\*450 M€ e\\*\\* número médio > \\*\\*1\\.000\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "Diretiva (UE) 2026/470 (novo art. 19.º-A da Diretiva 2013/34/UE)"
+  },
+  {
+    "id": "ai-act-small-midcaps",
+    "pergunta": "As small mid caps têm sempre a coima mais baixa no AI Act?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "o mais baixo só nas dos n\\.os 4 e 5"
+    ],
+    "naoContem": [],
+    "fonte": "Reg. (UE) 2024/1689, art. 99.º, n.º 6-A (Reg. (UE) 2026/1744)"
+  },
+  {
+    "id": "ai-act-anexo-iii-2027",
+    "pergunta": "Quando se aplicam as regras de alto risco do Anexo III do AI Act?",
+    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "contem": [
+      "\\*\\*02/12/2027\\*\\*"
+    ],
+    "naoContem": [
+      "alto risco do Anexo III\\)\\*\\*: \\*\\*02/08/2026"
+    ],
+    "fonte": "Reg. (UE) 2024/1689, art. 113.º (Reg. (UE) 2026/1744)"
+  },
+  {
+    "id": "ai-literacia-promover",
+    "pergunta": "O art. 4.º do AI Act obriga a garantir um nível de literacia?",
+    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "contem": [
+      "\\*\\*promover\\*\\* a literacia"
+    ],
+    "naoContem": [
+      "garantir que a equipa que opera os sistemas tem formação adequada"
+    ],
+    "fonte": "Reg. (UE) 2024/1689, art. 4.º (Reg. (UE) 2026/1744)"
+  },
+  {
+    "id": "anacom-ia-pendente",
+    "pergunta": "A ANACOM já é a autoridade nacional do AI Act?",
+    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "contem": [
+      "ainda não foi publicada"
+    ],
+    "naoContem": [],
+    "fonte": "Comissão Europeia, autoridades do AI Act (7/9/2026); ANACOM, Relatório de Regulação 2025"
   }
 ]

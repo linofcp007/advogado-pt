@@ -228,7 +228,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Prestação mínima na execução fiscal | **¼ UC = 25,50 €** (até 36 prestações); 1 UC só no regime excecional de retenções/IVA (n.º 3, al. b)); dívida > 500 UC: até 5 anos com prestação ≥ 10 UC | CPPT art. 196.º, n.os 3-5 |
 | Juros de mora às dívidas ao Estado | **7,221%** ao ano (desde 1/1/2026) | Aviso IGCP n.º 18/2026/2; DL 73/99 |
 | Coimas do RGIT (limites gerais) | mínimo **50 €**; máximo 165.000 € (dolo) / 45.000 € (negligência) para pessoas coletivas (metade para singulares) | RGIT art. 26.º |
-| Retenção na fonte de IRC — não residentes sem estabelecimento estável (royalties, serviços, juros) | **25%**; **35%** se domiciliados em paraíso fiscal (rendimentos de capitais); reduzida ou dispensada por convenção com o formulário Modelo 21-RFI (a confirmar o formulário em vigor) | CIRC arts. 87.º, n.º 4, e 94.º |
+| Retenção na fonte de IRC — não residentes sem estabelecimento estável (royalties, serviços, juros) | **25%**; **35%** se domiciliados em paraíso fiscal (rendimentos de capitais); reduzida ou dispensada por convenção com o formulário **Mod. 21-RFI** entregue antes do pagamento (validade máx. 1 ano; Despacho n.º 8363/2020; CIRC art. 98.º, n.os 2, al. a), e 3) | CIRC arts. 87.º, n.º 4, e 94.º |
 | Pagamentos em numerário — limite geral | < 3.000 € (10.000 € para não residentes singulares); faturas ≥ 1.000 € por meio identificável; impostos > 500 € não em numerário | LGT art. 63.º-E |
 
 ## Banca, Pagamentos e Branqueamento
@@ -272,22 +272,23 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Lei 93/2021 — contraordenações graves (ex.: não ter canal interno) | pessoa singular **500 € a 12.500 €**; pessoa coletiva **1.000 € a 125.000 €**; tentativa e negligência: máximos a metade | Lei 93/2021, art. 27.º, n.os 3 e 4 |
 | Lei 93/2021 — denúncia externa direta | infração punível com coima superior a **50.000 €** (ou crime) | Lei 93/2021, art. 7.º, n.º 2, al. e) |
 | RGPD — coimas | até **20 M€ ou 4%** do volume de negócios mundial (art. 83.º, n.º 5); até **10 M€ ou 2%** (n.º 4) | RGPD, art. 83.º |
-| Regulamento da IA (AI Act) — coimas | práticas proibidas: até **35 M€ ou 7%**; outras obrigações: até **15 M€ ou 3%**; informações incorretas: até **7,5 M€ ou 1%**; PME e *small mid caps*: o montante mais baixo | Reg. (UE) 2024/1689, art. 99.º (redação do Reg. (UE) 2026/1744) |
-| CSRD (relato de sustentabilidade) depois da "Omnibus I" | mais de **1.000 trabalhadores e** volume de negócios líquido > **450 M€** (a confirmar critérios e datas de transposição) | Diretiva (UE) 2026/470 |
+| Regulamento da IA (AI Act) — coimas | práticas proibidas: até **35 M€ ou 7%**; outras obrigações: até **15 M€ ou 3%**; informações incorretas: até **7,5 M€ ou 1%** (o mais elevado); **PME**: o montante mais baixo em todas (n.º 6); ***small mid caps***: o mais baixo só nas dos n.os 4 e 5 (n.º 6-A) | Reg. (UE) 2024/1689, art. 99.º (redação do Reg. (UE) 2026/1744) |
+| CSRD (relato de sustentabilidade) depois da "Omnibus I" | volume de negócios líquido > **450 M€ e** número médio > **1.000** empregados (cumulativos); transposição até **19/3/2027**; CSRD ainda **não transposta** em Portugal (EUR-Lex, medidas nacionais: 0) | Diretiva (UE) 2026/470, arts. 1.º (novo art. 19.º-A da Diretiva 2013/34/UE) e 5.º |
 
 ## Licenciamento Setorial
 
 | Item | Valor | Base legal |
 |---|---|---|
 | Alojamento local — seguro de responsabilidade civil | capital mínimo **75.000 €** | DL 128/2014, art. 13.º-A |
-| Alojamento local — coeficientes do regime simplificado de IRS | **0,15** (hospedagem e quartos); **0,50** (moradia ou apartamento em área de contenção); **0,35** (moradia ou apartamento fora dela) | CIRS art. 31.º, n.º 1, als. a), h) e c) |
-| Construção — classes de alvará | limites por classe fixados pela Portaria 212/2022 (classe 1 até **200.000 €** — a confirmar a atualização em impic.pt) | Lei 41/2015; Portaria 212/2022 |
+| Alojamento local — coeficientes do regime simplificado de IRS | **0,15** (estabelecimento de hospedagem; quartos por interpretação da al. a)); **0,50** (moradia ou apartamento em área de contenção); **0,35** (moradia ou apartamento fora dela) | CIRS art. 31.º, n.º 1, als. a), h) e c) |
+| Construção — classes de alvará | classe 1 até **200.000 €** · 2: 400.000 € · 3: 800.000 € · 4: 1.600.000 € · 5: 3.200.000 € · 6: 6.400.000 € · 7: 12.500.000 € · 8: 19.000.000 € · 9: acima | Portaria 212/2022, art. 1.º (em vigor; sem portaria posterior) |
+| Construção — certificado de empreiteiro / contrato escrito | certificado: obras até **20%** do limite da classe 1 (**40.000 €**); empreitada de obra particular acima de **10%** (**20.000 €**) tem de ser escrita, sob pena de nulidade | Lei 41/2015, arts. 7.º, n.º 2, 25.º, n.º 2, e 26.º |
 | Transporte rodoviário de mercadorias — capacidade financeira | **9.000 €** (1.º veículo) + **5.000 €** por pesado adicional + **900 €** por veículo de 2,5 a 3,5 t | Reg. (CE) 1071/2009, art. 7.º (redação do Reg. (UE) 2020/1055); imt-ip.pt |
-| TVDE — taxa de intermediação do operador de plataforma | máximo **25%** (a Lei 59/2026 passou a base de cálculo para o valor sem IVA — a confirmar) | Lei 45/2018, art. 15.º, n.º 3 |
+| TVDE — taxa de intermediação do gestor da plataforma | máximo **25%** do valor da viagem **sem IVA** | Lei 45/2018, art. 15.º, n.º 3 (redação da Lei 59/2026) |
 | TVDE — contribuição de regulação | **0,1% a 2%** | Lei 45/2018, art. 30.º |
-| TVDE — coimas (pessoas coletivas) | até **44.000 €** (a confirmar — Lei 59/2026, em vigor desde 1/9/2026) | Lei 45/2018, na redação da Lei 59/2026 |
+| TVDE — coimas | pessoas singulares **250 € a 4.500 €**; pessoas coletivas **5.000 € a 44.000 €**; tentativa e negligência puníveis | Lei 45/2018, art. 25.º, n.os 2 e 3 (redação da Lei 59/2026, em vigor desde 1/9/2026) |
 | Mediação imobiliária — seguro de responsabilidade civil | capital mínimo **150.000 €** | Lei 15/2013, art. 7.º, n.º 1 |
-| Mediação imobiliária — comunicação trimestral ao IMPIC | arrendamentos com renda mensal a partir de **2.500 €** | Lei 83/2017; Regulamento IMPIC 603/2021 |
+| Mediação imobiliária — comunicação trimestral ao IMPIC | arrendamentos com renda mensal a partir de **2.500 €** | Lei 83/2017, art. 46.º, n.os 1, al. b), e 3; Regulamento IMPIC 603/2021, art. 14.º |
 
 ## Fontes Oficiais para Verificação
 

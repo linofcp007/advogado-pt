@@ -18,7 +18,7 @@
 - **Lei 4/2019** (quotas de emprego para pessoas com deficiência): art. 5.º.
 - **RGPD** (Regulamento (UE) 2016/679): art. 30.º, n.º 5 (registo de atividades) e art. 37.º (encarregado de proteção de dados, DPO). **Lei 58/2019**: execução nacional.
 - **Lei 83/2017** (branqueamento) e **Lei 89/2017** (RCBE): ver `references/bancario.md`.
-- **Relato de sustentabilidade**: CSRD, Diretiva (UE) 2022/2464, alterada pela Diretiva "Omnibus I" (UE) 2026/470 (a confirmar). Ainda não transposta em Portugal (a confirmar).
+- **Relato de sustentabilidade**: CSRD, Diretiva (UE) 2022/2464, alterada pela Diretiva "Omnibus I" (UE) 2026/470, de 24/2/2026. Ainda **não transposta** em Portugal (EUR-Lex, medidas nacionais de transposição, consultado em 3/10/2026).
 - **DL 125/2025** (Regime Jurídico da Cibersegurança, que transpõe a NIS2) (a confirmar): ver `references/digital-ue.md`.
 
 ## Quem conta como "empresa com N trabalhadores"
@@ -41,7 +41,7 @@
 | **100 / 150** | Relatório de disparidades salariais entre homens e mulheres: com 150 ou mais trabalhadores a partir de 2027, com 100 ou mais a partir de 2031 (Diretiva 2023/970, art. 9.º — depende da transposição, a confirmar) | Diretiva (UE) 2023/970 |
 | **250** | Grande empresa: quota de **2 %**; fim da dispensa de registo de atividades de tratamento (que, aliás, quase nunca se aplica a quem tem trabalhadores); o canal deixa de poder ser partilhado com outras entidades (a partilha de recursos só é possível entre 50 e 249); relatório **anual** de disparidades salariais (Diretiva 2023/970, a confirmar) | Lei 4/2019, art. 5.º, n.º 2; RGPD art. 30.º, n.º 5; Lei 93/2021, art. 8.º, n.º 2 |
 | **400** (por estabelecimento) | **Serviço interno de SST**. Em atividades de risco elevado, basta haver **30** trabalhadores expostos | Lei 102/2009, art. 78.º, n.º 3 |
-| **1000** | CSRD depois da "Omnibus I": só empresas com mais de 1000 trabalhadores **e** volume de negócios líquido acima do limiar da diretiva (em `references/valores-2026.md`; a confirmar) | Diretiva (UE) 2026/470 |
+| **1000** | CSRD depois da "Omnibus I": só empresas com número médio de mais de 1000 trabalhadores **e** volume de negócios líquido acima de 450 M€ (`references/valores-2026.md`) | Diretiva (UE) 2026/470 |
 
 > O perfil da empresa (`.advogado-pt/perfil-empresa.md`, tool `obter_perfil_empresa`) diz-te o número de trabalhadores, a forma jurídica e o setor. Se o número estiver perto de um limiar, calcula a média do ano anterior antes de concluir.
 
@@ -214,7 +214,7 @@
 
 ## Relato de sustentabilidade (CSRD) — só grandes
 - A CSRD (Diretiva (UE) 2022/2464) previa a entrada faseada das grandes empresas, com 250 ou mais trabalhadores e outros critérios financeiros. A Diretiva "stop-the-clock" (UE) 2025/794 adiou as vagas seguintes (a confirmar).
-- A **Diretiva "Omnibus I" (UE) 2026/470**, publicada a 26/2/2026, limita a CSRD às empresas com **mais de 1000 trabalhadores e volume de negócios líquido acima do limiar da diretiva** (em `references/valores-2026.md`) (a confirmar os critérios exatos e as datas). O prazo de transposição das alterações ao relato é **19/3/2027** (a confirmar).
+- A **Diretiva "Omnibus I" (UE) 2026/470**, publicada a 26/2/2026, limita a CSRD às empresas que excedam **um volume de negócios líquido de 450 M€ e um número médio de 1000 empregados** (novo art. 19.º-A, n.º 1, da Diretiva 2013/34/UE; o art. 29.º-A aplica o critério aos grupos). O prazo de transposição das alterações ao relato é **19/3/2027** (art. 5.º, n.º 1); a CSRD original continua por transpor em Portugal.
 - **Em Portugal**, a CSRD ainda não estava transposta (a confirmar o estado atual). Continua a aplicar-se a **demonstração não financeira** do DL 89/2017 (CSC, arts. 66.º-B e 508.º-G) às grandes entidades de interesse público com mais de 500 trabalhadores (a confirmar).
 - **PME**: não estão sujeitas, mas os clientes grandes podem pedir-lhes dados ESG na cadeia de valor. A Omnibus limita o que pode ser exigido às empresas mais pequenas (a confirmar o *value-chain cap*).
 

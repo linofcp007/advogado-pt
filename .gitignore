@@ -22,5 +22,9 @@ mcp-server/dist/*
 .DS_Store
 Thumbs.db
 
-# dev-guardian outputs
-.guardian/
+# dev-guardian: só a baseline é versionada
+**/.guardian/*
+!**/.guardian/baseline.json
+
+# Registos de navegação de agentes (Playwright MCP)
+.playwright-mcp/

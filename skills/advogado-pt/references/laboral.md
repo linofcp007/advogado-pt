@@ -77,7 +77,7 @@
 - Comunicação de admissão à SS **até ao início da execução do contrato** (art. 29.º, n.º 2, al. a), Código Contributivo, na redação do DL 127/2025, em vigor desde 1/1/2026); só excecionalmente nas 24 horas seguintes ao início (al. b)). Contribuições pagas entre o dia 1 e o dia 25 do mês seguinte (art. 43.º)
 - Medicina no trabalho (exame de admissão, periódicos, ocasionais)
 - Formação profissional: 40h/ano por trabalhador
-- Relatório Único (entrega anual, habitualmente até março/abril)
+- Relatório Único: entrega de 16/3 a 15/4 do ano seguinte (Portaria 55/2010, art. 4.º, n.º 1); em 2026 a DGCP (ex-GEP) alargou-a até 12/6 — confirmar a janela de cada ano em dgcp.mtsss.gov.pt
 
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.

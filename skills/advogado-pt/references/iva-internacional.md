@@ -44,7 +44,7 @@
 | Bens a consumidor da UE, acima do limiar comum (ou opção) | EM do consumidor | tu (IVA do EM de destino) | taxa do EM de destino | OSS trimestral (ou registo nesse EM) |
 | Bens exportados para fora da UE (empresa ou consumidor) | isento em PT | ninguém em PT (o destino cobra na importação) | "Isento artigo 14.º do CIVA" (M05) | DP campo 8; prova aduaneira |
 | Serviços a empresa da UE (regra geral) | EM do cliente | o cliente (autoliquidação) | "IVA - autoliquidação" (M40) | DP campo 7 + Quadro 04; declaração recapitulativa |
-| Serviços a empresa fora da UE (regra geral) | fora de PT (não tributado cá) | regras do país do cliente | M40 — norma "art. 6.º, n.º 6, al. a), *a contrário*" (a confirmar a menção, ver abaixo) | DP campo 8 |
+| Serviços a empresa fora da UE (regra geral) | fora de PT (não tributado cá) | regras do país do cliente | "IVA - autoliquidação" (M40 — norma "art. 6.º, n.º 6, al. a), *a contrário*") | DP campo 8 |
 | Serviços a consumidor em PT ou na UE (regra geral, não eletrónicos) | Portugal | tu (IVA PT) | taxa portuguesa | DP |
 | Serviços a consumidor fora da UE da lista do art. 6.º, n.º 11 | fora de PT | — | "IVA – Regras específicas - artigo 6.º" (M44) | DP campo 8 |
 | Serviços a consumidor fora da UE fora da lista do n.º 11 | Portugal | tu (IVA PT) | taxa portuguesa | DP |
@@ -94,7 +94,7 @@ DP = declaração periódica do IVA (modelo em vigor até aos períodos que come
 | M45 | IVA – regime transfronteiriço de isenção | operações isentas noutro EM pelo regime transfronteiriço (art. 58.º-A) |
 | M99 | Não sujeito ou não tributado | outras situações de não liquidação (ex.: art. 3.º, n.º 4, e art. 4.º, n.º 5) |
 
-- **Serviços B2B a clientes de fora da UE**: a norma do M40 (art. 6.º, n.º 6, al. a), *a contrário*) abrange todos os serviços B2B localizados fora de PT. Mesmo assim, há quem use M99 quando o cliente está fora da UE. Alinha com o contabilista e com o programa de faturação (a confirmar).
+- **Serviços B2B a clientes de fora da UE**: usa-se o **M40** ("IVA - autoliquidação"). A norma do M40 (art. 6.º, n.º 6, al. a), *a contrário*) abrange todos os serviços B2B localizados fora de PT, e a AT confirmou-o para adquirentes de países terceiros (informações vinculativas no proc. 16210, de 21/2/2020, e PIV 27890, de 30/4/2025; art. 36.º, n.º 13, CIVA). O **M99** é para outras não liquidações (arts. 2.º, n.º 2, 3.º, n.os 4, 6 e 7, e 4.º, n.º 5) e o **M44** para as exceções dos n.os 7 e seguintes do art. 6.º.
 
 ## Bens para empresas da UE (transmissão intracomunitária)
 - **Isenção** (art. 14.º, n.º 1, al. a), RITI). Exige, cumulativamente:
@@ -160,7 +160,7 @@ DP = declaração periódica do IVA (modelo em vigor até aos períodos que come
 - **Cliente fora da UE** (Reino Unido, Suíça, EUA, Brasil, Angola…):
   - não é tributado em PT e não há declaração recapitulativa;
   - **DP**: campo 8;
-  - **fatura** sem IVA, com o código M40 (ver a nota sobre M40/M99 acima);
+  - **fatura** sem IVA, com a menção "IVA - autoliquidação" (código M40 — ver a nota acima);
   - guarda a prova de que o cliente é empresa (art. 18.º, n.º 3).
 - ⚠️ **Retenção na fonte no país do cliente**: alguns países retêm imposto sobre o rendimento nos pagamentos de serviços. Não é IVA. Vê a convenção para evitar a dupla tributação (a confirmar país a país).
 

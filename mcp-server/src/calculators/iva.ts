@@ -168,7 +168,7 @@ export function decidirIVA(p: ParamsIVA): DecisaoIVA {
       codigo: "M40",
       declaracoes: [`${DP} (campo 8)`],
       base: "CIVA, art. 6.º, n.º 6, al. a), a contrário",
-      avisos: ["Há quem use M99 nestes casos — confirmar a menção com o contabilista (a confirmar)."],
+      avisos: ["M40 confirmado pela AT para clientes de países terceiros (informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."],
     });
   }
   // Consumidor.
