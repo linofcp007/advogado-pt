@@ -32,7 +32,7 @@
 - `skills/advogado-pt/**` → `skills/juridico-pt/**` (renomeado) + conteúdo novo
 - `mcp-server/src/{index,tools,resources,prompts,persona,perfil,prazos-estado,calendario,dados,painel,atualidade,docx,zip,elicitacao}.ts`, `mcp-server/src/calculators/{juros-lote,ccp}.ts`
 - `mcp-server/scripts/{build-mcpb,gerar-integracoes}.mjs`, `build.py`
-- `cli/juridico-pt.mjs` (+ atalho `cli/advogado-pt.mjs`), `hooks/juridico-hook.mjs`, `hooks/hooks.json`
+- `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, `hooks/hooks.json`
 - `agents/*.md`, `evals/**`, `commands/{faturacao,painel,exportar,cobrar}.md`
 - `README.md`, `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `INSTALL.md`, `integrations/**`, `CHANGELOG.md`
 - `mcp-server/test/{v20.test.mjs,plugin.test.mjs,factos.json,fixtures/**}`, `skills/juridico-pt/scripts/test_scripts.py`

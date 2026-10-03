@@ -45,7 +45,7 @@
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-303|T-305" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 3_
-- [ ] 6. [US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs` (com atalho `cli/advogado-pt.mjs` que avisa), `hooks/juridico-hook.mjs`, URI `juridico-pt://` (aceita `advogado-pt://`), prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição
+- [ ] 6. [US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição
   - _Requirements: US-1.AC-1_
   - _Makes green: T-301_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-301" mcp-server/test/plugin.test.mjs_
