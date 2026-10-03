@@ -565,9 +565,45 @@
       ],
       "task": "[US6] Resources com lista fechada de categorias e nomes; erros sem stack trace nem caminhos; sem segredos",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-226|T-228\" mcp-server/test/v121.test.mjs"
+    },
+    "26": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-229|T-231|T-232\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "3/3. Todas as tools passam por comErrosTratados (try/catch, mensagem sem stack nem caminhos, montantes negativos recusados nomeando o campo, exceto lucro_tributavel); datas por parseDataEstrita com o nome do campo; juros sem data_fim usam hojeLisboa(). Suite completa: 155 testes, 139 passam, 14 falham (todos de tarefas por fazer).",
+      "at": "2026-10-03T21:52:03.264Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-229|T-231|T-232\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "3/3. Todas as tools passam por comErrosTratados (try/catch, mensagem sem stack nem caminhos, montantes negativos recusados nomeando o campo, exceto lucro_tributavel); datas por parseDataEstrita com o nome do campo; juros sem data_fim usam hojeLisboa(). Suite completa: 155 testes, 139 passam, 14 falham (todos de tarefas por fazer).",
+          "at": "2026-10-03T21:52:03.264Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] Tools: datas estritas, montantes não negativos, `try/catch` em todas, juros com a data de Lisboa",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-229|T-231|T-232\" mcp-server/test/v121.test.mjs"
+    },
+    "27": {
+      "command": "node --test --test-name-pattern=\"T-230\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-230 1/1 (e T-205 e cli.test 3/3 verdes). CLI com argumentos estritos: obrigatórios nomeados, números validados, negativos recusados (exceto --lucro), datas por parseDataEstrita, juros sem --fim usam hojeLisboa; erro -> exit 1 sem NaN/undefined.",
+      "at": "2026-10-03T21:53:11.200Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-230\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-230 1/1 (e T-205 e cli.test 3/3 verdes). CLI com argumentos estritos: obrigatórios nomeados, números validados, negativos recusados (exceto --lucro), datas por parseDataEstrita, juros sem --fim usam hojeLisboa; erro -> exit 1 sem NaN/undefined.",
+          "at": "2026-10-03T21:53:11.200Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] CLI: argumentos estritos, códigos de saída, sem `NaN`/`undefined`",
+      "verify": "node --test --test-name-pattern=\"T-230\" mcp-server/test/v121.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T21:50:38.057Z",
+  "lastTickAt": "2026-10-03T21:53:11.200Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -593,6 +629,8 @@
     "22": "2026-10-03T21:47:25.593Z",
     "23": "2026-10-03T21:48:37.312Z",
     "24": "2026-10-03T21:49:40.758Z",
-    "25": "2026-10-03T21:50:38.057Z"
+    "25": "2026-10-03T21:50:38.057Z",
+    "26": "2026-10-03T21:52:03.264Z",
+    "27": "2026-10-03T21:53:11.200Z"
   }
 }

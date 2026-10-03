@@ -21,6 +21,7 @@ import {
   decidirIVA,
   formatarEuros,
   parseDataEstrita,
+  hojeLisboa,
   PRESCRICAO_TIPOS,
   COMPENSACAO_MODALIDADES,
 } from "./calculators/index.js";
@@ -37,10 +38,53 @@ function texto(s: string) {
   return { content: [{ type: "text" as const, text: s }] };
 }
 
-function parseData(s: string): Date {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());
-  if (!m) throw new Error(`Data inválida: '${s}'. Usa YYYY-MM-DD.`);
-  return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])));
+/** Mensagem de erro para o utilizador: só o texto, sem stack trace nem caminhos do sistema. */
+function mensagemErro(e: unknown): string {
+  const m = e instanceof Error ? e.message : String(e);
+  return m
+    .replace(/[A-Za-z]:\\[^\s'"]+/g, "(caminho)")
+    .replace(/(^|[\s'"(])\/(?:[\w.-]+\/)+[\w.-]*/g, "$1(caminho)")
+    .split("\n")[0]
+    .slice(0, 300);
+}
+
+// Montantes que podem ser negativos (prejuízo fiscal); os restantes números têm de ser >= 0.
+const PODEM_SER_NEGATIVOS = new Set(["lucro_tributavel"]);
+
+function numeroNegativo(args: unknown, prefixo = ""): string | null {
+  if (!args || typeof args !== "object") return null;
+  for (const [k, v] of Object.entries(args as Record<string, unknown>)) {
+    if (typeof v === "number" && v < 0 && !PODEM_SER_NEGATIVOS.has(k)) return prefixo + k;
+    if (v && typeof v === "object") {
+      const r = numeroNegativo(v, `${prefixo}${k}.`);
+      if (r) return r;
+    }
+  }
+  return null;
+}
+
+/**
+ * Todas as tools passam por aqui: montantes negativos são recusados nomeando o campo e
+ * qualquer exceção vira uma resposta de texto (sem stack trace) — nunca falha o pedido.
+ */
+function comErrosTratados(server: McpServer): McpServer {
+  const original = server.registerTool.bind(server) as (...args: unknown[]) => unknown;
+  const envolvido = Object.create(server) as McpServer;
+  (envolvido as unknown as { registerTool: unknown }).registerTool = (
+    nome: string,
+    config: unknown,
+    handler: (...a: unknown[]) => unknown
+  ) =>
+    original(nome, config, async (...a: unknown[]) => {
+      try {
+        const negativo = numeroNegativo(a[0]);
+        if (negativo) return texto(`Valor inválido em '${negativo}': não pode ser negativo.`);
+        return await handler(...a);
+      } catch (e) {
+        return texto(`Não foi possível concluir: ${mensagemErro(e)}`);
+      }
+    });
+  return envolvido;
 }
 
 function iso(d: Date): string {
@@ -54,7 +98,8 @@ function listagem(cat: Categoria): string {
     .join("\n");
 }
 
-export function registerTools(server: McpServer): void {
+export function registerTools(servidor: McpServer): void {
+  const server = comErrosTratados(servidor);
   // ---------------- Calculadoras ----------------
 
   server.registerTool(
@@ -75,9 +120,10 @@ export function registerTools(server: McpServer): void {
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ capital, data_inicio, data_fim, tipo }) => {
-      const fim = data_fim ? parseData(data_fim) : new Date();
       try {
-        const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
+        // Sem data de fim: hoje em Lisboa (não a data UTC do servidor).
+        const fim = parseDataEstrita(data_fim ?? hojeLisboa(), "data_fim");
+        const r = calcularJuros(capital, parseDataEstrita(data_inicio, "data_inicio"), fim, tipo);
         return texto(memoriaJuros(capital, r, tipo) + AVISO);
       } catch (e) {
         return texto(`Não foi possível calcular: ${(e as Error).message}`);
@@ -143,8 +189,8 @@ export function registerTools(server: McpServer): void {
           const r = calcularCompensacaoPorDatas({
             retribuicaoBase: retribuicao_base,
             diuturnidades,
-            dataAdmissao: parseData(data_admissao),
-            dataCessacao: parseData(data_cessacao),
+            dataAdmissao: parseDataEstrita(data_admissao, "data_admissao"),
+            dataCessacao: parseDataEstrita(data_cessacao, "data_cessacao"),
             modalidade: modalidade === "termo" ? "termo" : "sem-termo",
           });
           return texto(
@@ -355,8 +401,8 @@ export function registerTools(server: McpServer): void {
         const r = calcularCreditosCessacao({
           retribuicaoBase: a.retribuicao_base,
           diuturnidades: a.diuturnidades,
-          dataAdmissao: parseData(a.data_admissao),
-          dataCessacao: parseData(a.data_cessacao),
+          dataAdmissao: parseDataEstrita(a.data_admissao, "data_admissao"),
+          dataCessacao: parseDataEstrita(a.data_cessacao, "data_cessacao"),
           feriasVencidasNaoGozadas: a.ferias_vencidas_nao_gozadas,
           subsidioFeriasVencidoEmFalta: a.subsidio_ferias_vencido_em_falta,
         });

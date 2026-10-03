@@ -21658,6 +21658,18 @@ function parseDataEstrita(texto2, campo) {
   }
   throw new Error(`Data inv\xE1lida em '${campo}': '${String(texto2).slice(0, 40)}'. Usa AAAA-MM-DD com uma data que exista.`);
 }
+function hojeLisboa(agora = /* @__PURE__ */ new Date()) {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Lisbon",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(agora);
+  } catch {
+    return agora.toISOString().slice(0, 10);
+  }
+}
 
 // src/calculators/compensacao.ts
 var DIAS_POR_ANO = {
@@ -23613,10 +23625,35 @@ var AVISO = "\n\n\u26A0\uFE0F Estimativa de apoio. Valores/taxas de 2026 \u2014 
 function texto(s) {
   return { content: [{ type: "text", text: s }] };
 }
-function parseData(s) {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());
-  if (!m) throw new Error(`Data inv\xE1lida: '${s}'. Usa YYYY-MM-DD.`);
-  return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])));
+function mensagemErro(e) {
+  const m = e instanceof Error ? e.message : String(e);
+  return m.replace(/[A-Za-z]:\\[^\s'"]+/g, "(caminho)").replace(/(^|[\s'"(])\/(?:[\w.-]+\/)+[\w.-]*/g, "$1(caminho)").split("\n")[0].slice(0, 300);
+}
+var PODEM_SER_NEGATIVOS = /* @__PURE__ */ new Set(["lucro_tributavel"]);
+function numeroNegativo(args, prefixo = "") {
+  if (!args || typeof args !== "object") return null;
+  for (const [k, v] of Object.entries(args)) {
+    if (typeof v === "number" && v < 0 && !PODEM_SER_NEGATIVOS.has(k)) return prefixo + k;
+    if (v && typeof v === "object") {
+      const r = numeroNegativo(v, `${prefixo}${k}.`);
+      if (r) return r;
+    }
+  }
+  return null;
+}
+function comErrosTratados(server) {
+  const original = server.registerTool.bind(server);
+  const envolvido = Object.create(server);
+  envolvido.registerTool = (nome, config2, handler) => original(nome, config2, async (...a) => {
+    try {
+      const negativo = numeroNegativo(a[0]);
+      if (negativo) return texto(`Valor inv\xE1lido em '${negativo}': n\xE3o pode ser negativo.`);
+      return await handler(...a);
+    } catch (e) {
+      return texto(`N\xE3o foi poss\xEDvel concluir: ${mensagemErro(e)}`);
+    }
+  });
+  return envolvido;
 }
 function iso4(d) {
   return d.toISOString().slice(0, 10);
@@ -23624,7 +23661,8 @@ function iso4(d) {
 function listagem(cat) {
   return listarComAmbito(cat).map((i) => `- ${i.nome}${i.ambito ? ` \u2014 ${i.ambito}` : ""}`).join("\n");
 }
-function registerTools(server) {
+function registerTools(servidor) {
+  const server = comErrosTratados(servidor);
   server.registerTool(
     "calc_juros_mora",
     {
@@ -23639,9 +23677,9 @@ function registerTools(server) {
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ capital, data_inicio, data_fim, tipo }) => {
-      const fim = data_fim ? parseData(data_fim) : /* @__PURE__ */ new Date();
       try {
-        const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
+        const fim = parseDataEstrita(data_fim ?? hojeLisboa(), "data_fim");
+        const r = calcularJuros(capital, parseDataEstrita(data_inicio, "data_inicio"), fim, tipo);
         return texto(memoriaJuros(capital, r, tipo) + AVISO);
       } catch (e) {
         return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
@@ -23699,8 +23737,8 @@ ${r.nota}` + AVISO
           const r3 = calcularCompensacaoPorDatas({
             retribuicaoBase: retribuicao_base,
             diuturnidades,
-            dataAdmissao: parseData(data_admissao),
-            dataCessacao: parseData(data_cessacao),
+            dataAdmissao: parseDataEstrita(data_admissao, "data_admissao"),
+            dataCessacao: parseDataEstrita(data_cessacao, "data_cessacao"),
             modalidade: modalidade === "termo" ? "termo" : "sem-termo"
           });
           return texto(
@@ -23878,8 +23916,8 @@ RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
         const r = calcularCreditosCessacao({
           retribuicaoBase: a.retribuicao_base,
           diuturnidades: a.diuturnidades,
-          dataAdmissao: parseData(a.data_admissao),
-          dataCessacao: parseData(a.data_cessacao),
+          dataAdmissao: parseDataEstrita(a.data_admissao, "data_admissao"),
+          dataCessacao: parseDataEstrita(a.data_cessacao, "data_cessacao"),
           feriasVencidasNaoGozadas: a.ferias_vencidas_nao_gozadas,
           subsidioFeriasVencidoEmFalta: a.subsidio_ferias_vencido_em_falta
         });

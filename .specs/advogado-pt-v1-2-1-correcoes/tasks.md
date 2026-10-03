@@ -190,14 +190,14 @@
 **Checkpoint:** US-6 — casos de abuso recusados.
 
 ## História US-7 (P2): entradas inválidas
-- [ ] 26. [US7] Tools: datas estritas, montantes não negativos, `try/catch` em todas, juros com a data de Lisboa
+- [x] 26. [US7] Tools: datas estritas, montantes não negativos, `try/catch` em todas, juros com a data de Lisboa
   - _Requirements: US-7.AC-1, US-7.AC-3, US-7.AC-4_
   - _Makes green: T-229, T-231, T-232_
   - _Implements: mcp-server/src/tools.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-229|T-231|T-232" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 4_
-- [ ] 27. [US7] CLI: argumentos estritos, códigos de saída, sem `NaN`/`undefined`
+- [x] 27. [US7] CLI: argumentos estritos, códigos de saída, sem `NaN`/`undefined`
   - _Requirements: US-7.AC-2_
   - _Makes green: T-230_
   - _Implements: cli/advogado-pt.mjs_
