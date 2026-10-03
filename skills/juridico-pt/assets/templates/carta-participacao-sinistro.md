@@ -3,7 +3,7 @@
      Âmbito: nacional -->
 
 {{TOMADOR_NOME}}
-Apólice n.º {{Nº_APOLICE}}
+Apólice n.º {{N_APOLICE}}
 NIF {{TOMADOR_NIF}}
 
 À {{SEGURADORA_NOME}}
@@ -11,7 +11,7 @@ NIF {{TOMADOR_NIF}}
 
 {{LOCAL}}, {{DATA}}
 
-**ASSUNTO: Participação de sinistro — Apólice {{Nº_APOLICE}}**
+**ASSUNTO: Participação de sinistro — Apólice {{N_APOLICE}}**
 
 Exmos. Senhores,
 

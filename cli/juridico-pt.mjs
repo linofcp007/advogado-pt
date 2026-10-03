@@ -366,6 +366,12 @@ async function calendarioCmd(args) {
   console.log("\nConfirmar no Portal das Finanças / Segurança Social Direta (prorrogações por despacho).");
 }
 
+async function painelCmd(args) {
+  const dir = resolve(str(args, "--dir", process.cwd()));
+  const { painelClientes, textoPainel } = await modulo("painel.js");
+  console.log(textoPainel(painelClientes({ projeto: dir, dias: num(args, "--dias", 30) })));
+}
+
 async function atualidadeCmd() {
   const { verificarAtualidade, textoAtualidade } = await modulo("atualidade.js");
   const hoje = new Date();
@@ -545,6 +551,9 @@ Uso:
   juridico-pt exportar --nome carta-cliente (--ficheiro documento.md | --template nome) [--dir <projeto>]
       Grava .juridico-pt/exportados/<nome>.docx (Word/LibreOffice), sem a lista "Antes de enviar".
 
+  juridico-pt painel [--dias 30] [--dir <projeto>]
+      Modo contabilista: obrigações e prazos dos próximos dias de todos os perfis (.juridico-pt/perfis/).
+
   juridico-pt atualidade
       Valores de referência, taxas de juros e tabelas: última atualização, próxima revisão e o que está fora de prazo.
 
@@ -565,6 +574,7 @@ async function main() {
   if (cmd === "prazos") return prazosCmd(args);
   if (cmd === "exportar") return exportarCmd(args);
   if (cmd === "atualidade") return atualidadeCmd();
+  if (cmd === "painel") return painelCmd(args);
   if (cmd === "doctor") return doctor();
   console.log(HELP);
 }

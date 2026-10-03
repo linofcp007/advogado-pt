@@ -11,7 +11,7 @@
 ## 1. Partes
 - **Eu / a empresa:** {{NOME}}, {{ENI_OU_LDA}}, NIF {{NIF}}
 - **Contraparte:** {{CONTRAPARTE_NOME}}, {{CONTRAPARTE_NIF}}
-- **A contraparte já tem advogado?** {{SIM/NÃO}}
+- **A contraparte já tem advogado?** {{ESCOLHER: SIM/NÃO}}
 
 ## 2. Factos (cronologia)
 | Data | O que aconteceu |
@@ -32,7 +32,7 @@
 - [ ] Outros: {{OUTROS_DOCS}}
 
 ## 5. Prazos
-- **Há algum prazo já a correr?** {{SIM/NÃO}}
+- **Há algum prazo já a correr?** {{ESCOLHER: SIM/NÃO}}
 - **Data da última notificação/citação recebida:** {{DATA_NOTIFICACAO}}
 - ⏰ **Prazo-limite identificado:** {{PRAZO}} — *(usar `scripts/prazos.py` ou `scripts/prescricao.py`)*
 
@@ -40,9 +40,9 @@
 {{O_QUE_QUERO: ex. cobrar, rescindir, defender-me, prevenir, negociar}}
 
 ## 7. Avaliação inicial (preenchido pelo advogado)
-- Posição jurídica: {{forte / média / fraca}}
+- Posição jurídica: {{ESCOLHER: forte / média / fraca}}
 - Próximo passo recomendado: {{PASSO}}
-- Recomenda advogado presencial? {{SIM/NÃO — porquê}}
+- Recomenda advogado presencial? {{ESCOLHER: SIM/NÃO — porquê}}
 
 ---
 

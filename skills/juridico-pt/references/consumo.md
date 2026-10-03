@@ -51,5 +51,5 @@
 
 - Termos e Condições para loja online (conforme DL 24/2014) — `assets/templates/termos-condicoes-loja-online.md`
 - Política de devoluções e reembolsos (a pedido)
-- `resposta-livro-reclamacoes.md` — resposta a reclamação no Livro de Reclamações
+- `assets/templates/resposta-livro-reclamacoes.md` — resposta a reclamação no Livro de Reclamações
 - Informação pré-contratual para vendas à distância (a pedido)

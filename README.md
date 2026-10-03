@@ -43,7 +43,7 @@ Para **desenvolver** o plugin a partir de um clone: `npm run setup` (instala as 
 
 ### Comandos (slash commands)
 
-`/advogado` · `/parecer` · `/cobrar` · `/contrato` · `/prazo` · `/prazos` · `/calendario` · `/juros` · `/imt` · `/defesa` · `/rgpd` · `/despedir` · `/salario` · `/irc` · `/compliance` · `/citacao` · `/sociedade` · `/comprar-imovel` · `/herancas` · `/arrendamento` · `/fisco` · `/insolvencia` · `/perfil` · `/template` · `/referencia` · `/procurar` (+ `/adv`, `/intake`, `/prescricao`, `/diagnostico`).
+`/advogado` · `/parecer` · `/cobrar` · `/faturacao` · `/painel` · `/exportar` · `/contrato` · `/prazo` · `/prazos` · `/calendario` · `/juros` · `/imt` · `/defesa` · `/rgpd` · `/despedir` · `/salario` · `/irc` · `/compliance` · `/citacao` · `/sociedade` · `/comprar-imovel` · `/herancas` · `/arrendamento` · `/fisco` · `/insolvencia` · `/perfil` · `/template` · `/referencia` · `/procurar` (+ `/adv`, `/intake`, `/prescricao`, `/diagnostico`).
 
 ## Estrutura
 
@@ -51,9 +51,10 @@ Para **desenvolver** o plugin a partir de um clone: `npm run setup` (instala as 
 juridico-pt/                     # plugin Claude Code
 ├── .claude-plugin/             # plugin.json + marketplace.json
 ├── .mcp.json                   # servidor MCP (${CLAUDE_PLUGIN_ROOT})
-├── commands/        (30)       # slash commands (/advogado, /cobrar, /calendario, /prazos, /perfil…)
+├── commands/        (33)       # slash commands (/advogado, /cobrar, /calendario, /painel, /exportar…)
+├── agents/                     # subagentes só de leitura: verificador-citacoes, revisor-contratos
 ├── hooks/                      # hooks.json + juridico-hook.mjs (SessionStart/PostToolUse)
-├── cli/juridico-pt.mjs         # CLI universal (mcp-config + calc + calendario + prazos + prompt + doctor)
+├── cli/juridico-pt.mjs         # CLI universal (mcp-config + calc + calendario + prazos + painel + exportar + atualidade + prompt + doctor)
 ├── skills/juridico-pt/         # a skill (conteúdo jurídico)
 │   ├── SKILL.md                # lógica, fluxo, protocolos de rigor
 │   ├── references/   (33)      # ⭐ valores-2026.md = ponto único de verdade
@@ -61,7 +62,7 @@ juridico-pt/                     # plugin Claude Code
 │   ├── assets/checklists/ (10)
 │   ├── playbooks/    (11)      # árvores de decisão
 │   └── scripts/      (14)      # calculadoras Python + testes
-├── mcp-server/                 # servidor MCP TypeScript (32 tools + resources + prompt)
+├── mcp-server/                 # servidor MCP TypeScript (38 tools + resources + prompt)
 ├── integrations/               # configs por plataforma (Cursor, Windsurf, Codex, Gemini, ChatGPT)
 ├── .cursor/ .windsurf/ .gemini/ .vscode/   # dotfiles de editor (dogfooding)
 ├── AGENTS.md · GEMINI.md · CLAUDE.md        # persona portátil + manutenção
@@ -116,7 +117,7 @@ cd mcp-server; npm test                              # calculadoras TS + estrutu
 
 ## Perfil da empresa
 
-O advogado não assume quem és. Guarda o perfil (forma jurídica, setor, n.º de trabalhadores, volume de negócios, IVA, clientes…) em:
+O assistente não assume quem és. Guarda o perfil (forma jurídica, setor, n.º de trabalhadores, volume de negócios, IVA, clientes…) em:
 
 - `<projeto>/.juridico-pt/perfil-empresa.md` — a empresa deste projeto (tem prioridade);
 - `~/.juridico-pt/perfil-empresa.md` — o perfil geral, usado em qualquer pasta sem perfil próprio.
@@ -124,6 +125,17 @@ O advogado não assume quem és. Guarda o perfil (forma jurídica, setor, n.º d
 Vê ou atualiza com `/perfil` (ou as tools `obter_perfil_empresa` / `guardar_perfil_empresa`). É um ficheiro de texto, editável à mão; não guarda dados de trabalhadores nem de clientes.
 
 **Vários perfis** (contabilista com muitos clientes): grava cada empresa com um nome (`perfis/<nome>.md`) e escolhe a ativa com `ativar_perfil`; o hook, as respostas e o calendário passam a usar essa.
+
+**Modo contabilista**: `/painel` (tool `painel_clientes`) mostra num só pedido as obrigações e os prazos dos próximos 30 dias de todos os clientes; os prazos podem ser associados a um perfil e o calendário exporta um `.ics` por cliente.
+
+## Privacidade e dados guardados
+
+- **Que dados e onde:** só ficheiros de texto no teu computador, na pasta `.juridico-pt/` do projeto (perfil, perfis de clientes, `prazos.md`, calendários `.ics`, documentos exportados) e em `~/.juridico-pt/` (perfil geral). O plugin não tem servidores, não envia estes ficheiros a ninguém e não tem telemetria.
+- **Por quanto tempo:** os prazos cumpridos há mais de **12 meses** saem na escrita seguinte; perfis, calendários e documentos ficam até os apagares; um perfil sem atualização há mais de 12 meses é assinalado no início da sessão.
+- **Apagar:** `apagar_perfil` apaga um perfil e os prazos e calendários dele; para apagar tudo, apaga as pastas `.juridico-pt/`. Num repositório git, o plugin avisa se o `.gitignore` não exclui `.juridico-pt/`.
+- **Conversas:** o conteúdo das conversas é tratado pelo **fornecedor do modelo** que escolheste (ex.: a Anthropic no Claude), nos termos que aceitaste com ele — não pelo plugin.
+
+Detalhes em [`references/privacidade-plugin.md`](skills/juridico-pt/references/privacidade-plugin.md).
 
 ## Manutenção
 

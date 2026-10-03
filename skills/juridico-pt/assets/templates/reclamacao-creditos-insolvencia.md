@@ -64,11 +64,11 @@ vem, no prazo fixado na sentença de declaração de insolvência e nos termos d
 
 10. Os créditos reclamados têm natureza **{{NATUREZA: comum / garantida / privilegiada / subordinada}}**.
 11. {{GARANTIA_REAL: só se garantido — O crédito beneficia de {{TIPO: hipoteca / penhor / direito de retenção / consignação de rendimentos}} sobre {{BEM: identificação do bem}}, {{DADOS_REGISTO: ex. descrito na Conservatória do Registo Predial de ... sob o n.º ..., com a inscrição AP. ... de DD/MM/AAAA}}, até ao montante de € {{MONTANTE_GARANTIDO}}, garantia que aqui se comunica para os efeitos do art. 36.º, n.º 1, al. l), do CIRE.}}
-12. {{PRIVILEGIO: só se privilegiado — O crédito goza do privilégio creditório {{geral/especial}} previsto em {{NORMA}} [VERIFICAR].}}
+12. {{PRIVILEGIO: só se privilegiado — O crédito goza do privilégio creditório {{ESCOLHER: geral/especial}} previsto em {{NORMA}} [VERIFICAR].}}
 
 ## V — Garantias pessoais [art. 128.º, n.º 1, al. d)]
 
-13. {{GARANTIAS_PESSOAIS: Não existem garantias pessoais. / OU: O cumprimento das obrigações da insolvente encontra-se garantido por {{fiança / aval em livrança / garantia bancária}} prestada por {{GARANTE_NOME}}, NIF {{GARANTE_NIF}}, residente/com sede em {{GARANTE_MORADA}}, reservando a reclamante o direito de agir contra o(s) garante(s), nos termos gerais.}}
+13. {{GARANTIAS_PESSOAIS: Não existem garantias pessoais. / OU: O cumprimento das obrigações da insolvente encontra-se garantido por {{ESCOLHER: fiança / aval em livrança / garantia bancária}} prestada por {{GARANTE_NOME}}, NIF {{GARANTE_NIF}}, residente/com sede em {{GARANTE_MORADA}}, reservando a reclamante o direito de agir contra o(s) garante(s), nos termos gerais.}}
 
 ## VI — Taxa de juros moratórios aplicável [art. 128.º, n.º 1, al. e)]
 
@@ -78,11 +78,11 @@ vem, no prazo fixado na sentença de declaração de insolvência e nos termos d
 
 15. Para efeitos de pagamento, a reclamante indica o IBAN **{{IBAN}}**, de que é titular{{BANCO: , no banco ...}}.
 
-## VIII — Restituição / separação de bens {{opcional — só se houver reserva de propriedade ou bens de terceiro na posse da insolvente}}
+## VIII — Restituição / separação de bens {{PREENCHER: opcional — só se houver reserva de propriedade ou bens de terceiro na posse da insolvente}}
 
 16. {{RESERVA_PROPRIEDADE: Os bens descritos em {{IDENTIFICACAO_BENS}}, vendidos à insolvente com reserva de propriedade estipulada por escrito até ao momento da entrega (art. 104.º, n.º 4, do CIRE), conforme {{DOCUMENTO: contrato / condições gerais aceites por escrito}}, permanecem propriedade da reclamante, pelo que se requer a sua restituição/separação da massa insolvente, nos termos do art. 141.º, n.º 1, al. c), do CIRE, e se fixa a V. Exa. prazo razoável para declarar se opta pelo cumprimento do contrato (art. 102.º, n.º 2, e art. 104.º, n.º 3, do CIRE).}}
 
-## IX — Compensação {{opcional}}
+## IX — Compensação {{OPCIONAL}}
 
 17. {{COMPENSACAO: A reclamante é devedora da insolvente da quantia de € ..., relativa a ..., verificando-se os pressupostos legais da compensação em data anterior à declaração de insolvência (art. 99.º, n.º 1, al. a), do CIRE). Pela presente declara compensar esse débito com o seu crédito, até à concorrência dos respetivos montantes, reclamando-se apenas o saldo [VERIFICAR requisitos do art. 99.º, n.os 1 e 4].}}
 
@@ -129,7 +129,7 @@ Substituir o cabeçalho e as referências legais do modelo acima pelo seguinte:
 {{AJP_EMAIL}}
 
 **Processo {{TIPO_PROCESSO: Especial de Revitalização / Especial para Acordo de Pagamento}} n.º:** {{N_PROCESSO}} — {{TRIBUNAL_JUIZO}}
-**{{Empresa / Devedor}}:** {{DEVEDOR_NOME}}, NIPC/NIF {{DEVEDOR_NIF}}
+**{{ESCOLHER: Empresa / Devedor}}:** {{DEVEDOR_NOME}}, NIPC/NIF {{DEVEDOR_NIF}}
 **Despacho de nomeação do administrador judicial provisório:** publicado no portal Citius em {{DATA_PUBLICACAO_DESPACHO}}
 
 **Assunto:** Reclamação de créditos ({{BASE: art. 17.º-D, n.º 2 / art. 222.º-D, n.º 2}} do CIRE)
@@ -142,7 +142,7 @@ Substituir o cabeçalho e as referências legais do modelo acima pelo seguinte:
 - d) as garantias pessoais, com identificação dos garantes — **secção V**;
 - e) a taxa de juros moratórios aplicável — **secção VI**.
 
-{{PARTICIPACAO_NEGOCIACOES: opcional — Mais declara que pretende participar nas negociações em curso, declaração que comunica igualmente à {{empresa/devedor}} por carta registada (art. 17.º-D, n.º 9 / art. 222.º-D, n.º 7, do CIRE).}}
+{{PARTICIPACAO_NEGOCIACOES: opcional — Mais declara que pretende participar nas negociações em curso, declaração que comunica igualmente à {{ESCOLHER: empresa/devedor}} por carta registada (art. 17.º-D, n.º 9 / art. 222.º-D, n.º 7, do CIRE).}}
 
 Requer a inclusão dos créditos reclamados na **lista provisória de créditos**, com a natureza indicada.
 

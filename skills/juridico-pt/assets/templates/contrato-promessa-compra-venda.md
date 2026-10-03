@@ -11,7 +11,7 @@
 **Segundo Outorgante (Promitente-Comprador):** {{COMPRADOR_NOME}}, NIF {{COMPRADOR_NIF}}, {{COMPRADOR_MORADA}}, estado civil {{COMPRADOR_ESTADO_CIVIL}}.
 
 ## 1. Identificação do imóvel
-Fração/prédio {{DESCRICAO_IMOVEL}}, sito em {{MORADA_IMOVEL}}, descrito na Conservatória do Registo Predial de {{CRP}} sob o n.º {{Nº_DESCRICAO}}, inscrito na matriz predial sob o artigo {{ARTIGO_MATRICIAL}}, com licença de utilização n.º {{Nº_LICENCA}} e certificado energético {{Nº_CE}}.
+Fração/prédio {{DESCRICAO_IMOVEL}}, sito em {{MORADA_IMOVEL}}, descrito na Conservatória do Registo Predial de {{CRP}} sob o n.º {{N_DESCRICAO}}, inscrito na matriz predial sob o artigo {{ARTIGO_MATRICIAL}}, com licença de utilização n.º {{N_LICENCA}} e certificado energético {{N_CE}}.
 
 ## 2. Promessa
 O Primeiro Outorgante promete vender, livre de ónus e encargos, e o Segundo Outorgante promete comprar, o imóvel identificado, pelo preço de **{{PRECO}}** ({{PRECO_EXTENSO}}).
@@ -32,7 +32,7 @@ Em caso de incumprimento, a parte não faltosa pode requerer a execução espec�
 <!-- Eficácia real (Art. 413.º CC): só existe se a promessa constar de escritura pública ou de documento particular autenticado e for registada; num CPCV comum a promessa tem eficácia meramente obrigacional. Se a pretenderem, [VERIFICAR] a forma e o registo antes de a mencionar. -->
 
 ## 7. Entrega
-A posse/entrega das chaves ocorre {{na escritura / em DATA}}.
+A posse/entrega das chaves ocorre {{ESCOLHER: na escritura / em DATA}}.
 
 ## 8. Foro
 Lei portuguesa; foro da comarca da situação do imóvel.

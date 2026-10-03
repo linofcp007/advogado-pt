@@ -24660,7 +24660,7 @@ function exportarDocumento(p) {
   if (!md.trim()) throw new Error("O documento est\xE1 vazio.");
   const bytes = gerarDocx(md);
   const caminho2 = escreverSeguro(dirProjeto(p.projeto), [PASTA_DADOS, "exportados", `${nome}.docx`], bytes);
-  const placeholders = (md.match(/\{\{[A-Z0-9_]+\}\}/g) ?? []).length;
+  const placeholders = (md.match(/\{\{[A-Z0-9_]+(?::[^{}]*)?\}\}/g) ?? []).length;
   return { caminho: caminho2, bytes: bytes.length, placeholders };
 }
 
@@ -24776,6 +24776,73 @@ function textoAtualidade(itens, hoje = /* @__PURE__ */ new Date()) {
     "",
     fora.length ? "Atualiza o plugin (/plugin marketplace update juridico-pt) e, at\xE9 l\xE1, confirma estes valores nas fontes oficiais antes de os usar." : "Mesmo dentro do prazo, valores determinantes confirmam-se na fonte oficial (dre.pt, Portal das Finan\xE7as)."
   ].join("\n");
+}
+
+// src/painel.ts
+var SEM_PERFIL = "(sem perfil)";
+function somarDias(iso6, dias) {
+  return new Date(Date.parse(`${iso6}T00:00:00Z`) + dias * 864e5).toISOString().slice(0, 10);
+}
+function painelClientes(opts = {}) {
+  const dias = Math.min(366, Math.max(1, Math.floor(opts.dias ?? 30)));
+  const desde = hojeEmLisboa(opts.hoje ?? /* @__PURE__ */ new Date());
+  const ate = somarDias(desde, dias);
+  const base = { projeto: opts.projeto, home: opts.home, hoje: opts.hoje };
+  const perfis = listarPerfis(base).map((p) => p.nome).sort();
+  const itens = [];
+  const anos = [.../* @__PURE__ */ new Set([Number(desde.slice(0, 4)), Number(ate.slice(0, 4))])];
+  for (const nome of perfis) {
+    const p = lerPerfil({ ...base, perfil: nome });
+    for (const ano of anos) {
+      for (const o of gerarCalendario(ano, p?.campos ?? null)) {
+        if (o.data < desde || o.data > ate) continue;
+        itens.push({ data: o.data, perfil: nome, tipo: "obriga\xE7\xE3o", descricao: o.titulo, ...o.aConfirmar ? { aConfirmar: true } : {} });
+      }
+    }
+  }
+  const vencidos = [];
+  for (const pr of lerPrazos(opts.projeto)) {
+    if (pr.concluido) continue;
+    const item = {
+      data: pr.data,
+      perfil: pr.perfil ?? SEM_PERFIL,
+      tipo: "prazo",
+      descricao: pr.descricao + (pr.origem ? ` (${pr.origem})` : "")
+    };
+    if (pr.data < desde) vencidos.push(item);
+    else if (pr.data <= ate) itens.push(item);
+  }
+  const ordem = (a, b) => a.data.localeCompare(b.data) || a.perfil.localeCompare(b.perfil) || a.tipo.localeCompare(b.tipo) || a.descricao.localeCompare(b.descricao);
+  itens.sort(ordem);
+  vencidos.sort(ordem);
+  return {
+    desde,
+    ate,
+    perfis,
+    itens,
+    vencidos,
+    ...perfis.length === 0 ? {
+      aviso: "Sem perfis nomeados em .juridico-pt/perfis/. Grava cada cliente com guardar_perfil_empresa (par\xE2metro perfil, ex.: 'cliente-a') e associa os prazos com registar_prazo (perfil)."
+    } : {}
+  };
+}
+function textoPainel(p) {
+  const linhas = [`Painel de ${p.desde} a ${p.ate} \u2014 ${p.perfis.length} perfil(is), ${p.itens.length} item(ns).`];
+  if (p.aviso) linhas.push(`\u26A0\uFE0F ${p.aviso}`);
+  if (p.vencidos.length) {
+    linhas.push("", "\u26A0\uFE0F Prazos registados j\xE1 VENCIDOS:");
+    for (const i of p.vencidos) linhas.push(`- ${i.data} \xB7 ${i.perfil} \xB7 ${i.descricao}`);
+  }
+  let atual = "";
+  for (const i of p.itens) {
+    if (i.data !== atual) {
+      atual = i.data;
+      linhas.push("", `## ${i.data}`);
+    }
+    linhas.push(`- ${i.perfil} \xB7 ${i.tipo === "prazo" ? "\u23F0 prazo" : "obriga\xE7\xE3o"}: ${i.descricao}${i.aConfirmar ? " (a confirmar \u2014 completa o perfil)" : ""}`);
+  }
+  linhas.push("", "Datas das obriga\xE7\xF5es a partir do perfil de cada cliente; confirmar no Portal das Finan\xE7as e na Seguran\xE7a Social Direta (prorroga\xE7\xF5es por despacho).");
+  return linhas.join("\n");
 }
 
 // src/tools.ts
@@ -25506,6 +25573,19 @@ Google Calendar: Defini\xE7\xF5es \u2192 Importar e exportar \u2192 Importar (es
     }
   );
   server.registerTool(
+    "painel_clientes",
+    {
+      title: "Painel do contabilista \u2014 pr\xF3ximos dias de todos os clientes",
+      description: "Modo contabilista: num s\xF3 pedido, as obriga\xE7\xF5es legais (do perfil de cada cliente) e os prazos registados dos pr\xF3ximos N dias (30 por defeito) de TODOS os perfis nomeados (.juridico-pt/perfis/), por data e por perfil, mais os prazos j\xE1 vencidos. Usa para 'o que tenho esta semana/este m\xEAs', 'prazos dos meus clientes', 'agenda do gabinete'. EN: upcoming deadlines across all client profiles.",
+      inputSchema: {
+        dias: external_exports.number().int().min(1).max(366).default(30).describe("Janela em dias a partir de hoje"),
+        diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (por defeito, cwd)")
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false }
+    },
+    async ({ dias, diretorio }) => texto(textoPainel(painelClientes({ projeto: diretorio, dias })) + AVISO)
+  );
+  server.registerTool(
     "verificar_atualidade",
     {
       title: "Verificar se os valores do plugin est\xE3o atualizados",
@@ -25863,7 +25943,7 @@ FLUXO: diagn\xF3stico \u2192 enquadramento legal (diplomas/artigos) \u2192 op\xE
 
 FERRAMENTAS: usa as tools do juridico-pt \u2014 calculadoras (juros, IMT, prazos, prescri\xE7\xE3o, compensa\xE7\xE3o, custas, imposto de selo, IRS), templates de documentos, refer\xEAncias por \xE1rea, playbooks e checklists. Para gerar documentos, parte sempre do template correspondente.
 
-QUANDO USAR (inten\xE7\xE3o \u2192 ferramenta): cliente n\xE3o paga \u2192 playbook "cliente-nao-paga" + calc_juros_mora; calcular um prazo/prescri\xE7\xE3o \u2192 calc_prazo / calc_prescricao; gerar um documento \u2192 obter_template; pergunta de fundo numa \xE1rea \u2192 ler_referencia; comprar im\xF3vel \u2192 calc_imt; despedir/indemniza\xE7\xE3o \u2192 calc_compensacao_despedimento (com data_admissao/data_cessacao); sal\xE1rio l\xEDquido / custo de contratar \u2192 calc_salario_liquido / calc_custo_trabalhador; IRC da empresa \u2192 calc_irc; faturar a cliente estrangeiro / IVA \u2192 calc_iva_operacao + playbook "faturar-cliente-estrangeiro"; quanto custa p\xF4r uma a\xE7\xE3o \u2192 calc_taxa_justica; que obriga\xE7\xF5es/prazos fiscais tenho no ano \u2192 calendario_obrigacoes (exportar=true para .ics/Google Calendar); prazo perent\xF3rio a correr \u2192 calc_prazo e depois registar_prazo (listar_prazos / concluir_prazo); empresa com 50+ trabalhadores \u2192 ler_referencia "compliance"; v\xE1rias empresas (contabilista) \u2192 listar_perfis / ativar_perfil; descrever uma situa\xE7\xE3o e querer os passos \u2192 obter_playbook; n\xE3o sabes onde est\xE1 \u2192 procurar_conteudo.
+QUANDO USAR (inten\xE7\xE3o \u2192 ferramenta): cliente n\xE3o paga \u2192 playbook "cliente-nao-paga" + calc_juros_mora; calcular um prazo/prescri\xE7\xE3o \u2192 calc_prazo / calc_prescricao; gerar um documento \u2192 obter_template; pergunta de fundo numa \xE1rea \u2192 ler_referencia; comprar im\xF3vel \u2192 calc_imt; despedir/indemniza\xE7\xE3o \u2192 calc_compensacao_despedimento (com data_admissao/data_cessacao); sal\xE1rio l\xEDquido / custo de contratar \u2192 calc_salario_liquido / calc_custo_trabalhador; IRC da empresa \u2192 calc_irc; faturar a cliente estrangeiro / IVA \u2192 calc_iva_operacao + playbook "faturar-cliente-estrangeiro"; quanto custa p\xF4r uma a\xE7\xE3o \u2192 calc_taxa_justica; que obriga\xE7\xF5es/prazos fiscais tenho no ano \u2192 calendario_obrigacoes (exportar=true para .ics/Google Calendar); prazo perent\xF3rio a correr \u2192 calc_prazo e depois registar_prazo (listar_prazos / concluir_prazo); empresa com 50+ trabalhadores \u2192 ler_referencia "compliance"; v\xE1rias empresas (contabilista) \u2192 listar_perfis / ativar_perfil e painel_clientes (pr\xF3ximos 30 dias de todos); v\xE1rias faturas em atraso \u2192 calc_juros_lote + template "carta-cobranca-varias-faturas"; faturas em PDF / 2027 \u2192 playbook "faturacao-eletronica-2027"; vender ao Estado \u2192 calc_procedimento_ccp + playbook "vender-ao-estado"; devolu\xE7\xE3o de apoio (PRR/PT2030) \u2192 playbook "recebi-pedido-devolucao-apoio"; NIS2 \u2192 checklist "checklist-nis2"; documento em Word \u2192 exportar_documento; valores em dia? \u2192 verificar_atualidade; apagar dados \u2192 apagar_perfil (confirmar antes); descrever uma situa\xE7\xE3o e querer os passos \u2192 obter_playbook; n\xE3o sabes onde est\xE1 \u2192 procurar_conteudo.
 
 SIN\xD3NIMOS/CAL\xC3O (traduz a linguagem do dia-a-dia para a \xE1rea certa): "recibos verdes" = trabalhador independente (Cat. B do IRS); "renda"/"aluguer" = arrendamento; "rescis\xE3o"/"mandar embora" = cessa\xE7\xE3o/despedimento do contrato de trabalho; "levei uma multa"/"coima" = contraordena\xE7\xE3o; "firma"/"abrir empresa" = constitui\xE7\xE3o de sociedade (societ\xE1rio); "fui \xE0 fal\xEAncia"/"estou insolvente" = insolv\xEAncia (CIRE/PER); "escritura"/"comprar casa" = compra e venda de im\xF3vel (imobili\xE1rio); "testamento"/"partilha" = heran\xE7as; "penhora"/"o tribunal tirou-me" = execu\xE7\xE3o; "processaram-me"/"vou a tribunal" = contencioso.
 
@@ -25872,12 +25952,14 @@ var INSTRUCOES_MCP = `juridico-pt \u2014 assessoria jur\xEDdica de Portugal (PT/
 Rigor: nunca inventes artigos nem jurisprud\xEAncia (sem certeza, di-lo e sugere dre.pt / dgsi.pt); valores do ano em ler_referencia "valores-2026"; destaca os prazos com \u23F0; n\xE3o substituis advogado inscrito na OA \u2014 recomenda-o com prazos judiciais a correr, processo penal ou risco elevado.
 Perfil: obter_perfil_empresa antes de aconselhar uma empresa; sem perfil, pergunta s\xF3 o necess\xE1rio e oferece guardar_perfil_empresa; v\xE1rios clientes: listar_perfis / ativar_perfil.
 Inten\xE7\xE3o -> tool:
-- n\xE3o me pagaram: obter_playbook "cliente-nao-paga", calc_juros_mora, calc_custas_injuncao, calc_prescricao
+- n\xE3o me pagaram: obter_playbook "cliente-nao-paga", calc_juros_mora (v\xE1rias faturas: calc_juros_lote), calc_custas_injuncao, calc_prescricao
 - prazo a correr: calc_prazo (tipo judicial nos processos em tribunal) e registar_prazo; listar_prazos / concluir_prazo
 - trabalho: calc_compensacao_despedimento, calc_creditos_laborais, calc_salario_liquido, calc_custo_trabalhador
 - impostos: calc_irs_simplificado, calc_irc, calc_iva_operacao; obriga\xE7\xF5es do ano: calendario_obrigacoes (exportar=true gera .ics)
 - im\xF3veis e heran\xE7as: calc_imt, calc_imposto_selo_heranca, calc_legitima
-- custo de uma a\xE7\xE3o: calc_taxa_justica
+- custo de uma a\xE7\xE3o: calc_taxa_justica; vender ao Estado: calc_procedimento_ccp
+- contabilista: painel_clientes (pr\xF3ximos 30 dias de todos os perfis); apagar dados: apagar_perfil
+- documento em Word: exportar_documento; valores em dia? verificar_atualidade
 - documentos: listar_templates / obter_template; enquadramento legal: listar_areas_juridicas / ler_referencia; passos por situa\xE7\xE3o: listar_playbooks / obter_playbook; listas de verifica\xE7\xE3o: listar_checklists / obter_checklist; n\xE3o sabes onde est\xE1: procurar_conteudo.
 Persona completa, tom e fluxo: prompt "assistente_juridico".`;
 

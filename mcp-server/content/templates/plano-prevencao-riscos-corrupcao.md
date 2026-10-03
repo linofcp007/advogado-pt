@@ -111,7 +111,7 @@ Foram identificadas as seguintes áreas de atividade com risco de prática de at
 | R06 | Recursos humanos | Contratação ou promoção de familiar de decisor público ou de cliente (corrupção; conflito de interesses) | {{PO}} | {{IP}} | {{NIVEL}} | Política de conflitos de interesses; declaração de relações; recrutamento com critérios escritos | Revisão do processo; procedimento disciplinar | {{RESP}} | {{PRAZO}} | Declarações recolhidas / trabalhadores |
 | R07 | Administração | Decisão de gestor em benefício próprio ou de terceiro relacionado | {{PO}} | {{IP}} | {{NIVEL}} | Regra de abstenção em conflito; aprovação colegial; registo de transações com partes relacionadas | Responsabilização; comunicação ao órgão de fiscalização | {{RESP}} | {{PRAZO}} | Transações com partes relacionadas registadas |
 | R08 | Ofertas, patrocínios e donativos | Ofertas ou patrocínios usados como contrapartida | {{PO}} | {{IP}} | {{NIVEL}} | Registo de ofertas dadas e recebidas; limite de valor; aprovação prévia de patrocínios e donativos | Devolução da oferta; procedimento disciplinar | {{RESP}} | {{PRAZO}} | Ofertas registadas |
-| {{Rnn}} | {{AREA}} | {{RISCO}} | {{PO}} | {{IP}} | {{NIVEL}} | {{MEDIDAS_PREVENTIVAS}} | {{MEDIDAS_CORRETIVAS}} | {{RESP}} | {{PRAZO}} | {{INDICADOR}} |
+| {{PREENCHER: Rnn}} | {{AREA}} | {{RISCO}} | {{PO}} | {{IP}} | {{NIVEL}} | {{MEDIDAS_PREVENTIVAS}} | {{MEDIDAS_CORRETIVAS}} | {{RESP}} | {{PRAZO}} | {{INDICADOR}} |
 
 ## 7. Medidas transversais
 
@@ -131,7 +131,7 @@ Foram identificadas as seguintes áreas de atividade com risco de prática de at
 
 | ID | Risco | Nível | Medida prioritária | Responsável | Data-limite de execução |
 |---|---|---|---|---|---|
-| {{ID}} | {{RISCO}} | {{Elevado / Máximo}} | {{MEDIDA}} | {{RESP}} | {{DATA}} |
+| {{ID}} | {{RISCO}} | {{ESCOLHER: Elevado / Máximo}} | {{MEDIDA}} | {{RESP}} | {{DATA}} |
 
 {{SEM_RISCOS_ELEVADOS: opcional — Na data de aprovação não foram identificados riscos de nível elevado ou máximo; nesse caso não é exigido o relatório de avaliação intercalar de outubro, devendo esta conclusão ser revista sempre que o PPR seja atualizado.}}
 
@@ -173,7 +173,7 @@ Assinatura: _______________________________
 
 ### Anexo II — Modelo de relatório de avaliação (intercalar / anual)
 
-**Relatório de avaliação {{intercalar (outubro) / anual (abril)}} do PPR — {{ANO_A_QUE_RESPEITA}}**
+**Relatório de avaliação {{ESCOLHER: intercalar (outubro) / anual (abril)}} do PPR — {{ANO_A_QUE_RESPEITA}}**
 
 1. **Período e âmbito:** {{PERIODO}}; no relatório intercalar, só os riscos de nível elevado ou máximo.
 2. **Grau de implementação das medidas** (quantificado):

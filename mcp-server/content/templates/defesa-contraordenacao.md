@@ -13,7 +13,7 @@
 # DEFESA EM PROCESSO DE CONTRAORDENAÇÃO
 
 **À {{AUTORIDADE_ADMINISTRATIVA}}**
-**Processo de contraordenação n.º {{Nº_PROCESSO}}**
+**Processo de contraordenação n.º {{N_PROCESSO}}**
 
 {{ARGUIDO_NOME}}, {{ARGUIDO_QUALIDADE: pessoa singular / pessoa coletiva}}, NIF/NIPC {{ARGUIDO_NIF}}, com morada/sede em {{ARGUIDO_MORADA}}, arguido(a) no processo de contraordenação acima identificado, notificado(a) em {{DATA_NOTIFICACAO}} do auto/da acusação, vem, ao abrigo do **Art. 50.º do RGCO (DL 433/82)** e no prazo legal, apresentar a sua **DEFESA ESCRITA**, nos termos e com os fundamentos seguintes.
 
@@ -30,10 +30,10 @@ O arguido não se conforma com a imputação, pelos motivos seguintes:
 
 <!-- Selecionar e desenvolver apenas os argumentos aplicáveis ao caso concreto; remover os restantes. -->
 
-- **Nulidade/irregularidade da notificação ou do auto** — {{ex. a notificação não contém todos os elementos do Art. 50.º RGCO (descrição dos factos, normas, coima aplicável e prazo de defesa), o que compromete o exercício do direito de defesa.}}
-- **Prescrição do procedimento** — {{ex. decorreu o prazo de prescrição do procedimento contraordenacional (Arts. 27.º e 27.º-A RGCO), atenta a data dos factos e a moldura da coima, pelo que o procedimento deve ser arquivado.}}
-- **Falta de culpa / inexigibilidade** — {{ex. a conduta não é censurável a título de dolo nem de negligência; o arguido atuou sem culpa / em erro / em circunstâncias que afastam a responsabilidade.}}
-- **Desproporcionalidade / atenuação da coima** — {{ex. a coima é desproporcionada face à gravidade, à situação económica do arguido e à ausência de benefício; requer-se, subsidiariamente, a aplicação do mínimo legal ou a admoestação (Art. 51.º RGCO).}}
+- **Nulidade/irregularidade da notificação ou do auto** — {{PREENCHER: ex. a notificação não contém todos os elementos do Art. 50.º RGCO (descrição dos factos, normas, coima aplicável e prazo de defesa), o que compromete o exercício do direito de defesa.}}
+- **Prescrição do procedimento** — {{PREENCHER: ex. decorreu o prazo de prescrição do procedimento contraordenacional (Arts. 27.º e 27.º-A RGCO), atenta a data dos factos e a moldura da coima, pelo que o procedimento deve ser arquivado.}}
+- **Falta de culpa / inexigibilidade** — {{PREENCHER: ex. a conduta não é censurável a título de dolo nem de negligência; o arguido atuou sem culpa / em erro / em circunstâncias que afastam a responsabilidade.}}
+- **Desproporcionalidade / atenuação da coima** — {{PREENCHER: ex. a coima é desproporcionada face à gravidade, à situação económica do arguido e à ausência de benefício; requer-se, subsidiariamente, a aplicação do mínimo legal ou a admoestação (Art. 51.º RGCO).}}
 - {{OUTROS_ARGUMENTOS}}
 
 ## IV — Da prova
@@ -50,7 +50,7 @@ O arguido {{OPCAO_AUDIENCIA: requer / prescinde de}} ser ouvido oralmente pela a
 ## Pedido
 Nestes termos, requer-se que a presente defesa seja admitida e, em consequência, que o processo seja **arquivado** por não estarem reunidos os pressupostos da responsabilidade contraordenacional ou, subsidiariamente, que a coima seja **reduzida ao mínimo legal** ou substituída por **admoestação**.
 
-Junta: {{Nº_DOCUMENTOS}} documentos.
+Junta: {{N_DOCUMENTOS}} documentos.
 
 {{LOCAL}}, {{DATA}}
 

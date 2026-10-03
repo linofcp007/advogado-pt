@@ -119,7 +119,7 @@
   - _Depends: 6_
 
 ## História US-6 (P2): subagentes
-- [ ] 16. [US6] `agents/verificador-citacoes.md` e `agents/revisor-contratos.md` (só leitura, `model: inherit`, saída estruturada, "não verificada" sem fonte)
+- [x] 16. [US6] `agents/verificador-citacoes.md` e `agents/revisor-contratos.md` (só leitura, `model: inherit`, saída estruturada, "não verificada" sem fonte)
   - _Requirements: US-6.AC-1, US-6.AC-2, US-6.AC-3, EC-5_
   - _Makes green: T-316, T-317_
   - _Implements: agents/verificador-citacoes.md, agents/revisor-contratos.md_
@@ -142,7 +142,7 @@
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-319" mcp-server/test/v20.test.mjs_
   - _Size: S_
   - _Depends: 5_
-- [ ] 19. [US7] `painel.ts` + tool `painel_clientes` + CLI `painel` + command `/painel`
+- [x] 19. [US7] `painel.ts` + tool `painel_clientes` + CLI `painel` + command `/painel`
   - _Requirements: US-7.AC-1, EC-6, SC-005_
   - _Makes green: T-318_
   - _Implements: mcp-server/src/painel.ts_
@@ -157,7 +157,7 @@
   - _Verify: node --test --test-name-pattern="T-321" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 6_
-- [ ] 21. [US8] Convenção única de placeholders em todos os templates
+- [x] 21. [US8] Convenção única de placeholders em todos os templates
   - _Requirements: US-8.AC-2_
   - _Makes green: T-322_
   - _Verify: node --test --test-name-pattern="T-322" mcp-server/test/v20.test.mjs_
@@ -241,7 +241,7 @@
   - _Verify: node --test --test-name-pattern="T-333" mcp-server/test/v20.test.mjs_
   - _Size: S_
   - _Depends: 15_
-- [ ] 33. [US11][P] Referência `privacidade-plugin` e secção no README
+- [x] 33. [US11][P] Referência `privacidade-plugin` e secção no README
   - _Requirements: US-11.AC-4_
   - _Makes green: T-334_
   - _Verify: node --test --test-name-pattern="T-334" mcp-server/test/v20.test.mjs_
@@ -256,7 +256,7 @@
   - _Depends: 18_
 
 ## Fase: Acabamento (transversal)
-- [ ] 35. [shared] Índices, SKILL.md (tabelas), README, persona, lista de commands do hook e integrações com tudo o que é novo
+- [x] 35. [shared] Índices, SKILL.md (tabelas), README, persona, lista de commands do hook e integrações com tudo o que é novo
   - _Requirements: SC-004_
   - _Makes green: T-340_
   - _Verify: node --test --test-name-pattern="T-340" mcp-server/test/v20.test.mjs_

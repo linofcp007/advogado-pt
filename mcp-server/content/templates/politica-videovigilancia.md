@@ -170,19 +170,19 @@ Assinatura: _______________________________
 **ESTE LOCAL ENCONTRA-SE SOB VIGILÂNCIA DE UM CIRCUITO FECHADO DE TELEVISÃO**
 
 - **Responsável pelo tratamento:** {{EMPRESA_NOME}} — {{EMAIL_PRIVACIDADE}} — {{TELEFONE}}
-- **Entidade de segurança privada:** {{EMPRESA_SEGURANCA}}, alvará/licença n.º {{N_ALVARA}} {{(apagar se não existir)}}
-- **Encarregado da proteção de dados:** {{EPD_CONTACTO}} {{(apagar se não existir)}}
+- **Entidade de segurança privada:** {{EMPRESA_SEGURANCA}}, alvará/licença n.º {{N_ALVARA}} {{OPCIONAL: apagar se não existir}}
+- **Encarregado da proteção de dados:** {{EPD_CONTACTO}} {{OPCIONAL: apagar se não existir}}
 - **Finalidade:** proteção de pessoas e bens. **Fundamento:** interesse legítimo (art. 6.º, n.º 1, al. f), RGPD).
 - **Conservação:** 30 dias. **Som:** não é captado.
 - **Direitos:** acesso, apagamento, limitação e oposição junto do responsável; reclamação à CNPD (www.cnpd.pt).
-- **Informação completa:** {{LOCAL_INFORMACAO / URL / código QR}}
+- **Informação completa:** {{ESCOLHER: LOCAL_INFORMACAO / URL / código QR}}
 
 ### Anexo II — Registo de câmaras
 
 | N.º | Local / estabelecimento | Posição e campo de visão (juntar imagem) | Zona abrangida | Verificação das zonas proibidas (art. 19.º, n.º 2, Lei 58/2019) | Máscara de privacidade | Som | Gravação (contínua / por movimento) | Instalada em | Revista em |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | {{...}} | {{ex. teto da entrada, voltada para a porta, por dentro}} | {{ex. acesso principal}} | {{ex. não capta via pública}} | {{Sim/Não}} | Não | {{...}} | {{...}} | {{...}} |
-| 2 | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | Não | {{...}} | {{...}} | {{...}} |
+| 1 | {{PREENCHER}} | {{PREENCHER: ex. teto da entrada, voltada para a porta, por dentro}} | {{PREENCHER: ex. acesso principal}} | {{PREENCHER: ex. não capta via pública}} | {{ESCOLHER: Sim/Não}} | Não | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
+| 2 | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | Não | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 ### Anexo III — Pessoas autorizadas e registo de acessos e extrações
 
@@ -190,21 +190,21 @@ Assinatura: _______________________________
 
 | Nome | Função | Tipo de acesso (tempo real / gravações / extração / remoto) | Autorizado em | Revogado em |
 |---|---|---|---|---|
-| {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+| {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 **Registo de acessos e extrações**
 
 | Data e hora | Pessoa | Câmara(s) | Período visualizado | Motivo | Extração (sim/não) | Destino (ex. PSP, processo n.º, MP) | Data de destruição da extração |
 |---|---|---|---|---|---|---|---|
-| {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+| {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 ### Anexo IV — Pedido de parecer à comissão de trabalhadores
 
 Exmos. Senhores membros da Comissão de Trabalhadores da {{EMPRESA_NOME}},
 
-**Assunto:** Pedido de parecer sobre a {{instalação / alteração}} de sistema de videovigilância (art. 21.º, n.º 4, do Código do Trabalho)
+**Assunto:** Pedido de parecer sobre a {{ESCOLHER: instalação / alteração}} de sistema de videovigilância (art. 21.º, n.º 4, do Código do Trabalho)
 
-A Empresa pretende {{instalar / alterar}} um sistema de videovigilância nas instalações de {{LOCAL}}, com a finalidade exclusiva de proteção de pessoas e bens, nos termos da Política de Videovigilância que se junta, com o registo de câmaras (Anexo II) e as imagens do enquadramento de cada câmara.
+A Empresa pretende {{ESCOLHER: instalar / alterar}} um sistema de videovigilância nas instalações de {{LOCAL}}, com a finalidade exclusiva de proteção de pessoas e bens, nos termos da Política de Videovigilância que se junta, com o registo de câmaras (Anexo II) e as imagens do enquadramento de cada câmara.
 
 O sistema não se destina, nem será usado, para controlar o desempenho profissional dos trabalhadores (art. 20.º, n.º 1, do Código do Trabalho).
 

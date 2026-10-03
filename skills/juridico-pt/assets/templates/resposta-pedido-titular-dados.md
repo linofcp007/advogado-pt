@@ -42,20 +42,20 @@ Para protegermos os seus dados e evitarmos a sua divulgação a terceiros, e ten
 
 ## Bloco B — Prorrogação do prazo (art. 12.º, n.º 3)
 
-Em virtude de {{MOTIVO: ex. a complexidade do pedido, que abrange dados tratados em vários sistemas desde {{ANO}} / o número de pedidos recebidos}}, informamos que o prazo de resposta é prorrogado por {{um | dois}} mes(es), nos termos do n.º 3 do artigo 12.º do RGPD. A resposta ser-lhe-á enviada até **{{NOVA_DATA_LIMITE}}**.
+Em virtude de {{MOTIVO: ex. a complexidade do pedido, que abrange dados tratados em vários sistemas desde {{ANO}} / o número de pedidos recebidos}}, informamos que o prazo de resposta é prorrogado por {{ESCOLHER: um | dois}} mes(es), nos termos do n.º 3 do artigo 12.º do RGPD. A resposta ser-lhe-á enviada até **{{NOVA_DATA_LIMITE}}**.
 
 ## Bloco C — Direito de acesso (art. 15.º)
 
-Confirmamos que **{{tratamos | não tratamos}}** dados pessoais que lhe dizem respeito. {{Se tratamos:}} Nos termos do artigo 15.º do RGPD, informamos:
+Confirmamos que **{{ESCOLHER: tratamos | não tratamos}}** dados pessoais que lhe dizem respeito. {{PREENCHER: Se tratamos:}} Nos termos do artigo 15.º do RGPD, informamos:
 
 - a) **Finalidades do tratamento:** {{FINALIDADES}};
 - b) **Categorias de dados pessoais:** {{CATEGORIAS_DADOS}};
-- c) **Destinatários ou categorias de destinatários** a quem os dados foram ou serão divulgados: {{DESTINATARIOS}}, {{incluindo / não incluindo}} destinatários estabelecidos em países terceiros ou organizações internacionais {{TRANSFERENCIAS: opcional — , com as seguintes garantias adequadas (art. 15.º, n.º 2, e art. 46.º): {{GARANTIAS}}}};
+- c) **Destinatários ou categorias de destinatários** a quem os dados foram ou serão divulgados: {{DESTINATARIOS}}, {{ESCOLHER: incluindo / não incluindo}} destinatários estabelecidos em países terceiros ou organizações internacionais {{TRANSFERENCIAS: opcional — , com as seguintes garantias adequadas (art. 15.º, n.º 2, e art. 46.º): {{GARANTIAS}}}};
 - d) **Prazo de conservação** previsto ou critérios usados para o fixar: {{PRAZO}};
 - e) Tem o direito de solicitar a **retificação, o apagamento ou a limitação** do tratamento, ou de se **opor** ao tratamento;
 - f) Tem o direito de apresentar **reclamação à Comissão Nacional de Proteção de Dados (CNPD)** — www.cnpd.pt;
 - g) **Origem dos dados**, quando não recolhidos junto de si: {{ORIGEM: opcional}};
-- h) **Decisões automatizadas, incluindo definição de perfis:** {{"não existem" | descrição da lógica subjacente, importância e consequências previstas}}.
+- h) **Decisões automatizadas, incluindo definição de perfis:** {{ESCOLHER: "não existem" | descrição da lógica subjacente, importância e consequências previstas}}.
 
 Junto enviamos **cópia** dos seus dados pessoais objeto de tratamento, em {{FORMATO: ex. ficheiro PDF/CSV protegido por palavra-passe enviada por canal separado}}, a título gratuito (art. 15.º, n.º 3). {{OMISSOES: opcional — Foram ocultados elementos que revelariam dados pessoais de terceiros ou segredos comerciais, por forma a não prejudicar os direitos e liberdades de outrem (art. 15.º, n.º 4).}}
 
@@ -75,7 +75,7 @@ Na sequência do seu pedido, e porque {{FUNDAMENTO: contesta a exatidão dos dad
 
 ## Bloco G — Direito de portabilidade (art. 20.º)
 
-Enviamos {{em anexo | diretamente a {{NOVO_RESPONSAVEL}}, por ser tecnicamente possível (art. 20.º, n.º 2)}} os dados pessoais que nos forneceu e que tratamos por meios automatizados com base {{no seu consentimento | na execução do contrato}}, em formato estruturado, de uso corrente e de leitura automática ({{FORMATO: ex. CSV / JSON}}). {{EXCLUIDOS: opcional — Não estão abrangidos pelo direito de portabilidade os dados {{DESCREVER}}, por serem tratados com outro fundamento ou por terem sido gerados por nós a partir dos seus dados.}}
+Enviamos {{em anexo | diretamente a {{NOVO_RESPONSAVEL}}, por ser tecnicamente possível (art. 20.º, n.º 2)}} os dados pessoais que nos forneceu e que tratamos por meios automatizados com base {{ESCOLHER: no seu consentimento | na execução do contrato}}, em formato estruturado, de uso corrente e de leitura automática ({{FORMATO: ex. CSV / JSON}}). {{EXCLUIDOS: opcional — Não estão abrangidos pelo direito de portabilidade os dados {{DESCREVER}}, por serem tratados com outro fundamento ou por terem sido gerados por nós a partir dos seus dados.}}
 
 ## Bloco H — Direito de oposição (art. 21.º)
 
@@ -85,7 +85,7 @@ Enviamos {{em anexo | diretamente a {{NOVO_RESPONSAVEL}}, por ser tecnicamente p
 
 ## Bloco I — Decisões individuais automatizadas (art. 22.º)
 
-{{DECISAO_AUTOMATIZADA: opcional — A decisão de {{DESCREVER}} foi reapreciada por {{NOME/FUNÇÃO}}, com intervenção humana, tendo em conta o ponto de vista que nos transmitiu. Resultado: {{RESULTADO}}.}}
+{{DECISAO_AUTOMATIZADA: opcional — A decisão de {{DESCREVER}} foi reapreciada por {{ESCOLHER: NOME/FUNÇÃO}}, com intervenção humana, tendo em conta o ponto de vista que nos transmitiu. Resultado: {{RESULTADO}}.}}
 
 ## Bloco J — Recusa fundamentada (art. 12.º, n.os 2, 4 e 5)
 
@@ -94,7 +94,7 @@ Lamentamos informar que não podemos dar seguimento ao seu pedido {{no todo | na
 - {{MOTIVO: escolher e fundamentar —
   · não foi possível confirmar a identidade do requerente, apesar do pedido de informação de {{DATA}} (arts. 11.º, n.º 2, e 12.º, n.os 2 e 6);
   · o pedido é manifestamente infundado ou excessivo, nomeadamente por ser repetitivo — {{FACTOS: ex. é o {{N}}.º pedido idêntico nos últimos {{M}} meses, sem alteração dos dados}} (art. 12.º, n.º 5, al. b));
-  · não se verificam os pressupostos do direito exercido — {{ex. o tratamento baseia-se numa obrigação legal, não sendo aplicável a portabilidade (art. 20.º, n.º 1) / o apagamento esbarra em obrigação legal de conservação (art. 17.º, n.º 3, al. b))}};
+  · não se verificam os pressupostos do direito exercido — {{PREENCHER: ex. o tratamento baseia-se numa obrigação legal, não sendo aplicável a portabilidade (art. 20.º, n.º 1) / o apagamento esbarra em obrigação legal de conservação (art. 17.º, n.º 3, al. b))}};
   · limitação prevista na lei nos termos do art. 23.º do RGPD — {{NORMA}} [VERIFICAR]}}
 
 {{TAXA: alternativa à recusa, só para pedidos manifestamente infundados ou excessivos ou para cópias adicionais — Em alternativa, podemos satisfazer o pedido mediante o pagamento de uma taxa razoável de {{VALOR}}, que corresponde aos custos administrativos de {{DESCREVER}} (art. 12.º, n.º 5, al. a), e art. 15.º, n.º 3).}}

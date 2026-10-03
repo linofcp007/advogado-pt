@@ -45,13 +45,13 @@ Exmos. Senhores,
 | 2 | {{DATA_HORA_2}} | {{TIPO_2}} | {{MONTANTE_2}} | {{BENEFICIARIO_2}} | {{REF_2}} |
 | | | | **Total: {{TOTAL}}** | | |
 
-**3. Factos.** Tomei conhecimento das operações em {{DATA_CONHECIMENTO}}, através de {{COMO: ex. alerta SMS / consulta do extrato / contacto do banco}}. Em {{DATA_HORA_COMUNICACAO}}, comuniquei a situação pela linha {{LINHA_APOIO}} (referência {{REF_CHAMADA}}) e pedi o bloqueio do {{cartão / acesso ao homebanking / serviço MB WAY}}.
+**3. Factos.** Tomei conhecimento das operações em {{DATA_CONHECIMENTO}}, através de {{COMO: ex. alerta SMS / consulta do extrato / contacto do banco}}. Em {{DATA_HORA_COMUNICACAO}}, comuniquei a situação pela linha {{LINHA_APOIO}} (referência {{REF_CHAMADA}}) e pedi o bloqueio do {{ESCOLHER: cartão / acesso ao homebanking / serviço MB WAY}}.
 
 {{FACTOS_VARIANTE: escolher e adaptar —
-(a) Sem qualquer intervenção minha: o cartão/telemóvel {{foi furtado / foi perdido / permaneceu sempre na minha posse}}; não forneci a terceiros quaisquer credenciais, códigos ou dados do cartão; {{suspeita de clonagem / SIM swap: o meu cartão SIM deixou de funcionar em {{DATA}}}}.
-(b) Fraude por engano (phishing / vishing / falsa mensagem): em {{DATA}} recebi {{SMS / e-mail / chamada}} que aparentava provir de {{V. Exas. / entidade}} ({{DESCREVER}}); fui induzido(a) em erro por terceiros, que obtiveram {{DESCREVER, com rigor, o que foi obtido}}. Nunca consenti nas operações acima, cujos montantes, beneficiários e finalidade desconhecia.}}
+(a) Sem qualquer intervenção minha: o cartão/telemóvel {{ESCOLHER: foi furtado / foi perdido / permaneceu sempre na minha posse}}; não forneci a terceiros quaisquer credenciais, códigos ou dados do cartão; {{suspeita de clonagem / SIM swap: o meu cartão SIM deixou de funcionar em {{DATA}}}}.
+(b) Fraude por engano (phishing / vishing / falsa mensagem): em {{DATA}} recebi {{ESCOLHER: SMS / e-mail / chamada}} que aparentava provir de {{ESCOLHER: V. Exas. / entidade}} ({{DESCREVER}}); fui induzido(a) em erro por terceiros, que obtiveram {{PREENCHER: DESCREVER, com rigor, o que foi obtido}}. Nunca consenti nas operações acima, cujos montantes, beneficiários e finalidade desconhecia.}}
 
-Foi apresentada queixa-crime em {{DATA_QUEIXA}} junto de {{PSP / GNR / PJ / Ministério Público}}, com o NUIPC {{NUIPC: opcional — "a apresentar"}}.
+Foi apresentada queixa-crime em {{DATA_QUEIXA}} junto de {{ESCOLHER: PSP / GNR / PJ / Ministério Público}}, com o NUIPC {{NUIPC: opcional — "a apresentar"}}.
 
 **4. Reembolso.** Nos termos do n.º 1 do artigo 114.º do RJSPME, requeiro o **reembolso imediato** do montante das operações não autorizadas — e, em todo o caso, **até ao final do primeiro dia útil seguinte** à presente comunicação —, com data-valor não posterior à data do débito e reposição da conta na situação em que estaria se as operações não tivessem sido executadas (n.os 3 e 4 do mesmo artigo). Na falta de reembolso tempestivo sem motivo de suspeita de fraude comunicado por escrito às autoridades judiciárias (n.º 2), são devidos juros moratórios à taxa legal acrescida de 10 pontos percentuais, contados dia a dia desde a data em que neguei ter autorizado as operações — {{DATA_COMUNICACAO_INICIAL}} — até ao reembolso efetivo, sem prejuízo de indemnização suplementar (n.º 10).
 
@@ -67,7 +67,7 @@ Foi apresentada queixa-crime em {{DATA_QUEIXA}} junto de {{PSP / GNR / PJ / Mini
 
 **7. Qualidade do cliente.**
 
-{{VARIANTE_A — consumidor ou microempresa: Sou {{consumidor | microempresa}}, pelo que me são aplicáveis integralmente as normas do capítulo do RJSPME relativo aos direitos e obrigações na prestação de serviços de pagamento (n.º 1 do artigo 100.º), sem possibilidade de derrogação contratual em meu prejuízo.}}
+{{VARIANTE_A — consumidor ou microempresa: Sou {{ESCOLHER: consumidor | microempresa}}, pelo que me são aplicáveis integralmente as normas do capítulo do RJSPME relativo aos direitos e obrigações na prestação de serviços de pagamento (n.º 1 do artigo 100.º), sem possibilidade de derrogação contratual em meu prejuízo.}}
 
 {{VARIANTE_B — empresa que não é microempresa: A presente comunicação é feita ao abrigo do artigo 114.º do RJSPME e das cláusulas {{CLAUSULAS}} do contrato-quadro. Na medida em que o contrato-quadro não tenha validamente afastado os artigos 113.º e 115.º nem fixado prazo diferente do previsto no artigo 112.º (n.º 2 do artigo 100.º), são os mesmos plenamente aplicáveis.}}
 

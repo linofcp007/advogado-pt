@@ -332,7 +332,7 @@ const TIPO_DOC =
   "pedido de (informa[çc][ãa]o vinculativa|pagamento em presta[çc][õo]es|reembolso)|" +
   "exerc[íi]cio do direito de|c[óo]digo de boa conduta|pol[íi]tica de preven[çc][ãa]o|" +
   // "ATA N.º 3" — \b depois de "N" (seguido de "."); "# Ata nova" não dispara.
-  "decis[ãa]o d[oa] s[óo]ci[oa] [úu]nic[oa]|ata (n|da assembleia|de reuni[ãa]o)|" +
+  "decis[ãa]o d[oa] s[óo]ci[oa] [úu]nic[oa]|ata (n|da assembleia|de reuni[ãa]o)|convocat[óo]ria (de|da) assembleia|" +
   "formul[áa]rio de livre resolu[çc][ãa]o|registo das atividades de tratamento|" +
   "resposta a pedido de exerc[íi]cio|queixa (à comiss[ãa]o|contra|-crime)|" +
   // v1.2 — peças processuais e regulamentos/políticas internas, sempre com o complemento.

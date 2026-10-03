@@ -33,8 +33,8 @@
 | **Total** | {{TOTAL}} |
 
 ## 5. Exposição dos factos (texto livre do requerimento)
-No exercício da sua atividade, o requerente {{DESCRICAO: ex. prestou ao requerido os serviços de … / forneceu os bens …}}, titulados pela(s) fatura(s) n.º {{Nº_FATURA}}, no valor de {{VALOR}}, com vencimento em {{DATA_VENCIMENTO}}.
-O requerido não procedeu ao pagamento, apesar de interpelado para o efeito por {{ex. carta registada de DATA}}, encontrando-se em mora desde {{DATA_VENCIMENTO}}.
+No exercício da sua atividade, o requerente {{DESCRICAO: ex. prestou ao requerido os serviços de … / forneceu os bens …}}, titulados pela(s) fatura(s) n.º {{N_FATURA}}, no valor de {{VALOR}}, com vencimento em {{DATA_VENCIMENTO}}.
+O requerido não procedeu ao pagamento, apesar de interpelado para o efeito por {{PREENCHER: ex. carta registada de DATA}}, encontrando-se em mora desde {{DATA_VENCIMENTO}}.
 São devidos juros de mora à taxa legal aplicável (ver `references/valores-2026.md`) desde a data de vencimento até integral pagamento.
 
 ## 6. Pedido

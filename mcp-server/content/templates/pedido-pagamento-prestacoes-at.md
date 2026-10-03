@@ -19,9 +19,9 @@
 **Exmo(a). Senhor(a) Chefe do Serviço de Finanças de {{SERVICO_FINANCAS}}**
 _(Órgão da execução fiscal — art. 197.º, n.º 1, do CPPT)_
 
-**Processo de execução fiscal n.º {{Nº_PEF}}** {{APENSOS: opcional — e apensos n.os {{Nº_PEF_APENSOS}}}}
+**Processo de execução fiscal n.º {{N_PEF}}** {{APENSOS: opcional — e apensos n.os {{N_PEF_APENSOS}}}}
 
-{{EXECUTADO_NOME}}, {{EXECUTADO_TIPO: sociedade por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{EXECUTADO_NIF}}, com {{sede / domicílio fiscal}} em {{EXECUTADO_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) gerente(s) / administrador(es) {{REPRESENTANTE_NOME}} / por mandatário(a) com procuração junta}}, executada nos autos acima identificados, citada em {{DATA_CITACAO}}, vem, ao abrigo dos **arts. 196.º e seguintes do Código de Procedimento e de Processo Tributário (CPPT)** e do **art. 42.º da Lei Geral Tributária (LGT)**, requerer o
+{{EXECUTADO_NOME}}, {{EXECUTADO_TIPO: sociedade por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{EXECUTADO_NIF}}, com {{ESCOLHER: sede / domicílio fiscal}} em {{EXECUTADO_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) gerente(s) / administrador(es) {{REPRESENTANTE_NOME}} / por mandatário(a) com procuração junta}}, executada nos autos acima identificados, citada em {{DATA_CITACAO}}, vem, ao abrigo dos **arts. 196.º e seguintes do Código de Procedimento e de Processo Tributário (CPPT)** e do **art. 42.º da Lei Geral Tributária (LGT)**, requerer o
 
 **PAGAMENTO DA DÍVIDA EXEQUENDA EM PRESTAÇÕES**
 
@@ -33,12 +33,12 @@ nos termos e com os fundamentos seguintes.
 
 | Processo | Tributo | Período | Quantia exequenda |
 |---|---|---|---|
-| {{Nº_PEF}} | {{TRIBUTO_1: ex. IRC / IVA / IUC / coima}} | {{PERIODO_1}} | {{VALOR_1}} |
-| {{Nº_PEF_2}} | {{TRIBUTO_2}} | {{PERIODO_2}} | {{VALOR_2}} |
+| {{N_PEF}} | {{TRIBUTO_1: ex. IRC / IVA / IUC / coima}} | {{PERIODO_1}} | {{VALOR_1}} |
+| {{N_PEF_2}} | {{TRIBUTO_2}} | {{PERIODO_2}} | {{VALOR_2}} |
 | **Total** | | | **{{TOTAL_QUANTIA_EXEQUENDA}}** |
 
 2. A executada tem conhecimento de que a importância a dividir não inclui os juros de mora, que continuam a vencer-se e são pagos com cada prestação (art. 196.º, n.º 8, do CPPT), nem as custas do processo.
-3. {{NATUREZA_DIVIDA: A dívida não resulta da falta de entrega de imposto retido na fonte nem de imposto legalmente repercutido a terceiros (art. 196.º, n.º 2, do CPPT). / A dívida resulta, em parte, de {{retenções na fonte / imposto repercutido}}, invocando-se o regime excecional do art. 196.º, n.º 3, al. {{a) — plano de recuperação em insolvência, PER ou RERE / b) — dificuldade financeira excecional e previsíveis consequências económicas gravosas}}, do CPPT [VERIFICAR limites aplicáveis].}}
+3. {{NATUREZA_DIVIDA: A dívida não resulta da falta de entrega de imposto retido na fonte nem de imposto legalmente repercutido a terceiros (art. 196.º, n.º 2, do CPPT). / A dívida resulta, em parte, de {{ESCOLHER: retenções na fonte / imposto repercutido}}, invocando-se o regime excecional do art. 196.º, n.º 3, al. {{ESCOLHER: a) — plano de recuperação em insolvência, PER ou RERE / b) — dificuldade financeira excecional e previsíveis consequências económicas gravosas}}, do CPPT [VERIFICAR limites aplicáveis].}}
 
 ## II — Da situação económica da executada
 
@@ -49,7 +49,7 @@ nos termos e com os fundamentos seguintes.
    - d) {{MOTIVO_N: ex. sazonalidade da atividade / perda de cliente relevante / situação pessoal do empresário}}.
 5. A executada mantém atividade e capacidade de gerar receita suficiente para cumprir o plano proposto, mantendo em dia as obrigações fiscais e contributivas correntes, como resulta do {{Doc. 5 — plano de tesouraria a {{N}} meses}}.
 6. {{PRESTACOES_ALARGADAS: opcional — A dívida exequenda excede 500 unidades de conta e a executada demonstra notória dificuldade financeira e previsíveis consequências económicas gravosas, pelo que requer o alargamento até 5 anos (art. 196.º, n.º 5, do CPPT).}}
-7. {{PLANO_RECUPERACAO: opcional — A executada {{está a negociar / cumpre}} {{plano de recuperação em processo de insolvência / PER / acordo no âmbito do RERE}}, requerendo o regime prestacional alargado previsto no art. 196.º, n.º {{6 / 7}}, do CPPT, sem garantias adicionais (art. 199.º, n.º 13).}}
+7. {{PLANO_RECUPERACAO: opcional — A executada {{ESCOLHER: está a negociar / cumpre}} {{ESCOLHER: plano de recuperação em processo de insolvência / PER / acordo no âmbito do RERE}}, requerendo o regime prestacional alargado previsto no art. 196.º, n.º {{ESCOLHER: 6 / 7}}, do CPPT, sem garantias adicionais (art. 199.º, n.º 13).}}
 
 ## III — Da proposta de pagamento _(art. 198.º, n.º 1, do CPPT)_
 
@@ -82,11 +82,11 @@ Nestes termos, requer-se a V. Exa. que:
 - b) {{PEDIDO_GARANTIA: seja reconhecida a dispensa legal de garantia (art. 198.º, n.º 5, do CPPT) / seja aceite a garantia oferecida / seja concedida a isenção de prestação de garantia (art. 52.º, n.º 4, da LGT)}};
 - c) Seja, em consequência, suspensa a execução fiscal enquanto o plano for cumprido (art. 52.º, n.os 1 e 2, da LGT) e considerada regularizada a situação tributária da executada [VERIFICAR art. 177.º-A do CPPT].
 
-Junta: {{Nº_DOCUMENTOS}} documentos — Doc. 1 citação / nota de dívida; Doc. 2 {{IES / declarações fiscais}}; Doc. 3 {{mapa de clientes}}; Doc. 4 {{extratos bancários}}; Doc. 5 {{plano de tesouraria}}; {{procuração / certidão permanente}}.
+Junta: {{N_DOCUMENTOS}} documentos — Doc. 1 citação / nota de dívida; Doc. 2 {{ESCOLHER: IES / declarações fiscais}}; Doc. 3 {{PREENCHER: mapa de clientes}}; Doc. 4 {{PREENCHER: extratos bancários}}; Doc. 5 {{PREENCHER: plano de tesouraria}}; {{ESCOLHER: procuração / certidão permanente}}.
 
 {{LOCAL}}, {{DATA}}
 
-{{A executada / O(A) mandatário(a)}},
+{{ESCOLHER: A executada / O(A) mandatário(a)}},
 
 _______________________________
 {{ASSINANTE_NOME}}, {{ASSINANTE_QUALIDADE: gerente / administrador / advogado(a)}}
@@ -105,4 +105,4 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Garantia: prestar no prazo do art. 199.º, n.º 7, após a autorização (regra 15 dias), ou ter a dispensa concedida — sem isso a execução prossegue para penhora (art. 199.º, n.º 8). Dispensa ao abrigo do art. 52.º, n.º 4, LGT: prova documental completa junta (art. 170.º, n.º 3, CPPT).
 - [ ] Plano de tesouraria realista: falhar **3 prestações seguidas ou 6 interpoladas** vence as restantes se não regularizares em 30 dias após notificação (art. 200.º, n.º 1); com dispensa legal por pequeno valor basta **uma** (art. 200.º, n.º 4).
 - [ ] Sociedade: dívidas não pagas podem reverter contra gerentes/administradores (art. 24.º LGT) — cumprir o plano protege também a gerência. Ver `playbooks/recebi-notificacao-at.md`.
-- [ ] Assinatura por quem obriga a empresa (perfil `.juridico-pt/perfil-empresa.md`) ou mandatário com procuração; comentários `<!-- -->`, opções não usadas e `{{...}}` removidos.
+- [ ] Assinatura por quem obriga a empresa (perfil `.juridico-pt/perfil-empresa.md`) ou mandatário com procuração; comentários `<!-- -->`, opções não usadas e `{{CAMPO}}` removidos.

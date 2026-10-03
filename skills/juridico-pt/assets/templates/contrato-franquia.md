@@ -61,7 +61,7 @@ e
 
 1. O Estabelecimento situa-se em {{MORADA_ESTABELECIMENTO}}, que só pode ser mudado com o acordo escrito do Franqueador (art. 4.º, al. b), subal. iii), do Reg. (UE) 2022/720).
 2. O Franqueado executa, à sua custa, o projeto de imagem e equipamento aprovado pelo Franqueador (**Anexo II**), obtém as licenças e autorizações administrativas necessárias e abre o Estabelecimento até {{DATA_ABERTURA}}.
-3. {{ARRENDAMENTO: opcional — O imóvel é {{arrendado pelo Franqueado / subarrendado pelo Franqueador ao Franqueado}}; o arrendamento é regulado por contrato próprio, devendo prever-se a sua articulação com a cessação deste contrato. Ver `assets/templates/contrato-arrendamento-nao-habitacional.md`.}}
+3. {{ARRENDAMENTO: opcional — O imóvel é {{ESCOLHER: arrendado pelo Franqueado / subarrendado pelo Franqueador ao Franqueado}}; o arrendamento é regulado por contrato próprio, devendo prever-se a sua articulação com a cessação deste contrato. Ver `assets/templates/contrato-arrendamento-nao-habitacional.md`.}}
 
 ## Cláusula 6.ª (Contrapartidas financeiras)
 

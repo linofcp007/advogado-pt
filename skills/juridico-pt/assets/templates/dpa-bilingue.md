@@ -15,9 +15,9 @@ O Processor trata dados pessoais por conta do Controller exclusivamente para a e
 *The Processor processes personal data on behalf of the Controller solely to perform the main contract.*
 
 ## 2. Detalhes do tratamento / Details (Art. 28.º(3))
-- **Natureza e finalidade / Nature and purpose:** {{ex. alojamento e processamento de dados de utilizadores}}
-- **Tipos de dados / Categories of data:** {{ex. identificação, contacto, faturação}}
-- **Categorias de titulares / Data subjects:** {{ex. clientes do Controller}}
+- **Natureza e finalidade / Nature and purpose:** {{PREENCHER: ex. alojamento e processamento de dados de utilizadores}}
+- **Tipos de dados / Categories of data:** {{PREENCHER: ex. identificação, contacto, faturação}}
+- **Categorias de titulares / Data subjects:** {{PREENCHER: ex. clientes do Controller}}
 - **Duração / Duration:** enquanto vigorar o contrato principal.
 
 ## 3. Obrigações do Subcontratante / Processor obligations
@@ -25,7 +25,7 @@ Nos termos do **Art. 28.º, n.º 3, RGPD**, o Processor: (a) trata os dados apen
 <!-- EN: Under Art. 28(3) GDPR the Processor (a) processes only on documented instructions; (b) ensures confidentiality; (c) implements Art. 32 security; (d) respects sub-processor conditions; (e)-(f) assists with data subject requests and Arts. 32-36; (g) at the Controller's choice deletes or returns all personal data at the end of the services and deletes existing copies unless retention is required by law; (h) makes available all information necessary to demonstrate compliance and allows for and contributes to audits, including inspections. -->
 
 ## 4. Sub-subcontratantes / Sub-processors
-{{Autorização específica / geral}}. O Processor mantém uma lista de sub-subcontratantes e informa o Controller de alterações, permitindo oposição fundamentada.
+{{ESCOLHER: Autorização específica / geral}}. O Processor mantém uma lista de sub-subcontratantes e informa o Controller de alterações, permitindo oposição fundamentada.
 
 ## 5. Transferências internacionais / International transfers
 Transferências para fora do EEE apenas ao abrigo de decisão de adequação ou de Cláusulas Contratuais-Tipo (Decisão (UE) 2021/914), com avaliação de impacto quando aplicável.

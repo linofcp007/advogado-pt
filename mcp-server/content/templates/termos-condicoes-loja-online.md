@@ -17,13 +17,13 @@ Antes da compra são apresentados: características essenciais, preço total com
 O contrato considera-se celebrado com a confirmação da encomenda enviada por email. Reservamo-nos o direito de não aceitar encomendas por rutura de stock ou erro manifesto de preço.
 
 ## 4. Preços e pagamento
-Os preços incluem IVA à taxa legal. Meios de pagamento aceites: {{MEIOS}}. {{Encargos de envio}}.
+Os preços incluem IVA à taxa legal. Meios de pagamento aceites: {{MEIOS}}. {{PREENCHER: Encargos de envio}}.
 
 ## 5. Entrega
 Prazo de entrega: {{PRAZO_ENTREGA}}. O risco transfere-se para o consumidor com a entrega física do bem.
 
 ## 6. Direito de livre resolução (Art. 10.º DL 24/2014)
-O consumidor pode resolver o contrato em **14 dias** sem necessidade de justificação, contados da receção do bem (ou da celebração, nos serviços). Para exercer, deve comunicar a decisão (pode usar o modelo de formulário disponibilizado). Reembolso em 14 dias após a comunicação, incluindo os custos de entrega iniciais. O custo da devolução do bem é suportado por {{o consumidor / a Loja}}; se o consumidor não tiver sido previamente informado de que o suporta, cabe à Loja (Art. 13.º DL 24/2014).
+O consumidor pode resolver o contrato em **14 dias** sem necessidade de justificação, contados da receção do bem (ou da celebração, nos serviços). Para exercer, deve comunicar a decisão (pode usar o modelo de formulário disponibilizado). Reembolso em 14 dias após a comunicação, incluindo os custos de entrega iniciais. O custo da devolução do bem é suportado por {{ESCOLHER: o consumidor / a Loja}}; se o consumidor não tiver sido previamente informado de que o suporta, cabe à Loja (Art. 13.º DL 24/2014).
 <!-- Diretiva (UE) 2023/2673: desde 19/6/2026, os contratos celebrados através de interface eletrónica devem disponibilizar uma "função de resolução" (botão) bem visível para exercer a livre resolução — [VERIFICAR] o diploma português de transposição e adaptar o site. -->
 **Exceções (Art. 17.º):** bens personalizados; conteúdos digitais cuja execução tenha início com consentimento expresso e reconhecimento da perda do direito; bens selados por motivos de higiene após abertura.
 
@@ -34,7 +34,7 @@ Bens novos: garantia legal de **3 anos**. Conteúdos e serviços digitais: confo
 Está disponível o Livro de Reclamações eletrónico em www.livroreclamacoes.pt. Respondemos no prazo de 15 dias úteis.
 
 ## 9. Resolução alternativa de litígios (RAL)
-Em caso de litígio, o consumidor pode recorrer a uma entidade de Resolução Alternativa de Litígios de consumo competente. {{Indicar entidade de RAL competente — consultar a lista do CNIACC}}. *(Nota: a Plataforma ODR da Comissão Europeia foi descontinuada em julho de 2025.)*
+Em caso de litígio, o consumidor pode recorrer a uma entidade de Resolução Alternativa de Litígios de consumo competente. {{PREENCHER: Indicar entidade de RAL competente — consultar a lista do CNIACC}}. *(Nota: a Plataforma ODR da Comissão Europeia foi descontinuada em julho de 2025.)*
 
 ## 10. Proteção de dados
 O tratamento de dados pessoais rege-se pela Política de Privacidade disponível em {{URL_PRIVACIDADE}}.

@@ -12,7 +12,7 @@
 # ACORDO DE PARTILHA EXTRAJUDICIAL DE HERANÇA
 
 ## Autor da herança
-Falecido(a) **{{FALECIDO_NOME}}**, NIF {{FALECIDO_NIF}}, no estado de {{FALECIDO_ESTADO_CIVIL}}, falecido(a) em {{DATA_OBITO}}, com última residência em {{FALECIDO_MORADA}}, conforme assento de óbito n.º {{Nº_ASSENTO_OBITO}}.
+Falecido(a) **{{FALECIDO_NOME}}**, NIF {{FALECIDO_NIF}}, no estado de {{FALECIDO_ESTADO_CIVIL}}, falecido(a) em {{DATA_OBITO}}, com última residência em {{FALECIDO_MORADA}}, conforme assento de óbito n.º {{N_ASSENTO_OBITO}}.
 
 ## Herdeiros (habilitados)
 Habilitados como únicos herdeiros, por {{TITULO_HABILITACAO: ex. escritura de habilitação de herdeiros de DATA / habilitação no balcão Heranças}}, os seguintes outorgantes:

@@ -19,7 +19,7 @@ e
 é celebrado o presente contrato de arrendamento urbano para fim habitacional, que se rege pelas cláusulas seguintes e, no omisso, pelo NRAU (Lei 6/2006) e pelos Arts. 1022.º e seguintes do Código Civil.
 
 ## Cláusula 1.ª (Identificação do imóvel)
-O Senhorio é legítimo proprietário/possuidor do imóvel sito em **{{IMOVEL_MORADA}}**, {{IMOVEL_DESCRICAO: ex. fração autónoma designada pela letra X / andar / tipologia TX}}, descrito na Conservatória do Registo Predial de {{CRP}} sob o n.º {{Nº_DESCRICAO}} e inscrito na matriz predial urbana da freguesia de {{FREGUESIA}} sob o artigo {{ARTIGO_MATRICIAL}}, com licença de utilização n.º {{LICENCA_UTILIZACAO}}.
+O Senhorio é legítimo proprietário/possuidor do imóvel sito em **{{IMOVEL_MORADA}}**, {{IMOVEL_DESCRICAO: ex. fração autónoma designada pela letra X / andar / tipologia TX}}, descrito na Conservatória do Registo Predial de {{CRP}} sob o n.º {{N_DESCRICAO}} e inscrito na matriz predial urbana da freguesia de {{FREGUESIA}} sob o artigo {{ARTIGO_MATRICIAL}}, com licença de utilização n.º {{LICENCA_UTILIZACAO}}.
 
 ## Cláusula 2.ª (Objeto e fim)
 Pelo presente contrato, o Senhorio dá de arrendamento ao Arrendatário o imóvel identificado, destinando-se o mesmo exclusivamente a **habitação própria e permanente** do Arrendatário e do seu agregado familiar, não lhe podendo ser dado outro fim sem autorização escrita do Senhorio.
@@ -36,7 +36,7 @@ A renda pode ser atualizada anualmente, decorrido um ano sobre o início do cont
 <!-- Coeficiente do ano em curso: confirmar em references/valores-2026.md (não inventar). -->
 
 ## Cláusula 6.ª (Caução)
-No ato de celebração, o Arrendatário entrega ao Senhorio, a título de caução, a quantia de **{{CAUCAO}}**, correspondente a {{Nº_MESES_CAUCAO}} {{MESES: mês/meses}} de renda. <!-- A caução não pode exceder o limite legal — confirmar em references/valores-2026.md. -->
+No ato de celebração, o Arrendatário entrega ao Senhorio, a título de caução, a quantia de **{{CAUCAO}}**, correspondente a {{N_MESES_CAUCAO}} {{MESES: mês/meses}} de renda. <!-- A caução não pode exceder o limite legal — confirmar em references/valores-2026.md. -->
 A caução destina-se a garantir o cumprimento das obrigações do Arrendatário e é restituída no termo do contrato, deduzidas eventuais quantias em dívida ou o custo de reparação de danos que não resultem do uso normal.
 
 ## Cláusula 7.ª (Encargos e despesas)

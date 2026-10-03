@@ -14,21 +14,21 @@
 
 {{LOCAL}}, {{DATA}}
 
-**ASSUNTO: Decisão de despedimento com justa causa — Processo disciplinar n.º {{Nº_PROCESSO}}**
+**ASSUNTO: Decisão de despedimento com justa causa — Processo disciplinar n.º {{N_PROCESSO}}**
 **(Carta registada com aviso de receção)**
 
 Exmo(a). Senhor(a),
 
-No âmbito do processo disciplinar instaurado por nota de culpa de {{DATA_NOTA_CULPA}}, e ponderada {{a resposta apresentada por V. Exa. em DATA / a ausência de resposta}}, bem como a prova produzida, decide o Empregador o seguinte.
+No âmbito do processo disciplinar instaurado por nota de culpa de {{DATA_NOTA_CULPA}}, e ponderada {{ESCOLHER: a resposta apresentada por V. Exa. em DATA / a ausência de resposta}}, bem como a prova produzida, decide o Empregador o seguinte.
 
 ## 1. Factos provados
 Consideram-se provados os seguintes factos: {{FACTOS_PROVADOS}}.
 
 ## 2. Apreciação da defesa
-{{Síntese da resposta do trabalhador e razões por que procede / improcede, com referência às provas.}}
+{{PREENCHER: Síntese da resposta do trabalhador e razões por que procede / improcede, com referência às provas.}}
 
 ## 3. Enquadramento — justa causa
-Os factos provados constituem violação culposa dos deveres laborais ({{deveres do Art. 128.º CT em causa}}) que, pela sua gravidade e consequências, tornam **imediata e praticamente impossível a subsistência da relação de trabalho**, integrando justa causa de despedimento nos termos do Art. 351.º do Código do Trabalho, designadamente a(s) alínea(s) {{ALÍNEAS}}.
+Os factos provados constituem violação culposa dos deveres laborais ({{PREENCHER: deveres do Art. 128.º CT em causa}}) que, pela sua gravidade e consequências, tornam **imediata e praticamente impossível a subsistência da relação de trabalho**, integrando justa causa de despedimento nos termos do Art. 351.º do Código do Trabalho, designadamente a(s) alínea(s) {{ALINEAS}}.
 
 ## 4. Decisão
 Pelo exposto, aplica-se a V. Exa. a sanção de **despedimento sem indemnização ou compensação**, com efeitos a partir da receção desta comunicação, cessando nessa data o contrato de trabalho.

@@ -22,8 +22,8 @@
 
 **Exmo(a). Senhor(a) Diretor(a)-Geral da Autoridade Tributária e Aduaneira**
 
-- **Sujeito passivo:** {{SP_NOME}}, NIF/NIPC {{SP_NIF}}, com {{sede / domicílio fiscal}} em {{SP_MORADA}}
-- **Requerente:** {{REQUERENTE: o próprio sujeito passivo / {{REQUERENTE_NOME}}, NIF {{REQUERENTE_NIF}}, na qualidade de {{advogado(a) / solicitador(a) / revisor(a) oficial de contas / contabilista certificado(a) / consultor(a) fiscal / representante legal}}, com documento de legitimidade junto (art. 68.º, n.os 4 e 5, da LGT)}}
+- **Sujeito passivo:** {{SP_NOME}}, NIF/NIPC {{SP_NIF}}, com {{ESCOLHER: sede / domicílio fiscal}} em {{SP_MORADA}}
+- **Requerente:** {{REQUERENTE: o próprio sujeito passivo / {{REQUERENTE_NOME}}, NIF {{REQUERENTE_NIF}}, na qualidade de {{ESCOLHER: advogado(a) / solicitador(a) / revisor(a) oficial de contas / contabilista certificado(a) / consultor(a) fiscal / representante legal}}, com documento de legitimidade junto (art. 68.º, n.os 4 e 5, da LGT)}}
 - **Área tributária:** {{AREA_TRIBUTARIA: IRC / IRS / IVA / IMT / IMI / Imposto do Selo / IUC / Relações Internacionais / Justiça Tributária / outra}}
 - **Modalidade:** {{MODALIDADE: pedido normal (art. 68.º, n.º 4, da LGT) / pedido urgente (art. 68.º, n.º 2, da LGT)}}
 - **Período a que respeitam os factos:** {{PERIODO: de {{DATA_INICIO}} a {{DATA_FIM}} / factos ainda não ocorridos, previstos para {{DATA_PREVISTA}}}}
@@ -34,7 +34,7 @@
 
 1. {{SP_NOME}} é {{FORMA_JURIDICA: empresário em nome individual / sociedade unipessoal por quotas / sociedade por quotas / sociedade anónima / pessoa singular}}, com a atividade de {{ATIVIDADE}} (CAE {{CAE}}), iniciada em {{DATA_INICIO_ATIVIDADE}}.
 2. Enquadramento fiscal atual: {{ENQUADRAMENTO: ex. IRC — regime geral / IRS — categoria B, regime simplificado ou contabilidade organizada; IVA — regime normal mensal / trimestral / isenção do art. 53.º do CIVA}}; dimensão: {{DIMENSAO: micro / pequena / média / grande empresa}} (ver perfil da empresa).
-3. Sobre os factos objeto deste pedido **não foi notificado o início de procedimento de inspeção** nem está pendente reclamação, recurso hierárquico ou impugnação (art. 68.º, n.os 3 e 12, da LGT). {{OUTRO_PEDIDO: Não foi apresentado outro pedido de informação vinculativa sobre esta matéria. / Foi apresentado o pedido n.º {{Nº}}, em {{DATA}}, sobre {{...}}.}}
+3. Sobre os factos objeto deste pedido **não foi notificado o início de procedimento de inspeção** nem está pendente reclamação, recurso hierárquico ou impugnação (art. 68.º, n.os 3 e 12, da LGT). {{OUTRO_PEDIDO: Não foi apresentado outro pedido de informação vinculativa sobre esta matéria. / Foi apresentado o pedido n.º {{NUMERO}}, em {{DATA}}, sobre {{PREENCHER}}.}}
 
 ## II — Descrição dos factos _(art. 68.º, n.º 1, al. a), da LGT)_
 
@@ -44,7 +44,7 @@
      inútil (ela só vincula quanto aos factos descritos). Não incluir juízos jurídicos nesta secção. -->
 
 4. **Contexto:** {{CONTEXTO: ex. a requerente desenvolve software por medida para clientes em Portugal e noutros Estados-Membros}}
-5. **Partes envolvidas:** {{PARTES: ex. cliente X, NIF/VAT {{...}}, com sede em {{país}}, sujeito passivo de IVA no seu Estado}}
+5. **Partes envolvidas:** {{PARTES: ex. cliente X, NIF/VAT {{PREENCHER}}, com sede em {{PREENCHER: país}}, sujeito passivo de IVA no seu Estado}}
 6. **Operação:** {{OPERACAO: o quê, quem, quando, onde, quanto — ex. a requerente vai ceder licenças de utilização de ... e prestar serviços de manutenção ..., pelo preço anual de ...}}
 7. **Fluxos de faturação e pagamento:** {{FLUXOS}}
 8. **Documentos:** {{DOCUMENTOS: ex. minuta do contrato (Doc. 1); proposta comercial (Doc. 2)}}
@@ -89,13 +89,13 @@
 
 ## VIII — Pedido
 
-Nestes termos, requer-se que seja prestada informação vinculativa {{PEDIDO: confirmando o enquadramento proposto na secção IV / esclarecendo a qualificação jurídico-tributária dos factos descritos}}, com caráter {{normal / urgente}}.
+Nestes termos, requer-se que seja prestada informação vinculativa {{PEDIDO: confirmando o enquadramento proposto na secção IV / esclarecendo a qualificação jurídico-tributária dos factos descritos}}, com caráter {{ESCOLHER: normal / urgente}}.
 
 Anexos: {{ANEXOS: Doc. 1 ... ; Doc. 2 ... ; documento comprovativo da legitimidade do requerente}}.
 
 {{LOCAL}}, {{DATA}}
 
-{{O(A) requerente}},
+{{PREENCHER: O(A) requerente}},
 
 _______________________________
 {{ASSINANTE_NOME}}, {{ASSINANTE_QUALIDADE}}
@@ -113,4 +113,4 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Taxa do pedido urgente (n.º 7) e taxa reduzida para micro/PME e certas pessoas singulares (n.º 22): (ver `references/valores-2026.md`). A dimensão da empresa consta do perfil `.juridico-pt/perfil-empresa.md`.
 - [ ] Efeitos explicados ao cliente: vincula a AT quanto ao objeto (n.º 14), não o contribuinte; caduca se mudarem os pressupostos e, em qualquer caso, 4 anos após a emissão, salvo renovação (n.º 15); revogável para o futuro após 1 ano (n.º 16); é publicada sem dados pessoais (n.º 17). Atraso da AT além dos 150 dias protege de coimas e juros quem atuar com interpretação plausível e de boa-fé (n.os 18 e 19).
 - [ ] Antes de pedir, consultadas as informações vinculativas já publicadas no Portal das Finanças sobre o tema. A resposta (e a recusa de urgência) admite recurso contencioso autónomo (n.º 20) — prazo e tribunal [VERIFICAR] com advogado.
-- [ ] Alterações posteriores relevantes para a troca automática de informações comunicadas à AT (n.º 21); comentários `<!-- -->`, secções opcionais e `{{...}}` removidos.
+- [ ] Alterações posteriores relevantes para a troca automática de informações comunicadas à AT (n.º 21); comentários `<!-- -->`, secções opcionais e `{{CAMPO}}` removidos.

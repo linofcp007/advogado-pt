@@ -17,7 +17,7 @@ O Segundo Outorgante reconhece dever ao Primeiro Outorgante a quantia de **{{VAL
 O Devedor obriga-se a pagar a quantia referida {{MODO_PAGAMENTO: ex. de uma só vez até DATA / em N prestações conforme Cláusula 3.ª}}, por transferência para o IBAN {{IBAN}}.
 
 ## Cláusula 3.ª (Plano de prestações) <!-- usar se aplicável; senão remover -->
-O pagamento será efetuado em {{Nº_PRESTACOES}} prestações mensais de {{VALOR_PRESTACAO}}, vencendo-se a primeira a {{DATA_1A_PRESTACAO}} e as seguintes em igual dia dos meses subsequentes.
+O pagamento será efetuado em {{N_PRESTACOES}} prestações mensais de {{VALOR_PRESTACAO}}, vencendo-se a primeira a {{DATA_1A_PRESTACAO}} e as seguintes em igual dia dos meses subsequentes.
 
 ## Cláusula 4.ª (Vencimento antecipado)
 A falta de pagamento de qualquer prestação na data devida implica o **vencimento imediato de toda a dívida remanescente**, ficando o Credor habilitado a exigir a totalidade em falta, acrescida de juros de mora à taxa legal.

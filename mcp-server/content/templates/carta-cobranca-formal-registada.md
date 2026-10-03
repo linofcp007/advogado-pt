@@ -12,12 +12,12 @@ NIF: {{DESTINATARIO_NIF}}
 
 {{LOCAL}}, {{DATA}}
 
-**ASSUNTO: Interpelação para pagamento — Fatura {{Nº_FATURA}}**
+**ASSUNTO: Interpelação para pagamento — Fatura {{N_FATURA}}**
 **(Carta registada com aviso de receção)**
 
 Exmo(a). Senhor(a),
 
-Apesar dos contactos anteriores, mantém-se por liquidar a quantia de **{{VALOR}}**, titulada pela fatura n.º **{{Nº_FATURA}}**, vencida a **{{DATA_VENCIMENTO}}**, referente a {{DESCRICAO_SERVICOS_BENS}}.
+Apesar dos contactos anteriores, mantém-se por liquidar a quantia de **{{VALOR}}**, titulada pela fatura n.º **{{N_FATURA}}**, vencida a **{{DATA_VENCIMENTO}}**, referente a {{DESCRICAO_SERVICOS_BENS}}.
 
 Encontrando-se V. Exa. em mora desde a data de vencimento, são devidos juros de mora à taxa legal aplicável, contados desde essa data até efetivo e integral pagamento.
 

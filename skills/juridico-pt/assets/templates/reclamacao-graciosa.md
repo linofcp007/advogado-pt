@@ -21,7 +21,7 @@
 
 _(Apresentada no Serviço de Finanças de {{SERVICO_FINANCAS}} — arts. 70.º, n.º 6, e 73.º, n.º 1, do CPPT)_
 
-{{RECLAMANTE_NOME}}, {{RECLAMANTE_TIPO: sociedade por quotas / sociedade unipessoal por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{RECLAMANTE_NIF}}, com {{sede / domicílio fiscal}} em {{RECLAMANTE_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) {{gerente(s) / administrador(es)}} {{REPRESENTANTE_NOME}}, com poderes para o ato / por mandatário(a) constituído(a), conforme procuração junta}}, vem, ao abrigo dos **artigos 68.º e seguintes do Código de Procedimento e de Processo Tributário (CPPT)**, apresentar
+{{RECLAMANTE_NOME}}, {{RECLAMANTE_TIPO: sociedade por quotas / sociedade unipessoal por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{RECLAMANTE_NIF}}, com {{ESCOLHER: sede / domicílio fiscal}} em {{RECLAMANTE_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) {{ESCOLHER: gerente(s) / administrador(es)}} {{REPRESENTANTE_NOME}}, com poderes para o ato / por mandatário(a) constituído(a), conforme procuração junta}}, vem, ao abrigo dos **artigos 68.º e seguintes do Código de Procedimento e de Processo Tributário (CPPT)**, apresentar
 
 **RECLAMAÇÃO GRACIOSA**
 
@@ -32,7 +32,7 @@ do ato tributário abaixo identificado, nos termos e com os fundamentos seguinte
 1. A reclamante foi notificada, em {{DATA_NOTIFICACAO}}, através de {{MEIO_NOTIFICACAO: carta registada / carta registada com aviso de receção / domicílio fiscal eletrónico (caixa postal eletrónica)}}, do seguinte ato tributário (Doc. 1):
    - **Imposto:** {{IMPOSTO: IRC / IRS / IVA / IMI / IMT / Imposto do Selo / IUC / outro}}
    - **Natureza do ato:** {{NATUREZA_ATO: liquidação / liquidação adicional / autoliquidação / retenção na fonte / pagamento por conta / liquidação de juros compensatórios}}
-   - **N.º da liquidação / documento:** {{Nº_LIQUIDACAO}} {{Nº_COMPENSACAO: opcional — n.º de compensação / nota de cobrança}}
+   - **N.º da liquidação / documento:** {{N_LIQUIDACAO}} {{N_COMPENSACAO: opcional — n.º de compensação / nota de cobrança}}
    - **Período de tributação:** {{PERIODO}}
    - **Valor a pagar:** {{VALOR_LIQUIDADO}}
    - **Data-limite de pagamento voluntário:** {{DATA_LIMITE_PAGAMENTO}}
@@ -92,31 +92,31 @@ do ato tributário abaixo identificado, nos termos e com os fundamentos seguinte
      a contar da apresentação desta reclamação (art. 170.º, n.os 1 e 3, CPPT). Apagar a secção se não
      se aplicar. -->
 
-17. A dívida {{SITUACAO_DIVIDA: encontra-se em cobrança coerciva no processo de execução fiscal n.º {{Nº_PEF}} / não foi paga e o prazo de pagamento voluntário terminou em {{DATA}}}}.
-18. Para efeitos de suspensão da execução, a reclamante {{OPCAO_GARANTIA: oferece garantia idónea, na modalidade de {{TIPO_GARANTIA: garantia bancária / seguro-caução / caução / penhor / hipoteca voluntária}}, pelo valor que a AT indicar (art. 199.º, n.º 6, do CPPT) / requer, em requerimento autónomo dirigido ao órgão da execução fiscal, a dispensa de prestação de garantia, com fundamento em {{prejuízo irreparável / manifesta falta de meios económicos revelada pela insuficiência de bens penhoráveis}}, nos termos do art. 52.º, n.º 4, da LGT e do art. 170.º do CPPT}}.
+17. A dívida {{SITUACAO_DIVIDA: encontra-se em cobrança coerciva no processo de execução fiscal n.º {{N_PEF}} / não foi paga e o prazo de pagamento voluntário terminou em {{DATA}}}}.
+18. Para efeitos de suspensão da execução, a reclamante {{OPCAO_GARANTIA: oferece garantia idónea, na modalidade de {{TIPO_GARANTIA: garantia bancária / seguro-caução / caução / penhor / hipoteca voluntária}}, pelo valor que a AT indicar (art. 199.º, n.º 6, do CPPT) / requer, em requerimento autónomo dirigido ao órgão da execução fiscal, a dispensa de prestação de garantia, com fundamento em {{ESCOLHER: prejuízo irreparável / manifesta falta de meios económicos revelada pela insuficiência de bens penhoráveis}}, nos termos do art. 52.º, n.º 4, da LGT e do art. 170.º do CPPT}}.
 
 ## VI — Do pedido
 
 Nestes termos, e nos demais de direito, requer-se a V. Exa. que a presente reclamação graciosa seja admitida e julgada **procedente** e, em consequência:
 
-- a) Seja **anulado {{ANULACAO: totalmente / parcialmente, no montante de {{VALOR_RECLAMADO}}}}** o ato de {{NATUREZA_ATO}} n.º {{Nº_LIQUIDACAO}}, referente a {{IMPOSTO}} de {{PERIODO}};
+- a) Seja **anulado {{ANULACAO: totalmente / parcialmente, no montante de {{VALOR_RECLAMADO}}}}** o ato de {{NATUREZA_ATO}} n.º {{N_LIQUIDACAO}}, referente a {{IMPOSTO}} de {{PERIODO}};
 - b) {{RESTITUICAO: opcional, se pago — Seja **restituído** o imposto indevidamente pago, no montante de {{VALOR_A_RESTITUIR}}, acrescido de **juros indemnizatórios** contados desde {{DATA_PAGAMENTO}} até à emissão da nota de crédito (arts. 43.º e 100.º da LGT);}}
 - c) Caso se projete o indeferimento total ou parcial, seja a reclamante **notificada para exercer o direito de audição** (art. 60.º, n.º 1, al. b), da LGT);
-- d) {{SUSPENSAO: opcional — Seja comunicada ao órgão da execução fiscal a pendência da presente reclamação, para efeitos de suspensão do processo de execução fiscal n.º {{Nº_PEF}}, logo que prestada a garantia ou concedida a dispensa.}}
+- d) {{SUSPENSAO: opcional — Seja comunicada ao órgão da execução fiscal a pendência da presente reclamação, para efeitos de suspensão do processo de execução fiscal n.º {{N_PEF}}, logo que prestada a garantia ou concedida a dispensa.}}
 
 ## VII — Da prova
 
-Junta: {{Nº_DOCUMENTOS}} documentos e {{PROCURACAO: procuração / certidão permanente que comprova os poderes de representação}}:
+Junta: {{N_DOCUMENTOS}} documentos e {{PROCURACAO: procuração / certidão permanente que comprova os poderes de representação}}:
 - Doc. 1 — Notificação / demonstração do ato reclamado;
 - Doc. 2 — {{DOC_2: ex. comprovativo de pagamento}};
 - Doc. 3 — {{DOC_3: ex. faturas, contratos, extratos, declarações periódicas}};
 - Doc. {{N}} — {{DOC_N}}.
 
-{{DILIGENCIAS: opcional — Requer-se ainda, por se mostrarem indispensáveis à descoberta da verdade material, as seguintes diligências complementares (art. 69.º, al. e), do CPPT): {{...}}.}}
+{{DILIGENCIAS: opcional — Requer-se ainda, por se mostrarem indispensáveis à descoberta da verdade material, as seguintes diligências complementares (art. 69.º, al. e), do CPPT): {{PREENCHER}}.}}
 
 {{LOCAL}}, {{DATA}}
 
-{{O(A) reclamante / O(A) mandatário(a)}},
+{{ESCOLHER: O(A) reclamante / O(A) mandatário(a)}},
 
 _______________________________
 {{ASSINANTE_NOME}}, {{ASSINANTE_QUALIDADE: gerente / administrador / advogado(a) / contabilista certificado(a), se tiver poderes}}
@@ -136,4 +136,4 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Dívida não paga: garantia prestada ou dispensa requerida ao órgão da execução fiscal **em 15 dias** após apresentares a reclamação (arts. 169.º, n.º 8, e 170.º, n.º 1, CPPT), senão segue a penhora. Suspensão automática temporária para dívidas de pequeno valor (art. 169.º, n.º 3) — limiares em ver `references/valores-2026.md`.
 - [ ] Depois de apresentar: sem decisão em **4 meses** presume-se o indeferimento (art. 57.º, n.os 1 e 5, LGT) → impugnação judicial em 3 meses ou recurso hierárquico. Indeferimento expresso → recurso hierárquico em 30 dias (arts. 76.º, n.º 1, e 66.º, n.º 2, CPPT) ou impugnação judicial em 3 meses. Projeto de indeferimento → `assets/templates/direito-audicao-previa.md`.
 - [ ] Assinatura por quem obriga a empresa (gerente/administrador com poderes — ver o perfil `.juridico-pt/perfil-empresa.md` e a certidão permanente) ou por mandatário com procuração.
-- [ ] Comentários `<!-- -->`, opções não usadas e placeholders `{{...}}` removidos; marcas [VERIFICAR] resolvidas.
+- [ ] Comentários `<!-- -->`, opções não usadas e placeholders `{{CAMPO}}` removidos; marcas [VERIFICAR] resolvidas.

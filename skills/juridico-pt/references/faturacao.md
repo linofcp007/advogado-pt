@@ -176,6 +176,6 @@
 - Pedido de informação vinculativa à AT (ex.: validar uma tecnologia "equivalente" ou o tratamento de faturas recebidas sem assinatura) — `assets/templates/pedido-informacao-vinculativa.md`
 - Acordo de tratamento de dados com o fornecedor do programa de faturação ou do arquivo na cloud — `assets/templates/dpa-bilingue.md`
 - Contrato com o fornecedor do programa de faturação em modelo SaaS (níveis de serviço, dados, exportação do SAF-T e do arquivo, saída) — `assets/templates/contrato-saas-b2b.md`, como base para rever o contrato do fornecedor (com `assets/checklists/checklist-revisao-contrato.md`)
-- Comunicação aos clientes sobre a passagem à fatura eletrónica com selo qualificado (aceitação da via eletrónica) — redigida a pedido
-- Pedido aos fornecedores de faturas com assinatura ou selo qualificado a partir de 1/1/2027 — redigido a pedido
-- Acordo EDI com um cliente ou fornecedor (modelo "Acordo tipo EDI europeu") — redigido a pedido
+- Comunicação aos clientes sobre a passagem à fatura eletrónica com selo qualificado (aceitação da via eletrónica) (a pedido)
+- Pedido aos fornecedores de faturas com assinatura ou selo qualificado a partir de 1/1/2027 (a pedido)
+- Acordo EDI com um cliente ou fornecedor (modelo "Acordo tipo EDI europeu") (a pedido)

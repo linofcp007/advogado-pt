@@ -12,7 +12,7 @@ Entre:
 é celebrado o presente acordo relativo à dívida de **{{VALOR}}** emergente de {{DESCRICAO_DIVIDA}}.
 
 ## 1. Montante e plano
-O Devedor reconhece a dívida e compromete-se a pagá-la em {{Nº_PRESTACOES}} prestações mensais:
+O Devedor reconhece a dívida e compromete-se a pagá-la em {{N_PRESTACOES}} prestações mensais:
 
 | Prestação | Data-limite | Valor |
 |---|---|---|

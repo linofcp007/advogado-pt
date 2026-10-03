@@ -28,9 +28,9 @@ Por aval ao subscritor: {{AVALISTA_NOME}}, NIF {{AVALISTA_NIF}}
 
 ## Parte II — Pacto de Preenchimento
 
-Entre **{{BENEFICIARIO_NOME}}** (credor/portador) e **{{SUBSCRITOR_NOME}}** (subscritor){{, e {{AVALISTA_NOME}} (avalista),}} acorda-se o seguinte quanto ao preenchimento da livrança acima, entregue em branco quanto a {{valor e/ou data de vencimento}}:
+Entre **{{BENEFICIARIO_NOME}}** (credor/portador) e **{{SUBSCRITOR_NOME}}** (subscritor){{, e {{AVALISTA_NOME}} (avalista),}} acorda-se o seguinte quanto ao preenchimento da livrança acima, entregue em branco quanto a {{ESCOLHER: valor e/ou data de vencimento}}:
 
-1. **Finalidade**: a livrança garante o cumprimento das obrigações emergentes de {{CONTRATO/RELAÇÃO}} de {{DATA}}.
+1. **Finalidade**: a livrança garante o cumprimento das obrigações emergentes de {{ESCOLHER: CONTRATO/RELAÇÃO}} de {{DATA}}.
 2. **Valor**: o portador fica autorizado a preencher a livrança pelo montante correspondente às quantias em dívida ao abrigo do contrato (capital, juros de mora à taxa legal, despesas e encargos) à data do preenchimento, até ao **montante máximo** de **{{MONTANTE_MAXIMO}}**.
 3. **Data de vencimento**: o portador fica autorizado a fixar como data de vencimento a data que entender, **após o incumprimento** e mediante comunicação ao subscritor com a antecedência de {{DIAS}} dias.
 4. **Comunicação**: o preenchimento será precedido de interpelação ao subscritor para regularização.

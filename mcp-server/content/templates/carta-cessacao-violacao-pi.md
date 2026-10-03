@@ -38,9 +38,9 @@ Exmos. Senhores,
 **1. Os direitos da {{REMETENTE_NOME}}**
 
 {{REMETENTE_NOME}} é titular {{DIREITOS: manter as alíneas aplicáveis
- (a) da marca {{nacional | da União Europeia | internacional}} n.º {{N_REGISTO}}, «{{SINAL}}», registada no {{INPI | EUIPO | OMPI}} em {{DATA_REGISTO}}, em vigor, para os produtos e serviços das classes {{CLASSES}} da Classificação de Nice;
+ (a) da marca {{ESCOLHER: nacional | da União Europeia | internacional}} n.º {{N_REGISTO}}, «{{SINAL}}», registada no {{ESCOLHER: INPI | EUIPO | OMPI}} em {{DATA_REGISTO}}, em vigor, para os produtos e serviços das classes {{CLASSES}} da Classificação de Nice;
  (b) do logótipo n.º {{N_LOGOTIPO}}, registado no INPI em {{DATA_REGISTO_LOGOTIPO}};
- (c) dos direitos de autor sobre {{OBRA: ex. o código-fonte do software …, as fotografias …, os textos e o design do website …}}, criada em {{DATA_CRIACAO}} {{por | por encomenda de}} {{REMETENTE_NOME}};
+ (c) dos direitos de autor sobre {{OBRA: ex. o código-fonte do software …, as fotografias …, os textos e o design do website …}}, criada em {{DATA_CRIACAO}} {{ESCOLHER: por | por encomenda de}} {{REMETENTE_NOME}};
  (d) da firma «{{FIRMA}}» e do prestígio associado aos seus produtos e serviços, presentes no mercado desde {{ANO_INICIO}}.}}
 
 Juntam-se cópias dos títulos de registo e da prova de titularidade (Docs. 1 a {{N}}).
@@ -52,9 +52,9 @@ Tomámos conhecimento de que V. Exas., pelo menos desde {{DATA_CONHECIMENTO}}, {
 **3. Fundamentos**
 
 {{FUNDAMENTOS: manter os aplicáveis
- (A) Marca/logótipo — Tais atos traduzem-se no uso, no exercício de atividades económicas e sem o nosso consentimento, de sinal {{idêntico | semelhante}} à marca registada, para produtos ou serviços {{idênticos | afins}}, com risco de confusão ou de associação no espírito do consumidor, que o registo nos confere o direito de impedir, incluindo o uso como firma, em documentos comerciais e em publicidade (art. 249.º do Código da Propriedade Industrial {{| art. 9.º do Regulamento (UE) 2017/1001}} {{| art. 293.º do CPI, quanto ao logótipo}}).
- (B) Direito de autor — A reprodução, distribuição e colocação à disposição do público da obra sem autorização viola os direitos exclusivos do titular (arts. 9.º, 67.º e 68.º do Código do Direito de Autor e dos Direitos Conexos {{| e art. 5.º do DL 252/94, quanto a programas de computador}}).
- (C) Concorrência desleal — Os atos descritos são contrários às normas e usos honestos da atividade económica, por serem suscetíveis de criar confusão com a nossa empresa, produtos ou serviços {{| e por invocarem, sem autorização, a nossa reputação}} (art. 311.º, n.º 1, als. a) {{| e c)}}, do CPI).
+ (A) Marca/logótipo — Tais atos traduzem-se no uso, no exercício de atividades económicas e sem o nosso consentimento, de sinal {{ESCOLHER: idêntico | semelhante}} à marca registada, para produtos ou serviços {{ESCOLHER: idênticos | afins}}, com risco de confusão ou de associação no espírito do consumidor, que o registo nos confere o direito de impedir, incluindo o uso como firma, em documentos comerciais e em publicidade (art. 249.º do Código da Propriedade Industrial {{OPCIONAL: art. 9.º do Regulamento (UE) 2017/1001}} {{OPCIONAL: art. 293.º do CPI, quanto ao logótipo}}).
+ (B) Direito de autor — A reprodução, distribuição e colocação à disposição do público da obra sem autorização viola os direitos exclusivos do titular (arts. 9.º, 67.º e 68.º do Código do Direito de Autor e dos Direitos Conexos {{OPCIONAL: e art. 5.º do DL 252/94, quanto a programas de computador}}).
+ (C) Concorrência desleal — Os atos descritos são contrários às normas e usos honestos da atividade económica, por serem suscetíveis de criar confusão com a nossa empresa, produtos ou serviços {{OPCIONAL: e por invocarem, sem autorização, a nossa reputação}} (art. 311.º, n.º 1, als. a) {{OPCIONAL: e c)}}, do CPI).
  (D) Responsabilidade — A violação constitui V. Exas. na obrigação de indemnizar os danos causados (art. 347.º do CPI, art. 211.º do CDADC e art. 483.º do Código Civil), sendo ainda suscetível de relevância contraordenacional e criminal nos termos da lei.}}
 
 **4. O que se exige**

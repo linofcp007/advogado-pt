@@ -26,7 +26,7 @@
      (art. 54.º). Versão consolidada consultada em pgdlisboa.pt (última alteração: DL 171/2026, que não
      mexe nestes artigos). -->
 
-# CONVOCATÓRIA
+# CONVOCATÓRIA DE ASSEMBLEIA GERAL
 
 **{{FIRMA}}**, {{TIPO_SOCIEDADE: sociedade por quotas / sociedade anónima}}
 Sede: {{SEDE}}

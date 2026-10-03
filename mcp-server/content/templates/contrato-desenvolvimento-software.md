@@ -102,7 +102,7 @@
 5.7 Até ao pagamento integral, o Cliente dispõe de uma licença não exclusiva para testar e avaliar os Entregáveis.
 *Until full payment, the Client holds a non-exclusive licence to test and evaluate the Deliverables.*
 
-{{OPCAO_LICENCA: opcional, em alternativa às cláusulas 5.1 a 5.4 — 5.1 O Fornecedor mantém a titularidade dos Entregáveis e concede ao Cliente uma licença {{exclusiva | não exclusiva}}, perpétua, irrevogável, {{mundial}}, para usar, reproduzir, modificar e {{sublicenciar}} o Software, com entrega do código-fonte nos termos da cláusula 8. / *The Developer retains ownership of the Deliverables and grants the Client a {{exclusive | non-exclusive}}, perpetual, irrevocable, {{worldwide}} licence to use, reproduce, modify and {{sublicense}} the Software, with delivery of the source code under clause 8.*}}
+{{OPCAO_LICENCA: opcional, em alternativa às cláusulas 5.1 a 5.4 — 5.1 O Fornecedor mantém a titularidade dos Entregáveis e concede ao Cliente uma licença {{ESCOLHER: exclusiva | não exclusiva}}, perpétua, irrevogável, {{PREENCHER: mundial}}, para usar, reproduzir, modificar e {{PREENCHER: sublicenciar}} o Software, com entrega do código-fonte nos termos da cláusula 8. / *The Developer retains ownership of the Deliverables and grants the Client a {{ESCOLHER: exclusive | non-exclusive}}, perpetual, irrevocable, {{PREENCHER: worldwide}} licence to use, reproduce, modify and {{PREENCHER: sublicense}} the Software, with delivery of the source code under clause 8.*}}
 
 ## 6. Background IP — licença / Background IP licence
 

@@ -14,13 +14,13 @@ Cookies são pequenos ficheiros guardados no seu dispositivo quando visita {{URL
 
 | Categoria | Finalidade | Consentimento | Exemplos |
 |---|---|---|---|
-| **Estritamente necessários** | Funcionamento do site, sessão, segurança | Não exigido | {{ex. sessão, carrinho, CSRF}} |
-| **Funcionais** | Recordar preferências (idioma, região) | Exigido | {{...}} |
-| **Analíticos** | Medir utilização e melhorar o site | Exigido | {{ex. Google Analytics}} |
-| **Marketing** | Publicidade e remarketing | Exigido | {{...}} |
+| **Estritamente necessários** | Funcionamento do site, sessão, segurança | Não exigido | {{PREENCHER: ex. sessão, carrinho, CSRF}} |
+| **Funcionais** | Recordar preferências (idioma, região) | Exigido | {{PREENCHER}} |
+| **Analíticos** | Medir utilização e melhorar o site | Exigido | {{PREENCHER: ex. Google Analytics}} |
+| **Marketing** | Publicidade e remarketing | Exigido | {{PREENCHER}} |
 
 ## 3. Consentimento
-No primeiro acesso é apresentado um **banner** que permite **aceitar**, **rejeitar** ou **configurar** por categoria. Os cookies não essenciais só são instalados após o seu consentimento. Pode alterar a sua escolha a qualquer momento em {{ex. "Definições de cookies" no rodapé}}.
+No primeiro acesso é apresentado um **banner** que permite **aceitar**, **rejeitar** ou **configurar** por categoria. Os cookies não essenciais só são instalados após o seu consentimento. Pode alterar a sua escolha a qualquer momento em {{PREENCHER: ex. "Definições de cookies" no rodapé}}.
 
 ## 4. Cookies de terceiros
 Alguns serviços (ex.: analítica, vídeos incorporados, redes sociais) instalam cookies próprios, sujeitos às políticas desses terceiros: {{LISTAR}}.
@@ -29,7 +29,7 @@ Alguns serviços (ex.: analítica, vídeos incorporados, redes sociais) instalam
 Pode bloquear ou eliminar cookies nas definições do seu navegador. Bloquear cookies necessários pode afetar o funcionamento do site.
 
 ## 6. Conservação
-Os cookies têm prazos de validade variáveis (de sessão a {{ex. 12 meses}}); o consentimento é, em regra, revalidado periodicamente.
+Os cookies têm prazos de validade variáveis (de sessão a {{PREENCHER: ex. 12 meses}}); o consentimento é, em regra, revalidado periodicamente.
 
 ## 7. Mais informação
 O tratamento de dados pessoais associado rege-se pela nossa [Política de Privacidade]({{URL_PRIVACIDADE}}). Autoridade de controlo: **CNPD** (www.cnpd.pt).

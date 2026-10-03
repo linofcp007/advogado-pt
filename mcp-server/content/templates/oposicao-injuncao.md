@@ -26,11 +26,11 @@
 
 **Ao Balcão Nacional de Injunções (BNI)**
 
-**Procedimento de injunção n.º {{Nº_PROCESSO_INJUNCAO}}**
+**Procedimento de injunção n.º {{N_PROCESSO_INJUNCAO}}**
 Requerente: {{REQUERENTE_NOME}}
 Requerido: {{REQUERIDO_NOME}}
 
-{{REQUERIDO_NOME}}, {{REQUERIDO_TIPO: sociedade por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{REQUERIDO_NIF}}, com {{sede / domicílio}} em {{REQUERIDO_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) gerente(s) / administrador(es) {{REPRESENTANTE_NOME}} / por mandatário(a) com procuração junta}}, requerido no procedimento de injunção acima identificado, notificado em {{DATA_NOTIFICACAO}}, vem, ao abrigo do **art. 12.º, n.º 1, e do art. 15.º do regime anexo ao Decreto-Lei n.º 269/98, de 1 de setembro**, deduzir
+{{REQUERIDO_NOME}}, {{REQUERIDO_TIPO: sociedade por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{REQUERIDO_NIF}}, com {{ESCOLHER: sede / domicílio}} em {{REQUERIDO_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) gerente(s) / administrador(es) {{REPRESENTANTE_NOME}} / por mandatário(a) com procuração junta}}, requerido no procedimento de injunção acima identificado, notificado em {{DATA_NOTIFICACAO}}, vem, ao abrigo do **art. 12.º, n.º 1, e do art. 15.º do regime anexo ao Decreto-Lei n.º 269/98, de 1 de setembro**, deduzir
 
 **OPOSIÇÃO**
 
@@ -50,7 +50,7 @@ Requerido: {{REQUERIDO_NOME}}
      — [VERIFICAR] jurisprudência); o requerente invoca transação comercial contra um consumidor (o DL 62/2013
      exclui os contratos com consumidores — art. 2.º, n.º 2, al. a)); ilegitimidade; incompetência do tribunal. -->
 
-4. {{EXCECAO_DILATORIA: ex. A obrigação cujo cumprimento se pede não emerge de contrato celebrado entre requerente e requerido, mas de {{…}}, pelo que o procedimento de injunção não é o meio próprio (art. 7.º do regime anexo ao DL 269/98 e art. 10.º do DL 62/2013).}}
+4. {{EXCECAO_DILATORIA: ex. A obrigação cujo cumprimento se pede não emerge de contrato celebrado entre requerente e requerido, mas de {{PREENCHER: …}}, pelo que o procedimento de injunção não é o meio próprio (art. 7.º do regime anexo ao DL 269/98 e art. 10.º do DL 62/2013).}}
 5. {{CONSEQUENCIA: ex. O que constitui exceção dilatória de conhecimento oficioso e determina a absolvição do requerido da instância.}}
 
 ## III — Da impugnação dos factos
@@ -58,7 +58,7 @@ Requerido: {{REQUERIDO_NOME}}
 <!-- Tomar posição definida sobre CADA facto alegado: os factos não impugnados podem considerar-se admitidos por
      acordo (art. 574.º, n.os 1 e 2, CPC). Não basta "impugna-se tudo": dizer o que é falso e qual a versão real. -->
 
-6. Não corresponde à verdade que {{FACTO_IMPUGNADO_1: ex. o requerente tenha prestado os serviços descritos na fatura n.º {{Nº_FATURA}} / os bens tenham sido entregues em {{DATA}} / o preço acordado fosse de {{VALOR}}}}.
+6. Não corresponde à verdade que {{FACTO_IMPUGNADO_1: ex. o requerente tenha prestado os serviços descritos na fatura n.º {{N_FATURA}} / os bens tenham sido entregues em {{DATA}} / o preço acordado fosse de {{VALOR}}}}.
 7. Na realidade, {{VERSAO_DO_REQUERIDO: ex. as partes acordaram, por email de {{DATA}} (Doc. 1), um preço global de {{VALOR}}, do qual o requerido já pagou {{VALOR}}}}.
 8. O requerido desconhece, sem obrigação de conhecer, {{FACTO_DESCONHECIDO: só para factos que não sejam pessoais nem de conhecimento obrigatório — art. 574.º, n.º 3, CPC}}.
 9. {{FACTO_IMPUGNADO_N}}
@@ -70,7 +70,7 @@ Requerido: {{REQUERIDO_NOME}}
 
 **A) Pagamento**
 
-10. A quantia peticionada {{foi integralmente paga / foi paga na parte de {{VALOR_PAGO}}}} em {{DATA_PAGAMENTO}}, por {{MEIO_PAGAMENTO: transferência bancária para o IBAN do requerente / cheque n.º … / numerário contra recibo}}, como resulta do {{Doc. 2 — comprovativo de transferência / recibo / declaração de quitação}}.
+10. A quantia peticionada {{foi integralmente paga / foi paga na parte de {{VALOR_PAGO}}}} em {{DATA_PAGAMENTO}}, por {{MEIO_PAGAMENTO: transferência bancária para o IBAN do requerente / cheque n.º … / numerário contra recibo}}, como resulta do {{ESCOLHER: Doc. 2 — comprovativo de transferência / recibo / declaração de quitação}}.
 11. A obrigação está, nessa medida, extinta pelo cumprimento, pelo que nada mais é devido {{ou: é devido apenas o remanescente de {{VALOR_REMANESCENTE}}}}.
 
 **B) Prescrição**
@@ -85,8 +85,8 @@ Requerido: {{REQUERIDO_NOME}}
 
 **C) Cumprimento defeituoso e exceção de não cumprimento**
 
-14. A prestação do requerente foi {{não realizada / realizada de forma defeituosa}}: {{DESCRICAO_DEFEITOS: ex. o software entregue não cumpre as funcionalidades X e Y previstas no caderno de encargos (Doc. 3) / os bens apresentavam os defeitos …}}.
-15. O requerido denunciou os defeitos ao requerente em {{DATA_DENUNCIA}}, por {{MEIO: carta registada / email}} (Doc. 4), {{dentro do prazo legal [VERIFICAR o prazo de denúncia aplicável: compra e venda, empreitada, compra e venda comercial ou bens de consumo]}}, sem que estes tenham sido eliminados.
+14. A prestação do requerente foi {{ESCOLHER: não realizada / realizada de forma defeituosa}}: {{DESCRICAO_DEFEITOS: ex. o software entregue não cumpre as funcionalidades X e Y previstas no caderno de encargos (Doc. 3) / os bens apresentavam os defeitos …}}.
+15. O requerido denunciou os defeitos ao requerente em {{DATA_DENUNCIA}}, por {{MEIO: carta registada / email}} (Doc. 4), {{PREENCHER: dentro do prazo legal [VERIFICAR o prazo de denúncia aplicável: compra e venda, empreitada, compra e venda comercial ou bens de consumo]}}, sem que estes tenham sido eliminados.
 16. Tratando-se de contrato bilateral, o requerido tem a faculdade de recusar o pagamento do preço enquanto o requerente não cumprir integral e pontualmente a sua prestação (exceção de não cumprimento do contrato — art. 428.º do CC), {{ou: tem direito à redução do preço na medida de {{VALOR_REDUCAO}}}}.
 
 **D) Compensação**
@@ -108,11 +108,11 @@ Nestes termos, deve a presente oposição ser julgada procedente, por provada, e
 
 - a) {{EXCECAO_DILATORIA_PEDIDO: opcional — ser o requerido absolvido da instância;}}
 - b) ser o requerido absolvido do pedido {{no todo / na parte que exceda {{VALOR_RECONHECIDO}}}};
-- c) ser o requerente condenado nas custas {{e, opcionalmente, como litigante de má-fé, em multa e indemnização a favor do requerido, por ter deduzido pretensão cuja falta de fundamento não devia ignorar (art. 542.º, n.os 1 e 2, al. a), do CPC)}}.
+- c) ser o requerente condenado nas custas {{PREENCHER: e, opcionalmente, como litigante de má-fé, em multa e indemnização a favor do requerido, por ter deduzido pretensão cuja falta de fundamento não devia ignorar (art. 542.º, n.os 1 e 2, al. a), do CPC)}}.
 
 ## VI — Da prova
 
-**Prova documental:** os {{Nº_DOCUMENTOS}} documentos juntos (Doc. 1 a Doc. {{Nº_DOCUMENTOS}}).
+**Prova documental:** os {{N_DOCUMENTOS}} documentos juntos (Doc. 1 a Doc. {{N_DOCUMENTOS}}).
 
 **Prova testemunhal:**
 1. {{TESTEMUNHA_1: nome, profissão e morada / local de trabalho}}
@@ -128,14 +128,14 @@ Nestes termos, deve a presente oposição ser julgada procedente, por provada, e
 
 **Valor:** {{VALOR_PEDIDO}} (art. 18.º do regime anexo ao DL 269/98).
 
-**Junta:** {{Nº_DOCUMENTOS}} documentos {{e procuração / certidão permanente do registo comercial}}.
+**Junta:** {{N_DOCUMENTOS}} documentos {{ESCOLHER: e procuração / certidão permanente do registo comercial}}.
 
 {{LOCAL}}, {{DATA}}
 
-{{O requerido / O(A) mandatário(a)}},
+{{ESCOLHER: O requerido / O(A) mandatário(a)}},
 
 _______________________________
-{{ASSINANTE_NOME}}, {{ASSINANTE_QUALIDADE: gerente / administrador / advogado(a), com cédula profissional n.º {{Nº_CEDULA}} e domicílio profissional em {{DOMICILIO_PROFISSIONAL}}}}
+{{ASSINANTE_NOME}}, {{ASSINANTE_QUALIDADE: gerente / administrador / advogado(a), com cédula profissional n.º {{N_CEDULA}} e domicílio profissional em {{DOMICILIO_PROFISSIONAL}}}}
 
 <!-- SE NÃO HOUVER OPOSIÇÃO (ou se for apresentada fora de prazo):
      1. O secretário apõe no requerimento a fórmula "Este documento tem força executiva" (art. 14.º do regime anexo)
@@ -166,4 +166,4 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] Prescrição: invocar expressamente (art. 303.º CC) e confirmar o prazo com `calc_prescricao`. **Não** invocar prescrição presuntiva (art. 317.º CC) junto com a negação da dívida ou com defeitos: vale como confissão tácita (art. 314.º CC).
 - [ ] Oposição sem fundamento sério: se o requerido não devia ignorar essa falta de fundamento, é condenado em multa igual a **2 vezes a taxa de justiça** da ação declarativa (arts. 13.º, n.º 1, al. e), e 17.º, n.º 4, do regime anexo), além de poder ser condenado como litigante de má-fé (art. 542.º CPC). Se a dívida é devida, ponderar pagar ou negociar.
 - [ ] Empresa: assinatura de quem obriga a sociedade, ou procuração ao mandatário (perfil em `.juridico-pt/perfil-empresa.md`); confirmar se o requerido é consumidor ou empresa (o regime do DL 62/2013, os juros comerciais e os 40 € de custos de cobrança só se aplicam entre empresas). Ver `playbooks/recebi-citacao-ou-injuncao.md` e `references/cobrancas.md`.
-- [ ] Retirar os comentários `<!-- -->`, as secções e exceções não usadas e todos os `{{...}}`; renumerar os artigos e os documentos.
+- [ ] Retirar os comentários `<!-- -->`, as secções e exceções não usadas e todos os `{{CAMPO}}`; renumerar os artigos e os documentos.

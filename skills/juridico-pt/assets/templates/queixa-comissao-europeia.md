@@ -29,7 +29,7 @@
 - **Queixoso:** {{EMPRESA_NOME}}, {{FORMA_JURIDICA: ENI | Unipessoal Lda | Lda | SA | outra}}, NIPC {{EMPRESA_NIF}}, sede em {{EMPRESA_MORADA}}, atividade {{CAE_E_DESCRICAO}}.
 - **Representante:** {{REPRESENTANTE: nome, qualidade (gerente/administrador/advogado), contactos}} {{PROCURACAO: opcional — procuração em anexo}}.
 - **Língua de correspondência:** português.
-- **Confidencialidade:** {{autorizo | não autorizo}} a Comissão a revelar a minha identidade às autoridades do Estado-Membro visado. _(Se não autorizar, a investigação pode ficar limitada.)_
+- **Confidencialidade:** {{ESCOLHER: autorizo | não autorizo}} a Comissão a revelar a minha identidade às autoridades do Estado-Membro visado. _(Se não autorizar, a investigação pode ficar limitada.)_
 - **Contactos anteriores com a Comissão sobre este assunto:** {{"nenhum" | referência {{REF}}, de {{DATA}}}}.
 
 ## 2. Estado-Membro e autoridade em causa
@@ -39,7 +39,7 @@
 
 ## 3. Medida nacional contestada
 
-- **Tipo:** {{lei | decreto | regulamento | ato administrativo | prática administrativa | falta de transposição/aplicação}}.
+- **Tipo:** {{ESCOLHER: lei | decreto | regulamento | ato administrativo | prática administrativa | falta de transposição/aplicação}}.
 - **Identificação:** {{DIPLOMA_OU_PRATICA: ex. artigo {{N}} do Decreto-Lei n.º {{X}}/{{ANO}}, publicado em {{JORNAL_OFICIAL}} / prática da {{ENTIDADE}} desde {{DATA}}}} — com ligação para o texto oficial.
 - **Descrição sumária:** {{O_QUE_EXIGE_OU_PROIBE}}.
 
@@ -60,14 +60,14 @@
 ## 6. Diligências nacionais já efetuadas
 
 - **Contactos/reclamações junto da autoridade:** {{DATAS_E_RESULTADO}}.
-- **Impugnação administrativa ou ação judicial:** {{"não" | tribunal, n.º de processo, fase, decisões já proferidas}} — {{houve | não houve}} pedido de reenvio prejudicial ao Tribunal de Justiça (art. 267.º TFUE).
-- **SOLVIT / Provedor de Justiça / outros mecanismos:** {{"não" | referência, data e resultado}}.
+- **Impugnação administrativa ou ação judicial:** {{ESCOLHER: "não" | tribunal, n.º de processo, fase, decisões já proferidas}} — {{ESCOLHER: houve | não houve}} pedido de reenvio prejudicial ao Tribunal de Justiça (art. 267.º TFUE).
+- **SOLVIT / Provedor de Justiça / outros mecanismos:** {{ESCOLHER: "não" | referência, data e resultado}}.
 - **Outros procedimentos na UE sobre o mesmo assunto** (processo de infração aberto, petição ao Parlamento Europeu, queixa ao Provedor de Justiça Europeu): {{CONHECIDOS: opcional}}.
 
 ## 7. Prejuízo para a empresa e alcance do problema
 
 - **Prejuízo concreto:** {{ex. impossibilidade de prestar serviços em {{ESTADO_MEMBRO}} desde {{DATA}}; custos adicionais de {{VALOR}}; perda do contrato {{X}}}}.
-- **Alcance geral:** {{QUANTOS_AFETADOS: ex. todas as empresas estabelecidas fora de {{ESTADO_MEMBRO}} que prestam {{SERVIÇO}}}} — a Comissão dá prioridade a problemas sistémicos com impacto alargado, não a casos individuais isolados.
+- **Alcance geral:** {{QUANTOS_AFETADOS: ex. todas as empresas estabelecidas fora de {{ESTADO_MEMBRO}} que prestam {{SERVICO}}}} — a Comissão dá prioridade a problemas sistémicos com impacto alargado, não a casos individuais isolados.
 
 ## 8. Pedido
 

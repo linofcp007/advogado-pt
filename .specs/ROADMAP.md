@@ -2,14 +2,14 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 96%** ▰▰▰▰▰▰▰▰▰▰ · 3/4 features completas · 129/137 tasks feitas
+**Progresso: 99%** ▰▰▰▰▰▰▰▰▰▰ · 3/4 features completas · 134/137 tasks feitas
 
-_Velocidade: 323 ponto(s)/dia útil — 129 tarefa(s), 323 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 336 ponto(s)/dia útil — 134 tarefa(s), 336 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
 ## ▶ A seguir
-- **juridico-pt-v2-0** (core +tdd +ai +privacy) — próxima #16 `agents/verificador-citacoes.md` e `agents
+- **juridico-pt-v2-0** (core +tdd +ai +privacy) — próxima #36 Bump 2.0.0, CHANGELOG com "Migração", bund
 
 ## Features
 
@@ -18,7 +18,7 @@ Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
 | ✅ | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | concluída | 100% | 41/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | — | — |
 | ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
-| 🟡 | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | em execução | 85% | 30/38 | advogado-pt-v1-2-1-correcoes ✓ | #16 `agents/verificador-citacoes.md` e `agents | 2026-10-05 |
+| 🟡 | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | em execução | 94% | 35/38 | advogado-pt-v1-2-1-correcoes ✓ | #36 Bump 2.0.0, CHANGELOG com "Migração", bund | 2026-10-05 |
 
 Previsão = pontos por fazer ÷ velocidade, em dias úteis (±25%) · `_Size: XS|S|M|L|XL_` numa tarefa = 1/2/3/5/8 pontos; uma tarefa sem tamanho conta como a mediana da sua feature (senão M) · uma feature à espera de uma dependência começa depois da previsão dessa.
 

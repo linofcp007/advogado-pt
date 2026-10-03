@@ -19,7 +19,7 @@
      Uso: documento interno — regulamento interno sobre organização e disciplina do trabalho: ouvir a comissão de
      trabalhadores (ou, na falta, as estruturas sindicais) e publicitar antes de produzir efeitos (art. 99.º CT).
      Adaptar ao perfil (.juridico-pt/perfil-empresa.md): n.º de trabalhadores, teletrabalho, viaturas, controlo de
-     assiduidade, representantes dos trabalhadores. Escolher as opções entre {{...}} e APAGAR os artigos que não se
+     assiduidade, representantes dos trabalhadores. Escolher as opções marcadas com {{ESCOLHER: …}} e APAGAR os artigos que não se
      aplicam (ex. geolocalização ou biometria, se não existirem). ⏰ Nenhum meio de controlo pode ser usado antes
      de os trabalhadores serem informados. Articular com assets/templates/politica-videovigilancia.md,
      politica-uso-ia.md, acordo-teletrabalho.md, registo-atividades-tratamento.md e nota-de-culpa.md. -->
@@ -136,7 +136,7 @@ Na Empresa **não são utilizados**, em caso algum:
 
 {{GEOLOCALIZACAO: apagar este artigo se a Empresa não tiver viaturas com GPS}}
 
-1. As viaturas {{IDENTIFICACAO_VIATURAS}} estão equipadas com sistema de geolocalização, com a finalidade exclusiva de {{FINALIDADE_GPS: escolher — "gestão da frota em serviço externo, na atividade de {{assistência técnica externa ou ao domicílio / distribuição de bens / transporte de passageiros / transporte de mercadorias / segurança privada}}" / "proteção de bens, no transporte de {{materiais perigosos / materiais de valor elevado}}" / "recuperação da viatura em caso de furto"}}. Estas são as finalidades que a CNPD admite (Deliberação n.º 7680/2014).
+1. As viaturas {{IDENTIFICACAO_VIATURAS}} estão equipadas com sistema de geolocalização, com a finalidade exclusiva de {{FINALIDADE_GPS: escolher — "gestão da frota em serviço externo, na atividade de {{ESCOLHER: assistência técnica externa ou ao domicílio / distribuição de bens / transporte de passageiros / transporte de mercadorias / segurança privada}}" / "proteção de bens, no transporte de {{ESCOLHER: materiais perigosos / materiais de valor elevado}}" / "recuperação da viatura em caso de furto"}}. Estas são as finalidades que a CNPD admite (Deliberação n.º 7680/2014).
 2. A geolocalização **não é usada para controlar o desempenho** dos trabalhadores, nem para provar o cumprimento de contratos ou horários. Os parâmetros de condução (velocidade, travagens, rotações, consumos, tempos de paragem) só são tratados de forma **anonimizada**, para estatística de gestão.
 3. Quando a finalidade seja apenas a recuperação em caso de furto, o registo fica **selado** e a Empresa só lhe acede se a viatura for furtada, comunicando de imediato os dados às autoridades e registando o acesso.
 4. Os dados de localização são conservados durante, no máximo, **1 semana** (ou 1 semana após o fim do percurso, no transporte de bens), salvo processo criminal em curso, e eliminados automaticamente.
@@ -149,11 +149,11 @@ Na Empresa **não são utilizados**, em caso algum:
 
 {{BIOMETRIA: apagar este artigo se a Empresa não usar biometria}}
 
-1. A Empresa utiliza {{SISTEMA_BIOMETRICO: ex. leitor de impressão digital / reconhecimento facial}} **exclusivamente** para {{controlo de assiduidade / controlo de acessos às instalações}} — as únicas finalidades legítimas para o tratamento de dados biométricos dos trabalhadores (art. 28.º, n.º 6, da Lei 58/2019).
+1. A Empresa utiliza {{SISTEMA_BIOMETRICO: ex. leitor de impressão digital / reconhecimento facial}} **exclusivamente** para {{ESCOLHER: controlo de assiduidade / controlo de acessos às instalações}} — as únicas finalidades legítimas para o tratamento de dados biométricos dos trabalhadores (art. 28.º, n.º 6, da Lei 58/2019).
 2. O sistema guarda apenas **representações** (modelos) dos dados biométricos, e o processo de recolha não permite reconstituir os dados originais (irreversibilidade); não guarda imagens das impressões digitais nem do rosto.
 3. O tratamento é necessário, adequado e proporcional (art. 18.º, n.º 2, do Código do Trabalho), e os dados são destruídos na transferência do trabalhador para outro local de trabalho ou na cessação do contrato (art. 18.º, n.º 3).
 4. Por se tratar de categoria especial de dados (art. 9.º do RGPD), foi feita **avaliação de impacto** {{DATA_AIPD}} (Regulamento CNPD n.º 798/2018, ponto 7 — dados biométricos de pessoas vulneráveis, categoria em que se incluem os trabalhadores) e foi ouvida a comissão de trabalhadores (art. 18.º, n.º 4, do Código do Trabalho) [VERIFICAR — a notificação à CNPD prevista no art. 18.º, n.º 1, deixou de existir com o RGPD].
-5. {{ALTERNATIVA: recomendado — "O trabalhador que não queira usar o sistema biométrico pode usar {{cartão / código}}, sem qualquer prejuízo." [VERIFICAR se a alternativa é exigível no caso concreto]}}
+5. {{ALTERNATIVA: recomendado — "O trabalhador que não queira usar o sistema biométrico pode usar {{ESCOLHER: cartão / código}}, sem qualquer prejuízo." [VERIFICAR se a alternativa é exigível no caso concreto]}}
 
 ## Artigo 16.º — Videovigilância e inteligência artificial
 
@@ -203,19 +203,19 @@ Assinatura: _______________________________
 
 | Meio | Finalidade | Dados recolhidos | Quem acede | Conservação | Fundamento (RGPD / lei) | AIPD (sim/não, data) | Informação aos trabalhadores em |
 |---|---|---|---|---|---|---|---|
-| Filtros e registos de correio eletrónico | Segurança da informação | {{ex. metadados de mensagens bloqueadas}} | {{...}} | {{...}} | {{ex. art. 6.º, n.º 1, al. f)}} | {{...}} | {{...}} |
-| Filtros e estatística de navegação | Segurança e custos | {{ex. categorias bloqueadas; estatística agregada}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
-| Registos (logs) de sistemas | Segurança, deteção de incidentes | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
-| Registo de tempos de trabalho | Obrigação legal (art. 202.º CT) | Início, fim, pausas | {{...}} | 5 anos | Art. 6.º, n.º 1, al. c) | {{...}} | {{...}} |
-| Geolocalização de viaturas | {{...}} | {{...}} | {{...}} | Máx. 1 semana | {{...}} | {{...}} | {{...}} |
-| Biometria | {{Assiduidade / acessos}} | Modelo biométrico | {{...}} | Até à transferência ou cessação | Art. 9.º RGPD; art. 28.º, n.º 6, Lei 58/2019 | Sim | {{...}} |
-| Videovigilância | Proteção de pessoas e bens | Imagens | Ver `politica-videovigilancia.md` | 30 dias | Art. 6.º, n.º 1, al. f) | {{...}} | {{...}} |
+| Filtros e registos de correio eletrónico | Segurança da informação | {{PREENCHER: ex. metadados de mensagens bloqueadas}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER: ex. art. 6.º, n.º 1, al. f)}} | {{PREENCHER}} | {{PREENCHER}} |
+| Filtros e estatística de navegação | Segurança e custos | {{PREENCHER: ex. categorias bloqueadas; estatística agregada}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
+| Registos (logs) de sistemas | Segurança, deteção de incidentes | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
+| Registo de tempos de trabalho | Obrigação legal (art. 202.º CT) | Início, fim, pausas | {{PREENCHER}} | 5 anos | Art. 6.º, n.º 1, al. c) | {{PREENCHER}} | {{PREENCHER}} |
+| Geolocalização de viaturas | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | Máx. 1 semana | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
+| Biometria | {{ESCOLHER: Assiduidade / acessos}} | Modelo biométrico | {{PREENCHER}} | Até à transferência ou cessação | Art. 9.º RGPD; art. 28.º, n.º 6, Lei 58/2019 | Sim | {{PREENCHER}} |
+| Videovigilância | Proteção de pessoas e bens | Imagens | Ver `politica-videovigilancia.md` | 30 dias | Art. 6.º, n.º 1, al. f) | {{PREENCHER}} | {{PREENCHER}} |
 
 ### Anexo II — Registo de acesso excecional a conta, equipamento ou registos
 
 | Data e hora | Conta / equipamento / registo | Motivo concreto | Decidido por | Presentes (trabalhador, representante, EPD) | Âmbito do acesso (só tráfego / mensagem de serviço X) | Resultado | Trabalhador informado em |
 |---|---|---|---|---|---|---|---|
-| {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+| {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 ### Anexo III — Declaração de tomada de conhecimento
 
@@ -231,7 +231,7 @@ _(Lista para quem envia — não faz parte do documento.)_
 
 - [ ] ⏰ **Audição e publicitação** (art. 99.º CT): ouvir a comissão de trabalhadores ou, na sua falta, as estruturas sindicais **antes** da aprovação; a Política só produz efeitos após publicitação (afixação na sede e nos locais de trabalho). Confirmar os representantes e o n.º de trabalhadores em `.juridico-pt/perfil-empresa.md`.
 - [ ] ⏰ **Parecer de 10 dias** da comissão de trabalhadores pedido antes de introduzir meios de vigilância a distância ou biometria (arts. 18.º, n.º 4, e 21.º, n.º 4, CT) — confirmar se a exigência subsiste após o RGPD [VERIFICAR].
-- [ ] **Escolhas feitas** em todos os {{...}} e artigos não aplicáveis apagados (geolocalização, biometria, BYOD, gravação de chamadas), renumerando os artigos e as remissões internas.
+- [ ] **Escolhas feitas** em todos os {{ESCOLHER: …}} e artigos não aplicáveis apagados (geolocalização, biometria, BYOD, gravação de chamadas), renumerando os artigos e as remissões internas.
 - [ ] **AIPD** realizada para geolocalização, biometria e qualquer controlo que avalie comportamentos (Regulamento CNPD 798/2018); registo de atividades de tratamento atualizado (`registo-atividades-tratamento.md`); Anexo I preenchido com prazos reais.
 - [ ] **Orientações da CNPD** confirmadas em cnpd.pt (Deliberação 1638/2013, Deliberação 7680/2014, Orientações de 17/4/2020 sobre teletrabalho): anteriores ao RGPD em parte, mas continuam publicadas como orientações; verificar se houve atualização.
 - [ ] Ferramentas de TI efetivamente instaladas (DLP, EDR, MDM, software de produtividade das suítes de escritório) conferidas contra o art. 11.º — muitas trazem funções de «análise de produtividade» ativas por defeito que têm de ser desligadas.

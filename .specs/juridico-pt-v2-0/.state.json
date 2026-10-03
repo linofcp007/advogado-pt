@@ -444,6 +444,24 @@
       "task": "[US5] `atualidade.ts` + tool `verificar_atualidade` + linha no SessionStart; \"Próxima revisão\" no topo de `valores-2026.md`",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-314|T-315\" mcp-server/test/v20.test.mjs"
     },
+    "16": {
+      "command": "node --test --test-name-pattern=\"T-316\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-316 passa (e T-317): agents/verificador-citacoes.md e agents/revisor-contratos.md, só ferramentas de leitura, model: inherit, saída em tabela, 'não verificada' sem fonte; claude plugin validate OK",
+      "at": "2026-10-03T23:34:13.911Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-316\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-316 passa (e T-317): agents/verificador-citacoes.md e agents/revisor-contratos.md, só ferramentas de leitura, model: inherit, saída em tabela, 'não verificada' sem fonte; claude plugin validate OK",
+          "at": "2026-10-03T23:34:13.911Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] `agents/verificador-citacoes.md` e `agents/revisor-contratos.md` (só leitura, `model: inherit`, saída estruturada, \"não verificada\" sem fonte)",
+      "verify": "node --test --test-name-pattern=\"T-316\" mcp-server/test/plugin.test.mjs"
+    },
     "17": {
       "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-320\" mcp-server/test/v20.test.mjs",
       "exitCode": 0,
@@ -480,6 +498,24 @@
       "task": "[US7] Prazos com perfil e `.ics` por perfil",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-319\" mcp-server/test/v20.test.mjs"
     },
+    "19": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-318\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-318 passa: painel com os 10 perfis fictícios, itens dos próximos 30 dias ordenados por data e perfil, prazos com perfil, aviso sem perfis; tool painel_clientes, CLI painel e /painel",
+      "at": "2026-10-03T23:35:13.514Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-318\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-318 passa: painel com os 10 perfis fictícios, itens dos próximos 30 dias ordenados por data e perfil, prazos com perfil, aviso sem perfis; tool painel_clientes, CLI painel e /painel",
+          "at": "2026-10-03T23:35:13.514Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] `painel.ts` + tool `painel_clientes` + CLI `painel` + command `/painel`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-318\" mcp-server/test/v20.test.mjs"
+    },
     "20": {
       "command": "node --test --test-name-pattern=\"T-321\" mcp-server/test/v20.test.mjs",
       "exitCode": 0,
@@ -497,6 +533,24 @@
       ],
       "task": "[US8][P] Templates `convocatoria-assembleia-geral`, `ata-aprovacao-contas`, `procuracao`, `carta-caducidade-contrato-termo`, `resposta-livro-reclamacoes` (fonte por regra) e índice",
       "verify": "node --test --test-name-pattern=\"T-321\" mcp-server/test/v20.test.mjs"
+    },
+    "21": {
+      "command": "node --test --test-name-pattern=\"T-322\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-322 passa: 370 placeholders em 41 templates convertidos (N_X, PREENCHER, ESCOLHER, OPCIONAL, sem acentos, sinónimos LOCAL/DATA/IBAN); convenção documentada no índice dos templates; hooks.test 13/13 (convocatória detetada)",
+      "at": "2026-10-03T23:37:30.780Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-322\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-322 passa: 370 placeholders em 41 templates convertidos (N_X, PREENCHER, ESCOLHER, OPCIONAL, sem acentos, sinónimos LOCAL/DATA/IBAN); convenção documentada no índice dos templates; hooks.test 13/13 (convocatória detetada)",
+          "at": "2026-10-03T23:37:30.780Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] Convenção única de placeholders em todos os templates",
+      "verify": "node --test --test-name-pattern=\"T-322\" mcp-server/test/v20.test.mjs"
     },
     "22": {
       "command": "node --test --test-name-pattern=\"T-323\" mcp-server/test/v20.test.mjs",
@@ -696,6 +750,24 @@
       "task": "[US11] SessionStart numa linha fora de projetos com dados; descrições dos commands ≤ 150 caracteres",
       "verify": "node --test --test-name-pattern=\"T-333\" mcp-server/test/v20.test.mjs"
     },
+    "33": {
+      "command": "node --test --test-name-pattern=\"T-334\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-334 passa: references/privacidade-plugin.md (que dados, onde, 12 meses, apagar_perfil, fornecedor do modelo, RGPD arts. 5.º/13.º/17.º/28.º) indexada no SKILL.md; README com a secção 'Privacidade e dados guardados'",
+      "at": "2026-10-03T23:38:22.814Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-334\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-334 passa: references/privacidade-plugin.md (que dados, onde, 12 meses, apagar_perfil, fornecedor do modelo, RGPD arts. 5.º/13.º/17.º/28.º) indexada no SKILL.md; README com a secção 'Privacidade e dados guardados'",
+          "at": "2026-10-03T23:38:22.814Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11][P] Referência `privacidade-plugin` e secção no README",
+      "verify": "node --test --test-name-pattern=\"T-334\" mcp-server/test/v20.test.mjs"
+    },
     "34": {
       "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs",
       "exitCode": 0,
@@ -713,9 +785,27 @@
       ],
       "task": "[US11] Conservação: prazos cumpridos há mais de 12 meses retirados; perfil antigo assinalado",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs"
+    },
+    "35": {
+      "command": "node --test --test-name-pattern=\"T-340\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-340 passa; suite completa 189 pass / 1 fail (só T-337, o bump da tarefa 36) / 2 skipped. Índices, SKILL.md, README (38 tools, commands, privacidade), AGENTS.md (mapa), persona e INSTRUCOES_MCP (1.765 caracteres, todas as tools), integrações regeneradas, CLAUDE.md",
+      "at": "2026-10-03T23:40:41.962Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-340\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-340 passa; suite completa 189 pass / 1 fail (só T-337, o bump da tarefa 36) / 2 skipped. Índices, SKILL.md, README (38 tools, commands, privacidade), AGENTS.md (mapa), persona e INSTRUCOES_MCP (1.765 caracteres, todas as tools), integrações regeneradas, CLAUDE.md",
+          "at": "2026-10-03T23:40:41.962Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Índices, SKILL.md (tabelas), README, persona, lista de commands do hook e integrações com tudo o que é novo",
+      "verify": "node --test --test-name-pattern=\"T-340\" mcp-server/test/v20.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T23:33:12.346Z",
+  "lastTickAt": "2026-10-03T23:40:41.962Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
     "2": "2026-10-03T22:41:08.058Z",
@@ -732,9 +822,12 @@
     "13": "2026-10-03T23:32:59.447Z",
     "14": "2026-10-03T23:07:40.573Z",
     "15": "2026-10-03T23:27:15.778Z",
+    "16": "2026-10-03T23:34:13.911Z",
     "17": "2026-10-03T23:33:02.616Z",
     "18": "2026-10-03T23:12:29.079Z",
+    "19": "2026-10-03T23:35:13.514Z",
     "20": "2026-10-03T23:33:05.199Z",
+    "21": "2026-10-03T23:37:30.780Z",
     "22": "2026-10-03T23:33:07.658Z",
     "23": "2026-10-03T23:33:09.838Z",
     "24": "2026-10-03T23:09:11.511Z",
@@ -746,6 +839,8 @@
     "30": "2026-10-03T23:14:22.081Z",
     "31": "2026-10-03T23:14:23.979Z",
     "32": "2026-10-03T23:27:17.836Z",
-    "34": "2026-10-03T23:12:31.188Z"
+    "33": "2026-10-03T23:38:22.814Z",
+    "34": "2026-10-03T23:12:31.188Z",
+    "35": "2026-10-03T23:40:41.962Z"
   }
 }

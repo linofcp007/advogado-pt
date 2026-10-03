@@ -16,16 +16,22 @@ Esqueletos reais e reutilizáveis. Quando o utilizador pede um documento, **part
 | Marca | Significa | O que fazer |
 |---|---|---|
 | `{{CAMPO}}` | Dado a preencher (nomes, datas, valores) | Pedir ao utilizador; nunca inventar |
-| `{{CAMPO: opcional — texto}}` | Cláusula ou parágrafo opcional | Manter só se se aplicar ao caso |
+| `{{CAMPO: indicação}}` | Dado a preencher, com uma indicação ou exemplo | Preencher seguindo a indicação |
+| `{{PREENCHER: indicação}}` | Texto livre a redigir (ex.: descrição dos factos) | Redigir com os dados do caso |
+| `{{ESCOLHER: a \| b}}` | Alternativas | Deixar só a que se aplica |
+| `{{OPCIONAL: texto}}` / `{{CAMPO: opcional — texto}}` | Cláusula, parágrafo ou acrescento opcional | Manter só se se aplicar ao caso |
 | `[VERIFICAR]` | Facto, norma ou valor a confirmar antes de enviar | Confirmar (dre.pt, `valores-2026.md`, documentos do caso) e só depois retirar a marca |
 | `(a confirmar)` | Citação que não foi confirmada em fonte oficial | Confirmar antes de a usar como fundamento |
 
 ## Convenção de placeholders
 
+O nome vai sempre em **maiúsculas, sem acentos**, com algarismos e `_` (o teste T-322 confirma-o em todos os templates); o texto depois de `:` é livre. O mesmo dado tem sempre o mesmo nome:
+
 - `{{REMETENTE_NOME}}`, `{{REMETENTE_NIF}}`, `{{REMETENTE_MORADA}}`
 - `{{DESTINATARIO_NOME}}`, `{{DESTINATARIO_NIF}}`, `{{DESTINATARIO_MORADA}}`
-- `{{DATA}}`, `{{LOCAL}}`, `{{VALOR}}`, `{{Nº_FATURA}}`, `{{DATA_VENCIMENTO}}`
-- `{{PRAZO_DIAS}}`, `{{IBAN}}`
+- `{{DATA}}` (nunca DATA_ATUAL/DATA_HOJE), `{{LOCAL}}` (nunca LOCALIDADE/CIDADE), `{{VALOR}}`, `{{N_FATURA}}`, `{{DATA_VENCIMENTO}}`
+- `{{PRAZO_DIAS}}`, `{{IBAN}}` (nunca NIB); números de documentos com `N_` (`{{N_PROCESSO}}`, `{{N_APOLICE}}`)
+- Tabelas de faturas: `{{FATURA_1}}`, `{{EMISSAO_1}}`, `{{VENCIMENTO_1}}`, `{{CAPITAL_1}}`, `{{JUROS_1}}`, `{{TOTAL_1}}` e os totais `{{TOTAL_CAPITAL}}`, `{{TOTAL_JUROS}}`, `{{TOTAL_GERAL}}`
 
 ## Índice
 

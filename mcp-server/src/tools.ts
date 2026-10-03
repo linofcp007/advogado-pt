@@ -39,6 +39,7 @@ import { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } from "./prazo
 import { exportarDocumento } from "./exportar.js";
 import { pedirPerfil, CAMPOS_FORMULARIO } from "./elicitacao.js";
 import { verificarAtualidade, textoAtualidade } from "./atualidade.js";
+import { painelClientes, textoPainel } from "./painel.js";
 
 const AVISO =
   "\n\n⚠️ Estimativa de apoio. Valores/taxas de 2026 — confirmar no ano corrente. Não substitui aconselhamento de advogado inscrito na OA.";
@@ -929,6 +930,21 @@ export function registerTools(servidor: McpServer): void {
         return texto(`Não foi possível gerar o calendário: ${(e as Error).message}`);
       }
     }
+  );
+
+  server.registerTool(
+    "painel_clientes",
+    {
+      title: "Painel do contabilista — próximos dias de todos os clientes",
+      description:
+        "Modo contabilista: num só pedido, as obrigações legais (do perfil de cada cliente) e os prazos registados dos próximos N dias (30 por defeito) de TODOS os perfis nomeados (.juridico-pt/perfis/), por data e por perfil, mais os prazos já vencidos. Usa para 'o que tenho esta semana/este mês', 'prazos dos meus clientes', 'agenda do gabinete'. EN: upcoming deadlines across all client profiles.",
+      inputSchema: {
+        dias: z.number().int().min(1).max(366).default(30).describe("Janela em dias a partir de hoje"),
+        diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ dias, diretorio }) => texto(textoPainel(painelClientes({ projeto: diretorio, dias })) + AVISO)
   );
 
   server.registerTool(

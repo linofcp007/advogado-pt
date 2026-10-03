@@ -99,7 +99,7 @@ qualquer das condutas anteriores praticada por meios digitais, incluindo a parti
    - a) {{RESPONSAVEL_DESIGNADO: ex. a pessoa responsável pela receção de participações — Nome, cargo}}, presencialmente ou pelo endereço **{{EMAIL_DEDICADO: ex. etica@empresa.pt}}**, de acesso restrito;
    - b) carta em envelope fechado, com a menção "Confidencial", dirigida a {{DESTINATARIO_CARTA}}, para {{MORADA}};
    - c) {{CANAL_ALTERNATIVO: ex. diretamente à gerência / a um elemento externo independente (advogado ou consultor) — recomenda-se sempre um canal alternativo para quando o visado seja o responsável designado ou a chefia direta}};
-   - d) {{CANAL_DENUNCIA_INTERNA: só se a empresa tiver canal ao abrigo da Lei 93/2021 — o canal de denúncia interna da Empresa, acessível em {{ENDERECO_CANAL}}, que garante confidencialidade e permite {{denúncias anónimas / identificadas}}}}.
+   - d) {{CANAL_DENUNCIA_INTERNA: só se a empresa tiver canal ao abrigo da Lei 93/2021 — o canal de denúncia interna da Empresa, acessível em {{ENDERECO_CANAL}}, que garante confidencialidade e permite {{ESCOLHER: denúncias anónimas / identificadas}}}}.
 2. {{ANONIMATO: As participações podem ser apresentadas de forma anónima, sem prejuízo de a averiguação poder ficar limitada pela falta de contacto com o participante. / OU: As participações devem ser identificadas, garantindo-se a confidencialidade da identidade do participante.}}
 3. A utilização dos canais internos não impede o recurso, a todo o tempo, a entidades externas, designadamente:
    - a) **ACT — Autoridade para as Condições do Trabalho** (serviço com competência inspetiva na área laboral);

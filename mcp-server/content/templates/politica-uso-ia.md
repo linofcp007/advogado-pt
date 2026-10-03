@@ -262,16 +262,16 @@ Assinatura: _______________________________
 
 | N.º | Sistema / ferramenta | Fornecedor | Finalidade | Departamentos e utilizadores | Dados de entrada (pessoais? confidenciais?) | Afeta decisões sobre pessoas? | Classificação (proibido / risco elevado / transparência / mínimo) e fundamento | Papel da Empresa (implantação / prestador) | AIPD (sim/não, data) | Aprovado em | Próxima revisão |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | {{SISTEMA_1: ex. assistente de IA generativa — versão empresarial}} | {{...}} | {{ex. redação e revisão de textos internos}} | {{...}} | {{ex. informação Interna; sem dados pessoais}} | {{Não}} | {{ex. Risco mínimo / transparência (art. 50.º) se gerar conteúdos publicados}} | {{Implantação}} | {{...}} | {{...}} | {{...}} |
-| 2 | {{SISTEMA_2: ex. triagem de CV na plataforma de recrutamento}} | {{...}} | {{ex. ordenação de candidaturas}} | {{RH}} | {{CV — dados pessoais}} | {{Sim}} | {{Risco elevado — anexo III, ponto 4, al. a)}} | {{...}} | {{Sim}} | {{...}} | {{...}} |
-| 3 | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+| 1 | {{SISTEMA_1: ex. assistente de IA generativa — versão empresarial}} | {{PREENCHER}} | {{PREENCHER: ex. redação e revisão de textos internos}} | {{PREENCHER}} | {{PREENCHER: ex. informação Interna; sem dados pessoais}} | {{PREENCHER: Não}} | {{PREENCHER: ex. Risco mínimo / transparência (art. 50.º) se gerar conteúdos publicados}} | {{PREENCHER: Implantação}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
+| 2 | {{SISTEMA_2: ex. triagem de CV na plataforma de recrutamento}} | {{PREENCHER}} | {{PREENCHER: ex. ordenação de candidaturas}} | {{RH}} | {{PREENCHER: CV — dados pessoais}} | {{PREENCHER: Sim}} | {{PREENCHER: Risco elevado — anexo III, ponto 4, al. a)}} | {{PREENCHER}} | {{PREENCHER: Sim}} | {{PREENCHER}} | {{PREENCHER}} |
+| 3 | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 ### Anexo II — Ferramentas aprovadas
 
 | Ferramenta e tipo de conta | Usos permitidos | Nível máximo de informação (Pública / Interna / Confidencial) | Dados pessoais permitidos | Usos proibidos | Condições (treino com dados desativado, região dos dados, DPA) | Responsável |
 |---|---|---|---|---|---|---|
-| {{FERRAMENTA_1}} | {{...}} | {{...}} | {{Não / Só pseudonimizados / Sim — finalidade X}} | {{...}} | {{...}} | {{...}} |
-| {{FERRAMENTA_2}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+| {{FERRAMENTA_1}} | {{PREENCHER}} | {{PREENCHER}} | {{ESCOLHER: Não / Só pseudonimizados / Sim — finalidade X}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
+| {{FERRAMENTA_2}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 ### Anexo III — Plano de literacia em IA e registo de formação
 
@@ -279,15 +279,15 @@ Assinatura: _______________________________
 
 | Nível | Destinatários | Conteúdos | Duração | Data(s) prevista(s) | Formador / entidade | Forma de avaliação |
 |---|---|---|---|---|---|---|
-| 1 — Base | Todas as pessoas abrangidas | {{...}} | {{...}} | {{...}} | {{...}} | {{ex. questionário final}} |
-| 2 — Utilizadores | Utilizadores de ferramentas aprovadas | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
-| 3 — Funções críticas | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+| 1 — Base | Todas as pessoas abrangidas | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER: ex. questionário final}} |
+| 2 — Utilizadores | Utilizadores de ferramentas aprovadas | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
+| 3 — Funções críticas | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 **Registo de formação**
 
 | Nome | Função | Nível | Data | Duração | Formador / entidade | Conteúdos | Prova (certificado, lista de presenças, registo eletrónico) |
 |---|---|---|---|---|---|---|---|
-| {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+| {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} | {{PREENCHER}} |
 
 ### Anexo IV — Declaração de tomada de conhecimento
 

@@ -10,6 +10,7 @@ Plugin Claude Code de assessoria jurídica de Portugal, com 4 superfícies sobre
 - **Servidor MCP** (`mcp-server/`, TypeScript) — calculadoras (port TS) + conteúdo como tools/resources + persona como prompt.
 - **Slash commands** (`commands/`) — wrappers finos que invocam a skill / tools.
 - **Hooks** (`hooks/`) + **CLI** (`cli/juridico-pt.mjs`).
+- **Subagentes** (`agents/`) — `verificador-citacoes` e `revisor-contratos`, só com ferramentas de leitura.
 
 Distribuição: plugin via marketplace git (`.claude-plugin/`) + `.skill` (Anthropic Skills) gerado por `build.py`. **Sem npm publish e sem CI, por opção** (zero custo).
 
@@ -30,6 +31,8 @@ Distribuição: plugin via marketplace git (`.claude-plugin/`) + `.skill` (Anthr
 
 Ao corrigir um valor: atualizar a "Última atualização" no topo do `valores-2026.md` **e** o port TS em `mcp-server/src/calculators/` se for uma taxa usada numa calculadora.
 
+**Aviso de atualidade:** o hook e a tool `verificar_atualidade` leem duas linhas do topo do `valores-2026.md` — `**Próxima revisão:** AAAA-MM-DD` e `**Juros de mora:** taxas oficiais até ao N.º semestre de AAAA`. Ao rever os valores ou acrescentar um semestre de juros, atualizar estas duas linhas (senão o plugin avisa que está desatualizado). A data de revisão do coeficiente das rendas está em `REVISOES_FIXAS` de `mcp-server/src/atualidade.ts`.
+
 ## Como adicionar
 
 Caminhos relativos a `skills/juridico-pt/`:
@@ -47,6 +50,7 @@ Caminhos relativos a `skills/juridico-pt/`:
 ```bash
 npm run setup                                    # bootstrap: instala + compila o MCP + doctor
 python build.py                                  # gera juridico-pt.skill (empacota skills/juridico-pt/)
+npm --prefix mcp-server run build:mcpb           # gera dist/juridico-pt-<versão>.mcpb (Claude Desktop)
 cd mcp-server && npm test                        # calculadoras + estrutura do plugin
 python skills/juridico-pt/scripts/test_scripts.py  # testes das calculadoras Python
 node mcp-server/scripts/gerar-integracoes.mjs      # copia PERSONA_INTEGRACOES (src/persona.ts) para AGENTS.md e integrations/ (--check só verifica)

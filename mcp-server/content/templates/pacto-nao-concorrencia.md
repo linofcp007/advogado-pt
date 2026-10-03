@@ -80,7 +80,7 @@ A obrigação prevista na Cláusula 1.ª vale {{AMBITO: ex. no território de Po
 
 O presente pacto não prejudica o dever de sigilo do Trabalhador, nem a proteção dos segredos comerciais do Empregador (DL 110/2018, Código da Propriedade Industrial [VERIFICAR artigos aplicáveis]), que subsistem independentemente do período de limitação.
 
-## Cláusula 8.ª (Renúncia pelo Empregador) {{opcional}}
+## Cláusula 8.ª (Renúncia pelo Empregador) {{OPCIONAL}}
 
 {{RENUNCIA: O Empregador pode renunciar ao presente pacto mediante comunicação escrita ao Trabalhador com, pelo menos, {{N_DIAS}} dias de antecedência relativamente à data da cessação do contrato, caso em que não é devida a compensação. [NÃO RECOMENDADO — o STJ (30-04-2014, proc. 2525/11.3TTLSB.L1.S1) não admite a renúncia unilateral do empregador ao pacto, que é oneroso e sinalagmático; só com acordo do Trabalhador. A validade de uma cláusula de renúncia até à cessação não foi testada.]}}
 

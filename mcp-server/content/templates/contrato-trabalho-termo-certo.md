@@ -20,22 +20,22 @@ O presente contrato é celebrado a **termo certo** pelo período de **{{DURACAO}
 **Motivo justificativo concreto:** {{MOTIVO: ex. acréscimo excecional e temporário de atividade resultante de … / execução da tarefa/obra/projeto definido … / substituição de trabalhador ausente …}}, com a indicação dos factos que o concretizam: {{FACTOS}}. **Relação entre o motivo e o termo estipulado** (Art. 141.º, n.º 3, CT): {{RELACAO: ex. o acréscimo de atividade decorre da encomenda X, com entrega prevista até DATA_FIM}}.
 
 ## 4. Renovação
-Não havendo oposição escrita de qualquer das partes com a antecedência legal, o contrato renova-se por períodos {{iguais/de DURACAO}}, até 3 renovações e 2 anos de duração total (Art. 148.º CT), não podendo a duração total das renovações exceder a do período inicial (Art. 149.º, n.º 4, CT); a renovação exige que o motivo justificativo se mantenha (Art. 149.º, n.º 3, CT).
+Não havendo oposição escrita de qualquer das partes com a antecedência legal, o contrato renova-se por períodos {{ESCOLHER: iguais/de DURACAO}}, até 3 renovações e 2 anos de duração total (Art. 148.º CT), não podendo a duração total das renovações exceder a do período inicial (Art. 149.º, n.º 4, CT); a renovação exige que o motivo justificativo se mantenha (Art. 149.º, n.º 3, CT).
 
 ## 5. Período normal de trabalho
 {{HORAS}} horas semanais, {{HORARIO}}.
 
 ## 6. Retribuição
-Retribuição base mensal de **{{VALOR}}** (não inferior à RMMG — ver `references/valores-2026.md`), paga {{forma/data}}, acrescida de {{subsídio de alimentação / outros}}.
+Retribuição base mensal de **{{VALOR}}** (não inferior à RMMG — ver `references/valores-2026.md`), paga {{ESCOLHER: forma/data}}, acrescida de {{ESCOLHER: subsídio de alimentação / outros}}.
 
 ## 7. Período experimental
-{{15 ou 30 dias conforme a duração — Art. 112.º CT}}.
+{{PREENCHER: 15 ou 30 dias conforme a duração — Art. 112.º CT}}.
 
 ## 8. Confidencialidade e proteção de dados
 O Trabalhador obriga-se a sigilo sobre informação confidencial do Empregador. Os dados pessoais do Trabalhador são tratados nos termos do RGPD para fins de gestão da relação laboral.
 
 ## 9. Regime aplicável
-Em tudo o omisso aplica-se o Código do Trabalho e {{IRCT aplicável / nenhum instrumento de regulamentação coletiva}}.
+Em tudo o omisso aplica-se o Código do Trabalho e {{ESCOLHER: IRCT aplicável / nenhum instrumento de regulamentação coletiva}}.
 
 {{LOCAL}}, {{DATA}}
 

@@ -23,7 +23,7 @@ Preço: {{VALOR}} {{REGIME: por projeto / por hora / mensal}}, acrescido de IVA 
 ## 5. Propriedade intelectual
 {{OPCAO_PI:
  (A) Cessão: o Prestador cede ao Cliente, após pagamento integral, os direitos patrimoniais de autor sobre os entregáveis desenvolvidos especificamente para este contrato. A cessão parcial exige documento escrito com reconhecimento notarial das assinaturas (Art. 43.º CDADC) e a transmissão total e definitiva exige escritura pública com identificação da obra e do preço (Art. 44.º CDADC), sob pena de nulidade — [VERIFICAR] a forma adotada; para software feito por encomenda ver também o Art. 14.º CDADC e o DL 252/94 (a confirmar).
- (B) Licença: o Prestador concede ao Cliente uma licença {{exclusiva/não exclusiva}} de uso, retendo a titularidade.}}
+ (B) Licença: o Prestador concede ao Cliente uma licença {{ESCOLHER: exclusiva/não exclusiva}} de uso, retendo a titularidade.}}
 O Prestador mantém a titularidade de ferramentas, bibliotecas e know-how preexistentes (*background IP*), concedendo ao Cliente o direito de uso necessário ao funcionamento dos entregáveis.
 
 ## 6. Níveis de serviço (SLA) <!-- se aplicável -->
@@ -45,7 +45,7 @@ Alterações ao âmbito carecem de acordo escrito, com revisão de prazos e pre�
 Vigência: {{DURACAO}}. Qualquer Parte pode resolver por incumprimento não sanado em {{DIAS_SANACAO}} dias após interpelação. Em caso de cessação, o Prestador entrega ao Cliente os trabalhos em curso e dados (**exit plan**), mediante pagamento do devido.
 
 ## 12. Lei e foro
-Lei portuguesa. Foro: {{FORO}}. {{Para clientes internacionais, ponderar arbitragem — ver contratos-internacionais.md}}.
+Lei portuguesa. Foro: {{FORO}}. {{PREENCHER: Para clientes internacionais, ponderar arbitragem — ver contratos-internacionais.md}}.
 
 {{LOCAL}}, {{DATA}}
 

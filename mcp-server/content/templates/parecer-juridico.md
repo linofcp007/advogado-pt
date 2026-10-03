@@ -7,28 +7,28 @@
 **Para:** {{NOME}}  |  **Data:** {{DATA}}  |  **Área:** {{AREA}}
 
 ## 1. Situação
-{{Resumo dos factos em 2-3 linhas.}}
+{{PREENCHER: Resumo dos factos em 2-3 linhas.}}
 
 ## 2. Enquadramento legal
 - Diplomas aplicáveis: {{LEIS}}
 - Artigos relevantes: {{ARTIGOS}} *(confirmar citações determinantes em dre.pt/dgsi.pt)*
 
 ## 3. Posição jurídica
-{{Forte / Média / Fraca}} — porque {{FUNDAMENTAÇÃO}}.
+{{ESCOLHER: Forte / Média / Fraca}} — porque {{FUNDAMENTACAO}}.
 
 ## 4. Opções
 | Opção | Custo estimado | Tempo | Probabilidade de êxito | Risco |
 |---|---|---|---|---|
-| {{A}} | {{€}} | {{prazo}} | {{%/qualitativo}} | {{baixo/médio/alto}} |
+| {{A}} | {{PREENCHER: €}} | {{PREENCHER: prazo}} | {{PREENCHER: %/qualitativo}} | {{ESCOLHER: baixo/médio/alto}} |
 | {{B}} | ... | ... | ... | ... |
 | {{C}} | ... | ... | ... | ... |
 
 ## 5. Matriz de risco
-- Probabilidade de desfecho desfavorável: {{baixa/média/alta}}
-- Impacto financeiro estimado: {{€}}
+- Probabilidade de desfecho desfavorável: {{ESCOLHER: baixa/média/alta}}
+- Impacto financeiro estimado: {{PREENCHER: €}}
 
 ## 6. Recomendação
-{{A opção aconselhada e porquê. Honesto quando a posição é fraca.}}
+{{PREENCHER: A opção aconselhada e porquê. Honesto quando a posição é fraca.}}
 
 ## 7. Próximos passos
 1. {{PASSO_1}} — ⏰ {{PRAZO_1}}
@@ -36,7 +36,7 @@
 3. {{PASSO_3}}
 
 ## 8. Prazos a vigiar
-- ⏰ {{PRAZO}}: {{descrição}} — consequência: {{CONSEQUÊNCIA}}
+- ⏰ {{PRAZO}}: {{PREENCHER: descrição}} — consequência: {{CONSEQUENCIA}}
 
 ---
 ⚖️ *Orientação informativa baseada na legislação portuguesa vigente. Para ações judiciais ou alta complexidade, validar com advogado inscrito na Ordem dos Advogados.*

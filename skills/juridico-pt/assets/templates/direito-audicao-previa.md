@@ -17,10 +17,10 @@
 
 **Exmo(a). Senhor(a) {{DESTINATARIO: Chefe do Serviço de Finanças de {{SERVICO}} / Diretor(a) de Finanças de {{DISTRITO}} / Chefe de Divisão da Inspeção Tributária da Direção de Finanças de {{DISTRITO}} / Diretor(a) da Unidade dos Grandes Contribuintes — a entidade que subscreve a notificação}}**
 
-**Assunto:** Direito de audição sobre o projeto de {{TIPO_PROJETO: conclusões do relatório de inspeção tributária / decisão de liquidação adicional / decisão de indeferimento da reclamação graciosa n.º {{Nº}} / decisão de reversão no processo de execução fiscal n.º {{Nº_PEF}} / revogação de benefício fiscal}}
-**Referência:** {{REFERENCIA: ordem de serviço n.º {{OI}} / procedimento n.º {{Nº}} / ofício n.º {{Nº}}, de {{DATA_OFICIO}}}}
+**Assunto:** Direito de audição sobre o projeto de {{TIPO_PROJETO: conclusões do relatório de inspeção tributária / decisão de liquidação adicional / decisão de indeferimento da reclamação graciosa n.º {{NUMERO}} / decisão de reversão no processo de execução fiscal n.º {{N_PEF}} / revogação de benefício fiscal}}
+**Referência:** {{REFERENCIA: ordem de serviço n.º {{OI}} / procedimento n.º {{NUMERO}} / ofício n.º {{NUMERO}}, de {{DATA_OFICIO}}}}
 
-{{REQUERENTE_NOME}}, {{REQUERENTE_TIPO: sociedade por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{REQUERENTE_NIF}}, com {{sede / domicílio fiscal}} em {{REQUERENTE_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) gerente(s) / administrador(es) {{REPRESENTANTE_NOME}} / por mandatário(a) com procuração junta}}, notificada em {{DATA_NOTIFICACAO}}, através de {{MEIO_NOTIFICACAO: carta registada / domicílio fiscal eletrónico}}, do projeto acima identificado, para se pronunciar no prazo de **{{PRAZO_DIAS}} dias**, vem, ao abrigo do **art. 60.º da Lei Geral Tributária (LGT)** {{BASE_INSPECAO: e do art. 60.º do Regime Complementar do Procedimento de Inspeção Tributária e Aduaneira (RCPITA)}} {{BASE_REVERSAO: e do art. 23.º, n.º 4, da LGT}}, exercer por escrito o seu
+{{REQUERENTE_NOME}}, {{REQUERENTE_TIPO: sociedade por quotas / sociedade anónima / empresário em nome individual / pessoa singular}}, NIF/NIPC {{REQUERENTE_NIF}}, com {{ESCOLHER: sede / domicílio fiscal}} em {{REQUERENTE_MORADA}}, {{REPRESENTACAO: aqui representada pelo(s) seu(s) gerente(s) / administrador(es) {{REPRESENTANTE_NOME}} / por mandatário(a) com procuração junta}}, notificada em {{DATA_NOTIFICACAO}}, através de {{MEIO_NOTIFICACAO: carta registada / domicílio fiscal eletrónico}}, do projeto acima identificado, para se pronunciar no prazo de **{{PRAZO_DIAS}} dias**, vem, ao abrigo do **art. 60.º da Lei Geral Tributária (LGT)** {{BASE_INSPECAO: e do art. 60.º do Regime Complementar do Procedimento de Inspeção Tributária e Aduaneira (RCPITA)}} {{BASE_REVERSAO: e do art. 23.º, n.º 4, da LGT}}, exercer por escrito o seu
 
 **DIREITO DE AUDIÇÃO**
 
@@ -40,9 +40,9 @@ nos termos e com os fundamentos seguintes.
 
 <!-- Apagar as que não se aplicam. Confirmar prazos e normas em dre.pt antes de as invocar. -->
 
-2. **Caducidade do direito à liquidação** quanto a {{PERIODO_CADUCADO}} — {{ex. a liquidação que venha a resultar do projeto já não poderá ser validamente notificada dentro do prazo do art. 45.º da LGT [VERIFICAR causas de suspensão do prazo]}}.
-3. **Insuficiência de fundamentação do projeto** — {{ex. o ponto ... não identifica os factos, os critérios nem os cálculos que suportam a correção, o que impede o exercício efetivo deste direito (arts. 60.º, n.º 5, e 77.º da LGT); requer-se a indicação desses elementos e a concessão de novo prazo}}.
-4. **Vícios do procedimento de inspeção** — {{ex. extensão do procedimento a períodos ou tributos não abrangidos pela ordem de serviço / duração além do prazo legal [VERIFICAR norma do RCPITA aplicável]}}.
+2. **Caducidade do direito à liquidação** quanto a {{PERIODO_CADUCADO}} — {{PREENCHER: ex. a liquidação que venha a resultar do projeto já não poderá ser validamente notificada dentro do prazo do art. 45.º da LGT [VERIFICAR causas de suspensão do prazo]}}.
+3. **Insuficiência de fundamentação do projeto** — {{PREENCHER: ex. o ponto ... não identifica os factos, os critérios nem os cálculos que suportam a correção, o que impede o exercício efetivo deste direito (arts. 60.º, n.º 5, e 77.º da LGT); requer-se a indicação desses elementos e a concessão de novo prazo}}.
+4. **Vícios do procedimento de inspeção** — {{PREENCHER: ex. extensão do procedimento a períodos ou tributos não abrangidos pela ordem de serviço / duração além do prazo legal [VERIFICAR norma do RCPITA aplicável]}}.
 5. {{OUTRAS_QUESTOES_PREVIAS: ex. ilegitimidade do visado; erro na identificação do sujeito passivo}}
 
 ## III — Pronúncia sobre cada ponto do projeto
@@ -87,7 +87,7 @@ nos termos e com os fundamentos seguintes.
 
 ## VI — Da prova
 
-15. A requerente junta {{Nº_DOCUMENTOS}} documentos:
+15. A requerente junta {{N_DOCUMENTOS}} documentos:
     - Doc. 1 — {{DOC_1}};
     - Doc. 2 — {{DOC_2}};
     - Doc. {{N}} — {{DOC_N}}.
@@ -103,7 +103,7 @@ Nestes termos, requer-se a V. Exa. que, tidos obrigatoriamente em conta os eleme
 
 {{LOCAL}}, {{DATA}}
 
-{{A requerente / O(A) mandatário(a)}},
+{{ESCOLHER: A requerente / O(A) mandatário(a)}},
 
 _______________________________
 {{ASSINANTE_NOME}}, {{ASSINANTE_QUALIDADE: gerente / administrador / advogado(a)}}
@@ -121,4 +121,4 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] **Toda** a prova junta agora (docs. numerados e legíveis): é o momento em que pesa mais, e a AT tem de a considerar (art. 60.º, n.º 7, LGT).
 - [ ] Regularização (art. 58.º RCPITA) decidida ponto a ponto com o contabilista certificado — aceitar o documento de regularização preclude a discussão posterior dessas correções (art. 58.º-A, n.º 8, RCPITA).
 - [ ] A audição **não é** um meio de impugnação: depois da decisão final/liquidação, os prazos de reclamação graciosa (120 dias), impugnação (3 meses) e CAAD (90 dias) correm à parte — ver `playbooks/recebi-notificacao-at.md` e `references/contencioso-tributario.md`. Métodos indiretos → pedido de revisão da matéria tributável em 30 dias após a decisão (art. 91.º, n.º 1, LGT).
-- [ ] Assinatura por quem obriga a empresa (perfil `.juridico-pt/perfil-empresa.md`) ou mandatário com procuração; comentários `<!-- -->`, secções opcionais não usadas e `{{...}}` removidos.
+- [ ] Assinatura por quem obriga a empresa (perfil `.juridico-pt/perfil-empresa.md`) ou mandatário com procuração; comentários `<!-- -->`, secções opcionais não usadas e `{{CAMPO}}` removidos.

@@ -32,6 +32,6 @@ export function exportarDocumento(p: PedidoExportacao): { caminho: string; bytes
   if (!md.trim()) throw new Error("O documento está vazio.");
   const bytes = gerarDocx(md);
   const caminho = escreverSeguro(dirProjeto(p.projeto), [PASTA_DADOS, "exportados", `${nome}.docx`], bytes);
-  const placeholders = (md.match(/\{\{[A-Z0-9_]+\}\}/g) ?? []).length;
+  const placeholders = (md.match(/\{\{[A-Z0-9_]+(?::[^{}]*)?\}\}/g) ?? []).length;
   return { caminho, bytes: bytes.length, placeholders };
 }

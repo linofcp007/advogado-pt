@@ -30,7 +30,7 @@ Tool-agnostic: vê a intenção do utilizador e encadeia playbook + calculadora 
 
 | Intenção do utilizador | Ação recomendada |
 | --- | --- |
-| "Cliente não paga", "quero cobrar", "não me pagaram" | `obter_playbook` (`cliente-nao-paga`) → `calc_juros_mora` → `obter_template` (`carta-cobranca-amigavel` / `carta-cobranca-formal-registada` / `carta-interpelacao-incumprimento`); se avançar para tribunal: `calc_custas_injuncao` + `obter_template` (`requerimento-injuncao`) |
+| "Cliente não paga", "quero cobrar", "não me pagaram" | `obter_playbook` (`cliente-nao-paga`) → `calc_juros_mora` (várias faturas: `calc_juros_lote`) → `obter_template` (`carta-cobranca-amigavel` / `carta-cobranca-formal-registada` / `carta-cobranca-varias-faturas` / `carta-interpelacao-incumprimento`); se avançar para tribunal: `calc_custas_injuncao` + `obter_template` (`requerimento-injuncao`); PEPEX e IVA de créditos incobráveis no playbook |
 | "Calcular prazo", "quantos dias tenho", "data-limite" | `calc_prazo` (dias úteis/corridos, com feriados PT) |
 | "Quando prescreve", "ainda posso reclamar/cobrar" | `calc_prescricao` |
 | "Rever contrato", "ver se este contrato está bom" | `obter_template` (modelo equivalente) + `obter_checklist` (`checklist-revisao-contrato`) |
@@ -55,7 +55,15 @@ Tool-agnostic: vê a intenção do utilizador e encadeia playbook + calculadora 
 | "Lay-off", "despedimento coletivo", "fechar a empresa" | `obter_playbook` (`lay-off`, `despedimento-coletivo`, `dissolucao-liquidacao`) |
 | "Recebi uma injunção / execução e quero opor-me", "quanto custa pôr uma ação" | `obter_template` (`oposicao-injuncao`, `oposicao-execucao`) + `calc_prazo`; `calc_taxa_justica` |
 | "Alojamento local", "restaurante", "obras", "TVDE", "imobiliária" | `ler_referencia` (`licenciamento-setorial`) |
-| "Sou contabilista e tenho vários clientes" | `guardar_perfil_empresa` com `perfil` + `ativar_perfil` / `listar_perfis` |
+| "Sou contabilista e tenho vários clientes" | `guardar_perfil_empresa` com `perfil` + `ativar_perfil` / `listar_perfis`; `painel_clientes` (próximos 30 dias de todos); `registar_prazo` com `perfil`; `calendario_obrigacoes` com `por_perfil` |
+| "Faturas em PDF", "o que muda em 2027 nas faturas", "ATCUD", "QR" | `obter_playbook` (`faturacao-eletronica-2027`) + `ler_referencia` (`faturacao`) + `obter_checklist` (`checklist-faturacao`) |
+| "Quero vender ao Estado", "concurso público", "ajuste direto" | `calc_procedimento_ccp` + `obter_playbook` (`vender-ao-estado`) + `obter_template` (`pedido-esclarecimentos-ccp`, `lista-erros-omissoes-ccp`, `pronuncia-audiencia-previa-ccp`, `impugnacao-administrativa-ccp`) |
+| "Pediram a devolução de um apoio", "PRR", "Portugal 2030" | `obter_playbook` (`recebi-pedido-devolucao-apoio`) + `ler_referencia` (`fundos-europeus`) + `calc_prazo` (`uteis`) |
+| "NIS2", "cibersegurança", "incidente" | `obter_checklist` (`checklist-nis2`) + `ler_referencia` (`digital-ue`) |
+| "Convocar a assembleia", "ata de contas", "procuração", "fim do contrato a termo", "livro de reclamações" | `obter_template` (`convocatoria-assembleia-geral`, `ata-aprovacao-contas`, `procuracao`, `carta-caducidade-contrato-termo`, `resposta-livro-reclamacoes`) |
+| "Quero isto em Word", "manda o .docx" | `exportar_documento` (`conteudo` ou `template`, `nome`) |
+| "Os valores estão atualizados?" | `verificar_atualidade` |
+| "Apaga os meus dados / os do cliente X" | `apagar_perfil` (confirmar antes — não se desfaz) |
 
 Descoberta: `listar_areas_juridicas`, `listar_templates`, `listar_playbooks`, `listar_checklists` e `procurar_conteudo` (procura transversal por termo) ajudam a encontrar o recurso certo quando a intenção não mapeia diretamente acima.
 
@@ -82,7 +90,10 @@ Todas devolvem texto com um aviso de que são estimativas de apoio (valores de 2
 
 - `obter_perfil_empresa` / `guardar_perfil_empresa` (`perfil` opcional para perfis nomeados) / `listar_perfis` / `ativar_perfil`.
 - `calendario_obrigacoes` (`ano`, `mes`, `exportar`) — obrigações do ano a partir do perfil, com base legal; `.ics` para Google Calendar/Outlook.
-- `registar_prazo` / `listar_prazos` / `concluir_prazo` — prazos em curso em `.juridico-pt/prazos.md`.
+- `registar_prazo` / `listar_prazos` / `concluir_prazo` — prazos em curso em `.juridico-pt/prazos.md` (com `perfil` no modo contabilista).
+- `painel_clientes` (`dias`) — obrigações e prazos dos próximos dias de todos os perfis.
+- `apagar_perfil` (`nome`) — apaga um perfil, os prazos e os calendários dele.
+- `exportar_documento` — grava um documento em `.docx`; `verificar_atualidade` — valores e taxas fora de prazo.
 
 ## Tools de conteúdo
 
