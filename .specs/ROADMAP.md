@@ -2,14 +2,14 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 83%** ▰▰▰▰▰▰▰▰▱▱ · 3/4 features completas · 99/137 tasks feitas
+**Progresso: 84%** ▰▰▰▰▰▰▰▰▱▱ · 3/4 features completas · 101/137 tasks feitas
 
-_Velocidade: 245 ponto(s)/dia útil — 99 tarefa(s), 245 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 248 ponto(s)/dia útil — 101 tarefa(s), 248 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
 ## ▶ A seguir
-- **juridico-pt-v2-0** (core +tdd +ai +privacy) — próxima #1 Branch `feat/v2.0-juridico-pt` a partir do
+- **juridico-pt-v2-0** (core +tdd +ai +privacy) — próxima #3 Escrever os testes a falhar: `mcp-server/t
 
 ## Features
 
@@ -18,7 +18,7 @@ Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
 | ✅ | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | concluída | 100% | 41/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | — | — |
 | ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
-| 📋 | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | tarefas prontas | 30% | 0/38 | advogado-pt-v1-2-1-correcoes ✓ | #1 Branch `feat/v2.0-juridico-pt` a partir do | 2026-10-05 |
+| 🟡 | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | em execução | 34% | 2/38 | advogado-pt-v1-2-1-correcoes ✓ | #3 Escrever os testes a falhar: `mcp-server/t | 2026-10-05 |
 
 Previsão = pontos por fazer ÷ velocidade, em dias úteis (±25%) · `_Size: XS|S|M|L|XL_` numa tarefa = 1/2/3/5/8 pontos; uma tarefa sem tamanho conta como a mediana da sua feature (senão M) · uma feature à espera de uma dependência começa depois da previsão dessa.
 

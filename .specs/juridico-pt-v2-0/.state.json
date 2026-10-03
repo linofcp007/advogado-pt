@@ -15,32 +15,29 @@
       "batch": true
     },
     "requirements": {
-      "at": "2026-10-03T21:00:42.817Z",
+      "at": "2026-10-03T22:40:59.390Z",
       "by": "Carlos Pereira",
-      "fingerprint": "2426af0b434c8c231135f3a140ccd5d4c67c3b8d",
+      "fingerprint": "68cc3f30317a9d01c67acd805b2014726ce8dac3",
       "steering": {
         "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
         "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
-      },
-      "batch": true
+      }
     },
     "design": {
-      "at": "2026-10-03T21:00:42.871Z",
+      "at": "2026-10-03T22:41:00.000Z",
       "by": "Carlos Pereira",
-      "fingerprint": "95f6ebf6c7f6ab0c396e8382d1a76e73f969ef44",
+      "fingerprint": "79f0a8cd3318db9ba53e0250c6f874e06e3bdb78",
       "steering": {
         "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
         "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
       },
       "weigh": true,
-      "reuse": true,
-      "batch": true
+      "reuse": true
     },
     "test-plan": {
-      "at": "2026-10-03T21:00:42.931Z",
+      "at": "2026-10-03T22:41:00.976Z",
       "by": "Carlos Pereira",
-      "fingerprint": "490fc59e43ce17c4e5b3067bc2deefb9efe151b8",
-      "batch": true
+      "fingerprint": "83b0b0af8c99c40735c39f7956316b6e3bfd0ea4"
     },
     "eval-plan": {
       "at": "2026-10-03T21:00:42.985Z",
@@ -100,7 +97,70 @@
       "fingerprint": "42729dd4daf0eb55c19af31151f33351eec05c24",
       "batch": true,
       "snapshot": ".history/eval-plan@1.md"
+    },
+    {
+      "phase": "requirements",
+      "at": "2026-10-03T22:40:59.390Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "68cc3f30317a9d01c67acd805b2014726ce8dac3",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "snapshot": ".history/requirements@2.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-03T22:41:00.000Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "79f0a8cd3318db9ba53e0250c6f874e06e3bdb78",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "snapshot": ".history/design@2.md"
+    },
+    {
+      "phase": "test-plan",
+      "at": "2026-10-03T22:41:00.976Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "83b0b0af8c99c40735c39f7956316b6e3bfd0ea4",
+      "snapshot": ".history/test-plan@2.md"
     }
   ],
-  "lastApprovedPhase": "eval-plan"
+  "lastApprovedPhase": "test-plan",
+  "evidence": {
+    "1": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exitCode": 0,
+      "summary": "feat/v2.0-juridico-pt (criado a partir da main com a 1.2.1 publicada, 3da861a); a spec aprovada já está no histórico (73585f2).",
+      "at": "2026-10-03T22:26:36.779Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "git rev-parse --abbrev-ref HEAD",
+          "exitCode": 0,
+          "summary": "feat/v2.0-juridico-pt (criado a partir da main com a 1.2.1 publicada, 3da861a); a spec aprovada já está no histórico (73585f2).",
+          "at": "2026-10-03T22:26:36.779Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Branch `feat/v2.0-juridico-pt` a partir do `main` com a 1.2.1; commit da spec aprovada",
+      "verify": "git rev-parse --abbrev-ref HEAD"
+    },
+    "2": {
+      "summary": "Investigação concluída e registada em decisions.md: D-2 (claude plugin eval: evals/<caso>/prompt.md + graders regex/tool_used; .mcpb: ZIP stored com manifest 0.3, sem assinatura, package.json type module; elicitation: getClientCapabilities()?.elicitation?.form + elicitInput, com recurso a argumentos/texto porque o Desktop não a documenta) e D-1 (renomeação direta sem migração, por decisão do Carlos; teste local mostrou que o renames funciona mas a mudança de nome do marketplace não é aplicada ao registo existente). Spec ajustada (US-1.AC-3/4/5, EC-1, SC-001, T-303/304/305, tarefas 5 e 8) e reaprovada.",
+      "manual": true,
+      "at": "2026-10-03T22:41:08.058Z",
+      "task": "[shared] Investigação: confirmar na documentação oficial (claude-code-guide e docs) (a) o que acontece a um marketplace instalado quando o `name` do `marketplace.json` e o repositório mudam, (b) o formato e as opções do `claude plugin eval`, (c) o manifesto `.mcpb` para servidores Node, (d) a elicitation no SDK do MCP e o anúncio da capacidade pelo cliente; registar as decisões em `decisions.md` e ajustar o design se a alternativa de recurso for necessária",
+      "verify": ""
+    }
+  },
+  "lastTickAt": "2026-10-03T22:41:08.058Z",
+  "ticks": {
+    "1": "2026-10-03T22:26:36.779Z",
+    "2": "2026-10-03T22:41:08.058Z"
+  }
 }

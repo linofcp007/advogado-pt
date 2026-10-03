@@ -7,18 +7,18 @@
 ## Restrições Globais
 - Node >= 18 e Python 3 só com a biblioteca-padrão · nenhuma dependência nova de runtime · `.docx`, ZIP e `.mcpb` com módulos próprios · nunca `bin/` na raiz · hook sem dependências, fail-open e SessionStart < 300 ms.
 - Identificador novo `juridico-pt` (nome apresentado "Jurídico PT"); nunca "És o advogado" — sempre "assistente jurídico", com o aviso de que não substitui advogado inscrito na OA.
-- Dados em `.juridico-pt/` com leitura de `.advogado-pt/` e cópia na primeira escrita; a pasta antiga nunca é apagada pelo plugin.
+- Dados em `.juridico-pt/` (projeto ou `~/.juridico-pt/`), sem leitura nem migração de `.advogado-pt/` — só o Carlos usava o plugin (D-1).
 - Calculadoras novas em Python E TypeScript com os mesmos casos; montantes e limiares em `valores-2026.md` com fonte.
 - Toda a escrita através de `fs-seguro` (sem links, tmp + rename), dentro do projeto ou de `~/.juridico-pt/`.
 - Cada regra jurídica nova com fonte oficial e um facto em `factos.json` (ids `v20-…`); o que não se confirmar fica "(a confirmar)".
 - Mensagens de consola com `->`; stdout UTF-8; erros sem stack trace.
 
 ## Fase: Setup
-- [ ] 1. [shared] Branch `feat/v2.0-juridico-pt` a partir do `main` com a 1.2.1; commit da spec aprovada
+- [x] 1. [shared] Branch `feat/v2.0-juridico-pt` a partir do `main` com a 1.2.1; commit da spec aprovada
   - _Requirements: NFR-2_
   - _Verify: git rev-parse --abbrev-ref HEAD_
   - _Size: XS_
-- [ ] 2. [shared] Investigação: confirmar na documentação oficial (claude-code-guide e docs) (a) o que acontece a um marketplace instalado quando o `name` do `marketplace.json` e o repositório mudam, (b) o formato e as opções do `claude plugin eval`, (c) o manifesto `.mcpb` para servidores Node, (d) a elicitation no SDK do MCP e o anúncio da capacidade pelo cliente; registar as decisões em `decisions.md` e ajustar o design se a alternativa de recurso for necessária
+- [x] 2. [shared] Investigação: confirmar na documentação oficial (claude-code-guide e docs) (a) o que acontece a um marketplace instalado quando o `name` do `marketplace.json` e o repositório mudam, (b) o formato e as opções do `claude plugin eval`, (c) o manifesto `.mcpb` para servidores Node, (d) a elicitation no SDK do MCP e o anúncio da capacidade pelo cliente; registar as decisões em `decisions.md` e ajustar o design se a alternativa de recurso for necessária
   - _Requirements: US-1.AC-1, US-1.AC-4, US-4.AC-1, US-10.AC-2, US-10.AC-3_
   - _Size: S_
   - _Depends: 1_
@@ -38,7 +38,7 @@
   - _Depends: 2_
 
 ## História US-1 (P1 — MVP): renomeação e migração
-- [ ] 5. [US1] `dados.ts`: pasta `.juridico-pt/` com leitura de `.advogado-pt/`, cópia na primeira escrita, aviso com as duas pastas, `JURIDICO_PT_HOME`/`ADVOGADO_PT_HOME`; perfil, prazos e calendário passam a usá-la
+- [ ] 5. [US1] `dados.ts`: pasta `.juridico-pt/` no projeto e no perfil geral (`JURIDICO_PT_HOME` ou a home), sem ler `.advogado-pt/`; perfil, prazos e calendário passam a usá-la
   - _Requirements: US-1.AC-3, US-1.AC-5, EC-1_
   - _Makes green: T-303, T-305_
   - _Implements: mcp-server/src/dados.ts_
@@ -57,13 +57,13 @@
   - _Verify: node --test --test-name-pattern="T-302" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 6_
-- [ ] 8. [US1] Plugin legado `legacy/advogado-pt/` 1.2.2 (manifesto + hook com o aviso e os comandos exatos) no marketplace
+- [ ] 8. [US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão
   - _Requirements: US-1.AC-4, SC-001_
   - _Makes green: T-304_
   - _Verify: node --test --test-name-pattern="T-304" mcp-server/test/v20.test.mjs_
-  - _Size: S_
+  - _Size: XS_
   - _Depends: 6_
-**Checkpoint:** US-1 — `juridico-pt` instalável, dados migrados, aviso aos utilizadores antigos.
+**Checkpoint:** US-1 — `juridico-pt` instalável, dados em `.juridico-pt/`, passos de troca documentados.
 
 ## História US-2 (P1): faturação 2027
 - [ ] 9. [US2] Referência `faturacao`, playbook `faturacao-eletronica-2027`, checklist `checklist-faturacao`, command `/faturacao`, datas em `valores-2026.md` — cada regra confirmada no DR/Portal das Finanças; factos `v20-fatura-`
@@ -274,7 +274,7 @@
   - _Verify: python skills/juridico-pt/scripts/test_scripts.py_
   - _Size: M_
   - _Depends: 36_
-- [ ] 38. [shared] Push, renomear o repositório no GitHub para `juridico-pt` (com confirmação explícita do Carlos) e quickstart manual (`.mcpb` no Desktop, `.docx` no Word/LibreOffice, migração numa instalação real)
+- [ ] 38. [shared] Push, renomear o repositório no GitHub para `juridico-pt` (com confirmação explícita do Carlos) e quickstart manual (`.mcpb` no Desktop, `.docx` no Word/LibreOffice, troca da instalação real seguindo o CHANGELOG)
   - _Requirements: US-1.AC-4, US-10.AC-1, US-10.AC-3, SC-001_
   - _Makes green: T-341_
   - _Size: S_
