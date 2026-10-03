@@ -1,6 +1,7 @@
 <!-- Template: Termos e Condições de loja online (B2C). Base: DL 24/2014 (vendas à distância),
      DL 84/2021 (garantias e conteúdos digitais), Lei 24/96 (defesa do consumidor), DL 446/85 (CCG).
-     Cumprir deveres de informação pré-contratual e direito de arrependimento (14 dias). -->
+     Cumprir deveres de informação pré-contratual e direito de arrependimento (14 dias).
+     Âmbito: misto -->
 
 # Termos e Condições
 
@@ -39,3 +40,15 @@ O tratamento de dados pessoais rege-se pela Política de Privacidade disponível
 
 ## 11. Lei aplicável
 Lei portuguesa. Cláusulas contratuais gerais sujeitas ao DL 446/85.
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Livre resolução de 14 dias (art. 10.º DL 24/2014); se faltar a informação sobre este direito, o prazo passa a 12 meses após o fim do prazo inicial (art. 10.º, n.º 2) — confirmar que é mostrada antes da compra; reembolso em 14 dias.
+- [ ] Disponibilizar o formulário de livre resolução (`formulario-livre-resolucao.md`) e indicar quem suporta o custo da devolução.
+- [ ] Livro de Reclamações eletrónico ativo, com ligação visível no site; identificar a entidade de RAL competente (lista do CNIACC) e retirar ligações à plataforma ODR, descontinuada em julho de 2025.
+- [ ] Distinguir B2C de B2B (livre resolução e garantias são de consumo); preços com IVA; vendas a consumidores de outros Estados-Membros: IVA no destino/OSS (`references/fiscal.md`) e regras de geobloqueio (Reg. (UE) 2018/302).
+- [ ] Coerência com a `politica-privacidade.md` e a `cookie-policy.md`; rever o texto contra as cláusulas proibidas do DL 446/85 (arts. 18.º a 22.º) antes de publicar.

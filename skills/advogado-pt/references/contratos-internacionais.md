@@ -1,5 +1,7 @@
 # Contratos Internacionais (Clientes e Fornecedores)
 
+> **Âmbito:** misto
+>
 > 💶 **Retenções na fonte, taxas e limiares fiscais (IVA, dupla tributação):** ver `references/fiscal.md` e `references/valores-2026.md`. Vertente de dados pessoais: `references/rgpd.md`. Cláusulas gerais e templates internos: `references/contratos.md`.
 
 ## Legislação e Instrumentos Base

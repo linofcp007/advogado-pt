@@ -1,5 +1,6 @@
 <!-- Template: Política de Privacidade para website/app (PT). Base: RGPD + Lei 58/2019.
-     Adaptar à realidade concreta do tratamento — NÃO publicar sem rever as finalidades reais. -->
+     Adaptar à realidade concreta do tratamento — NÃO publicar sem rever as finalidades reais.
+     Âmbito: misto -->
 
 # Política de Privacidade
 
@@ -40,3 +41,15 @@ Utilizamos cookies estritamente necessários (sem consentimento) e, mediante o s
 
 ## 9. Alterações
 Esta política pode ser atualizada; a versão em vigor está sempre disponível em {{URL}}.
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Publicar antes de começar a recolher dados (a informação é devida no momento da recolha — art. 13.º RGPD) e rever sempre que mude uma finalidade, um subcontratante ou uma transferência.
+- [ ] Completar os elementos obrigatórios que o template não tem: contacto do EPD/DPO quando a nomeação for obrigatória (art. 37.º RGPD), prazos de conservação por finalidade, decisões automatizadas/perfis se existirem e se a comunicação dos dados é obrigatória.
+- [ ] Interesse legítimo e marketing: documentar a ponderação de interesses; marketing eletrónico a quem não é cliente exige consentimento prévio (Lei 41/2004 — a confirmar o artigo).
+- [ ] Coerência com o registo de atividades de tratamento (art. 30.º RGPD), a `cookie-policy.md` e os DPA assinados (`dpa-bilingue.md`); identificar os subcontratantes fora do EEE e a base de cada transferência.
+- [ ] Prazo de conservação da faturação ("10 anos") a confirmar na lei fiscal aplicável (a confirmar); link visível no rodapé e nos formulários de recolha.

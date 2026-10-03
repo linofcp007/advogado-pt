@@ -2,20 +2,20 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 30%** ▰▰▰▱▱▱▱▱▱▱ · 0/1 features completas · 0/27 tasks feitas
+**Progresso: 100%** ▰▰▰▰▰▰▰▰▰▰ · 1/1 features completas · 28/28 tasks feitas
 
-_Velocidade: ainda sem dados suficientes — 0 das 3 tarefas concluídas de que uma previsão precisa nos últimos 28 dias_
+_Velocidade: 66 ponto(s)/dia útil — 28 tarefa(s), 66 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
 ## ▶ A seguir
-- **advogado-pt-v1-1-empresas** (core +tdd) — próxima #1 Criar o branch `feat/v1.1-empresas` e faze
+Todas as features completas 🎉
 
 ## Features
 
 | | Feature | Tracks | Fase | % | Tasks | Deps | Próxima | Previsão |
 |---|---|---|---|---|---|---|---|---|
-| 📋 | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | tarefas prontas | 30% | 0/27 | — | #1 Criar o branch `feat/v1.1-empresas` e faze | — |
+| ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
 
 ## Dependências
 
@@ -23,7 +23,7 @@ _Sem dependências declaradas._
 
 ## ⚠ Precisa de atenção
 
-_Nada a assinalar ✓_
+- **advogado-pt-v1-1-empresas** — alterado desde a aprovação — rever de novo: tasks.md
 
 ## Backlog (planeadas, ainda sem spec)
 

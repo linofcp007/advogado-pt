@@ -1,5 +1,7 @@
 # Propriedade Intelectual
 
+> **Âmbito:** misto
+
 ## Legislação Base
 - CDADC: Código do Direito de Autor e dos Direitos Conexos (DL 63/85)
 - CPI: Código da Propriedade Industrial (DL 110/2018)
@@ -15,7 +17,7 @@
 
 ### Titularidade
 - Software criado por trabalhador no âmbito do contrato: presume-se que pertence ao empregador (Art. 14º Diretiva)
-- Software criado por freelancer: definir contratualmente (por defeito, o autor retém direitos)
+- Software feito por encomenda (freelancer/fornecedor): por defeito os direitos pertencem ao destinatário/cliente, salvo estipulação em contrário ou se outra coisa resultar das finalidades do contrato (art. 3.º, n.º 3, DL 252/94) — mesmo assim, definir sempre por contrato (template `contrato-desenvolvimento-software.md`); para documentação/design aplica-se o CDADC (art. 14.º e forma dos arts. 43.º/44.º)
 - Software criado em coautoria: direitos conjuntos, decisões por unanimidade
 - **Cláusula essencial em todos os contratos de desenvolvimento**: assignment ou licença clara
 
@@ -28,7 +30,7 @@
 - Classes de Nice relevantes para o utilizador: 9 (software), 35 (retalho/consultoria), 42 (serviços TI)
 
 ## Proteção de Know-How e Segredos Comerciais
-- DL 49/2018: transpõe Diretiva (UE) 2016/943
+- Segredos comerciais: Código da Propriedade Industrial (DL 110/2018), arts. 313.º e ss. — transpõe a Diretiva (UE) 2016/943
 - Requisitos: informação secreta + valor comercial + medidas razoáveis de proteção
 - Medidas práticas: NDAs, restrição de acesso, marcação "confidencial", políticas internas
 

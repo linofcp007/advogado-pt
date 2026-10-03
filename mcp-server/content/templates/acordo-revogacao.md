@@ -3,7 +3,8 @@
      O trabalhador pode REVOGAR/desistir do acordo nos 7 dias seguintes à assinatura (Art. 350.º CT)
      — salvo se as assinaturas tiverem sido objeto de reconhecimento notarial presencial.
      A compensação por revogação tem implicações fiscais e no subsídio de desemprego — confirmar
-     enquadramento; ver references/laboral.md e references/valores-2026.md. -->
+     enquadramento; ver references/laboral.md e references/valores-2026.md.
+     Âmbito: nacional -->
 
 # ACORDO DE REVOGAÇÃO DO CONTRATO DE TRABALHO
 
@@ -48,3 +49,15 @@ O presente acordo é feito em duplicado, ficando um exemplar na posse de cada pa
 {{LOCAL}}, {{DATA}}
 
 O Empregador: _______________________   O Trabalhador: _______________________
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ O trabalhador pode fazer cessar o acordo até ao 7.º dia seguinte à celebração, por comunicação escrita (art. 350.º CT), salvo se o acordo estiver datado e as assinaturas tiverem reconhecimento notarial presencial (art. 350.º, n.º 4, CT) — só dar a compensação por definitiva depois desse prazo.
+- [ ] Forma: documento escrito assinado por ambas as partes, em duplicado, com a data de celebração e a data de início dos efeitos (art. 349.º CT).
+- [ ] Subsídio de desemprego: a revogação por acordo só dá acesso ao subsídio nos motivos e quotas do DL 220/2006 (a confirmar) — verificar antes de prometer ao trabalhador a declaração RP 5044 com esse efeito.
+- [ ] Compensação: confirmar a parte isenta de IRS (art. 2.º, n.º 4, CIRS — a confirmar) e os valores de referência em `references/valores-2026.md`; usar `calc_compensacao_despedimento` como referência.
+- [ ] Após a cessação: entregar o certificado de trabalho (art. 341.º CT) e comunicar a cessação à Segurança Social (prazo a confirmar).

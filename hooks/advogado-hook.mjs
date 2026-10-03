@@ -2,12 +2,14 @@
 // Dispatcher de hooks do plugin advogado-pt. Sem dependências (só node: builtins) e FAIL-OPEN:
 // qualquer erro -> exit 0 (nunca bloqueia o utilizador). Lê o payload JSON do Claude Code de stdin.
 //
-//   SessionStart  -> breve briefing de "advogado ativo".
+//   SessionStart  -> breve briefing de "advogado ativo" + perfil da empresa guardado
+//                    (projeto -> geral) ou instrução para o perguntar.
 //   PostToolUse   -> ao gravar um INSTRUMENTO jurídico (detetado pela estrutura, não pelo
 //                    léxico — ver detetarDocumentoJuridico), lembra as cláusulas essenciais
 //                    e o disclaimer. Informativo, nunca bloqueia.
 import { readFileSync, existsSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { homedir } from "node:os";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const EVENT = process.argv[2] || "";
@@ -33,23 +35,72 @@ function lerStdin() {
   }
 }
 
-function sessionStart() {
+// --- Perfil da empresa -----------------------------------------------------
+// <projeto>/.advogado-pt/perfil-empresa.md tem prioridade; senão ~/.advogado-pt/perfil-empresa.md.
+// Leitor mínimo, alinhado com mcp-server/src/perfil.ts (o hook não importa o servidor).
+const CAMPOS_PERFIL = [
+  "forma_juridica", "denominacao", "setor", "trabalhadores", "volume_negocios", "regime_iva",
+  "contabilidade", "clientes", "dados_pessoais", "linguas", "notas", "atualizado_em",
+];
+const MS_12_MESES = 365 * 24 * 60 * 60 * 1000;
+
+function lerPerfilEm(base, origem, hoje) {
+  try {
+    const caminho = join(base, ".advogado-pt", "perfil-empresa.md");
+    if (!existsSync(caminho)) return null;
+    const campos = {};
+    for (const linha of readFileSync(caminho, "utf8").split(/\r?\n/)) {
+      const m = /^\s*([a-z_]+)\s*:\s*(.*?)\s*$/.exec(linha);
+      if (m && CAMPOS_PERFIL.includes(m[1]) && m[2] !== "") campos[m[1]] = m[2];
+    }
+    const uteis = CAMPOS_PERFIL.filter((c) => c !== "atualizado_em" && campos[c]);
+    if (uteis.length === 0) return null;
+    const d = /^(\d{4})-(\d{2})-(\d{2})$/.exec(campos.atualizado_em || "");
+    const desatualizado = !d || hoje.getTime() - Date.UTC(+d[1], +d[2] - 1, +d[3]) > MS_12_MESES;
+    const resumo = uteis.map((c) => `${c}: ${campos[c]}`).join(" · ");
+    return { origem, resumo, desatualizado };
+  } catch {
+    return null; // fail-open
+  }
+}
+
+/** Mensagem do SessionStart (exportada para testes). Nunca lança. */
+export function mensagemSessionStart(opts = {}) {
   let msg =
     "⚖️ advogado-pt ativo — assessoria jurídica de Portugal · active — legal assistant for Portugal. " +
-    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /defesa /rgpd /despedir /comprar-imovel /doctor. " +
+    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /defesa /rgpd /despedir /fisco /insolvencia /perfil /doctor. " +
     "Valores 2026 em valores-2026; confirma prazos a correr · check running deadlines. " +
     "Orientação informativa, não substitui advogado da OA · informational guidance, not a substitute for a registered lawyer.";
+  try {
+    const hoje = opts.hoje || new Date();
+    const projeto = opts.projeto || process.env.CLAUDE_PROJECT_DIR || process.cwd();
+    const home = opts.home || process.env.ADVOGADO_PT_HOME || homedir();
+    const p = lerPerfilEm(projeto, "projeto", hoje) || lerPerfilEm(home, "geral", hoje);
+    if (p) {
+      msg += ` 🏢 Perfil da empresa (${p.origem}): ${p.resumo}. Adapta as respostas a este perfil.`;
+      if (p.desatualizado) {
+        msg += " ⚠️ Perfil com mais de 12 meses (ou sem data): confirma os dados com o utilizador antes de os usar.";
+      }
+    } else {
+      msg +=
+        " 🏢 Sem perfil da empresa guardado: na 1.ª questão empresarial pergunta só o necessário " +
+        "(forma jurídica, setor, n.º de trabalhadores, volume de negócios…) e oferece guardar com " +
+        "guardar_perfil_empresa (destino projeto ou geral).";
+    }
+  } catch {
+    /* fail-open: segue sem perfil */
+  }
+  return msg;
+}
+
+function sessionStart() {
+  let msg = mensagemSessionStart();
   if (!existsSync(MCP_DIST)) {
     msg +=
       " ⚠️ Servidor MCP por construir: corre `npm run setup` na raiz do plugin · " +
       "MCP server not built: run `npm run setup` at the plugin root.";
   }
   emit(msg);
-}
-
-// Mensagem do SessionStart com o perfil da empresa (stub — Phase 4; tarefa 12).
-export function mensagemSessionStart(_opts = {}) {
-  throw new Error("não implementado");
 }
 
 // --- Deteção de documento jurídico ---------------------------------------
@@ -66,7 +117,16 @@ const TIPO_DOC =
   "contratos?|acordos?|cartas?|declara[çc][ãa]o|procura[çc][ãa]o|requerimentos?|nota de culpa|" +
   "notifica[çc][ãa]o|aditamento|reconhecimento de d[íi]vida|pactos?|livran[çc]a|nda|" +
   "pol[íi]tica de (privacidade|cookies)|termos e condi[çc][õo]es|defesa em processo|" +
-  "minuta|den[úu]ncia|resolu[çc][ãa]o|revoga[çc][ãa]o|adenda|termo de";
+  "minuta|den[úu]ncia|resolu[çc][ãa]o|revoga[çc][ãa]o|adenda|termo de|" +
+  // v1.1 — atos dirigidos a entidades (AT, AI, CNPD, Comissão…), sempre com o complemento
+  // que os distingue de texto técnico ("# Pedido de feature" não dispara).
+  "reclama[çc][ãa]o (graciosa|de cr[ée]ditos|ao banco|por opera[çc])|" +
+  "pedido de (informa[çc][ãa]o vinculativa|pagamento em presta[çc][õo]es|reembolso)|" +
+  "exerc[íi]cio do direito de|c[óo]digo de boa conduta|pol[íi]tica de preven[çc][ãa]o|" +
+  // "ATA N.º 3" — \b depois de "N" (seguido de "."); "# Ata nova" não dispara.
+  "decis[ãa]o d[oa] s[óo]ci[oa] [úu]nic[oa]|ata (n|da assembleia|de reuni[ãa]o)|" +
+  "formul[áa]rio de livre resolu[çc][ãa]o|registo das atividades de tratamento|" +
+  "resposta a pedido de exerc[íi]cio|queixa (à comiss[ãa]o|contra|-crime)";
 
 // Só prosa: um .ts/.py/.json nunca é um instrumento, por muito que o cite.
 const EXT_PROSA = /\.(md|markdown|txt|rtf)$/i;
@@ -76,7 +136,7 @@ const NOME_TECNICO = /(^|[\\/])(README|CHANGELOG|CLAUDE|AGENTS|CONTRIBUTING|LICE
 const VETO_REFERENCIA = /^\s{0,3}#{1,3}\s*(legisla[çc][ãa]o base|para o contexto do utilizador)/im;
 
 // Gate primário: H1 que ABRE com um tipo de documento ("# CONTRATO DE …").
-const TITULO = new RegExp(`^\\s{0,3}#\\s*\\**\\s*(minuta de\\s+)?(${TIPO_DOC})\\b`, "im");
+const TITULO = new RegExp(`^\\s{0,3}#\\s*\\**\\s*((minuta|modelo) de\\s+)?(${TIPO_DOC})\\b`, "im");
 
 // Sem título, exigem-se >= 2 marcadores estruturais independentes.
 const MARCADORES = [

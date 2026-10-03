@@ -1,9 +1,11 @@
 # Valores-Chave 2026 — Tabela Central de Referência
 
+> **Âmbito:** nacional
+>
 > **Como usar este ficheiro:** Este é o **ponto único de verdade** para montantes, taxas e limiares que mudam ao longo do tempo. Os outros ficheiros de referência remetem para aqui em vez de repetir valores. Antes de afirmar qualquer valor numa resposta ao utilizador, confirma aqui. Se o valor tiver mais de ~6 meses ou estiveres em dúvida, **verifica por web search** nas fontes oficiais (ver fundo do ficheiro).
 >
-> **Última atualização:** 2026-01 (valores em vigor no 1.º semestre/ano de 2026)
-> **Próxima revisão recomendada:** após o Orçamento do Estado seguinte e em julho de 2026 (juros de mora do 2.º semestre).
+> **Última atualização:** 2026-10 (juros de mora do 2.º semestre de 2026; restantes valores de 2026-01)
+> **Próxima revisão recomendada:** em janeiro de 2027 (Orçamento do Estado e juros de mora do 1.º semestre de 2027).
 
 ---
 
@@ -79,13 +81,16 @@
 
 ## Juros de Mora ♻️ (mudam todos os semestres)
 
-| Tipo | Taxa 1.º sem. 2026 | Base legal |
-|---|---|---|
-| **Comerciais — transações comerciais** (empresas) | **10,15%** (BCE + 8 p.p.) | DL 62/2013; § 5.º Art. 102.º Cód. Comercial; Aviso 822/2026/2 |
-| Comerciais — créditos gerais de empresas (§ 3.º) | 9,15% | Aviso 822/2026/2 |
-| **Civis / com consumidores** | **4%** | Portaria 291/2003 (estável há anos) |
+| Tipo | 1.º sem. 2026 | **2.º sem. 2026** | Base legal |
+|---|---|---|---|
+| **Comerciais — transações comerciais** (empresas) | 10,15% | **10,40%** (BCE + 8 p.p.) | DL 62/2013; § 5.º Art. 102.º Cód. Comercial; Avisos 822/2026/2 e 16623/2026/2 |
+| Comerciais — créditos gerais de empresas (§ 3.º) | 9,15% | **9,40%** (BCE + 7 p.p.) | § 3.º Art. 102.º Cód. Comercial; Avisos 822/2026/2 e 16623/2026/2 |
+| **Civis / com consumidores** | 4% | **4%** | Portaria 291/2003 (estável há anos) |
+| Indemnização por custos de cobrança (transações comerciais) | 40,00 € | **40,00 €** | Art. 7.º DL 62/2013 (sem interpelação; acresce aos juros) |
 
-> ♻️ A taxa comercial é fixada **semestralmente** por aviso da Entidade do Tesouro e Finanças (ETF, ex-DGTF). Para o 2.º semestre de 2026, **verificar novo aviso em julho de 2026**.
+> ♻️ A taxa comercial é fixada **semestralmente** por aviso da Entidade do Tesouro e Finanças (ETF, ex-DGTF) — Aviso n.º 16623/2026/2, de 3 de julho, para o 2.º semestre de 2026. Próximo aviso: **janeiro de 2027**.
+>
+> 📈 **Tabela histórica (2.º sem. 2013 → 2.º sem. 2026)**: está embebida nas calculadoras (`scripts/juros_mora.py` e `mcp-server/src/calculators/juros.ts`), que dividem a mora em **tramos semestrais** e aplicam a cada tramo a taxa do seu semestre. Ao publicar-se um aviso novo, acrescentar a linha nos **dois** ficheiros e aqui. Semestres ainda sem aviso usam a última taxa conhecida e aparecem como **estimados** na memória de cálculo.
 
 ## Custas Judiciais 🔄
 
@@ -156,7 +161,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Imposto do selo — transmissão gratuita | **10%** (verba 1.2 TGIS) | |
 | Isenção — cônjuge/unido de facto, descendentes, ascendentes | **isentos** | |
 | Imposto do selo adicional sobre imóveis | 0,8% sobre VPT | |
-| Prazo Modelo 1 do IS (participação) | 3 meses após o óbito | |
+| Prazo Modelo 1 do IS (participação) | até ao fim do 3.º mês seguinte ao do óbito | art. 26.º CIS |
 
 ---
 
@@ -166,11 +171,52 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 |---|---|---|
 | Constituição de sociedade (Empresa na Hora / online) | ~300–400€ | IRN / eportugal |
 | Capital social mínimo (Lda) | 1€ por quota | recomendável mínimo funcional |
+| Reserva legal mínima (Lda) | 2.500 € (5% do lucro até 20% do capital, nunca menos de 2.500 €) | art. 218.º, n.º 2, CSC |
 | Habilitação de herdeiros (balcão IRN) | ~375€ + registos | varia com nº de bens/herdeiros |
 | Marca nacional (INPI, classe única online) | ~200€ (10 anos, renovável) | INPI |
 | Marca da UE (EUIPO, classe única) | ~850€ | EUIPO |
 
 > Emolumentos e taxas de registo/notariado são aproximados e atualizam-se periodicamente — confirmar no IRN/eportugal, INPI e EUIPO. Limites de deduções à coleta de IRS: confirmar no CIRS / Portal das Finanças (mudam anualmente).
+
+## Fisco — Contencioso e Execução Fiscal
+
+| Item | Valor | Base legal |
+|---|---|---|
+| Arbitragem tributária (CAAD) — limite de vinculação da AT | 10.000.000 € | Portaria 112-A/2011, art. 3.º |
+| Dispensa automática de garantia / plano oficioso / suspensão de 120 dias | dívida ≤ 5.000 € (singulares) · ≤ 10.000 € (coletivas) | CPPT arts. 169.º, n.º 3, 198.º, n.º 5, e 198.º-A |
+| Informação vinculativa urgente — taxa | 25 a 250 UC (12,5 a 125 UC para micro/PME e certos particulares) | LGT art. 68.º, n.os 7 e 22 |
+| Abuso de confiança fiscal (crime) | prestação não entregue > 7.500 € (agravado > 50.000 €) | RGIT art. 105.º |
+| Coima mínima após atenuação especial | 25 € | RGIT art. 32.º, n.º 2 |
+| Prestação mínima na execução fiscal | [VERIFICAR] — art. 196.º, n.º 4, CPPT diz ¼ UC; a página da AT indica 1 UC | CPPT art. 196.º |
+| Pagamentos em numerário — limite geral | < 3.000 € (10.000 € para não residentes singulares); faturas ≥ 1.000 € por meio identificável; impostos > 500 € não em numerário | LGT art. 63.º-E |
+
+## Banca, Pagamentos e Branqueamento
+
+| Item | Valor | Base legal |
+|---|---|---|
+| Responsabilidade máxima do ordenante por operação não autorizada (sem negligência grosseira) | 50 € | DL 91/2018, art. 115.º, n.º 1 |
+| Prazo para comunicar ao banco uma operação não autorizada | até 13 meses após o débito | DL 91/2018 |
+| Crédito aos consumidores — âmbito do regime | 200 € a 75.000 € | DL 133/2009, art. 2.º |
+| Branqueamento — entidades obrigadas não financeiras (comerciantes) | transações em numerário ≥ 3.000 € (≥ 10.000 € noutros meios, consoante a atividade) | Lei 83/2017, art. 4.º |
+| RCBE — coima por falta de declaração | 1.000 € a 50.000 € | Lei 89/2017, art. 6.º |
+| Garantia de depósitos | 100.000 € por depositante e por banco | Fundo de Garantia de Depósitos (a confirmar) |
+| Microempresa (definição UE) | < 10 trabalhadores e volume de negócios ou balanço ≤ 2 M€ | Recomendação 2003/361/CE (a confirmar) |
+
+## Concorrência e Direito da UE (limiares)
+
+| Item | Valor | Base legal |
+|---|---|---|
+| Notificação prévia de concentração à AdC — quota | ≥ 50% do mercado nacional (ou parte substancial) | Art. 37.º, n.º 1, Lei 19/2012 |
+| — quota intermédia | 30% a 50% **e** ≥ 2 empresas com volume de negócios > 5 M€ em Portugal | Art. 37.º, n.º 1, Lei 19/2012 |
+| — volume de negócios | conjunto em Portugal > 100 M€ **e** ≥ 2 empresas com > 5 M€ cada em Portugal | Art. 37.º, n.º 1, Lei 19/2012 |
+| Coima máxima por infração às regras de concorrência | 10% do volume de negócios (mundial) do ano anterior | Art. 69.º Lei 19/2012 |
+| Auxílios *de minimis* (regra geral) | 300.000 € por empresa única em 3 anos | Reg. (UE) 2023/2831 (aplicável até 31/12/2030) |
+| Processo europeu para ações de pequeno montante | até 5.000 € | Reg. (CE) 861/2007, alterado pelo Reg. (UE) 2015/2421 |
+| Vendas à distância intra-UE a consumidores (IVA no destino / OSS) | 10.000 € anuais (limiar comum UE) | Diretiva IVA, art. 59.º-C; regime OSS |
+| Taxa de notificação de concentrações à AdC | [VERIFICAR] | Regulamento de taxas da AdC |
+| Coimas do DL 166/2013 (práticas individuais restritivas) | [VERIFICAR] — variam com a dimensão da empresa | DL 166/2013 |
+
+> Os limiares de concentrações são fixados na lei (não mudam todos os anos), mas ficam aqui por serem montantes. Confirmar sempre a versão consolidada em pgdlisboa.pt / dre.pt.
 
 ## Fontes Oficiais para Verificação
 

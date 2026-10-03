@@ -1,5 +1,7 @@
 # Direito Penal Económico e Cibercrime
 
+> **Âmbito:** nacional
+>
 > 💶 **Valores (taxa de justiça, custas do PIC, montantes de coimas RGPD):** ver `references/valores-2026.md`. Vertente contraordenacional da proteção de dados em `references/rgpd.md`; seguro cyber em `references/seguros.md`.
 
 ## Legislação Base

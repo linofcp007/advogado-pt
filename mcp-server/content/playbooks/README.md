@@ -11,6 +11,8 @@
 - **[quero-despedir.md](quero-despedir.md)** — Cessar o contrato de um trabalhador: escolher o fundamento, cumprir o processo e calcular a compensação sem cair em despedimento ilícito.
 - **[data-breach.md](data-breach.md)** — Violação de dados pessoais: notificar a CNPD em 72h, conter, avaliar risco, acionar seguro cyber e verificar crime/NIS2.
 - **[comprar-imovel.md](comprar-imovel.md)** — Adquirir um imóvel: due diligence, CPCV com sinal, simular IMT/IMT Jovem, escritura e registo.
+- **[recebi-notificacao-at.md](recebi-notificacao-at.md)** — Notificação das Finanças: que tipo é, quando conta o prazo e qual o meio de defesa (audição, reclamação, impugnação, CAAD, prestações).
+- **[cliente-insolvente.md](cliente-insolvente.md)** — Um cliente entrou em insolvência/PER: reclamar créditos a tempo, garantias, IVA de créditos incobráveis e riscos de resolução.
 
 ## Como usar
 

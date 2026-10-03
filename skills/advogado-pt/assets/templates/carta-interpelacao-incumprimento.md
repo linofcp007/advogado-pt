@@ -1,6 +1,7 @@
 <!-- Template: interpelação admonitória (Art. 808.º CC). Fixa prazo suplementar razoável e
      converte a mora em incumprimento definitivo se não cumprir → habilita resolução do contrato.
-     Enviar por carta registada com AR. Passo ANTES da notificacao-resolucao-contrato.md. -->
+     Enviar por carta registada com AR. Passo ANTES da notificacao-resolucao-contrato.md.
+     Âmbito: nacional -->
 
 {{REMETENTE_NOME}}
 {{REMETENTE_MORADA}} — NIF {{REMETENTE_NIF}}
@@ -29,3 +30,15 @@ Com os melhores cumprimentos,
 
 _______________________________
 {{REMETENTE_NOME}}
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Fixar em `{{PRAZO_DIAS}}` um prazo suplementar razoável para a obrigação em causa (art. 808.º CC); conta-se da receção da carta — anotar a data do AR para saber quando termina.
+- [ ] Confirmar que o devedor já está em mora (prazo original vencido) e rever o contrato: cláusula resolutiva expressa, forma e morada das notificações, cláusula penal.
+- [ ] Envio por carta registada com aviso de receção para a morada contratual; guardar talão, AR e cópia.
+- [ ] Findo o prazo sem cumprimento, a resolução não é automática: segue-se a `notificacao-resolucao-contrato.md` (declaração à outra parte — art. 436.º CC).
+- [ ] Se a obrigação incumprida for apenas o pagamento de dinheiro, usar antes a `carta-cobranca-formal-registada.md`.

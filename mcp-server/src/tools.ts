@@ -3,6 +3,7 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import {
   calcularJuros,
+  memoriaJuros,
   contarPrazo,
   calcularCompensacao,
   custasInjuncao,
@@ -10,11 +11,14 @@ import {
   calcularIMT,
   calcularPrescricao,
   calcularIRSSimplificado,
+  calcularCreditosCessacao,
+  calcularLegitima,
   formatarEuros,
   PRESCRICAO_TIPOS,
   COMPENSACAO_MODALIDADES,
 } from "./calculators/index.js";
-import { listar, ler, procurar } from "./content.js";
+import { listar, ler, procurar, listarComAmbito, formatarProcura, type Categoria } from "./content.js";
+import { lerPerfil, guardarPerfil, resumoPerfil, textoPerguntasPerfil } from "./perfil.js";
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 
 const AVISO =
@@ -34,6 +38,13 @@ function iso(d: Date): string {
   return d.toISOString().slice(0, 10);
 }
 
+/** "- nome — âmbito" por linha (âmbito: nacional / ue / misto, quando declarado). */
+function listagem(cat: Categoria): string {
+  return listarComAmbito(cat)
+    .map((i) => `- ${i.nome}${i.ambito ? ` — ${i.ambito}` : ""}`)
+    .join("\n");
+}
+
 export function registerTools(server: McpServer): void {
   // ---------------- Calculadoras ----------------
 
@@ -42,7 +53,7 @@ export function registerTools(server: McpServer): void {
     {
       title: "Calcular juros de mora",
       description:
-        "Calcula juros de mora (comercial: 10,15% em 2026, DL 62/2013; ou civil: 4%) entre duas datas. Usa quando o utilizador quer saber quanto deve de juros sobre uma fatura ou dívida em atraso ('quanto rende de juros', 'juros de mora', 'juros de atraso', 'mora'). EN: how much interest is owed on an overdue invoice/debt.",
+        "Calcula juros de mora por TRAMOS SEMESTRAIS (cada semestre com a taxa do seu aviso, 2.º sem. 2013 a 2026) e devolve a memória de cálculo pronta a anexar. Tipos: comercial (transações comerciais, DL 62/2013 / art. 102.º §5 CCom), comercial-geral (art. 102.º §3 CCom) ou civil (4%). Usa quando o utilizador quer saber quanto deve de juros sobre uma fatura ou dívida em atraso ('quanto rende de juros', 'juros de mora', 'juros de atraso', 'mora'). EN: late-payment interest owed on an overdue invoice/debt, split by semester.",
       inputSchema: {
         capital: z.number().describe("Capital em dívida (€)"),
         data_inicio: z.string().describe("Data de início da mora (YYYY-MM-DD)"),
@@ -50,22 +61,18 @@ export function registerTools(server: McpServer): void {
           .string()
           .optional()
           .describe("Data final (YYYY-MM-DD); por defeito, hoje"),
-        tipo: z.enum(["comercial", "civil"]).default("comercial"),
+        tipo: z.enum(["comercial", "comercial-geral", "civil"]).default("comercial"),
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ capital, data_inicio, data_fim, tipo }) => {
       const fim = data_fim ? parseData(data_fim) : new Date();
-      const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
-      return texto(
-        `Juros de mora (${tipo})\n` +
-          `Capital: ${formatarEuros(capital)}\n` +
-          `Período: ${data_inicio} a ${data_fim ?? iso(fim)} (${r.dias} dias)\n` +
-          `Taxa: ${(r.taxa * 100).toFixed(2).replace(".", ",")}%/ano\n` +
-          `Juros: ${formatarEuros(r.juros)}\n` +
-          `TOTAL: ${formatarEuros(r.total)}` +
-          AVISO
-      );
+      try {
+        const r = calcularJuros(capital, parseData(data_inicio), fim, tipo);
+        return texto(memoriaJuros(capital, r, tipo) + AVISO);
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
     }
   );
 
@@ -251,6 +258,99 @@ export function registerTools(server: McpServer): void {
     }
   );
 
+  server.registerTool(
+    "calc_creditos_laborais",
+    {
+      title: "Calcular créditos laborais na cessação",
+      description:
+        "Calcula os créditos laborais devidos quando um contrato de trabalho termina: proporcionais de férias, subsídio de férias e subsídio de Natal do ano da cessação, férias vencidas e não gozadas e subsídio de férias em falta (estimativa bruta, CT arts. 245.º e 263.º). Usa quando há despedimento, demissão, fim de contrato a termo ou acordo de revogação e se quer saber 'quanto tenho de pagar/receber', 'acerto de contas', 'proporcionais', 'férias não gozadas'. Não inclui a compensação (calc_compensacao_despedimento). EN: final-pay entitlements on termination.",
+      inputSchema: {
+        retribuicao_base: z.number().describe("Retribuição base mensal (€)"),
+        diuturnidades: z.number().optional().describe("Diuturnidades mensais (€)"),
+        data_admissao: z.string().describe("Data de admissão (YYYY-MM-DD)"),
+        data_cessacao: z.string().describe("Data de cessação (YYYY-MM-DD)"),
+        ferias_vencidas_nao_gozadas: z
+          .number()
+          .optional()
+          .describe("Dias úteis de férias vencidas e não gozadas"),
+        subsidio_ferias_vencido_em_falta: z
+          .boolean()
+          .optional()
+          .describe("O subsídio de férias das férias vencidas ainda não foi pago"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async (a) => {
+      try {
+        const r = calcularCreditosCessacao({
+          retribuicaoBase: a.retribuicao_base,
+          diuturnidades: a.diuturnidades,
+          dataAdmissao: parseData(a.data_admissao),
+          dataCessacao: parseData(a.data_cessacao),
+          feriasVencidasNaoGozadas: a.ferias_vencidas_nao_gozadas,
+          subsidioFeriasVencidoEmFalta: a.subsidio_ferias_vencido_em_falta,
+        });
+        return texto(
+          `Créditos laborais na cessação (estimativa bruta)\n` +
+            `Dias de serviço no ano da cessação: ${r.diasServicoAno}/${r.diasAno}\n` +
+            `Proporcional de férias: ${formatarEuros(r.proporcionalFerias)}\n` +
+            `Proporcional de subsídio de férias: ${formatarEuros(r.proporcionalSubsidioFerias)}\n` +
+            `Proporcional de subsídio de Natal: ${formatarEuros(r.proporcionalSubsidioNatal)}\n` +
+            `Férias vencidas não gozadas: ${formatarEuros(r.feriasVencidas)}\n` +
+            `Subsídio de férias vencido em falta: ${formatarEuros(r.subsidioFeriasVencido)}\n` +
+            `TOTAL BRUTO: ${formatarEuros(r.total)}` +
+            (r.limite245n3
+              ? "\n⚠️ Contrato até 12 meses ou cessação no ano seguinte ao da admissão: aplica-se o limite do art. 245.º, n.º 3, CT — rever as férias à mão."
+              : "") +
+            "\n(Não inclui a retribuição do mês em curso, a compensação — calc_compensacao_despedimento —, formação não prestada nem descontos de IRS/SS.)" +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "calc_legitima",
+    {
+      title: "Calcular legítima e quota disponível",
+      description:
+        "Calcula a legítima (parte da herança reservada aos herdeiros legitimários — cônjuge, filhos, ascendentes) e a quota disponível (o que se pode deixar livremente por testamento ou doação), com a divisão da legítima por herdeiro (CC arts. 2156.º-2162.º, 2139.º, 2142.º). Usa em heranças, testamentos, doações a filhos/terceiros ('quanto posso deixar a…', 'parte legítima', 'quota disponível', 'herdeiros forçosos'). EN: forced heirship share and freely disposable portion.",
+      inputSchema: {
+        bens: z.number().describe("Valor dos bens à data da morte (€)"),
+        doacoes: z.number().optional().describe("Valor dos bens doados em vida (€)"),
+        dividas: z.number().optional().describe("Dívidas da herança (€)"),
+        conjuge: z.boolean().describe("Há cônjuge sobrevivo?"),
+        filhos: z.number().int().describe("Número de filhos (estirpes)"),
+        ascendentes: z.enum(["nenhum", "pais", "outros"]).default("nenhum"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async (a) => {
+      try {
+        const r = calcularLegitima(a);
+        return texto(
+          `Legítima e quota disponível\n` +
+            `Valor da herança (art. 2162.º CC): ${formatarEuros(r.valorHeranca)}\n` +
+            `Legítima: ${formatarEuros(r.legitima)}\n` +
+            `Quota disponível: ${formatarEuros(r.quotaDisponivel)} (${r.quotaDisponivelPct.toFixed(2).replace(".", ",")}%)\n` +
+            (r.partes.length
+              ? "Divisão da legítima:\n" +
+                r.partes.map((p) => `  - ${p.herdeiro}: ${formatarEuros(p.valor)}`).join("\n") +
+                "\n"
+              : "") +
+            r.fundamento +
+            "\n" +
+            r.avisos.map((x) => `Nota: ${x}`).join("\n") +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
+    }
+  );
+
   // ---------------- Conteúdo ----------------
 
   server.registerTool(
@@ -262,7 +362,7 @@ export function registerTools(server: McpServer): void {
       inputSchema: {},
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async () => texto("Áreas de referência:\n- " + listar("references").join("\n- "))
+    async () => texto("Áreas de referência (nome — âmbito):\n" + listagem("references"))
   );
 
   const obter = (cat: "references" | "templates" | "playbooks" | "checklists", rotulo: string) =>
@@ -303,7 +403,7 @@ export function registerTools(server: McpServer): void {
       inputSchema: {},
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async () => texto("Templates:\n- " + listar("templates").join("\n- "))
+    async () => texto("Templates (nome — âmbito):\n" + listagem("templates"))
   );
 
   server.registerTool(
@@ -396,10 +496,65 @@ export function registerTools(server: McpServer): void {
     async ({ query }) => {
       const res = procurar(query);
       if (res.length === 0) return texto(`Sem resultados para '${query}'.`);
-      const linhas = res.map(
-        (r) => `• [${r.categoria}] ${r.nome}\n   ${r.linhas.join("\n   ")}`
+      return texto(`Resultados para '${query}' (agrupados por tipo; âmbito entre parênteses):\n\n` + formatarProcura(res));
+    }
+  );
+
+  // ---------------- Perfil da empresa ----------------
+
+  server.registerTool(
+    "obter_perfil_empresa",
+    {
+      title: "Obter perfil da empresa",
+      description:
+        "Lê o perfil da empresa do utilizador (forma jurídica, setor, trabalhadores, volume de negócios, IVA, clientes…) guardado em <projeto>/.advogado-pt/perfil-empresa.md ou, na falta, no perfil geral ~/.advogado-pt/perfil-empresa.md. Usa no início de qualquer questão empresarial para adaptar a resposta à empresa ('a minha empresa', 'somos uma Lda', 'temos trabalhadores'). Sem perfil, devolve as perguntas a fazer. EN: read the saved company profile.",
+      inputSchema: {
+        diretorio: z
+          .string()
+          .optional()
+          .describe("Diretório do projeto (por defeito, o do cliente/cwd)"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ diretorio }) => {
+      const p = lerPerfil({ projeto: diretorio });
+      if (!p) return texto(textoPerguntasPerfil());
+      return texto(
+        `Perfil da empresa (${p.origem}) — ${p.caminho}\n` +
+          resumoPerfil(p) +
+          `\natualizado_em: ${p.campos.atualizado_em ?? "(sem data)"}` +
+          (p.desatualizado
+            ? "\n⚠️ Perfil com mais de 12 meses (ou sem data): confirma os dados com o utilizador antes de os usar."
+            : "")
       );
-      return texto(`Resultados para '${query}':\n\n` + linhas.join("\n\n"));
+    }
+  );
+
+  server.registerTool(
+    "guardar_perfil_empresa",
+    {
+      title: "Guardar perfil da empresa",
+      description:
+        "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.advogado-pt/perfil-empresa.md; destino 'geral' -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito). Usa só depois de o utilizador aceitar guardar e só com dados da PRÓPRIA empresa — nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
+      inputSchema: {
+        campos: z
+          .record(z.string())
+          .describe("Campos a gravar, ex.: {forma_juridica: 'Lda', setor: 'Restauração', trabalhadores: '12'}"),
+        destino: z.enum(["projeto", "geral"]).default("projeto"),
+        diretorio: z
+          .string()
+          .optional()
+          .describe("Diretório do projeto quando destino = projeto (por defeito, cwd)"),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
+    },
+    async ({ campos, destino, diretorio }) => {
+      try {
+        const p = guardarPerfil(campos, destino, { projeto: diretorio });
+        return texto(`Perfil guardado (${p.origem}) em ${p.caminho}\n${resumoPerfil(p)}`);
+      } catch (e) {
+        return texto(`Não foi possível guardar o perfil: ${(e as Error).message}`);
+      }
     }
   );
 

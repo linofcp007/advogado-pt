@@ -1,5 +1,7 @@
 # Direito Laboral
 
+> **Âmbito:** nacional
+>
 > 💶 **Valores (salário mínimo, dias de compensação, taxas SS):** ponto único de verdade em `references/valores-2026.md`. Para cálculos, usa `scripts/compensacao_despedimento.py`.
 
 ## Legislação Base
@@ -72,7 +74,7 @@
 
 ## Obrigações Essenciais do Empregador
 - Seguro de acidentes de trabalho (obrigatório desde o 1º dia)
-- Comunicação de admissão à SS (24h antes do início)
+- Comunicação de admissão à SS nos 15 dias anteriores ao início do contrato (art. 29.º, n.º 2, al. a), Código Contributivo); só excecionalmente nas 24 horas seguintes ao início (al. b))
 - Medicina no trabalho (exame de admissão, periódicos, ocasionais)
 - Formação profissional: 40h/ano por trabalhador
 - Relatório Único (entrega anual, habitualmente até março/abril)

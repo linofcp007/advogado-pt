@@ -34,7 +34,7 @@ export function listar(cat: Categoria): string[] {
   const d = dir(cat);
   if (!existsSync(d)) return [];
   return readdirSync(d)
-    .filter((f) => f.endsWith(".md"))
+    .filter((f) => f.endsWith(".md") && f.toLowerCase() !== "readme.md")
     .map((f) => f.slice(0, -3))
     .sort();
 }
@@ -54,10 +54,13 @@ export function lerSkill(): string {
   return existsSync(caminho) ? readFileSync(caminho, "utf8") : "";
 }
 
+export type Ambito = "nacional" | "ue" | "misto";
+
 export interface ResultadoProcura {
   categoria: Categoria;
   nome: string;
   linhas: string[];
+  ambito?: Ambito | null;
 }
 
 /** Procura case-insensitive por todo o conteúdo; devolve até `maxFicheiros` ficheiros com trechos. */
@@ -75,7 +78,7 @@ export function procurar(query: string, maxFicheiros = 12): ResultadoProcura[] {
         .filter((l) => l.toLowerCase().includes(q))
         .slice(0, 3)
         .map((l) => l.trim());
-      out.push({ categoria: cat, nome, linhas });
+      out.push({ categoria: cat, nome, linhas, ambito: lerAmbito(texto) });
       if (out.length >= maxFicheiros) return out;
     }
   }
@@ -93,17 +96,41 @@ export function listarTudo(): Array<{ categoria: Categoria; nome: string; label:
   return out;
 }
 
-// --- v1.1 (stubs — Phase 4; implementação na tarefa 2) ---
-export type Ambito = "nacional" | "ue" | "misto";
+// --- Âmbito (nacional / ue / misto) e pesquisa agrupada ---
 
-export function lerAmbito(_texto: string): Ambito | null {
-  throw new Error("não implementado");
+const RE_AMBITO = /Âmbito:\**\s*(nacional|ue|misto)\b/i;
+const NL = "\n";
+
+/** Lê o âmbito declarado numa linha `Âmbito:` nas primeiras 15 linhas; null se não houver. */
+export function lerAmbito(texto: string): Ambito | null {
+  const topo = texto.split(NL).slice(0, 15).join(NL);
+  const m = RE_AMBITO.exec(topo);
+  return m ? (m[1].toLowerCase() as Ambito) : null;
 }
 
-export function listarComAmbito(_cat: Categoria): Array<{ nome: string; ambito: Ambito | null }> {
-  throw new Error("não implementado");
+/** Lista os itens de uma categoria com o respetivo âmbito. */
+export function listarComAmbito(cat: Categoria): Array<{ nome: string; ambito: Ambito | null }> {
+  return listar(cat).map((nome) => ({ nome, ambito: lerAmbito(ler(cat, nome) ?? "") }));
 }
 
-export function formatarProcura(_res: Array<ResultadoProcura & { ambito?: Ambito | null }>): string {
-  throw new Error("não implementado");
+const TITULO_GRUPO: Record<Categoria, string> = {
+  references: "Referências",
+  templates: "Templates",
+  playbooks: "Playbooks",
+  checklists: "Checklists",
+};
+const ORDEM_GRUPOS: Categoria[] = ["references", "templates", "playbooks", "checklists"];
+
+/** Formata resultados de `procurar` agrupados por tipo, com o âmbito de cada item. */
+export function formatarProcura(res: ResultadoProcura[]): string {
+  const blocos: string[] = [];
+  for (const cat of ORDEM_GRUPOS) {
+    const itens = res.filter((r) => r.categoria === cat);
+    if (itens.length === 0) continue;
+    const linhas = itens.map(
+      (r) => `• ${r.nome}${r.ambito ? ` (${r.ambito})` : ""}${NL}   ${r.linhas.join(NL + "   ")}`
+    );
+    blocos.push(`## ${TITULO_GRUPO[cat]}${NL}${linhas.join(NL)}`);
+  }
+  return blocos.join(NL + NL);
 }

@@ -1,5 +1,7 @@
 # Direito Digital e Regulação Europeia (AI Act, NIS2, DSA, CRA)
 
+> **Âmbito:** misto
+>
 > Área crítica e em rápida evolução para um negócio de software/tecnologia com clientes internacionais. Datas de aplicação são faseadas — **confirma sempre o estado atual** (a regulação UE entra em vigor por etapas). Articula com `references/rgpd.md` (dados pessoais) e `references/pi.md` (software).
 
 ## Legislação Base
@@ -66,6 +68,7 @@ Aplica-se a **intermediários online**: serviços de simples transporte, *cachin
 - Obrigações graduais conforme o papel: termos transparentes, ponto de contacto, mecanismos de notificação e ação (*notice-and-action*), fundamentação de remoções, rastreabilidade de vendedores (*KYBC*) em marketplaces.
 - Micro e pequenas empresas estão isentas de algumas obrigações mais pesadas.
 - VLOPs (grandes plataformas) têm obrigações reforçadas — não aplicável a PME.
+- **Execução em Portugal**: Lei 12-A/2026, de 15 de abril — a **ANACOM** é o Coordenador dos Serviços Digitais (art. 5.º); revogou os arts. 12.º a 19.º do DL 7/2004 (antigo regime de responsabilidade dos prestadores intermediários e "solução provisória de litígios") e o DL 20-B/2024 (art. 35.º). Notificações de conteúdo ilegal: template `assets/templates/notificacao-remocao-conteudo.md`.
 
 ---
 

@@ -1,5 +1,7 @@
 # Cobranças e Recuperação de Dívidas
 
+> **Âmbito:** nacional
+
 ## Legislação Base
 - Código Civil: Arts. 762º-812º (cumprimento de obrigações), 798º-812º (responsabilidade contratual)
 - Código de Processo Civil (CPC): injunção, ação executiva
@@ -57,7 +59,7 @@ A prescrição interrompe-se com: citação judicial, notificação judicial avu
    - Requer advogado constituído se valor > 5.000€
    
 8. **Ação executiva** (quando já tem título executivo)
-   - Títulos: sentença, injunção não contestada, documento particular com reconhecimento de assinatura, fatura assinada
+   - Títulos (art. 703.º CPC): sentença, injunção com fórmula executória, documento exarado ou **autenticado** por notário, advogado ou solicitador que importe constituição ou reconhecimento de obrigação, títulos de crédito (livrança, letra, cheque). Desde o CPC de 2013, o documento particular só com assinatura reconhecida e a fatura assinada **não** são títulos executivos
    - Penhora de bens, contas bancárias, salários
 
 ## Juros de Mora

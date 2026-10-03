@@ -1,5 +1,6 @@
 <!-- Template: acordo de pagamento faseado quando o devedor mostra boa-fé.
-     Combinar com reconhecimento-divida.md para criar título executivo. -->
+     Combinar com reconhecimento-divida.md para criar título executivo.
+     Âmbito: nacional -->
 
 # ACORDO DE PAGAMENTO FASEADO
 
@@ -33,3 +34,15 @@ O pagamento integral nos termos acima extingue a dívida, dando o Credor plena q
 {{LOCAL}}, {{DATA}}
 
 O Credor: _______________________  O Devedor: _______________________
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Preencher datas-limite certas para cada prestação e o prazo de tolerância (`{{DIAS_TOLERANCIA}}`); se a dívida estiver perto de prescrever, assinar já — o reconhecimento da dívida pelo devedor interrompe a prescrição (art. 325.º CC) e começa a correr novo prazo.
+- [ ] Este acordo, por si só, não é título executivo: para executar sem ação declarativa, usar também o `reconhecimento-divida.md` em documento **autenticado** (termo de autenticação por notário, advogado ou solicitador — art. 703.º, n.º 1, al. b), CPC).
+- [ ] Escolher uma só opção na cláusula 3 (com ou sem juros); havendo juros, a taxa é a civil se o devedor for consumidor e a comercial se for transação entre empresas — taxas em `references/valores-2026.md`.
+- [ ] Assinar em duplicado (um exemplar por parte); se o devedor for sociedade, confirmar na certidão permanente que quem assina a obriga.
+- [ ] Se falhar uma prestação, comunicar por carta registada com AR o vencimento antecipado e o remanescente em dívida antes de avançar para injunção ou execução.

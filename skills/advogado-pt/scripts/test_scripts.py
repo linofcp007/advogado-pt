@@ -85,7 +85,9 @@ class TestJurosMora(unittest.TestCase):
             self.assertIn(s, m)
         rc = calcular_juros(1000, datetime.date(2025, 1, 1),
                             datetime.date(2026, 1, 1), "civil")
-        self.assertNotIn("40,00 €", memoria_juros(1000, rc, "civil"))
+        # Os juros civis deste caso são 40,00 €; o que não pode aparecer é a
+        # nota da indemnização por custos de cobrança (só no comercial).
+        self.assertNotIn("custos de cobrança", memoria_juros(1000, rc, "civil"))
 
 
 class TestCreditosLaborais(unittest.TestCase):

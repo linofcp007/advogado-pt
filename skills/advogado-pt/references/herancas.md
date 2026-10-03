@@ -1,5 +1,7 @@
 # Heranças e Sucessões
 
+> **Âmbito:** nacional
+>
 > 🔗 O **regime de bens** do casamento condiciona a herança — ver `references/familia.md`. Para valores/isenções do imposto do selo, ver `references/valores-2026.md`.
 
 ## Legislação Base
@@ -47,7 +49,7 @@
 - **Imposto do selo**: 10% sobre o valor dos bens (verba 1.2 TGIS)
 - **Isenção**: cônjuge/unido de facto, descendentes e ascendentes estão ISENTOS
 - **Imóveis**: imposto do selo de 0,8% sobre o VPT (adicional ao IS de 10% quando aplicável)
-- Declaração Modelo 1 do IS: prazo de 3 meses após o óbito
+- Declaração Modelo 1 do IS: até ao fim do 3.º mês seguinte ao do óbito (art. 26.º CIS)
 - Avaliação de imóveis: VPT (Valor Patrimonial Tributário) das Finanças
 
 ## Questões Comuns

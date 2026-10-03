@@ -160,7 +160,8 @@ test("T-08 memoriaJuros: uma linha por tramo, total e nota dos 40 € só no com
   assert.match(m, /DL 62\/2013/);
   const rc = calcularJuros(1000, dataUTC(2025, 1, 1), dataUTC(2026, 1, 1), "civil");
   const mc = memoriaJuros(1000, rc, "civil");
-  assert.doesNotMatch(mc, /40,00 €/);
+  // (os juros civis deste caso são 40,00 € — o que não pode aparecer é a nota da indemnização)
+  assert.doesNotMatch(mc, /custos de cobran[çc]a/);
 });
 
 // === IMT ===

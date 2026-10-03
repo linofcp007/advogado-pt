@@ -1,5 +1,7 @@
 # Arrendamento
 
+> **Âmbito:** nacional
+
 ## Legislação Base
 - NRAU: Novo Regime do Arrendamento Urbano (Lei 6/2006, atualizada)
 - Código Civil: Arts. 1022º-1120º
@@ -9,7 +11,7 @@
 
 ## Celebração do Contrato
 - Forma escrita obrigatória
-- Comunicação às Finanças: até 30 dias (Portal das Finanças)
+- Comunicação às Finanças: até ao fim do mês seguinte ao do início do arrendamento (art. 60.º, n.º 2, CIS — Modelo 2, Portal das Finanças)
 - Imposto do selo: 10% sobre a renda de 1 mês (pago pelo senhorio, repercutível)
 - Depósito/caução: máximo 2 meses de renda (Art. 1076º CC)
 

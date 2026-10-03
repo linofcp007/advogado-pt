@@ -1,5 +1,7 @@
 # RGPD e Proteção de Dados
 
+> **Âmbito:** misto
+>
 > 🔗 Para IA, cookies/ePrivacy, NIS2 e regulação digital da UE, ver `references/digital-ue.md`. Para coimas e limiares atualizados, ver `references/valores-2026.md`.
 
 ## Legislação Base

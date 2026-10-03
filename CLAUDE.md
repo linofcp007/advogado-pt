@@ -25,7 +25,7 @@ Distribuição: plugin via marketplace git (`.claude-plugin/`) + `.skill` (Anthr
 | Quando | Rever em `skills/advogado-pt/references/valores-2026.md` |
 |---|---|
 | **Janeiro** (pós-OE) | IRC, IRS, IAS, salário mínimo, deduções, IMT/IMI, isenções jovem |
-| **Julho** | juros de mora comerciais do 2.º semestre (aviso da ETF) |
+| **Janeiro e julho** | juros de mora comerciais do semestre (aviso da ETF) — acrescentar a linha à tabela `TAXAS_SEMESTRAIS` em `scripts/juros_mora.py` **e** `mcp-server/src/calculators/juros.ts` |
 | **Outubro** | coeficiente de atualização de rendas (INE) |
 
 Ao corrigir um valor: atualizar a "Última atualização" no topo do `valores-2026.md` **e** o port TS em `mcp-server/src/calculators/` se for uma taxa usada numa calculadora.
@@ -35,7 +35,8 @@ Ao corrigir um valor: atualizar a "Última atualização" no topo do `valores-20
 Caminhos relativos a `skills/advogado-pt/`:
 
 - **Nova área** → `references/nova-area.md` + ligar em `SKILL.md` (Áreas de Competência), no `README.md` e (opcional) um command.
-- **Novo template** → `assets/templates/nome.md` (comentário `<!-- Template: -->`, placeholders `{{...}}`) + índice `assets/templates/README.md`.
+- **Novo template** → `assets/templates/nome.md` (comentário `<!-- Template: -->` com linha `Âmbito: nacional|ue|misto`, placeholders `{{...}}`, `[VERIFICAR]` para o que falta confirmar, e a secção final `## Antes de enviar — verificar` com ≥ 3 itens `- [ ]`) + índice `assets/templates/README.md`. O `plugin.test.mjs` (T-21/T-22) falha se faltar o âmbito ou a verificação final.
+- **Nova referência** → também com `> **Âmbito:** …` nas primeiras 15 linhas.
 - **Novo playbook / checklist** → `playbooks/nome.md` / `assets/checklists/nome.md` + índice.
 - **Nova calculadora** → **dois lados**: Python em `scripts/nome.py` (stdlib, `argparse`, `formatar_euros`, AVISO) + teste em `scripts/test_scripts.py`; **e** o port TS em `mcp-server/src/calculators/nome.ts` (reexportar em `index.ts`) + teste em `mcp-server/test/calculators.test.mjs` + registar a tool em `mcp-server/src/tools.ts`.
 - **Novo command** → `commands/nome.md` (frontmatter `description` PT+EN + `argument-hint`; corpo fino que nomeia a tool/ficheiro real).
@@ -63,3 +64,4 @@ Plugin: `git push` → `/plugin marketplace add https://github.com/linofcp007/ad
 - Scripts Python e CLI/MCP reconfiguram stdout para UTF-8 (consola cp1252 do Windows); usar `->` em vez de setas unicode nas mensagens.
 - `mcp-server/dist/index.js` (bundle self-contained via esbuild) e `mcp-server/content/` são **versionados** — é o que permite o plugin funcionar via marketplace sem `npm install`. São gerados por `npm run build`; regenerar e committar ao mudar `src/` ou conteúdo. O resto de `mcp-server/dist/` (saída do `tsc`, usada só nos testes) e `node_modules/` ficam ignorados.
 - Conteúdo jurídico parcialmente gerado por subagentes; rever citações determinantes antes de confiar.
+- **Perfil da empresa**: o plugin não assume o perfil do utilizador. Vive em `<projeto>/.advogado-pt/perfil-empresa.md` (ou `~/.advogado-pt/perfil-empresa.md`); o leitor existe em dois sítios — `mcp-server/src/perfil.ts` e `hooks/advogado-hook.mjs` (o hook não importa o servidor) — manter os dois alinhados.

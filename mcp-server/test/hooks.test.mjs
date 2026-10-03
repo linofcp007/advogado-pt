@@ -150,7 +150,7 @@ test("T-41 SessionStart: com perfil mostra resumo e origem; sem perfil manda per
   assert.match(m1, /Perfil da empresa \(projeto\)/);
   assert.match(m1, /Lda/);
   assert.match(m1, /Restaura/);
-  assert.doesNotMatch(m1, /confirma/i);
+  assert.doesNotMatch(m1, /mais de 12 meses/i);
 
   const b = dirsHook();
   perfilEm(b.home, "forma_juridica: ENI\natualizado_em: 2026-09-01\n");
@@ -163,7 +163,7 @@ test("T-41 SessionStart: com perfil mostra resumo e origem; sem perfil manda per
 
   const d = dirsHook();
   perfilEm(d.projeto, "forma_juridica: Lda\natualizado_em: 2024-01-01\n");
-  assert.match(mensagemSessionStart({ ...d, hoje: HOJE_HOOK }), /confirma/i);
+  assert.match(mensagemSessionStart({ ...d, hoje: HOJE_HOOK }), /mais de 12 meses[\s\S]*confirma os dados/i);
 });
 
 test("T-42 SessionStart: perfil ilegível ou diretório inexistente -> sem erro, segue sem perfil", () => {
@@ -175,4 +175,19 @@ test("T-42 SessionStart: perfil ilegível ou diretório inexistente -> sem erro,
   assert.doesNotThrow(() =>
     mensagemSessionStart({ projeto: join(a.projeto, "nao", "existe"), home: join(a.home, "x"), hoje: HOJE_HOOK })
   );
+});
+
+// --- v1.1: tipos de ato novos só disparam com o complemento específico ------
+test("v1.1: títulos técnicos parecidos com os atos novos não disparam", () => {
+  for (const titulo of [
+    "# Pedido de feature: exportar CSV",
+    "# Decisão: usar SQLite em vez de Postgres",
+    "# Queixa de utilizador sobre o login",
+    "# Reclamação de performance no endpoint /orders",
+    "# Código de conduta do projeto",
+    "# Ata nova do sprint 12",
+  ]) {
+    assert.equal(dispara("docs/notas.md", `${titulo}\n\nTexto técnico.`), false, titulo);
+  }
+  assert.equal(dispara("docs/rg.md", "# RECLAMAÇÃO GRACIOSA\n\nExmo. Senhor"), true);
 });

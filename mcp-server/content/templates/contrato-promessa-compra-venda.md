@@ -1,7 +1,8 @@
 <!-- Template: Contrato-Promessa de Compra e Venda (CPCV) de imóvel. Base: Arts. 410.º e ss. CC.
      Pontos críticos: sinal (Art. 442.º CC), execução específica (Art. 830.º), condições suspensivas
      (ex.: aprovação de crédito), prazo da escritura. Para imóveis, exige forma escrita com
-     reconhecimento de assinaturas e certificação da licença de utilização (Art. 410.º/3 CC). -->
+     reconhecimento de assinaturas e certificação da licença de utilização (Art. 410.º/3 CC).
+     Âmbito: nacional -->
 
 # CONTRATO-PROMESSA DE COMPRA E VENDA
 
@@ -40,3 +41,15 @@ Lei portuguesa; foro da comarca da situação do imóvel.
 O Promitente-Vendedor: __________________   O Promitente-Comprador: __________________
 
 <!-- Reconhecimento presencial de assinaturas e certificação da licença de utilização pelo notário (Art. 410.º/3 CC) — recomendado para garantir a eficácia e a execução específica. -->
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Preencher a data-limite da escritura, o pré-aviso de marcação e a data-limite da condição de crédito e calendarizá-las — a falta à escritura pode significar perda do sinal ou restituição em dobro (art. 442.º CC).
+- [ ] Forma: documento escrito com reconhecimento presencial das assinaturas e certificação da existência de licença de utilização (art. 410.º, n.º 3, CC).
+- [ ] Antes de assinar: certidão predial permanente (ónus, penhoras, hipotecas), caderneta predial, licença de utilização, certificado energético e declaração de encargos de condomínio (a confirmar o regime atual).
+- [ ] Entregar as chaves antes da escritura (tradição) pode tornar o IMT exigível logo com a promessa (art. 2.º, n.º 2, al. a), CIMT), salvo habitação própria e permanente nas condições legais — calcular com `calc_imt` e taxas em `references/valores-2026.md`.
+- [ ] Confirmar direitos de preferência (arrendatário, comproprietários, entidades públicas) antes de marcar a escritura (a confirmar caso a caso).

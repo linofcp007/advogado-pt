@@ -3,7 +3,8 @@
      parecer (se houver comissão de trabalhadores/sindical) -> DECISÃO fundamentada e escrita.
      Base: Arts. 351.º, 357.º CT. Enviar por carta registada com AR. A decisão tem de ponderar a
      resposta do trabalhador e as provas; o despedimento sem justa causa é ilícito (reintegração
-     ou indemnização). Recomenda-se validação por advogado. -->
+     ou indemnização). Recomenda-se validação por advogado.
+     Âmbito: nacional -->
 
 {{EMPREGADOR_NOME}}
 {{EMPREGADOR_MORADA}} — NIF {{EMPREGADOR_NIF}}
@@ -39,3 +40,16 @@ Da presente decisão pode V. Exa. reagir judicialmente nos termos legais.
 
 _______________________________
 {{EMPREGADOR_NOME}}
+
+---
+
+## Antes de enviar — verificar
+
+_(Lista para quem envia — não faz parte do documento.)_
+
+- [ ] ⏰ Proferir a decisão nos 30 dias seguintes à receção dos pareceres (ou ao fim do prazo para os emitir), sob pena de caducidade do direito de aplicar a sanção (art. 357.º, n.º 1, CT).
+- [ ] A decisão só pode assentar em factos constantes da nota de culpa e tem de ponderar a resposta e a prova — conferir o ponto 1 com a `nota-de-culpa.md`.
+- [ ] Envio por carta registada com AR (ou entrega em mão contra recibo datado); enviar cópia à comissão de trabalhadores e, sendo representante sindical, à associação sindical (art. 357.º CT — a confirmar o número).
+- [ ] ⏰ O trabalhador tem 60 dias, a contar da receção da decisão (ou da cessação, se posterior), para se opor ao despedimento (art. 387.º, n.º 2, CT) — conservar o processo disciplinar completo como prova.
+- [ ] Contas finais: processar créditos vencidos e proporcionais, entregar certificado de trabalho e declaração de situação de desemprego e comunicar a cessação à Segurança Social (prazo a confirmar).
+- [ ] Microempresa: verificar o procedimento simplificado (art. 358.º CT — a confirmar); em caso de dúvida, validar com advogado antes de enviar.

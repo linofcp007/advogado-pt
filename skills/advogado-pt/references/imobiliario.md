@@ -1,5 +1,7 @@
 # Imobiliário — Compra e Venda de Imóveis
 
+> **Âmbito:** nacional
+>
 > 💶 **Impostos, taxas e limiares (IMT, IMI, AIMI, Imposto do Selo, isenção jovem):** consulta sempre `references/valores-2026.md` (ponto único de verdade). Os números abaixo são estruturais; os montantes e escalões concretos mudam anualmente.
 > Arrendamento tem ficheiro próprio: `references/arrendamento.md`. Tributação de mais-valias do vendedor: `references/fiscal-pessoal.md`.
 
