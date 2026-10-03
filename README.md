@@ -19,7 +19,9 @@ Além da Skill para Claude, o Advogado PT corre como **servidor MCP** (`mcp-serv
 /plugin install advogado-pt
 ```
 
-Depois, no repositório, **uma vez**: `npm run setup` (instala + compila o servidor MCP e corre o diagnóstico).
+Não é preciso compilar nada: o servidor MCP vem empacotado no plugin. Se alguma coisa não responder, corre `/diagnostico`.
+
+Para **desenvolver** o plugin a partir de um clone: `npm run setup` (instala as dependências, compila o servidor MCP e corre o diagnóstico).
 
 **Como Skill** (Claude.ai / Claude Desktop):
 
@@ -30,7 +32,7 @@ Depois, no repositório, **uma vez**: `npm run setup` (instala + compila o servi
 
 ### Comandos (slash commands)
 
-`/advogado` · `/parecer` · `/cobrar` · `/contrato` · `/prazo` · `/prazos` · `/calendario` · `/juros` · `/imt` · `/defesa` · `/rgpd` · `/despedir` · `/salario` · `/irc` · `/compliance` · `/citacao` · `/sociedade` · `/comprar-imovel` · `/herancas` · `/arrendamento` · `/fisco` · `/insolvencia` · `/perfil` · `/template` · `/referencia` · `/procurar` (+ `/adv`, `/intake`, `/prescricao`, `/doctor`).
+`/advogado` · `/parecer` · `/cobrar` · `/contrato` · `/prazo` · `/prazos` · `/calendario` · `/juros` · `/imt` · `/defesa` · `/rgpd` · `/despedir` · `/salario` · `/irc` · `/compliance` · `/citacao` · `/sociedade` · `/comprar-imovel` · `/herancas` · `/arrendamento` · `/fisco` · `/insolvencia` · `/perfil` · `/template` · `/referencia` · `/procurar` (+ `/adv`, `/intake`, `/prescricao`, `/diagnostico`).
 
 ## Estrutura
 

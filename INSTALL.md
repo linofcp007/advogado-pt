@@ -22,15 +22,11 @@ Carrega em **Claude → Settings → Skills**. (Claude Code: coloca a pasta em `
 
 ## B. Servidor MCP (universal)
 
-### 1. Construir (uma vez)
+### 1. Obter o servidor
 
-Na raiz do repositório, um comando:
+O servidor vem já compilado e autocontido no repositório (`mcp-server/dist/index.js`): basta clonar e ter **Node ≥ 18** — não é preciso instalar dependências nem compilar.
 
-```bash
-npm run setup             # instala + compila o servidor MCP + diagnóstico (doctor)
-```
-
-> Não há pacote npm publicado (por opção): o servidor corre localmente a partir de `mcp-server/dist/index.js`. Equivale a `cd mcp-server && npm install && npm run build`.
+> Não há pacote npm publicado (por opção). Só para **desenvolver** o plugin: `npm run setup` na raiz (instala as dependências, compila o servidor e corre o diagnóstico).
 
 ### 2. Ligar a cada plataforma
 

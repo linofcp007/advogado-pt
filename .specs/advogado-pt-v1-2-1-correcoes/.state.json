@@ -638,6 +638,24 @@
       "task": "[US8] `INSTRUCOES_MCP` (≤ 2000, todas as tools) nas instruções do servidor; persona completa no prompt `advogado_pt`",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-234\" mcp-server/test/plugin.test.mjs"
     },
+    "30": {
+      "command": "node --test --test-name-pattern=\"T-235|T-236\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "2/2. commands/doctor.md -> diagnostico.md (git mv), sem mandar compilar; scripts citados com ${CLAUDE_PLUGIN_ROOT}/skills/advogado-pt/scripts/; /prazo com o tipo judicial; hook e README com /diagnostico; README e INSTALL sem 'npm run setup' para quem instala (só para desenvolver). plugin+hooks: 37/39 (faltam T-244 e T-249, tarefas 34 e 39).",
+      "at": "2026-10-03T22:00:33.176Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-235|T-236\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "2/2. commands/doctor.md -> diagnostico.md (git mv), sem mandar compilar; scripts citados com ${CLAUDE_PLUGIN_ROOT}/skills/advogado-pt/scripts/; /prazo com o tipo judicial; hook e README com /diagnostico; README e INSTALL sem 'npm run setup' para quem instala (só para desenvolver). plugin+hooks: 37/39 (faltam T-244 e T-249, tarefas 34 e 39).",
+          "at": "2026-10-03T22:00:33.176Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] `/doctor` → `/diagnostico`; `${CLAUDE_PLUGIN_ROOT}` nos commands; README sem `npm run setup` para quem instala pelo marketplace",
+      "verify": "node --test --test-name-pattern=\"T-235|T-236\" mcp-server/test/plugin.test.mjs"
+    },
     "31": {
       "command": "npm --prefix mcp-server audit --omit=dev --audit-level=high",
       "exitCode": 0,
@@ -657,7 +675,7 @@
       "verify": "npm --prefix mcp-server audit --omit=dev --audit-level=high"
     }
   },
-  "lastTickAt": "2026-10-03T21:59:05.121Z",
+  "lastTickAt": "2026-10-03T22:00:33.176Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -688,6 +706,7 @@
     "27": "2026-10-03T21:53:11.200Z",
     "28": "2026-10-03T21:54:00.850Z",
     "29": "2026-10-03T21:59:02.442Z",
+    "30": "2026-10-03T22:00:33.176Z",
     "31": "2026-10-03T21:59:05.121Z"
   }
 }

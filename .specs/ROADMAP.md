@@ -2,21 +2,21 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 78%** ▰▰▰▰▰▰▰▰▱▱ · 2/4 features completas · 88/137 tasks feitas
+**Progresso: 78%** ▰▰▰▰▰▰▰▰▱▱ · 2/4 features completas · 89/137 tasks feitas
 
-_Velocidade: 218 ponto(s)/dia útil — 88 tarefa(s), 218 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 220 ponto(s)/dia útil — 89 tarefa(s), 220 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
 ## ▶ A seguir
-- **advogado-pt-v1-2-1-correcoes** (core +tdd +sec) — próxima #30 `/doctor` → `/diagnostico`; `${CLAUDE_PLUG
+- **advogado-pt-v1-2-1-correcoes** (core +tdd +sec) — próxima #32 Arredondamento único em TS; `formatar_euro
 
 ## Features
 
 | | Feature | Tracks | Fase | % | Tasks | Deps | Próxima | Previsão |
 |---|---|---|---|---|---|---|---|---|
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
-| 🟡 | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | em execução | 81% | 30/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | #30 `/doctor` → `/diagnostico`; `${CLAUDE_PLUG | 2026-10-05 |
+| 🟡 | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | em execução | 83% | 31/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | #32 Arredondamento único em TS; `formatar_euro | 2026-10-05 |
 | ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
 | ⛔ | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | tarefas prontas | 30% | 0/38 | advogado-pt-v1-2-1-correcoes ✗ | bloqueada | 2026-10-06 |
 

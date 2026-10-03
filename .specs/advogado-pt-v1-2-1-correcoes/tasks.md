@@ -220,7 +220,7 @@
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-234" mcp-server/test/plugin.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 30. [US8] `/doctor` → `/diagnostico`; `${CLAUDE_PLUGIN_ROOT}` nos commands; README sem `npm run setup` para quem instala pelo marketplace
+- [x] 30. [US8] `/doctor` → `/diagnostico`; `${CLAUDE_PLUGIN_ROOT}` nos commands; README sem `npm run setup` para quem instala pelo marketplace
   - _Requirements: US-8.AC-3, US-8.AC-4_
   - _Makes green: T-235, T-236_
   - _Verify: node --test --test-name-pattern="T-235|T-236" mcp-server/test/plugin.test.mjs_

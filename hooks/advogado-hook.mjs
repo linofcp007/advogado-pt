@@ -179,7 +179,7 @@ function avisoPrazos(projeto, hoje) {
 export function mensagemSessionStart(opts = {}) {
   let msg =
     "⚖️ advogado-pt ativo — assessoria jurídica de Portugal · active — legal assistant for Portugal. " +
-    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /prazos /calendario /defesa /rgpd /despedir /salario /irc /fisco /compliance /insolvencia /perfil /doctor. " +
+    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /prazos /calendario /defesa /rgpd /despedir /salario /irc /fisco /compliance /insolvencia /perfil /diagnostico. " +
     "Valores 2026 em valores-2026; confirma prazos a correr · check running deadlines. " +
     "Orientação informativa, não substitui advogado da OA · informational guidance, not a substitute for a registered lawyer.";
   try {
