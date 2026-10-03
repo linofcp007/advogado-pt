@@ -15,6 +15,30 @@ Todas as alterações relevantes ao **juridico-pt** (até à 1.2.1, **advogado-p
 - **Dados locais em `.juridico-pt/`** (projeto) e `~/.juridico-pt/` (perfil geral; a variável passa a `JURIDICO_PT_HOME`). A pasta `.advogado-pt/` nunca é lida nem apagada.
 - As regras de editor da raiz (`.cursor/`, `.windsurf/`) e `integrations/windsurf/.windsurfrules` passam a ser geradas a partir da persona única (`gerar-integracoes.mjs`); tinham um perfil fixo antigo.
 
+### Added
+
+- **Cobrança em lote**: `calc_juros_lote` (juros por fatura por tramos semestrais, 40 € por fatura comercial vencida, totais por cliente e geral; Python `juros_mora.py --lote`), template `carta-cobranca-varias-faturas`, PEPEX (Lei 32/2014) e IVA de créditos incobráveis (CIVA, arts. 78.º-A a 78.º-D) no playbook `cliente-nao-paga`; `/cobrar` usa o conector de faturação quando existe e propõe `registar_prazo`.
+- **Faturação 2027**: referência `faturacao`, playbook `faturacao-eletronica-2027`, checklist `checklist-faturacao` e `/faturacao` — faturas em PDF aceites até 31/12/2026 (Lei 73-A/2025, art. 95.º, n.º 3) e assinatura ou selo eletrónico qualificado a partir de 1/1/2027 (DL 28/2019, art. 12.º); a data entra no calendário.
+- **Contratação pública**: `calc_procedimento_ccp` (limiares do DL 177/2026; regime anterior para procedimentos iniciados até 30/9/2026; Python `procedimento_ccp.py`), playbook `vender-ao-estado` e 4 templates (esclarecimentos, erros e omissões, audiência prévia, impugnação administrativa).
+- **NIS2 e fundos europeus**: `checklist-nis2` (DL 125/2025 e Regulamento CNCS 756/2026); referência `fundos-europeus` e playbook `recebi-pedido-devolucao-apoio` (PRR e Portugal 2030).
+- **Templates do dia a dia**: convocatória de assembleia geral, ata de aprovação de contas, procuração, caducidade do contrato a termo e resposta ao Livro de Reclamações.
+- **Modo contabilista**: `painel_clientes` e `/painel` (obrigações e prazos dos próximos 30 dias de todos os perfis), prazos com `perfil`, `.ics` por perfil (`calendario_obrigacoes` com `por_perfil`); 9 campos novos no perfil (CAE, concelho, fim do período de tributação, imóveis, viaturas, setor NIS2, vendas B2C, trabalhadores estrangeiros, emite faturas).
+- **Calendário**: IMI (CIMI, art. 120.º), IUC pelo mês da matrícula até 2026 e anual a partir de 2027 (DL 161/2026), Modelo 22, IES e pagamentos por conta com período de tributação diferente do ano civil.
+- **Formatos**: `exportar_documento`, `/exportar` e CLI `exportar` — `.docx` sem dependências (Word e LibreOffice), sem a lista "Antes de enviar"; pacote `.mcpb` para o Claude Desktop (`npm --prefix mcp-server run build:mcpb`).
+- **Perfil por formulário**: sem perfil, o `calendario_obrigacoes` pede os dados num formulário (elicitation) com listas fechadas; sem suporte do cliente, pergunta em texto.
+- **Atualidade**: `verificar_atualidade` e aviso no início da sessão quando passou a "Próxima revisão" do `valores-2026.md` ou falta a taxa de juros do semestre.
+- **Subagentes**: `verificador-citacoes` (verifica artigos e acórdãos na fonte oficial) e `revisor-contratos` (semáforo vermelho/amarelo/verde), só de leitura.
+- **Privacidade**: referência `privacidade-plugin` e secção no README; `apagar_perfil`; aviso e `acrescentar_gitignore` em repositórios git; prazos cumpridos há mais de 12 meses saem de `prazos.md`.
+- **Avaliações**: 53 casos em `evals/` para o `claude plugin eval` (golden, adversariais e de regressão), com a base da 1.2.1 registada.
+
+### Fixed
+
+- Início de sessão numa linha (≤ 200 caracteres) em projetos sem `.juridico-pt/`; descrições dos commands com ≤ 150 caracteres.
+- Convenção única de placeholders em todos os templates (`{{MAIUSCULAS}}`, `N_FATURA`, `{{ESCOLHER: …}}`, `{{PREENCHER: …}}`, `{{OPCIONAL: …}}`).
+- Livro de Reclamações (`consumo.md`): o livro eletrónico é obrigatório para todos os fornecedores e os prazos de 15 dias úteis distinguem o eletrónico do físico.
+- Prestação de contas (`societario.md`): 5 meses com contas consolidadas (CSC, art. 65.º, n.º 5).
+- NIS2 (`data-breach.md`): notificação inicial em 24 h, atualização em 72 h e relatório final em 30 dias úteis (DL 125/2025).
+
 ### Migração
 
 Quem tinha o `advogado-pt` instalado troca a instalação com estes comandos no Claude Code:

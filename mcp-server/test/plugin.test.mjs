@@ -497,19 +497,14 @@ test("T-244 nenhuma referência, checklist ou playbook com perfil fixo do utiliz
   assert.deepEqual(falhas, [], `perfil fixo em: ${falhas.join(", ")}`);
 });
 
-test("T-249 versão 1.2.1 nos 6 sítios e no package-lock; CHANGELOG com ## [1.2.1]", () => {
-  const V = "1.2.1";
-  assert.equal(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version, V);
-  const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
-  assert.equal(mk.metadata.version, V);
-  assert.equal(mk.plugins[0].version, V);
-  assert.equal(JSON.parse(lerMd(r("package.json"))).version, V);
-  assert.equal(JSON.parse(lerMd(r("mcp-server", "package.json"))).version, V);
-  assert.ok(lerMd(r("mcp-server", "src", "index.ts")).includes(`version: "${V}"`));
+// Na 2.0 a versão corrente nos 6 sítios passou para o T-337; o T-249 fica com o histórico da 1.2.1
+// e com a coerência do package-lock (raiz e pacote "") com a versão do plugin.
+test("T-249 package-lock coerente com a versão do plugin; CHANGELOG mantém ## [1.2.1]", () => {
+  const V = JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version;
   const lock = JSON.parse(lerMd(r("mcp-server", "package-lock.json")));
   assert.equal(lock.version, V);
   assert.equal(lock.packages[""].version, V);
-  assert.ok(lerMd(r("CHANGELOG.md")).includes(`## [${V}]`));
+  assert.ok(lerMd(r("CHANGELOG.md")).includes("## [1.2.1]"));
 });
 
 // ---------------- v2.0 (juridico-pt) ----------------

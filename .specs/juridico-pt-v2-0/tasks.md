@@ -262,7 +262,7 @@
   - _Verify: node --test --test-name-pattern="T-340" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 10, 14, 16, 19, 21, 23, 26, 29, 33_
-- [ ] 36. [shared] Bump 2.0.0, CHANGELOG com "Migração", bundle e conteúdo regenerados, `juridico-pt.skill`, `.mcpb`, tag `v2.0.0`
+- [x] 36. [shared] Bump 2.0.0, CHANGELOG com "Migração", bundle e conteúdo regenerados, `juridico-pt.skill`, `.mcpb`, tag `v2.0.0`
   - _Requirements: NFR-1, NFR-2_
   - _Makes green: T-336, T-337_
   - _Verify: npm --prefix mcp-server test_
