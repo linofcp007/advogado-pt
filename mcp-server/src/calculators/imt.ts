@@ -13,8 +13,10 @@
  *
  * Acima dos escalões marginais aplicam-se TAXAS ÚNICAS sobre o valor total.
  *
- * Além do IMT, devolve o Imposto do Selo (0,8% sobre o valor) e o total de
- * impostos na aquisição.
+ * Além do IMT, devolve o Imposto do Selo (0,8% sobre o valor — verba 1.1 da TGIS) e o
+ * total de impostos na aquisição. No IMT Jovem o Selo tem uma dedução à coleta até 0,8% do
+ * limite do 1.º escalão (CIS, art. 7.º-A, n.º 1, aditado pelo DL 48-A/2024): isento até
+ * 330.539 € e, na isenção parcial, só paga 0,8% sobre o excedente.
  */
 
 type TipoImt = "hpp" | "secundaria";
@@ -90,7 +92,10 @@ export function calcularIMT(
     throw new Error("O valor não pode ser negativo.");
   }
 
-  const selo = valor * TAXA_SELO;
+  let selo = valor * TAXA_SELO;
+  // IMT Jovem: dedução à coleta do Selo até 0,8% do limite do 1.º escalão (CIS, art. 7.º-A, n.º 1).
+  const seloJovem = jovem && tipo === "hpp" && valor <= IMT_JOVEM_LIMITE;
+  if (seloJovem) selo = Math.max(0, valor - IMT_JOVEM_ISENCAO_TOTAL) * TAXA_SELO;
   const comTotais = (r: {
     imt: number;
     taxa: number;
@@ -107,7 +112,7 @@ export function calcularIMT(
         taxa: 0.0,
         parcela: 0.0,
         isento: true,
-        regime: "IMT Jovem — isenção total (valor <= 330.539 €)",
+        regime: "IMT Jovem — isenção total de IMT e de Imposto do Selo (valor <= 330.539 €)",
       });
     }
     if (valor <= IMT_JOVEM_LIMITE) {
@@ -117,7 +122,7 @@ export function calcularIMT(
         taxa: IMT_JOVEM_TAXA,
         parcela: 0.0,
         isento: false,
-        regime: "IMT Jovem — isenção parcial: (valor - 330.539) * 8%",
+        regime: "IMT Jovem — isenção parcial: IMT = (valor - 330.539) * 8%; Selo = (valor - 330.539) * 0,8%",
       });
     }
     // valor > 660.982: sem isenção; segue o regime normal de HPP.

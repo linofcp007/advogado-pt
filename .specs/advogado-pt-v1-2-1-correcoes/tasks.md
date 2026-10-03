@@ -63,14 +63,14 @@
 **Checkpoint:** US-1 — prazos certos em TS, Python, tool, CLI e conteúdo.
 
 ## História US-2 (P1): prescrição
-- [ ] 8. [US2] Tabela de prescrição por tipos do CC (309.º, 310.º b)/d)/g), 317.º b)/c) presuntivas com aviso) em TS e Python; tool com os tipos novos
+- [x] 8. [US2] Tabela de prescrição por tipos do CC (309.º, 310.º b)/d)/g), 317.º b)/c) presuntivas com aviso) em TS e Python; tool com os tipos novos
   - _Requirements: US-2.AC-1, US-2.AC-2, US-2.AC-3_
   - _Makes green: T-207, T-208_
   - _Implements: mcp-server/src/calculators/prescricao.ts, skills/advogado-pt/scripts/prescricao.py, mcp-server/src/tools.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-207" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T208_
   - _Size: M_
   - _Depends: 2_
-- [ ] 9. [US2] `cliente-nao-paga.md` e SKILL.md alinhados com a calculadora; factos `v121-prescricao-`
+- [x] 9. [US2] `cliente-nao-paga.md` e SKILL.md alinhados com a calculadora; factos `v121-prescricao-`
   - _Requirements: US-2.AC-3_
   - _Makes green: T-209_
   - _Verify: node --test --test-name-pattern="T-209" mcp-server/test/v121.test.mjs_
@@ -78,27 +78,27 @@
   - _Depends: 8_
 
 ## História US-3 (P1): impostos, contribuições e custas
-- [ ] 10. [US3] Imposto do Selo com a isenção do IMT Jovem (total e parcial) em TS e Python — reconfirmar a regra da isenção parcial em fonte oficial
+- [x] 10. [US3] Imposto do Selo com a isenção do IMT Jovem (total e parcial) em TS e Python — reconfirmar a regra da isenção parcial em fonte oficial
   - _Requirements: US-3.AC-1, EC-3_
   - _Makes green: T-210_
   - _Implements: mcp-server/src/calculators/imt.ts, skills/advogado-pt/scripts/imt.py_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-210" mcp-server/test/v121.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 11. [US3] Coeficientes do IRS simplificado e dedução de 4.587,09 € em TS, Python, `valores-2026.md` e `fiscal.md`
+- [x] 11. [US3] Coeficientes do IRS simplificado e dedução de 4.587,09 € em TS, Python, `valores-2026.md` e `fiscal.md`
   - _Requirements: US-3.AC-2_
   - _Makes green: T-211_
   - _Implements: mcp-server/src/calculators/irs.ts, skills/advogado-pt/scripts/irs_simplificado.py_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-211" mcp-server/test/v121.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 12. [US3][P] Segurança Social do ENI (25,2%, base, mínimo 20 €) e MOE (art. 69.º) em `valores-2026.md` e `fiscal.md`; factos `v121-ss-`
+- [x] 12. [US3][P] Segurança Social do ENI (25,2%, base, mínimo 20 €) e MOE (art. 69.º) em `valores-2026.md` e `fiscal.md`; factos `v121-ss-`
   - _Requirements: US-3.AC-3_
   - _Makes green: T-212_
   - _Verify: node --test --test-name-pattern="T-212" mcp-server/test/v121.test.mjs_
   - _Size: XS_
   - _Depends: 2_
-- [ ] 13. [US3] Injunção nas transações comerciais sem limite de valor: playbook, `cobrancas.md`, calculadora de custas (TS e Python)
+- [x] 13. [US3] Injunção nas transações comerciais sem limite de valor: playbook, `cobrancas.md`, calculadora de custas (TS e Python)
   - _Requirements: US-3.AC-4_
   - _Makes green: T-213_
   - _Implements: mcp-server/src/calculators/injuncao.ts, skills/advogado-pt/scripts/custas_injuncao.py_

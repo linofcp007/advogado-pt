@@ -39,11 +39,11 @@
 | Item | Valor 2026 | Notas |
 |---|---|---|
 | Limiar regime simplificado | até **200.000€**/ano de rendimento | acima → contabilidade organizada obrigatória |
-| Coeficiente — venda de mercadorias | 0,15 | tributa 15% do bruto |
-| Coeficiente — prestação de serviços (Art. 151.º) | 0,75 | |
-| Coeficiente — serviços não previstos / outros | 0,35 | |
-| Coeficiente — propriedade intelectual | 0,50 | |
-| Dedução específica (despesas gerais presumidas) | 4.104€ (ou despesa efetiva, se superior) | |
+| Coeficiente — venda de mercadorias e produtos | 0,15 | tributa 15% do bruto — CIRS art. 31.º, n.º 1, al. a) |
+| Coeficiente — atividades profissionais (tabela do art. 151.º) | 0,75 | al. b) |
+| Coeficiente — restantes prestações de serviços | 0,35 | al. c) |
+| Coeficiente — propriedade intelectual | 0,95 | cessão ou utilização temporária de propriedade intelectual ou industrial — al. d) |
+| Dedução específica da Cat. A (também considerada nas despesas do art. 31.º, n.º 2) | **4.587,09 €** (8,54 × IAS) | CIRS art. 25.º, n.º 1, al. a) |
 | Escalões e taxas progressivas IRS | **🔄 confirmar tabela do ano** | mudam quase todos os anos no OE |
 
 ## Segurança Social 🔄
@@ -51,10 +51,12 @@
 | Item | Valor 2026 | Notas |
 |---|---|---|
 | IAS (Indexante dos Apoios Sociais) | **537,13€** (era 522,50€ em 2025) | base de muitos limiares |
-| Taxa contributiva ENI (trabalhador independente) | 21,4% (regra geral) | sobre 70% do rendimento relevante |
+| Taxa contributiva — trabalhador independente | 21,4% | Código Contributivo art. 168.º; base mensal = 1/3 do rendimento relevante do trimestre (70% dos serviços, 20% das vendas — arts. 162.º e 163.º) |
+| Taxa contributiva — empresário em nome individual (ENI) e titular de EIRL | **25,2%** | Código Contributivo art. 168.º |
+| Contribuição mínima do trabalhador independente | **20 €** por mês | Código Contributivo |
 | Taxa contributiva — entidade empregadora | 23,75% | |
 | Taxa contributiva — trabalhador (TSU) | 11% | |
-| Membros de órgãos estatutários (MOE) | 20,3% (entidade) + 9,3% (MOE); com funções de gerência: 23,75% + 11% | Código Contributivo, art. 53.º (Guia ISS 1001) |
+| Membros de órgãos estatutários (MOE) | 20,3% (entidade) + 9,3% (MOE); com funções de gerência: 23,75% + 11% | Código Contributivo, art. 69.º (Guia ISS 1001) |
 | Pagamento das contribuições (empresas) | entre o **dia 1 e o dia 25** do mês seguinte (agosto: até 31) | Código Contributivo, art. 43.º (DL 127/2025, desde 1/1/2026) |
 | Declaração/confirmação de remunerações | até dia **10** (modelo antigo) ou confirmação até dia **20** (novo modelo; obrigatório a partir de 1/1/2027) | Código Contributivo, art. 40.º (DL 127/2025, art. 5.º) |
 | Comunicação de admissão | **até ao início da execução do contrato** (excecionalmente 24 h depois) | Código Contributivo, art. 29.º, n.º 2 (DL 127/2025) |
@@ -143,7 +145,7 @@ Exemplos: 1.500 € (Tabela I, sem dependentes) -> 24,10% × 1.500 − 193,33 = 
 | IMT — isenção habitação própria permanente (HPP) | até **106.346€** | escalões atualizados +2% no OE 2026 |
 | IMT — taxas HPP | progressivas de **2% a 8%** | acima do último escalão: taxa única 6% ou 7,5% |
 | **IMT Jovem** (≤ 35 anos, 1.ª HPP) — isenção total | até **330.539€** | também isento de Imposto do Selo na compra |
-| IMT Jovem — isenção parcial | entre **330.539€ e 660.982€** | IMT só sobre o excesso a 330.539€, à taxa de 8% |
+| IMT Jovem — isenção parcial | entre **330.539€ e 660.982€** | IMT só sobre o excesso a 330.539€, à taxa de 8%; Imposto do Selo só sobre o mesmo excesso, a 0,8% (CIS, art. 7.º-A) |
 | IMT Jovem — sem isenção | valor > **660.982€** | |
 | Imposto do Selo na aquisição | **0,8%** sobre o maior de VPT/preço | |
 | IMI (prédios urbanos) | **0,3% a 0,45%** (taxa municipal) | rústicos 0,8% |
@@ -179,7 +181,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 
 > A parcela a abater de cada escalão marginal deriva-se por continuidade. Cálculo automático em `scripts/imt.py`. Prédios rústicos: 5%. Açores/Madeira têm tabelas próprias.
 
-> Requisitos IMT Jovem: idade ≤ 35 anos à data da escritura, 1.ª habitação própria e permanente, não ser dependente para IRS no ano. Isenção total até 330.539€; entre 330.539€ e 660.982€ isenta a parte até 330.539€ e tributa o excesso a 8%; acima de 660.982€ sem isenção. Confirmar no Portal das Finanças (IMT Jovem).
+> Requisitos IMT Jovem: idade ≤ 35 anos à data da escritura, 1.ª habitação própria e permanente, não ser dependente para IRS no ano. Isenção total até 330.539€; entre 330.539€ e 660.982€ isenta a parte até 330.539€ e tributa o excesso a 8% (IMT) e a 0,8% (Imposto do Selo — dedução à coleta do art. 7.º-A CIS, aditado pelo DL 48-A/2024); acima de 660.982€ sem isenção. Confirmar no Portal das Finanças (IMT Jovem).
 
 ## Arrendamento 🔄
 

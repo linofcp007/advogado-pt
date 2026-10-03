@@ -34,7 +34,7 @@
    python scripts/imt.py --valor <preço ou VPT, o maior>      # junta --jovem se ≤35 anos e 1.ª HPP
    ```
    - **IMT**: incide sobre o **maior** entre preço e VPT; taxas progressivas (2% a 8%).
-   - **Tens ≤ 35 anos e é 1.ª habitação própria e permanente?** → **IMT Jovem**: isenção total até 330.539€; isenção parcial entre 330.539€ e 660.982€; também isento de **Imposto do Selo** na compra.
+   - **Tens ≤ 35 anos e é 1.ª habitação própria e permanente?** → **IMT Jovem**: isenção total até 330.539€; isenção parcial entre 330.539€ e 660.982€ (IMT a 8% e **Imposto do Selo** a 0,8%, só sobre o excesso); até 330.539€ também isento de **Imposto do Selo** na compra (CIS, art. 7.º-A). Calcula com `calc_imt` (`jovem: true`).
    - **Imposto do Selo (verba 1.1)**: **0,8%** sobre o maior de VPT/preço.
    - ⚠️ Em alternativa ao script, a **Tabela IMT 2026** e os requisitos do **IMT Jovem** estão em `references/valores-2026.md` (ponto único de verdade — escalões, parcela a abater e limites).
 

@@ -21,8 +21,11 @@ IMT Jovem (--jovem, só para habitação própria e permanente):
   - 330.539 < valor <= 660.982 -> IMT = (valor - 330.539) * 0,08
   - valor > 660.982            -> sem isenção (IMT normal de HPP)
 
-Além do IMT, mostra também o Imposto do Selo (0,8% sobre o valor) e o TOTAL
-de impostos na aquisição.
+Além do IMT, mostra também o Imposto do Selo (0,8% sobre o valor — verba 1.1 da
+TGIS) e o TOTAL de impostos na aquisição. No IMT Jovem o Selo tem uma dedução à
+coleta até 0,8% do limite do 1.º escalão (CIS, art. 7.º-A, n.º 1, aditado pelo
+DL 48-A/2024): isento até 330.539 € e, na isenção parcial, só paga 0,8% sobre o
+excedente.
 
 Exemplos de uso:
   python scripts/imt.py --valor 200000
@@ -104,8 +107,20 @@ def calcular_imt(valor, tipo="hpp", jovem=False):
     """Calcula o IMT 2026 (Continente).
 
     Devolve um dicionário com: imt, taxa, parcela, regime (descrição da regra
-    aplicada), e isento (bool).
+    aplicada), isento (bool), selo e total (o mesmo resultado do port TS).
     """
+    r = _calcular_imt(valor, tipo, jovem)
+    selo = valor * TAXA_SELO
+    # IMT Jovem: dedução à coleta do Selo até 0,8% do limite do 1.º escalão
+    # (CIS, art. 7.º-A, n.º 1).
+    if jovem and tipo == "hpp" and valor <= IMT_JOVEM_LIMITE:
+        selo = max(0.0, valor - IMT_JOVEM_ISENCAO_TOTAL) * TAXA_SELO
+    r["selo"] = selo
+    r["total"] = r["imt"] + selo
+    return r
+
+
+def _calcular_imt(valor, tipo, jovem):
     if tipo not in ESCALOES:
         raise ValueError(f"Tipo desconhecido: {tipo}")
     if valor < 0:
@@ -116,14 +131,14 @@ def calcular_imt(valor, tipo="hpp", jovem=False):
         if valor <= IMT_JOVEM_ISENCAO_TOTAL:
             return {
                 "imt": 0.0, "taxa": 0.0, "parcela": 0.0, "isento": True,
-                "regime": "IMT Jovem — isenção total (valor <= 330.539 €)",
+                "regime": "IMT Jovem — isenção total de IMT e de Imposto do Selo (valor <= 330.539 €)",
             }
         if valor <= IMT_JOVEM_LIMITE:
             imt = (valor - IMT_JOVEM_ISENCAO_TOTAL) * IMT_JOVEM_TAXA
             return {
                 "imt": imt, "taxa": IMT_JOVEM_TAXA, "parcela": 0.0,
                 "isento": False,
-                "regime": "IMT Jovem — isenção parcial: (valor - 330.539) * 8%",
+                "regime": "IMT Jovem — isenção parcial: IMT = (valor - 330.539) * 8%; Selo = (valor - 330.539) * 0,8%",
             }
         # valor > 660.982: sem isenção; segue o regime normal de HPP.
 
@@ -189,8 +204,9 @@ def main():
         parser.error("A isenção IMT Jovem só se aplica a --tipo hpp.")
 
     r = calcular_imt(args.valor, args.tipo, args.jovem)
-    selo = args.valor * TAXA_SELO
-    total = r["imt"] + selo
+    selo = r["selo"]
+    total = r["total"]
+    jovem_hpp = args.jovem and args.tipo == "hpp"
 
     print("=== IMT 2026 (Continente) ===")
     print(f"Tipo:                  {args.tipo}"
@@ -204,11 +220,12 @@ def main():
         print("Taxa aplicada:         0,00%")
     print(f"Parcela a abater:      {formatar_euros(r['parcela'])}")
     print(f"IMT a pagar:           {formatar_euros(r['imt'])}")
-    print(f"Imposto do Selo (0,8%): {formatar_euros(selo)}")
+    rotulo = "Imposto do Selo (IMT Jovem — CIS, art. 7.º-A)" if jovem_hpp else "Imposto do Selo (0,8%)"
+    print(f"{rotulo}: {formatar_euros(selo)}")
     print(f"TOTAL de impostos na aquisição: {formatar_euros(total)}")
-    if r["isento"]:
+    if r["isento"] and not jovem_hpp:
         print()
-        print("Nota: o IMT resultante é 0 € (isenção / escalão a 0%). O "
+        print("Nota: o IMT resultante é 0 € (escalão a 0%). O "
               "Imposto do Selo de 0,8% continua a ser devido.")
     print()
     print("AVISO: Tabela de 2026 (Ofício Circulado 40129/2026). Açores/Madeira "

@@ -111,8 +111,9 @@ async function calc(args) {
       break;
     }
     case "prescricao": {
-      const r = c.calcularPrescricao(new Date(str(rest, "--inicio", "")), str(rest, "--tipo", "creditos-comerciais"));
-      console.log(`${r.descricao}: limite ${r.limite.toISOString().slice(0, 10)} (${r.prazoTexto})`);
+      const r = c.calcularPrescricao(c.parseDataEstrita(str(rest, "--inicio", ""), "--inicio"), str(rest, "--tipo", "creditos-comerciais"));
+      console.log(`${r.descricao}: limite ${r.limite.toISOString().slice(0, 10)} (${r.prazoTexto}; ${r.base})`);
+      if (r.aviso) console.log(r.aviso);
       break;
     }
     case "compensacao": {

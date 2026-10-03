@@ -75,7 +75,7 @@ Argumentos: `--valor`, `--herdeiro`
 Calcula o IMT na aquisição de imóvel para habitação (tabelas de 2026,
 Continente). Aplica o método português `IMT = valor * taxa - parcela`, com a
 parcela a abater derivada por continuidade; suporta taxas únicas (6% / 7,5%)
-e a isenção IMT Jovem. Mostra também o Imposto do Selo (0,8%) e o total.
+e a isenção IMT Jovem. Mostra também o Imposto do Selo (0,8%; no IMT Jovem isento até 330.539 € e, acima, só sobre o excesso) e o total.
 
 ```bash
 python scripts/imt.py --valor 200000

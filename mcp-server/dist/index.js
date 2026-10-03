@@ -21791,6 +21791,9 @@ function calcularCompensacaoPorDatas(p) {
 // src/calculators/injuncao.ts
 var UC_2026 = 102;
 function custasInjuncao(valor) {
+  if (!Number.isFinite(valor) || valor <= 0) {
+    throw new Error("O valor da d\xEDvida tem de ser um n\xFAmero positivo.");
+  }
   if (valor <= 5e3) {
     return { escalao: "D\xEDvida at\xE9 5.000\u20AC", taxa: 0.5 * UC_2026 };
   }
@@ -21801,7 +21804,7 @@ function custasInjuncao(valor) {
     };
   }
   return {
-    escalao: "D\xEDvida superior a 15.000\u20AC (em regra segue forma de a\xE7\xE3o)",
+    escalao: "D\xEDvida superior a 15.000\u20AC (s\xF3 em transa\xE7\xF5es comerciais \u2014 DL 62/2013, art. 10.\xBA)",
     taxa: 1.5 * UC_2026
   };
 }
@@ -21864,7 +21867,9 @@ function calcularIMT(valor, tipo, jovem) {
   if (valor < 0) {
     throw new Error("O valor n\xE3o pode ser negativo.");
   }
-  const selo = valor * TAXA_SELO;
+  let selo = valor * TAXA_SELO;
+  const seloJovem = jovem && tipo === "hpp" && valor <= IMT_JOVEM_LIMITE;
+  if (seloJovem) selo = Math.max(0, valor - IMT_JOVEM_ISENCAO_TOTAL) * TAXA_SELO;
   const comTotais = (r) => ({ ...r, selo, total: r.imt + selo });
   if (jovem && tipo === "hpp") {
     if (valor <= IMT_JOVEM_ISENCAO_TOTAL) {
@@ -21873,7 +21878,7 @@ function calcularIMT(valor, tipo, jovem) {
         taxa: 0,
         parcela: 0,
         isento: true,
-        regime: "IMT Jovem \u2014 isen\xE7\xE3o total (valor <= 330.539 \u20AC)"
+        regime: "IMT Jovem \u2014 isen\xE7\xE3o total de IMT e de Imposto do Selo (valor <= 330.539 \u20AC)"
       });
     }
     if (valor <= IMT_JOVEM_LIMITE) {
@@ -21883,7 +21888,7 @@ function calcularIMT(valor, tipo, jovem) {
         taxa: IMT_JOVEM_TAXA,
         parcela: 0,
         isento: false,
-        regime: "IMT Jovem \u2014 isen\xE7\xE3o parcial: (valor - 330.539) * 8%"
+        regime: "IMT Jovem \u2014 isen\xE7\xE3o parcial: IMT = (valor - 330.539) * 8%; Selo = (valor - 330.539) * 0,8%"
       });
     }
   }
@@ -21930,35 +21935,54 @@ function calcularIMT(valor, tipo, jovem) {
 
 // src/calculators/prescricao.ts
 var PRAZOS = {
-  "civil-geral": ["Prescri\xE7\xE3o civil geral", 20, 0, "Art. 309.\xBA CC"],
-  "servicos-profissionais": [
-    "Servi\xE7os profissionais",
-    5,
-    0,
-    "Art. 310.\xBA CC"
-  ],
+  "civil-geral": ["Prescri\xE7\xE3o ordin\xE1ria (regra geral)", 20, 0, "CC, art. 309.\xBA", false],
   "creditos-comerciais": [
-    "Cr\xE9ditos comerciais",
+    "Cr\xE9ditos comerciais entre empresas (ex.: faturas B2B) \u2014 prazo ordin\xE1rio",
+    20,
+    0,
+    "CC, art. 309.\xBA",
+    false
+  ],
+  "servicos-profissionais": [
+    "Servi\xE7os prestados no exerc\xEDcio de profiss\xF5es liberais (prescri\xE7\xE3o presuntiva)",
+    2,
+    0,
+    "CC, art. 317.\xBA, al. c)",
+    true
+  ],
+  "vendas-a-consumidor": [
+    "Vendas e fornecimentos de comerciantes/industriais a quem n\xE3o \xE9 comerciante nem os destina ao seu com\xE9rcio (prescri\xE7\xE3o presuntiva)",
+    2,
+    0,
+    "CC, art. 317.\xBA, al. b)",
+    true
+  ],
+  rendas: ["Rendas e alugueres devidos pelo locat\xE1rio", 5, 0, "CC, art. 310.\xBA, al. b)", false],
+  juros: ["Juros convencionais ou legais", 5, 0, "CC, art. 310.\xBA, al. d)", false],
+  "prestacoes-periodicas": [
+    "Presta\xE7\xF5es periodicamente renov\xE1veis (ex.: quotas de condom\xEDnio)",
     5,
     0,
-    "Art. 310.\xBA al. e) CC"
+    "CC, art. 310.\xBA, al. g)",
+    false
   ],
-  juros: ["Juros", 5, 0, "Art. 310.\xBA al. d) CC"],
-  rendas: ["Rendas", 5, 0, "Art. 310.\xBA al. a) CC"],
   "telecom-energia-agua": [
-    "Telecomunica\xE7\xF5es / energia / \xE1gua",
+    "Pre\xE7o de servi\xE7os p\xFAblicos essenciais (telecomunica\xE7\xF5es, energia, \xE1gua)",
     0,
     6,
-    "legisla\xE7\xE3o setorial"
+    "Lei 23/96, art. 10.\xBA, n.\xBA 1",
+    false
   ],
   "queixa-crime-semipublico": [
-    "Queixa-crime (crime semip\xFAblico)",
+    "Direito de queixa por crime semip\xFAblico (caducidade)",
     0,
     6,
-    "Art. 115.\xBA CP"
+    "CP, art. 115.\xBA, n.\xBA 1",
+    false
   ],
-  "garantia-bens-consumo": ["Garantia de bens de consumo", 3, 0, "DL 84/2021"]
+  "garantia-bens-consumo": ["Garantia legal de bens de consumo (bens m\xF3veis)", 3, 0, "DL 84/2021", false]
 };
+var AVISO_PRESUNTIVA = "Prescri\xE7\xE3o presuntiva (CC, arts. 312.\xBA a 317.\xBA): ao fim do prazo presume-se que a d\xEDvida foi paga; o credor s\xF3 afasta essa presun\xE7\xE3o com a confiss\xE3o do devedor, expressa ou t\xE1cita (arts. 313.\xBA e 314.\xBA). Se o devedor admitir que n\xE3o pagou, a presun\xE7\xE3o cai.";
 var PRESCRICAO_TIPOS = Object.keys(PRAZOS).sort();
 function ultimoDiaDoMes(ano, mes) {
   return new Date(Date.UTC(ano, mes, 0)).getUTCDate();
@@ -21978,10 +22002,13 @@ function addAnos(data, anos) {
   return addMeses(data, anos * 12);
 }
 function calcularPrescricao(inicio, tipo) {
-  if (!(tipo in PRAZOS)) {
-    throw new Error(`Tipo desconhecido: ${tipo}`);
+  if (!(inicio instanceof Date) || Number.isNaN(inicio.getTime())) {
+    throw new Error("Data de in\xEDcio inv\xE1lida. Usa AAAA-MM-DD.");
   }
-  const [descricao, anos, meses, base] = PRAZOS[tipo];
+  if (!Object.prototype.hasOwnProperty.call(PRAZOS, tipo)) {
+    throw new Error(`Tipo desconhecido: ${tipo}. Tipos: ${PRESCRICAO_TIPOS.join(", ")}.`);
+  }
+  const [descricao, anos, meses, base, presuntiva] = PRAZOS[tipo];
   let limite;
   let prazoTexto;
   if (anos) {
@@ -21991,7 +22018,7 @@ function calcularPrescricao(inicio, tipo) {
     limite = addMeses(inicio, meses);
     prazoTexto = `${meses} mese(s)`;
   }
-  return { descricao, prazoTexto, base, limite };
+  return { descricao, prazoTexto, base, limite, presuntiva, aviso: presuntiva ? AVISO_PRESUNTIVA : "" };
 }
 
 // src/calculators/irs.ts
@@ -21999,7 +22026,7 @@ var COEFICIENTES = {
   mercadorias: 0.15,
   "servicos-151": 0.75,
   "servicos-outros": 0.35,
-  "propriedade-intelectual": 0.5
+  "propriedade-intelectual": 0.95
 };
 function calcularIRSSimplificado(rendimento, tipo) {
   if (!(tipo in COEFICIENTES)) {
@@ -23626,17 +23653,21 @@ VALOR BRUTO: ${formatarEuros(r.bruto)}` + (r.tetoAplicado ? "\n(Aplicado o teto 
     "calc_custas_injuncao",
     {
       title: "Taxa de justi\xE7a de injun\xE7\xE3o",
-      description: "Estima a taxa de justi\xE7a de um requerimento de injun\xE7\xE3o (UC 2026 = 102\u20AC). Usa quando o utilizador vai avan\xE7ar com a cobran\xE7a judicial de uma d\xEDvida e quer saber o custo ('quanto custa uma injun\xE7\xE3o', 'taxa de justi\xE7a', 'custas', 'cobrar judicialmente'). EN: court fee for a payment-order (injun\xE7\xE3o).",
+      description: "Estima a taxa de justi\xE7a de um requerimento de injun\xE7\xE3o (UC 2026 = 102\u20AC). A injun\xE7\xE3o serve para d\xEDvidas at\xE9 15.000\u20AC e, entre empresas (transa\xE7\xF5es comerciais), para qualquer valor (DL 62/2013, art. 10.\xBA). Usa quando o utilizador vai avan\xE7ar com a cobran\xE7a judicial de uma d\xEDvida e quer saber o custo ('quanto custa uma injun\xE7\xE3o', 'taxa de justi\xE7a', 'custas', 'cobrar judicialmente'). EN: court fee for a payment-order (injun\xE7\xE3o).",
       inputSchema: { valor: external_exports.number().describe("Valor da d\xEDvida (\u20AC)") },
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ valor }) => {
-      const r = custasInjuncao(valor);
-      return texto(
-        `Injun\xE7\xE3o \u2014 valor ${formatarEuros(valor)}
+      try {
+        const r = custasInjuncao(valor);
+        return texto(
+          `Injun\xE7\xE3o \u2014 valor ${formatarEuros(valor)}
 Escal\xE3o: ${r.escalao}
 Taxa de justi\xE7a estimada: ${formatarEuros(r.taxa)}` + AVISO
-      );
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
@@ -23666,7 +23697,7 @@ IS transmiss\xE3o (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
     "calc_imt",
     {
       title: "Calcular IMT (compra de im\xF3vel)",
-      description: "Calcula o IMT 2026 (Continente, imposto na compra de im\xF3vel) incl. IMT Jovem, mais o Imposto do Selo de 0,8%. Usa quando o utilizador vai comprar casa/im\xF3vel e quer saber os impostos da aquisi\xE7\xE3o ('quanto pago de IMT', 'impostos na compra de casa', 'comprar im\xF3vel'). EN: property transfer tax (IMT) on a home purchase.",
+      description: "Calcula o IMT 2026 (Continente, imposto na compra de im\xF3vel) incl. IMT Jovem, mais o Imposto do Selo de 0,8% (no IMT Jovem o Selo tamb\xE9m \xE9 isento at\xE9 330.539 \u20AC e, acima, s\xF3 incide sobre o excedente \u2014 CIS, art. 7.\xBA-A). Usa quando o utilizador vai comprar casa/im\xF3vel e quer saber os impostos da aquisi\xE7\xE3o ('quanto pago de IMT', 'impostos na compra de casa', 'comprar im\xF3vel'). EN: property transfer tax (IMT) on a home purchase.",
       inputSchema: {
         valor: external_exports.number().describe("Maior entre pre\xE7o e VPT (\u20AC)"),
         tipo: external_exports.enum(["hpp", "secundaria"]).default("hpp"),
@@ -23675,22 +23706,27 @@ IS transmiss\xE3o (10%): ${r.isento ? "ISENTO" : formatarEuros(r.isTransmissao)}
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ valor, tipo, jovem }) => {
-      const r = calcularIMT(valor, tipo, jovem);
-      return texto(
-        `IMT 2026 (${tipo}${jovem ? " + IMT Jovem" : ""})
+      try {
+        const r = calcularIMT(valor, tipo, jovem);
+        const seloTxt = jovem && tipo === "hpp" ? "Imposto do Selo (IMT Jovem \u2014 CIS, art. 7.\xBA-A)" : "Imposto do Selo (0,8%)";
+        return texto(
+          `IMT 2026 (${tipo}${jovem ? " + IMT Jovem" : ""})
 Valor: ${formatarEuros(valor)}
 Regime: ${r.regime}
 IMT: ${formatarEuros(r.imt)}
-Imposto do Selo (0,8%): ${formatarEuros(r.selo)}
+${seloTxt}: ${formatarEuros(r.selo)}
 TOTAL impostos: ${formatarEuros(r.total)}` + AVISO
-      );
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
     "calc_prescricao",
     {
       title: "Prazo de prescri\xE7\xE3o/caducidade",
-      description: `Calcula a data-limite de prescri\xE7\xE3o/caducidade de um direito ou d\xEDvida. Usa quando o utilizador pergunta 'ainda posso cobrar/reclamar?', 'j\xE1 prescreveu?', 'h\xE1 quanto tempo \xE9 a d\xEDvida', 'caducou?' ou se um prazo legal j\xE1 expirou. Tipos: ${PRESCRICAO_TIPOS.join(", ")}. EN: limitation/time-bar deadline (is the claim still enforceable?).`,
+      description: `Calcula a data-limite de prescri\xE7\xE3o/caducidade de um direito ou d\xEDvida. Usa quando o utilizador pergunta 'ainda posso cobrar/reclamar?', 'j\xE1 prescreveu?', 'h\xE1 quanto tempo \xE9 a d\xEDvida', 'caducou?' ou se um prazo legal j\xE1 expirou. Faturas entre empresas: 'creditos-comerciais' (20 anos, art. 309.\xBA CC); servi\xE7os de profiss\xF5es liberais e vendas a quem n\xE3o \xE9 comerciante: 2 anos presuntivos (art. 317.\xBA CC); rendas, juros e presta\xE7\xF5es peri\xF3dicas: 5 anos (art. 310.\xBA CC). Tipos: ${PRESCRICAO_TIPOS.join(", ")}. EN: limitation/time-bar deadline (is the claim still enforceable?).`,
       inputSchema: {
         inicio: external_exports.string().describe("Data de in\xEDcio da contagem (YYYY-MM-DD)"),
         tipo: external_exports.enum(PRESCRICAO_TIPOS)
@@ -23698,23 +23734,29 @@ TOTAL impostos: ${formatarEuros(r.total)}` + AVISO
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ inicio, tipo }) => {
-      const r = calcularPrescricao(parseData(inicio), tipo);
-      return texto(
-        `Prescri\xE7\xE3o/caducidade \u2014 ${r.descricao}
+      try {
+        const r = calcularPrescricao(parseDataEstrita(inicio, "inicio"), tipo);
+        return texto(
+          `Prescri\xE7\xE3o/caducidade \u2014 ${r.descricao}
 Base: ${r.base}
-Prazo: ${r.prazoTexto}
+Prazo: ${r.prazoTexto}${r.presuntiva ? " (presuntiva)" : ""}
 In\xEDcio: ${inicio}
-DATA-LIMITE: ${iso4(r.limite)}
+\u23F0 DATA-LIMITE: ${iso4(r.limite)}
 
-Nota: a prescri\xE7\xE3o interrompe-se com cita\xE7\xE3o/notifica\xE7\xE3o judicial ou reconhecimento da d\xEDvida (Arts. 323.\xBA/325.\xBA CC).` + AVISO
-      );
+` + (r.aviso ? `${r.aviso}
+
+` : "") + "Nota: a prescri\xE7\xE3o interrompe-se com a cita\xE7\xE3o ou notifica\xE7\xE3o judicial (ex.: injun\xE7\xE3o) ou com o reconhecimento da d\xEDvida (arts. 323.\xBA e 325.\xBA CC); uma carta ou email de cobran\xE7a n\xE3o a interrompe." + AVISO
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(
     "calc_irs_simplificado",
     {
       title: "IRS \u2014 rendimento tribut\xE1vel (regime simplificado)",
-      description: "Calcula o rendimento tribut\xE1vel no regime simplificado (Cat. B/ENI), aplicando o coeficiente ao rendimento bruto (n\xE3o calcula o imposto final, pois os escal\xF5es mudam anualmente). Usa para estimativas de IRS de trabalhador independente/recibos verdes ('quanto pago de IRS como independente', 'regime simplificado', 'recibos verdes', 'ENI'). EN: simplified-regime taxable income for the self-employed.",
+      description: "Calcula o rendimento tribut\xE1vel no regime simplificado (Cat. B/ENI), aplicando o coeficiente ao rendimento bruto (n\xE3o calcula o imposto final, pois os escal\xF5es mudam anualmente). Usa para estimativas de IRS de trabalhador independente/recibos verdes ('quanto pago de IRS como independente', 'regime simplificado', 'recibos verdes', 'ENI'). Coeficientes (CIRS, art. 31.\xBA): mercadorias 0,15; atividades da tabela do art. 151.\xBA 0,75; restantes servi\xE7os 0,35; propriedade intelectual 0,95. EN: simplified-regime taxable income for the self-employed.",
       inputSchema: {
         rendimento: external_exports.number().describe("Rendimento bruto anual (\u20AC)"),
         tipo: external_exports.enum([
@@ -23727,14 +23769,18 @@ Nota: a prescri\xE7\xE3o interrompe-se com cita\xE7\xE3o/notifica\xE7\xE3o judic
       annotations: { readOnlyHint: true, openWorldHint: false }
     },
     async ({ rendimento, tipo }) => {
-      const r = calcularIRSSimplificado(rendimento, tipo);
-      return texto(
-        `IRS simplificado (${tipo})
+      try {
+        const r = calcularIRSSimplificado(rendimento, tipo);
+        return texto(
+          `IRS simplificado (${tipo})
 Rendimento bruto: ${formatarEuros(rendimento)}
-Coeficiente: ${r.coeficiente}
+Coeficiente: ${String(r.coeficiente).replace(".", ",")} (CIRS, art. 31.\xBA, n.\xBA 1)
 RENDIMENTO TRIBUT\xC1VEL: ${formatarEuros(r.tributavel)}
 (Acresce aos restantes rendimentos e \xE9 tributado pelos escal\xF5es progressivos de IRS.)` + AVISO
-      );
+        );
+      } catch (e) {
+        return texto(`N\xE3o foi poss\xEDvel calcular: ${e.message}`);
+      }
     }
   );
   server.registerTool(

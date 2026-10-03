@@ -48,8 +48,8 @@ A prescrição interrompe-se com: citação judicial, notificação judicial avu
    - Cláusula de vencimento antecipado se falhar prestação
 
 ### Fase 3: Via Judicial
-6. **Injunção** (recomendada para dívidas até 15.000€)
-   - Procedimento rápido e económico
+6. **Injunção** — até 15.000€ (DL 269/98) e, nas **transações comerciais entre empresas, independentemente do valor** (DL 62/2013, art. 10.º)
+   - Procedimento rápido e económico; com oposição e valor elevado segue como ação comum no tribunal
    - Requerimento eletrónico via Citius (balcoj.mj.pt)
    - Custas reduzidas (taxa de justiça em frações de UC, ~51€ a 153€ consoante o valor — ver `references/valores-2026.md`)
    - Se o devedor não se opuser em 15 dias → título executivo

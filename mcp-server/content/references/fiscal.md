@@ -12,16 +12,18 @@
 - Lei Geral Tributária (LGT)
 - CPPT: Código de Procedimento e de Processo Tributário
 
-## Regime Atual — ENI (Categoria B do IRS)
+## Trabalhador Independente e ENI (Categoria B do IRS)
+
+> Aplica-se a quem fatura em nome próprio (recibos verdes ou empresário em nome individual). Adapta ao perfil guardado em `.advogado-pt/perfil-empresa.md`, se existir.
 
 ### Regimes de Tributação
-1. **Regime Simplificado** (rendimentos até 200.000€/ano)
-   - Coeficientes sobre rendimento bruto:
-     - Venda de mercadorias: 0,15 (tributa 15%)
-     - Prestação de serviços (geral): 0,75 (tributa 75%)
-     - Prestação de serviços de atividades profissionais (lista Art. 151º): 0,75
-     - Rendimentos de propriedade intelectual: 0,50
-   - Dedução de 4.104€ em despesas gerais (ou despesas efetivas se superiores)
+1. **Regime Simplificado** (rendimentos até ao limite do regime — ver `references/valores-2026.md`)
+   - Coeficientes sobre o rendimento bruto (CIRS, art. 31.º, n.º 1) — calcula com `calc_irs_simplificado`:
+     - Venda de mercadorias e produtos (e restauração/hotelaria): 0,15 (tributa 15%) — al. a)
+     - Atividades profissionais da tabela do art. 151.º: 0,75 — al. b)
+     - Restantes prestações de serviços: 0,35 — al. c)
+     - Cessão ou utilização temporária de propriedade intelectual ou industrial (e outros rendimentos de capitais/prediais da Cat. B): 0,95 — al. d)
+   - No coeficiente de 0,75 parte das despesas tem de ser justificada (CIRS, art. 31.º, n.º 2); considera-se automaticamente um montante igual à dedução específica da Cat. A (art. 25.º, n.º 1, al. a)) — valor do ano em `references/valores-2026.md`
    - Não precisa de contabilidade organizada
 
 2. **Contabilidade Organizada** (obrigatória acima de 200.000€, opcional abaixo)
@@ -36,11 +38,12 @@
 - Declaração de início/alteração/cessação de atividade
 - Comunicação de faturas à AT (SAF-T mensal)
 
-### Segurança Social como ENI
-- Base de incidência: 70% do rendimento relevante
-- Taxa: 21,4% (regra geral)
-- Contribuição mínima: sobre 1 IAS (indexante dos apoios sociais)
-- Isenção no 1º ano de atividade (e rendimentos baixos nos seguintes)
+### Segurança Social do trabalhador independente e do ENI
+- **Rendimento relevante**: 70% do valor das prestações de serviços e 20% das vendas de bens/produção (Código Contributivo, art. 162.º)
+- **Base de incidência mensal**: 1/3 do rendimento relevante do trimestre anterior, declarado trimestralmente (Código Contributivo, art. 163.º)
+- **Taxa**: 21,4% para os trabalhadores independentes; **25,2%** para os empresários em nome individual e titulares de EIRL (Código Contributivo, art. 168.º)
+- **Contribuição mínima**: 20 € por mês quando há rendimento relevante (Código Contributivo)
+- Isenção nos primeiros 12 meses de atividade (e outras situações previstas no Código Contributivo) — confirmar o enquadramento no Portal da Segurança Social Direta
 
 ## Transição para Unipessoal Lda
 
@@ -89,8 +92,9 @@
 ## Benefícios Fiscais a Considerar
 - RFAI: benefícios para investimento produtivo
 - SIFIDE: crédito fiscal para I&D (relevante se desenvolve software)
-- Remuneração convencional do capital social (Lda): dedução de 7% das entradas de capital
-- Regime fiscal de ex-residentes ou RNH (se aplicável)
+- **ICE — Incentivo à Capitalização das Empresas** (EBF, art. 43.º-D): dedução ao lucro tributável de uma percentagem dos aumentos líquidos de capitais próprios (substituiu a antiga remuneração convencional do capital social)
+- **IFICI — Incentivo Fiscal à Investigação Científica e Inovação** (EBF, art. 58.º-A): taxa especial de IRS para quem se torna residente e exerce atividades qualificadas (substituiu o RNH para novas inscrições, salvo regime transitório)
+- Regime fiscal de ex-residentes (CIRS, art. 12.º-A), se aplicável
 
 ## Reclamações e Impugnações Fiscais
 - **Reclamação graciosa**: 120 dias após notificação (Art. 70º CPPT)

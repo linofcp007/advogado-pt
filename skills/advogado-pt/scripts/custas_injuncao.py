@@ -9,9 +9,8 @@ Tabela aproximada (2026):
   dívida 5.000,01 a 15.000€   -> 1,0 UC  = 102€
   dívida > 15.000€            -> 1,5 UC  = 153€
 
-Nota: a injunção (procedimento simples) destina-se em regra a dívidas até
-15.000€. Acima desse valor, a cobrança segue a forma de ação declarativa
-comum, com custas calculadas de outra forma.
+Nota: a injunção do DL 269/98 serve para dívidas até 15.000€; nas transações
+comerciais (entre empresas) não há limite de valor (DL 62/2013, art. 10.º).
 
 AVISO: estimativa. Confirmar sempre no simulador oficial.
 
@@ -35,12 +34,14 @@ def formatar_euros(valor):
 
 def estimar_taxa(valor):
     """Estima a taxa de injunção. Devolve (escalao, fracao_uc, taxa)."""
+    if isinstance(valor, bool) or not isinstance(valor, (int, float)) or not valor > 0:
+        raise ValueError("O valor da dívida tem de ser um número positivo.")
     if valor <= 5000:
         return "Dívida até 5.000€", 0.5, 0.5 * UC_2026
     elif valor <= 15000:
         return "Dívida de 5.000,01€ a 15.000€", 1.0, 1.0 * UC_2026
     else:
-        return ("Dívida superior a 15.000€ (em regra segue forma de ação)",
+        return ("Dívida superior a 15.000€ (só em transações comerciais — DL 62/2013, art. 10.º)",
                 1.5, 1.5 * UC_2026)
 
 
@@ -55,10 +56,10 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.valor < 0:
-        parser.error("O valor da dívida não pode ser negativo.")
-
-    escalao, fracao_uc, taxa = estimar_taxa(args.valor)
+    try:
+        escalao, fracao_uc, taxa = estimar_taxa(args.valor)
+    except ValueError as e:
+        parser.error(str(e))
 
     print("=== Estimativa de Taxa de Justiça — Injunção ===")
     print(f"Valor da dívida: {formatar_euros(args.valor)}")
