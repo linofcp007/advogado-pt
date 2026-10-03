@@ -249,13 +249,13 @@
   - _Depends: 5, 8, 10, 11_
 
 ## História US-10 (P3): coerência e manutenção
-- [ ] 34. [US10][P] Perfil genérico nas references e checklists; teste estendido
+- [x] 34. [US10][P] Perfil genérico nas references e checklists; teste estendido
   - _Requirements: US-10.AC-1_
   - _Makes green: T-244_
   - _Verify: node --test --test-name-pattern="T-244" mcp-server/test/plugin.test.mjs_
   - _Size: M_
   - _Depends: 2_
-- [ ] 35. [US10] SKILL.md: tabela cálculo → tool → script, encaminhamento, regras de contagem, superfícies; `scripts/README.md` e índice de templates corrigidos
+- [x] 35. [US10] SKILL.md: tabela cálculo → tool → script, encaminhamento, regras de contagem, superfícies; `scripts/README.md` e índice de templates corrigidos
   - _Requirements: US-10.AC-2_
   - _Makes green: T-245_
   - _Verify: node --test --test-name-pattern="T-245" mcp-server/test/v121.test.mjs_

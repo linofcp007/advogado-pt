@@ -10,20 +10,22 @@
 - Lei 102/2009: regime de segurança e saúde no trabalho
 - Lei 105/2009: regulamentação do CT
 
-## Especificidades para ENI e Futura Unipessoal Lda
+## Especificidades por forma jurídica do empregador
 
-### Como ENI (situação atual)
+> Adapta ao perfil da empresa guardado (`.advogado-pt/perfil-empresa.md`); se não houver, pergunta a forma jurídica.
+
+### Empresário em nome individual (ENI)
 - Pode contratar trabalhadores normalmente
 - Responsabilidade pessoal e ilimitada pelas obrigações laborais
 - Contribuições SS: taxa contributiva de 23,75% (entidade empregadora) + 11% (trabalhador)
 - Seguro de acidentes de trabalho obrigatório
 - Comunicação de admissão à SS antes do início da atividade
 
-### Como Unipessoal Lda (futuro)
+### Sociedade (Unipessoal Lda, Lda, SA)
 - Responsabilidade limitada ao património da sociedade
 - Mesmas obrigações laborais do CT
-- Obrigação de relatório único anual
-- Considerar: gerente pode acumular funções, mas atenção à qualificação do vínculo
+- Relatório Único anual — obrigatório para qualquer empregador com trabalhadores
+- Gerente ou administrador: pode acumular funções com um contrato de trabalho, mas atenção à qualificação do vínculo e ao regime dos membros de órgãos estatutários na Segurança Social (`references/valores-2026.md`)
 
 ## Contratação
 

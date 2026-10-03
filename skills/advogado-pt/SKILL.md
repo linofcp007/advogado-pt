@@ -216,24 +216,29 @@ Quando o utilizador pede um documento, **parte do template correspondente** em v
 - Cada template termina com **`## Antes de enviar — verificar`**: entrega essa lista ao utilizador **separada do documento** (nunca dentro do documento enviado), já preenchida com os prazos ⏰ do caso.
 - Cada template e referência declara o **âmbito** (`nacional`, `ue` ou `misto`) — se for `misto`/`ue`, articula o regime português com o da UE.
 
-### Calculadoras → `scripts/`
-Para cálculos exatos (onde o erro é fácil), corre o script em vez de calcular de cabeça:
-- `python scripts/juros_mora.py --capital 5000 --data-inicio 2025-03-01 [--tipo comercial|comercial-geral|civil]` — juros de mora **por tramos semestrais**, com memória de cálculo pronta a anexar
-- `python scripts/prazos.py --inicio 2026-10-01 --dias 30 --tipo judicial` — prazos: `judicial` (processos em tribunal — CPC, art. 138.º, com férias judiciais; `--urgente` para processos urgentes), `corridos` (por defeito — CC, art. 279.º) ou `uteis` (ex.: CPA, art. 87.º)
-- `python scripts/compensacao_despedimento.py --retribuicao-base 1500 --anos 4` — compensação por cessação
-- `python scripts/custas_injuncao.py --valor 8000` — taxa de justiça de injunção
-- `python scripts/imposto_selo_heranca.py --valor 100000 --herdeiro outro` — imposto do selo em heranças
-- `python scripts/imt.py --valor 250000 --tipo hpp` — IMT na compra de imóvel (IMT Jovem com `--jovem`)
-- `python scripts/prescricao.py --inicio 2025-01-15 --tipo creditos-comerciais` — data-limite de prescrição
-- `python scripts/irs_simplificado.py --rendimento 60000 --tipo servicos-151` — rendimento tributável (regime simplificado)
-- `python scripts/creditos_laborais.py --retribuicao 1500 --admissao 2020-03-01 --cessacao 2026-06-30` — créditos na cessação (proporcionais, férias não gozadas)
-- `python scripts/legitima.py --bens 300000 --conjuge --filhos 2` — legítima e quota disponível
-- `python scripts/salario_liquido.py salario --bruto 1500 --tabela I --dependentes 0` — salário líquido 2026 (retenção de IRS + SS); `custo --base 1500` — custo total para a empresa
-- `python scripts/irc.py --lucro 100000 --pme --derrama 0.015` — IRC (taxa PME, derramas, tributação autónoma)
-- `python scripts/iva_operacao.py --tipo servicos --cliente empresa --destino UE` — IVA em operações com o estrangeiro (menção e código AT)
-- `python scripts/taxa_justica.py --valor 30000` — taxa de justiça (RCP, Tabela I)
+### Calculadoras → tools MCP e `scripts/`
+Para cálculos exatos (onde o erro é fácil), usa a tool MCP; sem MCP (ex.: claude.ai), corre o script Python equivalente em vez de calcular de cabeça. Os dois lados dão o mesmo resultado (casos partilhados nos testes).
 
-No servidor MCP as mesmas calculadoras são tools (`calc_juros_mora`, `calc_creditos_laborais`, `calc_legitima`, `calc_salario_liquido`, `calc_custo_trabalhador`, `calc_irc`, `calc_iva_operacao`, `calc_taxa_justica`, …). O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa` (vários perfis: `listar_perfis` / `ativar_perfil`).
+| Cálculo | Tool MCP | Script (`scripts/`) |
+|---|---|---|
+| Juros de mora por tramos semestrais (com memória de cálculo) | `calc_juros_mora` | `juros_mora.py` |
+| Prazo — `judicial` (CPC 138.º, férias judiciais), `corridos` ou `uteis` | `calc_prazo` | `prazos.py` |
+| Prescrição / caducidade (com as presuntivas) | `calc_prescricao` | `prescricao.py` |
+| Compensação por cessação do contrato de trabalho | `calc_compensacao_despedimento` | `compensacao_despedimento.py` |
+| Créditos na cessação (proporcionais, férias não gozadas) | `calc_creditos_laborais` | `creditos_laborais.py` |
+| Salário líquido / custo do trabalhador para a empresa | `calc_salario_liquido` / `calc_custo_trabalhador` | `salario_liquido.py` (`salario` / `custo`) |
+| IRC (taxa PME, derramas, tributação autónoma) | `calc_irc` | `irc.py` |
+| IRS — rendimento tributável no regime simplificado | `calc_irs_simplificado` | `irs_simplificado.py` |
+| IVA em operações com o estrangeiro (menção e código AT) | `calc_iva_operacao` | `iva_operacao.py` |
+| IMT e Imposto do Selo na compra de imóvel (IMT Jovem) | `calc_imt` | `imt.py` |
+| Imposto do Selo em heranças e doações | `calc_imposto_selo_heranca` | `imposto_selo_heranca.py` |
+| Legítima e quota disponível | `calc_legitima` | `legitima.py` |
+| Taxa de justiça de uma ação (RCP, Tabela I) | `calc_taxa_justica` | `taxa_justica.py` |
+| Taxa de justiça da injunção | `calc_custas_injuncao` | `custas_injuncao.py` |
+
+Exemplos: `python scripts/prazos.py --inicio 2026-10-01 --dias 30 --tipo judicial` · `python scripts/juros_mora.py --capital 5000 --data-inicio 2025-03-01` · `python scripts/imt.py --valor 250000 --tipo hpp --jovem`. Cada script tem `--help`; índice completo em `scripts/README.md`.
+
+O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa` (vários perfis: `listar_perfis` / `ativar_perfil`).
 
 ### Calendário de obrigações e prazos em curso
 - `calendario_obrigacoes` (CLI `calendario --ano 2026 [--ics]`) — calendário anual a partir do perfil (IVA, Modelo 22, IES, SS, contas, RCBE, Relatório Único, mapa de férias, RGPC…), com base legal por data e exportação `.ics` para Google Calendar/Outlook. Datas com perfil incompleto vêm "a confirmar".
@@ -243,12 +248,31 @@ Apresenta sempre o resultado como **estimativa de apoio**, com a ressalva indica
 
 ### Playbooks (ação guiada) → `playbooks/`
 Para cenários comuns, segue a árvore de decisão correspondente (passo-a-passo com prazos e ligações):
-- `playbooks/cliente-nao-paga.md` · `recebi-citacao-ou-injuncao.md` · `quero-despedir.md` · `data-breach.md` · `comprar-imovel.md` · `recebi-notificacao-at.md` · `cliente-insolvente.md` · `lay-off.md` · `despedimento-coletivo.md` · `faturar-cliente-estrangeiro.md` · `dissolucao-liquidacao.md`
+
+| Situação | Playbook (`playbooks/`) | Tools a usar |
+|---|---|---|
+| Um cliente não paga uma fatura | `cliente-nao-paga.md` | `calc_juros_mora`, `calc_prescricao`, `calc_custas_injuncao` |
+| Recebi uma citação, injunção ou notificação do tribunal | `recebi-citacao-ou-injuncao.md` | `calc_prazo` (`judicial`), `registar_prazo` |
+| Recebi uma notificação das Finanças | `recebi-notificacao-at.md` | `calc_prazo` (`corridos`), `registar_prazo` |
+| Quero despedir / cessar um contrato | `quero-despedir.md` | `calc_compensacao_despedimento`, `calc_creditos_laborais` |
+| Despedimento coletivo | `despedimento-coletivo.md` | `calc_compensacao_despedimento` |
+| Lay-off | `lay-off.md` | — |
+| Fuga ou violação de dados pessoais | `data-breach.md` | `registar_prazo` (72 horas) |
+| Vou comprar um imóvel | `comprar-imovel.md` | `calc_imt` |
+| Um cliente ficou insolvente | `cliente-insolvente.md` | `registar_prazo` |
+| Faturar a um cliente estrangeiro | `faturar-cliente-estrangeiro.md` | `calc_iva_operacao` |
+| Dissolver ou liquidar a sociedade | `dissolucao-liquidacao.md` | — |
 
 ### Checklists (verificação) → `assets/checklists/`
 Listas acionáveis: `checklist-rgpd.md` · `checklist-due-diligence-imovel.md` · `checklist-constituicao-sociedade.md` · `checklist-revisao-contrato.md` · `checklist-predeploy-legal.md` · `checklist-registo-marca.md` · `checklist-loja-online.md` · `checklist-concorrencia.md` · `checklist-compliance-dimensao.md` · `checklist-seguranca-saude-trabalho.md`
 
 ---
+
+## Superfícies (onde esta skill corre)
+
+- **Claude Code (plugin)**: skill + servidor MCP (tools `calc_*`, conteúdos, perfil, prazos, calendário) + slash commands + hooks (perfil e prazos em curso ao abrir a sessão).
+- **claude.ai / Claude Desktop (upload do `.skill`)**: só a skill — as tools MCP e os ficheiros `.advogado-pt/` (perfil, prazos) não existem; corre os scripts de `scripts/` quando houver execução de código, senão faz o cálculo com cuidado, mostra-o e indica que é estimativa. Para guardar o perfil, pede ao utilizador que o cole no início da conversa.
+- **Outras IAs (Cursor, Windsurf, Codex, Gemini, ChatGPT)**: servidor MCP e instruções em `integrations/` (gera a configuração com `node cli/advogado-pt.mjs mcp-config <host>`).
 
 ## Formatos de Output
 
