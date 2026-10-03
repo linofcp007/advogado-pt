@@ -1,6 +1,6 @@
-# ChatGPT / OpenAI — `advogado-pt`
+# ChatGPT / OpenAI — `juridico-pt`
 
-Há **dois caminhos** para usar o Advogado PT no ecossistema OpenAI. Escolhe consoante
+Há **dois caminhos** para usar o Jurídico PT no ecossistema OpenAI. Escolhe consoante
 queiras a experiência mais simples (Custom GPT) ou as tools MCP "ao vivo" (conector MCP).
 
 ---
@@ -42,7 +42,7 @@ aponta os clientes ao `dist/index.js` com `command: "node"` e o caminho **absolu
 - **Codex CLI** (ver [`../codex/`](../codex/)) — `~/.codex/config.toml`.
 - **OpenAI Agents SDK** — podes ligar um servidor MCP **stdio** localmente (parâmetro de
   servidor MCP stdio do SDK), apontando `command: "node"`,
-  `args: ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]`.
+  `args: ["/ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js"]`.
 
 ### ChatGPT web / Responses API exigem um endpoint remoto (HTTP)
 
@@ -53,14 +53,14 @@ via um wrapper HTTP/remoto**:
 
 1. Coloca um adaptador stdio→HTTP à frente do servidor (ex.: `mcp-proxy`/`supergateway`, ou
    o transporte Streamable HTTP do MCP) que execute por baixo
-   `node /ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js`.
+   `node /ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js`.
 2. Publica esse endpoint num URL acessível (HTTPS), com autenticação adequada.
 3. No ChatGPT, adiciona-o em **Settings → Connectors** (ou no campo de conector MCP do modo
    Agent/Deep Research). Na Responses API, passa o `server_url` do teu wrapper.
 
 Resumo:
 
-| Cliente OpenAI | Transporte que aceita | Como ligar o servidor advogado-pt |
+| Cliente OpenAI | Transporte que aceita | Como ligar o servidor juridico-pt |
 |---|---|---|
 | Codex CLI | stdio | direto (`node …/mcp-server/dist/index.js`) |
 | Agents SDK | stdio (local) ou HTTP | direto via servidor MCP stdio do SDK |
@@ -70,8 +70,8 @@ Resumo:
 ### Forma local (para o wrapper / Agents SDK)
 
 - Compila (`npm install && npm run build` em `mcp-server/`) e usa `command: "node"`,
-  `args: ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]` (caminho **absoluto**).
-- Atalho: corre `node cli/advogado-pt.mjs mcp-config codex` (ou outro host) na raiz do repo
+  `args: ["/ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js"]` (caminho **absoluto**).
+- Atalho: corre `node cli/juridico-pt.mjs mcp-config codex` (ou outro host) na raiz do repo
   para obter o bloco com o caminho **absoluto** já preenchido para a tua máquina.
 
 ---

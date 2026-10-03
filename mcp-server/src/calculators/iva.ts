@@ -7,7 +7,7 @@
  * Fora do decisor (devolve aviso): operações em cadeia/triangulares, regime da margem, IEC,
  * meios de transporte novos, regime transfronteiriço PME e a lista completa do art. 6.º, n.º 11.
  *
- * Igual a skills/advogado-pt/scripts/iva_operacao.py.
+ * Igual a skills/juridico-pt/scripts/iva_operacao.py.
  */
 
 export interface ParamsIVA {

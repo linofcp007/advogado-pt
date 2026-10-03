@@ -11,7 +11,7 @@
  *   só acima de 62.500 €), representação 10%, ajudas de custo 5%, não documentadas 50%;
  *   +10 p.p. com prejuízo fiscal (n.º 14), salvo as exceções (ver `isentoAgravamento`).
  *
- * Igual a skills/advogado-pt/scripts/irc.py.
+ * Igual a skills/juridico-pt/scripts/irc.py.
  */
 
 import { r2 } from "./arredondar.js";

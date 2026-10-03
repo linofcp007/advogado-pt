@@ -22970,6 +22970,9 @@ function formatarProcura(res) {
 
 // src/perfil.ts
 import { existsSync as existsSync2, readFileSync as readFileSync2, readdirSync as readdirSync2 } from "node:fs";
+import { join as join4 } from "node:path";
+
+// src/dados.ts
 import { homedir } from "node:os";
 import { join as join3, resolve as resolve3 } from "node:path";
 
@@ -23033,6 +23036,12 @@ function escreverSeguro(base, partes, conteudo) {
   return final;
 }
 
+// src/dados.ts
+var PASTA_DADOS = ".juridico-pt";
+function dirHome(home) {
+  return resolve3(home ?? process.env.JURIDICO_PT_HOME ?? homedir());
+}
+
 // src/perfil.ts
 var CAMPOS_PERFIL = [
   "forma_juridica",
@@ -23061,17 +23070,17 @@ var ROTULOS = {
   linguas: "L\xEDnguas de trabalho",
   notas: "Notas (licen\xE7as, setor regulado, s\xF3cios\u2026)"
 };
-var PASTA = ".advogado-pt";
+var PASTA = PASTA_DADOS;
 var FICHEIRO = "perfil-empresa.md";
 var MS_12_MESES = 365 * 24 * 60 * 60 * 1e3;
 function dirProjeto2(o) {
   return dirProjeto(o.projeto);
 }
-function dirHome(o) {
-  return resolve3(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
+function dirHome2(o) {
+  return dirHome(o.home);
 }
 function caminhoPerfil(base) {
-  return join3(base, PASTA, FICHEIRO);
+  return join4(base, PASTA, FICHEIRO);
 }
 var NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
 function validarNome(nome) {
@@ -23082,11 +23091,11 @@ function validarNome(nome) {
   return n;
 }
 function caminhoNomeado(base, nome) {
-  return join3(base, PASTA, "perfis", `${nome}.md`);
+  return join4(base, PASTA, "perfis", `${nome}.md`);
 }
 function nomeAtivoEm(base) {
   try {
-    const f = join3(base, PASTA, "perfil-ativo");
+    const f = join4(base, PASTA, "perfil-ativo");
     if (!existsSync2(f)) return null;
     const n = readFileSync2(f, "utf8").split(/\r?\n/)[0].trim().toLowerCase();
     return NOME_RE.test(n) ? n : null;
@@ -23121,14 +23130,14 @@ function lerDe(caminho2, origem, hoje) {
   }
 }
 function lerPorDefeito(opts, hoje) {
-  return lerDe(caminhoPerfil(dirProjeto2(opts)), "projeto", hoje) ?? lerDe(caminhoPerfil(dirHome(opts)), "geral", hoje);
+  return lerDe(caminhoPerfil(dirProjeto2(opts)), "projeto", hoje) ?? lerDe(caminhoPerfil(dirHome2(opts)), "geral", hoje);
 }
 function lerNomeado(nome, opts, hoje) {
-  const p = lerDe(caminhoNomeado(dirProjeto2(opts), nome), "projeto", hoje) ?? lerDe(caminhoNomeado(dirHome(opts), nome), "geral", hoje);
+  const p = lerDe(caminhoNomeado(dirProjeto2(opts), nome), "projeto", hoje) ?? lerDe(caminhoNomeado(dirHome2(opts), nome), "geral", hoje);
   return p ? { ...p, nome } : null;
 }
 function nomePerfilAtivo(opts = {}) {
-  return nomeAtivoEm(dirProjeto2(opts)) ?? nomeAtivoEm(dirHome(opts));
+  return nomeAtivoEm(dirProjeto2(opts)) ?? nomeAtivoEm(dirHome2(opts));
 }
 function lerPerfil(opts = {}) {
   const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
@@ -23147,9 +23156,9 @@ function umaLinha(v) {
 }
 function serializar(campos) {
   const linhas = [
-    "# Perfil da empresa \u2014 advogado-pt",
+    "# Perfil da empresa \u2014 juridico-pt",
     "",
-    "<!-- Gerido pelo advogado-pt. Podes editar \xE0 m\xE3o: uma linha `campo: valor` por campo.",
+    "<!-- Gerido pelo juridico-pt. Podes editar \xE0 m\xE3o: uma linha `campo: valor` por campo.",
     "     N\xE3o guardes aqui dados pessoais de trabalhadores ou clientes. -->",
     ""
   ];
@@ -23157,7 +23166,7 @@ function serializar(campos) {
   return linhas.join("\n") + "\n";
 }
 function guardarPerfil(novos, destino, opts = {}) {
-  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome(opts);
+  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome2(opts);
   const nome = opts.perfil ? validarNome(opts.perfil) : void 0;
   const caminho2 = nome ? caminhoNomeado(base, nome) : caminhoPerfil(base);
   let atuais = {};
@@ -23190,17 +23199,17 @@ function textoPerguntasPerfil() {
     ...itens,
     "",
     "Depois oferece guardar com `guardar_perfil_empresa`, \xE0 escolha do utilizador:",
-    '- destino "projeto" -> <projeto>/.advogado-pt/perfil-empresa.md (esta empresa/pasta)',
-    '- destino "geral" -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito em todas as pastas)',
+    '- destino "projeto" -> <projeto>/.juridico-pt/perfil-empresa.md (esta empresa/pasta)',
+    '- destino "geral" -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito em todas as pastas)',
     "Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador."
   ].join("\n");
 }
 function listarPerfis(opts = {}) {
   const ativo = nomePerfilAtivo(opts);
   const vistos = /* @__PURE__ */ new Map();
-  for (const [base, origem] of [[dirProjeto2(opts), "projeto"], [dirHome(opts), "geral"]]) {
+  for (const [base, origem] of [[dirProjeto2(opts), "projeto"], [dirHome2(opts), "geral"]]) {
     try {
-      const dir2 = join3(base, PASTA, "perfis");
+      const dir2 = join4(base, PASTA, "perfis");
       if (!existsSync2(dir2)) continue;
       for (const f of readdirSync2(dir2)) {
         const n = f.replace(/\.md$/i, "").toLowerCase();
@@ -23213,7 +23222,7 @@ function listarPerfis(opts = {}) {
 }
 function ativarPerfil(nome, destino, opts = {}) {
   const n = validarNome(nome);
-  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome(opts);
+  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome2(opts);
   escreverSeguro(base, [PASTA, "perfil-ativo"], n + "\n");
 }
 
@@ -23779,10 +23788,10 @@ function paraICS(obrigacoes, opts = {}) {
   const linhas = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//advogado-pt//Calendario de obrigacoes legais//PT",
+    "PRODID:-//juridico-pt//Calendario de obrigacoes legais//PT",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "X-WR-CALNAME:Obriga\xE7\xF5es legais (advogado-pt)"
+    "X-WR-CALNAME:Obriga\xE7\xF5es legais (juridico-pt)"
   ];
   for (const o of obrigacoes) {
     const fim = isoDe(tsDe(o.data) + MS_DIA);
@@ -23793,11 +23802,11 @@ function paraICS(obrigacoes, opts = {}) {
       o.nota ?? "",
       o.aConfirmar ? `A confirmar no perfil: ${o.camposEmFalta.join(", ")}` : "",
       `Fonte: ${o.fonte}`,
-      "Gerado pelo advogado-pt: confirmar no Portal das Finan\xE7as / Seguran\xE7a Social Direta. N\xE3o substitui advogado nem contabilista."
+      "Gerado pelo juridico-pt: confirmar no Portal das Finan\xE7as / Seguran\xE7a Social Direta. N\xE3o substitui advogado nem contabilista."
     ].filter(Boolean).join("\n");
     linhas.push(
       "BEGIN:VEVENT",
-      `UID:${o.id}-${o.data}@advogado-pt`,
+      `UID:${o.id}-${o.data}@juridico-pt`,
       `DTSTAMP:${stamp}`,
       `DTSTART;VALUE=DATE:${dataICS(o.data)}`,
       `DTEND;VALUE=DATE:${dataICS(fim)}`,
@@ -23822,7 +23831,7 @@ function paraICS(obrigacoes, opts = {}) {
 }
 function exportarICS(ano, obrigacoes, dir2, hoje) {
   if (!Number.isInteger(ano) || ano < 2e3 || ano > 2100) throw new Error(`Ano inv\xE1lido: ${ano}`);
-  return escreverSeguro(dirProjeto(dir2), [".advogado-pt", `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
+  return escreverSeguro(dirProjeto(dir2), [PASTA_DADOS, `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
 }
 function formatarCalendario(obrigacoes, opts = {}) {
   const lista = opts.mes ? obrigacoes.filter((o) => Number(o.data.slice(5, 7)) === opts.mes) : obrigacoes;
@@ -23846,17 +23855,17 @@ function formatarCalendario(obrigacoes, opts = {}) {
 
 // src/prazos-estado.ts
 import { existsSync as existsSync3, readFileSync as readFileSync3 } from "node:fs";
-import { join as join4 } from "node:path";
-var PASTA2 = ".advogado-pt";
+import { join as join5 } from "node:path";
+var PASTA2 = PASTA_DADOS;
 var FICHEIRO2 = "prazos.md";
 var SEP = " \u2014 ";
 var LINHA_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
-var CABECALHO = '# Prazos em curso\n\n<!-- advogado-pt: uma linha por prazo \u2014 "- [ ] AAAA-MM-DD \u2014 descri\xE7\xE3o \u2014 origem". Marca [x] quando cumprido. O aviso aparece ao abrir a sess\xE3o (vencidos e pr\xF3ximos 7 dias). -->\n\n';
+var CABECALHO = '# Prazos em curso\n\n<!-- juridico-pt: uma linha por prazo \u2014 "- [ ] AAAA-MM-DD \u2014 descri\xE7\xE3o \u2014 origem". Marca [x] quando cumprido. O aviso aparece ao abrir a sess\xE3o (vencidos e pr\xF3ximos 7 dias). -->\n\n';
 function dirBase(dir2) {
   return dirProjeto(dir2);
 }
 function caminho(dir2) {
-  return join4(dirBase(dir2), PASTA2, FICHEIRO2);
+  return join5(dirBase(dir2), PASTA2, FICHEIRO2);
 }
 function validarData(data) {
   const s = String(data ?? "").trim();
@@ -24455,7 +24464,7 @@ Quota dispon\xEDvel: ${formatarEuros(r.quotaDisponivel)} (${r.quotaDisponivelPct
     "obter_perfil_empresa",
     {
       title: "Obter perfil da empresa",
-      description: "L\xEA o perfil da empresa do utilizador (forma jur\xEDdica, setor, trabalhadores, volume de neg\xF3cios, IVA, clientes\u2026) guardado em <projeto>/.advogado-pt/perfil-empresa.md ou, na falta, no perfil geral ~/.advogado-pt/perfil-empresa.md. Usa no in\xEDcio de qualquer quest\xE3o empresarial para adaptar a resposta \xE0 empresa ('a minha empresa', 'somos uma Lda', 'temos trabalhadores'). Sem perfil, devolve as perguntas a fazer. EN: read the saved company profile.",
+      description: "L\xEA o perfil da empresa do utilizador (forma jur\xEDdica, setor, trabalhadores, volume de neg\xF3cios, IVA, clientes\u2026) guardado em <projeto>/.juridico-pt/perfil-empresa.md ou, na falta, no perfil geral ~/.juridico-pt/perfil-empresa.md. Usa no in\xEDcio de qualquer quest\xE3o empresarial para adaptar a resposta \xE0 empresa ('a minha empresa', 'somos uma Lda', 'temos trabalhadores'). Sem perfil, devolve as perguntas a fazer. EN: read the saved company profile.",
       inputSchema: {
         diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (por defeito, o do cliente/cwd)"),
         perfil: external_exports.string().optional().describe("Nome de um perfil nomeado (ex.: cliente de um contabilista); omitido = perfil ativo ou o por defeito")
@@ -24482,7 +24491,7 @@ atualizado_em: ${p.campos.atualizado_em ?? "(sem data)"}` + (p.desatualizado ? "
     "guardar_perfil_empresa",
     {
       title: "Guardar perfil da empresa",
-      description: "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.advogado-pt/perfil-empresa.md; destino 'geral' -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito). Usa s\xF3 depois de o utilizador aceitar guardar e s\xF3 com dados da PR\xD3PRIA empresa \u2014 nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
+      description: "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.juridico-pt/perfil-empresa.md; destino 'geral' -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito). Usa s\xF3 depois de o utilizador aceitar guardar e s\xF3 com dados da PR\xD3PRIA empresa \u2014 nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
       inputSchema: {
         campos: external_exports.record(external_exports.string()).describe("Campos a gravar, ex.: {forma_juridica: 'Lda', setor: 'Restaura\xE7\xE3o', trabalhadores: '12'}"),
         destino: external_exports.enum(["projeto", "geral"]).default("projeto"),
@@ -24552,7 +24561,7 @@ ${resumoPerfil(p)}`);
       inputSchema: {
         ano: external_exports.number().int().min(2e3).max(2100).describe("Ano civil (ex.: 2026)"),
         mes: external_exports.number().int().min(1).max(12).optional().describe("S\xF3 este m\xEAs (1-12)"),
-        exportar: external_exports.boolean().default(false).describe("Gravar .advogado-pt/calendario-<ano>.ics"),
+        exportar: external_exports.boolean().default(false).describe("Gravar .juridico-pt/calendario-<ano>.ics"),
         diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (perfil e exporta\xE7\xE3o; por defeito, cwd)"),
         perfil: external_exports.string().optional().describe("Perfil nomeado a usar (por defeito, o ativo)")
       },
@@ -24586,7 +24595,7 @@ Google Calendar: Defini\xE7\xF5es \u2192 Importar e exportar \u2192 Importar (es
     "registar_prazo",
     {
       title: "Registar prazo em curso",
-      description: "Guarda um prazo a correr (data-limite, descri\xE7\xE3o, origem) em .advogado-pt/prazos.md do projeto; o hook avisa ao abrir cada sess\xE3o quando estiver vencido ou a 7 dias ou menos. Usa sempre que surgir um prazo perent\xF3rio (notifica\xE7\xE3o da AT, cita\xE7\xE3o, audi\xE7\xE3o pr\xE9via, recurso, resposta a carta) \u2014 de prefer\xEAncia depois de o calcular com calc_prazo. EN: save a running deadline with start-of-session reminders.",
+      description: "Guarda um prazo a correr (data-limite, descri\xE7\xE3o, origem) em .juridico-pt/prazos.md do projeto; o hook avisa ao abrir cada sess\xE3o quando estiver vencido ou a 7 dias ou menos. Usa sempre que surgir um prazo perent\xF3rio (notifica\xE7\xE3o da AT, cita\xE7\xE3o, audi\xE7\xE3o pr\xE9via, recurso, resposta a carta) \u2014 de prefer\xEAncia depois de o calcular com calc_prazo. EN: save a running deadline with start-of-session reminders.",
       inputSchema: {
         data: external_exports.string().describe("Data-limite AAAA-MM-DD"),
         descricao: external_exports.string().describe("O que tem de ser feito (ex.: 'Oposi\xE7\xE3o \xE0 execu\xE7\xE3o fiscal')"),
@@ -24601,7 +24610,7 @@ Google Calendar: Defini\xE7\xF5es \u2192 Importar e exportar \u2192 Importar (es
         const { proximos, vencidos } = prazosProximos([p], /* @__PURE__ */ new Date(), 7);
         const alerta = vencidos.length ? " \u26A0\uFE0F Esta data j\xE1 passou." : proximos.length ? ` \u23F0 Faltam ${proximos[0].faltam} dia(s).` : "";
         return texto(`Prazo registado: ${p.data} \u2014 ${p.descricao}${p.origem ? ` (${p.origem})` : ""}.${alerta}
-Ficheiro: .advogado-pt/prazos.md (aviso autom\xE1tico ao abrir a sess\xE3o).`);
+Ficheiro: .juridico-pt/prazos.md (aviso autom\xE1tico ao abrir a sess\xE3o).`);
       } catch (e) {
         return texto(`N\xE3o foi poss\xEDvel registar: ${e.message}`);
       }
@@ -24611,7 +24620,7 @@ Ficheiro: .advogado-pt/prazos.md (aviso autom\xE1tico ao abrir a sess\xE3o).`);
     "listar_prazos",
     {
       title: "Listar prazos em curso",
-      description: "Lista os prazos registados no projeto (.advogado-pt/prazos.md), com os vencidos e os dias em falta. Usa para 'que prazos tenho', 'o que est\xE1 a correr', 'prazos pendentes'. EN: list running deadlines.",
+      description: "Lista os prazos registados no projeto (.juridico-pt/prazos.md), com os vencidos e os dias em falta. Usa para 'que prazos tenho', 'o que est\xE1 a correr', 'prazos pendentes'. EN: list running deadlines.",
       inputSchema: {
         diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (por defeito, cwd)"),
         incluir_concluidos: external_exports.boolean().default(false)
@@ -24874,10 +24883,10 @@ function comeca(value, nome) {
 function registerResources(server) {
   server.registerResource(
     "conteudo-juridico",
-    new ResourceTemplate("advogado-pt://{categoria}/{nome}", {
+    new ResourceTemplate("juridico-pt://{categoria}/{nome}", {
       list: async () => ({
         resources: listarTudo().map(({ categoria, nome, label }) => ({
-          uri: `advogado-pt://${categoria}/${nome}`,
+          uri: `juridico-pt://${categoria}/${nome}`,
           name: `${label}: ${nome}`,
           description: `${label} de direito portugu\xEAs \u2014 ${nome}`,
           mimeType: "text/markdown"
@@ -24913,7 +24922,7 @@ function registerResources(server) {
 // src/persona.ts
 var PERSONA = `\xC9s o advogado pessoal e empresarial do utilizador, especializado em DIREITO PORTUGU\xCAS, para qualquer tipo de empresa (ENI, Unipessoal Lda, Lda, SA, associa\xE7\xE3o, cooperativa) de qualquer setor e dimens\xE3o, e para particulares.
 
-PERFIL DA EMPRESA: n\xE3o assumas o perfil. L\xEA o perfil guardado (tool "obter_perfil_empresa": <projeto>/.advogado-pt/perfil-empresa.md, ou o perfil geral ~/.advogado-pt/perfil-empresa.md). Se n\xE3o houver, pergunta s\xF3 o que for relevante para a quest\xE3o (forma jur\xEDdica, setor, n.\xBA de trabalhadores, volume de neg\xF3cios, B2B/B2C, clientes UE/fora da UE) e oferece guardar com "guardar_perfil_empresa" (destino projeto ou geral). Se tiver mais de 12 meses, confirma-o. Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador. Trabalha em PT e EN.
+PERFIL DA EMPRESA: n\xE3o assumas o perfil. L\xEA o perfil guardado (tool "obter_perfil_empresa": <projeto>/.juridico-pt/perfil-empresa.md, ou o perfil geral ~/.juridico-pt/perfil-empresa.md). Se n\xE3o houver, pergunta s\xF3 o que for relevante para a quest\xE3o (forma jur\xEDdica, setor, n.\xBA de trabalhadores, volume de neg\xF3cios, B2B/B2C, clientes UE/fora da UE) e oferece guardar com "guardar_perfil_empresa" (destino projeto ou geral). Se tiver mais de 12 meses, confirma-o. Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador. Trabalha em PT e EN.
 
 TOM: formal e juridicamente preciso nos documentos; direto e pr\xE1tico na estrat\xE9gia. Responde na l\xEDngua do utilizador (PT/EN).
 
@@ -24924,14 +24933,14 @@ RIGOR (inegoci\xE1vel):
 
 FLUXO: diagn\xF3stico \u2192 enquadramento legal (diplomas/artigos) \u2192 op\xE7\xF5es (custo / tempo / probabilidade de \xEAxito) \u2192 a\xE7\xE3o (documento ou pr\xF3ximos passos). Destaca SEMPRE prazos com \u23F0.
 
-FERRAMENTAS: usa as tools do advogado-pt \u2014 calculadoras (juros, IMT, prazos, prescri\xE7\xE3o, compensa\xE7\xE3o, custas, imposto de selo, IRS), templates de documentos, refer\xEAncias por \xE1rea, playbooks e checklists. Para gerar documentos, parte sempre do template correspondente.
+FERRAMENTAS: usa as tools do juridico-pt \u2014 calculadoras (juros, IMT, prazos, prescri\xE7\xE3o, compensa\xE7\xE3o, custas, imposto de selo, IRS), templates de documentos, refer\xEAncias por \xE1rea, playbooks e checklists. Para gerar documentos, parte sempre do template correspondente.
 
 QUANDO USAR (inten\xE7\xE3o \u2192 ferramenta): cliente n\xE3o paga \u2192 playbook "cliente-nao-paga" + calc_juros_mora; calcular um prazo/prescri\xE7\xE3o \u2192 calc_prazo / calc_prescricao; gerar um documento \u2192 obter_template; pergunta de fundo numa \xE1rea \u2192 ler_referencia; comprar im\xF3vel \u2192 calc_imt; despedir/indemniza\xE7\xE3o \u2192 calc_compensacao_despedimento (com data_admissao/data_cessacao); sal\xE1rio l\xEDquido / custo de contratar \u2192 calc_salario_liquido / calc_custo_trabalhador; IRC da empresa \u2192 calc_irc; faturar a cliente estrangeiro / IVA \u2192 calc_iva_operacao + playbook "faturar-cliente-estrangeiro"; quanto custa p\xF4r uma a\xE7\xE3o \u2192 calc_taxa_justica; que obriga\xE7\xF5es/prazos fiscais tenho no ano \u2192 calendario_obrigacoes (exportar=true para .ics/Google Calendar); prazo perent\xF3rio a correr \u2192 calc_prazo e depois registar_prazo (listar_prazos / concluir_prazo); empresa com 50+ trabalhadores \u2192 ler_referencia "compliance"; v\xE1rias empresas (contabilista) \u2192 listar_perfis / ativar_perfil; descrever uma situa\xE7\xE3o e querer os passos \u2192 obter_playbook; n\xE3o sabes onde est\xE1 \u2192 procurar_conteudo.
 
 SIN\xD3NIMOS/CAL\xC3O (traduz a linguagem do dia-a-dia para a \xE1rea certa): "recibos verdes" = trabalhador independente (Cat. B do IRS); "renda"/"aluguer" = arrendamento; "rescis\xE3o"/"mandar embora" = cessa\xE7\xE3o/despedimento do contrato de trabalho; "levei uma multa"/"coima" = contraordena\xE7\xE3o; "firma"/"abrir empresa" = constitui\xE7\xE3o de sociedade (societ\xE1rio); "fui \xE0 fal\xEAncia"/"estou insolvente" = insolv\xEAncia (CIRE/PER); "escritura"/"comprar casa" = compra e venda de im\xF3vel (imobili\xE1rio); "testamento"/"partilha" = heran\xE7as; "penhora"/"o tribunal tirou-me" = execu\xE7\xE3o; "processaram-me"/"vou a tribunal" = contencioso.
 
 DISCLAIMER (incluir na 1.\xAA resposta de cada novo tema): "Orienta\xE7\xE3o informativa baseada na legisla\xE7\xE3o portuguesa vigente; para a\xE7\xF5es judiciais ou situa\xE7\xF5es de elevada complexidade, recomendo valida\xE7\xE3o por advogado inscrito na Ordem dos Advogados."`;
-var INSTRUCOES_MCP = `advogado-pt \u2014 assessoria jur\xEDdica de Portugal (PT/EN), para empresas de qualquer forma e setor e para particulares.
+var INSTRUCOES_MCP = `juridico-pt \u2014 assessoria jur\xEDdica de Portugal (PT/EN), para empresas de qualquer forma e setor e para particulares.
 Rigor: nunca inventes artigos nem jurisprud\xEAncia (sem certeza, di-lo e sugere dre.pt / dgsi.pt); valores do ano em ler_referencia "valores-2026"; destaca os prazos com \u23F0; n\xE3o substituis advogado inscrito na OA \u2014 recomenda-o com prazos judiciais a correr, processo penal ou risco elevado.
 Perfil: obter_perfil_empresa antes de aconselhar uma empresa; sem perfil, pergunta s\xF3 o necess\xE1rio e oferece guardar_perfil_empresa; v\xE1rios clientes: listar_perfis / ativar_perfil.
 Inten\xE7\xE3o -> tool:
@@ -24942,7 +24951,7 @@ Inten\xE7\xE3o -> tool:
 - im\xF3veis e heran\xE7as: calc_imt, calc_imposto_selo_heranca, calc_legitima
 - custo de uma a\xE7\xE3o: calc_taxa_justica
 - documentos: listar_templates / obter_template; enquadramento legal: listar_areas_juridicas / ler_referencia; passos por situa\xE7\xE3o: listar_playbooks / obter_playbook; listas de verifica\xE7\xE3o: listar_checklists / obter_checklist; n\xE3o sabes onde est\xE1: procurar_conteudo.
-Persona completa, tom e fluxo: prompt "advogado_pt".`;
+Persona completa, tom e fluxo: prompt "assistente_juridico".`;
 
 // src/prompts.ts
 function mensagem(texto2) {
@@ -24980,9 +24989,9 @@ var AREAS = {
 };
 function registerPrompts(server) {
   server.registerPrompt(
-    "advogado_pt",
+    "assistente_juridico",
     {
-      title: "Advogado PT \u2014 assessor jur\xEDdico de Portugal",
+      title: "Jur\xEDdico PT \u2014 assessor jur\xEDdico de Portugal",
       description: "Ativa a persona de advogado pessoal e empresarial especializado em direito portugu\xEAs (geral).",
       argsSchema: {
         assunto: external_exports.string().optional().describe("Quest\xE3o ou tarefa jur\xEDdica concreta (opcional)")
@@ -24997,7 +25006,7 @@ Tarefa do utilizador: ${assunto}` : ""))
     server.registerPrompt(
       nome,
       {
-        title: `Advogado PT \u2014 ${titulo}`,
+        title: `Jur\xEDdico PT \u2014 ${titulo}`,
         description: `Persona de advogado de Portugal focada em: ${titulo.toLowerCase()}.`,
         argsSchema: {
           assunto: external_exports.string().optional().describe("Situa\xE7\xE3o concreta (opcional)")
@@ -25025,12 +25034,12 @@ function argumentosOpcionaisNosPrompts(server) {
 async function main() {
   const server = new McpServer(
     {
-      name: "advogado-pt",
+      name: "juridico-pt",
       version: "1.2.1"
     },
     {
       // Muitos clientes MCP injetam estas instruções como contexto do servidor (com um limite
-      // de tamanho): regras e mapa intenção -> tool. A persona completa está no prompt advogado_pt.
+      // de tamanho): regras e mapa intenção -> tool. A persona completa está no prompt assistente_juridico.
       instructions: INSTRUCOES_MCP
     }
   );
@@ -25040,9 +25049,9 @@ async function main() {
   argumentosOpcionaisNosPrompts(server);
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("advogado-pt MCP server ativo (stdio).");
+  console.error("juridico-pt MCP server ativo (stdio).");
 }
 main().catch((err) => {
-  console.error("Erro fatal no advogado-pt MCP server:", err);
+  console.error("Erro fatal no juridico-pt MCP server:", err);
   process.exit(1);
 });

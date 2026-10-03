@@ -202,12 +202,50 @@
       ],
       "task": "[shared] Escrever os testes a falhar: `mcp-server/test/v20.test.mjs` (T-302 a T-340 exceto T-309, T-313, T-316, T-326, T-336 a T-338), os casos novos de `plugin.test.mjs` (T-301, T-316, T-336, T-337), `test_scripts.py` (T-309, T-326), fixtures do contabilista e factos `v20-` esperados",
       "verify": "npm --prefix mcp-server test"
+    },
+    "5": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-303|T-305\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "build OK; T-303 e T-305 passam (pass 2, fail 0). Suite completa: 157 pass, 33 fail (só testes de tarefas seguintes), 2 skipped",
+      "at": "2026-10-03T22:57:02.520Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-303|T-305\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "build OK; T-303 e T-305 passam (pass 2, fail 0). Suite completa: 157 pass, 33 fail (só testes de tarefas seguintes), 2 skipped",
+          "at": "2026-10-03T22:57:02.520Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] `dados.ts`: pasta `.juridico-pt/` no projeto e no perfil geral (`JURIDICO_PT_HOME` ou a home), sem ler `.advogado-pt/`; perfil, prazos e calendário passam a usá-la",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-303|T-305\" mcp-server/test/v20.test.mjs"
+    },
+    "6": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-301\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-301 passa (pass 1, fail 0). Suite: 159 pass / 31 fail (só tarefas seguintes); Python 49 OK + T309/T326 em erro (esperado); plugin validate OK; build.py gera juridico-pt.skill (136 ficheiros); integrações em dia",
+      "at": "2026-10-03T22:59:25.736Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-301\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-301 passa (pass 1, fail 0). Suite: 159 pass / 31 fail (só tarefas seguintes); Python 49 OK + T309/T326 em erro (esperado); plugin validate OK; build.py gera juridico-pt.skill (136 ficheiros); integrações em dia",
+          "at": "2026-10-03T22:59:25.736Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-301\" mcp-server/test/plugin.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T22:48:16.978Z",
+  "lastTickAt": "2026-10-03T22:59:25.736Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
     "2": "2026-10-03T22:41:08.058Z",
-    "3": "2026-10-03T22:48:16.978Z"
+    "3": "2026-10-03T22:48:16.978Z",
+    "5": "2026-10-03T22:57:02.520Z",
+    "6": "2026-10-03T22:59:25.736Z"
   }
 }

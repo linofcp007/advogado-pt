@@ -10,6 +10,7 @@
 //   todos "independentemente de esse dia ser útil", e as janelas mensais (RGPC).
 // Agosto: férias fiscais (LGT 57.º-A) e contributivas (CRC 23.º-B) -> 31/8; declaração ou
 //   confirmação de remunerações à SS -> 25/8. IVA de junho / 2.º trimestre -> setembro (CIVA 41.º e 27.º, n.º 10).
+import { PASTA_DADOS } from "./dados.js";
 import { dirProjeto, escreverSeguro } from "./fs-seguro.js";
 import { eDiaUtil, proximoDiaUtil } from "./calculators/prazos.js";
 
@@ -674,10 +675,10 @@ export function paraICS(obrigacoes: Obrigacao[], opts: { hoje?: Date; alarmeDias
   const linhas: string[] = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//advogado-pt//Calendario de obrigacoes legais//PT",
+    "PRODID:-//juridico-pt//Calendario de obrigacoes legais//PT",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "X-WR-CALNAME:Obrigações legais (advogado-pt)",
+    "X-WR-CALNAME:Obrigações legais (juridico-pt)",
   ];
   for (const o of obrigacoes) {
     const fim = isoDe(tsDe(o.data) + MS_DIA);
@@ -688,13 +689,13 @@ export function paraICS(obrigacoes: Obrigacao[], opts: { hoje?: Date; alarmeDias
       o.nota ?? "",
       o.aConfirmar ? `A confirmar no perfil: ${o.camposEmFalta.join(", ")}` : "",
       `Fonte: ${o.fonte}`,
-      "Gerado pelo advogado-pt: confirmar no Portal das Finanças / Segurança Social Direta. Não substitui advogado nem contabilista.",
+      "Gerado pelo juridico-pt: confirmar no Portal das Finanças / Segurança Social Direta. Não substitui advogado nem contabilista.",
     ]
       .filter(Boolean)
       .join("\n");
     linhas.push(
       "BEGIN:VEVENT",
-      `UID:${o.id}-${o.data}@advogado-pt`,
+      `UID:${o.id}-${o.data}@juridico-pt`,
       `DTSTAMP:${stamp}`,
       `DTSTART;VALUE=DATE:${dataICS(o.data)}`,
       `DTEND;VALUE=DATE:${dataICS(fim)}`,
@@ -718,11 +719,11 @@ export function paraICS(obrigacoes: Obrigacao[], opts: { hoje?: Date; alarmeDias
   return linhas.map(dobrar).join("\r\n") + "\r\n";
 }
 
-/** Grava `<dir>/.advogado-pt/calendario-<ano>.ics` e devolve o caminho. */
+/** Grava `<dir>/.juridico-pt/calendario-<ano>.ics` e devolve o caminho. */
 export function exportarICS(ano: number, obrigacoes: Obrigacao[], dir?: string, hoje?: Date): string {
   if (!Number.isInteger(ano) || ano < 2000 || ano > 2100) throw new Error(`Ano inválido: ${ano}`);
   // Mesmo diretório que o hook lê; escrita segura (sem seguir ligações, temporário + renomeação).
-  return escreverSeguro(dirProjeto(dir), [".advogado-pt", `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
+  return escreverSeguro(dirProjeto(dir), [PASTA_DADOS, `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
 }
 
 /** Texto legível do calendário, agrupado por mês (para a tool e o CLI). */

@@ -1,9 +1,10 @@
-// Prazos em curso do projeto, guardados em <projeto>/.advogado-pt/prazos.md (editável à mão).
+// Prazos em curso do projeto, guardados em <projeto>/.juridico-pt/prazos.md (editável à mão).
 // Uma linha por prazo:  "- [ ] 2026-10-20 — Oposição à execução fiscal — art. 203.º CPPT"
 //                        caixa · data-limite · descrição · origem (opcional)
-// Concluído = "- [x]". O hook (hooks/advogado-hook.mjs) tem um leitor equivalente — manter alinhados.
+// Concluído = "- [x]". O hook (hooks/juridico-hook.mjs) tem um leitor equivalente — manter alinhados.
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { PASTA_DADOS } from "./dados.js";
 import { dirProjeto, escreverSeguro } from "./fs-seguro.js";
 
 export interface PrazoRegistado {
@@ -13,13 +14,13 @@ export interface PrazoRegistado {
   concluido: boolean;
 }
 
-const PASTA = ".advogado-pt";
+const PASTA = PASTA_DADOS;
 const FICHEIRO = "prazos.md";
 const SEP = " — ";
 const LINHA_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
 const CABECALHO =
   "# Prazos em curso\n\n" +
-  "<!-- advogado-pt: uma linha por prazo — \"- [ ] AAAA-MM-DD — descrição — origem\". " +
+  "<!-- juridico-pt: uma linha por prazo — \"- [ ] AAAA-MM-DD — descrição — origem\". " +
   "Marca [x] quando cumprido. O aviso aparece ao abrir a sessão (vencidos e próximos 7 dias). -->\n\n";
 
 // Mesmo diretório que o hook lê: o indicado, senão CLAUDE_PROJECT_DIR, senão o cwd.

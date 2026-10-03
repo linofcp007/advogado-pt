@@ -38,14 +38,14 @@
   - _Depends: 2_
 
 ## História US-1 (P1 — MVP): renomeação e migração
-- [ ] 5. [US1] `dados.ts`: pasta `.juridico-pt/` no projeto e no perfil geral (`JURIDICO_PT_HOME` ou a home), sem ler `.advogado-pt/`; perfil, prazos e calendário passam a usá-la
+- [x] 5. [US1] `dados.ts`: pasta `.juridico-pt/` no projeto e no perfil geral (`JURIDICO_PT_HOME` ou a home), sem ler `.advogado-pt/`; perfil, prazos e calendário passam a usá-la
   - _Requirements: US-1.AC-3, US-1.AC-5, EC-1_
   - _Makes green: T-303, T-305_
   - _Implements: mcp-server/src/dados.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-303|T-305" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 3_
-- [ ] 6. [US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição
+- [x] 6. [US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição
   - _Requirements: US-1.AC-1_
   - _Makes green: T-301_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-301" mcp-server/test/plugin.test.mjs_

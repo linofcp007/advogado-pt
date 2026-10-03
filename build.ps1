@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Empacota a skill advogado-pt num ficheiro .skill (ZIP) para upload no Claude.
+    Empacota a skill juridico-pt num ficheiro .skill (ZIP) para upload no Claude.
 .EXAMPLE
     ./build.ps1
     ./build.ps1 -Out dist
@@ -10,7 +10,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$SkillName = "advogado-pt"
+$SkillName = "juridico-pt"
 $Root = $PSScriptRoot
 $ExcludeDirs = @("__pycache__", ".git", ".idea", ".vscode", "dist", "node_modules")
 $ExcludeSuffix = @(".pyc", ".skill", ".zip")

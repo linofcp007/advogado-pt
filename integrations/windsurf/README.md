@@ -1,6 +1,6 @@
-# Windsurf — `advogado-pt-mcp`
+# Windsurf — `juridico-pt-mcp`
 
-Liga o servidor MCP `advogado-pt-mcp` ao **Windsurf** (Cascade) e adiciona a persona como
+Liga o servidor MCP `juridico-pt-mcp` ao **Windsurf** (Cascade) e adiciona a persona como
 regras do espaço de trabalho.
 
 ## Ficheiros
@@ -26,16 +26,16 @@ ficheiro de configuração MCP do Windsurf, preenchendo o caminho **absoluto** p
 ```json
 {
   "mcpServers": {
-    "advogado-pt": {
+    "juridico-pt": {
       "command": "node",
-      "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
+      "args": ["/ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js"]
     }
   }
 }
 ```
 
-> Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-> `node cli/advogado-pt.mjs mcp-config windsurf` na raiz do repo para gerar o bloco com o
+> Substitui `/ABSOLUTE/PATH/TO/juridico-pt` pelo caminho absoluto na tua máquina, ou corre
+> `node cli/juridico-pt.mjs mcp-config windsurf` na raiz do repo para gerar o bloco com o
 > caminho **absoluto** já preenchido.
 
 Em alternativa, abre o painel do **Cascade → MCP servers → Configure** (ícone do martelo) e

@@ -1,5 +1,5 @@
 /**
- * Testes do CLI universal (`cli/advogado-pt.mjs`), via spawnSync.
+ * Testes do CLI universal (`cli/juridico-pt.mjs`), via spawnSync.
  * `prompt` não depende do build; `calc` usa as calculadoras compiladas (`npm test` compila antes).
  */
 
@@ -10,7 +10,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const CLI = resolve(here, "..", "..", "cli", "advogado-pt.mjs");
+const CLI = resolve(here, "..", "..", "cli", "juridico-pt.mjs");
 
 function cli(...args) {
   const r = spawnSync(process.execPath, [CLI, ...args], { encoding: "utf8" });

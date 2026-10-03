@@ -1,6 +1,6 @@
-# Claude Desktop — `advogado-pt-mcp`
+# Claude Desktop — `juridico-pt-mcp`
 
-Liga o servidor MCP `advogado-pt-mcp` à app **Claude Desktop**.
+Liga o servidor MCP `juridico-pt-mcp` à app **Claude Desktop**.
 
 ## Onde fica o ficheiro de configuração
 
@@ -26,27 +26,27 @@ Atalho para abrir a partir da app: **Settings → Developer → Edit Config**.
 2. Abre (ou cria) o `claude_desktop_config.json`.
 3. Cola o bloco `mcpServers` de [`claude_desktop_config.snippet.json`](./claude_desktop_config.snippet.json),
    usando o caminho **absoluto** para `dist/index.js`. Se o ficheiro já tiver outros
-   servidores, acrescenta apenas a chave `"advogado-pt"` dentro do `mcpServers` existente
+   servidores, acrescenta apenas a chave `"juridico-pt"` dentro do `mcpServers` existente
    (não dupliques a chave `mcpServers`).
 
    ```json
    {
      "mcpServers": {
-       "advogado-pt": {
+       "juridico-pt": {
          "command": "node",
-         "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
+         "args": ["/ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js"]
        }
      }
    }
    ```
 
-   > Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-   > `node cli/advogado-pt.mjs mcp-config claude-desktop` na raiz do repo para gerar o bloco
+   > Substitui `/ABSOLUTE/PATH/TO/juridico-pt` pelo caminho absoluto na tua máquina, ou corre
+   > `node cli/juridico-pt.mjs mcp-config claude-desktop` na raiz do repo para gerar o bloco
    > com o caminho **absoluto** já preenchido.
 
 4. **Fecha e reabre** o Claude Desktop (sai por completo, não apenas a janela).
 5. Confirma no ícone de ferramentas/plug (🔌) da caixa de conversa que o servidor
-   `advogado-pt` está ligado. O prompt `advogado_pt` aparece no menu de prompts.
+   `juridico-pt` está ligado. O prompt `assistente_juridico` aparece no menu de prompts.
 
 ## Resolução de problemas
 

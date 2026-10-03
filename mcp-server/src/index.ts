@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Servidor MCP "advogado-pt" — assessoria jurídica de Portugal (referências, templates,
+// Servidor MCP "juridico-pt" — assessoria jurídica de Portugal (referências, templates,
 // playbooks, checklists e calculadoras) para qualquer cliente compatível com MCP:
 // Claude Desktop/Code, Cursor, Windsurf, Codex, Gemini CLI, OpenAI Agents/ChatGPT.
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -27,12 +27,12 @@ function argumentosOpcionaisNosPrompts(server: McpServer): void {
 async function main(): Promise<void> {
   const server = new McpServer(
     {
-      name: "advogado-pt",
+      name: "juridico-pt",
       version: "1.2.1",
     },
     {
       // Muitos clientes MCP injetam estas instruções como contexto do servidor (com um limite
-      // de tamanho): regras e mapa intenção -> tool. A persona completa está no prompt advogado_pt.
+      // de tamanho): regras e mapa intenção -> tool. A persona completa está no prompt assistente_juridico.
       instructions: INSTRUCOES_MCP,
     }
   );
@@ -45,10 +45,10 @@ async function main(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   // Logs vão para stderr para não interferir com o protocolo JSON-RPC em stdout.
-  console.error("advogado-pt MCP server ativo (stdio).");
+  console.error("juridico-pt MCP server ativo (stdio).");
 }
 
 main().catch((err) => {
-  console.error("Erro fatal no advogado-pt MCP server:", err);
+  console.error("Erro fatal no juridico-pt MCP server:", err);
   process.exit(1);
 });

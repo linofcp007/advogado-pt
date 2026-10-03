@@ -1,8 +1,8 @@
-// Escrita segura dos dados locais do plugin (`<projeto>/.advogado-pt/` e `~/.advogado-pt/`).
+// Escrita segura dos dados locais do plugin (`<projeto>/.juridico-pt/` e `~/.juridico-pt/`).
 //
 // - `dirProjeto` resolve sempre o mesmo diretório que o hook lê (CLAUDE_PROJECT_DIR, senão o cwd).
 // - `escreverSeguro` verifica cada componente abaixo da base com `lstat` e recusa symlinks e
-//   junctions (um repositório de terceiros podia apontar `.advogado-pt` para fora do projeto);
+//   junctions (um repositório de terceiros podia apontar `.juridico-pt` para fora do projeto);
 //   grava num ficheiro temporário exclusivo e renomeia-o por cima do destino.
 import { lstatSync, mkdirSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";

@@ -1,14 +1,14 @@
-# advogado-pt-mcp
+# juridico-pt-mcp
 
-Servidor **MCP (Model Context Protocol)** que disponibiliza a skill **Advogado PT** — assessoria jurídica de Portugal — a qualquer cliente compatível com MCP: **Claude Desktop/Code, Cursor, Windsurf, Codex, Gemini CLI e OpenAI Agents/ChatGPT**.
+Servidor **MCP (Model Context Protocol)** que disponibiliza a skill **Jurídico PT** — assessoria jurídica de Portugal — a qualquer cliente compatível com MCP: **Claude Desktop/Code, Cursor, Windsurf, Codex, Gemini CLI e OpenAI Agents/ChatGPT**.
 
 ## O que expõe
 
 - **Tools — calculadoras**: `calc_juros_mora`, `calc_prazo`, `calc_compensacao_despedimento`, `calc_custas_injuncao`, `calc_imposto_selo_heranca`, `calc_imt`, `calc_prescricao`, `calc_irs_simplificado`, `calc_creditos_laborais`, `calc_legitima`, `calc_salario_liquido`, `calc_custo_trabalhador`, `calc_irc`, `calc_iva_operacao`, `calc_taxa_justica`.
 - **Tools — perfil, calendário e prazos**: `obter_perfil_empresa`, `guardar_perfil_empresa`, `listar_perfis`, `ativar_perfil`, `calendario_obrigacoes`, `registar_prazo`, `listar_prazos`, `concluir_prazo`.
 - **Tools — conteúdo**: `listar_areas_juridicas`, `ler_referencia`, `listar_templates`, `obter_template`, `listar_playbooks`, `obter_playbook`, `listar_checklists`, `obter_checklist`, `procurar_conteudo`.
-- **Resources**: todo o conteúdo jurídico em `advogado-pt://{categoria}/{nome}` (referências, templates, playbooks, checklists).
-- **Prompt**: `advogado_pt` — ativa a persona de advogado de Portugal.
+- **Resources**: todo o conteúdo jurídico em `juridico-pt://{categoria}/{nome}` (referências, templates, playbooks, checklists).
+- **Prompt**: `assistente_juridico` — ativa a persona de advogado de Portugal.
 
 ## Instalação rápida
 
@@ -19,9 +19,9 @@ Bloco de configuração genérico (Claude Desktop, Cursor, Windsurf, Gemini, …
 ```json
 {
   "mcpServers": {
-    "advogado-pt": {
+    "juridico-pt": {
       "command": "node",
-      "args": ["/CAMINHO/ABSOLUTO/advogado-pt/mcp-server/dist/index.js"]
+      "args": ["/CAMINHO/ABSOLUTO/juridico-pt/mcp-server/dist/index.js"]
     }
   }
 }
@@ -43,9 +43,9 @@ npm start          # arranca o servidor em stdio
 ```json
 {
   "mcpServers": {
-    "advogado-pt": {
+    "juridico-pt": {
       "command": "node",
-      "args": ["/CAMINHO/ABSOLUTO/advogado-pt/mcp-server/dist/index.js"]
+      "args": ["/CAMINHO/ABSOLUTO/juridico-pt/mcp-server/dist/index.js"]
     }
   }
 }
@@ -58,7 +58,7 @@ npm start          # arranca o servidor em stdio
 - `src/tools.ts`, `src/resources.ts`, `src/prompts.ts` — registo MCP.
 - `scripts/bundle-content.mjs` — copia `references/`, `assets/`, `playbooks/` da skill para `content/` (corre no `build`).
 
-O conteúdo jurídico é o mesmo da skill `advogado-pt`; ao atualizar a skill, corre `npm run build` para re-empacotar.
+O conteúdo jurídico é o mesmo da skill `juridico-pt`; ao atualizar a skill, corre `npm run build` para re-empacotar.
 
 ## Aviso legal
 

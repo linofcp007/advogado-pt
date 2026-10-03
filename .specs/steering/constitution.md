@@ -4,7 +4,7 @@ Princípios inegociáveis que toda a feature deve cumprir. Mantém-nos poucos, c
 O `doctor` e o `/prReview` verificam contra eles; um design que viole um princípio é bloqueado.
 
 ## Princípios
-1. **Ponto único de verdade para valores** — montantes, taxas e limiares vivem em `skills/advogado-pt/references/valores-2026.md`; os outros ficheiros remetem para lá. Uma taxa usada numa calculadora existe também no port TS e no Python, com o mesmo valor.
+1. **Ponto único de verdade para valores** — montantes, taxas e limiares vivem em `skills/juridico-pt/references/valores-2026.md`; os outros ficheiros remetem para lá. Uma taxa usada numa calculadora existe também no port TS e no Python, com o mesmo valor.
 2. **Anti-alucinação** — nenhum artigo, diploma, prazo ou acórdão inventado. O que não estiver confirmado leva "(a confirmar)" ou `[VERIFICAR]` e remete para dre.pt / dgsi.pt.
 3. **Calculadoras nos dois lados** — cada calculadora existe em Python (`scripts/`, stdlib, `argparse`, `formatar_euros`, AVISO) e em TypeScript (`mcp-server/src/calculators/`), com testes equivalentes nos dois lados e os mesmos resultados.
 4. **Cross-refs com nomes reais** — commands, SKILL.md, READMEs e playbooks só citam ficheiros e tools que existem; o `plugin.test.mjs` valida-o.

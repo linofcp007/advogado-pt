@@ -15,14 +15,14 @@ const here = dirname(fileURLToPath(import.meta.url));
 const raiz = resolve(here, "..", "..");
 const persona = resolve(here, "..", "dist", "persona.js");
 
-const INICIO = "<!-- advogado-pt:persona:inicio — gerado por mcp-server/scripts/gerar-integracoes.mjs; não editar à mão -->";
-const FIM = "<!-- advogado-pt:persona:fim -->";
+const INICIO = "<!-- juridico-pt:persona:inicio — gerado por mcp-server/scripts/gerar-integracoes.mjs; não editar à mão -->";
+const FIM = "<!-- juridico-pt:persona:fim -->";
 
 const ALVOS = [
   "AGENTS.md",
   "integrations/codex/AGENTS.md",
   "integrations/gemini-cli/GEMINI.md",
-  "integrations/cursor/rules/advogado-pt.mdc",
+  "integrations/cursor/rules/juridico-pt.mdc",
   "integrations/chatgpt/custom-gpt-instructions.md",
 ];
 

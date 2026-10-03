@@ -1,6 +1,6 @@
-# Gemini CLI — `advogado-pt-mcp`
+# Gemini CLI — `juridico-pt-mcp`
 
-Liga o servidor MCP `advogado-pt-mcp` ao **Gemini CLI** e carrega a persona como contexto de
+Liga o servidor MCP `juridico-pt-mcp` ao **Gemini CLI** e carrega a persona como contexto de
 projeto.
 
 ## Ficheiros
@@ -23,25 +23,25 @@ O Gemini CLI lê as definições de `settings.json`:
 Clona o repo e compila o servidor **uma vez** (`npm install && npm run build` em
 `mcp-server/`). Depois cola o bloco `mcpServers` de
 [`settings.snippet.json`](./settings.snippet.json), com o caminho **absoluto** para
-`dist/index.js`. Se o ficheiro já existir, acrescenta apenas a chave `"advogado-pt"` dentro
+`dist/index.js`. Se o ficheiro já existir, acrescenta apenas a chave `"juridico-pt"` dentro
 do `mcpServers` existente:
 
 ```json
 {
   "mcpServers": {
-    "advogado-pt": {
+    "juridico-pt": {
       "command": "node",
-      "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
+      "args": ["/ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js"]
     }
   }
 }
 ```
 
-> Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-> `node cli/advogado-pt.mjs mcp-config gemini` na raiz do repo para gerar o bloco com o
+> Substitui `/ABSOLUTE/PATH/TO/juridico-pt` pelo caminho absoluto na tua máquina, ou corre
+> `node cli/juridico-pt.mjs mcp-config gemini` na raiz do repo para gerar o bloco com o
 > caminho **absoluto** já preenchido.
 
-Inicia o `gemini` e confirma com o comando `/mcp` que o servidor `advogado-pt` está ligado e
+Inicia o `gemini` e confirma com o comando `/mcp` que o servidor `juridico-pt` está ligado e
 que as tools estão listadas.
 
 ## 2. Carregar a persona

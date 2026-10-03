@@ -1,28 +1,28 @@
-# CLAUDE.md — Guia de Manutenção do plugin `advogado-pt`
+# CLAUDE.md — Guia de Manutenção do plugin `juridico-pt`
 
-Orienta quem (humano ou Claude) **mantém ou desenvolve** o plugin. Não é runtime jurídico — o conteúdo da skill está em `skills/advogado-pt/SKILL.md`.
+Orienta quem (humano ou Claude) **mantém ou desenvolve** o plugin. Não é runtime jurídico — o conteúdo da skill está em `skills/juridico-pt/SKILL.md`.
 
 ## O que é
 
 Plugin Claude Code de assessoria jurídica de Portugal, com 4 superfícies sobre o mesmo conteúdo:
 
-- **Skill** (`skills/advogado-pt/`) — `SKILL.md` + `references/`, `assets/templates/`, `assets/checklists/`, `playbooks/`, `scripts/` (calculadoras Python).
+- **Skill** (`skills/juridico-pt/`) — `SKILL.md` + `references/`, `assets/templates/`, `assets/checklists/`, `playbooks/`, `scripts/` (calculadoras Python).
 - **Servidor MCP** (`mcp-server/`, TypeScript) — calculadoras (port TS) + conteúdo como tools/resources + persona como prompt.
 - **Slash commands** (`commands/`) — wrappers finos que invocam a skill / tools.
-- **Hooks** (`hooks/`) + **CLI** (`cli/advogado-pt.mjs`).
+- **Hooks** (`hooks/`) + **CLI** (`cli/juridico-pt.mjs`).
 
 Distribuição: plugin via marketplace git (`.claude-plugin/`) + `.skill` (Anthropic Skills) gerado por `build.py`. **Sem npm publish e sem CI, por opção** (zero custo).
 
 ## Princípios invioláveis
 
-1. **Ponto único de verdade para valores**: todos os montantes/taxas/limiares vivem em `skills/advogado-pt/references/valores-2026.md`. Os outros ficheiros **remetem** para lá. Ao mudar de ano, atualizar e renomear.
+1. **Ponto único de verdade para valores**: todos os montantes/taxas/limiares vivem em `skills/juridico-pt/references/valores-2026.md`. Os outros ficheiros **remetem** para lá. Ao mudar de ano, atualizar e renomear.
 2. **Anti-alucinação**: nunca inventar artigos ou jurisprudência. Marcar "(a confirmar)" e verificar em dre.pt/dgsi.pt. Ver "Princípios de Rigor" no `SKILL.md`.
 3. **Estilo da casa**: H1; `## Legislação Base`; secções em bullets; `## Para o contexto do utilizador`; `## Templates`. O `.markdownlint.jsonc` já silencia o ruído (MD022/MD032/…) — é estilo intencional.
 4. **Cross-refs com nomes reais**: usar caminhos que existem mesmo (o teste `mcp-server/test/plugin.test.mjs` valida commands→tools e conteúdo referenciado).
 
 ## Calendário de manutenção (valores mudam!)
 
-| Quando | Rever em `skills/advogado-pt/references/valores-2026.md` |
+| Quando | Rever em `skills/juridico-pt/references/valores-2026.md` |
 |---|---|
 | **Janeiro** (pós-OE) | IRC, IRS, IAS, salário mínimo, deduções, IMT/IMI, isenções jovem |
 | **Janeiro e julho** | juros de mora comerciais do semestre (aviso da ETF) — acrescentar a linha à tabela `TAXAS_SEMESTRAIS` em `scripts/juros_mora.py` **e** `mcp-server/src/calculators/juros.ts` |
@@ -32,7 +32,7 @@ Ao corrigir um valor: atualizar a "Última atualização" no topo do `valores-20
 
 ## Como adicionar
 
-Caminhos relativos a `skills/advogado-pt/`:
+Caminhos relativos a `skills/juridico-pt/`:
 
 - **Nova área** → `references/nova-area.md` + ligar em `SKILL.md` (Áreas de Competência), no `README.md` e (opcional) um command.
 - **Novo template** → `assets/templates/nome.md` (comentário `<!-- Template: -->` com linha `Âmbito: nacional|ue|misto`, placeholders `{{...}}`, `[VERIFICAR]` para o que falta confirmar, e a secção final `## Antes de enviar — verificar` com ≥ 3 itens `- [ ]`) + índice `assets/templates/README.md`. O `plugin.test.mjs` (T-21/T-22) falha se faltar o âmbito ou a verificação final.
@@ -40,15 +40,15 @@ Caminhos relativos a `skills/advogado-pt/`:
 - **Novo playbook / checklist** → `playbooks/nome.md` / `assets/checklists/nome.md` + índice.
 - **Nova calculadora** → **dois lados**: Python em `scripts/nome.py` (stdlib, `argparse`, `formatar_euros`, AVISO) + teste em `scripts/test_scripts.py`; **e** o port TS em `mcp-server/src/calculators/nome.ts` (reexportar em `index.ts`) + teste em `mcp-server/test/calculators.test.mjs` + registar a tool em `mcp-server/src/tools.ts`.
 - **Novo command** → `commands/nome.md` (frontmatter `description` PT+EN + `argument-hint`; corpo fino que nomeia a tool/ficheiro real).
-- **Novo hook** → registar em `hooks/hooks.json`; manter o dispatcher `hooks/advogado-hook.mjs` dependency-free e fail-open. **Não** declarar `hooks/hooks.json` em `plugin.json` (o caminho padrão é carregado automaticamente pelo Claude Code; declará-lo dá "Duplicate hooks file detected"). O `manifest.hooks` só serve para ficheiros de hooks fora do caminho padrão. O teste `mcp-server/test/plugin.test.mjs` trava esta regressão. **Nunca detetar conteúdo jurídico por léxico**: aqui o vocabulário jurídico é o assunto — as `references/`, os `playbooks/` e até specs de software falam de "contrato" e "cláusula" sem serem contratos. Classificar pela **estrutura** do instrumento (ver `detetarDocumentoJuridico()` e `mcp-server/test/hooks.test.mjs`). Precisão >> recall: um falso positivo é ruído em cada gravação.
+- **Novo hook** → registar em `hooks/hooks.json`; manter o dispatcher `hooks/juridico-hook.mjs` dependency-free e fail-open. **Não** declarar `hooks/hooks.json` em `plugin.json` (o caminho padrão é carregado automaticamente pelo Claude Code; declará-lo dá "Duplicate hooks file detected"). O `manifest.hooks` só serve para ficheiros de hooks fora do caminho padrão. O teste `mcp-server/test/plugin.test.mjs` trava esta regressão. **Nunca detetar conteúdo jurídico por léxico**: aqui o vocabulário jurídico é o assunto — as `references/`, os `playbooks/` e até specs de software falam de "contrato" e "cláusula" sem serem contratos. Classificar pela **estrutura** do instrumento (ver `detetarDocumentoJuridico()` e `mcp-server/test/hooks.test.mjs`). Precisão >> recall: um falso positivo é ruído em cada gravação.
 
 ## Build, testes e versões
 
 ```bash
 npm run setup                                    # bootstrap: instala + compila o MCP + doctor
-python build.py                                  # gera advogado-pt.skill (empacota skills/advogado-pt/)
+python build.py                                  # gera juridico-pt.skill (empacota skills/juridico-pt/)
 cd mcp-server && npm test                        # calculadoras + estrutura do plugin
-python skills/advogado-pt/scripts/test_scripts.py  # testes das calculadoras Python
+python skills/juridico-pt/scripts/test_scripts.py  # testes das calculadoras Python
 node mcp-server/scripts/gerar-integracoes.mjs      # copia PERSONA_INTEGRACOES (src/persona.ts) para AGENTS.md e integrations/ (--check só verifica)
 ```
 
@@ -56,7 +56,7 @@ node mcp-server/scripts/gerar-integracoes.mjs      # copia PERSONA_INTEGRACOES (
 
 ## Distribuição
 
-Plugin: `git push` → `/plugin marketplace add https://github.com/linofcp007/advogado-pt.git` → `/plugin install advogado-pt`. **Não é preciso build após instalar**: o servidor MCP é distribuído como bundle self-contained versionado (`mcp-server/dist/index.js`). Noutras IAs: `node cli/advogado-pt.mjs mcp-config <host>`.
+Plugin: `git push` → `/plugin marketplace add https://github.com/linofcp007/juridico-pt.git` → `/plugin install juridico-pt`. **Não é preciso build após instalar**: o servidor MCP é distribuído como bundle self-contained versionado (`mcp-server/dist/index.js`). Noutras IAs: `node cli/juridico-pt.mjs mcp-config <host>`.
 
 **Nunca criar um diretório `bin/` na raiz.** O Claude Desktop / claude.ai não clona o repo: valida-o num serviço remoto da Anthropic, que **rejeita** qualquer plugin com `bin/` de topo (esses ficheiros entram no PATH no CLI mas não são mostrados na superfície de aprovação). O sync falha com `status=failed_content` e a UI mostra só *"Falha na sincronização do marketplace. Verifique a URL do repositório"* — que não tem nada a ver com a causa. Pontos de entrada executáveis vão para `hooks/`, `commands/` ou `mcpServers`; o CLI universal vive em `cli/`. O CLI local (`/plugin marketplace add`) usa `git clone` e **não** aplica esta regra, por isso passa mesmo quando o Desktop falha — não serve de validação.
 
@@ -65,5 +65,5 @@ Plugin: `git push` → `/plugin marketplace add https://github.com/linofcp007/ad
 - Scripts Python e CLI/MCP reconfiguram stdout para UTF-8 (consola cp1252 do Windows); usar `->` em vez de setas unicode nas mensagens.
 - `mcp-server/dist/index.js` (bundle self-contained via esbuild) e `mcp-server/content/` são **versionados** — é o que permite o plugin funcionar via marketplace sem `npm install`. São gerados por `npm run build`; regenerar e committar ao mudar `src/` ou conteúdo. O resto de `mcp-server/dist/` (saída do `tsc`, usada só nos testes) e `node_modules/` ficam ignorados.
 - Conteúdo jurídico parcialmente gerado por subagentes; rever citações determinantes antes de confiar.
-- **Abrir este repositório no Claude Code**: o `.mcp.json` da raiz é o do *plugin* (usa `${CLAUDE_PLUGIN_ROOT}`) e, lido como servidor de *projeto*, não arranca ("advogado-pt — Connection closed"). Não o alterar (é o caminho padrão do plugin); desativá-lo localmente em `.claude/settings.local.json` com `"disabledMcpjsonServers": ["advogado-pt"]` e testar o servidor com o plugin instalado ou com `node mcp-server/test/smoke-client.mjs`.
-- **Perfil da empresa**: o plugin não assume o perfil do utilizador. Vive em `<projeto>/.advogado-pt/perfil-empresa.md` (ou `~/.advogado-pt/perfil-empresa.md`); o leitor existe em dois sítios — `mcp-server/src/perfil.ts` e `hooks/advogado-hook.mjs` (o hook não importa o servidor) — manter os dois alinhados.
+- **Abrir este repositório no Claude Code**: o `.mcp.json` da raiz é o do *plugin* (usa `${CLAUDE_PLUGIN_ROOT}`) e, lido como servidor de *projeto*, não arranca ("juridico-pt — Connection closed"). Não o alterar (é o caminho padrão do plugin); desativá-lo localmente em `.claude/settings.local.json` com `"disabledMcpjsonServers": ["juridico-pt"]` e testar o servidor com o plugin instalado ou com `node mcp-server/test/smoke-client.mjs`.
+- **Perfil da empresa**: o plugin não assume o perfil do utilizador. Vive em `<projeto>/.juridico-pt/perfil-empresa.md` (ou `~/.juridico-pt/perfil-empresa.md`); o leitor existe em dois sítios — `mcp-server/src/perfil.ts` e `hooks/juridico-hook.mjs` (o hook não importa o servidor) — manter os dois alinhados.

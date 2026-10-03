@@ -1,19 +1,19 @@
-# Contribuir para o advogado-pt
+# Contribuir para o juridico-pt
 
-Obrigado por ajudar a melhorar este plugin. O `advogado-pt` é, ao mesmo tempo, uma **skill** de
+Obrigado por ajudar a melhorar este plugin. O `juridico-pt` é, ao mesmo tempo, uma **skill** de
 assessoria jurídica de Portugal, um **servidor MCP** e um **plugin do Claude Code**. Algumas regras
 mantêm-no coerente e rigoroso — respeita-as em cada alteração.
 
 ## Estrutura do repositório
 
 ```text
-advogado-pt/
-├── skills/advogado-pt/   # A skill: SKILL.md, references/, assets/templates/, assets/checklists/,
+juridico-pt/
+├── skills/juridico-pt/   # A skill: SKILL.md, references/, assets/templates/, assets/checklists/,
 │                         #   playbooks/, scripts/ (calculadoras Python) — a fonte de verdade do conteúdo
 ├── mcp-server/           # Servidor MCP em TypeScript (src/, test/, scripts/bundle-content.mjs → content/)
 ├── commands/             # Slash commands do plugin do Claude Code
 ├── hooks/                # Hooks locais do plugin (hooks.json)
-├── cli/                  # CLI / entry point (cli/advogado-pt.mjs)
+├── cli/                  # CLI / entry point (cli/juridico-pt.mjs)
 ├── integrations/         # Configs por plataforma (Cursor, Windsurf, Gemini, Codex, ChatGPT, Claude)
 └── .claude-plugin/       # plugin.json + marketplace.json
 ```
@@ -23,7 +23,7 @@ advogado-pt/
 A partir da raiz:
 
 ```bash
-python build.py            # gera advogado-pt.skill (exclui mcp-server/ e integrations/)
+python build.py            # gera juridico-pt.skill (exclui mcp-server/ e integrations/)
 ```
 
 ## Construir e testar o servidor MCP
@@ -35,7 +35,7 @@ npm run build              # empacota o conteúdo da skill em content/ + compila
 npm test                   # build + testes das calculadoras (node --test)
 ```
 
-O conteúdo jurídico é **o mesmo da skill**: ao mudar `skills/advogado-pt/`, corre `npm run build` no
+O conteúdo jurídico é **o mesmo da skill**: ao mudar `skills/juridico-pt/`, corre `npm run build` no
 `mcp-server/` para re-empacotar antes de publicar.
 
 ## Versionamento
@@ -58,7 +58,7 @@ Usa [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:
 - **Não inventar.** Nunca inventes números de artigos, diplomas ou jurisprudência. Em caso de dúvida,
   marca `(a confirmar)` e verifica em [dre.pt](https://dre.pt) / [dgsi.pt](https://www.dgsi.pt).
 - **Valores num só sítio.** Todos os montantes, taxas, limiares e prazos vivem em
-  `skills/advogado-pt/references/valores-2026.md`. As outras referências **remetem** para lá — não
+  `skills/juridico-pt/references/valores-2026.md`. As outras referências **remetem** para lá — não
   repetem números. Ao corrigir um valor, atualiza também a "Última atualização" no topo desse ficheiro.
 - **Estilo da casa.** Mantém o estilo consistente das referências (ver `CLAUDE.md`). O linter de
   Markdown está configurado em `.markdownlint.jsonc` para não perseguir esse estilo intencional.

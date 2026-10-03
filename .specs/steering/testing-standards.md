@@ -2,7 +2,7 @@
 
 ## Runner e Ferramentas
 - Unit (TS): `node --test` sobre `mcp-server/test/*.test.mjs`, importando `../dist/` (corre `npm test` = build + testes).
-- Unit (Python): `unittest` em `skills/advogado-pt/scripts/test_scripts.py`.
+- Unit (Python): `unittest` em `skills/juridico-pt/scripts/test_scripts.py`.
 - Estrutura/conteúdo: `mcp-server/test/plugin.test.mjs` lê os `.md` e o `tools.ts` diretamente.
 - E2E: `mcp-server/test/smoke-client.mjs` (manual).
 - Mocking: nenhum — calculadoras são puras; datas passadas explicitamente.

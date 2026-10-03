@@ -16,11 +16,11 @@ import { readFileSync, readdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { detetarDocumentoJuridico } from "../../hooks/advogado-hook.mjs";
+import { detetarDocumentoJuridico } from "../../hooks/juridico-hook.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const raiz = resolve(here, "..", "..");
-const TEMPLATES = resolve(raiz, "skills", "advogado-pt", "assets", "templates");
+const TEMPLATES = resolve(raiz, "skills", "juridico-pt", "assets", "templates");
 
 const dispara = (path, content) => detetarDocumentoJuridico({ path, content });
 
@@ -44,7 +44,7 @@ test("DF-3: spec técnica com 'contrato' de interface não dispara", () => {
 
 test("DF-3: documento que DESCREVE os termos-gatilho não dispara (auto-referência)", () => {
   const meta = [
-    "### DF-3 · `advogado-pt` · hook `PostToolUse` dispara em documentos técnicos",
+    "### DF-3 · `juridico-pt` · hook `PostToolUse` dispara em documentos técnicos",
     "",
     "*Correção sugerida:* exigir dois ou mais termos jurídicos de alta especificidade",
     "(foro, arbitragem, outorgante, cláusula), ou excluir caminhos como `.specs/`.",
@@ -55,8 +55,8 @@ test("DF-3: documento que DESCREVE os termos-gatilho não dispara (auto-referên
 test("ficheiro de código nunca dispara, mesmo cheio de termos jurídicos", () => {
   const ts = 'export const SINAIS = /contrato|cláusula|arrendamento|honorários/i;';
   assert.equal(dispara("mcp-server/src/tools.ts", ts), false);
-  assert.equal(dispara("hooks/advogado-hook.mjs", ts), false);
-  assert.equal(dispara("skills/advogado-pt/scripts/compensacao_despedimento.py", ts), false);
+  assert.equal(dispara("hooks/juridico-hook.mjs", ts), false);
+  assert.equal(dispara("skills/juridico-pt/scripts/compensacao_despedimento.py", ts), false);
 });
 
 test("referência da casa (## Legislação Base) não dispara", () => {
@@ -67,7 +67,7 @@ test("referência da casa (## Legislação Base) não dispara", () => {
     "",
     "- Código Civil, arts. 405.º e ss. — liberdade contratual, cláusula penal.",
   ].join("\n");
-  assert.equal(dispara("skills/advogado-pt/references/contratos.md", ref), false);
+  assert.equal(dispara("skills/juridico-pt/references/contratos.md", ref), false);
 });
 
 test("README/CHANGELOG/CLAUDE.md não disparam", () => {
@@ -126,7 +126,7 @@ test("entradas degeneradas não rebentam (fail-open silencioso)", () => {
 });
 
 // --- Perfil da empresa no SessionStart ------------------------------------
-import { mensagemSessionStart } from "../../hooks/advogado-hook.mjs";
+import { mensagemSessionStart } from "../../hooks/juridico-hook.mjs";
 import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -139,8 +139,8 @@ function dirsHook() {
   };
 }
 function perfilEm(base, conteudo) {
-  mkdirSync(join(base, ".advogado-pt"), { recursive: true });
-  writeFileSync(join(base, ".advogado-pt", "perfil-empresa.md"), conteudo);
+  mkdirSync(join(base, ".juridico-pt"), { recursive: true });
+  writeFileSync(join(base, ".juridico-pt", "perfil-empresa.md"), conteudo);
 }
 
 test("T-41 SessionStart: com perfil mostra resumo e origem; sem perfil manda perguntar; desatualizado pede confirmação", () => {

@@ -1,11 +1,11 @@
 // Perfil da empresa do utilizador, guardado em ficheiro local e editável:
-//   <projeto>/.advogado-pt/perfil-empresa.md   (prioridade — a empresa deste projeto)
-//   ~/.advogado-pt/perfil-empresa.md           (perfil geral — a empresa por defeito)
+//   <projeto>/.juridico-pt/perfil-empresa.md   (prioridade — a empresa deste projeto)
+//   ~/.juridico-pt/perfil-empresa.md           (perfil geral — a empresa por defeito; JURIDICO_PT_HOME)
 // Formato: uma linha "campo: valor" por campo. Só os campos de CAMPOS_PERFIL contam.
-// O hook (hooks/advogado-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
+// O hook (hooks/juridico-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { homedir } from "node:os";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
+import { PASTA_DADOS, dirHome as dirHomeBase } from "./dados.js";
 import { dirProjeto as dirProjetoBase, escreverSeguro } from "./fs-seguro.js";
 
 export const CAMPOS_PERFIL = [
@@ -37,7 +37,7 @@ const ROTULOS: Record<string, string> = {
   notas: "Notas (licenças, setor regulado, sócios…)",
 };
 
-const PASTA = ".advogado-pt";
+const PASTA = PASTA_DADOS;
 const FICHEIRO = "perfil-empresa.md";
 const MS_12_MESES = 365 * 24 * 60 * 60 * 1000;
 
@@ -53,11 +53,11 @@ export interface Perfil {
 }
 
 export interface OpcoesPerfil {
-  /** Perfil nomeado (`.advogado-pt/perfis/<nome>.md`); omitido = perfil ativo ou o por defeito. */
+  /** Perfil nomeado (`.juridico-pt/perfis/<nome>.md`); omitido = perfil ativo ou o por defeito. */
   perfil?: string;
   /** Diretório do projeto (default: CLAUDE_PROJECT_DIR ou cwd). */
   projeto?: string;
-  /** Diretório "home" do perfil geral (default: ADVOGADO_PT_HOME ou homedir()). */
+  /** Diretório "home" do perfil geral (default: JURIDICO_PT_HOME ou homedir()). */
   home?: string;
   hoje?: Date;
 }
@@ -67,7 +67,7 @@ function dirProjeto(o: OpcoesPerfil): string {
 }
 
 function dirHome(o: OpcoesPerfil): string {
-  return resolve(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
+  return dirHomeBase(o.home);
 }
 
 function caminhoPerfil(base: string): string {
@@ -88,7 +88,7 @@ function caminhoNomeado(base: string, nome: string): string {
   return join(base, PASTA, "perfis", `${nome}.md`);
 }
 
-/** Nome guardado em `<base>/.advogado-pt/perfil-ativo`, se válido. */
+/** Nome guardado em `<base>/.juridico-pt/perfil-ativo`, se válido. */
 function nomeAtivoEm(base: string): string | null {
   try {
     const f = join(base, PASTA, "perfil-ativo");
@@ -151,7 +151,7 @@ export function nomePerfilAtivo(opts: OpcoesPerfil = {}): string | null {
 
 /**
  * Perfil a usar: o nomeado pedido em `opts.perfil`; senão o perfil ativo
- * (`.advogado-pt/perfil-ativo`); senão o por defeito (`perfil-empresa.md`, projeto -> geral).
+ * (`.juridico-pt/perfil-ativo`); senão o por defeito (`perfil-empresa.md`, projeto -> geral).
  * Se o nomeado/ativo não existir, devolve o por defeito com `aviso`. null se nenhum.
  */
 export function lerPerfil(opts: OpcoesPerfil = {}): Perfil | null {
@@ -173,9 +173,9 @@ function umaLinha(v: string): string {
 
 function serializar(campos: Record<string, string>): string {
   const linhas = [
-    "# Perfil da empresa — advogado-pt",
+    "# Perfil da empresa — juridico-pt",
     "",
-    "<!-- Gerido pelo advogado-pt. Podes editar à mão: uma linha `campo: valor` por campo.",
+    "<!-- Gerido pelo juridico-pt. Podes editar à mão: uma linha `campo: valor` por campo.",
     "     Não guardes aqui dados pessoais de trabalhadores ou clientes. -->",
     "",
   ];
@@ -229,8 +229,8 @@ export function textoPerguntasPerfil(): string {
     ...itens,
     "",
     "Depois oferece guardar com `guardar_perfil_empresa`, à escolha do utilizador:",
-    "- destino \"projeto\" -> <projeto>/.advogado-pt/perfil-empresa.md (esta empresa/pasta)",
-    "- destino \"geral\" -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito em todas as pastas)",
+    "- destino \"projeto\" -> <projeto>/.juridico-pt/perfil-empresa.md (esta empresa/pasta)",
+    "- destino \"geral\" -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito em todas as pastas)",
     "Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador.",
   ].join("\n");
 }
@@ -256,7 +256,7 @@ export function listarPerfis(opts: OpcoesPerfil = {}): Array<{ nome: string; ori
   return [...vistos.entries()].map(([nome, origem]) => ({ nome, origem, ativo: nome === ativo }));
 }
 
-/** Define o perfil ativo (escreve `.advogado-pt/perfil-ativo` no projeto ou no geral). */
+/** Define o perfil ativo (escreve `.juridico-pt/perfil-ativo` no projeto ou no geral). */
 export function ativarPerfil(nome: string, destino: "projeto" | "geral", opts: OpcoesPerfil = {}): void {
   const n = validarNome(nome);
   const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);

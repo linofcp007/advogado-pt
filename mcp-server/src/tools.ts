@@ -628,7 +628,7 @@ export function registerTools(servidor: McpServer): void {
     {
       title: "Obter perfil da empresa",
       description:
-        "Lê o perfil da empresa do utilizador (forma jurídica, setor, trabalhadores, volume de negócios, IVA, clientes…) guardado em <projeto>/.advogado-pt/perfil-empresa.md ou, na falta, no perfil geral ~/.advogado-pt/perfil-empresa.md. Usa no início de qualquer questão empresarial para adaptar a resposta à empresa ('a minha empresa', 'somos uma Lda', 'temos trabalhadores'). Sem perfil, devolve as perguntas a fazer. EN: read the saved company profile.",
+        "Lê o perfil da empresa do utilizador (forma jurídica, setor, trabalhadores, volume de negócios, IVA, clientes…) guardado em <projeto>/.juridico-pt/perfil-empresa.md ou, na falta, no perfil geral ~/.juridico-pt/perfil-empresa.md. Usa no início de qualquer questão empresarial para adaptar a resposta à empresa ('a minha empresa', 'somos uma Lda', 'temos trabalhadores'). Sem perfil, devolve as perguntas a fazer. EN: read the saved company profile.",
       inputSchema: {
         diretorio: z
           .string()
@@ -666,7 +666,7 @@ export function registerTools(servidor: McpServer): void {
     {
       title: "Guardar perfil da empresa",
       description:
-        "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.advogado-pt/perfil-empresa.md; destino 'geral' -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito). Usa só depois de o utilizador aceitar guardar e só com dados da PRÓPRIA empresa — nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
+        "Grava/atualiza o perfil da empresa do utilizador (funde com o existente e atualiza a data). destino 'projeto' -> <projeto>/.juridico-pt/perfil-empresa.md; destino 'geral' -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito). Usa só depois de o utilizador aceitar guardar e só com dados da PRÓPRIA empresa — nunca de um cliente ou terceiro. Campos aceites: forma_juridica, denominacao, setor, trabalhadores, volume_negocios, regime_iva, contabilidade, clientes, dados_pessoais, linguas, notas. EN: save the company profile.",
       inputSchema: {
         campos: z
           .record(z.string())
@@ -749,7 +749,7 @@ export function registerTools(servidor: McpServer): void {
       inputSchema: {
         ano: z.number().int().min(2000).max(2100).describe("Ano civil (ex.: 2026)"),
         mes: z.number().int().min(1).max(12).optional().describe("Só este mês (1-12)"),
-        exportar: z.boolean().default(false).describe("Gravar .advogado-pt/calendario-<ano>.ics"),
+        exportar: z.boolean().default(false).describe("Gravar .juridico-pt/calendario-<ano>.ics"),
         diretorio: z.string().optional().describe("Diretório do projeto (perfil e exportação; por defeito, cwd)"),
         perfil: z.string().optional().describe("Perfil nomeado a usar (por defeito, o ativo)"),
       },
@@ -789,7 +789,7 @@ export function registerTools(servidor: McpServer): void {
     {
       title: "Registar prazo em curso",
       description:
-        "Guarda um prazo a correr (data-limite, descrição, origem) em .advogado-pt/prazos.md do projeto; o hook avisa ao abrir cada sessão quando estiver vencido ou a 7 dias ou menos. Usa sempre que surgir um prazo perentório (notificação da AT, citação, audição prévia, recurso, resposta a carta) — de preferência depois de o calcular com calc_prazo. EN: save a running deadline with start-of-session reminders.",
+        "Guarda um prazo a correr (data-limite, descrição, origem) em .juridico-pt/prazos.md do projeto; o hook avisa ao abrir cada sessão quando estiver vencido ou a 7 dias ou menos. Usa sempre que surgir um prazo perentório (notificação da AT, citação, audição prévia, recurso, resposta a carta) — de preferência depois de o calcular com calc_prazo. EN: save a running deadline with start-of-session reminders.",
       inputSchema: {
         data: z.string().describe("Data-limite AAAA-MM-DD"),
         descricao: z.string().describe("O que tem de ser feito (ex.: 'Oposição à execução fiscal')"),
@@ -807,7 +807,7 @@ export function registerTools(servidor: McpServer): void {
           : proximos.length
             ? ` ⏰ Faltam ${proximos[0].faltam} dia(s).`
             : "";
-        return texto(`Prazo registado: ${p.data} — ${p.descricao}${p.origem ? ` (${p.origem})` : ""}.${alerta}\nFicheiro: .advogado-pt/prazos.md (aviso automático ao abrir a sessão).`);
+        return texto(`Prazo registado: ${p.data} — ${p.descricao}${p.origem ? ` (${p.origem})` : ""}.${alerta}\nFicheiro: .juridico-pt/prazos.md (aviso automático ao abrir a sessão).`);
       } catch (e) {
         return texto(`Não foi possível registar: ${(e as Error).message}`);
       }
@@ -819,7 +819,7 @@ export function registerTools(servidor: McpServer): void {
     {
       title: "Listar prazos em curso",
       description:
-        "Lista os prazos registados no projeto (.advogado-pt/prazos.md), com os vencidos e os dias em falta. Usa para 'que prazos tenho', 'o que está a correr', 'prazos pendentes'. EN: list running deadlines.",
+        "Lista os prazos registados no projeto (.juridico-pt/prazos.md), com os vencidos e os dias em falta. Usa para 'que prazos tenho', 'o que está a correr', 'prazos pendentes'. EN: list running deadlines.",
       inputSchema: {
         diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
         incluir_concluidos: z.boolean().default(false),

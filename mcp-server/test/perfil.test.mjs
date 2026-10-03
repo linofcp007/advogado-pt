@@ -21,8 +21,8 @@ function dirs() {
 }
 
 function escrever(base, texto) {
-  mkdirSync(join(base, ".advogado-pt"), { recursive: true });
-  writeFileSync(join(base, ".advogado-pt", "perfil-empresa.md"), texto, "utf8");
+  mkdirSync(join(base, ".juridico-pt"), { recursive: true });
+  writeFileSync(join(base, ".juridico-pt", "perfil-empresa.md"), texto, "utf8");
 }
 
 test("T-37 lerPerfil: projeto tem prioridade sobre o geral; sem projeto usa o geral", () => {
@@ -31,7 +31,7 @@ test("T-37 lerPerfil: projeto tem prioridade sobre o geral; sem projeto usa o ge
   let p = lerPerfil({ projeto, home, hoje: HOJE });
   assert.equal(p.origem, "geral");
   assert.equal(p.campos.forma_juridica, "ENI");
-  assert.equal(p.caminho, join(home, ".advogado-pt", "perfil-empresa.md"));
+  assert.equal(p.caminho, join(home, ".juridico-pt", "perfil-empresa.md"));
 
   escrever(projeto, "# Perfil\nforma_juridica: Lda\nsetor: Restauração\natualizado_em: 2026-09-01\n");
   p = lerPerfil({ projeto, home, hoje: HOJE });
@@ -47,7 +47,7 @@ test("T-38 guardarPerfil: só no ficheiro fixo, funde campos, ignora desconhecid
     "projeto",
     { projeto, home, hoje: HOJE }
   );
-  const caminho = join(projeto, ".advogado-pt", "perfil-empresa.md");
+  const caminho = join(projeto, ".juridico-pt", "perfil-empresa.md");
   assert.equal(p1.caminho, caminho);
   const txt = readFileSync(caminho, "utf8");
   assert.match(txt, /^forma_juridica: Lda$/m);
@@ -61,7 +61,7 @@ test("T-38 guardarPerfil: só no ficheiro fixo, funde campos, ignora desconhecid
   assert.equal(p2.campos.trabalhadores, "12");
 
   guardarPerfil({ forma_juridica: "ENI" }, "geral", { projeto, home, hoje: HOJE });
-  assert.ok(existsSync(join(home, ".advogado-pt", "perfil-empresa.md")));
+  assert.ok(existsSync(join(home, ".juridico-pt", "perfil-empresa.md")));
 
   assert.throws(
     () => guardarPerfil({ setor: "x" }, "projeto", { projeto: join(projeto, "nao-existe"), home, hoje: HOJE }),
