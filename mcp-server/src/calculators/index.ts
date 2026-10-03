@@ -7,6 +7,8 @@
 
 export { formatarEuros } from "./format.js";
 export { calcularJuros, memoriaJuros, taxaDoSemestre, TAXAS_SEMESTRAIS } from "./juros.js";
+export { calcularJurosLote, memoriaJurosLote, INDEMNIZACAO_COBRANCA } from "./juros-lote.js";
+export type { FaturaLote, ResultadoLote } from "./juros-lote.js";
 export type { TipoJuros, ResultadoJuros, TramoJuros } from "./juros.js";
 export { contarPrazo, emFeriasJudiciais } from "./prazos.js";
 export type { TipoPrazo, ResultadoPrazo } from "./prazos.js";
@@ -33,3 +35,5 @@ export { calcularSalarioLiquido, calcularCustoTrabalhador } from "./salario.js";
 export { calcularIRC } from "./irc.js";
 export { calcularTaxaJustica } from "./taxa-justica.js";
 export { decidirIVA } from "./iva.js";
+export { calcularProcedimentoCCP, textoProcedimentoCCP, INICIO_DL_177_2026 } from "./ccp.js";
+export type { ResultadoCCP, TipoContratoCCP } from "./ccp.js";

@@ -4,6 +4,8 @@ import { z } from "zod";
 import {
   calcularJuros,
   memoriaJuros,
+  calcularJurosLote,
+  memoriaJurosLote,
   contarPrazo,
   calcularCompensacao,
   calcularCompensacaoPorDatas,
@@ -19,6 +21,8 @@ import {
   calcularIRC,
   calcularTaxaJustica,
   decidirIVA,
+  calcularProcedimentoCCP,
+  textoProcedimentoCCP,
   formatarEuros,
   parseDataEstrita,
   hojeLisboa,
@@ -128,6 +132,56 @@ export function registerTools(servidor: McpServer): void {
       } catch (e) {
         return texto(`Não foi possível calcular: ${(e as Error).message}`);
       }
+    }
+  );
+
+  server.registerTool(
+    "calc_juros_lote",
+    {
+      title: "Juros de mora de várias faturas",
+      description:
+        "Calcula de uma vez os juros de mora de VÁRIAS faturas (de um ou mais clientes), cada uma por tramos semestrais desde o vencimento, com a indemnização de 40 € por fatura comercial vencida (DL 62/2013, art. 7.º) e os totais por cliente e geral; faturas ainda não vencidas contam só o capital. Usa quando o cliente deve várias faturas ('tenho 5 faturas em atraso', 'quanto me deve ao todo', extrato de conta corrente) e antes da carta 'carta-cobranca-varias-faturas'. EN: late-payment interest on several overdue invoices at once.",
+      inputSchema: {
+        faturas: z
+          .array(
+            z.object({
+              cliente: z.string().describe("Nome do cliente (devedor)"),
+              fatura: z.string().describe("Número da fatura"),
+              capital: z.number().describe("Valor em dívida (€)"),
+              vencimento: z.string().describe("Data de vencimento (AAAA-MM-DD)"),
+              tipo: z.enum(["comercial", "comercial-geral", "civil"]).default("comercial"),
+            })
+          )
+          .min(1)
+          .max(500)
+          .describe("Faturas em dívida"),
+        data_fim: z.string().optional().describe("Data final (AAAA-MM-DD); por defeito, hoje"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ faturas, data_fim }) => {
+      const fim = parseDataEstrita(data_fim ?? hojeLisboa(), "data_fim");
+      const lista = faturas.map((f, i) => ({ ...f, vencimento: parseDataEstrita(f.vencimento, `faturas[${i}].vencimento`) }));
+      return texto(memoriaJurosLote(calcularJurosLote(lista, fim)) + AVISO);
+    }
+  );
+
+  server.registerTool(
+    "calc_procedimento_ccp",
+    {
+      title: "Procedimento de contratação pública pelo valor",
+      description:
+        "Diz que procedimentos do Código dos Contratos Públicos se podem usar pelo valor do contrato (ajuste direto, consulta prévia, concurso público ou limitado), com os limiares do DL 177/2026 (procedimentos iniciados a partir de 1/10/2026; com 'inicio' anterior, os limiares antigos). Usa quando o utilizador quer vender ao Estado, responder a um convite ou perceber se um ajuste direto é legal ('posso ser contratado por ajuste direto?', 'que procedimento para 100 mil euros'). EN: which public procurement procedure applies for a contract value.",
+      inputSchema: {
+        valor: z.number().describe("Valor do contrato, sem IVA (€)"),
+        tipo: z.enum(["bens-servicos", "empreitada"]).describe("bens-servicos (aquisição de bens ou serviços) | empreitada (obras públicas)"),
+        inicio: z.string().optional().describe("Data de início do procedimento (AAAA-MM-DD); omitido = regime atual"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ valor, tipo, inicio }) => {
+      const data = inicio === undefined ? undefined : parseDataEstrita(inicio, "inicio");
+      return texto(textoProcedimentoCCP(calcularProcedimentoCCP({ valor, tipo, inicio: data })) + AVISO);
     }
   );
 

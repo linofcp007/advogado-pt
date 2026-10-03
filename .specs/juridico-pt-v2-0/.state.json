@@ -43,6 +43,17 @@
       "by": "Carlos Pereira",
       "fingerprint": "42729dd4daf0eb55c19af31151f33351eec05c24",
       "batch": true
+    },
+    "tests": {
+      "at": "2026-10-03T23:02:19.571Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    "tasks": {
+      "at": "2026-10-03T23:02:19.680Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "9ee6cea9c15cced3495838a8759b6db04cc3d627",
+      "batch": true
     }
   },
   "createdAt": "2026-10-03T20:44:29.867Z",
@@ -154,9 +165,23 @@
       "by": "Carlos Pereira",
       "fingerprint": "4c614f2d439648fbbf4a770df47ded059da47ca3",
       "snapshot": ".history/test-plan@3.md"
+    },
+    {
+      "phase": "tests",
+      "at": "2026-10-03T23:02:19.571Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    {
+      "phase": "tasks",
+      "at": "2026-10-03T23:02:19.680Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "9ee6cea9c15cced3495838a8759b6db04cc3d627",
+      "batch": true,
+      "snapshot": ".history/tasks@1.md"
     }
   ],
-  "lastApprovedPhase": "test-plan",
+  "lastApprovedPhase": "tasks",
   "evidence": {
     "1": {
       "command": "git rev-parse --abbrev-ref HEAD",
@@ -274,9 +299,99 @@
       ],
       "task": "[US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão",
       "verify": "node --test --test-name-pattern=\"T-304\" mcp-server/test/v20.test.mjs"
+    },
+    "11": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-308\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-308 passa (pass 1, fail 0): 5 faturas da paridade, totais 9.556,33 €, CLI calc lote OK",
+      "at": "2026-10-03T23:06:34.601Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-308\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-308 passa (pass 1, fail 0): 5 faturas da paridade, totais 9.556,33 €, CLI calc lote OK",
+          "at": "2026-10-03T23:06:34.601Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] `calcularJurosLote` + tool `calc_juros_lote` + CLI `calc lote`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-308\" mcp-server/test/v20.test.mjs"
+    },
+    "12": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py -k T309",
+      "exitCode": 0,
+      "summary": "Ran 1 test OK — calcular_juros_lote igual ao TS (paridade.json); CLI --lote OK",
+      "at": "2026-10-03T23:07:21.071Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py -k T309",
+          "exitCode": 0,
+          "summary": "Ran 1 test OK — calcular_juros_lote igual ao TS (paridade.json); CLI --lote OK",
+          "at": "2026-10-03T23:07:21.071Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Python `calcular_juros_lote` com os mesmos casos",
+      "verify": "python skills/juridico-pt/scripts/test_scripts.py -k T309"
+    },
+    "14": {
+      "command": "node --test --test-name-pattern=\"T-311\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-311 passa (pass 1, fail 0): /cobrar com conector de faturação, calc_juros_lote e registar_prazo; descrição com 124 caracteres",
+      "at": "2026-10-03T23:07:40.573Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-311\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-311 passa (pass 1, fail 0): /cobrar com conector de faturação, calc_juros_lote e registar_prazo; descrição com 124 caracteres",
+          "at": "2026-10-03T23:07:40.573Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] `/cobrar` com instruções para o conector de faturação (quando existe) e proposta de `registar_prazo`",
+      "verify": "node --test --test-name-pattern=\"T-311\" mcp-server/test/v20.test.mjs"
+    },
+    "24": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-325\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-325 passa (pass 1, fail 0): 8 casos de fronteira, valor negativo recusado, tool calc_procedimento_ccp e CLI calc ccp",
+      "at": "2026-10-03T23:09:11.511Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-325\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-325 passa (pass 1, fail 0): 8 casos de fronteira, valor negativo recusado, tool calc_procedimento_ccp e CLI calc ccp",
+          "at": "2026-10-03T23:09:11.511Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] `calcularProcedimentoCCP` + tool `calc_procedimento_ccp` + CLI `calc ccp` (limiares do DL 177/2026 confirmados no DR)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-325\" mcp-server/test/v20.test.mjs"
+    },
+    "25": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py -k T326",
+      "exitCode": 0,
+      "summary": "Ran 1 test OK — procedimento_ccp igual ao TS nos 8 casos de fronteira; suite Python completa OK",
+      "at": "2026-10-03T23:09:45.404Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py -k T326",
+          "exitCode": 0,
+          "summary": "Ran 1 test OK — procedimento_ccp igual ao TS nos 8 casos de fronteira; suite Python completa OK",
+          "at": "2026-10-03T23:09:45.404Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] Python `procedimento_ccp` com os mesmos casos",
+      "verify": "python skills/juridico-pt/scripts/test_scripts.py -k T326"
     }
   },
-  "lastTickAt": "2026-10-03T23:02:08.820Z",
+  "lastTickAt": "2026-10-03T23:09:45.404Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
     "2": "2026-10-03T22:41:08.058Z",
@@ -284,6 +399,11 @@
     "5": "2026-10-03T22:57:02.520Z",
     "6": "2026-10-03T22:59:25.736Z",
     "7": "2026-10-03T23:01:22.586Z",
-    "8": "2026-10-03T23:02:08.820Z"
+    "8": "2026-10-03T23:02:08.820Z",
+    "11": "2026-10-03T23:06:34.601Z",
+    "12": "2026-10-03T23:07:21.071Z",
+    "14": "2026-10-03T23:07:40.573Z",
+    "24": "2026-10-03T23:09:11.511Z",
+    "25": "2026-10-03T23:09:45.404Z"
   }
 }

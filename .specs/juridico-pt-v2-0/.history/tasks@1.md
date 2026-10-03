@@ -14,15 +14,15 @@
 - Mensagens de consola com `->`; stdout UTF-8; erros sem stack trace.
 
 ## Fase: Setup
-- [x] 1. [shared] Branch `feat/v2.0-juridico-pt` a partir do `main` com a 1.2.1; commit da spec aprovada
+- [ ] 1. [shared] Branch `feat/v2.0-juridico-pt` a partir do `main` com a 1.2.1; commit da spec aprovada
   - _Requirements: NFR-2_
   - _Verify: git rev-parse --abbrev-ref HEAD_
   - _Size: XS_
-- [x] 2. [shared] Investigação: confirmar na documentação oficial (claude-code-guide e docs) (a) o que acontece a um marketplace instalado quando o `name` do `marketplace.json` e o repositório mudam, (b) o formato e as opções do `claude plugin eval`, (c) o manifesto `.mcpb` para servidores Node, (d) a elicitation no SDK do MCP e o anúncio da capacidade pelo cliente; registar as decisões em `decisions.md` e ajustar o design se a alternativa de recurso for necessária
+- [ ] 2. [shared] Investigação: confirmar na documentação oficial (claude-code-guide e docs) (a) o que acontece a um marketplace instalado quando o `name` do `marketplace.json` e o repositório mudam, (b) o formato e as opções do `claude plugin eval`, (c) o manifesto `.mcpb` para servidores Node, (d) a elicitation no SDK do MCP e o anúncio da capacidade pelo cliente; registar as decisões em `decisions.md` e ajustar o design se a alternativa de recurso for necessária
   - _Requirements: US-1.AC-1, US-1.AC-4, US-4.AC-1, US-10.AC-2, US-10.AC-3_
   - _Size: S_
   - _Depends: 1_
-- [x] 3. [shared] Escrever os testes a falhar: `mcp-server/test/v20.test.mjs` (T-302 a T-340 exceto T-309, T-313, T-316, T-326, T-336 a T-338), os casos novos de `plugin.test.mjs` (T-301, T-316, T-336, T-337), `test_scripts.py` (T-309, T-326), fixtures do contabilista e factos `v20-` esperados
+- [ ] 3. [shared] Escrever os testes a falhar: `mcp-server/test/v20.test.mjs` (T-302 a T-340 exceto T-309, T-313, T-316, T-326, T-336 a T-338), os casos novos de `plugin.test.mjs` (T-301, T-316, T-336, T-337), `test_scripts.py` (T-309, T-326), fixtures do contabilista e factos `v20-` esperados
   - _Requirements: US-1.AC-1, US-1.AC-3, US-3.AC-1, US-7.AC-1, US-9.AC-3, US-10.AC-1, US-11.AC-2_
   - _Implements: mcp-server/test/v20.test.mjs, mcp-server/test/plugin.test.mjs, mcp-server/test/fixtures/contabilista/_
   - _Verify: npm --prefix mcp-server test_
@@ -38,26 +38,26 @@
   - _Depends: 2_
 
 ## História US-1 (P1 — MVP): renomeação e migração
-- [x] 5. [US1] `dados.ts`: pasta `.juridico-pt/` no projeto e no perfil geral (`JURIDICO_PT_HOME` ou a home), sem ler `.advogado-pt/`; perfil, prazos e calendário passam a usá-la
+- [ ] 5. [US1] `dados.ts`: pasta `.juridico-pt/` no projeto e no perfil geral (`JURIDICO_PT_HOME` ou a home), sem ler `.advogado-pt/`; perfil, prazos e calendário passam a usá-la
   - _Requirements: US-1.AC-3, US-1.AC-5, EC-1_
   - _Makes green: T-303, T-305_
   - _Implements: mcp-server/src/dados.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-303|T-305" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 3_
-- [x] 6. [US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição
+- [ ] 6. [US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição
   - _Requirements: US-1.AC-1_
   - _Makes green: T-301_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-301" mcp-server/test/plugin.test.mjs_
   - _Size: L_
   - _Depends: 5_
-- [x] 7. [US1] Persona e textos de "assistente jurídico" em persona, instruções, SKILL.md, commands, agents e documentação; aviso da OA mantido
+- [ ] 7. [US1] Persona e textos de "assistente jurídico" em persona, instruções, SKILL.md, commands, agents e documentação; aviso da OA mantido
   - _Requirements: US-1.AC-2_
   - _Makes green: T-302_
   - _Verify: node --test --test-name-pattern="T-302" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 6_
-- [x] 8. [US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão
+- [ ] 8. [US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão
   - _Requirements: US-1.AC-4, SC-001_
   - _Makes green: T-304_
   - _Verify: node --test --test-name-pattern="T-304" mcp-server/test/v20.test.mjs_
@@ -81,14 +81,14 @@
   - _Depends: 9_
 
 ## História US-3 (P1): cobrança
-- [x] 11. [US3] `calcularJurosLote` + tool `calc_juros_lote` + CLI `calc lote`
+- [ ] 11. [US3] `calcularJurosLote` + tool `calc_juros_lote` + CLI `calc lote`
   - _Requirements: US-3.AC-1, EC-2_
   - _Makes green: T-308_
   - _Implements: mcp-server/src/calculators/juros-lote.ts, mcp-server/src/tools.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-308" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 3_
-- [x] 12. [US3] Python `calcular_juros_lote` com os mesmos casos
+- [ ] 12. [US3] Python `calcular_juros_lote` com os mesmos casos
   - _Requirements: US-3.AC-1_
   - _Makes green: T-309_
   - _Implements: skills/juridico-pt/scripts/juros_mora.py_
@@ -101,7 +101,7 @@
   - _Verify: node --test --test-name-pattern="T-310" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 6_
-- [x] 14. [US3] `/cobrar` com instruções para o conector de faturação (quando existe) e proposta de `registar_prazo`
+- [ ] 14. [US3] `/cobrar` com instruções para o conector de faturação (quando existe) e proposta de `registar_prazo`
   - _Requirements: US-3.AC-3, US-3.AC-4_
   - _Makes green: T-311_
   - _Verify: node --test --test-name-pattern="T-311" mcp-server/test/v20.test.mjs_
@@ -177,14 +177,14 @@
   - _Verify: node --test --test-name-pattern="T-324" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 6_
-- [x] 24. [US9] `calcularProcedimentoCCP` + tool `calc_procedimento_ccp` + CLI `calc ccp` (limiares do DL 177/2026 confirmados no DR)
+- [ ] 24. [US9] `calcularProcedimentoCCP` + tool `calc_procedimento_ccp` + CLI `calc ccp` (limiares do DL 177/2026 confirmados no DR)
   - _Requirements: US-9.AC-3, EC-3_
   - _Makes green: T-325_
   - _Implements: mcp-server/src/calculators/ccp.ts, mcp-server/src/tools.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-325" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 3_
-- [x] 25. [US9] Python `procedimento_ccp` com os mesmos casos
+- [ ] 25. [US9] Python `procedimento_ccp` com os mesmos casos
   - _Requirements: US-9.AC-3_
   - _Makes green: T-326_
   - _Implements: skills/juridico-pt/scripts/procedimento_ccp.py_

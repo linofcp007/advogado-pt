@@ -19,7 +19,7 @@ Cada script tem o port TypeScript equivalente no servidor MCP (`mcp-server/src/c
 
 | Script | Tool MCP | O que calcula |
 |---|---|---|
-| `juros_mora.py` | `calc_juros_mora` | Juros de mora por tramos semestrais (comercial, comercial-geral, civil) |
+| `juros_mora.py` | `calc_juros_mora` / `calc_juros_lote` | Juros de mora por tramos semestrais (comercial, comercial-geral, civil); `--lote` para várias faturas, com 40 € por fatura comercial e totais por cliente |
 | `prazos.py` | `calc_prazo` | Prazos `judicial` (CPC 138.º, férias judiciais), `corridos` (por defeito) ou `uteis` |
 | `prescricao.py` | `calc_prescricao` | Prescrição e caducidade pelos tipos do CC, com aviso nas presuntivas |
 | `compensacao_despedimento.py` | `calc_compensacao_despedimento` | Compensação por cessação (art. 366.º CT; regime transitório com as datas) |
@@ -33,6 +33,7 @@ Cada script tem o port TypeScript equivalente no servidor MCP (`mcp-server/src/c
 | `legitima.py` | `calc_legitima` | Legítima e quota disponível |
 | `taxa_justica.py` | `calc_taxa_justica` | Taxa de justiça de uma ação (RCP, Tabela I) |
 | `custas_injuncao.py` | `calc_custas_injuncao` | Taxa de justiça da injunção |
+| `procedimento_ccp.py` | `calc_procedimento_ccp` | Procedimento de contratação pública admissível pelo valor (limiares do DL 177/2026) |
 
 ### Exemplos
 
@@ -52,6 +53,8 @@ python scripts/imposto_selo_heranca.py --valor 50000 --herdeiro descendente
 python scripts/legitima.py --bens 300000 --conjuge --filhos 2
 python scripts/taxa_justica.py --valor 30000
 python scripts/custas_injuncao.py --valor 3500
+python scripts/juros_mora.py --data-fim 2026-10-01 --lote '[{"cliente": "A", "fatura": "FT 1", "capital": 1000, "vencimento": "2026-01-15"}]'
+python scripts/procedimento_ccp.py --valor 100000 --tipo bens-servicos
 ```
 
 Tipos de prescrição (`--tipo`): `civil-geral`, `creditos-comerciais` (20 anos), `servicos-profissionais` e `vendas-a-consumidor` (2 anos, presuntivas), `rendas`, `juros`, `prestacoes-periodicas` (5 anos), `telecom-energia-agua`, `queixa-crime-semipublico` (6 meses), `garantia-bens-consumo` (3 anos).

@@ -21851,6 +21851,108 @@ function memoriaJuros(capital, r, tipo) {
   return linhas.join("\n");
 }
 
+// src/calculators/datas.ts
+function parseDataEstrita(texto2, campo) {
+  const s = typeof texto2 === "string" ? texto2.trim() : "";
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (m) {
+    const [a, mes, dia] = [Number(m[1]), Number(m[2]), Number(m[3])];
+    const d = new Date(Date.UTC(a, mes - 1, dia));
+    if (d.getUTCFullYear() === a && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia) return d;
+  }
+  throw new Error(`Data inv\xE1lida em '${campo}': '${String(texto2).slice(0, 40)}'. Usa AAAA-MM-DD com uma data que exista.`);
+}
+function hojeLisboa(agora = /* @__PURE__ */ new Date()) {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Lisbon",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(agora);
+  } catch {
+    return agora.toISOString().slice(0, 10);
+  }
+}
+
+// src/calculators/juros-lote.ts
+var INDEMNIZACAO_COBRANCA = 40;
+var iso2 = (d) => d.toISOString().slice(0, 10);
+function somar(a, f) {
+  a.capital = r2(a.capital + f.capital);
+  a.juros = r2(a.juros + f.juros);
+  a.indemnizacao = r2(a.indemnizacao + f.indemnizacao40);
+  a.total = r2(a.capital + a.juros + a.indemnizacao);
+}
+function calcularJurosLote(faturas, dataFim) {
+  if (!Array.isArray(faturas) || faturas.length === 0) throw new Error("Indica pelo menos uma fatura.");
+  if (faturas.length > 500) throw new Error("No m\xE1ximo 500 faturas por c\xE1lculo.");
+  const fim = iso2(dataFim);
+  const resultados = faturas.map((f, i) => {
+    const fatura = String(f.fatura ?? "").trim() || `fatura ${i + 1}`;
+    const cliente = String(f.cliente ?? "").trim() || "(sem cliente)";
+    const tipo = f.tipo ?? "comercial";
+    if (!(Number.isFinite(f.capital) && f.capital >= 0)) throw new Error(`${fatura}: o capital tem de ser um valor positivo.`);
+    const vencimento = f.vencimento instanceof Date ? f.vencimento : parseDataEstrita(String(f.vencimento ?? ""), `${fatura}: vencimento`);
+    if (Number.isNaN(vencimento.getTime())) throw new Error(`${fatura}: data de vencimento inv\xE1lida.`);
+    const venc = iso2(vencimento);
+    const base = { cliente, fatura, capital: r2(f.capital), vencimento: venc, tipo };
+    if (venc >= fim) {
+      return {
+        ...base,
+        vencida: false,
+        dias: 0,
+        juros: 0,
+        indemnizacao40: 0,
+        total: base.capital,
+        tramos: [],
+        nota: `Ainda n\xE3o vencida a ${fim} (vence a ${venc}).`
+      };
+    }
+    const r = calcularJuros(f.capital, vencimento, dataFim, tipo);
+    const juros = r2(r.juros);
+    const indemnizacao40 = tipo === "comercial" ? INDEMNIZACAO_COBRANCA : 0;
+    return {
+      ...base,
+      vencida: true,
+      dias: r.dias,
+      juros,
+      indemnizacao40,
+      total: r2(base.capital + juros + indemnizacao40),
+      tramos: r.tramos,
+      ...r.tramos.some((t) => t.estimado) ? { nota: "Inclui semestres com taxa estimada (aviso ainda n\xE3o publicado)." } : {}
+    };
+  });
+  const porCliente = [];
+  const total = { capital: 0, juros: 0, indemnizacao: 0, total: 0 };
+  for (const f of resultados) {
+    let c = porCliente.find((x) => x.cliente === f.cliente);
+    if (!c) {
+      c = { cliente: f.cliente, faturas: 0, capital: 0, juros: 0, indemnizacao: 0, total: 0 };
+      porCliente.push(c);
+    }
+    c.faturas += 1;
+    somar(c, f);
+    somar(total, f);
+  }
+  return { dataFim: fim, faturas: resultados, porCliente, total };
+}
+function memoriaJurosLote(r) {
+  const linhas = [`Juros de mora em lote at\xE9 ${r.dataFim} (tramos semestrais por fatura)`, ""];
+  for (const c of r.porCliente) {
+    linhas.push(`${c.cliente} \u2014 ${c.faturas} fatura(s)`);
+    for (const f of r.faturas.filter((x) => x.cliente === c.cliente)) {
+      const extra = f.vencida ? `${f.dias} dias, juros ${formatarEuros(f.juros)}` + (f.indemnizacao40 ? ` + indemniza\xE7\xE3o ${formatarEuros(f.indemnizacao40)}` : "") : "n\xE3o vencida";
+      linhas.push(`- ${f.fatura} (${f.tipo}, vence ${f.vencimento}): capital ${formatarEuros(f.capital)}; ${extra} -> ${formatarEuros(f.total)}${f.nota && f.vencida ? ` (${f.nota})` : ""}`);
+    }
+    linhas.push(`  Subtotal: capital ${formatarEuros(c.capital)} + juros ${formatarEuros(c.juros)} + indemniza\xE7\xF5es ${formatarEuros(c.indemnizacao)} = ${formatarEuros(c.total)}`, "");
+  }
+  const t = r.total;
+  linhas.push(`TOTAL: capital ${formatarEuros(t.capital)} + juros ${formatarEuros(t.juros)} + indemniza\xE7\xF5es ${formatarEuros(t.indemnizacao)} = ${formatarEuros(t.total)}`);
+  linhas.push("", `Indemniza\xE7\xE3o de ${formatarEuros(INDEMNIZACAO_COBRANCA)} por fatura comercial vencida (DL 62/2013, art. 7.\xBA), devida sem interpela\xE7\xE3o; nas faturas civis s\xF3 h\xE1 juros.`);
+  return linhas.join("\n");
+}
+
 // src/calculators/prazos.ts
 var MS_POR_DIA2 = 24 * 60 * 60 * 1e3;
 function domingoPascoa(ano) {
@@ -21999,30 +22101,6 @@ function contarPrazo(inicio, dias, tipo = "corridos", opts = {}) {
   return { dataLimite: new Date(limiteTs), dataLegal: new Date(legalTs), transferido, diasSuspensos, nota };
 }
 
-// src/calculators/datas.ts
-function parseDataEstrita(texto2, campo) {
-  const s = typeof texto2 === "string" ? texto2.trim() : "";
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
-  if (m) {
-    const [a, mes, dia] = [Number(m[1]), Number(m[2]), Number(m[3])];
-    const d = new Date(Date.UTC(a, mes - 1, dia));
-    if (d.getUTCFullYear() === a && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia) return d;
-  }
-  throw new Error(`Data inv\xE1lida em '${campo}': '${String(texto2).slice(0, 40)}'. Usa AAAA-MM-DD com uma data que exista.`);
-}
-function hojeLisboa(agora = /* @__PURE__ */ new Date()) {
-  try {
-    return new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Europe/Lisbon",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }).format(agora);
-  } catch {
-    return agora.toISOString().slice(0, 10);
-  }
-}
-
 // src/calculators/compensacao.ts
 var DIAS_POR_ANO = {
   "sem-termo": 14,
@@ -22049,7 +22127,7 @@ function calcularCompensacao(retribuicaoBase, diuturnidades, anos, modalidade, r
 }
 var DIA = 24 * 60 * 60 * 1e3;
 var U = (a, m, d) => Date.UTC(a, m - 1, d);
-var iso2 = (ts) => new Date(ts).toISOString().slice(0, 10);
+var iso3 = (ts) => new Date(ts).toISOString().slice(0, 10);
 var utcDia2 = (d) => Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
 function fracaoAnos(a, b) {
   if (b < a) return 0;
@@ -22091,7 +22169,7 @@ function calcularCompensacaoPorDatas(p) {
     const e = Math.min(ate, ces);
     if (e < s) return 0;
     const valor = base / 30 * dias * fracaoAnos(s, e);
-    periodos.push({ de: iso2(s), ate: iso2(e), dias, valor });
+    periodos.push({ de: iso3(s), ate: iso3(e), dias, valor });
     return valor;
   };
   if (p.modalidade === "termo") {
@@ -22108,7 +22186,7 @@ function calcularCompensacaoPorDatas(p) {
     const ate = Math.min(ces, U(2012, 10, 31));
     if (ate >= adm) {
       a = R * fracaoAnos(adm, ate);
-      periodos.push({ de: iso2(adm), ate: iso2(ate), dias: 30, valor: a });
+      periodos.push({ de: iso3(adm), ate: iso3(ate), dias: 30, valor: a });
     }
     b = seg(U(2012, 11, 1), U(2013, 9, 30), 20, Rc);
   } else if (adm <= U(2013, 9, 30)) {
@@ -22876,6 +22954,62 @@ function decidirIVA(p) {
   return PT_NORMAL("CIVA, art. 6.\xBA, n.\xBA 6, al. b)", p.destino === "fora-UE" ? ["Se o servi\xE7o for da lista do art. 6.\xBA, n.\xBA 11 (consultoria, publicidade, advogados, inform\xE1tica/dados, direitos de autor...), n\xE3o \xE9 tributado em PT: usa servico='lista-art6-11' (M44)."] : []);
 }
 
+// src/calculators/ccp.ts
+var INICIO_DL_177_2026 = "2026-10-01";
+var LIMIARES = {
+  atual: {
+    "bens-servicos": { ajuste: 75e3, consulta: 13e4 },
+    empreitada: { ajuste: 15e4, consulta: 1e6 }
+  },
+  anterior: {
+    "bens-servicos": { ajuste: 2e4, consulta: 75e3 },
+    empreitada: { ajuste: 3e4, consulta: 15e4 }
+  }
+};
+var NOMES = {
+  "ajuste-direto": "Ajuste direto",
+  "consulta-previa": "Consulta pr\xE9via (convite a 3 ou mais entidades)",
+  "concurso-publico": "Concurso p\xFAblico",
+  "concurso-limitado": "Concurso limitado por pr\xE9via qualifica\xE7\xE3o"
+};
+function calcularProcedimentoCCP({ valor, tipo, inicio }) {
+  if (!(typeof valor === "number" && Number.isFinite(valor) && valor >= 0)) {
+    throw new Error("O valor do contrato tem de ser um n\xFAmero positivo (sem IVA).");
+  }
+  if (tipo !== "bens-servicos" && tipo !== "empreitada") {
+    throw new Error(`Tipo de contrato desconhecido: '${tipo}' (usa bens-servicos ou empreitada).`);
+  }
+  const data = inicio === void 0 ? null : (inicio instanceof Date ? inicio.toISOString() : String(inicio)).slice(0, 10);
+  const anterior = data !== null && data < INICIO_DL_177_2026;
+  const l = (anterior ? LIMIARES.anterior : LIMIARES.atual)[tipo];
+  const artigo = tipo === "empreitada" ? "art. 19.\xBA" : "art. 20.\xBA";
+  const redacao = anterior ? "reda\xE7\xE3o anterior ao DL 177/2026" : "reda\xE7\xE3o do DL 177/2026";
+  const base = `CCP, ${artigo} (${redacao})`;
+  const admissiveis = [];
+  if (valor < l.ajuste) admissiveis.push({ procedimento: "ajuste-direto", nome: NOMES["ajuste-direto"], ate: l.ajuste, base });
+  if (valor < l.consulta) admissiveis.push({ procedimento: "consulta-previa", nome: NOMES["consulta-previa"], ate: l.consulta, base });
+  admissiveis.push({ procedimento: "concurso-publico", nome: NOMES["concurso-publico"], ate: null, base: `${base} \u2014 qualquer valor` });
+  admissiveis.push({ procedimento: "concurso-limitado", nome: NOMES["concurso-limitado"], ate: null, base: `${base} \u2014 qualquer valor` });
+  const notas = [
+    "O valor \xE9 o do contrato a celebrar, sem IVA, incluindo prorroga\xE7\xF5es e op\xE7\xF5es; dividir o contrato para ficar abaixo de um limiar n\xE3o \xE9 permitido (CCP, art. 22.\xBA).",
+    "O ajuste direto e a consulta pr\xE9via dependem da escolha da entidade adjudicante; h\xE1 ainda escolhas por crit\xE9rios materiais, independentes do valor (CCP, arts. 24.\xBA a 27.\xBA).",
+    "Acima dos limiares europeus, o an\xFAncio do concurso \xE9 publicado tamb\xE9m no Jornal Oficial da UE \u2014 confirmar os limiares em vigor.",
+    anterior ? `Procedimento iniciado antes de ${INICIO_DL_177_2026}: aplicam-se os limiares anteriores ao DL 177/2026.` : `Limiares do DL 177/2026, para procedimentos iniciados a partir de ${INICIO_DL_177_2026}.`
+  ];
+  return { valor, tipo, regime: anterior ? "anterior ao DL 177/2026" : "DL 177/2026", admissiveis, notas };
+}
+function textoProcedimentoCCP(r) {
+  const tipo = r.tipo === "empreitada" ? "empreitada de obras p\xFAblicas" : "aquisi\xE7\xE3o de bens ou servi\xE7os";
+  return [
+    `Contrato de ${formatarEuros(r.valor)} (sem IVA) \u2014 ${tipo} (${r.regime})`,
+    "",
+    "Procedimentos admiss\xEDveis pelo valor:",
+    ...r.admissiveis.map((a) => `- ${a.nome}${a.ate !== null ? ` (abaixo de ${formatarEuros(a.ate)})` : ""} \u2014 ${a.base}`),
+    "",
+    ...r.notas.map((n) => `\u2022 ${n}`)
+  ].join("\n");
+}
+
 // src/content.ts
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -23264,11 +23398,11 @@ var MESES = [
 ];
 var MS_DIA = 864e5;
 var pad = (n) => String(n).padStart(2, "0");
-var iso3 = (a, m, d) => `${a}-${pad(m)}-${pad(d)}`;
+var iso4 = (a, m, d) => `${a}-${pad(m)}-${pad(d)}`;
 var tsDe = (s) => Date.parse(`${s}T00:00:00Z`);
 var isoDe = (ts) => new Date(ts).toISOString().slice(0, 10);
 var ultimoDia = (a, m) => new Date(Date.UTC(a, m, 0)).getUTCDate();
-var fimMes = (a, m) => iso3(a, m, ultimoDia(a, m));
+var fimMes = (a, m) => iso4(a, m, ultimoDia(a, m));
 function mesMais(a, m, n) {
   const t = a * 12 + (m - 1) + n;
   return [Math.floor(t / 12), t % 12 + 1];
@@ -23283,7 +23417,7 @@ function mensal(ano, dia, desfasamento, rotulo) {
   const out = [];
   for (let m = 1; m <= 12; m++) {
     const [pa, pm] = mesMais(ano, m, -desfasamento);
-    out.push({ data: iso3(ano, m, Math.min(dia, ultimoDia(ano, m))), periodo: `${rotulo} ${nomeMes(pa, pm, ano)}` });
+    out.push({ data: iso4(ano, m, Math.min(dia, ultimoDia(ano, m))), periodo: `${rotulo} ${nomeMes(pa, pm, ano)}` });
   }
   return out;
 }
@@ -23293,16 +23427,16 @@ function ivaMensal(ano, dia) {
     if (m === 8) continue;
     const [pa, pm] = mesMais(ano, m, -2);
     const periodo = m === 9 ? "per\xEDodo: junho e julho" : `per\xEDodo: ${nomeMes(pa, pm, ano)}`;
-    out.push({ data: iso3(ano, m, dia), periodo });
+    out.push({ data: iso4(ano, m, dia), periodo });
   }
   return out;
 }
 function ivaTrimestral(ano, dia) {
   return [
-    { data: iso3(ano, 2, dia), periodo: `4.\xBA trimestre de ${ano - 1}` },
-    { data: iso3(ano, 5, dia), periodo: "1.\xBA trimestre" },
-    { data: iso3(ano, 9, dia), periodo: "2.\xBA trimestre" },
-    { data: iso3(ano, 11, dia), periodo: "3.\xBA trimestre" }
+    { data: iso4(ano, 2, dia), periodo: `4.\xBA trimestre de ${ano - 1}` },
+    { data: iso4(ano, 5, dia), periodo: "1.\xBA trimestre" },
+    { data: iso4(ano, 9, dia), periodo: "2.\xBA trimestre" },
+    { data: iso4(ano, 11, dia), periodo: "3.\xBA trimestre" }
   ];
 }
 var SIM = { ok: true, faltam: [] };
@@ -23405,10 +23539,10 @@ var REGRAS = [
     nota: "Trimestral s\xF3 se as transmiss\xF5es de bens n\xE3o passarem 50.000 \u20AC no trimestre (nem em nenhum dos 4 anteriores); sen\xE3o \xE9 mensal.",
     aplica: (p) => p.ue && p.iva === "trimestral" && p.forma !== "particular" ? SIM : NAO,
     datas: (a) => [
-      { data: iso3(a, 1, 20), periodo: `4.\xBA trimestre de ${a - 1}` },
-      { data: iso3(a, 4, 20), periodo: "1.\xBA trimestre" },
-      { data: iso3(a, 7, 20), periodo: "2.\xBA trimestre" },
-      { data: iso3(a, 10, 20), periodo: "3.\xBA trimestre" }
+      { data: iso4(a, 1, 20), periodo: `4.\xBA trimestre de ${a - 1}` },
+      { data: iso4(a, 4, 20), periodo: "1.\xBA trimestre" },
+      { data: iso4(a, 7, 20), periodo: "2.\xBA trimestre" },
+      { data: iso4(a, 10, 20), periodo: "3.\xBA trimestre" }
     ]
   },
   {
@@ -23432,7 +23566,7 @@ var REGRAS = [
     transferivel: true,
     nota: "S\xF3 para quem tem invent\xE1rios (exist\xEAncias) e contabilidade organizada.",
     aplica: contabOrganizada,
-    datas: (a) => [{ data: iso3(a, 1, 31), periodo: `invent\xE1rio de ${a - 1}` }]
+    datas: (a) => [{ data: iso4(a, 1, 31), periodo: `invent\xE1rio de ${a - 1}` }]
   },
   // ---------------- Fiscal: retenções e rendimentos ----------------
   {
@@ -23487,7 +23621,7 @@ var REGRAS = [
     transferivel: false,
     nota: "Prazo legal: \xFAltimo dia de maio, independentemente de ser \xFAtil. Per\xEDodo diferente do ano civil: \xFAltimo dia do 5.\xBA m\xEAs ap\xF3s o fim.",
     aplica: (p) => formaEm(p, ["sociedade", "associacao"]),
-    datas: (a) => [{ data: iso3(a, 5, 31), periodo: `exerc\xEDcio de ${a - 1}` }]
+    datas: (a) => [{ data: iso4(a, 5, 31), periodo: `exerc\xEDcio de ${a - 1}` }]
   },
   {
     id: "irc_pagamentos_conta",
@@ -23501,7 +23635,7 @@ var REGRAS = [
     datas: (a) => [
       { data: fimMes(a, 7), periodo: "1.\xBA pagamento" },
       { data: fimMes(a, 9), periodo: "2.\xBA pagamento" },
-      { data: iso3(a, 12, 15), periodo: "3.\xBA pagamento" }
+      { data: iso4(a, 12, 15), periodo: "3.\xBA pagamento" }
     ]
   },
   {
@@ -23518,7 +23652,7 @@ var REGRAS = [
       if (p.forma === "eni") return contabOrganizada(p);
       return NAO;
     },
-    datas: (a) => [{ data: iso3(a, 7, 15), periodo: `exerc\xEDcio de ${a - 1}` }]
+    datas: (a) => [{ data: iso4(a, 7, 15), periodo: `exerc\xEDcio de ${a - 1}` }]
   },
   // ---------------- Fiscal: IRS (ENI) ----------------
   {
@@ -23530,7 +23664,7 @@ var REGRAS = [
     transferivel: false,
     nota: "Entrega de 1 de abril a 30 de junho, independentemente de ser \xFAtil; pagamento at\xE9 31 de agosto.",
     aplica: (p) => formaEm(p, ["eni", "particular"]),
-    datas: (a) => [{ data: iso3(a, 6, 30), periodo: `rendimentos de ${a - 1}` }]
+    datas: (a) => [{ data: iso4(a, 6, 30), periodo: `rendimentos de ${a - 1}` }]
   },
   {
     id: "irs_pagamentos_conta",
@@ -23542,9 +23676,9 @@ var REGRAS = [
     nota: "A AT notifica o valor; n\xE3o \xE9 exig\xEDvel se for inferior a 50 \u20AC.",
     aplica: (p) => formaEm(p, ["eni"]),
     datas: (a) => [
-      { data: iso3(a, 7, 20), periodo: "1.\xBA pagamento" },
-      { data: iso3(a, 9, 20), periodo: "2.\xBA pagamento" },
-      { data: iso3(a, 12, 20), periodo: "3.\xBA pagamento" }
+      { data: iso4(a, 7, 20), periodo: "1.\xBA pagamento" },
+      { data: iso4(a, 9, 20), periodo: "2.\xBA pagamento" },
+      { data: iso4(a, 12, 20), periodo: "3.\xBA pagamento" }
     ]
   },
   // ---------------- Segurança Social ----------------
@@ -23571,7 +23705,7 @@ var REGRAS = [
     nota: "Desde as contribui\xE7\xF5es de janeiro de 2026: do dia 1 ao dia 25 do m\xEAs seguinte (antes: 10 a 20).",
     aplica: comTrabalhadores,
     datas: (a) => mensal(a, 25, 1, "contribui\xE7\xF5es de").map(
-      (o, i) => a < 2026 || a === 2026 && i === 0 ? { ...o, data: iso3(a, i + 1, 20) } : o
+      (o, i) => a < 2026 || a === 2026 && i === 0 ? { ...o, data: iso4(a, i + 1, 20) } : o
     )
   },
   {
@@ -23612,7 +23746,7 @@ var REGRAS = [
     transferivel: false,
     nota: "3 meses ap\xF3s o fecho do exerc\xEDcio; 5 meses (31/5) se houver contas consolidadas ou m\xE9todo da equival\xEAncia patrimonial. Sem contas nos 2 meses seguintes, qualquer s\xF3cio pode pedir inqu\xE9rito judicial (art. 67.\xBA).",
     aplica: (p) => formaEm(p, ["sociedade"]),
-    datas: (a) => [{ data: iso3(a, 3, 31), periodo: `exerc\xEDcio de ${a - 1}` }]
+    datas: (a) => [{ data: iso4(a, 3, 31), periodo: `exerc\xEDcio de ${a - 1}` }]
   },
   {
     id: "rcbe_confirmacao_anual",
@@ -23623,7 +23757,7 @@ var REGRAS = [
     transferivel: false,
     nota: "Pode ser feita com a IES; dispensada se houve atualiza\xE7\xE3o no mesmo ano. Altera\xE7\xF5es: at\xE9 30 dias ap\xF3s o facto (art. 14.\xBA).",
     aplica: (p) => formaEm(p, ["sociedade", "associacao"]),
-    datas: (a) => [{ data: iso3(a, 12, 31) }]
+    datas: (a) => [{ data: iso4(a, 12, 31) }]
   },
   // ---------------- Laboral ----------------
   {
@@ -23635,7 +23769,7 @@ var REGRAS = [
     transferivel: true,
     nota: "Regra: entrega de 16 de mar\xE7o a 15 de abril, sobre o ano anterior. A DGCP (ex-GEP) pode alterar a janela \u2014 confirmar a data do ano em dgcp.mtsss.gov.pt/relatorio-unico.",
     aplica: comTrabalhadores,
-    datas: (a) => [{ data: iso3(a, 4, 15), periodo: `dados de ${a - 1}` }]
+    datas: (a) => [{ data: iso4(a, 4, 15), periodo: `dados de ${a - 1}` }]
   },
   {
     id: "mapa_ferias",
@@ -23646,7 +23780,7 @@ var REGRAS = [
     transferivel: false,
     nota: "Elaborado at\xE9 15 de abril e afixado at\xE9 31 de outubro.",
     aplica: comTrabalhadores,
-    datas: (a) => [{ data: iso3(a, 4, 15) }]
+    datas: (a) => [{ data: iso4(a, 4, 15) }]
   },
   {
     id: "formacao_continua",
@@ -23657,7 +23791,7 @@ var REGRAS = [
     transferivel: false,
     nota: "Sem data legal: horas n\xE3o dadas em 2 anos passam a cr\xE9dito de horas, que caduca ao fim de 3 anos.",
     aplica: comTrabalhadores,
-    datas: (a) => [{ data: iso3(a, 12, 31) }]
+    datas: (a) => [{ data: iso4(a, 12, 31) }]
   },
   // ---------------- Compliance (RGPC: 50 ou mais trabalhadores) ----------------
   {
@@ -23669,7 +23803,7 @@ var REGRAS = [
     transferivel: false,
     nota: "Elaborado no m\xEAs de abril sobre a execu\xE7\xE3o do ano anterior; publicar na intranet e no site em 10 dias. Rever o PPR a cada 3 anos.",
     aplica: rgpc,
-    datas: (a) => [{ data: iso3(a, 4, 30), final: ultimoDiaUtilAte(iso3(a, 4, 30)), periodo: `execu\xE7\xE3o de ${a - 1}` }]
+    datas: (a) => [{ data: iso4(a, 4, 30), final: ultimoDiaUtilAte(iso4(a, 4, 30)), periodo: `execu\xE7\xE3o de ${a - 1}` }]
   },
   {
     id: "rgpc_relatorio_intercalar",
@@ -23680,7 +23814,7 @@ var REGRAS = [
     transferivel: false,
     nota: "Elaborado no m\xEAs de outubro, sobre os riscos elevados ou m\xE1ximos do PPR; publicar em 10 dias.",
     aplica: rgpc,
-    datas: (a) => [{ data: iso3(a, 10, 31), final: ultimoDiaUtilAte(iso3(a, 10, 31)) }]
+    datas: (a) => [{ data: iso4(a, 10, 31), final: ultimoDiaUtilAte(iso4(a, 10, 31)) }]
   }
 ];
 function rgpc(p) {
@@ -23716,7 +23850,7 @@ function resolverData(r, o, ano) {
   const pr = PRORROGACOES[`${r.id}@${o.data}`];
   if (pr) return { data: pr.data, nota: pr.nota };
   if (r.agosto && o.data.slice(5, 7) === "08") {
-    const alvo = iso3(ano, 8, r.agosto);
+    const alvo = iso4(ano, 8, r.agosto);
     const motivo = r.agosto === 31 ? r.area === "Seguran\xE7a Social" ? "Agosto: prazo at\xE9 31/8 (C\xF3digo Contributivo, art. 23.\xBA-B)." : "F\xE9rias fiscais: prazo de agosto at\xE9 31/8 (LGT, art. 57.\xBA-A)." : "Agosto: declara\xE7\xE3o ou confirma\xE7\xE3o de remunera\xE7\xF5es at\xE9 25/8 (C\xF3digo Contributivo, art. 23.\xBA-B).";
     if (alvo <= o.data) return { data: o.data };
     const util2 = ultimoDiaUtilAte(alvo);
@@ -24016,7 +24150,7 @@ function comErrosTratados(server) {
   });
   return envolvido;
 }
-function iso4(d) {
+function iso5(d) {
   return d.toISOString().slice(0, 10);
 }
 function listagem(cat) {
@@ -24048,6 +24182,48 @@ function registerTools(servidor) {
     }
   );
   server.registerTool(
+    "calc_juros_lote",
+    {
+      title: "Juros de mora de v\xE1rias faturas",
+      description: "Calcula de uma vez os juros de mora de V\xC1RIAS faturas (de um ou mais clientes), cada uma por tramos semestrais desde o vencimento, com a indemniza\xE7\xE3o de 40 \u20AC por fatura comercial vencida (DL 62/2013, art. 7.\xBA) e os totais por cliente e geral; faturas ainda n\xE3o vencidas contam s\xF3 o capital. Usa quando o cliente deve v\xE1rias faturas ('tenho 5 faturas em atraso', 'quanto me deve ao todo', extrato de conta corrente) e antes da carta 'carta-cobranca-varias-faturas'. EN: late-payment interest on several overdue invoices at once.",
+      inputSchema: {
+        faturas: external_exports.array(
+          external_exports.object({
+            cliente: external_exports.string().describe("Nome do cliente (devedor)"),
+            fatura: external_exports.string().describe("N\xFAmero da fatura"),
+            capital: external_exports.number().describe("Valor em d\xEDvida (\u20AC)"),
+            vencimento: external_exports.string().describe("Data de vencimento (AAAA-MM-DD)"),
+            tipo: external_exports.enum(["comercial", "comercial-geral", "civil"]).default("comercial")
+          })
+        ).min(1).max(500).describe("Faturas em d\xEDvida"),
+        data_fim: external_exports.string().optional().describe("Data final (AAAA-MM-DD); por defeito, hoje")
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false }
+    },
+    async ({ faturas, data_fim }) => {
+      const fim = parseDataEstrita(data_fim ?? hojeLisboa(), "data_fim");
+      const lista = faturas.map((f, i) => ({ ...f, vencimento: parseDataEstrita(f.vencimento, `faturas[${i}].vencimento`) }));
+      return texto(memoriaJurosLote(calcularJurosLote(lista, fim)) + AVISO);
+    }
+  );
+  server.registerTool(
+    "calc_procedimento_ccp",
+    {
+      title: "Procedimento de contrata\xE7\xE3o p\xFAblica pelo valor",
+      description: "Diz que procedimentos do C\xF3digo dos Contratos P\xFAblicos se podem usar pelo valor do contrato (ajuste direto, consulta pr\xE9via, concurso p\xFAblico ou limitado), com os limiares do DL 177/2026 (procedimentos iniciados a partir de 1/10/2026; com 'inicio' anterior, os limiares antigos). Usa quando o utilizador quer vender ao Estado, responder a um convite ou perceber se um ajuste direto \xE9 legal ('posso ser contratado por ajuste direto?', 'que procedimento para 100 mil euros'). EN: which public procurement procedure applies for a contract value.",
+      inputSchema: {
+        valor: external_exports.number().describe("Valor do contrato, sem IVA (\u20AC)"),
+        tipo: external_exports.enum(["bens-servicos", "empreitada"]).describe("bens-servicos (aquisi\xE7\xE3o de bens ou servi\xE7os) | empreitada (obras p\xFAblicas)"),
+        inicio: external_exports.string().optional().describe("Data de in\xEDcio do procedimento (AAAA-MM-DD); omitido = regime atual")
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false }
+    },
+    async ({ valor, tipo, inicio }) => {
+      const data = inicio === void 0 ? void 0 : parseDataEstrita(inicio, "inicio");
+      return texto(textoProcedimentoCCP(calcularProcedimentoCCP({ valor, tipo, inicio: data })) + AVISO);
+    }
+  );
+  server.registerTool(
     "calc_prazo",
     {
       title: "Contar prazo legal",
@@ -24063,12 +24239,12 @@ function registerTools(servidor) {
     async ({ inicio, dias, tipo, urgente }) => {
       try {
         const r = contarPrazo(parseDataEstrita(inicio, "inicio"), dias, tipo, { urgente });
-        const termoLegal = r.transferido ? `Termo legal: ${iso4(r.dataLegal)}
+        const termoLegal = r.transferido ? `Termo legal: ${iso5(r.dataLegal)}
 ` : "";
         return texto(
           `Prazo de ${dias} dias (${tipo}${tipo === "judicial" && urgente ? ", processo urgente" : ""})
 In\xEDcio: ${inicio}
-` + termoLegal + `\u23F0 DATA-LIMITE: ${iso4(r.dataLimite)}
+` + termoLegal + `\u23F0 DATA-LIMITE: ${iso5(r.dataLimite)}
 
 ${r.nota}` + AVISO
         );
@@ -24216,7 +24392,7 @@ TOTAL impostos: ${formatarEuros(r.total)}` + AVISO
 Base: ${r.base}
 Prazo: ${r.prazoTexto}${r.presuntiva ? " (presuntiva)" : ""}
 In\xEDcio: ${inicio}
-\u23F0 DATA-LIMITE: ${iso4(r.limite)}
+\u23F0 DATA-LIMITE: ${iso5(r.limite)}
 
 ` + (r.aviso ? `${r.aviso}
 

@@ -124,6 +124,24 @@ async function calc(args) {
       console.log(c.memoriaJuros(capital, r, tipo));
       break;
     }
+    case "ccp": {
+      const inicio = valorDe(rest, "--inicio") === undefined ? undefined : data("--inicio");
+      const r = c.calcularProcedimentoCCP({ valor: num(rest, "--valor"), tipo: str(rest, "--tipo", "bens-servicos"), inicio });
+      console.log(c.textoProcedimentoCCP(r));
+      break;
+    }
+    case "lote": {
+      let faturas;
+      try {
+        faturas = JSON.parse(str(rest, "--json", OBRIGATORIO));
+      } catch {
+        throw new Error("--json: lista de faturas em JSON inválida (ex.: '[{\"cliente\":\"A\",\"fatura\":\"FT 1\",\"capital\":1000,\"vencimento\":\"2026-01-15\"}]').");
+      }
+      if (!Array.isArray(faturas)) throw new Error("--json: tem de ser uma lista de faturas.");
+      const r = c.calcularJurosLote(faturas, data("--fim", c.hojeLisboa()));
+      console.log(c.memoriaJurosLote(r));
+      break;
+    }
     case "prazo": {
       const inicio = data("--inicio");
       const r = c.contarPrazo(inicio, num(rest, "--dias"), str(rest, "--tipo", "corridos"), {
@@ -479,6 +497,10 @@ Uso:
   juridico-pt calc imt --valor 250000 [--tipo hpp|secundaria] [--jovem]
   juridico-pt calc juros --capital 5000 --inicio 2025-03-01 [--fim YYYY-MM-DD] [--tipo comercial|comercial-geral|civil]
       (memória de cálculo por tramos semestrais)
+  juridico-pt calc lote --json '[{"cliente":"A","fatura":"FT 1","capital":1000,"vencimento":"2026-01-15"}]' [--fim YYYY-MM-DD]
+      (várias faturas: juros por fatura, 40 € nas comerciais, totais por cliente e geral)
+  juridico-pt calc ccp --valor 100000 [--tipo bens-servicos|empreitada] [--inicio AAAA-MM-DD]
+      (procedimentos de contratação pública admissíveis pelo valor; limiares do DL 177/2026)
   juridico-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo judicial|corridos|uteis] [--urgente]
       (judicial: CPC 138.º com férias judiciais; corridos por defeito)
   juridico-pt calc prescricao --inicio 2025-01-15 --tipo creditos-comerciais

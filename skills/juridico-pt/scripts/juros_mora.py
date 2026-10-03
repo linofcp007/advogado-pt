@@ -24,6 +24,8 @@ Exemplos de uso:
       --data-fim 2024-12-31 --tipo civil
   python scripts/juros_mora.py --capital 10000 --data-inicio 2022-01-01 \\
       --tipo comercial-geral
+  python scripts/juros_mora.py --data-fim 2026-10-01 --lote \\
+      '[{"cliente": "A", "fatura": "FT 1", "capital": 1000, "vencimento": "2026-01-15"}]'
 """
 
 import argparse
@@ -193,6 +195,102 @@ def memoria_juros(capital, resultado, tipo):
     return "\n".join(linhas)
 
 
+INDEMNIZACAO_COBRANCA = 40.0  # DL 62/2013, art. 7.º (valor em references/valores-2026.md)
+
+
+def _r2(valor):
+    """Arredonda ao cêntimo, meio para cima, sobre a representação decimal mais curta (= r2 do TS)."""
+    return float(Decimal(repr(float(valor))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
+
+
+def calcular_juros_lote(faturas, data_fim):
+    """Juros de VÁRIAS faturas (porta de calcularJurosLote em juros-lote.ts).
+
+    faturas: lista de {"cliente", "fatura", "capital", "vencimento" (date ou
+    "AAAA-MM-DD"), "tipo" (opcional, "comercial" por defeito)}.
+    Devolve {"faturas": [...], "por_cliente": [...], "total": {...}}: juros
+    arredondados ao cêntimo por fatura, 40 € por fatura comercial vencida,
+    faturas ainda não vencidas só com o capital.
+    """
+    if not faturas:
+        raise ValueError("Indica pelo menos uma fatura.")
+    if len(faturas) > 500:
+        raise ValueError("No máximo 500 faturas por cálculo.")
+    resultados = []
+    for i, f in enumerate(faturas):
+        fatura = str(f.get("fatura") or "").strip() or f"fatura {i + 1}"
+        cliente = str(f.get("cliente") or "").strip() or "(sem cliente)"
+        tipo = f.get("tipo") or "comercial"
+        capital = f.get("capital")
+        if not isinstance(capital, (int, float)) or capital < 0:
+            raise ValueError(f"{fatura}: o capital tem de ser um valor positivo.")
+        venc = f.get("vencimento")
+        if isinstance(venc, str):
+            venc = datetime.date.fromisoformat(venc)
+        base = {"cliente": cliente, "fatura": fatura, "capital": _r2(capital),
+                "vencimento": venc.isoformat(), "tipo": tipo}
+        if venc >= data_fim:
+            resultados.append(dict(base, vencida=False, dias=0, juros=0.0,
+                                   indemnizacao40=0.0, total=base["capital"], tramos=[],
+                                   nota=f"Ainda não vencida a {data_fim.isoformat()} "
+                                        f"(vence a {venc.isoformat()})."))
+            continue
+        r = calcular_juros(capital, venc, data_fim, tipo)
+        juros = _r2(r["juros"])
+        indemnizacao = INDEMNIZACAO_COBRANCA if tipo == "comercial" else 0.0
+        resultados.append(dict(base, vencida=True, dias=r["dias"], juros=juros,
+                               indemnizacao40=indemnizacao,
+                               total=_r2(base["capital"] + juros + indemnizacao),
+                               tramos=r["tramos"]))
+
+    def somar(acc, f):
+        acc["capital"] = _r2(acc["capital"] + f["capital"])
+        acc["juros"] = _r2(acc["juros"] + f["juros"])
+        acc["indemnizacao"] = _r2(acc["indemnizacao"] + f["indemnizacao40"])
+        acc["total"] = _r2(acc["capital"] + acc["juros"] + acc["indemnizacao"])
+
+    por_cliente = []
+    total = {"capital": 0.0, "juros": 0.0, "indemnizacao": 0.0, "total": 0.0}
+    for f in resultados:
+        c = next((x for x in por_cliente if x["cliente"] == f["cliente"]), None)
+        if c is None:
+            c = {"cliente": f["cliente"], "faturas": 0, "capital": 0.0, "juros": 0.0,
+                 "indemnizacao": 0.0, "total": 0.0}
+            por_cliente.append(c)
+        c["faturas"] += 1
+        somar(c, f)
+        somar(total, f)
+    return {"data_fim": data_fim.isoformat(), "faturas": resultados,
+            "por_cliente": por_cliente, "total": total}
+
+
+def memoria_juros_lote(r):
+    """Resumo por fatura, por cliente e total (igual ao memoriaJurosLote do TS)."""
+    linhas = [f"Juros de mora em lote até {r['data_fim']} (tramos semestrais por fatura)", ""]
+    for c in r["por_cliente"]:
+        linhas.append(f"{c['cliente']} — {c['faturas']} fatura(s)")
+        for f in (x for x in r["faturas"] if x["cliente"] == c["cliente"]):
+            if f["vencida"]:
+                extra = f"{f['dias']} dias, juros {formatar_euros(f['juros'])}"
+                if f["indemnizacao40"]:
+                    extra += f" + indemnização {formatar_euros(f['indemnizacao40'])}"
+            else:
+                extra = "não vencida"
+            linhas.append(f"- {f['fatura']} ({f['tipo']}, vence {f['vencimento']}): capital "
+                          f"{formatar_euros(f['capital'])}; {extra} -> {formatar_euros(f['total'])}")
+        linhas.append(f"  Subtotal: capital {formatar_euros(c['capital'])} + juros "
+                      f"{formatar_euros(c['juros'])} + indemnizações "
+                      f"{formatar_euros(c['indemnizacao'])} = {formatar_euros(c['total'])}")
+        linhas.append("")
+    t = r["total"]
+    linhas.append(f"TOTAL: capital {formatar_euros(t['capital'])} + juros {formatar_euros(t['juros'])}"
+                  f" + indemnizações {formatar_euros(t['indemnizacao'])} = {formatar_euros(t['total'])}")
+    linhas.append("")
+    linhas.append(f"Indemnização de {formatar_euros(INDEMNIZACAO_COBRANCA)} por fatura comercial "
+                  "vencida (DL 62/2013, art. 7.º), devida sem interpelação; nas faturas civis só há juros.")
+    return "\n".join(linhas)
+
+
 def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -202,11 +300,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
-        "--capital", type=float, required=True,
+        "--capital", type=float,
         help="Capital em dívida, em euros (ex.: 5000)",
     )
     parser.add_argument(
-        "--data-inicio", type=parse_data, required=True,
+        "--data-inicio", type=parse_data,
         help="Data de início da mora (YYYY-MM-DD)",
     )
     parser.add_argument(
@@ -218,7 +316,27 @@ def main():
         help="comercial (DL 62/2013), comercial-geral (art. 102.º §3 CCom) "
              "ou civil (Portaria 291/2003). Default: comercial.",
     )
+    parser.add_argument(
+        "--lote",
+        help="Várias faturas em JSON: '[{\"cliente\": \"A\", \"fatura\": \"FT 1\", "
+             "\"capital\": 1000, \"vencimento\": \"2026-01-15\"}]' (usa --data-fim)",
+    )
     args = parser.parse_args()
+
+    if args.lote:
+        import json
+        try:
+            faturas = json.loads(args.lote)
+            r = calcular_juros_lote(faturas, args.data_fim)
+        except (ValueError, TypeError, AttributeError) as e:
+            parser.error(f"--lote: {e}")
+        print(memoria_juros_lote(r))
+        print()
+        print("AVISO: Estimativa de apoio. Confirmar os avisos da ETF para cada "
+              "semestre. Não substitui aconselhamento de advogado inscrito na OA.")
+        return
+    if args.capital is None or args.data_inicio is None:
+        parser.error("indica --capital e --data-inicio (ou --lote).")
 
     try:
         r = calcular_juros(args.capital, args.data_inicio, args.data_fim,
