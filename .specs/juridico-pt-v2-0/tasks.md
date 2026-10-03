@@ -135,7 +135,7 @@
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-320" mcp-server/test/v20.test.mjs_
   - _Size: M_
   - _Depends: 5_
-- [ ] 18. [US7] Prazos com perfil e `.ics` por perfil
+- [x] 18. [US7] Prazos com perfil e `.ics` por perfil
   - _Requirements: US-7.AC-2_
   - _Makes green: T-319_
   - _Implements: mcp-server/src/prazos-estado.ts, mcp-server/src/calendario.ts_
@@ -222,13 +222,13 @@
   - _Depends: 27_
 
 ## História US-11 (P2): privacidade e custo
-- [ ] 30. [US11] Aviso de `.gitignore` e `acrescentar_gitignore`
+- [x] 30. [US11] Aviso de `.gitignore` e `acrescentar_gitignore`
   - _Requirements: US-11.AC-1_
   - _Makes green: T-331_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-331" mcp-server/test/v20.test.mjs_
   - _Size: S_
   - _Depends: 5_
-- [ ] 31. [US11] Tool `apagar_perfil`
+- [x] 31. [US11] Tool `apagar_perfil`
   - _Requirements: US-11.AC-2_
   - _Makes green: T-332_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-332" mcp-server/test/v20.test.mjs_
@@ -247,7 +247,7 @@
   - _Verify: node --test --test-name-pattern="T-334" mcp-server/test/v20.test.mjs_
   - _Size: S_
   - _Depends: 6_
-- [ ] 34. [US11] Conservação: prazos cumpridos há mais de 12 meses retirados; perfil antigo assinalado
+- [x] 34. [US11] Conservação: prazos cumpridos há mais de 12 meses retirados; perfil antigo assinalado
   - _Requirements: US-11.AC-5_
   - _Makes green: T-335_
   - _Implements: mcp-server/src/prazos-estado.ts_

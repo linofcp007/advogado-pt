@@ -30,7 +30,9 @@ import {
   COMPENSACAO_MODALIDADES,
 } from "./calculators/index.js";
 import { listar, ler, procurar, listarComAmbito, formatarProcura, type Categoria } from "./content.js";
-import { lerPerfil, guardarPerfil, resumoPerfil, textoPerguntasPerfil, listarPerfis, ativarPerfil } from "./perfil.js";
+import {
+  lerPerfil, guardarPerfil, resumoPerfil, textoPerguntasPerfil, listarPerfis, ativarPerfil, apagarPerfil,
+} from "./perfil.js";
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import { gerarCalendario, exportarICS, formatarCalendario } from "./calendario.js";
 import { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } from "./prazos-estado.js";
@@ -734,16 +736,43 @@ export function registerTools(servidor: McpServer): void {
           .string()
           .optional()
           .describe("Nome do perfil (ex.: 'cliente-a'); omitido = perfil por defeito perfil-empresa.md"),
+        acrescentar_gitignore: z
+          .boolean()
+          .default(false)
+          .describe("Num repositório git, acrescentar '.juridico-pt/' ao .gitignore (só com o acordo do utilizador)"),
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
     },
-    async ({ campos, destino, diretorio, perfil }) => {
+    async ({ campos, destino, diretorio, perfil, acrescentar_gitignore }) => {
       try {
-        const p = guardarPerfil(campos, destino, { projeto: diretorio, perfil });
-        return texto(`Perfil guardado (${p.origem}) em ${p.caminho}\n${resumoPerfil(p)}`);
+        const p = guardarPerfil(campos, destino, { projeto: diretorio, perfil, acrescentarGitignore: acrescentar_gitignore });
+        return texto(
+          `Perfil guardado (${p.origem}) em ${p.caminho}\n${resumoPerfil(p)}` +
+            (p.avisoGitignore ? `\n\n⚠️ ${p.avisoGitignore}` : "")
+        );
       } catch (e) {
         return texto(`Não foi possível guardar o perfil: ${(e as Error).message}`);
       }
+    }
+  );
+
+  server.registerTool(
+    "apagar_perfil",
+    {
+      title: "Apagar perfil da empresa e os dados dele",
+      description:
+        "Apaga um perfil guardado e o que lhe pertence: o ficheiro do perfil, os prazos desse perfil em .juridico-pt/prazos.md, os calendários .ics do perfil e a marca de perfil ativo (direito ao apagamento). nome 'perfil-empresa' apaga o perfil por defeito. Usa só quando o utilizador pedir para apagar ('apaga os dados do cliente X', 'esquece a minha empresa') e confirma antes — não se desfaz. EN: delete a saved profile and its data.",
+      inputSchema: {
+        nome: z.string().describe("Nome do perfil (ex.: 'cliente-a'; 'perfil-empresa' = o perfil por defeito)"),
+        destino: z.enum(["projeto", "geral"]).default("projeto"),
+        diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false },
+    },
+    async ({ nome, destino, diretorio }) => {
+      const { apagados } = apagarPerfil(nome, destino, { projeto: diretorio });
+      if (apagados.length === 0) return texto(`Não encontrei dados do perfil '${nome}' (${destino}). Nada foi apagado.`);
+      return texto(`Apagado (${destino}):\n${apagados.map((a) => `- ${a}`).join("\n")}`);
     }
   );
 
@@ -803,14 +832,36 @@ export function registerTools(servidor: McpServer): void {
       inputSchema: {
         ano: z.number().int().min(2000).max(2100).describe("Ano civil (ex.: 2026)"),
         mes: z.number().int().min(1).max(12).optional().describe("Só este mês (1-12)"),
-        exportar: z.boolean().default(false).describe("Gravar .juridico-pt/calendario-<ano>.ics"),
+        exportar: z.boolean().default(false).describe("Gravar .juridico-pt/calendario-<ano>[-<perfil>].ics"),
         diretorio: z.string().optional().describe("Diretório do projeto (perfil e exportação; por defeito, cwd)"),
         perfil: z.string().optional().describe("Perfil nomeado a usar (por defeito, o ativo)"),
+        por_perfil: z
+          .boolean()
+          .default(false)
+          .describe("Modo contabilista: gerar e exportar um .ics por cada perfil nomeado (calendario-<ano>-<perfil>.ics)"),
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
     },
-    async ({ ano, mes, exportar, diretorio, perfil }) => {
+    async ({ ano, mes, exportar, diretorio, perfil, por_perfil }) => {
       try {
+        if (por_perfil) {
+          const perfis = listarPerfis({ projeto: diretorio });
+          if (perfis.length === 0) {
+            return texto("Sem perfis nomeados (.juridico-pt/perfis/). Grava-os com guardar_perfil_empresa e o parâmetro perfil.");
+          }
+          const linhas = perfis.map(({ nome }) => {
+            const pn = lerPerfil({ projeto: diretorio, perfil: nome });
+            const cal = gerarCalendario(ano, pn?.campos ?? null);
+            const f = exportarICS(ano, cal, diretorio, undefined, nome);
+            const nAc = cal.filter((o) => o.aConfirmar).length;
+            return `- ${nome}: ${cal.length} prazos${nAc ? ` (${nAc} a confirmar)` : ""} -> ${f}`;
+          });
+          return texto(
+            `Calendários ${ano} por perfil (${perfis.length}):\n${linhas.join("\n")}\n\n` +
+              "Importa cada .ics num calendário próprio (Google Calendar: Definições → Importar e exportar → Importar)." +
+              AVISO
+          );
+        }
         const p = lerPerfil({ projeto: diretorio, perfil });
         const cal = gerarCalendario(ano, p?.campos ?? null);
         const nAc = cal.filter((o) => o.aConfirmar).length;
@@ -822,7 +873,7 @@ export function registerTools(servidor: McpServer): void {
           (!p ? "Sem perfil, as obrigações vêm marcadas ❓: grava o perfil (guardar_perfil_empresa) para um calendário à medida.\n" : "") +
           formatarCalendario(cal, { mes });
         if (exportar) {
-          const caminho = exportarICS(ano, cal, diretorio);
+          const caminho = exportarICS(ano, cal, diretorio, undefined, p?.nome);
           out +=
             `\n\n📅 Exportado: ${caminho}\nGoogle Calendar: Definições → Importar e exportar → Importar (escolhe um calendário próprio, ex.: "Obrigações"). Outlook/Apple: abrir o ficheiro .ics.`;
         } else {
@@ -848,20 +899,21 @@ export function registerTools(servidor: McpServer): void {
         data: z.string().describe("Data-limite AAAA-MM-DD"),
         descricao: z.string().describe("O que tem de ser feito (ex.: 'Oposição à execução fiscal')"),
         origem: z.string().optional().describe("Norma ou ato de origem (ex.: 'art. 203.º CPPT, citação de 20/9')"),
+        perfil: z.string().optional().describe("Perfil (empresa/cliente) a que o prazo pertence — modo contabilista"),
         diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
     },
-    async ({ data, descricao, origem, diretorio }) => {
+    async ({ data, descricao, origem, perfil, diretorio }) => {
       try {
-        const p = registarPrazo({ data, descricao, origem }, diretorio);
+        const p = registarPrazo({ data, descricao, origem, perfil }, diretorio);
         const { proximos, vencidos } = prazosProximos([p], new Date(), 7);
         const alerta = vencidos.length
           ? " ⚠️ Esta data já passou."
           : proximos.length
             ? ` ⏰ Faltam ${proximos[0].faltam} dia(s).`
             : "";
-        return texto(`Prazo registado: ${p.data} — ${p.descricao}${p.origem ? ` (${p.origem})` : ""}.${alerta}\nFicheiro: .juridico-pt/prazos.md (aviso automático ao abrir a sessão).`);
+        return texto(`Prazo registado: ${p.data} — ${p.descricao}${p.origem ? ` (${p.origem})` : ""}${p.perfil ? ` [perfil ${p.perfil}]` : ""}.${alerta}\nFicheiro: .juridico-pt/prazos.md (aviso automático ao abrir a sessão).`);
       } catch (e) {
         return texto(`Não foi possível registar: ${(e as Error).message}`);
       }
@@ -886,8 +938,8 @@ export function registerTools(servidor: McpServer): void {
         if (todos.length === 0) return texto("Sem prazos registados neste projeto (usa registar_prazo).");
         const { vencidos, proximos } = prazosProximos(todos, new Date(), 36500);
         const linhas = [
-          ...vencidos.map((x) => `- ⚠️ VENCIDO ${x.data} — ${x.descricao}${x.origem ? ` (${x.origem})` : ""}`),
-          ...proximos.map((x) => `- ${x.faltam <= 7 ? "⏰ " : ""}${x.data} — ${x.descricao}${x.origem ? ` (${x.origem})` : ""} · ${x.faltam === 0 ? "termina hoje" : `faltam ${x.faltam} dias`}`),
+          ...vencidos.map((x) => `- ⚠️ VENCIDO ${x.data} — ${x.descricao}${x.origem ? ` (${x.origem})` : ""}${x.perfil ? ` [${x.perfil}]` : ""}`),
+          ...proximos.map((x) => `- ${x.faltam <= 7 ? "⏰ " : ""}${x.data} — ${x.descricao}${x.origem ? ` (${x.origem})` : ""}${x.perfil ? ` [${x.perfil}]` : ""} · ${x.faltam === 0 ? "termina hoje" : `faltam ${x.faltam} dias`}`),
         ];
         if (incluir_concluidos) {
           linhas.push(...todos.filter((x) => x.concluido).map((x) => `- ✔ ${x.data} — ${x.descricao} (cumprido)`));

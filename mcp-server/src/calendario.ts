@@ -10,7 +10,7 @@
 //   todos "independentemente de esse dia ser útil", e as janelas mensais (RGPC).
 // Agosto: férias fiscais (LGT 57.º-A) e contributivas (CRC 23.º-B) -> 31/8; declaração ou
 //   confirmação de remunerações à SS -> 25/8. IVA de junho / 2.º trimestre -> setembro (CIVA 41.º e 27.º, n.º 10).
-import { PASTA_DADOS } from "./dados.js";
+import { PASTA_DADOS, validarNomePerfil } from "./dados.js";
 import { dirProjeto, escreverSeguro } from "./fs-seguro.js";
 import { eDiaUtil, proximoDiaUtil } from "./calculators/prazos.js";
 
@@ -719,11 +719,12 @@ export function paraICS(obrigacoes: Obrigacao[], opts: { hoje?: Date; alarmeDias
   return linhas.map(dobrar).join("\r\n") + "\r\n";
 }
 
-/** Grava `<dir>/.juridico-pt/calendario-<ano>.ics` e devolve o caminho. */
-export function exportarICS(ano: number, obrigacoes: Obrigacao[], dir?: string, hoje?: Date): string {
+/** Grava `<dir>/.juridico-pt/calendario-<ano>[-<perfil>].ics` e devolve o caminho. */
+export function exportarICS(ano: number, obrigacoes: Obrigacao[], dir?: string, hoje?: Date, perfil?: string): string {
   if (!Number.isInteger(ano) || ano < 2000 || ano > 2100) throw new Error(`Ano inválido: ${ano}`);
+  const sufixo = perfil ? `-${validarNomePerfil(perfil)}` : "";
   // Mesmo diretório que o hook lê; escrita segura (sem seguir ligações, temporário + renomeação).
-  return escreverSeguro(dirProjeto(dir), [PASTA_DADOS, `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
+  return escreverSeguro(dirProjeto(dir), [PASTA_DADOS, `calendario-${ano}${sufixo}.ics`], paraICS(obrigacoes, { hoje }));
 }
 
 /** Texto legível do calendário, agrupado por mês (para a tool e o CLI). */

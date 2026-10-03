@@ -19,6 +19,17 @@ export function pastaProjeto(projeto?: string): string {
   return join(dirProjeto(projeto), PASTA_DADOS);
 }
 
+/** Nome de perfil: minúsculas, algarismos e hífens (é também o nome do ficheiro). */
+export const NOME_PERFIL_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
+
+export function validarNomePerfil(nome: string): string {
+  const n = String(nome ?? "").trim().toLowerCase();
+  if (!NOME_PERFIL_RE.test(n)) {
+    throw new Error(`Nome de perfil inválido: '${nome}' (usa letras minúsculas, algarismos e hífens).`);
+  }
+  return n;
+}
+
 /** `<home>/.juridico-pt` do perfil geral. */
 export function pastaGeral(home?: string): string {
   return join(dirHome(home), PASTA_DADOS);

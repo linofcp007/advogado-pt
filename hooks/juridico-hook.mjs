@@ -124,7 +124,7 @@ function lerPerfilAtivo(projeto, home, hoje) {
 }
 
 // --- Prazos em curso -------------------------------------------------------
-// <projeto>/.juridico-pt/prazos.md — "- [ ] AAAA-MM-DD — descrição — origem".
+// <projeto>/.juridico-pt/prazos.md — "- [ ] AAAA-MM-DD — descrição — origem — perfil: nome".
 // Leitor mínimo, alinhado com mcp-server/src/prazos-estado.ts.
 const PRAZO_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
 const DIAS_AVISO = 7;
@@ -152,7 +152,9 @@ function avisoPrazos(projeto, hoje) {
       if (!m || m[1] !== " ") continue;
       const ms = Date.parse(`${m[2]}T00:00:00Z`);
       if (Number.isNaN(ms)) continue;
-      const desc = limparCampo(m[3].split(/\s+[—–]\s+/)[0]).slice(0, 120);
+      const partes = m[3].split(/\s+[—–]\s+/);
+      const perfil = partes.length > 1 ? /^perfil:\s*([a-z0-9][a-z0-9-]{0,40})$/i.exec(partes[partes.length - 1].trim()) : null;
+      const desc = limparCampo(partes[0]).slice(0, 120) + (perfil ? ` [${perfil[1].toLowerCase()}]` : "");
       const faltam = Math.round((ms - hMs) / 86400000);
       if (faltam < 0) vencidos.push({ data: m[2], desc });
       else if (faltam <= DIAS_AVISO) proximos.push({ data: m[2], desc, faltam });

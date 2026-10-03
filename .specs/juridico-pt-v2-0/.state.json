@@ -354,6 +354,24 @@
       "task": "[US3] `/cobrar` com instruções para o conector de faturação (quando existe) e proposta de `registar_prazo`",
       "verify": "node --test --test-name-pattern=\"T-311\" mcp-server/test/v20.test.mjs"
     },
+    "18": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-319\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-319 passa (pass 1, fail 0): linha '— perfil: cliente-a', lerPrazos devolve perfil, calendario-2026-cliente-a.ics; tools registar_prazo/listar_prazos/calendario_obrigacoes (por_perfil) e hook atualizados; hooks.test 13/13",
+      "at": "2026-10-03T23:12:29.079Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-319\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-319 passa (pass 1, fail 0): linha '— perfil: cliente-a', lerPrazos devolve perfil, calendario-2026-cliente-a.ics; tools registar_prazo/listar_prazos/calendario_obrigacoes (por_perfil) e hook atualizados; hooks.test 13/13",
+          "at": "2026-10-03T23:12:29.079Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] Prazos com perfil e `.ics` por perfil",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-319\" mcp-server/test/v20.test.mjs"
+    },
     "24": {
       "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-325\" mcp-server/test/v20.test.mjs",
       "exitCode": 0,
@@ -389,9 +407,63 @@
       ],
       "task": "[US9] Python `procedimento_ccp` com os mesmos casos",
       "verify": "python skills/juridico-pt/scripts/test_scripts.py -k T326"
+    },
+    "30": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-331\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-331 passa: aviso em repositório git sem a exclusão; acrescentar_gitignore junta '.juridico-pt/' uma só vez; sem aviso depois",
+      "at": "2026-10-03T23:14:22.081Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-331\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-331 passa: aviso em repositório git sem a exclusão; acrescentar_gitignore junta '.juridico-pt/' uma só vez; sem aviso depois",
+          "at": "2026-10-03T23:14:22.081Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] Aviso de `.gitignore` e `acrescentar_gitignore`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-331\" mcp-server/test/v20.test.mjs"
+    },
+    "31": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-332\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-332 passa: apaga perfil, prazos do perfil, .ics e perfil ativo; recusa '../' e junction (alvo intacto); tool apagar_perfil registada",
+      "at": "2026-10-03T23:14:23.979Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-332\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-332 passa: apaga perfil, prazos do perfil, .ics e perfil ativo; recusa '../' e junction (alvo intacto); tool apagar_perfil registada",
+          "at": "2026-10-03T23:14:23.979Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] Tool `apagar_perfil`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-332\" mcp-server/test/v20.test.mjs"
+    },
+    "34": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-335 passa: prazos cumpridos com data há mais de 12 meses saem na escrita seguinte; em aberto nunca saem; perfil de 2024 assinalado como desatualizado e não apagado",
+      "at": "2026-10-03T23:12:31.188Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-335 passa: prazos cumpridos com data há mais de 12 meses saem na escrita seguinte; em aberto nunca saem; perfil de 2024 assinalado como desatualizado e não apagado",
+          "at": "2026-10-03T23:12:31.188Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] Conservação: prazos cumpridos há mais de 12 meses retirados; perfil antigo assinalado",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T23:09:45.404Z",
+  "lastTickAt": "2026-10-03T23:14:23.979Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
     "2": "2026-10-03T22:41:08.058Z",
@@ -403,7 +475,11 @@
     "11": "2026-10-03T23:06:34.601Z",
     "12": "2026-10-03T23:07:21.071Z",
     "14": "2026-10-03T23:07:40.573Z",
+    "18": "2026-10-03T23:12:29.079Z",
     "24": "2026-10-03T23:09:11.511Z",
-    "25": "2026-10-03T23:09:45.404Z"
+    "25": "2026-10-03T23:09:45.404Z",
+    "30": "2026-10-03T23:14:22.081Z",
+    "31": "2026-10-03T23:14:23.979Z",
+    "34": "2026-10-03T23:12:31.188Z"
   }
 }

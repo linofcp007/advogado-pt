@@ -5,8 +5,9 @@
 // O hook (hooks/juridico-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { PASTA_DADOS, dirHome as dirHomeBase } from "./dados.js";
-import { dirProjeto as dirProjetoBase, escreverSeguro } from "./fs-seguro.js";
+import { PASTA_DADOS, NOME_PERFIL_RE, dirHome as dirHomeBase, validarNomePerfil } from "./dados.js";
+import { apagarSeguro, dirProjeto as dirProjetoBase, escreverSeguro, listarSeguro } from "./fs-seguro.js";
+import { removerPrazosDoPerfil } from "./prazos-estado.js";
 
 export const CAMPOS_PERFIL = [
   "forma_juridica",
@@ -50,6 +51,8 @@ export interface Perfil {
   nome?: string;
   /** Aviso a mostrar (ex.: perfil ativo inexistente). */
   aviso?: string;
+  /** Projeto num repositório git cujo .gitignore não exclui `.juridico-pt/`. */
+  avisoGitignore?: string;
 }
 
 export interface OpcoesPerfil {
@@ -60,6 +63,8 @@ export interface OpcoesPerfil {
   /** Diretório "home" do perfil geral (default: JURIDICO_PT_HOME ou homedir()). */
   home?: string;
   hoje?: Date;
+  /** Num repositório git, acrescentar `.juridico-pt/` ao .gitignore (uma só vez). */
+  acrescentarGitignore?: boolean;
 }
 
 function dirProjeto(o: OpcoesPerfil): string {
@@ -74,15 +79,8 @@ function caminhoPerfil(base: string): string {
   return join(base, PASTA, FICHEIRO);
 }
 
-const NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
-
-function validarNome(nome: string): string {
-  const n = String(nome ?? "").trim().toLowerCase();
-  if (!NOME_RE.test(n)) {
-    throw new Error(`Nome de perfil inválido: '${nome}' (usa letras minúsculas, algarismos e hífens).`);
-  }
-  return n;
-}
+const NOME_RE = NOME_PERFIL_RE;
+const validarNome = validarNomePerfil;
 
 function caminhoNomeado(base: string, nome: string): string {
   return join(base, PASTA, "perfis", `${nome}.md`);
@@ -209,7 +207,77 @@ export function guardarPerfil(
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
   // Escrita segura: recusa ligações (symlink/junction) e grava por temporário + renomeação.
   escreverSeguro(base, nome ? [PASTA, "perfis", `${nome}.md`] : [PASTA, FICHEIRO], serializar(campos));
-  return { origem: destino, caminho, campos, desatualizado: false, ...(nome ? { nome } : {}) };
+  const avisoGitignore = destino === "projeto" ? verificarGitignore(base, opts.acrescentarGitignore === true) : undefined;
+  return {
+    origem: destino, caminho, campos, desatualizado: false,
+    ...(nome ? { nome } : {}),
+    ...(avisoGitignore ? { avisoGitignore } : {}),
+  };
+}
+
+// --- v2.0: privacidade (US-11) ---
+
+const LINHA_GITIGNORE = `${PASTA}/`;
+
+/** O .gitignore exclui a pasta de dados? (linhas `.juridico-pt`, `/.juridico-pt/`, `.juridico-pt/*`…) */
+function gitignoreExclui(texto: string): boolean {
+  return texto.split(/\r?\n/).some((l) => /^\/?\.juridico-pt(\/\*{0,2})?\s*$/.test(l.trim()));
+}
+
+/**
+ * Num repositório git (pasta `.git`), avisa se o .gitignore não exclui `.juridico-pt/` — os dados da
+ * empresa e os prazos podiam ser publicados por engano. Com `acrescentar`, junta a linha uma só vez.
+ */
+function verificarGitignore(base: string, acrescentar: boolean): string | undefined {
+  try {
+    if (!existsSync(join(base, ".git"))) return undefined;
+    const f = join(base, ".gitignore");
+    const atual = existsSync(f) ? readFileSync(f, "utf8") : "";
+    if (gitignoreExclui(atual)) return undefined;
+    if (acrescentar) {
+      const sep = atual === "" || atual.endsWith("\n") ? "" : "\n";
+      escreverSeguro(base, [".gitignore"], `${atual}${sep}${LINHA_GITIGNORE}\n`);
+      return undefined;
+    }
+  } catch {
+    return undefined; // nunca falha a gravação do perfil por causa do aviso
+  }
+  return (
+    `Este projeto é um repositório git e o .gitignore não exclui ${LINHA_GITIGNORE}: o perfil da empresa e os prazos ` +
+    `podem ser publicados por engano. Acrescenta a linha \`${LINHA_GITIGNORE}\` ao .gitignore (ou grava de novo com acrescentar_gitignore).`
+  );
+}
+
+/**
+ * Apaga um perfil e o que lhe pertence (direito ao apagamento, RGPD art. 17.º): o ficheiro do perfil,
+ * os prazos com esse perfil, os calendários `.ics` do perfil e a marca de perfil ativo, se for ele.
+ * `nome` "perfil-empresa" apaga o perfil por defeito. Recusa nomes inválidos e ligações.
+ */
+export function apagarPerfil(
+  nome: string,
+  destino: "projeto" | "geral" = "projeto",
+  opts: OpcoesPerfil = {}
+): { apagados: string[] } {
+  const n = validarNome(nome);
+  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
+  const apagados: string[] = [];
+  const ficheiro = n === "perfil-empresa" ? [PASTA, FICHEIRO] : [PASTA, "perfis", `${n}.md`];
+  const f = apagarSeguro(base, ficheiro);
+  if (f) apagados.push(f);
+  if (destino === "projeto" && n !== "perfil-empresa") {
+    const k = removerPrazosDoPerfil(n, base);
+    if (k > 0) apagados.push(`${k} prazo(s) do perfil '${n}' em ${PASTA}/prazos.md`);
+  }
+  const ics = new RegExp(`^calendario-\\d{4}-${n}\\.ics$`);
+  for (const nomeF of listarSeguro(base, [PASTA]).filter((x) => ics.test(x))) {
+    const c = apagarSeguro(base, [PASTA, nomeF]);
+    if (c) apagados.push(c);
+  }
+  if (nomeAtivoEm(base) === n) {
+    const c = apagarSeguro(base, [PASTA, "perfil-ativo"]);
+    if (c) apagados.push(`${c} (perfil ativo reposto)`);
+  }
+  return { apagados };
 }
 
 /** Resumo de uma linha para o contexto ("forma_juridica: Lda · setor: …"). */

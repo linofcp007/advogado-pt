@@ -23103,15 +23103,15 @@ function formatarProcura(res) {
 }
 
 // src/perfil.ts
-import { existsSync as existsSync2, readFileSync as readFileSync2, readdirSync as readdirSync2 } from "node:fs";
-import { join as join4 } from "node:path";
+import { existsSync as existsSync3, readFileSync as readFileSync3, readdirSync as readdirSync3 } from "node:fs";
+import { join as join5 } from "node:path";
 
 // src/dados.ts
 import { homedir } from "node:os";
 import { join as join3, resolve as resolve3 } from "node:path";
 
 // src/fs-seguro.ts
-import { lstatSync, mkdirSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
+import { lstatSync, mkdirSync, readdirSync as readdirSync2, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import { join as join2, resolve as resolve2 } from "node:path";
 import { randomBytes } from "node:crypto";
 function dirProjeto(projeto) {
@@ -23134,6 +23134,40 @@ function estado(caminho2, nome) {
     );
   }
   return st.isDirectory() ? "dir" : "ficheiro";
+}
+function validarPartes(partes) {
+  if (partes.length === 0) throw new Error("Caminho vazio.");
+  for (const p of partes) {
+    if (!p || p === "." || p === ".." || /[\\/]/.test(p) || p.includes("\0")) {
+      throw new Error(`Nome inv\xE1lido no caminho: '${p}'.`);
+    }
+  }
+}
+function percorrer(base, partes) {
+  validarPartes(partes);
+  const raiz = resolve2(base);
+  let atual = raiz;
+  const relativo = [];
+  let e = estado(raiz, raiz);
+  for (const parte of partes) {
+    if (e === "nenhum") return { caminho: join2(atual, ...partes.slice(relativo.length)), estado: "nenhum" };
+    atual = join2(atual, parte);
+    relativo.push(parte);
+    e = estado(atual, relativo.join("/"));
+  }
+  return { caminho: atual, estado: e };
+}
+function apagarSeguro(base, partes) {
+  const { caminho: caminho2, estado: e } = percorrer(base, partes);
+  if (e === "nenhum") return null;
+  if (e === "dir") throw new Error(`'${partes.join("/")}' \xE9 uma pasta.`);
+  unlinkSync(caminho2);
+  return caminho2;
+}
+function listarSeguro(base, partes) {
+  const { caminho: caminho2, estado: e } = percorrer(base, partes);
+  if (e !== "dir") return [];
+  return readdirSync2(caminho2);
 }
 function escreverSeguro(base, partes, conteudo) {
   if (partes.length === 0) throw new Error("Caminho de destino vazio.");
@@ -23175,6 +23209,167 @@ var PASTA_DADOS = ".juridico-pt";
 function dirHome(home) {
   return resolve3(home ?? process.env.JURIDICO_PT_HOME ?? homedir());
 }
+var NOME_PERFIL_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
+function validarNomePerfil(nome) {
+  const n = String(nome ?? "").trim().toLowerCase();
+  if (!NOME_PERFIL_RE.test(n)) {
+    throw new Error(`Nome de perfil inv\xE1lido: '${nome}' (usa letras min\xFAsculas, algarismos e h\xEDfens).`);
+  }
+  return n;
+}
+
+// src/prazos-estado.ts
+import { existsSync as existsSync2, readFileSync as readFileSync2 } from "node:fs";
+import { join as join4 } from "node:path";
+var PASTA = PASTA_DADOS;
+var FICHEIRO = "prazos.md";
+var SEP = " \u2014 ";
+var LINHA_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
+var PERFIL_RE = /^perfil:\s*([a-z0-9][a-z0-9-]{0,40})$/i;
+var CABECALHO = '# Prazos em curso\n\n<!-- juridico-pt: uma linha por prazo \u2014 "- [ ] AAAA-MM-DD \u2014 descri\xE7\xE3o \u2014 origem". Marca [x] quando cumprido. O aviso aparece ao abrir a sess\xE3o (vencidos e pr\xF3ximos 7 dias). -->\n\n';
+function dirBase(dir2) {
+  return dirProjeto(dir2);
+}
+function caminho(dir2) {
+  return join4(dirBase(dir2), PASTA, FICHEIRO);
+}
+function validarData(data) {
+  const s = String(data ?? "").trim();
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (m) {
+    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+    if (d.getUTCFullYear() === +m[1] && d.getUTCMonth() === +m[2] - 1 && d.getUTCDate() === +m[3]) return s;
+  }
+  throw new Error(`Data inv\xE1lida: '${data}' (usa AAAA-MM-DD).`);
+}
+function limpar(texto2) {
+  return String(texto2 ?? "").replace(/[\r\n]+/g, " ").replace(/\s+[—–]\s+/g, " - ").trim();
+}
+function parseLinha(linha) {
+  const m = LINHA_RE.exec(linha);
+  if (!m) return null;
+  const partes = m[3].split(/\s+[—–]\s+/);
+  const ult = partes.length > 1 ? PERFIL_RE.exec(partes[partes.length - 1].trim()) : null;
+  const perfil = ult ? ult[1].toLowerCase() : "";
+  if (ult) partes.pop();
+  const descricao = partes[0].trim();
+  if (!descricao) return null;
+  const origem = partes.slice(1).join(SEP).trim();
+  return { data: m[2], descricao, ...origem ? { origem } : {}, ...perfil ? { perfil } : {}, concluido: m[1] !== " " };
+}
+function linhaDe(p) {
+  return `- [${p.concluido ? "x" : " "}] ${p.data}${SEP}${p.descricao}${p.origem ? SEP + p.origem : ""}` + (p.perfil ? `${SEP}perfil: ${p.perfil}` : "");
+}
+function limiteConservacao(hoje) {
+  const h = hojeEmLisboa(hoje);
+  return `${Number(h.slice(0, 4)) - 1}${h.slice(4)}`;
+}
+function lerPrazos(dir2) {
+  const f = caminho(dir2);
+  if (!existsSync2(f)) return [];
+  const out = [];
+  for (const linha of readFileSync2(f, "utf8").split(/\r?\n/)) {
+    const p = parseLinha(linha);
+    if (p) out.push(p);
+  }
+  return out;
+}
+function gravar(prazos, dir2, hoje = /* @__PURE__ */ new Date()) {
+  const limite = limiteConservacao(hoje);
+  const ordenados = prazos.filter((p) => !(p.concluido && p.data < limite)).sort(
+    (a, b) => Number(a.concluido) - Number(b.concluido) || a.data.localeCompare(b.data)
+  );
+  const novas = ordenados.map(linhaDe);
+  let atual = null;
+  try {
+    const f = caminho(dir2);
+    if (existsSync2(f)) atual = readFileSync2(f, "utf8");
+  } catch {
+    atual = null;
+  }
+  let texto2;
+  if (atual === null) {
+    texto2 = CABECALHO + novas.join("\n") + "\n";
+  } else {
+    const saida = [];
+    let inseridas = false;
+    for (const linha of atual.split(/\r?\n/)) {
+      if (parseLinha(linha)) {
+        if (!inseridas) {
+          saida.push(...novas);
+          inseridas = true;
+        }
+        continue;
+      }
+      saida.push(linha);
+    }
+    while (saida.length && saida[saida.length - 1].trim() === "") saida.pop();
+    if (!inseridas) saida.push("", ...novas);
+    texto2 = saida.join("\n") + "\n";
+  }
+  escreverSeguro(dirBase(dir2), [PASTA, FICHEIRO], texto2);
+}
+function registarPrazo(p, dir2) {
+  const data = validarData(p.data);
+  const descricao = limpar(p.descricao);
+  if (!descricao) throw new Error("Falta a descri\xE7\xE3o do prazo.");
+  const origem = p.origem ? limpar(p.origem) : "";
+  const perfil = p.perfil ? validarNomePerfil(p.perfil) : "";
+  const novo = {
+    data,
+    descricao,
+    ...origem ? { origem } : {},
+    ...perfil ? { perfil } : {},
+    concluido: false
+  };
+  const atuais = lerPrazos(dir2);
+  const igual = (x) => x.data === data && x.descricao === descricao && (x.perfil ?? "") === perfil && !x.concluido;
+  if (!atuais.some(igual)) atuais.push(novo);
+  gravar(atuais, dir2);
+  return novo;
+}
+function removerPrazosDoPerfil(perfil, dir2) {
+  const n = validarNomePerfil(perfil);
+  const atuais = lerPrazos(dir2);
+  const ficam = atuais.filter((p) => p.perfil !== n);
+  const saem = atuais.length - ficam.length;
+  if (saem > 0) gravar(ficam, dir2);
+  return saem;
+}
+function concluirPrazo(data, descricao, dir2) {
+  const d = validarData(data);
+  const desc = limpar(descricao).toLowerCase();
+  const atuais = lerPrazos(dir2);
+  const alvo = atuais.find((x) => !x.concluido && x.data === d && x.descricao.toLowerCase() === desc);
+  if (!alvo) return false;
+  alvo.concluido = true;
+  gravar(atuais, dir2);
+  return true;
+}
+function hojeEmLisboa(hoje) {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Lisbon",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(hoje);
+  } catch {
+    return hoje.toISOString().slice(0, 10);
+  }
+}
+function diasEntre(deIso, ateIso) {
+  const a = Date.parse(`${deIso}T00:00:00Z`);
+  const b = Date.parse(`${ateIso}T00:00:00Z`);
+  return Math.round((b - a) / 864e5);
+}
+function prazosProximos(prazos, hoje, dias = 7) {
+  const h = hojeEmLisboa(hoje);
+  const abertos = prazos.filter((p) => !p.concluido).sort((a, b) => a.data.localeCompare(b.data));
+  const vencidos = abertos.filter((p) => p.data < h);
+  const proximos = abertos.map((p) => ({ ...p, faltam: diasEntre(h, p.data) })).filter((p) => p.faltam >= 0 && p.faltam <= dias);
+  return { vencidos, proximos };
+}
 
 // src/perfil.ts
 var CAMPOS_PERFIL = [
@@ -23204,8 +23399,8 @@ var ROTULOS = {
   linguas: "L\xEDnguas de trabalho",
   notas: "Notas (licen\xE7as, setor regulado, s\xF3cios\u2026)"
 };
-var PASTA = PASTA_DADOS;
-var FICHEIRO = "perfil-empresa.md";
+var PASTA2 = PASTA_DADOS;
+var FICHEIRO2 = "perfil-empresa.md";
 var MS_12_MESES = 365 * 24 * 60 * 60 * 1e3;
 function dirProjeto2(o) {
   return dirProjeto(o.projeto);
@@ -23214,24 +23409,18 @@ function dirHome2(o) {
   return dirHome(o.home);
 }
 function caminhoPerfil(base) {
-  return join4(base, PASTA, FICHEIRO);
+  return join5(base, PASTA2, FICHEIRO2);
 }
-var NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
-function validarNome(nome) {
-  const n = String(nome ?? "").trim().toLowerCase();
-  if (!NOME_RE.test(n)) {
-    throw new Error(`Nome de perfil inv\xE1lido: '${nome}' (usa letras min\xFAsculas, algarismos e h\xEDfens).`);
-  }
-  return n;
-}
+var NOME_RE = NOME_PERFIL_RE;
+var validarNome = validarNomePerfil;
 function caminhoNomeado(base, nome) {
-  return join4(base, PASTA, "perfis", `${nome}.md`);
+  return join5(base, PASTA2, "perfis", `${nome}.md`);
 }
 function nomeAtivoEm(base) {
   try {
-    const f = join4(base, PASTA, "perfil-ativo");
-    if (!existsSync2(f)) return null;
-    const n = readFileSync2(f, "utf8").split(/\r?\n/)[0].trim().toLowerCase();
+    const f = join5(base, PASTA2, "perfil-ativo");
+    if (!existsSync3(f)) return null;
+    const n = readFileSync3(f, "utf8").split(/\r?\n/)[0].trim().toLowerCase();
     return NOME_RE.test(n) ? n : null;
   } catch {
     return null;
@@ -23254,8 +23443,8 @@ function estaDesatualizado(campos, hoje) {
 }
 function lerDe(caminho2, origem, hoje) {
   try {
-    if (!existsSync2(caminho2)) return null;
-    const campos = parsePerfil(readFileSync2(caminho2, "utf8"));
+    if (!existsSync3(caminho2)) return null;
+    const campos = parsePerfil(readFileSync3(caminho2, "utf8"));
     const reconhecidos = Object.keys(campos).filter((k) => k !== "atualizado_em");
     if (reconhecidos.length === 0) return null;
     return { origem, caminho: caminho2, campos, desatualizado: estaDesatualizado(campos, hoje) };
@@ -23305,7 +23494,7 @@ function guardarPerfil(novos, destino, opts = {}) {
   const caminho2 = nome ? caminhoNomeado(base, nome) : caminhoPerfil(base);
   let atuais = {};
   try {
-    if (existsSync2(caminho2)) atuais = parsePerfil(readFileSync2(caminho2, "utf8"));
+    if (existsSync3(caminho2)) atuais = parsePerfil(readFileSync3(caminho2, "utf8"));
   } catch {
     atuais = {};
   }
@@ -23318,8 +23507,59 @@ function guardarPerfil(novos, destino, opts = {}) {
   }
   const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
-  escreverSeguro(base, nome ? [PASTA, "perfis", `${nome}.md`] : [PASTA, FICHEIRO], serializar(campos));
-  return { origem: destino, caminho: caminho2, campos, desatualizado: false, ...nome ? { nome } : {} };
+  escreverSeguro(base, nome ? [PASTA2, "perfis", `${nome}.md`] : [PASTA2, FICHEIRO2], serializar(campos));
+  const avisoGitignore = destino === "projeto" ? verificarGitignore(base, opts.acrescentarGitignore === true) : void 0;
+  return {
+    origem: destino,
+    caminho: caminho2,
+    campos,
+    desatualizado: false,
+    ...nome ? { nome } : {},
+    ...avisoGitignore ? { avisoGitignore } : {}
+  };
+}
+var LINHA_GITIGNORE = `${PASTA2}/`;
+function gitignoreExclui(texto2) {
+  return texto2.split(/\r?\n/).some((l) => /^\/?\.juridico-pt(\/\*{0,2})?\s*$/.test(l.trim()));
+}
+function verificarGitignore(base, acrescentar) {
+  try {
+    if (!existsSync3(join5(base, ".git"))) return void 0;
+    const f = join5(base, ".gitignore");
+    const atual = existsSync3(f) ? readFileSync3(f, "utf8") : "";
+    if (gitignoreExclui(atual)) return void 0;
+    if (acrescentar) {
+      const sep = atual === "" || atual.endsWith("\n") ? "" : "\n";
+      escreverSeguro(base, [".gitignore"], `${atual}${sep}${LINHA_GITIGNORE}
+`);
+      return void 0;
+    }
+  } catch {
+    return void 0;
+  }
+  return `Este projeto \xE9 um reposit\xF3rio git e o .gitignore n\xE3o exclui ${LINHA_GITIGNORE}: o perfil da empresa e os prazos podem ser publicados por engano. Acrescenta a linha \`${LINHA_GITIGNORE}\` ao .gitignore (ou grava de novo com acrescentar_gitignore).`;
+}
+function apagarPerfil(nome, destino = "projeto", opts = {}) {
+  const n = validarNome(nome);
+  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome2(opts);
+  const apagados = [];
+  const ficheiro = n === "perfil-empresa" ? [PASTA2, FICHEIRO2] : [PASTA2, "perfis", `${n}.md`];
+  const f = apagarSeguro(base, ficheiro);
+  if (f) apagados.push(f);
+  if (destino === "projeto" && n !== "perfil-empresa") {
+    const k = removerPrazosDoPerfil(n, base);
+    if (k > 0) apagados.push(`${k} prazo(s) do perfil '${n}' em ${PASTA2}/prazos.md`);
+  }
+  const ics = new RegExp(`^calendario-\\d{4}-${n}\\.ics$`);
+  for (const nomeF of listarSeguro(base, [PASTA2]).filter((x) => ics.test(x))) {
+    const c = apagarSeguro(base, [PASTA2, nomeF]);
+    if (c) apagados.push(c);
+  }
+  if (nomeAtivoEm(base) === n) {
+    const c = apagarSeguro(base, [PASTA2, "perfil-ativo"]);
+    if (c) apagados.push(`${c} (perfil ativo reposto)`);
+  }
+  return { apagados };
 }
 function resumoPerfil(p) {
   return CAMPOS_PERFIL.filter((c) => c !== "atualizado_em" && p.campos[c]).map((c) => `${c}: ${p.campos[c]}`).join(" \xB7 ");
@@ -23343,9 +23583,9 @@ function listarPerfis(opts = {}) {
   const vistos = /* @__PURE__ */ new Map();
   for (const [base, origem] of [[dirProjeto2(opts), "projeto"], [dirHome2(opts), "geral"]]) {
     try {
-      const dir2 = join4(base, PASTA, "perfis");
-      if (!existsSync2(dir2)) continue;
-      for (const f of readdirSync2(dir2)) {
+      const dir2 = join5(base, PASTA2, "perfis");
+      if (!existsSync3(dir2)) continue;
+      for (const f of readdirSync3(dir2)) {
         const n = f.replace(/\.md$/i, "").toLowerCase();
         if (f.toLowerCase().endsWith(".md") && NOME_RE.test(n) && !vistos.has(n)) vistos.set(n, origem);
       }
@@ -23357,7 +23597,7 @@ function listarPerfis(opts = {}) {
 function ativarPerfil(nome, destino, opts = {}) {
   const n = validarNome(nome);
   const base = destino === "projeto" ? dirProjeto2(opts) : dirHome2(opts);
-  escreverSeguro(base, [PASTA, "perfil-ativo"], n + "\n");
+  escreverSeguro(base, [PASTA2, "perfil-ativo"], n + "\n");
 }
 
 // src/calendario.ts
@@ -23963,9 +24203,10 @@ function paraICS(obrigacoes, opts = {}) {
   linhas.push("END:VCALENDAR");
   return linhas.map(dobrar).join("\r\n") + "\r\n";
 }
-function exportarICS(ano, obrigacoes, dir2, hoje) {
+function exportarICS(ano, obrigacoes, dir2, hoje, perfil) {
   if (!Number.isInteger(ano) || ano < 2e3 || ano > 2100) throw new Error(`Ano inv\xE1lido: ${ano}`);
-  return escreverSeguro(dirProjeto(dir2), [PASTA_DADOS, `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
+  const sufixo = perfil ? `-${validarNomePerfil(perfil)}` : "";
+  return escreverSeguro(dirProjeto(dir2), [PASTA_DADOS, `calendario-${ano}${sufixo}.ics`], paraICS(obrigacoes, { hoje }));
 }
 function formatarCalendario(obrigacoes, opts = {}) {
   const lista = opts.mes ? obrigacoes.filter((o) => Number(o.data.slice(5, 7)) === opts.mes) : obrigacoes;
@@ -23985,134 +24226,6 @@ function formatarCalendario(obrigacoes, opts = {}) {
     linhas.push(`- ${dd} \xB7 ${o.titulo}${orig} \u2014 ${o.base}${conf}`);
   }
   return linhas.join("\n").trim();
-}
-
-// src/prazos-estado.ts
-import { existsSync as existsSync3, readFileSync as readFileSync3 } from "node:fs";
-import { join as join5 } from "node:path";
-var PASTA2 = PASTA_DADOS;
-var FICHEIRO2 = "prazos.md";
-var SEP = " \u2014 ";
-var LINHA_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
-var CABECALHO = '# Prazos em curso\n\n<!-- juridico-pt: uma linha por prazo \u2014 "- [ ] AAAA-MM-DD \u2014 descri\xE7\xE3o \u2014 origem". Marca [x] quando cumprido. O aviso aparece ao abrir a sess\xE3o (vencidos e pr\xF3ximos 7 dias). -->\n\n';
-function dirBase(dir2) {
-  return dirProjeto(dir2);
-}
-function caminho(dir2) {
-  return join5(dirBase(dir2), PASTA2, FICHEIRO2);
-}
-function validarData(data) {
-  const s = String(data ?? "").trim();
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
-  if (m) {
-    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
-    if (d.getUTCFullYear() === +m[1] && d.getUTCMonth() === +m[2] - 1 && d.getUTCDate() === +m[3]) return s;
-  }
-  throw new Error(`Data inv\xE1lida: '${data}' (usa AAAA-MM-DD).`);
-}
-function limpar(texto2) {
-  return String(texto2 ?? "").replace(/[\r\n]+/g, " ").replace(/\s+[—–]\s+/g, " - ").trim();
-}
-function parseLinha(linha) {
-  const m = LINHA_RE.exec(linha);
-  if (!m) return null;
-  const partes = m[3].split(/\s+[—–]\s+/);
-  const descricao = partes[0].trim();
-  if (!descricao) return null;
-  const origem = partes.slice(1).join(SEP).trim();
-  return { data: m[2], descricao, ...origem ? { origem } : {}, concluido: m[1] !== " " };
-}
-function linhaDe(p) {
-  return `- [${p.concluido ? "x" : " "}] ${p.data}${SEP}${p.descricao}${p.origem ? SEP + p.origem : ""}`;
-}
-function lerPrazos(dir2) {
-  const f = caminho(dir2);
-  if (!existsSync3(f)) return [];
-  const out = [];
-  for (const linha of readFileSync3(f, "utf8").split(/\r?\n/)) {
-    const p = parseLinha(linha);
-    if (p) out.push(p);
-  }
-  return out;
-}
-function gravar(prazos, dir2) {
-  const ordenados = [...prazos].sort(
-    (a, b) => Number(a.concluido) - Number(b.concluido) || a.data.localeCompare(b.data)
-  );
-  const novas = ordenados.map(linhaDe);
-  let atual = null;
-  try {
-    const f = caminho(dir2);
-    if (existsSync3(f)) atual = readFileSync3(f, "utf8");
-  } catch {
-    atual = null;
-  }
-  let texto2;
-  if (atual === null) {
-    texto2 = CABECALHO + novas.join("\n") + "\n";
-  } else {
-    const saida = [];
-    let inseridas = false;
-    for (const linha of atual.split(/\r?\n/)) {
-      if (parseLinha(linha)) {
-        if (!inseridas) {
-          saida.push(...novas);
-          inseridas = true;
-        }
-        continue;
-      }
-      saida.push(linha);
-    }
-    while (saida.length && saida[saida.length - 1].trim() === "") saida.pop();
-    if (!inseridas) saida.push("", ...novas);
-    texto2 = saida.join("\n") + "\n";
-  }
-  escreverSeguro(dirBase(dir2), [PASTA2, FICHEIRO2], texto2);
-}
-function registarPrazo(p, dir2) {
-  const data = validarData(p.data);
-  const descricao = limpar(p.descricao);
-  if (!descricao) throw new Error("Falta a descri\xE7\xE3o do prazo.");
-  const origem = p.origem ? limpar(p.origem) : "";
-  const novo = { data, descricao, ...origem ? { origem } : {}, concluido: false };
-  const atuais = lerPrazos(dir2);
-  if (!atuais.some((x) => x.data === data && x.descricao === descricao && !x.concluido)) atuais.push(novo);
-  gravar(atuais, dir2);
-  return novo;
-}
-function concluirPrazo(data, descricao, dir2) {
-  const d = validarData(data);
-  const desc = limpar(descricao).toLowerCase();
-  const atuais = lerPrazos(dir2);
-  const alvo = atuais.find((x) => !x.concluido && x.data === d && x.descricao.toLowerCase() === desc);
-  if (!alvo) return false;
-  alvo.concluido = true;
-  gravar(atuais, dir2);
-  return true;
-}
-function hojeEmLisboa(hoje) {
-  try {
-    return new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Europe/Lisbon",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }).format(hoje);
-  } catch {
-    return hoje.toISOString().slice(0, 10);
-  }
-}
-function diasEntre(deIso, ateIso) {
-  const a = Date.parse(`${deIso}T00:00:00Z`);
-  const b = Date.parse(`${ateIso}T00:00:00Z`);
-  return Math.round((b - a) / 864e5);
-}
-function prazosProximos(prazos, hoje, dias = 7) {
-  const h = hojeEmLisboa(hoje);
-  const abertos = prazos.filter((p) => !p.concluido).sort((a, b) => a.data.localeCompare(b.data));
-  const vencidos = abertos.filter((p) => p.data < h);
-  const proximos = abertos.map((p) => ({ ...p, faltam: diasEntre(h, p.data) })).filter((p) => p.faltam >= 0 && p.faltam <= dias);
-  return { vencidos, proximos };
 }
 
 // src/tools.ts
@@ -24672,18 +24785,42 @@ atualizado_em: ${p.campos.atualizado_em ?? "(sem data)"}` + (p.desatualizado ? "
         campos: external_exports.record(external_exports.string()).describe("Campos a gravar, ex.: {forma_juridica: 'Lda', setor: 'Restaura\xE7\xE3o', trabalhadores: '12'}"),
         destino: external_exports.enum(["projeto", "geral"]).default("projeto"),
         diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto quando destino = projeto (por defeito, cwd)"),
-        perfil: external_exports.string().optional().describe("Nome do perfil (ex.: 'cliente-a'); omitido = perfil por defeito perfil-empresa.md")
+        perfil: external_exports.string().optional().describe("Nome do perfil (ex.: 'cliente-a'); omitido = perfil por defeito perfil-empresa.md"),
+        acrescentar_gitignore: external_exports.boolean().default(false).describe("Num reposit\xF3rio git, acrescentar '.juridico-pt/' ao .gitignore (s\xF3 com o acordo do utilizador)")
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false }
     },
-    async ({ campos, destino, diretorio, perfil }) => {
+    async ({ campos, destino, diretorio, perfil, acrescentar_gitignore }) => {
       try {
-        const p = guardarPerfil(campos, destino, { projeto: diretorio, perfil });
-        return texto(`Perfil guardado (${p.origem}) em ${p.caminho}
-${resumoPerfil(p)}`);
+        const p = guardarPerfil(campos, destino, { projeto: diretorio, perfil, acrescentarGitignore: acrescentar_gitignore });
+        return texto(
+          `Perfil guardado (${p.origem}) em ${p.caminho}
+${resumoPerfil(p)}` + (p.avisoGitignore ? `
+
+\u26A0\uFE0F ${p.avisoGitignore}` : "")
+        );
       } catch (e) {
         return texto(`N\xE3o foi poss\xEDvel guardar o perfil: ${e.message}`);
       }
+    }
+  );
+  server.registerTool(
+    "apagar_perfil",
+    {
+      title: "Apagar perfil da empresa e os dados dele",
+      description: "Apaga um perfil guardado e o que lhe pertence: o ficheiro do perfil, os prazos desse perfil em .juridico-pt/prazos.md, os calend\xE1rios .ics do perfil e a marca de perfil ativo (direito ao apagamento). nome 'perfil-empresa' apaga o perfil por defeito. Usa s\xF3 quando o utilizador pedir para apagar ('apaga os dados do cliente X', 'esquece a minha empresa') e confirma antes \u2014 n\xE3o se desfaz. EN: delete a saved profile and its data.",
+      inputSchema: {
+        nome: external_exports.string().describe("Nome do perfil (ex.: 'cliente-a'; 'perfil-empresa' = o perfil por defeito)"),
+        destino: external_exports.enum(["projeto", "geral"]).default("projeto"),
+        diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (por defeito, cwd)")
+      },
+      annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false }
+    },
+    async ({ nome, destino, diretorio }) => {
+      const { apagados } = apagarPerfil(nome, destino, { projeto: diretorio });
+      if (apagados.length === 0) return texto(`N\xE3o encontrei dados do perfil '${nome}' (${destino}). Nada foi apagado.`);
+      return texto(`Apagado (${destino}):
+${apagados.map((a) => `- ${a}`).join("\n")}`);
     }
   );
   server.registerTool(
@@ -24737,14 +24874,34 @@ ${resumoPerfil(p)}`);
       inputSchema: {
         ano: external_exports.number().int().min(2e3).max(2100).describe("Ano civil (ex.: 2026)"),
         mes: external_exports.number().int().min(1).max(12).optional().describe("S\xF3 este m\xEAs (1-12)"),
-        exportar: external_exports.boolean().default(false).describe("Gravar .juridico-pt/calendario-<ano>.ics"),
+        exportar: external_exports.boolean().default(false).describe("Gravar .juridico-pt/calendario-<ano>[-<perfil>].ics"),
         diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (perfil e exporta\xE7\xE3o; por defeito, cwd)"),
-        perfil: external_exports.string().optional().describe("Perfil nomeado a usar (por defeito, o ativo)")
+        perfil: external_exports.string().optional().describe("Perfil nomeado a usar (por defeito, o ativo)"),
+        por_perfil: external_exports.boolean().default(false).describe("Modo contabilista: gerar e exportar um .ics por cada perfil nomeado (calendario-<ano>-<perfil>.ics)")
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false }
     },
-    async ({ ano, mes, exportar, diretorio, perfil }) => {
+    async ({ ano, mes, exportar, diretorio, perfil, por_perfil }) => {
       try {
+        if (por_perfil) {
+          const perfis = listarPerfis({ projeto: diretorio });
+          if (perfis.length === 0) {
+            return texto("Sem perfis nomeados (.juridico-pt/perfis/). Grava-os com guardar_perfil_empresa e o par\xE2metro perfil.");
+          }
+          const linhas = perfis.map(({ nome }) => {
+            const pn = lerPerfil({ projeto: diretorio, perfil: nome });
+            const cal2 = gerarCalendario(ano, pn?.campos ?? null);
+            const f = exportarICS(ano, cal2, diretorio, void 0, nome);
+            const nAc2 = cal2.filter((o) => o.aConfirmar).length;
+            return `- ${nome}: ${cal2.length} prazos${nAc2 ? ` (${nAc2} a confirmar)` : ""} -> ${f}`;
+          });
+          return texto(
+            `Calend\xE1rios ${ano} por perfil (${perfis.length}):
+${linhas.join("\n")}
+
+Importa cada .ics num calend\xE1rio pr\xF3prio (Google Calendar: Defini\xE7\xF5es \u2192 Importar e exportar \u2192 Importar).` + AVISO
+          );
+        }
         const p = lerPerfil({ projeto: diretorio, perfil });
         const cal = gerarCalendario(ano, p?.campos ?? null);
         const nAc = cal.filter((o) => o.aConfirmar).length;
@@ -24752,7 +24909,7 @@ ${resumoPerfil(p)}`);
 ` + (p?.aviso ? `\u26A0\uFE0F ${p.aviso}
 ` : "") + (!p ? "Sem perfil, as obriga\xE7\xF5es v\xEAm marcadas \u2753: grava o perfil (guardar_perfil_empresa) para um calend\xE1rio \xE0 medida.\n" : "") + formatarCalendario(cal, { mes });
         if (exportar) {
-          const caminho2 = exportarICS(ano, cal, diretorio);
+          const caminho2 = exportarICS(ano, cal, diretorio, void 0, p?.nome);
           out += `
 
 \u{1F4C5} Exportado: ${caminho2}
@@ -24776,16 +24933,17 @@ Google Calendar: Defini\xE7\xF5es \u2192 Importar e exportar \u2192 Importar (es
         data: external_exports.string().describe("Data-limite AAAA-MM-DD"),
         descricao: external_exports.string().describe("O que tem de ser feito (ex.: 'Oposi\xE7\xE3o \xE0 execu\xE7\xE3o fiscal')"),
         origem: external_exports.string().optional().describe("Norma ou ato de origem (ex.: 'art. 203.\xBA CPPT, cita\xE7\xE3o de 20/9')"),
+        perfil: external_exports.string().optional().describe("Perfil (empresa/cliente) a que o prazo pertence \u2014 modo contabilista"),
         diretorio: external_exports.string().optional().describe("Diret\xF3rio do projeto (por defeito, cwd)")
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false }
     },
-    async ({ data, descricao, origem, diretorio }) => {
+    async ({ data, descricao, origem, perfil, diretorio }) => {
       try {
-        const p = registarPrazo({ data, descricao, origem }, diretorio);
+        const p = registarPrazo({ data, descricao, origem, perfil }, diretorio);
         const { proximos, vencidos } = prazosProximos([p], /* @__PURE__ */ new Date(), 7);
         const alerta = vencidos.length ? " \u26A0\uFE0F Esta data j\xE1 passou." : proximos.length ? ` \u23F0 Faltam ${proximos[0].faltam} dia(s).` : "";
-        return texto(`Prazo registado: ${p.data} \u2014 ${p.descricao}${p.origem ? ` (${p.origem})` : ""}.${alerta}
+        return texto(`Prazo registado: ${p.data} \u2014 ${p.descricao}${p.origem ? ` (${p.origem})` : ""}${p.perfil ? ` [perfil ${p.perfil}]` : ""}.${alerta}
 Ficheiro: .juridico-pt/prazos.md (aviso autom\xE1tico ao abrir a sess\xE3o).`);
       } catch (e) {
         return texto(`N\xE3o foi poss\xEDvel registar: ${e.message}`);
@@ -24809,8 +24967,8 @@ Ficheiro: .juridico-pt/prazos.md (aviso autom\xE1tico ao abrir a sess\xE3o).`);
         if (todos.length === 0) return texto("Sem prazos registados neste projeto (usa registar_prazo).");
         const { vencidos, proximos } = prazosProximos(todos, /* @__PURE__ */ new Date(), 36500);
         const linhas = [
-          ...vencidos.map((x) => `- \u26A0\uFE0F VENCIDO ${x.data} \u2014 ${x.descricao}${x.origem ? ` (${x.origem})` : ""}`),
-          ...proximos.map((x) => `- ${x.faltam <= 7 ? "\u23F0 " : ""}${x.data} \u2014 ${x.descricao}${x.origem ? ` (${x.origem})` : ""} \xB7 ${x.faltam === 0 ? "termina hoje" : `faltam ${x.faltam} dias`}`)
+          ...vencidos.map((x) => `- \u26A0\uFE0F VENCIDO ${x.data} \u2014 ${x.descricao}${x.origem ? ` (${x.origem})` : ""}${x.perfil ? ` [${x.perfil}]` : ""}`),
+          ...proximos.map((x) => `- ${x.faltam <= 7 ? "\u23F0 " : ""}${x.data} \u2014 ${x.descricao}${x.origem ? ` (${x.origem})` : ""}${x.perfil ? ` [${x.perfil}]` : ""} \xB7 ${x.faltam === 0 ? "termina hoje" : `faltam ${x.faltam} dias`}`)
         ];
         if (incluir_concluidos) {
           linhas.push(...todos.filter((x) => x.concluido).map((x) => `- \u2714 ${x.data} \u2014 ${x.descricao} (cumprido)`));
