@@ -79,7 +79,7 @@ A utilização de IA na Empresa obedece aos seguintes princípios:
 | Sistemas de risco elevado do anexo I (componentes de segurança de produtos regulados) | cap. III, secções 1 a 3 | 2/8/2028 |
 
 2. A Empresa aplica desde já, como boa prática, as regras previstas para a IA de risco elevado no art. 10.º desta Política, para estar preparada quando forem obrigatórias.
-3. Em Portugal, o Governo anunciou a designação da ANACOM como autoridade de fiscalização do mercado e ponto de contacto único para o Regulamento da IA (a confirmar o diploma de designação e o regime nacional de sanções). A CNPD mantém a competência em matéria de dados pessoais e a ACT em matéria laboral.
+3. Em Portugal, o Governo manifestou em 19/9/2025 a intenção de designar a ANACOM como autoridade de fiscalização do mercado e ponto de contacto único para o Regulamento da IA, mas a designação **ainda não foi publicada** (a Comissão Europeia lista-a como pendente) e o regime nacional de sanções não está aprovado [VERIFICAR em diariodarepublica.pt à data da aprovação]. A CNPD mantém a competência em matéria de dados pessoais e a ACT em matéria laboral.
 
 ## Artigo 6.º — Governação
 
@@ -306,6 +306,6 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] **Representantes dos trabalhadores** (ver `.advogado-pt/perfil-empresa.md`): informação à comissão de trabalhadores (art. 424.º, n.º 1, al. j), CT) e aos delegados sindicais, exceto em micro e pequena empresa — menos de 50 trabalhadores (art. 466.º, n.º 1, al. d), e n.º 3, conjugado com o art. 100.º CT); audição prévia se a Política for regulamento interno (art. 99.º, n.º 2) e publicitação (n.º 3).
 - [ ] **RGPD**: registo de atividades de tratamento atualizado (`registo-atividades-tratamento.md`); acordos de tratamento de dados com os fornecedores de IA (`dpa-bilingue.md`); garantias para transferências fora do EEE; AIPD feita para os usos do art. 10.º e do art. 13.º, n.º 5; política de privacidade dos candidatos/trabalhadores atualizada.
 - [ ] **Termos dos fornecedores** lidos para cada ferramenta do Anexo II: treino com dados do cliente desativado, prazo de conservação, região dos dados, titularidade dos resultados, indemnização por violação de direitos de terceiros.
-- [ ] **Autoridade e sanções**: designação da ANACOM e regime sancionatório nacional do Regulamento da IA (a confirmar em dre.pt); coimas do art. 99.º do Regulamento da IA e do art. 83.º do RGPD: ver `references/valores-2026.md` (secção Compliance, Denúncias, Dados e IA).
+- [ ] **Autoridade e sanções**: designação formal da ANACOM e regime sancionatório nacional do Regulamento da IA — pendentes a 3/10/2026; confirmar em diariodarepublica.pt; coimas do art. 99.º do Regulamento da IA e do art. 83.º do RGPD: ver `references/valores-2026.md` (secção Compliance, Denúncias, Dados e IA).
 - [ ] Se a Empresa **desenvolve ou comercializa** IA (prestadora), esta Política não basta: rever as obrigações de prestador, de modelos de finalidade geral e de transparência do art. 50.º, n.os 1 e 2 (ver `references/digital-ue.md`).
 - [ ] Plano de literacia (Anexo III) preenchido com datas reais e registo de formação a funcionar antes da entrada em vigor; declarações de tomada de conhecimento (Anexo IV) recolhidas.

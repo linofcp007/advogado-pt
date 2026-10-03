@@ -64,7 +64,7 @@
 - [ ] Consciência de que acidente causado por violação de regras de SST torna o empregador responsável por **todos os danos**, patrimoniais e não patrimoniais (art. 18.º Lei 98/2009)
 
 ## Relatório anual e documentação
-- [ ] **Anexo D do Relatório Único** (atividade do serviço de SST) preenchido — em regra pelo serviço de SST — e entregue com o Relatório Único entre **16 de março e 15 de abril** do ano seguinte (Portaria 55/2010, art. 4.º — a confirmar eventuais prorrogações do ano; ver `calendario_obrigacoes`)
+- [ ] **Anexo D do Relatório Único** (atividade do serviço de SST) preenchido — em regra pelo serviço de SST — e entregue com o Relatório Único entre **16 de março e 15 de abril** do ano seguinte (Portaria 55/2010, art. 4.º, n.º 1; em 2026 alargado até 12/6 pela DGCP — confirmar a janela de cada ano; ver `calendario_obrigacoes`)
 - [ ] Documentos à mão para a ACT: modalidade e contrato de SST, autorizações, avaliação de riscos, fichas de aptidão, registos de formação e EPI, apólice e recibos do seguro, registos de acidentes
 
 ## Coimas e responsabilidade

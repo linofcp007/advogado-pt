@@ -110,7 +110,8 @@ def decidir_iva(tipo, cliente, destino, nif_vies=False, vendas_distancia_ue=0,
                       "CIVA, art. 6.º, n.º 6, al. a); RITI, art. 30.º")
         return _d("Fora de Portugal (não tributado cá)", "Segundo as regras do país do cliente",
                   "M40", [f"{DP} (campo 8)"], "CIVA, art. 6.º, n.º 6, al. a), a contrário",
-                  ["Há quem use M99 nestes casos (a confirmar)."])
+                  ["M40 confirmado pela AT para clientes de países terceiros "
+                   "(informações vinculativas 16210/2020 e 27890/2025; art. 36.º, n.º 13, CIVA)."])
     if servico == "eletronico":
         if destino == "fora-UE":
             return _d("Fora de Portugal (TBE a consumidor de fora da UE)",

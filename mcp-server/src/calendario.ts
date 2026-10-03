@@ -80,13 +80,17 @@ const PGDL_CSC = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=52
 const PGDL_CT = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=1047&tabela=leis";
 const PGDL_RGPC = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3543&tabela=leis";
 const RCBE = "https://justica.gov.pt/Guias/guia-do-registo-central-do-beneficiario-efetivo-rcbe";
-const RU = "https://www.relatoriounico.pt";
+const RU = "https://www.dgcp.mtsss.gov.pt/relatorio-unico";
 
 // --- Prorrogações por despacho (ano a ano) ------------------------------------
 const PRORROGACOES: Record<string, { data: string; nota: string }> = {
   "efatura_comunicacao@2026-01-05": { data: "2026-01-09", nota: "Prorrogado pelo Despacho SEAF 166/2025." },
   "efatura_comunicacao@2026-04-05": { data: "2026-04-08", nota: "Prorrogado pelo Despacho SEAF 40/2026." },
   "efatura_comunicacao@2026-05-05": { data: "2026-05-08", nota: "Prorrogado pelo Despacho SEAF 55/2026." },
+  "relatorio_unico@2026-04-15": {
+    data: "2026-06-12",
+    nota: "Em 2026 (dados de 2025) a recolha começou mais tarde e foi alargada até 12/6/2026 (DGCP).",
+  },
   "modelo22@2026-05-31": {
     data: "2026-06-30",
     nota: "Prorrogado para 30/6/2026, com o pagamento, pelos Despachos SEAF 68/2026 e 81/2026.",
@@ -492,7 +496,7 @@ const REGRAS: Regra[] = [
     base: "Portaria 55/2010, art. 4.º",
     fonte: RU,
     transferivel: true,
-    nota: "Entrega de 16 de março a 15 de abril, sobre o ano anterior. O GEP tem adiado a janela (em 2026, para maio/junho): confirmar a data do ano em relatoriounico.pt.",
+    nota: "Regra: entrega de 16 de março a 15 de abril, sobre o ano anterior. A DGCP (ex-GEP) pode alterar a janela — confirmar a data do ano em dgcp.mtsss.gov.pt/relatorio-unico.",
     aplica: comTrabalhadores,
     datas: (a) => [{ data: iso(a, 4, 15), periodo: `dados de ${a - 1}` }],
   },

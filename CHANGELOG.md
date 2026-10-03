@@ -17,13 +17,15 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 - **Referências**: `compliance` (RGPC e canal de denúncias por dimensão), `iva-internacional`, `licenciamento-setorial` (alojamento local, restauração, construção, transportes/TVDE, mediação imobiliária).
 - **Templates (17)**: plano de prevenção de riscos de corrupção, regulamento do canal de denúncias, regulamento interno, registo dos tempos de trabalho, contratos de agência (indemnização de clientela), distribuição, franquia e SaaS B2B, acordo parassocial com vesting, cessão de quotas, arrendamento não habitacional, trespasse, oposição à injunção, embargos de executado, política de uso de IA (art. 4.º do AI Act), videovigilância e monitorização de trabalhadores.
 - **Playbooks** `lay-off`, `despedimento-coletivo`, `faturar-cliente-estrangeiro`, `dissolucao-liquidacao`; **checklists** `checklist-compliance-dimensao` e `checklist-seguranca-saude-trabalho`; **commands** `/calendario`, `/prazos`, `/salario`, `/irc`, `/compliance`.
-- **Factos de referência** (`mcp-server/test/factos.json`, 54 factos com fonte): cada erro corrigido fica testado para não voltar.
+- **Factos de referência** (`mcp-server/test/factos.json`, 67 factos com fonte): cada erro corrigido fica testado para não voltar.
 
 ### Changed
 
 - `valores-2026.md`: retenção de IRS 2026, IRC 2026-2028, SS pelo DL 127/2025, custas (Tabelas I e II), coimas laborais (leve/grave/muito grave), RGPC, Lei 93/2021, RGPD e AI Act, limiares de IVA intracomunitário, licenciamento setorial; os **18 valores** por confirmar e as **45 marcas** dos ficheiros novos resolvidos com fonte oficial.
 - **Pontos de doutrina** resolvidos com posição recomendada e grau de certeza: software por encomenda (DL 252/94), decisões do sócio único, renúncia ao pacto de não concorrência, botão de livre resolução (Diretiva 2023/2673, ainda não transposta).
 - Hook: deteta as peças processuais e os regulamentos internos novos (sempre pela estrutura, com teste de precisão).
+- Pontos "(a confirmar)" verificados em fonte oficial: M40 nos serviços B2B a empresas de fora da UE (informações vinculativas da AT); Relatório Único de 2026 alargado até 12/6 (DGCP); Mod. 21-RFI (Despacho 8363/2020); Lei 59/2026 do TVDE (25% sem IVA, coimas até 44.000 €, fim do teto da tarifa dinâmica); classes de alvará da Portaria 212/2022; DL 108/2026 (RJUE) em vigor desde 1/10/2026; CSRD pós-Omnibus (450 M€ e 1.000 trabalhadores; não transposta); ANACOM ainda não designada para o AI Act.
+- AI Act: calendário pela redação do Reg. (UE) 2026/1744 (Anexo III em 2/12/2027, Anexo I em 2/8/2028) e literacia do art. 4.º como dever de promover; coima mais baixa das *small mid caps* só nos n.os 4 e 5 do art. 99.º.
 
 ### Fixed
 

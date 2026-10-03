@@ -80,7 +80,7 @@
      - ⏰ **declaração recapitulativa** (art. 29.º, n.º 1, al. i)).
    - **Empresa da UE sem número válido** → pede o número **antes** de faturar. Sem ele, trata o cliente como consumidor (Reg. 282/2011, art. 18.º, n.º 2) → passo 8.
    - **Empresa fora da UE** → não tributado em PT:
-     - **fatura** sem IVA com o código M40 (há quem use M99; alinha com o contabilista — a confirmar);
+     - **fatura** sem IVA com a menção "IVA - autoliquidação" (código M40 — confirmado pela AT nas informações vinculativas 16210 e 27890);
      - **DP**: campo 8, sem declaração recapitulativa;
      - **prova** de que é empresa: certificado fiscal, número de empresa ou registo (art. 18.º, n.º 3).
    - **Consumidor** → passo 8.

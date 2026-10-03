@@ -30,20 +30,21 @@ Aplica-se a quem **desenvolve (provider)**, **utiliza (deployer)**, importa ou d
 ### Modelos de IA de finalidade geral (GPAI)
 Quem desenvolve ou ajusta modelos fundacionais tem obrigações próprias (documentação, política de direitos de autor, resumo dos dados de treino); obrigações reforçadas para modelos com "risco sistémico".
 
-### Calendário de aplicação (faseado — confirmar)
-- **Práticas proibidas**: aplicáveis desde **02/02/2025**.
+### Calendário de aplicação (redação do Reg. (UE) 2026/1744 — "Omnibus Digital", em vigor desde 27/07/2026; art. 113.º)
+- **Práticas proibidas e literacia em IA**: desde **02/02/2025**; as novas proibições acrescentadas ao art. 5.º aplicam-se a partir de **02/12/2026**.
 - **Obrigações de GPAI**: desde **02/08/2025**.
-- **Maioria das regras (incl. alto risco do Anexo III)**: **02/08/2026**.
-- **Alto risco do Anexo I (produtos regulados)**: **02/08/2027**.
+- **Transparência (art. 50.º)**: desde **02/08/2026**.
+- **Alto risco do Anexo III** (incl. recrutamento e gestão de trabalhadores) e obrigações do art. 26.º: **02/12/2027**.
+- **Alto risco do Anexo I (produtos regulados)**: **02/08/2028**.
 
 ### Obrigações práticas mais prováveis para o utilizador (deployer/provider de risco limitado)
 - **Transparência**: rotular conteúdo gerado por IA e avisar quando o utilizador fala com um bot.
-- **Literacia em IA** (Art. 4.º): garantir que a equipa que opera os sistemas tem formação adequada.
+- **Literacia em IA** (Art. 4.º, redação do Reg. 2026/1744): adotar medidas para **promover** a literacia em IA de quem opera os sistemas — não exige garantir um nível específico. Template: `assets/templates/politica-uso-ia.md`.
 - Se construir/integrar algo que caia em **alto risco**, planear avaliação de conformidade com antecedência.
-- **Coimas**: até **35 M€ ou 7%** do volume de negócios mundial (práticas proibidas); escalões inferiores para outras infrações.
+- **Coimas**: até **35 M€ ou 7%** do volume de negócios mundial (práticas proibidas); escalões inferiores para outras infrações — ver `references/valores-2026.md`.
 
 ### Supervisão
-Cada Estado-Membro designa autoridade(s). Em Portugal o quadro de supervisão está a ser definido — verificar a autoridade nacional competente e o *AI Office* europeu.
+Cada Estado-Membro designa autoridade(s) (art. 70.º). Em Portugal o Governo manifestou a intenção de designar a **ANACOM** (19/9/2025), mas a designação ainda não foi publicada (pendente a 3/10/2026); a CNPD mantém a competência em dados pessoais. Verificar em diariodarepublica.pt e no *AI Office* europeu.
 
 ---
 
@@ -100,7 +101,7 @@ Estabelece **requisitos de cibersegurança para produtos com elementos digitais*
 ## Para o Contexto do Utilizador (tech/software, clientes internacionais)
 
 Checklist rápido de exposição regulatória:
-- [ ] **Usa ou vende IA?** → mapear o risco no AI Act; garantir transparência e literacia (Art. 4.º).
+- [ ] **Usa ou vende IA?** → mapear o risco no AI Act; transparência (Art. 50.º) e medidas de literacia (Art. 4.º) — `assets/templates/politica-uso-ia.md`.
 - [ ] **Vende software/produtos digitais na UE?** → preparar conformidade CRA (calendário até 2027).
 - [ ] **É fornecedor TIC de entidades reguladas?** → antecipar requisitos NIS2 nos contratos.
 - [ ] **Opera plataforma/marketplace?** → deveres do DSA (notice-and-action, KYBC).
