@@ -62,7 +62,7 @@
 ## Arbitragem tributária (CAAD — RJAT)
 - Alternativa à impugnação judicial, normalmente **mais rápida**; decide segundo o direito constituído, **sem equidade** (art. 2.º, n.º 2 RJAT). Objeto: ilegalidade de liquidações, autoliquidações, retenções, pagamentos por conta e atos de fixação da matéria tributável/coletável (art. 2.º, n.º 1)
 - ⏰ **Prazo: 90 dias** contados dos factos do art. 102.º CPPT (notificação/termo do pagamento voluntário, indeferimento expresso ou tácito da reclamação) e da notificação da decisão ou termo do prazo do recurso hierárquico (art. 10.º, n.º 1, al. a)); ⏰ **30 dias** para atos de fixação da matéria tributável sem liquidação (al. b))
-- **Árbitro singular**: valor do pedido **até 2× a alçada do Tribunal Central Administrativo** e sem designação de árbitro pelo contribuinte; **coletivo de 3**: acima desse valor ou se designares árbitro (art. 5.º) — valor concreto: [VERIFICAR — valores-2026]
+- **Árbitro singular**: valor do pedido **até 2× a alçada do Tribunal Central Administrativo** e sem designação de árbitro pelo contribuinte; **coletivo de 3**: acima desse valor ou se designares árbitro (art. 5.º) — alçada do TCA = 30.000 €, logo árbitro singular até **60.000 €** (ETAF art. 6.º; LOSJ art. 44.º; ver `references/valores-2026.md`)
 - **Limite de vinculação da AT**: litígios até ao valor máximo fixado no art. 3.º, n.º 1 da Portaria 112-A/2011 — (ver `references/valores-2026.md`). Acima disso só a via judicial
 - **Excluídos** (art. 2.º Portaria 112-A/2011): autoliquidações, retenções e pagamentos por conta **sem prévia reclamação graciosa**; matéria coletável fixada por **métodos indiretos**; direitos aduaneiros e classificação pautal; liquidações com base na cláusula antiabuso sem prévio recurso administrativo
 - Pedido eletrónico ao CAAD com prova e **pagamento da taxa de arbitragem** (art. 10.º, n.º 2); custas pelo Regulamento de Custas do CAAD (a confirmar valores em caad.pt)
@@ -98,7 +98,7 @@
 ## Juros indemnizatórios e juros a teu cargo
 - **Juros indemnizatórios** a teu favor (art. 43.º LGT) quando, em reclamação ou impugnação, se prove **erro imputável aos serviços** com pagamento a mais (n.º 1); também se a AT não restituir no prazo, se anular por iniciativa própria e não processar a nota de crédito em 30 dias, se a revisão pedida demorar mais de 1 ano, ou após declaração de inconstitucionalidade/ilegalidade da norma (n.º 3). **Taxa = juros compensatórios** (n.º 4) = taxa dos **juros legais civis** (art. 35.º, n.º 10) — ver `references/valores-2026.md`. Pedir sempre expressamente no articulado
 - Atraso no cumprimento de decisão judicial: juros de mora ao **dobro** da taxa de mora das dívidas ao Estado (art. 43.º, n.º 5)
-- **Juros compensatórios** a teu cargo quando o atraso na liquidação te é imputável (art. 35.º); **juros de mora** sobre dívidas em atraso — taxa anual publicada pela AT/IGCP: [VERIFICAR — valores-2026]
+- **Juros compensatórios** a teu cargo quando o atraso na liquidação te é imputável (art. 35.º); **juros de mora** sobre dívidas em atraso — taxa anual de **7,221%** em 2026 (Aviso IGCP n.º 18/2026/2; DL 73/99) — ver `references/valores-2026.md`
 
 ## Contraordenações fiscais (RGIT)
 - ⏰ **Notificação para defesa: 30 dias** para apresentar defesa e prova **ou** optar por: pagamento antecipado, atenuação especial, dispensa de coima ou, até à decisão, pagamento voluntário (art. 70.º, n.º 1 RGIT)
@@ -108,7 +108,7 @@
 - **Atenuação especial** (art. 32.º): reconhecendo a responsabilidade e regularizando no prazo de defesa, limites da coima **a metade** (mínimo absoluto: ver `references/valores-2026.md`); em casos leves, mera **admoestação** (n.º 3)
 - **Pagamento voluntário** após a decisão: coima reduzida a **75%** do fixado (nunca abaixo do mínimo), em **15 dias** após notificação (art. 78.º)
 - ⏰ **Recurso judicial da decisão de aplicação da coima: 30 dias**, apresentado no serviço de Finanças que instaurou o processo, para o tribunal tributário (art. 80.º RGIT)
-- Montantes mínimos/máximos das coimas: ver o tipo concreto no RGIT; valores em `references/valores-2026.md` [VERIFICAR — valores-2026]
+- Montantes mínimos/máximos das coimas: ver o tipo concreto no RGIT; limites gerais: mínimo 50 €; máximo 165.000 € (dolo) / 45.000 € (negligência) para pessoas coletivas, metade para singulares (RGIT art. 26.º) — ver `references/valores-2026.md`
 - **Crime de abuso de confiança fiscal** (art. 105.º RGIT): não entregar IVA ou retenções acima de um limiar (n.º 1 — (ver `references/valores-2026.md`)) — só é punível se passarem **90 dias** sobre o prazo de entrega **e** não pagares (com juros e coima) em ⏰ **30 dias** após notificação para o efeito (n.º 4). Essa notificação é a última oportunidade — pagar dentro do prazo afasta a punição
 
 ## Responsabilidade subsidiária dos gerentes e administradores (art. 24.º LGT)

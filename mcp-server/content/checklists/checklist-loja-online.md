@@ -29,7 +29,7 @@
 - [ ] Prazo de **14 dias** bem contado — a partir da receção física do (último) bem ou da celebração do contrato de serviços (DL 24/2014, art. 10.º); se faltar a informação, o prazo estende-se 12 meses (art. 10.º, n.º 2)
 - [ ] Formulário de livre resolução disponibilizado antes da compra e com a confirmação — `assets/templates/formulario-livre-resolucao.md` (parte B do anexo ao DL 24/2014)
 - [ ] Aceita qualquer declaração inequívoca (e-mail, carta, devolução do bem) — o formulário não pode ser obrigatório (art. 11.º, n.os 1 e 2)
-- [ ] Função ("botão") de livre resolução permanente na interface em linha, com "confirmar retratação" e aviso de receção — Diretiva (UE) 2023/2673, aplicável desde 19/06/2026; confirmar a transposição portuguesa (a confirmar)
+- [ ] Função ("botão") de livre resolução permanente na interface em linha, com "confirmar retratação" e aviso de receção — Diretiva (UE) 2023/2673, aplicável desde 19/06/2026; **Portugal ainda não transpôs** (verificado a 3/10/2026) — implementar já (ver a Nota doutrinal no fim)
 - [ ] Aviso de receção em 24 horas em suporte duradouro quando a resolução é feita no site (art. 11.º, n.º 4)
 - [ ] ⏰ Reembolso em **14 dias** desde a comunicação, pelo mesmo meio de pagamento, incluindo portes normais (art. 12.º, n.os 1 a 3); retenção só até receber os bens ou a prova do envio (n.º 4); atraso = devolução em dobro (n.º 6)
 - [ ] Exceções (bens personalizados, perecíveis, selados de higiene abertos, conteúdos digitais com início consentido, etc.) identificadas por produto e informadas antes da compra (arts. 17.º e 4.º, n.º 1, al. p))
@@ -91,9 +91,16 @@
 ## Faturação e IVA (breve)
 - [ ] Fatura emitida por cada venda em programa de faturação certificado pela AT e comunicada nos termos legais (ver `references/fiscal.md`) [VERIFICAR]
 - [ ] Vendas B2C à distância para outros Estados-Membros: acima do limiar anual da UE ((ver `references/valores-2026.md`)) aplica-se o IVA do país do cliente — declarar e pagar através do balcão único **OSS** no Portal das Finanças
-- [ ] Importações de bens de baixo valor vendidas a consumidores da UE: regime **IOSS** (limite por remessa [VERIFICAR — valores-2026])
+- [ ] Importações de bens de baixo valor vendidas a consumidores da UE: regime **IOSS** (remessas até 150 € de valor intrínseco; desde 1/7/2026 há um direito aduaneiro fixo de 3 € por item — ver `references/valores-2026.md`)
 
 ## Marketplaces e plataformas (DSA — Regulamento (UE) 2022/2065) (breve)
 - [ ] Vendes num marketplace de terceiros: fornecer ao operador os dados de rastreabilidade exigidos (identificação, contactos, registo comercial, autocertificação) — art. 30.º DSA
 - [ ] Operas um marketplace com vendedores terceiros: rastreabilidade dos comerciantes, conformidade desde a conceção e informação aos consumidores sobre produtos ilegais (arts. 30.º a 32.º DSA), mecanismo de notificação e ação (art. 16.º) e informação específica de mercados em linha (DL 24/2014, arts. 4.º-A e 4.º-B); micro e pequenas empresas isentas das obrigações das plataformas em linha (arts. 19.º e 29.º DSA — a confirmar âmbito e limites)
 - [ ] Apenas vendes produtos próprios no teu site: em regra **não** és plataforma para efeitos do DSA (ver `references/digital-ue.md`)
+
+## Nota doutrinal — "botão" de livre resolução (Diretiva (UE) 2023/2673)
+
+- **Posição recomendada:** implementar já: ligação/botão "Livre resolução — resolver o contrato aqui" na conta do cliente, na página da encomenda e no rodapé (acessível sem login, com n.º de encomenda + e-mail); confirmação em dois passos ("Confirmar livre resolução"); e-mail automático com o conteúdo do pedido, data e hora (cumpre também o art. 11.º, n.º 4, do DL 24/2014: aviso de receção em 24 h); referência à função na informação pré-contratual e nos termos; guardar registo das submissões.
+- **Fundamento:** a diretiva tinha de ser transposta até 19/12/2025 e aplica-se desde 19/06/2026 (art. 2.º; novo art. 11.º-A da Diretiva 2011/83). A pesquisa no DRE não encontra diploma de transposição; o DL 24/2014 tem como última alteração a Lei 10/2023; a Comissão enviou carta de notificação a Portugal em 30/01/2026 (INF/26/115). Sem transposição não há coima nacional pela falta do botão (princípio da legalidade), mas: (a) nas vendas a consumidores de outros Estados-Membros aplica-se a lei imperativa desse país (Roma I, art. 6.º), que pode já ter transposto; (b) os tribunais interpretam o direito nacional em conformidade com a diretiva (Marleasing, C-106/89); (c) a transposição pode chegar sem período de adaptação.
+- **Grau de certeza:** alto quanto à não transposição a 3/10/2026; médio quanto ao processo de infração. Voltar a verificar no DRE antes de publicar a loja.
+

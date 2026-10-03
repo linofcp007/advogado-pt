@@ -2,23 +2,21 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 65%** ▰▰▰▰▰▰▰▱▱▱ · 1/2 features completas · 28/58 tasks feitas
+**Progresso: 100%** ▰▰▰▰▰▰▰▰▰▰ · 2/2 features completas · 58/58 tasks feitas
 
-_Velocidade: 66 ponto(s)/dia útil — 28 tarefa(s), 66 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 149 ponto(s)/dia útil — 58 tarefa(s), 149 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
 ## ▶ A seguir
-- **advogado-pt-v1-2-operacional** (core +tdd) — próxima #1 Commit da spec e dos testes a falhar no br
+Todas as features completas 🎉
 
 ## Features
 
 | | Feature | Tracks | Fase | % | Tasks | Deps | Próxima | Previsão |
 |---|---|---|---|---|---|---|---|---|
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
-| 📋 | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | tarefas prontas | 30% | 0/30 | advogado-pt-v1-1-empresas ✓ | #1 Commit da spec e dos testes a falhar no br | 2026-10-06 (10-05…10-06) |
-
-Previsão = pontos por fazer ÷ velocidade, em dias úteis (±25%) · `_Size: XS|S|M|L|XL_` numa tarefa = 1/2/3/5/8 pontos; uma tarefa sem tamanho conta como a mediana da sua feature (senão M) · uma feature à espera de uma dependência começa depois da previsão dessa.
+| ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
 
 ## Dependências
 

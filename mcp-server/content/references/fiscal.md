@@ -71,9 +71,10 @@
 ## IVA — Regras Essenciais
 
 ### Taxas
-- Normal: 23% (continente), 22% (Açores), 18% (Madeira)
-- Intermédia: 13% / 12% / 9%
-- Reduzida: 6% / 5% / 4%
+- Normal: 23% (Continente) / 22% (Madeira) / 16% (Açores)
+- Intermédia: 13% / 12% / 9% (Continente / Madeira / Açores)
+- Reduzida: 6% / 5% / 4% (Continente / Madeira / Açores)
+- Confirmar sempre em `references/valores-2026.md` (ponto único de verdade)
 
 ### Isenções Relevantes
 - Regime de isenção Art. 53º CIVA: volume negócios < 15.000€/ano (verificar atualizações)

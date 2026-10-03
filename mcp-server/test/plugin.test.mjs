@@ -322,16 +322,18 @@ test("T-44 sem dependências novas", () => {
   assert.deepEqual(raiz.dependencies || {}, {});
 });
 
-test("T-45 versão 1.1.0 em todos os manifestos + CHANGELOG", () => {
-  const V = "1.1.0";
+// v1.2: valida a coerência com a versão corrente (a de plugin.json), não um número fixo.
+test("T-45 versão coerente em todos os manifestos + CHANGELOG", () => {
+  const V = JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version;
+  assert.match(V, /^\d+\.\d+\.\d+$/);
   assert.equal(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version, V);
   const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
   assert.equal(mk.metadata.version, V);
   assert.equal(mk.plugins[0].version, V);
   assert.equal(JSON.parse(lerMd(r("package.json"))).version, V);
   assert.equal(JSON.parse(lerMd(r("mcp-server", "package.json"))).version, V);
-  assert.match(lerMd(r("mcp-server", "src", "index.ts")), /version:\s*"1\.1\.0"/);
-  assert.match(lerMd(r("CHANGELOG.md")), /^## \[1\.1\.0\]/m);
+  assert.ok(lerMd(r("mcp-server", "src", "index.ts")).includes(`version: "${V}"`), "index.ts sem a versão corrente");
+  assert.ok(lerMd(r("CHANGELOG.md")).includes(`## [${V}]`), "CHANGELOG sem a versão corrente");
 });
 
 test("T-46 o bundle mcp-server/content tem os conteúdos novos", () => {

@@ -10,7 +10,7 @@
 
 ## Prazos de Prescrição (Atenção!)
 - Regra geral: 20 anos (Art. 309º CC)
-- Prestação de serviços (profissionais liberais): 5 anos (Art. 310º CC)
+- Serviços de profissões liberais (advogados, contabilistas, consultores…): prescrição **presuntiva de 2 anos** (Art. 317.º, al. c), CC) — presume-se o pagamento; o credor só a afasta com confissão do devedor (Arts. 312.º a 314.º CC). Não é o prazo de 5 anos do Art. 310.º
 - Créditos comerciais: regra geral 20 anos (Art. 309º CC); o prazo de 5 anos do Art. 310º aplica-se a prestações periodicamente renováveis (al. g)), rendas (al. a)) e juros (al. d)) — qualificar a natureza do crédito concreto
 - Rendas e alugueres: 5 anos (Art. 310º al. a) CC)
 - Juros: 5 anos (Art. 310º al. d) CC)

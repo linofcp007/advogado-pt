@@ -111,5 +111,580 @@
       "snapshot": ".history/tasks@1.md"
     }
   ],
-  "lastApprovedPhase": "tasks"
+  "lastApprovedPhase": "tasks",
+  "evidence": {
+    "1": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exitCode": 0,
+      "summary": "feat/v1.2-operacional; commit 16c46f6 com spec + 36 testes a vermelho",
+      "at": "2026-10-03T18:36:49.678Z",
+      "observed": true,
+      "history": [
+        {
+          "command": "git rev-parse --abbrev-ref HEAD",
+          "exitCode": 0,
+          "summary": "feat/v1.2-operacional; commit 16c46f6 com spec + 36 testes a vermelho",
+          "at": "2026-10-03T18:36:49.678Z",
+          "observed": true
+        }
+      ],
+      "task": "[shared] Commit da spec e dos testes a falhar no branch `feat/v1.2-operacional`",
+      "verify": "git rev-parse --abbrev-ref HEAD"
+    },
+    "2": {
+      "command": "npm --prefix mcp-server run build",
+      "exitCode": 0,
+      "summary": "build OK; feriadosNacionais/eDiaUtil/proximoDiaUtil exportados; valores-2026 com IRS retenção 2026, IRC (derrama estadual, TA, prejuízos 65%), SS/DL 127/2025, subsídio refeição, teletrabalho, custas/RCP/DL 164/2026, compensação (14 dias, tetos, sem mínimo), INPI/EUIPO, concorrência, fisco",
+      "at": "2026-10-03T18:38:13.343Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build",
+          "exitCode": 0,
+          "summary": "build OK; feriadosNacionais/eDiaUtil/proximoDiaUtil exportados; valores-2026 com IRS retenção 2026, IRC (derrama estadual, TA, prejuízos 65%), SS/DL 127/2025, subsídio refeição, teletrabalho, custas/RCP/DL 164/2026, compensação (14 dias, tetos, sem mínimo), INPI/EUIPO, concorrência, fisco",
+          "at": "2026-10-03T18:38:13.343Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Exportar `feriadosNacionais` e `ehDiaUtil` de `calculators/prazos.ts`; tabelas de 2026 da investigação em `valores-2026.md` (IRS retenção — resumo, IRC, RCP/UC, TSU, subsídio de refeição)",
+      "verify": "npm --prefix mcp-server run build"
+    },
+    "3": {
+      "command": "node --test --test-name-pattern=\"T-101\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-101 green: 0 marcas [VERIFICAR — valores-2026] (eram 18), todas com valor confirmado + remissão; concorrencia.md corrigido (sem limiar agroalimentar); admissão SS alinhada com DL 127/2025",
+      "at": "2026-10-03T18:39:06.993Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-101\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-101 green: 0 marcas [VERIFICAR — valores-2026] (eram 18), todas com valor confirmado + remissão; concorrencia.md corrigido (sem limiar agroalimentar); admissão SS alinhada com DL 127/2025",
+          "at": "2026-10-03T18:39:06.993Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Resolver as 18 marcas `[VERIFICAR — valores-2026]` com os valores confirmados (registo em `valores-2026.md` + remissão no ficheiro de origem); as não confirmáveis ficam com a fonte onde confirmar",
+      "verify": "node --test --test-name-pattern=\"T-101\" mcp-server/test/v12.test.mjs"
+    },
+    "4": {
+      "command": "node --test --test-name-pattern=\"T-102\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-102 green; notas doutrinais (posição recomendada, acórdãos confirmados, grau de certeza, cláusula segura) em contrato-desenvolvimento-software (cl. 5.3 invoca art. 3.º/3 DL 252/94), decisao-socio-unico ([D] desaconselhado), checklist-loja-online (PT não transpôs 2023/2673) e pacto-nao-concorrencia (renúncia unilateral não recomendada — STJ 2014)",
+      "at": "2026-10-03T18:40:35.012Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-102\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-102 green; notas doutrinais (posição recomendada, acórdãos confirmados, grau de certeza, cláusula segura) em contrato-desenvolvimento-software (cl. 5.3 invoca art. 3.º/3 DL 252/94), decisao-socio-unico ([D] desaconselhado), checklist-loja-online (PT não transpôs 2023/2673) e pacto-nao-concorrencia (renúncia unilateral não recomendada — STJ 2014)",
+          "at": "2026-10-03T18:40:35.012Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Posição doutrinal (posição recomendada, fonte, grau de certeza, cláusula segura) nos 4 pontos em aberto",
+      "verify": "node --test --test-name-pattern=\"T-102\" mcp-server/test/v12.test.mjs"
+    },
+    "5": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(127|128)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-127 e T-128 passam (2/2); perfil.test.mjs v1.1 4/4; tools listar_perfis/ativar_perfil registadas",
+      "at": "2026-10-03T18:46:13.842Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(127|128)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-127 e T-128 passam (2/2); perfil.test.mjs v1.1 4/4; tools listar_perfis/ativar_perfil registadas",
+          "at": "2026-10-03T18:46:13.842Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] `perfil.ts`: perfis nomeados, `perfil-ativo`, `listarPerfis`, `ativarPerfil`; tools `listar_perfis`, `ativar_perfil`; parâmetro `perfil` em obter/guardar",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(127|128)\" mcp-server/test/v12.test.mjs"
+    },
+    "6": {
+      "command": "node --test --test-name-pattern=\"T-(109|110|111|129)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-129 passa (hook mostra 'obra-x' e o setor do perfil ativo); T-41/T-42 da v1.1 continuam verdes",
+      "at": "2026-10-03T18:48:02.490Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(109|110|111|129)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-129 passa (hook mostra 'obra-x' e o setor do perfil ativo); T-41/T-42 da v1.1 continuam verdes",
+          "at": "2026-10-03T18:48:02.490Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] Hook: carregar o perfil ativo",
+      "verify": "node --test --test-name-pattern=\"T-129\" mcp-server/test/v12.test.mjs"
+    },
+    "7": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(103|104|105|106|107|113)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "6/6: ≥15 obrigações com base legal; DMR 12/1 (orig. 10/1); IVA jun+jul 21/9; e-fatura 31/8; M22 30/6 (Desp. 81/2026); IES 15/7; transferíveis em dia útil; ENI isento; sem perfil -> aConfirmar; ICS RFC 5545",
+      "at": "2026-10-03T18:54:04.973Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(103|104|105|106|107|113)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "6/6: ≥15 obrigações com base legal; DMR 12/1 (orig. 10/1); IVA jun+jul 21/9; e-fatura 31/8; M22 30/6 (Desp. 81/2026); IES 15/7; transferíveis em dia útil; ENI isento; sem perfil -> aConfirmar; ICS RFC 5545",
+          "at": "2026-10-03T18:54:04.973Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2] `calendario.ts`: tabela de regras 2026 (fonte por regra), aplicabilidade pelo perfil, transferência para dia útil, `aConfirmar`, `paraICS`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(103|104|105|106|107)\" mcp-server/test/v12.test.mjs"
+    },
+    "8": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-108\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-108 passa: tool calendario_obrigacoes registada; CLI calendario imprime 'Modelo 22' e --ics grava .advogado-pt/calendario-2026.ics (tools registar/listar/concluir_prazo e CLI prazos também)",
+      "at": "2026-10-03T18:55:16.624Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-108\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-108 passa: tool calendario_obrigacoes registada; CLI calendario imprime 'Modelo 22' e --ics grava .advogado-pt/calendario-2026.ics (tools registar/listar/concluir_prazo e CLI prazos também)",
+          "at": "2026-10-03T18:55:16.624Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2] Tool `calendario_obrigacoes` (com exportação `.ics`) + CLI `calendario`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-108\" mcp-server/test/v12.test.mjs"
+    },
+    "9": {
+      "command": "node --test --test-name-pattern=\"T-(109|110|111|129)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-109 e T-110 passam: registar/listar/concluir em .advogado-pt/prazos.md, data inválida rejeitada, vencidos e próximos (faltam 3)",
+      "at": "2026-10-03T18:48:04.333Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(109|110|111|129)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-109 e T-110 passam: registar/listar/concluir em .advogado-pt/prazos.md, data inválida rejeitada, vencidos e próximos (faltam 3)",
+          "at": "2026-10-03T18:48:04.333Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] `prazos-estado.ts` + tools `registar_prazo`, `listar_prazos`, `concluir_prazo`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(109|110)\" mcp-server/test/v12.test.mjs"
+    },
+    "10": {
+      "command": "node --test --test-name-pattern=\"T-(109|110|111|129)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-111 passa: aviso 'VENCIDO' e 'faltam 3 dias'; prazos.md binário não lança (fail-open)",
+      "at": "2026-10-03T18:48:08.080Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-(109|110|111|129)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-111 passa: aviso 'VENCIDO' e 'faltam 3 dias'; prazos.md binário não lança (fail-open)",
+          "at": "2026-10-03T18:48:08.080Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Hook: aviso de prazos vencidos e a 7 dias (fail-open)",
+      "verify": "node --test --test-name-pattern=\"T-111\" mcp-server/test/v12.test.mjs"
+    },
+    "11": {
+      "command": "node --test --test-name-pattern=\"T-112\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: compliance.md, PPR, regulamento-canal-denuncias e checklist-compliance-dimensao criados e indexados; citações verificadas (pgdlisboa RGPC nid=3543, Lei 93/2021 nid=3544); coimas em valores-2026",
+      "at": "2026-10-03T19:12:51.086Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-112\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: compliance.md, PPR, regulamento-canal-denuncias e checklist-compliance-dimensao criados e indexados; citações verificadas (pgdlisboa RGPC nid=3543, Lei 93/2021 nid=3544); coimas em valores-2026",
+          "at": "2026-10-03T19:12:51.086Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Conteúdo: referência `compliance`, templates `plano-prevencao-riscos-corrupcao` e `regulamento-canal-denuncias`, checklist `checklist-compliance-dimensao`",
+      "verify": "node --test --test-name-pattern=\"T-112\" mcp-server/test/v12.test.mjs"
+    },
+    "12": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(103|104|105|106|107|113)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-113 passa: rgpc_relatorio_anual/intercalar só com ≥50 trabalhadores (pessoas coletivas), datas no último dia útil de abril/outubro (RGPC art. 6.º n.º 4)",
+      "at": "2026-10-03T18:54:07.755Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(103|104|105|106|107|113)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-113 passa: rgpc_relatorio_anual/intercalar só com ≥50 trabalhadores (pessoas coletivas), datas no último dia útil de abril/outubro (RGPC art. 6.º n.º 4)",
+          "at": "2026-10-03T18:54:07.755Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4] Regras RGPC no calendário (perfil com >= 50 trabalhadores)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-113\" mcp-server/test/v12.test.mjs"
+    },
+    "13": {
+      "command": "node --test --test-name-pattern=\"T-114\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: regulamento-interno, politica-registo-tempos-trabalho, checklist SST, playbooks lay-off e despedimento-coletivo criados e indexados (CT pgdlisboa nid=1047, Lei 102/2009, Lei 98/2009)",
+      "at": "2026-10-03T19:12:53.272Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-114\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: regulamento-interno, politica-registo-tempos-trabalho, checklist SST, playbooks lay-off e despedimento-coletivo criados e indexados (CT pgdlisboa nid=1047, Lei 102/2009, Lei 98/2009)",
+          "at": "2026-10-03T19:12:53.272Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5][P] Conteúdo: `regulamento-interno`, `politica-registo-tempos-trabalho`, `checklist-seguranca-saude-trabalho`, playbooks `lay-off` e `despedimento-coletivo`",
+      "verify": "node --test --test-name-pattern=\"T-114\" mcp-server/test/v12.test.mjs"
+    },
+    "14": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(115|117)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "2/2: 168,17/36,00/0/88,35/178,47 (Desp. 233-A/2026, -1 p.p. com 3+ dep.); refeição numerário 1328,54 e cartão 1386,83; erros nomeiam o campo. Python T131 verde; tool calc_salario_liquido + CLI calc salario",
+      "at": "2026-10-03T19:04:15.687Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(115|117)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "2/2: 168,17/36,00/0/88,35/178,47 (Desp. 233-A/2026, -1 p.p. com 3+ dep.); refeição numerário 1328,54 e cartão 1386,83; erros nomeiam o campo. Python T131 verde; tool calc_salario_liquido + CLI calc salario",
+          "at": "2026-10-03T19:04:15.687Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5] Calculadora de salário líquido (TS + Python + tool `calc_salario_liquido` + CLI)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(115|117)\" mcp-server/test/v12.test.mjs"
+    },
+    "15": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-116\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: 27.649,50 €/ano e 2.304,13 €/mês; refeição 8 € -> TSU 5.093,83 sobre o excesso. Python T131 verde; tool calc_custo_trabalhador + CLI calc custo",
+      "at": "2026-10-03T19:04:18.225Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-116\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: 27.649,50 €/ano e 2.304,13 €/mês; refeição 8 € -> TSU 5.093,83 sobre o excesso. Python T131 verde; tool calc_custo_trabalhador + CLI calc custo",
+          "at": "2026-10-03T19:04:18.225Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5] Calculadora de custo do trabalhador (TS + Python + tool `calc_custo_trabalhador` + CLI)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-116\" mcp-server/test/v12.test.mjs"
+    },
+    "16": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(118|119)\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "2/2: PME 19.100; não PME 425.000; derrama estadual 40 M€ 2.005.000; PHEV 125; prejuízos 65% -> 5.250; TA agravada 200/100. Taxa por ano (Lei 64/2025 art. 3.º: 19/18/17%)",
+      "at": "2026-10-03T19:04:21.037Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(118|119)\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "2/2: PME 19.100; não PME 425.000; derrama estadual 40 M€ 2.005.000; PHEV 125; prejuízos 65% -> 5.250; TA agravada 200/100. Taxa por ano (Lei 64/2025 art. 3.º: 19/18/17%)",
+          "at": "2026-10-03T19:04:21.037Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] Calculadora de IRC (TS + Python + tool `calc_irc` + CLI)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-(118|119)\" mcp-server/test/v12.test.mjs"
+    },
+    "17": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-120\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: M40 + recapitulativa; M16 com VIES; sem VIES liquida o fornecedor; OSS acima de 10.000 €; Portugal abaixo; M05 exportação; M10 art. 53.º",
+      "at": "2026-10-03T19:04:23.544Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-120\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: M40 + recapitulativa; M16 com VIES; sem VIES liquida o fornecedor; OSS acima de 10.000 €; Portugal abaixo; M05 exportação; M10 art. 53.º",
+          "at": "2026-10-03T19:04:23.544Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] Decisor de IVA em operações internacionais (TS + Python + tool `calc_iva_operacao` + CLI)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-120\" mcp-server/test/v12.test.mjs"
+    },
+    "18": {
+      "command": "node --test --test-name-pattern=\"T-121\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: iva-internacional.md + playbook faturar-cliente-estrangeiro indexados; códigos M05-M99 da tabela AT v4.0; limiares (10.000/50.000/100.000/150 €) em valores-2026",
+      "at": "2026-10-03T19:12:55.690Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-121\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: iva-internacional.md + playbook faturar-cliente-estrangeiro indexados; códigos M05-M99 da tabela AT v4.0; limiares (10.000/50.000/100.000/150 €) em valores-2026",
+          "at": "2026-10-03T19:12:55.690Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6][P] Conteúdo: referência `iva-internacional` + playbook `faturar-cliente-estrangeiro`",
+      "verify": "node --test --test-name-pattern=\"T-121\" mcp-server/test/v12.test.mjs"
+    },
+    "19": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py -k T132",
+      "exitCode": 0,
+      "summary": "3/3 OK (IRC, taxa de justiça, IVA) — suite Python completa 38/38",
+      "at": "2026-10-03T19:04:27.796Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py -k T132",
+          "exitCode": 0,
+          "summary": "3/3 OK (IRC, taxa de justiça, IVA) — suite Python completa 38/38",
+          "at": "2026-10-03T19:04:27.796Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] Python: IRC, IVA e taxa de justiça verdes no unittest",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py -k T132"
+    },
+    "20": {
+      "command": "node --test --test-name-pattern=\"T-122\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: 8 templates (agência c/ indemnização de clientela, distribuição, franquia, SaaS B2B, parassocial c/ vesting, cessão de quotas, arrendamento não habitacional, trespasse) + playbook dissolucao-liquidacao, indexados",
+      "at": "2026-10-03T19:12:58.376Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-122\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: 8 templates (agência c/ indemnização de clientela, distribuição, franquia, SaaS B2B, parassocial c/ vesting, cessão de quotas, arrendamento não habitacional, trespasse) + playbook dissolucao-liquidacao, indexados",
+          "at": "2026-10-03T19:12:58.376Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7][P] Conteúdo: 8 templates (agência, distribuição, franquia, SaaS B2B, parassocial, cessão de quotas, arrendamento não habitacional, trespasse) + playbook `dissolucao-liquidacao`",
+      "verify": "node --test --test-name-pattern=\"T-122\" mcp-server/test/v12.test.mjs"
+    },
+    "21": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-124\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: 1 UC=102 €; 30.000 €=510 €; 300.000 €=16+3=19 UC (1.938 €); 310.000 €=22 UC; redução 90% -> 459 € (RCP art. 6.º e Tabela I conferidos)",
+      "at": "2026-10-03T19:04:26.237Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-124\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: 1 UC=102 €; 30.000 €=510 €; 300.000 €=16+3=19 UC (1.938 €); 310.000 €=22 UC; redução 90% -> 459 € (RCP art. 6.º e Tabela I conferidos)",
+          "at": "2026-10-03T19:04:26.237Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] Calculadora de taxa de justiça (TS + Python + tool `calc_taxa_justica` + CLI)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-124\" mcp-server/test/v12.test.mjs"
+    },
+    "22": {
+      "command": "node --test --test-name-pattern=\"T-123\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: oposicao-injuncao (15 dias, DL 269/98) e oposicao-execucao (20 dias, CPC 728.º-731.º) indexados; Tabela II do RCP e alçada em valores-2026",
+      "at": "2026-10-03T19:13:00.839Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-123\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: oposicao-injuncao (15 dias, DL 269/98) e oposicao-execucao (20 dias, CPC 728.º-731.º) indexados; Tabela II do RCP e alçada em valores-2026",
+          "at": "2026-10-03T19:13:00.839Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8][P] Conteúdo: templates `oposicao-injuncao` e `oposicao-execucao`",
+      "verify": "node --test --test-name-pattern=\"T-123\" mcp-server/test/v12.test.mjs"
+    },
+    "23": {
+      "command": "node --test --test-name-pattern=\"T-125\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: licenciamento-setorial.md com as 5 secções (AL, restauração, construção, transportes, mediação) e no SKILL.md; valores setoriais em valores-2026",
+      "at": "2026-10-03T19:13:03.209Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-125\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: licenciamento-setorial.md com as 5 secções (AL, restauração, construção, transportes, mediação) e no SKILL.md; valores setoriais em valores-2026",
+          "at": "2026-10-03T19:13:03.209Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9][P] Conteúdo: referência `licenciamento-setorial` (AL, restauração, construção, transportes/TVDE, mediação imobiliária)",
+      "verify": "node --test --test-name-pattern=\"T-125\" mcp-server/test/v12.test.mjs"
+    },
+    "24": {
+      "command": "node --test --test-name-pattern=\"T-126\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: politica-uso-ia (art. 4.º AI Act, redacção Omnibus Reg. 2026/1744), politica-videovigilancia, politica-monitorizacao-trabalhadores indexadas",
+      "at": "2026-10-03T19:13:05.057Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-126\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: politica-uso-ia (art. 4.º AI Act, redacção Omnibus Reg. 2026/1744), politica-videovigilancia, politica-monitorizacao-trabalhadores indexadas",
+          "at": "2026-10-03T19:13:05.057Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10][P] Conteúdo: `politica-uso-ia`, `politica-videovigilancia`, `politica-monitorizacao-trabalhadores`",
+      "verify": "node --test --test-name-pattern=\"T-126\" mcp-server/test/v12.test.mjs"
+    },
+    "25": {
+      "command": "node --test mcp-server/test/factos.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: 54 factos verificados (pergunta, ficheiro, contém, não contém, fonte); prova de falha: alterar 1 facto faz falhar nomeando 'profissoes-liberais-presuntiva'",
+      "at": "2026-10-03T19:15:33.554Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test mcp-server/test/factos.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: 54 factos verificados (pergunta, ficheiro, contém, não contém, fonte); prova de falha: alterar 1 facto faz falhar nomeando 'profissoes-liberais-presuntiva'",
+          "at": "2026-10-03T19:15:33.554Z",
+          "observed": false
+        }
+      ],
+      "task": "[US12] `factos.json` (>= 40 factos verificados com fonte) + `factos.test.mjs`",
+      "verify": "node --test mcp-server/test/factos.test.mjs"
+    },
+    "26": {
+      "command": "node --test --test-name-pattern=\"T-133\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "1/1: 26 ficheiros novos indexados (templates/checklists/playbooks READMEs, SKILL.md Áreas+Ferramentas, README); commands calendario/prazos/irc/salario/compliance; persona, AGENTS.md e hook (lista de comandos + detetor) atualizados; 11 tools novas registadas",
+      "at": "2026-10-03T19:15:40.300Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-133\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "1/1: 26 ficheiros novos indexados (templates/checklists/playbooks READMEs, SKILL.md Áreas+Ferramentas, README); commands calendario/prazos/irc/salario/compliance; persona, AGENTS.md e hook (lista de comandos + detetor) atualizados; 11 tools novas registadas",
+          "at": "2026-10-03T19:15:40.300Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Índices (READMEs, Áreas e Ferramentas no SKILL.md, README), commands `/calendario`, `/prazos`, `/irc`, `/salario`, `/compliance`, persona (tools novas), hook (lista de comandos)",
+      "verify": "node --test --test-name-pattern=\"T-133\" mcp-server/test/v12.test.mjs"
+    },
+    "27": {
+      "command": "node --test mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "18/18. Revisão: 45 marcas [VERIFICAR — valores-2026] resolvidas (valores novos com fonte oficial: CT 554.º, RGPC 20.º, Lei 93/2021 27.º, TGIS 2 e 27.1, CIRS 101.º, CIRC 87.º n.º 4, RCP Tab. II, RITI 5.º/30.º, CIVA 58.º-A); corrigidos 5 erros antigos (profissões liberais 2 anos presuntiva, IVA Açores/Madeira, extinção 14 dias e sem mínimo em laboral/quero-despedir, IS da renda encargo do senhorio); CIS 3.º n.º 3 v) confirma o trespasse",
+      "at": "2026-10-03T19:16:22.209Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "18/18. Revisão: 45 marcas [VERIFICAR — valores-2026] resolvidas (valores novos com fonte oficial: CT 554.º, RGPC 20.º, Lei 93/2021 27.º, TGIS 2 e 27.1, CIRS 101.º, CIRC 87.º n.º 4, RCP Tab. II, RITI 5.º/30.º, CIVA 58.º-A); corrigidos 5 erros antigos (profissões liberais 2 anos presuntiva, IVA Açores/Madeira, extinção 14 dias e sem mínimo em laboral/quero-despedir, IS da renda encargo do senhorio); CIS 3.º n.º 3 v) confirma o trespasse",
+          "at": "2026-10-03T19:16:22.209Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Revisão jurídica das citações determinantes do conteúdo novo; correções em conteúdo antigo que surgirem",
+      "verify": "node --test mcp-server/test/plugin.test.mjs"
+    },
+    "28": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "107/107 (T-134 versão 1.2.0 nos 6 sítios + CHANGELOG [1.2.0]; T-45 passa a validar coerência com a versão corrente); bundle dist/index.js regenerado; python build.py -> advogado-pt.skill (136 ficheiros, 585,6 KB)",
+      "at": "2026-10-03T19:17:54.418Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "107/107 (T-134 versão 1.2.0 nos 6 sítios + CHANGELOG [1.2.0]; T-45 passa a validar coerência com a versão corrente); bundle dist/index.js regenerado; python build.py -> advogado-pt.skill (136 ficheiros, 585,6 KB)",
+          "at": "2026-10-03T19:17:54.418Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Bump 1.2.0 (6 sítios) + CHANGELOG + build + `.skill`; o teste de versão da v1.1 passa a validar a versão corrente",
+      "verify": "npm --prefix mcp-server test"
+    },
+    "29": {
+      "command": "python skills/advogado-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Python 38/38 OK; MCP npm test 107/107; smoke do bundle dist/index.js OK (32 tools, + salário 1.166,83, IVA M40, calendário com Modelo 22); cli doctor OK",
+      "at": "2026-10-03T19:18:19.376Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/advogado-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Python 38/38 OK; MCP npm test 107/107; smoke do bundle dist/index.js OK (32 tools, + salário 1.166,83, IVA M40, calendário com Modelo 22); cli doctor OK",
+          "at": "2026-10-03T19:18:19.376Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Suites completas (MCP + Python), smoke MCP e `cli doctor`",
+      "verify": "python skills/advogado-pt/scripts/test_scripts.py"
+    },
+    "30": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-135\" mcp-server/test/v12.test.mjs",
+      "exitCode": 0,
+      "summary": "T-135 green (9 casos = simulador ACT ao cêntimo); Python T136 + sem_minimo 3/3 OK; tool aceita datas (regime transitório), CLI --admissao/--cessacao; sem mínimo de 3 meses, extinção 14 dias, tetos 20/12/240 RMMG",
+      "at": "2026-10-03T18:42:24.008Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-135\" mcp-server/test/v12.test.mjs",
+          "exitCode": 0,
+          "summary": "T-135 green (9 casos = simulador ACT ao cêntimo); Python T136 + sem_minimo 3/3 OK; tool aceita datas (regime transitório), CLI --admissao/--cessacao; sem mínimo de 3 meses, extinção 14 dias, tetos 20/12/240 RMMG",
+          "at": "2026-10-03T18:42:24.008Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Corrigir `calc_compensacao_despedimento` (TS + Python): sem mínimo de 3 meses, extinção do posto a 14 dias, tetos do art. 366.º, regime transitório por períodos de antiguidade; `valores-2026.md` alinhado",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-135\" mcp-server/test/v12.test.mjs"
+    }
+  },
+  "lastTickAt": "2026-10-03T19:18:19.376Z",
+  "ticks": {
+    "1": "2026-10-03T18:36:49.678Z",
+    "2": "2026-10-03T18:38:13.343Z",
+    "3": "2026-10-03T18:39:06.993Z",
+    "4": "2026-10-03T18:40:35.012Z",
+    "5": "2026-10-03T18:46:13.842Z",
+    "6": "2026-10-03T18:48:02.490Z",
+    "7": "2026-10-03T18:54:04.973Z",
+    "8": "2026-10-03T18:55:16.624Z",
+    "9": "2026-10-03T18:48:04.333Z",
+    "10": "2026-10-03T18:48:08.080Z",
+    "11": "2026-10-03T19:12:51.086Z",
+    "12": "2026-10-03T18:54:07.755Z",
+    "13": "2026-10-03T19:12:53.272Z",
+    "14": "2026-10-03T19:04:15.687Z",
+    "15": "2026-10-03T19:04:18.225Z",
+    "16": "2026-10-03T19:04:21.037Z",
+    "17": "2026-10-03T19:04:23.544Z",
+    "18": "2026-10-03T19:12:55.690Z",
+    "19": "2026-10-03T19:04:27.796Z",
+    "20": "2026-10-03T19:12:58.376Z",
+    "21": "2026-10-03T19:04:26.237Z",
+    "22": "2026-10-03T19:13:00.839Z",
+    "23": "2026-10-03T19:13:03.209Z",
+    "24": "2026-10-03T19:13:05.057Z",
+    "25": "2026-10-03T19:15:33.554Z",
+    "26": "2026-10-03T19:15:40.300Z",
+    "27": "2026-10-03T19:16:22.209Z",
+    "28": "2026-10-03T19:17:54.418Z",
+    "29": "2026-10-03T19:18:19.376Z",
+    "30": "2026-10-03T18:42:24.008Z"
+  }
 }

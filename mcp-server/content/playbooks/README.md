@@ -12,6 +12,10 @@
 - **[data-breach.md](data-breach.md)** — Violação de dados pessoais: notificar a CNPD em 72h, conter, avaliar risco, acionar seguro cyber e verificar crime/NIS2.
 - **[comprar-imovel.md](comprar-imovel.md)** — Adquirir um imóvel: due diligence, CPCV com sinal, simular IMT/IMT Jovem, escritura e registo.
 - **[recebi-notificacao-at.md](recebi-notificacao-at.md)** — Notificação das Finanças: que tipo é, quando conta o prazo e qual o meio de defesa (audição, reclamação, impugnação, CAAD, prestações).
+- **[lay-off.md](lay-off.md)** — Reduzir ou suspender a atividade por crise empresarial: fundamentos, comunicações, prazos, compensação retributiva e deveres durante o lay-off.
+- **[despedimento-coletivo.md](despedimento-coletivo.md)** — Despedir 2 ou mais (micro/pequena) ou 5 ou mais trabalhadores: comunicações, negociação, aviso prévio, compensação e riscos de ilicitude.
+- **[faturar-cliente-estrangeiro.md](faturar-cliente-estrangeiro.md)** — Faturar a um cliente da UE ou de fora: IVA, menção na fatura, VIES, OSS e declarações.
+- **[dissolucao-liquidacao.md](dissolucao-liquidacao.md)** — Fechar a empresa: dissolução e liquidação (imediata ou por fases), registos, Finanças, Segurança Social e responsabilidade dos sócios.
 - **[cliente-insolvente.md](cliente-insolvente.md)** — Um cliente entrou em insolvência/PER: reclamar créditos a tempo, garantias, IVA de créditos incobráveis e riscos de resolução.
 
 ## Como usar

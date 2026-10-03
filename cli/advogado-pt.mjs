@@ -12,6 +12,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "..");
 const serverPath = resolve(repo, "mcp-server", "dist", "index.js");
 const calcPath = resolve(repo, "mcp-server", "dist", "calculators", "index.js");
+const distPath = (f) => resolve(repo, "mcp-server", "dist", f);
 
 const HOSTS = {
   "claude-desktop": "json-mcpServers",
@@ -110,13 +111,25 @@ async function calc(args) {
       break;
     }
     case "compensacao": {
-      const r = c.calcularCompensacao(
-        num(rest, "--retribuicao", 0),
-        num(rest, "--diuturnidades", 0),
-        num(rest, "--anos", 0),
-        str(rest, "--modalidade", "sem-termo")
-      );
-      console.log(`Compensação: ${fmt(r.bruto)} (${r.diasAno} dias/ano${r.minimoAplicado ? ", mínimo aplicado" : ""})`);
+      const adm = str(rest, "--admissao", "");
+      const ces = str(rest, "--cessacao", "");
+      const mod = str(rest, "--modalidade", "sem-termo");
+      if (adm && ces) {
+        const r = c.calcularCompensacaoPorDatas({
+          retribuicaoBase: num(rest, "--retribuicao", 0),
+          diuturnidades: num(rest, "--diuturnidades", 0),
+          dataAdmissao: new Date(adm),
+          dataCessacao: new Date(ces),
+          modalidade: mod === "termo" ? "termo" : "sem-termo",
+        });
+        console.log(
+          r.periodos.map((p) => `- ${p.de} a ${p.ate}: ${p.dias} dias/ano = ${fmt(p.valor)}`).join("\n") +
+            `\nCompensação: ${fmt(r.total)}${r.tetoAplicado ? " (teto aplicado)" : ""}${r.minimoAplicado ? " (mínimo de 3 meses — regime transitório)" : ""}`
+        );
+        break;
+      }
+      const r = c.calcularCompensacao(num(rest, "--retribuicao", 0), num(rest, "--diuturnidades", 0), num(rest, "--anos", 0), mod);
+      console.log(`Compensação: ${fmt(r.bruto)} (${r.diasAno} dias/ano${r.tetoAplicado ? ", teto aplicado" : ""}) -> se a antiguidade começou antes de 1/5/2023, usa --admissao/--cessacao`);
       break;
     }
     case "custas": {
@@ -172,10 +185,152 @@ async function calc(args) {
       );
       break;
     }
+    case "salario": {
+      const r = c.calcularSalarioLiquido({
+        bruto: num(rest, "--bruto", 0),
+        tabela: str(rest, "--tabela", "I"),
+        dependentes: num(rest, "--dependentes", 0),
+        subsidioRefeicaoDia: num(rest, "--refeicao", 0),
+        diasRefeicao: rest.includes("--refeicao") ? num(rest, "--dias", 22) : 0,
+        refeicaoCartao: rest.includes("--cartao"),
+      });
+      console.log(
+        `Segurança Social (11%): -${fmt(r.segurancaSocial)}\n` +
+          `Retenção de IRS (${String(r.taxaMarginal).replace(".", ",")}%): -${fmt(r.retencaoIRS)}\n` +
+          (r.refeicaoTributavel ? `Refeição tributável: ${fmt(r.refeicaoTributavel)}\n` : "") +
+          `LÍQUIDO: ${fmt(r.liquido)}`
+      );
+      break;
+    }
+    case "custo": {
+      const r = c.calcularCustoTrabalhador({
+        base: num(rest, "--base", 0),
+        diuturnidades: num(rest, "--diuturnidades", 0),
+        subsidioRefeicaoDia: num(rest, "--refeicao", 0),
+        diasRefeicaoMes: num(rest, "--dias", 22),
+        mesesRefeicao: num(rest, "--meses", 11),
+        refeicaoCartao: rest.includes("--cartao"),
+        taxaSeguroAT: num(rest, "--seguro", 0),
+      });
+      console.log(
+        `Retribuições: ${fmt(r.retribuicaoAnual)} | TSU 23,75%: ${fmt(r.tsuAnual)} | Refeição: ${fmt(r.refeicaoAnual)} | Seguro AT: ${fmt(r.seguroAnual)}\n` +
+          `TOTAL ANUAL: ${fmt(r.total)} (média mensal ${fmt(r.mensalMedio)})`
+      );
+      break;
+    }
+    case "irc": {
+      const viaturas = [];
+      for (let i = 0; i < rest.length; i++) {
+        if (rest[i] === "--viatura" && rest[i + 1]) {
+          const [custo, tipo, encargos] = rest[i + 1].split(":");
+          viaturas.push({ custoAquisicao: Number(custo), tipo, encargos: Number(encargos) });
+        }
+      }
+      const r = c.calcularIRC({
+        lucroTributavel: num(rest, "--lucro", 0),
+        pme: rest.includes("--pme"),
+        derramaMunicipal: num(rest, "--derrama", 0.015),
+        prejuizosDedutiveis: num(rest, "--prejuizos", 0),
+        despesasRepresentacao: num(rest, "--representacao", 0),
+        ajudasCusto: num(rest, "--ajudas-custo", 0),
+        despesasNaoDocumentadas: num(rest, "--nao-documentadas", 0),
+        viaturas,
+        isentoAgravamento: rest.includes("--isento-agravamento"),
+        ano: num(rest, "--ano", 2026),
+      });
+      console.log(
+        `Matéria coletável: ${fmt(r.materiaColetavel)} | IRC (${r.taxaGeral}%${rest.includes("--pme") ? "; PME 15% até 50.000 €" : ""}): ${fmt(r.irc)}\n` +
+          `Derrama municipal: ${fmt(r.derramaMunicipal)} | Derrama estadual: ${fmt(r.derramaEstadual)} | Tributação autónoma: ${fmt(r.tributacaoAutonoma)}\n` +
+          `TOTAL: ${fmt(r.total)}`
+      );
+      break;
+    }
+    case "iva": {
+      const r = c.decidirIVA({
+        tipo: str(rest, "--tipo", "servicos"),
+        cliente: str(rest, "--cliente", "empresa"),
+        destino: str(rest, "--destino", "UE"),
+        nifVIES: rest.includes("--vies"),
+        vendasDistanciaUE: num(rest, "--vendas-distancia", 0),
+        servico: str(rest, "--servico", "geral"),
+        regime53: rest.includes("--regime53"),
+      });
+      console.log(
+        `Onde se tributa: ${r.tributacao}\nQuem liquida: ${r.liquida}\n` +
+          (r.codigo ? `Menção: "${r.mencaoFatura}" (${r.codigo})\n` : "") +
+          `Declarações: ${r.declaracoes.join("; ") || "—"}\nBase: ${r.base}` +
+          r.avisos.map((x) => `\n- ${x}`).join("")
+      );
+      break;
+    }
+    case "taxa-justica": {
+      const r = c.calcularTaxaJustica(num(rest, "--valor", 0), {
+        tabela: str(rest, "--tabela", "A"),
+        reducaoEletronica: rest.includes("--reducao-eletronica"),
+      });
+      console.log(
+        `${r.escalao} | taxa inicial ${r.taxaInicialUC} UC = ${fmt(r.taxaInicialEuros)}` +
+          (r.remanescenteUC ? ` | remanescente ${r.remanescenteUC} UC (a final)` : "") +
+          `\nTOTAL: ${r.totalUC} UC = ${fmt(r.totalEuros)} (UC ${fmt(r.ucValor)})`
+      );
+      break;
+    }
     default:
-      console.error("calc <imt|juros|prazo|prescricao|compensacao|custas|selo|irs|creditos|legitima> [--flags]");
+      console.error("calc <imt|juros|prazo|prescricao|compensacao|custas|selo|irs|creditos|legitima|salario|custo|irc|iva|taxa-justica> [--flags]");
       process.exit(1);
   }
+}
+
+// --- calendario / prazos: usam os módulos compilados do mcp-server ----------
+async function modulo(f) {
+  const p = distPath(f);
+  if (!existsSync(p)) {
+    console.error("Servidor ainda não compilado. Corre: cd mcp-server && npm install && npm run build");
+    process.exit(1);
+  }
+  return import(pathToFileURL(p).href);
+}
+
+async function calendarioCmd(args) {
+  const ano = Number(str(args, "--ano", String(new Date().getFullYear())));
+  const dir = resolve(str(args, "--dir", process.cwd()));
+  const mes = args.includes("--mes") ? Number(str(args, "--mes", "0")) : undefined;
+  const { gerarCalendario, formatarCalendario, exportarICS } = await modulo("calendario.js");
+  const { lerPerfil } = await modulo("perfil.js");
+  const perfil = lerPerfil({ projeto: dir, perfil: str(args, "--perfil", undefined) });
+  const cal = gerarCalendario(ano, perfil?.campos ?? null);
+  console.log(
+    `Calendário de obrigações ${ano}` +
+      (perfil ? ` — perfil${perfil.nome ? ` '${perfil.nome}'` : ""} (${perfil.origem})` : " — sem perfil (obrigações a confirmar)") +
+      ` · ${cal.length} prazos`
+  );
+  if (perfil?.aviso) console.log(`AVISO: ${perfil.aviso}`);
+  console.log(formatarCalendario(cal, { mes }));
+  if (args.includes("--ics")) {
+    const caminho = exportarICS(ano, cal, dir);
+    console.log(`\nExportado: ${caminho} (Google Calendar: Definições -> Importar e exportar -> Importar)`);
+  }
+  console.log("\nConfirmar no Portal das Finanças / Segurança Social Direta (prorrogações por despacho).");
+}
+
+async function prazosCmd(args) {
+  const dir = resolve(str(args, "--dir", process.cwd()));
+  const { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } = await modulo("prazos-estado.js");
+  const sub = args[0];
+  if (sub === "add") {
+    const p = registarPrazo({ data: str(args, "--data", ""), descricao: str(args, "--descricao", ""), origem: str(args, "--origem", undefined) }, dir);
+    console.log(`Registado: ${p.data} — ${p.descricao}`);
+    return;
+  }
+  if (sub === "done") {
+    const ok = concluirPrazo(str(args, "--data", ""), str(args, "--descricao", ""), dir);
+    console.log(ok ? "Marcado como cumprido." : "Prazo em aberto não encontrado.");
+    process.exit(ok ? 0 : 1);
+  }
+  const { vencidos, proximos } = prazosProximos(lerPrazos(dir), new Date(), 36500);
+  if (vencidos.length + proximos.length === 0) return console.log("Sem prazos em aberto.");
+  for (const x of vencidos) console.log(`VENCIDO ${x.data} — ${x.descricao}`);
+  for (const x of proximos) console.log(`${x.data} — ${x.descricao} (faltam ${x.faltam} dias)`);
 }
 
 // --- prompt: exporta conteúdo como prompt autocontido para outras IAs ---------
@@ -291,12 +446,24 @@ Uso:
       (memória de cálculo por tramos semestrais)
   advogado-pt calc prazo --inicio 2026-06-01 --dias 15 [--tipo uteis|corridos]
   advogado-pt calc prescricao --inicio 2025-01-15 --tipo creditos-comerciais
-  advogado-pt calc compensacao --retribuicao 1500 --anos 4 [--modalidade sem-termo]
+  advogado-pt calc compensacao --retribuicao 1500 --admissao 2015-05-01 --cessacao 2024-04-30 [--modalidade sem-termo|termo]
+      (ou --anos N para a regra atual; regime transitório por períodos com as datas)
   advogado-pt calc custas --valor 8000
   advogado-pt calc selo --valor 100000 [--herdeiro conjuge|descendente|ascendente|outro] [--imovel --vpt N]
   advogado-pt calc irs --rendimento 60000 [--tipo mercadorias|servicos-151|servicos-outros|propriedade-intelectual]
   advogado-pt calc creditos --retribuicao 1500 --admissao 2020-03-01 --cessacao 2026-06-30 [--diuturnidades N] [--ferias-vencidas DIAS] [--sf-em-falta]
   advogado-pt calc legitima --bens 300000 [--doacoes N] [--dividas N] [--conjuge] [--filhos N] [--ascendentes nenhum|pais|outros]
+
+  advogado-pt calendario --ano 2026 [--dir <projeto>] [--mes N] [--perfil nome] [--ics]
+      Calendário de obrigações a partir do perfil da empresa; --ics grava .advogado-pt/calendario-<ano>.ics.
+  advogado-pt prazos [add --data AAAA-MM-DD --descricao "…" [--origem "…"] | done --data … --descricao "…"] [--dir <projeto>]
+      Prazos em curso do projeto (.advogado-pt/prazos.md).
+
+  advogado-pt calc salario --bruto 1500 [--tabela I|II|III] [--dependentes N] [--refeicao 8 --dias 22] [--cartao]
+  advogado-pt calc custo --base 1500 [--refeicao 6] [--seguro 0.01] [--diuturnidades N]
+  advogado-pt calc irc --lucro 100000 [--pme] [--derrama 0.015] [--prejuizos N] [--representacao N] [--viatura custo:tipo:encargos]
+  advogado-pt calc iva --tipo bens|servicos --cliente empresa|consumidor --destino PT|UE|fora-UE [--vies] [--vendas-distancia N] [--servico eletronico|…]
+  advogado-pt calc taxa-justica --valor 30000 [--tabela A|B|C] [--reducao-eletronica]
 
   advogado-pt prompt <nome> [--tipo template|playbook|checklist|referencia]
       Imprime um prompt autocontido (persona + rigor + conteúdo) para colar noutra IA.
@@ -311,6 +478,8 @@ async function main() {
   if (cmd === "mcp-config") return mcpConfig(args);
   if (cmd === "calc") return calc(args);
   if (cmd === "prompt") return promptCmd(args);
+  if (cmd === "calendario") return calendarioCmd(args);
+  if (cmd === "prazos") return prazosCmd(args);
   if (cmd === "doctor") return doctor();
   console.log(HELP);
 }

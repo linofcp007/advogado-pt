@@ -4,6 +4,34 @@ Todas as alterações relevantes ao **advogado-pt**. O formato segue
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [1.2.0] - 2026-10
+
+**Advogado operacional.** O plugin passa de responder a perguntas a acompanhar a empresa no dia a dia: calendário de obrigações a partir do perfil, prazos em curso com aviso, pacote do empregador, fisco internacional, mais contratos e setores regulados — e os valores e pontos de doutrina que estavam por confirmar foram verificados.
+
+### Added
+
+- **Calendário de obrigações** (`calendario_obrigacoes`, `/calendario`, `cli calendario`): obrigações do ano a partir do perfil (IVA mensal/trimestral e recapitulativa, e-fatura, inventário, DMR, retenções, Modelo 10, Modelo 22, pagamentos por conta, IES, Modelo 3 e Cat. B para ENI, Segurança Social e trabalhador independente, aprovação de contas, RCBE, Relatório Único, mapa de férias, formação, RGPC), cada data com base legal e fonte; feriados, fins de semana, férias fiscais de agosto, IVA de junho em setembro e prorrogações por despacho (Modelo 22 de 2026 até 30/6) aplicados; perfil incompleto → datas "a confirmar". Exportação **`.ics`** (RFC 5545) para Google Calendar/Outlook.
+- **Prazos em curso** (`registar_prazo`, `listar_prazos`, `concluir_prazo`, `/prazos`, `cli prazos`): guardados em `.advogado-pt/prazos.md`; o hook avisa ao abrir a sessão os vencidos e os que terminam em 7 dias (fail-open).
+- **Vários perfis** (`listar_perfis`, `ativar_perfil`; `perfil` em `obter/guardar_perfil_empresa`): `perfis/<nome>.md` + perfil ativo, para contabilistas e consultores; o hook mostra o ativo.
+- **Calculadoras novas** (Python + TS + tool + CLI, com testes): `calc_salario_liquido` (tabelas de retenção do Despacho 233-A/2026, SS 11%, subsídio de refeição), `calc_custo_trabalhador` (14 meses, TSU 23,75%, refeição, seguro AT), `calc_irc` (19/18/17% e PME 15%, prejuízos 65%, derramas, tributação autónoma com agravamento), `calc_iva_operacao` (onde se tributa, quem liquida, menção e código AT, declarações, OSS) e `calc_taxa_justica` (RCP, Tabela I, remanescente, redução eletrónica).
+- **Referências**: `compliance` (RGPC e canal de denúncias por dimensão), `iva-internacional`, `licenciamento-setorial` (alojamento local, restauração, construção, transportes/TVDE, mediação imobiliária).
+- **Templates (17)**: plano de prevenção de riscos de corrupção, regulamento do canal de denúncias, regulamento interno, registo dos tempos de trabalho, contratos de agência (indemnização de clientela), distribuição, franquia e SaaS B2B, acordo parassocial com vesting, cessão de quotas, arrendamento não habitacional, trespasse, oposição à injunção, embargos de executado, política de uso de IA (art. 4.º do AI Act), videovigilância e monitorização de trabalhadores.
+- **Playbooks** `lay-off`, `despedimento-coletivo`, `faturar-cliente-estrangeiro`, `dissolucao-liquidacao`; **checklists** `checklist-compliance-dimensao` e `checklist-seguranca-saude-trabalho`; **commands** `/calendario`, `/prazos`, `/salario`, `/irc`, `/compliance`.
+- **Factos de referência** (`mcp-server/test/factos.json`, 54 factos com fonte): cada erro corrigido fica testado para não voltar.
+
+### Changed
+
+- `valores-2026.md`: retenção de IRS 2026, IRC 2026-2028, SS pelo DL 127/2025, custas (Tabelas I e II), coimas laborais (leve/grave/muito grave), RGPC, Lei 93/2021, RGPD e AI Act, limiares de IVA intracomunitário, licenciamento setorial; os **18 valores** por confirmar e as **45 marcas** dos ficheiros novos resolvidos com fonte oficial.
+- **Pontos de doutrina** resolvidos com posição recomendada e grau de certeza: software por encomenda (DL 252/94), decisões do sócio único, renúncia ao pacto de não concorrência, botão de livre resolução (Diretiva 2023/2673, ainda não transposta).
+- Hook: deteta as peças processuais e os regulamentos internos novos (sempre pela estrutura, com teste de precisão).
+
+### Fixed
+
+- **Compensação por despedimento**: sem mínimo de 3 meses no regime atual, extinção do posto a 14 dias/ano, tetos do art. 366.º e regime transitório por períodos (validado contra o simulador da ACT); `laboral.md` e `quero-despedir.md` alinhados.
+- Comunicação de admissão à SS **até ao início da execução do contrato** (DL 127/2025).
+- Honorários de profissões liberais: prescrição **presuntiva de 2 anos** (art. 317.º, al. c), CC), não 5 anos.
+- Taxas de IVA dos Açores e da Madeira em `fiscal.md`; Imposto do Selo da renda é encargo do senhorio; periodicidade mensal do IVA a partir de 650.000 € (inclusive).
+
 ## [1.1.0] - 2026-10
 
 **Advogado para qualquer empresa.** O plugin deixa de assumir um "ENI de tecnologia": guarda o perfil da empresa, corrige erros jurídicos encontrados numa revisão comparativa e acrescenta cobertura empresarial (fisco, banca, concorrência, UE).

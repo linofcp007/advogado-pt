@@ -4,7 +4,8 @@ Servidor **MCP (Model Context Protocol)** que disponibiliza a skill **Advogado P
 
 ## O que expõe
 
-- **Tools — calculadoras**: `calc_juros_mora`, `calc_prazo`, `calc_compensacao_despedimento`, `calc_custas_injuncao`, `calc_imposto_selo_heranca`, `calc_imt`, `calc_prescricao`, `calc_irs_simplificado`.
+- **Tools — calculadoras**: `calc_juros_mora`, `calc_prazo`, `calc_compensacao_despedimento`, `calc_custas_injuncao`, `calc_imposto_selo_heranca`, `calc_imt`, `calc_prescricao`, `calc_irs_simplificado`, `calc_creditos_laborais`, `calc_legitima`, `calc_salario_liquido`, `calc_custo_trabalhador`, `calc_irc`, `calc_iva_operacao`, `calc_taxa_justica`.
+- **Tools — perfil, calendário e prazos**: `obter_perfil_empresa`, `guardar_perfil_empresa`, `listar_perfis`, `ativar_perfil`, `calendario_obrigacoes`, `registar_prazo`, `listar_prazos`, `concluir_prazo`.
 - **Tools — conteúdo**: `listar_areas_juridicas`, `ler_referencia`, `listar_templates`, `obter_template`, `listar_playbooks`, `obter_playbook`, `listar_checklists`, `obter_checklist`, `procurar_conteudo`.
 - **Resources**: todo o conteúdo jurídico em `advogado-pt://{categoria}/{nome}` (referências, templates, playbooks, checklists).
 - **Prompt**: `advogado_pt` — ativa a persona de advogado de Portugal.

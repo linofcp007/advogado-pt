@@ -4,7 +4,7 @@
 >
 > **Como usar este ficheiro:** Este é o **ponto único de verdade** para montantes, taxas e limiares que mudam ao longo do tempo. Os outros ficheiros de referência remetem para aqui em vez de repetir valores. Antes de afirmar qualquer valor numa resposta ao utilizador, confirma aqui. Se o valor tiver mais de ~6 meses ou estiveres em dúvida, **verifica por web search** nas fontes oficiais (ver fundo do ficheiro).
 >
-> **Última atualização:** 2026-10 (juros de mora do 2.º semestre de 2026; restantes valores de 2026-01)
+> **Última atualização:** 2026-10 (v1.2: retenção de IRS, IRC, SS/DL 127/2025, custas, concorrência, INPI e os 18 valores antes por confirmar — todos com fonte oficial; juros de mora do 2.º semestre de 2026)
 > **Próxima revisão recomendada:** em janeiro de 2027 (Orçamento do Estado e juros de mora do 1.º semestre de 2027).
 
 ---
@@ -25,7 +25,11 @@
 | Taxa geral IRC | **19%** (desce p/ 18% em 2027, 17% em 2028) | Lei 64/2025, de 7 nov |
 | Taxa reduzida PME / Small Mid Cap (1.os 50.000€ matéria coletável) | **15%** | Lei 64/2025; Art. 87.º CIRC |
 | Derrama municipal | até **1,5%** sobre lucro tributável (varia por município) | Lei das Finanças Locais |
-| Derrama estadual | escalões progressivos sobre lucro > 1,5M€ | Art. 87.º-A CIRC |
+| Derrama estadual (sobre o lucro tributável, por partes) | **3%** de 1,5 M€ a 7,5 M€ · **5%** de 7,5 M€ a 35 M€ · **9%** acima de 35 M€ | Art. 87.º-A CIRC |
+| Dedução de prejuízos fiscais | sem limite temporal; até **65%** do lucro tributável de cada período | Art. 52.º, n.os 1-2, CIRC |
+| Tributação autónoma — viaturas ligeiras (custo de aquisição) | < 37.500 € **8%** · 37.500-45.000 € **25%** · ≥ 45.000 € **32%**; PHEV/GNV 2,5% / 7,5% / 15%; elétricos só se custo > 62.500 €: 10% | Art. 88.º, n.os 3, 18 e 20, CIRC (Lei 73-A/2025) |
+| Tributação autónoma — outras | despesas de representação **10%**; ajudas de custo/km não faturados **5%**; despesas não documentadas **50%** (70% se isento) | Art. 88.º, n.os 1, 2, 7 e 9, CIRC |
+| Agravamento da TA com prejuízo fiscal | +10 p.p. (exceto início de atividade e ano seguinte; em 2026, também se houve lucro num dos 3 anos anteriores com declarações cumpridas) | Art. 88.º, n.os 14-15, CIRC; Lei 73-A/2025, art. 95.º, n.º 5 |
 | Retenção sobre lucros distribuídos | **28%** (ou englobamento) | CIRS |
 
 > ⚠️ **Correção importante:** versões anteriores desta skill indicavam "17% até 50.000€ + 21% acima" — **desatualizado**. Em vigor para períodos iniciados a partir de 01/01/2026: **15% (PME, 1.os 50.000€) + 19% (restante)**.
@@ -50,7 +54,26 @@
 | Taxa contributiva ENI (trabalhador independente) | 21,4% (regra geral) | sobre 70% do rendimento relevante |
 | Taxa contributiva — entidade empregadora | 23,75% | |
 | Taxa contributiva — trabalhador (TSU) | 11% | |
+| Membros de órgãos estatutários (MOE) | 20,3% (entidade) + 9,3% (MOE); com funções de gerência: 23,75% + 11% | Código Contributivo, art. 53.º (Guia ISS 1001) |
+| Pagamento das contribuições (empresas) | entre o **dia 1 e o dia 25** do mês seguinte (agosto: até 31) | Código Contributivo, art. 43.º (DL 127/2025, desde 1/1/2026) |
+| Declaração/confirmação de remunerações | até dia **10** (modelo antigo) ou confirmação até dia **20** (novo modelo; obrigatório a partir de 1/1/2027) | Código Contributivo, art. 40.º (DL 127/2025, art. 5.º) |
+| Comunicação de admissão | **até ao início da execução do contrato** (excecionalmente 24 h depois) | Código Contributivo, art. 29.º, n.º 2 (DL 127/2025) |
+| Subsídio de refeição — limite isento de IRS e SS | **6,15 €/dia** em numerário · **10,46 €/dia** em cartão/vale | Portaria 51-B/2026/1; art. 2.º, n.º 3, al. b), 2), CIRS |
+| Compensação de despesas de teletrabalho isenta | **1,00 €** por dia completo (eletricidade 0,10 + internet 0,40 + computador 0,50; +50% se por IRCT) | CT art. 168.º, n.º 6; Portaria 292-A/2023 |
+| FCT / FGCT | FCT **extinto** (entregas desde 1/1/2024); FGCT (0,075%) **suspenso** durante o Acordo de Médio Prazo | DL 115/2023, art. 4.º |
 | Isenção 1.º ano de atividade (ENI) | sim | |
+
+## Retenção na Fonte de IRS 2026 — Trabalho Dependente (Continente) 🔄
+
+Despacho n.º 233-A/2026 (DR 2.ª série, 6/1/2026). Fórmula: R × taxa marginal − parcela a abater − (parcela adicional × n.º de dependentes), nunca negativa (n.º 3). Com 3 ou mais dependentes, −1 p.p. na taxa (n.º 5, al. h)). Subsídios de férias e de Natal retidos autonomamente (art. 99.º-C CIRS). Tabela completa embebida na calculadora `calc_salario_liquido`.
+
+| Tabela | Isenção até | Parcela adicional por dependente | Escalão de topo |
+|---|---|---|---|
+| I — não casado sem dependentes / casado dois titulares | 920,00 € | 21,43 € | > 20.221 €: 47,17% − 1.272,31 € |
+| II — não casado com dependentes | 920,00 € | 34,29 € | > 20.221 €: 47,17% − 1.272,31 € |
+| III — casado, único titular | 991,00 € | 42,86 € | > 20.265 €: 47,17% − 2.821,13 € |
+
+Exemplos: 1.500 € (Tabela I, sem dependentes) -> 24,10% × 1.500 − 193,33 = **168,17 €**; 1.000 € -> 12,50% × 1.000 − 12,50% × 2,60 × (1.273,85 − 1.000) = **36,00 €**.
 
 ## IVA 🔄
 
@@ -61,7 +84,11 @@
 | Taxa reduzida (Continente) | 6% | Açores 4%, Madeira 5% |
 | Limiar de isenção Art. 53.º CIVA | **15.000€** (volume negócios ano anterior) | DL 35/2025 |
 | Margem de tolerância (obriga a registo em 15 dias úteis) | **18.750€** (15.000 + 25%) | |
-| Periodicidade declarativa — trimestral / mensal | mensal se volume > 650.000€ | |
+| Periodicidade declarativa — trimestral / mensal | mensal se volume de negócios do ano anterior **≥ 650.000 €** | CIVA art. 41.º, n.º 1, al. a) |
+| Declaração recapitulativa — passa a mensal | transmissões intracomunitárias de bens > **50.000 €** no trimestre em curso ou em qualquer dos 4 anteriores | RITI art. 30.º, n.º 2 |
+| Aquisições intracomunitárias de bens — limiar de não sujeição (isentos sem dedução, ex.: art. 53.º) | **10.000 €** por ano (salvo opção) | RITI art. 5.º, n.º 1, al. c) |
+| Regime transfronteiriço PME (isenção noutro Estado-Membro) | volume de negócios anual na UE ≤ **100.000 €** (e o limiar nacional do EM de destino) | CIVA art. 58.º-A, n.º 1, al. b) |
+| Vendas à distância e TBE a consumidores da UE — limiar comum; IOSS | **10.000 €**/ano; IOSS: remessas até **150 €** (ver também a secção Concorrência e UE) | CIVA art. 6.º-A; Lei 47/2020, Anexo I, art. 19.º |
 
 > Nota: desde o DL 35/2025 (em vigor 01/07/2025), ter contabilidade organizada **deixou de impedir** a isenção do Art. 53.º.
 
@@ -71,12 +98,16 @@
 |---|---|---|
 | RMMG / Salário mínimo (Continente) | **920€** brutos (12 880€/ano) | DL 139/2025 |
 | Salário mínimo — Açores | 966€ | |
-| Salário mínimo — Madeira | 968€ | |
-| Compensação despedimento — contrato **sem termo** | **14 dias** RB+DT por ano de antiguidade | desde 01/05/2023 |
-| Compensação — **extinção do posto / inadaptação** (sem termo) | **12 dias** por ano | Art. 366.º CT |
+| Salário mínimo — Madeira | **980€** | DLR 1/2026/M |
+| Compensação despedimento — contrato **sem termo** | **14 dias** RB+DT por ano, **só para a antiguidade desde 01/05/2023**; antes: regime transitório (30/20/18/12 dias por períodos — Lei 69/2013, art. 5.º) | Art. 366.º CT; Lei 13/2023, art. 35.º, n.º 2 |
+| Compensação — **extinção do posto / inadaptação** (sem termo) | **14 dias** por ano (remetem para o art. 366.º) | Arts. 372.º e 379.º CT |
 | Compensação — **despedimento coletivo** | **14 dias** por ano | Art. 366.º CT |
 | Compensação — caducidade de **contrato a termo** (certo/incerto) | **24 dias** por ano | desde 01/05/2023 |
-| Mínimo da compensação | 3 meses de RB+DT | |
+| Tetos da compensação | RB+DT considerada ≤ **20 RMMG**; total ≤ **12 × RB+DT** ou **240 RMMG** | Art. 366.º, n.º 2, CT |
+| Mínimo da compensação | **não existe** no regime atual; 3 meses só para contratos sem termo celebrados antes de 1/11/2011 (regime transitório) | Lei 69/2013, art. 5.º, n.º 2 |
+| Coimas laborais — contraordenação **leve** | VN < 10 M€: 2-5 UC (negligência) / 6-9 UC (dolo); VN ≥ 10 M€: 6-9 UC / 10-15 UC — **204 € a 1.530 €** | CT art. 554.º, n.º 2 |
+| Coimas laborais — contraordenação **grave** | 6-12 UC (negligência, VN < 500 k€) a 55-95 UC (dolo, VN ≥ 10 M€), por escalão de volume de negócios — **612 € a 9.690 €** | CT art. 554.º, n.º 3 |
+| Coimas laborais — contraordenação **muito grave** | 20-40 UC (negligência, VN < 500 k€) a 300-600 UC (dolo, VN ≥ 10 M€) — **2.040 € a 61.200 €** | CT art. 554.º, n.º 4 |
 | Formação profissional obrigatória | 40h/ano por trabalhador | |
 
 ## Juros de Mora ♻️ (mudam todos os semestres)
@@ -96,8 +127,12 @@
 
 | Item | Valor 2026 | Notas |
 |---|---|---|
-| UC (unidade de conta) | **102€** | base do cálculo das taxas de justiça |
-| Injunção | taxa em frações de UC consoante o valor da dívida (~0,5 a 1,5 UC) | Citius/balcão; ver simulador justica.gov.pt |
+| UC (unidade de conta) | **102€** (congelada) | OE 2026 (Lei 73-A/2025), art. 242.º |
+| Taxa de justiça — Tabela I-A (regra geral) | até 2.000 € **1 UC** · até 8.000 € 2 · até 16.000 € 3 · até 24.000 € 4 · até 30.000 € 5 · até 40.000 € 6 · até 60.000 € 7 · até 80.000 € 8 · até 100.000 € 9 · até 150.000 € 10 · até 200.000 € 12 · até 250.000 € 14 · até 275.000 € **16 UC**; acima: +3 UC por cada 25.000 € ou fração (remanescente, pago a final) | RCP, art. 6.º e Tabela I |
+| Redução por entrega eletrónica | taxa a **90%** (art. 6.º, n.º 3); a partir de **1/12/2026** só para partes não representadas por mandatário | RCP; DL 164/2026 |
+| Alçada da Relação / do TCA | **30.000 €** (CAAD: árbitro singular até **60.000 €**) | LOSJ art. 44.º; ETAF art. 6.º; RJAT art. 5.º |
+| Injunção | **0,5 UC** até 5.000 € · **1 UC** de 5.000,01 a 15.000 € · **1,5 UC** acima | RCP, Tabela II |
+| Embargos de executado, oposição à penhora, embargos de terceiro | **3 UC** até 30.000 € · **6 UC** acima | RCP, art. 7.º, n.º 4, e Tabela II (tabelas SFJ; a Lei 34/2026 só alterou a Tabela III) |
 | Julgados de Paz — competência | até **15.000€** | |
 | Patrocínio obrigatório (advogado) — ação cível | regra: valor > alçada da 1.ª instância (5.000€) | |
 
@@ -152,7 +187,9 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 |---|---|---|
 | Coeficiente de atualização anual de rendas | **1,0224** (+2,24%) | Aviso 23174/2025/2 (INE) |
 | Caução máxima | 2 meses de renda | Art. 1076.º CC |
-| Imposto do selo sobre arrendamento | 10% sobre 1 mês de renda | |
+| Imposto do selo sobre arrendamento | **10%** sobre 1 mês de renda; encargo legal do **senhorio** | TGIS verba 2; CIS art. 3.º, n.º 3, al. b) |
+| Retenção na fonte de IRS sobre rendas (arrendatário com contabilidade organizada) | **25%** | CIRS art. 101.º, n.º 1, al. e) |
+| Imposto do selo no trespasse de estabelecimento | **5%** sobre o valor | TGIS verba 27.1 |
 
 ## Heranças / Imposto do Selo 🔄
 
@@ -173,8 +210,9 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Capital social mínimo (Lda) | 1€ por quota | recomendável mínimo funcional |
 | Reserva legal mínima (Lda) | 2.500 € (5% do lucro até 20% do capital, nunca menos de 2.500 €) | art. 218.º, n.º 2, CSC |
 | Habilitação de herdeiros (balcão IRN) | ~375€ + registos | varia com nº de bens/herdeiros |
-| Marca nacional (INPI, classe única online) | ~200€ (10 anos, renovável) | INPI |
-| Marca da UE (EUIPO, classe única) | ~850€ | EUIPO |
+| Marca nacional (INPI, online, desde 1/7/2026) | pedido **151,98 €** (1 classe) + concessão 12,85 € = **164,83 €**; classe adicional 38,52 €; renovação 151,98 € (+38,52 €/classe) | Deliberação INPI n.º 334/2026; Portaria 201-A/2019 |
+| Marca da UE (EUIPO, online) | **850 €** (1 classe); 2.ª classe 50 €; 3.ª e seguintes 150 € cada; renovação igual (+25% se tardia) | Reg. (UE) 2017/1001, Anexo I |
+| Imposto do Selo — livrança | **0,5%** do valor (mínimo 1 €) | TGIS, verba 23.2 |
 
 > Emolumentos e taxas de registo/notariado são aproximados e atualizam-se periodicamente — confirmar no IRN/eportugal, INPI e EUIPO. Limites de deduções à coleta de IRS: confirmar no CIRS / Portal das Finanças (mudam anualmente).
 
@@ -187,7 +225,10 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Informação vinculativa urgente — taxa | 25 a 250 UC (12,5 a 125 UC para micro/PME e certos particulares) | LGT art. 68.º, n.os 7 e 22 |
 | Abuso de confiança fiscal (crime) | prestação não entregue > 7.500 € (agravado > 50.000 €) | RGIT art. 105.º |
 | Coima mínima após atenuação especial | 25 € | RGIT art. 32.º, n.º 2 |
-| Prestação mínima na execução fiscal | [VERIFICAR] — art. 196.º, n.º 4, CPPT diz ¼ UC; a página da AT indica 1 UC | CPPT art. 196.º |
+| Prestação mínima na execução fiscal | **¼ UC = 25,50 €** (até 36 prestações); 1 UC só no regime excecional de retenções/IVA (n.º 3, al. b)); dívida > 500 UC: até 5 anos com prestação ≥ 10 UC | CPPT art. 196.º, n.os 3-5 |
+| Juros de mora às dívidas ao Estado | **7,221%** ao ano (desde 1/1/2026) | Aviso IGCP n.º 18/2026/2; DL 73/99 |
+| Coimas do RGIT (limites gerais) | mínimo **50 €**; máximo 165.000 € (dolo) / 45.000 € (negligência) para pessoas coletivas (metade para singulares) | RGIT art. 26.º |
+| Retenção na fonte de IRC — não residentes sem estabelecimento estável (royalties, serviços, juros) | **25%**; **35%** se domiciliados em paraíso fiscal (rendimentos de capitais); reduzida ou dispensada por convenção com o formulário Modelo 21-RFI (a confirmar o formulário em vigor) | CIRC arts. 87.º, n.º 4, e 94.º |
 | Pagamentos em numerário — limite geral | < 3.000 € (10.000 € para não residentes singulares); faturas ≥ 1.000 € por meio identificável; impostos > 500 € não em numerário | LGT art. 63.º-E |
 
 ## Banca, Pagamentos e Branqueamento
@@ -199,8 +240,8 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Crédito aos consumidores — âmbito do regime | 200 € a 75.000 € | DL 133/2009, art. 2.º |
 | Branqueamento — entidades obrigadas não financeiras (comerciantes) | transações em numerário ≥ 3.000 € (≥ 10.000 € noutros meios, consoante a atividade) | Lei 83/2017, art. 4.º |
 | RCBE — coima por falta de declaração | 1.000 € a 50.000 € | Lei 89/2017, art. 6.º |
-| Garantia de depósitos | 100.000 € por depositante e por banco | Fundo de Garantia de Depósitos (a confirmar) |
-| Microempresa (definição UE) | < 10 trabalhadores e volume de negócios ou balanço ≤ 2 M€ | Recomendação 2003/361/CE (a confirmar) |
+| Garantia de depósitos | 100.000 € por depositante e por instituição | RGICSF; fgd.pt |
+| Microempresa (definição UE) | < 10 trabalhadores **e** volume de negócios ou balanço ≤ 2 M€ (nas coimas do DL 166/2013 conta só o n.º de trabalhadores — RJCE art. 19.º) | Recomendação 2003/361/CE; DL 372/2007 |
 
 ## Concorrência e Direito da UE (limiares)
 
@@ -213,10 +254,40 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Auxílios *de minimis* (regra geral) | 300.000 € por empresa única em 3 anos | Reg. (UE) 2023/2831 (aplicável até 31/12/2030) |
 | Processo europeu para ações de pequeno montante | até 5.000 € | Reg. (CE) 861/2007, alterado pelo Reg. (UE) 2015/2421 |
 | Vendas à distância intra-UE a consumidores (IVA no destino / OSS) | 10.000 € anuais (limiar comum UE) | Diretiva IVA, art. 59.º-C; regime OSS |
-| Taxa de notificação de concentrações à AdC | [VERIFICAR] | Regulamento de taxas da AdC |
-| Coimas do DL 166/2013 (práticas individuais restritivas) | [VERIFICAR] — variam com a dimensão da empresa | DL 166/2013 |
+| Taxa de notificação de concentrações à AdC | **7.500 €** (VN em PT ≤ 150 M€) · 15.000 € (≤ 300 M€) · 25.000 € (> 300 M€); +50% se investigação aprofundada | Lei 19/2012, art. 94.º; Regulamento AdC n.º 1/E/2003 |
+| Notificação à Comissão Europeia (Reg. 139/2004) | VN mundial > 5.000 M€ e ≥ 2 empresas > 250 M€ na UE (ou limiares alternativos do art. 1.º, n.º 3) | Reg. (CE) 139/2004, art. 1.º |
+| Subvenções estrangeiras (Reg. 2022/2560) | concentrações: VN UE ≥ 500 M€ e contribuições > 50 M€; contratos públicos ≥ 250 M€ | Reg. (UE) 2022/2560, arts. 20.º e 28.º |
+| IOSS | remessas até **150 €**; desde 1/7/2026 direito aduaneiro fixo de 3 € por item | Reg. (UE) 2026/382 |
+| Coimas do DL 166/2013 (práticas individuais restritivas) | muito graves: micro 2.500-50.000 € … grande 5.000-2.500.000 €; graves: micro 500-10.000 € … grande 2.500-500.000 € (dimensão = n.º de trabalhadores) | DL 166/2013, arts. 9.º-10.º; RJCE (DL 9/2021) art. 19.º |
 
 > Os limiares de concentrações são fixados na lei (não mudam todos os anos), mas ficam aqui por serem montantes. Confirmar sempre a versão consolidada em pgdlisboa.pt / dre.pt.
+
+## Compliance, Denúncias, Dados e IA (coimas e limiares)
+
+| Item | Valor | Base legal |
+|---|---|---|
+| RGPC — infrações mais graves (sem PPR, PPR incompleto, sem código de conduta…) | pessoa coletiva **2.000 € a 44.891,81 €**; pessoa singular até **3.740,98 €** | RGPC (anexo ao DL 109-E/2021), art. 20.º, n.os 1 e 2 |
+| RGPC — infrações menos graves (sem relatórios, sem revisão, sem publicitação…) | pessoa coletiva **1.000 € a 25.000 €**; pessoa singular até **2.500 €**; com negligência, limites a metade | RGPC, art. 20.º, n.os 3 a 5 |
+| Lei 93/2021 (denunciantes) — contraordenações muito graves | pessoa singular **1.000 € a 25.000 €**; pessoa coletiva **10.000 € a 250.000 €** | Lei 93/2021, art. 27.º, n.º 2 |
+| Lei 93/2021 — contraordenações graves (ex.: não ter canal interno) | pessoa singular **500 € a 12.500 €**; pessoa coletiva **1.000 € a 125.000 €**; tentativa e negligência: máximos a metade | Lei 93/2021, art. 27.º, n.os 3 e 4 |
+| Lei 93/2021 — denúncia externa direta | infração punível com coima superior a **50.000 €** (ou crime) | Lei 93/2021, art. 7.º, n.º 2, al. e) |
+| RGPD — coimas | até **20 M€ ou 4%** do volume de negócios mundial (art. 83.º, n.º 5); até **10 M€ ou 2%** (n.º 4) | RGPD, art. 83.º |
+| Regulamento da IA (AI Act) — coimas | práticas proibidas: até **35 M€ ou 7%**; outras obrigações: até **15 M€ ou 3%**; informações incorretas: até **7,5 M€ ou 1%**; PME e *small mid caps*: o montante mais baixo | Reg. (UE) 2024/1689, art. 99.º (redação do Reg. (UE) 2026/1744) |
+| CSRD (relato de sustentabilidade) depois da "Omnibus I" | mais de **1.000 trabalhadores e** volume de negócios líquido > **450 M€** (a confirmar critérios e datas de transposição) | Diretiva (UE) 2026/470 |
+
+## Licenciamento Setorial
+
+| Item | Valor | Base legal |
+|---|---|---|
+| Alojamento local — seguro de responsabilidade civil | capital mínimo **75.000 €** | DL 128/2014, art. 13.º-A |
+| Alojamento local — coeficientes do regime simplificado de IRS | **0,15** (hospedagem e quartos); **0,50** (moradia ou apartamento em área de contenção); **0,35** (moradia ou apartamento fora dela) | CIRS art. 31.º, n.º 1, als. a), h) e c) |
+| Construção — classes de alvará | limites por classe fixados pela Portaria 212/2022 (classe 1 até **200.000 €** — a confirmar a atualização em impic.pt) | Lei 41/2015; Portaria 212/2022 |
+| Transporte rodoviário de mercadorias — capacidade financeira | **9.000 €** (1.º veículo) + **5.000 €** por pesado adicional + **900 €** por veículo de 2,5 a 3,5 t | Reg. (CE) 1071/2009, art. 7.º (redação do Reg. (UE) 2020/1055); imt-ip.pt |
+| TVDE — taxa de intermediação do operador de plataforma | máximo **25%** (a Lei 59/2026 passou a base de cálculo para o valor sem IVA — a confirmar) | Lei 45/2018, art. 15.º, n.º 3 |
+| TVDE — contribuição de regulação | **0,1% a 2%** | Lei 45/2018, art. 30.º |
+| TVDE — coimas (pessoas coletivas) | até **44.000 €** (a confirmar — Lei 59/2026, em vigor desde 1/9/2026) | Lei 45/2018, na redação da Lei 59/2026 |
+| Mediação imobiliária — seguro de responsabilidade civil | capital mínimo **150.000 €** | Lei 15/2013, art. 7.º, n.º 1 |
+| Mediação imobiliária — comunicação trimestral ao IMPIC | arrendamentos com renda mensal a partir de **2.500 €** | Lei 83/2017; Regulamento IMPIC 603/2021 |
 
 ## Fontes Oficiais para Verificação
 

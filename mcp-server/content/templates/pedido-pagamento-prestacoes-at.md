@@ -56,7 +56,7 @@ nos termos e com os fundamentos seguintes.
 8. A executada propõe pagar a quantia exequenda em **{{N_PRESTACOES}} prestações mensais, iguais e sucessivas**, no valor de **{{VALOR_PRESTACAO}}** cada, acrescidas dos juros de mora vencidos.
    <!-- Limites (art. 196.º CPPT): até 36 prestações (n.º 4); até 5 anos se a dívida exceder 500 UC e
         houver notória dificuldade financeira (n.º 5); até 150 em planos de recuperação (n.os 6 e 7).
-        Valor mínimo de cada prestação (fixado em UC) e valor da UC: [VERIFICAR — valores-2026]. -->
+        Valor mínimo de cada prestação: ¼ UC = 25,50 € (art. 196.º, n.º 4, CPPT; UC 2026 = 102 €); 1 UC só no regime excecional de retenções/IVA (n.º 3, al. b)) — ver `references/valores-2026.md`. -->
 9. A primeira prestação será paga no mês seguinte ao da notificação do despacho de autorização (art. 198.º, n.º 2, do CPPT).
 
 ## IV — Da garantia _(escolher UMA opção e apagar as restantes)_
@@ -100,7 +100,7 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] ⏰ Pedido feito **até à marcação da venda** (art. 196.º, n.º 1, CPPT) — quanto mais cedo, menos juros e menor risco de penhora; se a execução esteve suspensa por reclamação/impugnação/oposição, **15 dias** após a notificação da decisão (art. 189.º, n.º 8).
 - [ ] Confirmado na área reservada do Portal das Finanças se já existe **plano oficioso** (art. 198.º-A CPPT) — nesse caso basta pagar as guias, sem requerimento.
 - [ ] Apresentação: Portal das Finanças → e-balcão → "Justiça Tributária > Execuções > Pagamento em Prestações", ou serviço de finanças com marcação [VERIFICAR o caminho atual]. Guardar comprovativo.
-- [ ] N.º de prestações dentro dos limites do art. 196.º (36 / 5 anos / 150); **valor mínimo de cada prestação, valor da UC e limite da dispensa automática de garantia**: [VERIFICAR — valores-2026] (atenção: o texto do art. 196.º, n.º 4, e a página informativa da AT sobre execuções divergem quanto ao mínimo — confirmar).
+- [ ] N.º de prestações dentro dos limites do art. 196.º (até 36; até 5 anos se a dívida exceder 500 UC, com prestação ≥ 10 UC; até 150 em PER/insolvência/RERE); **prestação mínima ¼ UC = 25,50 €** (1 UC = 102 € só no regime excecional de retenções/IVA do n.º 3, al. b)); **dispensa automática de garantia** se a dívida for ≤ 5.000 € (singulares) ou ≤ 10.000 € (coletivas) — art. 198.º, n.º 5; a página informativa da AT que indica 1 UC como regra está desatualizada (ver `references/valores-2026.md`).
 - [ ] Dívida de retenções na fonte ou imposto repercutido (ex.: IVA — a confirmar o enquadramento): só pelo regime excecional do art. 196.º, n.º 3; se o valor for elevado, há risco penal (abuso de confiança fiscal — art. 105.º RGIT; limiar em (ver `references/valores-2026.md`)) → advogado.
 - [ ] Garantia: prestar no prazo do art. 199.º, n.º 7, após a autorização (regra 15 dias), ou ter a dispensa concedida — sem isso a execução prossegue para penhora (art. 199.º, n.º 8). Dispensa ao abrigo do art. 52.º, n.º 4, LGT: prova documental completa junta (art. 170.º, n.º 3, CPPT).
 - [ ] Plano de tesouraria realista: falhar **3 prestações seguidas ou 6 interpoladas** vence as restantes se não regularizares em 30 dias após notificação (art. 200.º, n.º 1); com dispensa legal por pequeno valor basta **uma** (art. 200.º, n.º 4).

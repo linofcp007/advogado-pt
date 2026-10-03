@@ -172,6 +172,15 @@ Consulta os ficheiros de referência para orientações detalhadas por área:
 - **Direito da UE para Empresas** → ler `references/uniao-europeia.md`
   Primado e efeito direto, queixa à Comissão, SOLVIT, reenvio prejudicial, auxílios de Estado/de minimis, mercado interno, cobrança transfronteiriça (injunção europeia, pequeno montante)
 
+- **Cumprimento Normativo por Dimensão (Compliance)** → ler `references/compliance.md`
+  RGPC e Plano de Prevenção de Riscos de Corrupção (50+ trabalhadores), canal de denúncias (Lei 93/2021), obrigações por n.º de trabalhadores, responsável pelo cumprimento normativo
+
+- **IVA em Operações Internacionais** → ler `references/iva-internacional.md`
+  Bens e serviços para a UE e fora dela, VIES, autoliquidação, vendas à distância e OSS/IOSS, exportações, menções e códigos da AT (decisor `calc_iva_operacao`)
+
+- **Licenciamento Setorial** → ler `references/licenciamento-setorial.md`
+  Alojamento local, restauração e bebidas, construção (alvarás, RJUE), transportes e TVDE, mediação imobiliária
+
 - **Estrangeiros e Imigração** → ler `references/estrangeiros.md`
   Contratar não-UE, vistos (D8 nómada digital, Cartão Azul), destacamento, SS de trabalhadores remotos (A1)
 
@@ -230,17 +239,25 @@ Para cálculos exatos (onde o erro é fácil), corre o script em vez de calcular
 - `python scripts/irs_simplificado.py --rendimento 60000 --tipo servicos-151` — rendimento tributável (regime simplificado)
 - `python scripts/creditos_laborais.py --retribuicao 1500 --admissao 2020-03-01 --cessacao 2026-06-30` — créditos na cessação (proporcionais, férias não gozadas)
 - `python scripts/legitima.py --bens 300000 --conjuge --filhos 2` — legítima e quota disponível
+- `python scripts/salario_liquido.py salario --bruto 1500 --tabela I --dependentes 0` — salário líquido 2026 (retenção de IRS + SS); `custo --base 1500` — custo total para a empresa
+- `python scripts/irc.py --lucro 100000 --pme --derrama 0.015` — IRC (taxa PME, derramas, tributação autónoma)
+- `python scripts/iva_operacao.py --tipo servicos --cliente empresa --destino UE` — IVA em operações com o estrangeiro (menção e código AT)
+- `python scripts/taxa_justica.py --valor 30000` — taxa de justiça (RCP, Tabela I)
 
-No servidor MCP as mesmas calculadoras são tools (`calc_juros_mora`, `calc_creditos_laborais`, `calc_legitima`, …). O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa`.
+No servidor MCP as mesmas calculadoras são tools (`calc_juros_mora`, `calc_creditos_laborais`, `calc_legitima`, `calc_salario_liquido`, `calc_custo_trabalhador`, `calc_irc`, `calc_iva_operacao`, `calc_taxa_justica`, …). O perfil da empresa lê-se/grava-se com `obter_perfil_empresa` / `guardar_perfil_empresa` (vários perfis: `listar_perfis` / `ativar_perfil`).
+
+### Calendário de obrigações e prazos em curso
+- `calendario_obrigacoes` (CLI `calendario --ano 2026 [--ics]`) — calendário anual a partir do perfil (IVA, Modelo 22, IES, SS, contas, RCBE, Relatório Único, mapa de férias, RGPC…), com base legal por data e exportação `.ics` para Google Calendar/Outlook. Datas com perfil incompleto vêm "a confirmar".
+- `registar_prazo` / `listar_prazos` / `concluir_prazo` — prazos a correr em `.advogado-pt/prazos.md`; o hook avisa ao abrir a sessão os vencidos e os que terminam em 7 dias. **Sempre que calculares um prazo perentório do utilizador, oferece registá-lo.**
 
 Apresenta sempre o resultado como **estimativa de apoio**, com a ressalva indicada no output do script.
 
 ### Playbooks (ação guiada) → `playbooks/`
 Para cenários comuns, segue a árvore de decisão correspondente (passo-a-passo com prazos e ligações):
-- `playbooks/cliente-nao-paga.md` · `recebi-citacao-ou-injuncao.md` · `quero-despedir.md` · `data-breach.md` · `comprar-imovel.md` · `recebi-notificacao-at.md` · `cliente-insolvente.md`
+- `playbooks/cliente-nao-paga.md` · `recebi-citacao-ou-injuncao.md` · `quero-despedir.md` · `data-breach.md` · `comprar-imovel.md` · `recebi-notificacao-at.md` · `cliente-insolvente.md` · `lay-off.md` · `despedimento-coletivo.md` · `faturar-cliente-estrangeiro.md` · `dissolucao-liquidacao.md`
 
 ### Checklists (verificação) → `assets/checklists/`
-Listas acionáveis: `checklist-rgpd.md` · `checklist-due-diligence-imovel.md` · `checklist-constituicao-sociedade.md` · `checklist-revisao-contrato.md` · `checklist-predeploy-legal.md` · `checklist-registo-marca.md` · `checklist-loja-online.md` · `checklist-concorrencia.md`
+Listas acionáveis: `checklist-rgpd.md` · `checklist-due-diligence-imovel.md` · `checklist-constituicao-sociedade.md` · `checklist-revisao-contrato.md` · `checklist-predeploy-legal.md` · `checklist-registo-marca.md` · `checklist-loja-online.md` · `checklist-concorrencia.md` · `checklist-compliance-dimensao.md` · `checklist-seguranca-saude-trabalho.md`
 
 ---
 
@@ -274,8 +291,9 @@ A resposta certa depende de quem é o utilizador (Lda com 60 trabalhadores ≠ E
 4. **Atualização**: quando o utilizador disser que algo mudou (ex.: passou de ENI a Lda, contratou o 10.º trabalhador), atualiza o perfil e ajusta as respostas (IRC em vez de IRS Cat. B; atas e contas anuais; obrigações laborais por escalão de trabalhadores; responsabilidade limitada).
 5. **Desatualizado**: se `atualizado_em` tiver mais de **12 meses** (ou faltar), confirma os dados antes de os usar.
 6. **Outra entidade**: se a questão for sobre um cliente, fornecedor ou terceiro, **não** grave os dados dessa outra entidade no perfil do utilizador.
+7. **Vários perfis** (contabilistas, consultores, grupos): `guardar_perfil_empresa` com `perfil: "<nome>"` grava em `.advogado-pt/perfis/<nome>.md`; `ativar_perfil` escolhe o ativo (usado nas respostas, no hook e no calendário); `listar_perfis` mostra-os. Se o pedido parecer de outra empresa, confirma qual antes de responder.
 
-Regras que dependem do perfil e que deves verificar sempre: n.º de trabalhadores (código de conduta contra o assédio, canal de denúncias, regulamento interno), volume de negócios/dimensão (concentrações, certificação legal de contas, regimes de IVA), B2C (consumo, livro de reclamações, RAL), clientes UE (IVA intracomunitário/OSS, Bruxelas I-bis).
+Regras que dependem do perfil e que deves verificar sempre: n.º de trabalhadores (código de conduta contra o assédio, canal de denúncias e PPR a partir de 50 — `references/compliance.md`, regulamento interno), volume de negócios/dimensão (concentrações, certificação legal de contas, regimes de IVA), B2C (consumo, livro de reclamações, RAL), clientes UE (IVA intracomunitário/OSS, Bruxelas I-bis).
 
 ---
 

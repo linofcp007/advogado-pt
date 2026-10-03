@@ -22,7 +22,7 @@
 - [ ] Produtos e serviços atuais e previsíveis a 3-5 anos identificados
 - [ ] Termos da lista alfabética da Classificação de Nice em vigor, agrupados por classe (art. 222.º, n.º 1, al. b), CPI); os títulos das classes só cobrem o seu sentido literal (art. 222.º, n.º 2)
 - [ ] Classes frequentes (confirmar para o setor): 9 (software descarregável), 35 (publicidade, gestão, retalho), 41 (formação), 42 (serviços informáticos/SaaS), 43 (restauração), 44 (saúde/beleza)
-- [ ] Custo por classe adicional confirmado na tabela do INPI/EUIPO [VERIFICAR — valores-2026]
+- [ ] Custo por classe adicional: INPI 38,52 € (online); EUIPO 50 € (2.ª classe) e 150 € (3.ª e seguintes) — ver `references/valores-2026.md`
 
 ## Marca nacional, da UE ou internacional
 - [ ] **Nacional (INPI, pedido online):** protege só Portugal; taxa de base em `references/valores-2026.md`
@@ -48,7 +48,7 @@
 - [ ] ⏰ Marca nacional: 10 anos contados da data do pedido, renovável indefinidamente por iguais períodos (art. 247.º CPI); registos concedidos antes do CPI de 2018 mantêm a duração anterior até à renovação seguinte (DL 110/2018, art. 7.º, n.º 2)
 - [ ] ⏰ Marca da UE: 10 anos a contar do pedido (art. 52.º Reg. (UE) 2017/1001); renovação nos 6 meses anteriores ao termo ou nos 6 meses seguintes com taxa adicional (art. 53.º)
 - [ ] ⏰ Renovação nacional: janela de renovação e sobretaxa por pagamento tardio na tabela do INPI (a confirmar); a falta de pagamento de taxas faz caducar o direito (art. 36.º, n.º 1, al. b), CPI)
-- [ ] Alertas de renovação no calendário e contactos atualizados no INPI/EUIPO; taxas de renovação em `references/valores-2026.md` [VERIFICAR — valores-2026]
+- [ ] Alertas de renovação no calendário e contactos atualizados no INPI/EUIPO; taxas de renovação: INPI 151,98 € + 38,52 €/classe adicional; EUIPO 850 € / 50 € / 150 € (+25% se tardia) — ver `references/valores-2026.md`
 
 ## Uso sério e caducidade
 - [ ] ⏰ Usar a marca tal como registada, para os produtos/serviços registados: 5 anos consecutivos sem uso sério → caducidade (art. 268.º, n.os 1 e 5, CPI; art. 58.º Reg. (UE) 2017/1001)

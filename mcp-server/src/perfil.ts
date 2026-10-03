@@ -3,7 +3,7 @@
 //   ~/.advogado-pt/perfil-empresa.md           (perfil geral — a empresa por defeito)
 // Formato: uma linha "campo: valor" por campo. Só os campos de CAMPOS_PERFIL contam.
 // O hook (hooks/advogado-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -45,6 +45,10 @@ export interface Perfil {
   caminho: string;
   campos: Record<string, string>;
   desatualizado: boolean;
+  /** Nome do perfil nomeado (`perfis/<nome>.md`); ausente = perfil por defeito. */
+  nome?: string;
+  /** Aviso a mostrar (ex.: perfil ativo inexistente). */
+  aviso?: string;
 }
 
 export interface OpcoesPerfil {
@@ -67,6 +71,32 @@ function dirHome(o: OpcoesPerfil): string {
 
 function caminhoPerfil(base: string): string {
   return join(base, PASTA, FICHEIRO);
+}
+
+const NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
+
+function validarNome(nome: string): string {
+  const n = String(nome ?? "").trim().toLowerCase();
+  if (!NOME_RE.test(n)) {
+    throw new Error(`Nome de perfil inválido: '${nome}' (usa letras minúsculas, algarismos e hífens).`);
+  }
+  return n;
+}
+
+function caminhoNomeado(base: string, nome: string): string {
+  return join(base, PASTA, "perfis", `${nome}.md`);
+}
+
+/** Nome guardado em `<base>/.advogado-pt/perfil-ativo`, se válido. */
+function nomeAtivoEm(base: string): string | null {
+  try {
+    const f = join(base, PASTA, "perfil-ativo");
+    if (!existsSync(f)) return null;
+    const n = readFileSync(f, "utf8").split(/\r?\n/)[0].trim().toLowerCase();
+    return NOME_RE.test(n) ? n : null;
+  } catch {
+    return null;
+  }
 }
 
 /** Lê os campos reconhecidos de um texto "campo: valor". */
@@ -99,13 +129,41 @@ function lerDe(caminho: string, origem: Perfil["origem"], hoje: Date): Perfil | 
   }
 }
 
-/** Perfil do projeto, ou o geral se o projeto não tiver; null se nenhum. */
-export function lerPerfil(opts: OpcoesPerfil = {}): Perfil | null {
-  const hoje = opts.hoje ?? new Date();
+function lerPorDefeito(opts: OpcoesPerfil, hoje: Date): Perfil | null {
   return (
     lerDe(caminhoPerfil(dirProjeto(opts)), "projeto", hoje) ??
     lerDe(caminhoPerfil(dirHome(opts)), "geral", hoje)
   );
+}
+
+function lerNomeado(nome: string, opts: OpcoesPerfil, hoje: Date): Perfil | null {
+  const p =
+    lerDe(caminhoNomeado(dirProjeto(opts), nome), "projeto", hoje) ??
+    lerDe(caminhoNomeado(dirHome(opts), nome), "geral", hoje);
+  return p ? { ...p, nome } : null;
+}
+
+/** Nome do perfil ativo (projeto tem prioridade sobre o geral), se houver. */
+export function nomePerfilAtivo(opts: OpcoesPerfil = {}): string | null {
+  return nomeAtivoEm(dirProjeto(opts)) ?? nomeAtivoEm(dirHome(opts));
+}
+
+/**
+ * Perfil a usar: o nomeado pedido em `opts.perfil`; senão o perfil ativo
+ * (`.advogado-pt/perfil-ativo`); senão o por defeito (`perfil-empresa.md`, projeto -> geral).
+ * Se o nomeado/ativo não existir, devolve o por defeito com `aviso`. null se nenhum.
+ */
+export function lerPerfil(opts: OpcoesPerfil = {}): Perfil | null {
+  const hoje = opts.hoje ?? new Date();
+  const pedido = opts.perfil ? validarNome(opts.perfil) : nomePerfilAtivo(opts);
+  if (pedido) {
+    const p = lerNomeado(pedido, opts, hoje);
+    if (p) return p;
+    const d = lerPorDefeito(opts, hoje);
+    const aviso = `Perfil '${pedido}' não encontrado — a usar o perfil por defeito.`;
+    return d ? { ...d, aviso } : null;
+  }
+  return lerPorDefeito(opts, hoje);
 }
 
 function umaLinha(v: string): string {
@@ -134,7 +192,8 @@ export function guardarPerfil(
   if (!existsSync(base) || !statSync(base).isDirectory()) {
     throw new Error(`O diretório '${base}' não existe.`);
   }
-  const caminho = caminhoPerfil(base);
+  const nome = opts.perfil ? validarNome(opts.perfil) : undefined;
+  const caminho = nome ? caminhoNomeado(base, nome) : caminhoPerfil(base);
   let atuais: Record<string, string> = {};
   try {
     if (existsSync(caminho)) atuais = parsePerfil(readFileSync(caminho, "utf8"));
@@ -150,9 +209,9 @@ export function guardarPerfil(
   }
   const hoje = opts.hoje ?? new Date();
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
-  mkdirSync(join(base, PASTA), { recursive: true });
+  mkdirSync(nome ? join(base, PASTA, "perfis") : join(base, PASTA), { recursive: true });
   writeFileSync(caminho, serializar(campos), "utf8");
-  return { origem: destino, caminho, campos, desatualizado: false };
+  return { origem: destino, caminho, campos, desatualizado: false, ...(nome ? { nome } : {}) };
 }
 
 /** Resumo de uma linha para o contexto ("forma_juridica: Lda · setor: …"). */
@@ -178,6 +237,34 @@ export function textoPerguntasPerfil(): string {
   ].join("\n");
 }
 
-// --- v1.2: vários perfis (stubs — Phase 4; tarefa 5) ---
-export function listarPerfis(_opts: OpcoesPerfil = {}): Array<{ nome: string; origem: "projeto" | "geral"; ativo: boolean }> { throw new Error("não implementado"); }
-export function ativarPerfil(_nome: string, _destino: "projeto" | "geral", _opts: OpcoesPerfil = {}): void { throw new Error("não implementado"); }
+// --- v1.2: vários perfis (contabilistas / consultores com muitos clientes) ---
+
+/** Perfis nomeados existentes (projeto e geral), com o ativo assinalado. */
+export function listarPerfis(opts: OpcoesPerfil = {}): Array<{ nome: string; origem: "projeto" | "geral"; ativo: boolean }> {
+  const ativo = nomePerfilAtivo(opts);
+  const vistos = new Map<string, "projeto" | "geral">();
+  for (const [base, origem] of [[dirProjeto(opts), "projeto"], [dirHome(opts), "geral"]] as const) {
+    try {
+      const dir = join(base, PASTA, "perfis");
+      if (!existsSync(dir)) continue;
+      for (const f of readdirSync(dir)) {
+        const n = f.replace(/\.md$/i, "").toLowerCase();
+        if (f.toLowerCase().endsWith(".md") && NOME_RE.test(n) && !vistos.has(n)) vistos.set(n, origem);
+      }
+    } catch {
+      /* ilegível: ignora */
+    }
+  }
+  return [...vistos.entries()].map(([nome, origem]) => ({ nome, origem, ativo: nome === ativo }));
+}
+
+/** Define o perfil ativo (escreve `.advogado-pt/perfil-ativo` no projeto ou no geral). */
+export function ativarPerfil(nome: string, destino: "projeto" | "geral", opts: OpcoesPerfil = {}): void {
+  const n = validarNome(nome);
+  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
+  if (!existsSync(base) || !statSync(base).isDirectory()) {
+    throw new Error(`O diretório '${base}' não existe.`);
+  }
+  mkdirSync(join(base, PASTA), { recursive: true });
+  writeFileSync(join(base, PASTA, "perfil-ativo"), n + "\n", "utf8");
+}

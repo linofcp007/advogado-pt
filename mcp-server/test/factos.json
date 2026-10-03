@@ -1,0 +1,567 @@
+[
+  {
+    "id": "carta-cobranca-nao-interrompe",
+    "pergunta": "A carta de cobrança interrompe a prescrição?",
+    "ficheiro": "skills/advogado-pt/assets/templates/carta-cobranca-formal-registada.md",
+    "contem": [
+      "NÃO interrompe a prescrição"
+    ],
+    "naoContem": [],
+    "fonte": "CC arts. 323.º e 325.º"
+  },
+  {
+    "id": "interrupcao-prescricao",
+    "pergunta": "O que interrompe a prescrição de um crédito?",
+    "ficheiro": "skills/advogado-pt/references/cobrancas.md",
+    "contem": [
+      "interrompe-se com: citação judicial"
+    ],
+    "naoContem": [],
+    "fonte": "CC arts. 323.º e 325.º"
+  },
+  {
+    "id": "reconhecimento-divida",
+    "pergunta": "O reconhecimento de dívida interrompe a prescrição e é título executivo?",
+    "ficheiro": "skills/advogado-pt/assets/templates/reconhecimento-divida.md",
+    "contem": [
+      "Art\\. 325\\.º do Código Civil",
+      "autenticado"
+    ],
+    "naoContem": [],
+    "fonte": "CC art. 325.º; CPC art. 703.º, n.º 1, al. b)"
+  },
+  {
+    "id": "profissoes-liberais-presuntiva",
+    "pergunta": "Em quanto tempo prescrevem os honorários de profissões liberais?",
+    "ficheiro": "skills/advogado-pt/references/cobrancas.md",
+    "contem": [
+      "presuntiva de 2 anos",
+      "317\\.º, al\\. c\\)"
+    ],
+    "naoContem": [
+      "profissionais liberais\\): 5 anos"
+    ],
+    "fonte": "CC art. 317.º, al. c)"
+  },
+  {
+    "id": "juros-comerciais-2s-2026",
+    "pergunta": "Qual a taxa de juros de mora comerciais no 2.º semestre de 2026?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "10,40%"
+    ],
+    "naoContem": [],
+    "fonte": "Aviso n.º 16623/2026/2 (DR); DL 62/2013"
+  },
+  {
+    "id": "juros-dividas-estado",
+    "pergunta": "Qual a taxa de juros de mora das dívidas ao Estado em 2026?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "7,221%"
+    ],
+    "naoContem": [],
+    "fonte": "Aviso IGCP n.º 18/2026/2; DL 73/99"
+  },
+  {
+    "id": "arrendamento-comunicacao-at",
+    "pergunta": "Até quando se comunica um arrendamento às Finanças?",
+    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "contem": [
+      "art\\. 60\\.º, n\\.º 2, CIS"
+    ],
+    "naoContem": [],
+    "fonte": "CIS art. 60.º, n.º 2"
+  },
+  {
+    "id": "is-arrendamento-senhorio",
+    "pergunta": "Quem suporta o Imposto do Selo do arrendamento?",
+    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "contem": [
+      "encargo é do \\*\\*senhorio"
+    ],
+    "naoContem": [
+      "repercutível"
+    ],
+    "fonte": "CIS art. 3.º, n.º 3, al. b); TGIS verba 2"
+  },
+  {
+    "id": "heranca-modelo1",
+    "pergunta": "Qual o prazo da participação do Imposto do Selo por óbito?",
+    "ficheiro": "skills/advogado-pt/references/herancas.md",
+    "contem": [
+      "Modelo 1 do IS: até ao fim do 3\\.º mês"
+    ],
+    "naoContem": [],
+    "fonte": "CIS art. 26.º"
+  },
+  {
+    "id": "admissao-seguranca-social",
+    "pergunta": "Quando se comunica a admissão de um trabalhador à Segurança Social?",
+    "ficheiro": "skills/advogado-pt/references/laboral.md",
+    "contem": [
+      "até ao início da execução do contrato"
+    ],
+    "naoContem": [
+      "15 dias anteriores"
+    ],
+    "fonte": "Código Contributivo art. 29.º (DL 127/2025)"
+  },
+  {
+    "id": "compensacao-sem-minimo",
+    "pergunta": "Há um mínimo de 3 meses na compensação por despedimento?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "\\*\\*não existe\\*\\* no regime atual"
+    ],
+    "naoContem": [],
+    "fonte": "CT art. 366.º; Lei 69/2013, art. 5.º"
+  },
+  {
+    "id": "compensacao-extincao-14",
+    "pergunta": "Quantos dias por ano na compensação por extinção do posto de trabalho?",
+    "ficheiro": "skills/advogado-pt/references/laboral.md",
+    "contem": [
+      "extinção do posto de trabalho e inadaptação\\*\\*: \\*\\*14 dias"
+    ],
+    "naoContem": [
+      "inadaptação\\*\\*: \\*\\*12 dias",
+      "Mínimo: 3 meses"
+    ],
+    "fonte": "CT arts. 366.º, 372.º e 379.º (Lei 13/2023)"
+  },
+  {
+    "id": "compensacao-playbook-14",
+    "pergunta": "O playbook de despedimento usa 14 dias/ano?",
+    "ficheiro": "skills/advogado-pt/playbooks/quero-despedir.md",
+    "contem": [
+      "Compensação: 14 dias/ano"
+    ],
+    "naoContem": [
+      "Compensação: 12 dias/ano",
+      "inadaptação: 12 dias"
+    ],
+    "fonte": "CT arts. 366.º e 372.º"
+  },
+  {
+    "id": "compensacao-codigo-ts",
+    "pergunta": "A calculadora TS usa 14 dias na extinção do posto?",
+    "ficheiro": "mcp-server/src/calculators/compensacao.ts",
+    "contem": [
+      "\"extincao-posto\": 14"
+    ],
+    "naoContem": [
+      "\"extincao-posto\": 12"
+    ],
+    "fonte": "CT arts. 366.º e 372.º"
+  },
+  {
+    "id": "compensacao-codigo-py",
+    "pergunta": "A calculadora Python usa 14 dias na extinção do posto?",
+    "ficheiro": "skills/advogado-pt/scripts/compensacao_despedimento.py",
+    "contem": [
+      "\"extincao-posto\": 14"
+    ],
+    "naoContem": [
+      "\"extincao-posto\": 12"
+    ],
+    "fonte": "CT arts. 366.º e 372.º"
+  },
+  {
+    "id": "ss-pagamento-dia-25",
+    "pergunta": "Até que dia se pagam as contribuições à Segurança Social em 2026?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "entre o \\*\\*dia 1 e o dia 25\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "Código Contributivo art. 43.º (DL 127/2025)"
+  },
+  {
+    "id": "retencao-irs-1500",
+    "pergunta": "Quanto se retém de IRS a 1.500 € (tabela I, sem dependentes)?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "168,17 €"
+    ],
+    "naoContem": [],
+    "fonte": "Despacho n.º 233-A/2026"
+  },
+  {
+    "id": "subsidio-refeicao-2026",
+    "pergunta": "Até quanto é isento o subsídio de refeição em 2026?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "6,15 €/dia",
+      "10,46 €/dia"
+    ],
+    "naoContem": [],
+    "fonte": "Portaria 51-B/2026/1; CIRS art. 2.º, n.º 3, al. b), 2)"
+  },
+  {
+    "id": "coimas-laborais-muito-graves",
+    "pergunta": "Quais os limites das coimas laborais muito graves?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "2\\.040 € a 61\\.200 €"
+    ],
+    "naoContem": [],
+    "fonte": "CT art. 554.º, n.º 4"
+  },
+  {
+    "id": "impugnacao-judicial-3-meses",
+    "pergunta": "Qual o prazo da impugnação judicial de uma liquidação?",
+    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "contem": [
+      "Prazo: 3 meses\\*\\* \\(art\\. 102\\.º"
+    ],
+    "naoContem": [],
+    "fonte": "CPPT art. 102.º, n.º 1"
+  },
+  {
+    "id": "notificacao-carta-registada",
+    "pergunta": "Quando se presume feita a notificação por carta registada da AT?",
+    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "contem": [
+      "3\\.º dia posterior ao registo"
+    ],
+    "naoContem": [],
+    "fonte": "CPPT art. 39.º, n.º 1"
+  },
+  {
+    "id": "prestacao-minima-execucao",
+    "pergunta": "Qual a prestação mínima num plano de prestações da execução fiscal?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "¼ UC = 25,50 €"
+    ],
+    "naoContem": [],
+    "fonte": "CPPT art. 196.º, n.ºs 3-5"
+  },
+  {
+    "id": "irc-taxa-2026",
+    "pergunta": "Qual a taxa geral de IRC em 2026?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "\\*\\*19%\\*\\* \\(desce p/ 18% em 2027, 17% em 2028\\)"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 64/2025, art. 3.º"
+  },
+  {
+    "id": "irc-taxa-codigo",
+    "pergunta": "A calculadora de IRC aplica 19/18/17% por ano?",
+    "ficheiro": "mcp-server/src/calculators/irc.ts",
+    "contem": [
+      "ano === 2026 \\? 19 : ano === 2027 \\? 18 : 17"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 64/2025, art. 3.º"
+  },
+  {
+    "id": "irc-pme-15",
+    "pergunta": "Qual a taxa de IRC das PME nos primeiros 50.000 €?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "Small Mid Cap \\(1\\.os 50\\.000€ matéria coletável\\) \\| \\*\\*15%\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "CIRC art. 87.º, n.º 2 (Lei 64/2025)"
+  },
+  {
+    "id": "derrama-estadual",
+    "pergunta": "Quais os escalões da derrama estadual?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "\\*\\*3%\\*\\* de 1,5 M€ a 7,5 M€"
+    ],
+    "naoContem": [],
+    "fonte": "CIRC art. 87.º-A"
+  },
+  {
+    "id": "prejuizos-65",
+    "pergunta": "Até quanto se deduzem prejuízos fiscais?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "até \\*\\*65%\\*\\* do lucro tributável"
+    ],
+    "naoContem": [],
+    "fonte": "CIRC art. 52.º, n.º 2"
+  },
+  {
+    "id": "ta-viaturas",
+    "pergunta": "Qual a tributação autónoma de uma viatura de 30.000 €?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "< 37\\.500 € \\*\\*8%\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "CIRC art. 88.º, n.º 3"
+  },
+  {
+    "id": "iva-periodicidade-mensal",
+    "pergunta": "Quando passa a periodicidade do IVA a mensal?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "≥ 650\\.000 €"
+    ],
+    "naoContem": [
+      "volume > 650\\.000€"
+    ],
+    "fonte": "CIVA art. 41.º, n.º 1, al. a)"
+  },
+  {
+    "id": "iva-art53-limiar",
+    "pergunta": "Qual o limiar de isenção do art. 53.º do CIVA?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "\\*\\*15\\.000€\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "CIVA art. 53.º (DL 35/2025)"
+  },
+  {
+    "id": "iva-taxas-ilhas",
+    "pergunta": "Qual a taxa normal de IVA nos Açores e na Madeira?",
+    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "contem": [
+      "22% \\(Madeira\\) / 16% \\(Açores\\)"
+    ],
+    "naoContem": [
+      "22% \\(Açores\\)",
+      "18% \\(Madeira\\)"
+    ],
+    "fonte": "Taxas regionais (valores-2026.md; Portal das Finanças)"
+  },
+  {
+    "id": "modelo22-2026-prorrogado",
+    "pergunta": "Até quando se entregou o Modelo 22 em 2026?",
+    "ficheiro": "mcp-server/src/calendario.ts",
+    "contem": [
+      "Despachos SEAF 68/2026 e 81/2026"
+    ],
+    "naoContem": [],
+    "fonte": "Despacho SEAF 81/2026"
+  },
+  {
+    "id": "modelo22-sem-transferencia",
+    "pergunta": "O prazo do Modelo 22 passa para o dia útil seguinte?",
+    "ficheiro": "mcp-server/src/calendario.ts",
+    "contem": [
+      "independentemente de ser útil"
+    ],
+    "naoContem": [],
+    "fonte": "CIRC art. 120.º, n.º 1"
+  },
+  {
+    "id": "trespasse-imposto-selo",
+    "pergunta": "Que Imposto do Selo paga um trespasse?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "Imposto do selo no trespasse de estabelecimento \\| \\*\\*5%\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "TGIS verba 27.1"
+  },
+  {
+    "id": "uc-2026",
+    "pergunta": "Qual o valor da UC em 2026?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "\\*\\*102€\\*\\* \\(congelada\\)"
+    ],
+    "naoContem": [],
+    "fonte": "OE 2026 (Lei 73-A/2025), art. 242.º"
+  },
+  {
+    "id": "taxa-justica-tabela-i",
+    "pergunta": "Qual a taxa de justiça de uma ação de 275.000 €?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "até 275\\.000 € \\*\\*16 UC\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "RCP art. 6.º e Tabela I"
+  },
+  {
+    "id": "oposicao-injuncao-15-dias",
+    "pergunta": "Qual o prazo para deduzir oposição a uma injunção?",
+    "ficheiro": "skills/advogado-pt/assets/templates/oposicao-injuncao.md",
+    "contem": [
+      "15 dias a contar da notificação"
+    ],
+    "naoContem": [],
+    "fonte": "DL 269/98, regime anexo, art. 12.º, n.º 1"
+  },
+  {
+    "id": "embargos-executado-20-dias",
+    "pergunta": "Qual o prazo dos embargos de executado?",
+    "ficheiro": "skills/advogado-pt/assets/templates/oposicao-execucao.md",
+    "contem": [
+      "20 dias a contar da citação"
+    ],
+    "naoContem": [],
+    "fonte": "CPC art. 728.º, n.º 1"
+  },
+  {
+    "id": "reserva-legal-2500",
+    "pergunta": "Qual o mínimo da reserva legal numa Lda?",
+    "ficheiro": "skills/advogado-pt/references/societario.md",
+    "contem": [
+      "nunca menos de \\*\\*2\\.500 €\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "CSC art. 218.º, n.º 2"
+  },
+  {
+    "id": "aprovacao-contas-31-marco",
+    "pergunta": "Até quando se aprovam as contas de uma sociedade?",
+    "ficheiro": "skills/advogado-pt/references/societario.md",
+    "contem": [
+      "aprovação até 31 de março"
+    ],
+    "naoContem": [],
+    "fonte": "CSC art. 65.º, n.º 5"
+  },
+  {
+    "id": "per-standstill",
+    "pergunta": "Quanto dura a suspensão das ações no PER?",
+    "ficheiro": "skills/advogado-pt/references/insolvencia.md",
+    "contem": [
+      "\\*\\*4 meses\\*\\*",
+      "\\*\\*2 meses\\*\\*, prorrogável uma vez por 1 mês"
+    ],
+    "naoContem": [],
+    "fonte": "CIRE arts. 17.º-D e 17.º-E (Lei 9/2022)"
+  },
+  {
+    "id": "marca-inpi-2026",
+    "pergunta": "Quanto custa registar uma marca nacional no INPI?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "151,98 €"
+    ],
+    "naoContem": [],
+    "fonte": "Deliberação INPI n.º 334/2026"
+  },
+  {
+    "id": "segredos-comerciais-cpi",
+    "pergunta": "Onde se protegem os segredos comerciais?",
+    "ficheiro": "skills/advogado-pt/references/pi.md",
+    "contem": [
+      "DL 110/2018\\), arts\\. 313"
+    ],
+    "naoContem": [],
+    "fonte": "CPI (DL 110/2018), arts. 313.º e ss."
+  },
+  {
+    "id": "software-encomenda-dl252",
+    "pergunta": "A quem pertence o software feito por encomenda?",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-desenvolvimento-software.md",
+    "contem": [
+      "252/94"
+    ],
+    "naoContem": [],
+    "fonte": "DL 252/94, art. 3.º, n.º 3"
+  },
+  {
+    "id": "bens-usados-18-meses",
+    "pergunta": "Pode reduzir-se a garantia de bens usados?",
+    "ficheiro": "skills/advogado-pt/references/consumo.md",
+    "contem": [
+      "18 meses\\*\\* \\(art\\. 12\\.º, n\\.º 3, DL 84/2021"
+    ],
+    "naoContem": [],
+    "fonte": "DL 84/2021, art. 12.º, n.º 3"
+  },
+  {
+    "id": "odr-encerrada",
+    "pergunta": "A plataforma europeia ODR ainda existe?",
+    "ficheiro": "skills/advogado-pt/references/consumo.md",
+    "contem": [
+      "ODR\\) foi encerrada em 20/07/2025"
+    ],
+    "naoContem": [],
+    "fonte": "Reg. (UE) 2024/3228"
+  },
+  {
+    "id": "botao-livre-resolucao",
+    "pergunta": "O botão de livre resolução já está transposto em Portugal?",
+    "ficheiro": "skills/advogado-pt/assets/checklists/checklist-loja-online.md",
+    "contem": [
+      "Portugal ainda não transpôs"
+    ],
+    "naoContem": [],
+    "fonte": "Diretiva (UE) 2023/2673"
+  },
+  {
+    "id": "dsa-lei-12a-2026",
+    "pergunta": "Quem coordena os serviços digitais (DSA) em Portugal?",
+    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "contem": [
+      "Lei 12-A/2026"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 12-A/2026, art. 5.º"
+  },
+  {
+    "id": "rgpc-50-trabalhadores",
+    "pergunta": "A partir de quantos trabalhadores se aplica o RGPC?",
+    "ficheiro": "skills/advogado-pt/references/compliance.md",
+    "contem": [
+      "50 ou mais trabalhadores"
+    ],
+    "naoContem": [],
+    "fonte": "RGPC (DL 109-E/2021), art. 2.º, n.º 1"
+  },
+  {
+    "id": "denuncia-7-dias",
+    "pergunta": "Em quantos dias se confirma a receção de uma denúncia?",
+    "ficheiro": "skills/advogado-pt/references/compliance.md",
+    "contem": [
+      "\\*\\*7 dias\\*\\*: notificar ao denunciante"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 93/2021, art. 11.º, n.º 1"
+  },
+  {
+    "id": "agencia-indemnizacao-clientela",
+    "pergunta": "Qual o prazo para pedir a indemnização de clientela?",
+    "ficheiro": "skills/advogado-pt/assets/templates/contrato-agencia.md",
+    "contem": [
+      "indemnização de clientela em 1 ano"
+    ],
+    "naoContem": [],
+    "fonte": "DL 178/86, art. 33.º, n.º 4"
+  },
+  {
+    "id": "ia-literacia-art4",
+    "pergunta": "O que exige o art. 4.º do Regulamento da IA?",
+    "ficheiro": "skills/advogado-pt/assets/templates/politica-uso-ia.md",
+    "contem": [
+      "art\\. 4\\.º do Regulamento da IA"
+    ],
+    "naoContem": [],
+    "fonte": "Reg. (UE) 2024/1689, art. 4.º"
+  },
+  {
+    "id": "videovigilancia-30-dias",
+    "pergunta": "Quanto tempo se guardam as imagens de videovigilância?",
+    "ficheiro": "skills/advogado-pt/assets/templates/politica-videovigilancia.md",
+    "contem": [
+      "Conservação máxima de 30 dias"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 58/2019, art. 19.º; Lei 34/2013, art. 31.º"
+  },
+  {
+    "id": "al-seguro-75000",
+    "pergunta": "Qual o capital mínimo do seguro do alojamento local?",
+    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "contem": [
+      "capital mínimo \\*\\*75\\.000 €\\*\\*"
+    ],
+    "naoContem": [],
+    "fonte": "DL 128/2014, art. 13.º-A"
+  }
+]

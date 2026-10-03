@@ -40,6 +40,16 @@ const leg = await client.callTool({
 });
 check("calc_legitima 300000 cônjuge+2 => 200.000,00", leg.content[0].text.includes("200.000,00"));
 
+// v1.2 — tools operacionais no bundle distribuído.
+const sal = await client.callTool({ name: "calc_salario_liquido", arguments: { bruto: 1500, tabela: "I", dependentes: 0 } });
+check("calc_salario_liquido 1500 I/0 => 1.166,83", sal.content[0].text.includes("1.166,83"));
+
+const iva = await client.callTool({ name: "calc_iva_operacao", arguments: { tipo: "servicos", cliente: "empresa", destino: "UE" } });
+check("calc_iva_operacao serviços B2B UE => M40", iva.content[0].text.includes("M40"));
+
+const cal = await client.callTool({ name: "calendario_obrigacoes", arguments: { ano: 2026 } });
+check("calendario_obrigacoes 2026 => Modelo 22", cal.content[0].text.includes("Modelo 22"));
+
 const ref = await client.readResource({ uri: "advogado-pt://references/valores-2026" });
 check("readResource valores-2026", (ref.contents[0].text ?? "").length > 500, `${(ref.contents[0].text ?? "").length} chars`);
 

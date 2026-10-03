@@ -191,3 +191,17 @@ test("v1.1: títulos técnicos parecidos com os atos novos não disparam", () =>
   }
   assert.equal(dispara("docs/rg.md", "# RECLAMAÇÃO GRACIOSA\n\nExmo. Senhor"), true);
 });
+
+test("v1.2: títulos técnicos parecidos com as peças e regulamentos novos não disparam", () => {
+  for (const titulo of [
+    "# Regulamento de estilo do código",
+    "# Plano de testes da v1.2",
+    "# Oposição entre as duas abordagens de cache",
+    "# Política de utilização da API",
+    "# Política de registo de logs",
+  ]) {
+    assert.equal(dispara("docs/notas.md", `${titulo}\n\nTexto técnico.`), false, titulo);
+  }
+  assert.equal(dispara("docs/oi.md", "# OPOSIÇÃO AO REQUERIMENTO DE INJUNÇÃO\n\nExmo. Senhor"), true);
+  assert.equal(dispara("docs/ri.md", "# REGULAMENTO INTERNO DE EMPRESA\n\nArtigo 1.º"), true);
+});
