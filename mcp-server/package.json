@@ -33,6 +33,7 @@
     "build:server": "node scripts/build-server.mjs",
     "build": "npm run bundle && npm run typecheck && npm run build:server",
     "start": "node dist/index.js",
+    "integracoes": "node scripts/gerar-integracoes.mjs",
     "test": "npm run build && node --test test/calculators.test.mjs test/plugin.test.mjs test/hooks.test.mjs test/content.test.mjs test/perfil.test.mjs test/cli.test.mjs test/v12.test.mjs test/v121.test.mjs test/factos.test.mjs && node test/smoke-client.mjs",
     "prepublishOnly": "npm run build"
   },

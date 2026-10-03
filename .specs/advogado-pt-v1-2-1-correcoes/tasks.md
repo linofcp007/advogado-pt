@@ -261,13 +261,13 @@
   - _Verify: node --test --test-name-pattern="T-245" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 7, 28_
-- [ ] 36. [US10][P] Montantes duplicados → remissões; teste dos montantes que ficam
+- [x] 36. [US10][P] Montantes duplicados → remissões; teste dos montantes que ficam
   - _Requirements: US-10.AC-3_
   - _Makes green: T-246_
   - _Verify: node --test --test-name-pattern="T-246" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 2_
-- [ ] 37. [US10] Gerador das integrações a partir da fonte única; contagens da documentação
+- [x] 37. [US10] Gerador das integrações a partir da fonte única; contagens da documentação
   - _Requirements: US-10.AC-4_
   - _Makes green: T-247_
   - _Implements: mcp-server/scripts/gerar-integracoes.mjs_

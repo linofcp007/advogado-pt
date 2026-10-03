@@ -46,6 +46,17 @@
 | Dedução específica da Cat. A (também considerada nas despesas do art. 31.º, n.º 2) | **4.587,09 €** (8,54 × IAS) | CIRS art. 25.º, n.º 1, al. a) |
 | Escalões e taxas progressivas IRS | **🔄 confirmar tabela do ano** | mudam quase todos os anos no OE |
 
+**Deduções à coleta de IRS (por sujeito passivo, salvo indicação)**
+
+| Dedução | Limite 2026 | Base |
+|---|---|---|
+| Despesas gerais familiares (35%) | **250 €** | CIRS art. 78.º-B |
+| Saúde (15%) | **1.000 €** por agregado | CIRS art. 78.º-C |
+| Educação e formação (30%) | **800 €** por agregado | CIRS art. 78.º-D |
+| Rendas de habitação permanente (15%) | **900 €** em 2026 (1.000 € a partir de 2027) **(a confirmar)** no CIRS em vigor | CIRS art. 78.º-E |
+| Juros de crédito à habitação própria (contratos até 31/12/2011) (15%) | **296 €** | CIRS art. 78.º-E |
+| Lares e apoio domiciliário (25%) | **403,75 €** | CIRS art. 84.º |
+
 ## Segurança Social 🔄
 
 | Item | Valor 2026 | Notas |

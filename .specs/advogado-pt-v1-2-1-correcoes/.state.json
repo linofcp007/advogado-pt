@@ -727,9 +727,45 @@
       ],
       "task": "[US10] SKILL.md: tabela cálculo → tool → script, encaminhamento, regras de contagem, superfícies; `scripts/README.md` e índice de templates corrigidos",
       "verify": "node --test --test-name-pattern=\"T-245\" mcp-server/test/v121.test.mjs"
+    },
+    "36": {
+      "command": "node --test --test-name-pattern=\"T-246\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-246 1/1. fiscal-pessoal.md sem montantes (remete para valores-2026); valores-2026 ganha a tabela de deduções à coleta (CIRS 78.º-B a 78.º-E e 84.º) — a dedução das rendas estava desatualizada (502 €): 900 € em 2026 / 1.000 € em 2027, marcada '(a confirmar)'. Nenhum montante ≥ 100 € nas references fora do valores-2026.",
+      "at": "2026-10-03T22:05:42.183Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-246\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-246 1/1. fiscal-pessoal.md sem montantes (remete para valores-2026); valores-2026 ganha a tabela de deduções à coleta (CIRS 78.º-B a 78.º-E e 84.º) — a dedução das rendas estava desatualizada (502 €): 900 € em 2026 / 1.000 € em 2027, marcada '(a confirmar)'. Nenhum montante ≥ 100 € nas references fora do valores-2026.",
+          "at": "2026-10-03T22:05:42.183Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10][P] Montantes duplicados → remissões; teste dos montantes que ficam",
+      "verify": "node --test --test-name-pattern=\"T-246\" mcp-server/test/v121.test.mjs"
+    },
+    "37": {
+      "command": "node --test --test-name-pattern=\"T-247\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-247 1/1. mcp-server/scripts/gerar-integracoes.mjs copia PERSONA_INTEGRACOES (fonte única em src/persona.ts) para AGENTS.md, Codex, Gemini CLI, Cursor e ChatGPT entre marcadores; --check sai 0 (em dia). README com 32 tools; GEMINI.md e mcp-server/README.md sem '8 calculadoras'. npm script 'integracoes' e nota no CLAUDE.md.",
+      "at": "2026-10-03T22:07:27.584Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-247\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-247 1/1. mcp-server/scripts/gerar-integracoes.mjs copia PERSONA_INTEGRACOES (fonte única em src/persona.ts) para AGENTS.md, Codex, Gemini CLI, Cursor e ChatGPT entre marcadores; --check sai 0 (em dia). README com 32 tools; GEMINI.md e mcp-server/README.md sem '8 calculadoras'. npm script 'integracoes' e nota no CLAUDE.md.",
+          "at": "2026-10-03T22:07:27.584Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] Gerador das integrações a partir da fonte única; contagens da documentação",
+      "verify": "node --test --test-name-pattern=\"T-247\" mcp-server/test/v121.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T22:04:48.103Z",
+  "lastTickAt": "2026-10-03T22:07:27.584Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -764,6 +800,8 @@
     "31": "2026-10-03T21:59:05.121Z",
     "32": "2026-10-03T22:02:32.317Z",
     "34": "2026-10-03T22:03:18.029Z",
-    "35": "2026-10-03T22:04:48.103Z"
+    "35": "2026-10-03T22:04:48.103Z",
+    "36": "2026-10-03T22:05:42.183Z",
+    "37": "2026-10-03T22:07:27.584Z"
   }
 }

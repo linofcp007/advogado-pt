@@ -49,6 +49,7 @@ npm run setup                                    # bootstrap: instala + compila 
 python build.py                                  # gera advogado-pt.skill (empacota skills/advogado-pt/)
 cd mcp-server && npm test                        # calculadoras + estrutura do plugin
 python skills/advogado-pt/scripts/test_scripts.py  # testes das calculadoras Python
+node mcp-server/scripts/gerar-integracoes.mjs      # copia PERSONA_INTEGRACOES (src/persona.ts) para AGENTS.md e integrations/ (--check só verifica)
 ```
 
 **Bump de versão**: alterar em SIMULTÂNEO `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` (campo `metadata.version` **e** `plugins[0].version`), `package.json`, `mcp-server/package.json`, `mcp-server/src/index.ts` (versão reportada pelo servidor) e adicionar entrada no `CHANGELOG.md` (Keep a Changelog + SemVer). Depois `cd mcp-server && npm run build` e **committar o bundle** `mcp-server/dist/index.js` regenerado.

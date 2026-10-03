@@ -17,12 +17,12 @@
 - G: Incrementos patrimoniais (mais-valias)
 - H: Pensões
 
-## Deduções à Coleta (verificar valores atualizados anualmente)
-- Despesas gerais familiares: 35% das despesas, até 250€/sujeito passivo
-- Saúde: 15%, até 1.000€
-- Educação: 30%, até 800€
-- Habitação (juros/rendas): até 502€ (rendas) ou 296€ (juros)
-- Lares: 25%, até 403,75€
+## Deduções à Coleta (limites do ano em `references/valores-2026.md`)
+- Despesas gerais familiares: 35% das despesas (CIRS, art. 78.º-B)
+- Saúde: 15% (art. 78.º-C)
+- Educação: 30% (art. 78.º-D)
+- Habitação: 15% das rendas da habitação permanente ou dos juros de crédito à habitação própria contraído até 2011 (art. 78.º-E)
+- Lares: 25% (art. 84.º)
 - IVA de faturas: 15% do IVA em setores específicos (restauração, cabeleireiros, oficinas, etc.)
 
 ## Mais-Valias Imobiliárias
