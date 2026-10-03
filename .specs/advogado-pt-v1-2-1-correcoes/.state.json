@@ -692,6 +692,24 @@
       "task": "[US9] Arredondamento único em TS; `formatar_euros` meio para cima em Python; textos do decisor de IVA iguais; casos partilhados nos dois lados",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-240\" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241"
     },
+    "33": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "155 testes: 153 passam, 0 falham, 2 saltados (T-238/T-251, externos opcionais); SMOKE OK (smoke-client agora no npm test). T-242 (contarPrazo úteis, custas 4.000/12.000, Selo nas heranças) e T-243 (testes que fixavam o erro substituídos) verdes.",
+      "at": "2026-10-03T22:10:28.180Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "155 testes: 153 passam, 0 falham, 2 saltados (T-238/T-251, externos opcionais); SMOKE OK (smoke-client agora no npm test). T-242 (contarPrazo úteis, custas 4.000/12.000, Selo nas heranças) e T-243 (testes que fixavam o erro substituídos) verdes.",
+          "at": "2026-10-03T22:10:28.180Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] Testes em falta (`contarPrazo`, custas, Selo nas heranças), smoke no `npm test`, substituição dos testes que fixavam o erro",
+      "verify": "npm --prefix mcp-server test"
+    },
     "34": {
       "command": "node --test --test-name-pattern=\"T-244\" mcp-server/test/plugin.test.mjs",
       "exitCode": 0,
@@ -781,9 +799,27 @@
       ],
       "task": "[US10][P] Secções `## Templates` das references com nomes de ficheiro ou \"(a pedido)\"",
       "verify": "node --test --test-name-pattern=\"T-248\" mcp-server/test/v121.test.mjs"
+    },
+    "39": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "153/155 (2 externos saltados), SMOKE OK. Versão 1.2.1 em plugin.json, marketplace.json (metadata e plugins[0]), package.json, mcp-server/package.json, index.ts e package-lock (T-249 verde); CHANGELOG ## [1.2.1] com os achados corrigidos; bundle e content regenerados; .skill com 136 ficheiros sob advogado-pt/. Tags locais v1.1.0 (fb6da1c) e v1.2.0 (1f8ff85) criadas; v1.2.1 fica para o merge, após a aprovação final.",
+      "at": "2026-10-03T22:10:31.329Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "153/155 (2 externos saltados), SMOKE OK. Versão 1.2.1 em plugin.json, marketplace.json (metadata e plugins[0]), package.json, mcp-server/package.json, index.ts e package-lock (T-249 verde); CHANGELOG ## [1.2.1] com os achados corrigidos; bundle e content regenerados; .skill com 136 ficheiros sob advogado-pt/. Tags locais v1.1.0 (fb6da1c) e v1.2.0 (1f8ff85) criadas; v1.2.1 fica para o merge, após a aprovação final.",
+          "at": "2026-10-03T22:10:31.329Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Bump 1.2.1 (6 sítios + `package-lock.json`), CHANGELOG com a lista dos achados corrigidos, bundle e conteúdo regenerados, `.skill`, tags `v1.1.0`, `v1.2.0` e `v1.2.1`",
+      "verify": "npm --prefix mcp-server test"
     }
   },
-  "lastTickAt": "2026-10-03T22:08:56.155Z",
+  "lastTickAt": "2026-10-03T22:10:31.329Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -817,10 +853,12 @@
     "30": "2026-10-03T22:00:33.176Z",
     "31": "2026-10-03T21:59:05.121Z",
     "32": "2026-10-03T22:02:32.317Z",
+    "33": "2026-10-03T22:10:28.180Z",
     "34": "2026-10-03T22:03:18.029Z",
     "35": "2026-10-03T22:04:48.103Z",
     "36": "2026-10-03T22:05:42.183Z",
     "37": "2026-10-03T22:07:27.584Z",
-    "38": "2026-10-03T22:08:56.155Z"
+    "38": "2026-10-03T22:08:56.155Z",
+    "39": "2026-10-03T22:10:31.329Z"
   }
 }

@@ -54,6 +54,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- **Livrança** (modelo) + **pacto de preenchimento** (autorização, montante máximo, vencimento, comunicação)
-- **Contrato de fiança** (com/sem renúncia ao benefício de excussão; "principal pagador")
-- **Cláusula de reserva de propriedade** para contrato de compra e venda/fornecimento de equipamento
+- **Livrança** (modelo) + **pacto de preenchimento** (autorização, montante máximo, vencimento, comunicação) — `assets/templates/livranca-pacto-preenchimento.md`
+- **Contrato de fiança** (com/sem renúncia ao benefício de excussão; "principal pagador") (a pedido)
+- **Cláusula de reserva de propriedade** para contrato de compra e venda/fornecimento de equipamento (a pedido)

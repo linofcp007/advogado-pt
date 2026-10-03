@@ -67,11 +67,11 @@
 ## Templates Disponíveis
 
 Quando o utilizador pedir, gera estes documentos adaptados ao caso:
-- Contrato de prestação de serviços TI
-- Contrato de licenciamento de software (SaaS)
-- NDA bilateral PT/EN
-- Termos e Condições para website/app
-- Política de Privacidade RGPD
-- Data Processing Agreement (DPA) EN
-- Carta de interpelação por incumprimento
-- Notificação de resolução contratual
+- Contrato de prestação de serviços TI — `assets/templates/contrato-prestacao-servicos-ti.md`
+- Contrato de licenciamento de software (SaaS) — `assets/templates/contrato-saas-b2b.md`
+- NDA bilateral PT/EN — `assets/templates/nda-bilingue.md`
+- Termos e Condições para website/app (a pedido)
+- Política de Privacidade RGPD — `assets/templates/politica-privacidade.md`
+- Data Processing Agreement (DPA) EN — `assets/templates/dpa-bilingue.md`
+- Carta de interpelação por incumprimento — `assets/templates/carta-interpelacao-incumprimento.md`
+- Notificação de resolução contratual — `assets/templates/notificacao-resolucao-contrato.md`

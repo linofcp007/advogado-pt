@@ -241,7 +241,7 @@
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-240" mcp-server/test/v121.test.mjs && python skills/advogado-pt/scripts/test_scripts.py -k T241_
   - _Size: M_
   - _Depends: 3_
-- [ ] 33. [US9] Testes em falta (`contarPrazo`, custas, Selo nas heranças), smoke no `npm test`, substituição dos testes que fixavam o erro
+- [x] 33. [US9] Testes em falta (`contarPrazo`, custas, Selo nas heranças), smoke no `npm test`, substituição dos testes que fixavam o erro
   - _Requirements: US-9.AC-2, US-9.AC-3_
   - _Makes green: T-242, T-243_
   - _Verify: npm --prefix mcp-server test_
@@ -282,7 +282,7 @@
   - _Depends: 2_
 
 ## Fase: Acabamento (transversal)
-- [ ] 39. [shared] Bump 1.2.1 (6 sítios + `package-lock.json`), CHANGELOG com a lista dos achados corrigidos, bundle e conteúdo regenerados, `.skill`, tags `v1.1.0`, `v1.2.0` e `v1.2.1`
+- [x] 39. [shared] Bump 1.2.1 (6 sítios + `package-lock.json`), CHANGELOG com a lista dos achados corrigidos, bundle e conteúdo regenerados, `.skill`, tags `v1.1.0`, `v1.2.0` e `v1.2.1`
   - _Requirements: NFR-2_
   - _Makes green: T-249_
   - _Verify: npm --prefix mcp-server test_

@@ -59,6 +59,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Cláusula de lei aplicável e resolução de litígios (PT/EN) — variantes foro e arbitragem
-- MSA internacional (Master Services Agreement) — esqueleto (partes, serviços/SOW, preço, IP, confidencialidade, responsabilidade, lei e litígios, dados)
-- Cláusula fiscal cross-border (retenções, CDT, gross-up)
+- Cláusula de lei aplicável e resolução de litígios (PT/EN) — variantes foro e arbitragem (a pedido)
+- MSA internacional (Master Services Agreement) — esqueleto (partes, serviços/SOW, preço, IP, confidencialidade, responsabilidade, lei e litígios, dados) (a pedido)
+- Cláusula fiscal cross-border (retenções, CDT, gross-up) (a pedido)

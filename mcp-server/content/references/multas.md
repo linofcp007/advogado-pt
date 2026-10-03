@@ -81,8 +81,8 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Defesa escrita contra contraordenação (modelo genérico)
-- Recurso judicial de decisão de contraordenação
-- Requerimento de pagamento com redução
-- Defesa contra multa de trânsito
-- Defesa contra coima fiscal
+- Defesa escrita contra contraordenação (modelo genérico) — `assets/templates/defesa-contraordenacao.md`
+- Recurso judicial de decisão de contraordenação (a pedido)
+- Requerimento de pagamento com redução (a pedido)
+- Defesa contra multa de trânsito — `assets/templates/defesa-contraordenacao.md` (adaptar ao Código da Estrada)
+- Defesa contra coima fiscal — `assets/templates/defesa-contraordenacao.md` (adaptar ao RGIT: arts. 70.º e 80.º)

@@ -84,10 +84,10 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Contrato de trabalho sem termo
-- Contrato de trabalho a termo certo
-- Acordo de teletrabalho
-- Nota de culpa (processo disciplinar)
-- Carta de despedimento com justa causa
-- Acordo de revogação (cessação por mútuo acordo)
-- Carta de denúncia pelo trabalhador
+- Contrato de trabalho sem termo — `assets/templates/contrato-trabalho-sem-termo.md`
+- Contrato de trabalho a termo certo — `assets/templates/contrato-trabalho-termo-certo.md`
+- Acordo de teletrabalho — `assets/templates/acordo-teletrabalho.md`
+- Nota de culpa (processo disciplinar) — `assets/templates/nota-de-culpa.md`
+- Carta de despedimento com justa causa — `assets/templates/carta-despedimento-justa-causa.md`
+- Acordo de revogação (cessação por mútuo acordo) — `assets/templates/acordo-revogacao.md`
+- Carta de denúncia pelo trabalhador (a pedido)

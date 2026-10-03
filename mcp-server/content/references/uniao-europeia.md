@@ -158,4 +158,4 @@
 
 ## Templates
 - `assets/templates/queixa-comissao-europeia.md` — queixa à Comissão Europeia por incumprimento do direito da UE por um Estado-Membro (art. 258.º TFUE)
-- Gerados a pedido, neste estilo: requerimento ao juiz para reenvio prejudicial (com as questões propostas); queixa ao Provedor de Justiça Europeu; descrição de caso para o SOLVIT; guião de preenchimento do formulário A da injunção de pagamento europeia
+- Gerados a pedido, neste estilo: requerimento ao juiz para reenvio prejudicial (com as questões propostas); queixa ao Provedor de Justiça Europeu; descrição de caso para o SOLVIT; guião de preenchimento do formulário A da injunção de pagamento europeia (a pedido)

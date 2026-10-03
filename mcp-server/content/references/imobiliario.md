@@ -68,6 +68,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Contrato-Promessa de Compra e Venda (CPCV) — existe em `assets/templates`
-- Minuta de distrate (declaração de cancelamento de hipoteca/ónus)
-- Checklist de due diligence do comprador
+- Contrato-Promessa de Compra e Venda (CPCV) — `assets/templates/contrato-promessa-compra-venda.md`
+- Minuta de distrate (declaração de cancelamento de hipoteca/ónus) (a pedido)
+- Checklist de due diligence do comprador — `assets/checklists/checklist-due-diligence-imovel.md`

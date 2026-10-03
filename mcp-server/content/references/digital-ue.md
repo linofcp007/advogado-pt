@@ -109,7 +109,7 @@ Checklist rápido de exposição regulatória:
 - [ ] **Cláusulas contratuais**: repercutir obrigações de segurança e IA nos contratos com clientes e fornecedores (ver `references/contratos-internacionais.md`).
 
 ## Templates (gerados a pedido)
-- Aviso de transparência de IA (rotulagem de conteúdo gerado / interação com bot)
-- Cláusula contratual de cibersegurança e NIS2 para fornecedores
-- Política de gestão de vulnerabilidades (CRA)
-- Cookie banner / Cookie policy
+- Aviso de transparência de IA (rotulagem de conteúdo gerado / interação com bot) (a pedido)
+- Cláusula contratual de cibersegurança e NIS2 para fornecedores (a pedido)
+- Política de gestão de vulnerabilidades (CRA) (a pedido)
+- Cookie banner / Cookie policy — `assets/templates/cookie-policy.md`

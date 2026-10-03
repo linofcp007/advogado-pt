@@ -75,9 +75,9 @@ A prescrição interrompe-se com: citação judicial, notificação judicial avu
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Lembrete amigável de pagamento (email)
-- Carta formal de cobrança
-- Carta registada — interpelação final
-- Acordo de pagamento faseado
-- Reconhecimento de dívida
-- Requerimento de injunção (guião para preenchimento no Citius)
+- Lembrete amigável de pagamento (email) — `assets/templates/carta-cobranca-amigavel.md`
+- Carta formal de cobrança — `assets/templates/carta-cobranca-formal-registada.md`
+- Carta registada — interpelação final — `assets/templates/carta-cobranca-formal-registada.md`
+- Acordo de pagamento faseado — `assets/templates/acordo-pagamento-faseado.md`
+- Reconhecimento de dívida — `assets/templates/reconhecimento-divida.md`
+- Requerimento de injunção (guião para preenchimento no Citius) — `assets/templates/requerimento-injuncao.md`

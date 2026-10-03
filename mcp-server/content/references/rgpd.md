@@ -93,10 +93,10 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Política de privacidade para website (PT)
-- Privacy Policy para SaaS (EN)
-- Data Processing Agreement (DPA) bilíngue
-- Registo de atividades de tratamento
-- Template de resposta a exercício de direitos
-- Procedimento interno de data breach
-- Cookie policy
+- Política de privacidade para website (PT) — `assets/templates/politica-privacidade.md`
+- Privacy Policy para SaaS (EN) (a pedido)
+- Data Processing Agreement (DPA) bilíngue — `assets/templates/dpa-bilingue.md`
+- Registo de atividades de tratamento — `assets/templates/registo-atividades-tratamento.md`
+- Template de resposta a exercício de direitos — `assets/templates/resposta-pedido-titular-dados.md`
+- Procedimento interno de data breach — `playbooks/data-breach.md`
+- Cookie policy — `assets/templates/cookie-policy.md`

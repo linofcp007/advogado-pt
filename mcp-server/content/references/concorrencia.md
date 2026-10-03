@@ -193,4 +193,4 @@
 ## Templates
 - `assets/checklists/checklist-concorrencia.md` — auditoria de compliance concorrencial (contratos de distribuição, contactos com concorrentes, associações, concentrações, protocolo de busca)
 - `assets/templates/pacto-nao-concorrencia.md` — pacto de não concorrência **laboral** (art. 136.º CT). Não confundir com a não concorrência nos contratos de distribuição
-- Gerados a pedido, neste estilo: política de concorrência e código de conduta; protocolo interno de busca (*dawn raid*); denúncia à AdC; cláusula de condição suspensiva de aprovação da AdC em contratos de M&A
+- Gerados a pedido, neste estilo: política de concorrência e código de conduta; protocolo interno de busca (*dawn raid*); denúncia à AdC; cláusula de condição suspensiva de aprovação da AdC em contratos de M&A (a pedido)

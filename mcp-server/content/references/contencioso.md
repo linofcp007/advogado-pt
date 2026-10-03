@@ -58,5 +58,5 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Nota orientadora para preparar uma petição inicial (factos / pedido / valor da causa / prova)
-- Guião de requerimento de providência cautelar (pressupostos, fundamentação do periculum, pedido)
+- Nota orientadora para preparar uma petição inicial (factos / pedido / valor da causa / prova) (a pedido)
+- Guião de requerimento de providência cautelar (pressupostos, fundamentação do periculum, pedido) (a pedido)

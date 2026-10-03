@@ -53,9 +53,9 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Contrato de arrendamento habitacional
-- Contrato de arrendamento não habitacional (escritório)
-- Carta de atualização de renda
-- Carta de denúncia pelo senhorio
-- Carta de oposição à renovação
-- Notificação de resolução por falta de pagamento
+- Contrato de arrendamento habitacional — `assets/templates/contrato-arrendamento-habitacional.md`
+- Contrato de arrendamento não habitacional (escritório) — `assets/templates/contrato-arrendamento-nao-habitacional.md`
+- Carta de atualização de renda — `assets/templates/carta-atualizacao-renda.md`
+- Carta de denúncia pelo senhorio (a pedido)
+- Carta de oposição à renovação (a pedido)
+- Notificação de resolução por falta de pagamento (a pedido)

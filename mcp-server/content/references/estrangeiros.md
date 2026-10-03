@@ -54,6 +54,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- **Checklist de contratação de nacional de país terceiro** (verificar título habilitante → promessa/contrato → comunicação à SS → inscrição AT/SS → cópia de documentos → cumprimento de condições do visto)
-- **Carta-convite / promessa de contrato de trabalho** para efeitos de instrução de visto (identificação das partes, função, retribuição, duração, condição suspensiva da concessão do visto)
-- Checklist de avaliação de risco (EE + SS) para contratação de trabalhador remoto no estrangeiro
+- **Checklist de contratação de nacional de país terceiro** (verificar título habilitante → promessa/contrato → comunicação à SS → inscrição AT/SS → cópia de documentos → cumprimento de condições do visto) (a pedido)
+- **Carta-convite / promessa de contrato de trabalho** para efeitos de instrução de visto (identificação das partes, função, retribuição, duração, condição suspensiva da concessão do visto) (a pedido)
+- Checklist de avaliação de risco (EE + SS) para contratação de trabalhador remoto no estrangeiro (a pedido)
