@@ -7,7 +7,7 @@
 - Código Civil (CC): responsabilidade civil extracontratual — Arts. 483.º e seguintes
 - Regime de reparação de acidentes de trabalho e doenças profissionais: Lei 98/2009 (cross-ref `laboral.md`)
 - Seguro obrigatório de responsabilidade civil automóvel: DL 291/2007
-- Supervisão do setor: Autoridade de Supervisão de Seguros e Fundos de Pensões (ASF) — regime no DL 147/2015 (acesso e exercício da atividade seguradora e resseguradora)
+- Supervisão do setor: Autoridade de Supervisão de Seguros e Fundos de Pensões (ASF) — regime na Lei 147/2015 (acesso e exercício da atividade seguradora e resseguradora)
 
 ## Conceitos-Chave do Contrato de Seguro
 
@@ -37,7 +37,7 @@
 - **Salvados** e dever de **minoração do dano**: o segurado deve tomar medidas para limitar as consequências do sinistro
 
 ## Seguros Obrigatórios Relevantes
-- **Acidentes de trabalho**: obrigatório desde o 1.º dia para qualquer trabalhador (cross-ref `laboral.md`, "Obrigações Essenciais do Empregador"). O ENI com trabalhadores e a Lda estão sujeitos. O próprio trabalhador independente pode/deve segurar-se consoante a atividade.
+- **Acidentes de trabalho**: obrigatório desde o 1.º dia para qualquer trabalhador (cross-ref `laboral.md`, "Obrigações Essenciais do Empregador"). O ENI com trabalhadores e a Lda estão sujeitos. O próprio trabalhador independente é obrigado a ter seguro de acidentes de trabalho (DL 159/99), salvo as exceções aí previstas.
 - **Responsabilidade Civil Automóvel (RCA)**: obrigatório para qualquer veículo terrestre a motor (DL 291/2007). Cobre danos causados a terceiros.
 - **Seguros obrigatórios setoriais**: várias profissões e atividades têm seguro de RC profissional **obrigatório por lei** (ex.: advogados, arquitetos, mediadores, certas atividades reguladas). Verificar caso a caso o regime da atividade concreta (a confirmar consoante o setor).
 

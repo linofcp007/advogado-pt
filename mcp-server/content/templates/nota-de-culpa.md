@@ -13,7 +13,7 @@
 
 **Trabalhador arguido:** {{TRABALHADOR_NOME}}, com a categoria profissional de {{CATEGORIA}}, admitido em {{DATA_ADMISSAO}}, residente em {{TRABALHADOR_MORADA}}.
 
-A entidade empregadora, no exercício do seu poder disciplinar (Art. 328.º do Código do Trabalho) e com a intenção de proceder ao despedimento do trabalhador, instaura o presente procedimento disciplinar e deduz contra o trabalhador a seguinte
+A entidade empregadora, no exercício do seu poder disciplinar (Art. 98.º do Código do Trabalho) e com a intenção de proceder ao despedimento do trabalhador, instaura o presente procedimento disciplinar e deduz contra o trabalhador a seguinte
 
 ## I — Descrição circunstanciada dos factos
 
@@ -38,7 +38,7 @@ Nos termos do **Art. 355.º do Código do Trabalho**, o trabalhador dispõe do p
 
 - a) **Consultar o processo disciplinar**, que se encontra disponível para o efeito em {{LOCAL_CONSULTA_PROCESSO}};
 - b) **Responder por escrito à nota de culpa**, deduzindo os elementos que considere relevantes para o esclarecimento dos factos e da sua responsabilidade;
-- c) **Apresentar os meios de prova** que entenda, designadamente **arrolar testemunhas** (até ao máximo de 3 por cada facto, no total de 10 — Art. 356.º, n.º 4, CT) e juntar documentos.
+- c) **Apresentar os meios de prova** que entenda, designadamente **arrolar testemunhas** (o empregador não é obrigado a ouvir mais de 3 por cada facto descrito na nota de culpa, nem mais de 10 no total — Art. 356.º CT) e juntar documentos.
 
 A falta de resposta no prazo indicado não obsta ao prosseguimento do procedimento.
 

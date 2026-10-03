@@ -7,14 +7,14 @@
 - ⏰ **Prazos do CPCV**: o contrato-promessa fixa o prazo para a escritura e as consequências do incumprimento. **Não deixes passar a data marcada** — quem falta perde o sinal (comprador) ou restitui o sinal em dobro (vendedor) — Art. 442.º CC. Marca a data da escritura no calendário e cumpre os prazos para obter financiamento e documentos.
 - ⏰ **Validade de documentos**: certidão permanente do registo predial, caderneta predial e certificado energético têm de estar **atualizados** à data da escritura — pede-os com pouca antecedência.
 - ⏰ **Registo predial**: regista a aquisição **de imediato** após a escritura. Pelo princípio da prioridade (Art. 6.º CRPredial), quem regista primeiro prevalece — proteges-te contra dupla venda/oneração superveniente.
-- ⏰ Se contas com **isenção de IMT por reinvestimento** futuro ou regras de mais-valias, há prazos próprios na venda do imóvel anterior — ver Ramo mais-valias.
+- ⏰ Se contas com a **exclusão de tributação das mais-valias por reinvestimento** (IRS) na venda do imóvel anterior, há prazos próprios — ver Ramo mais-valias.
 
 ## Fluxo de decisão
 
 1. **DUE DILIGENCE antes de assinar seja o que for.** Reúne e verifica (checklist em `assets/checklists/checklist-due-diligence-imovel.md`; enquadramento em `references/imobiliario.md`, secção "Due Diligence do Comprador"):
    - **Certidão permanente do registo predial** → titularidade atual, cadeia de transmissões, **ónus/hipotecas/penhoras/arrestos**.
    - **Caderneta predial** (Finanças) → identificação fiscal, VPT, titular.
-   - **Licença de utilização** (câmara) → finalidade autorizada (sem ela, o ato pode estar comprometido — DL 281/99).
+   - **Licença/autorização de utilização** (câmara) → finalidade autorizada. Desde o DL 10/2024 já não é exibida na escritura, mas sem ela o uso pode ser ilegal e o banco pode recusar o crédito.
    - **Certificado energético** (ADENE) → obrigatório para venda.
    - **Ficha técnica de habitação** (se licenciado após 30/03/2004).
    - **Dívidas de condomínio** e estado das partes comuns.
@@ -24,7 +24,7 @@
 
 3. **Contrato-Promessa de Compra e Venda (CPCV) com sinal.** Usa `assets/templates/contrato-promessa-compra-venda.md`. Pontos críticos:
    - **Sinal** (Art. 442.º CC): define o valor; incumprimento do comprador = perde o sinal; do vendedor = devolve em dobro.
-   - **Execução específica** (Art. 830.º CC): se quiseres poder obrigar à venda por sentença, **não** afastes a execução específica (atenção, com sinal pode estar convencionada em contrário).
+   - **Execução específica** (Art. 830.º CC): permite obter por sentença a venda prometida. Com sinal presume-se afastada, **mas** na promessa de compra de edifício ou fração autónoma não pode ser afastada (art. 830.º, n.º 3, e art. 410.º, n.º 3). Se pagaste sinal e já tens a chave (tradição), como consumidor tens direito de retenção, mesmo na insolvência do vendedor (AUJ do STJ 4/2014).
    - **Forma**: escrito com **reconhecimento de assinaturas** (prédios — Art. 410.º n.º 3 CC).
    - **Tradição da coisa** (se receberes já o imóvel): confere direito de retenção que prevalece sobre hipoteca anterior.
    - Fixa **prazo e local da escritura**, condição de financiamento, e o que acontece se o crédito não for aprovado.

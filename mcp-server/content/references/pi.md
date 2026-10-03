@@ -23,7 +23,7 @@
 
 ## Marcas (INPI)
 - Registo no INPI (Instituto Nacional da Propriedade Industrial)
-- Marca nacional: ~200€ (classe única online), válida 10 anos, renovável
+- Marca nacional: taxas do INPI em `references/valores-2026.md` (pedido online por classe + concessão); válida 10 anos, renovável
 - Marca da UE: via EUIPO (~850€ classe única), protege em toda a UE
 - *(Custos aproximados — ver `references/valores-2026.md`, Emolumentos)*
 - Pesquisa prévia obrigatória: TMView (gratuito)

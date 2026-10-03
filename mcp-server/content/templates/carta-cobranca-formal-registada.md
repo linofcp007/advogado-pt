@@ -25,7 +25,7 @@ Encontrando-se V. Exa. em mora desde a data de vencimento, são devidos juros de
 
 Pela presente, fica V. Exa. **interpelado(a) para proceder ao pagamento da quantia em dívida, acrescida dos juros vencidos, no prazo de {{PRAZO_DIAS}} dias** a contar da receção desta carta, para o IBAN **{{IBAN}}**.
 
-Findo este prazo sem que o pagamento se mostre efetuado, e sem necessidade de nova interpelação, reservo-me o direito de recorrer aos meios judiciais ao meu dispor — designadamente procedimento de injunção e/ou ação executiva — com as consequentes custas e encargos a correr por conta de V. Exa.
+Findo este prazo sem que o pagamento se mostre efetuado, e sem necessidade de nova interpelação, reservo-me o direito de recorrer aos meios judiciais ao meu dispor — designadamente procedimento de injunção ou ação declarativa e, obtido título executivo, a respetiva execução — com as consequentes custas e encargos a correr por conta de V. Exa.
 
 <!-- PRESCRIÇÃO: esta carta NÃO interrompe a prescrição — a interrupção exige citação ou notificação
      judicial (Art. 323.º CC; inclui a notificação no procedimento de injunção) ou o reconhecimento

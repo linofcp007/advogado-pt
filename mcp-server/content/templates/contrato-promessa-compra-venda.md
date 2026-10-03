@@ -28,7 +28,8 @@ A escritura pública (ou documento particular autenticado) será celebrada até 
 O presente contrato fica sujeito à condição de aprovação de crédito bancário ao Promitente-Comprador no valor de {{VALOR_CREDITO}}. Não sendo aprovado até {{DATA_LIMITE_CREDITO}}, comprovadamente, o contrato resolve-se e o sinal é restituído em singelo.
 
 ## 6. Execução específica (Art. 830.º CC)
-As partes {{ATRIBUEM / NÃO ATRIBUEM}} eficácia real à promessa e {{convencionam / afastam}} o direito à execução específica. <!-- por defeito, para imóveis a execução específica é admissível; afastá-la requer cláusula expressa -->
+Em caso de incumprimento, a parte não faltosa pode requerer a execução específica do presente contrato. Tratando-se de promessa de transmissão de edifício ou de fração autónoma, este direito não pode ser afastado pelas partes, ainda que haja sinal (Art. 830.º, n.º 3, e Art. 410.º, n.º 3, CC).
+<!-- Eficácia real (Art. 413.º CC): só existe se a promessa constar de escritura pública ou de documento particular autenticado e for registada; num CPCV comum a promessa tem eficácia meramente obrigacional. Se a pretenderem, [VERIFICAR] a forma e o registo antes de a mencionar. -->
 
 ## 7. Entrega
 A posse/entrega das chaves ocorre {{na escritura / em DATA}}.
@@ -40,7 +41,7 @@ Lei portuguesa; foro da comarca da situação do imóvel.
 
 O Promitente-Vendedor: __________________   O Promitente-Comprador: __________________
 
-<!-- Reconhecimento presencial de assinaturas e certificação da licença de utilização pelo notário (Art. 410.º/3 CC) — recomendado para garantir a eficácia e a execução específica. -->
+<!-- Requisito de forma (Art. 410.º, n.º 3, CC): reconhecimento presencial das assinaturas e certificação, pela entidade que o faz, da existência da licença de utilização ou de construção. A omissão só pode ser invocada pelo promitente-vendedor se tiver sido culposamente causada pelo promitente-comprador. -->
 
 ---
 

@@ -6,7 +6,7 @@
 ## Documentos
 - [ ] Caderneta predial (Finanças): identificação fiscal, VPT e titular
 - [ ] Certidão permanente do registo predial: titularidade atual e cadeia de transmissões
-- [ ] Licença de utilização (câmara municipal)
+- [ ] Licença/autorização de utilização (câmara municipal) — desde o DL 10/2024 já não é exibida na escritura, mas confirma-a na mesma
 - [ ] Certificado energético (ADENE) — obrigatório para venda
 - [ ] Ficha técnica de habitação (se construção/reabilitação licenciada após 30/03/2004)
 - [ ] Conferir que a descrição predial corresponde à realidade física do imóvel

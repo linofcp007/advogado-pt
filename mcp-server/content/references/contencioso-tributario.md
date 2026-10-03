@@ -55,7 +55,7 @@
 ## Impugnação judicial (arts. 99.º-103.º CPPT)
 - No **tribunal tributário** de 1.ª instância; fundamento: **qualquer ilegalidade** — erro nos factos/quantificação, incompetência, falta de fundamentação, preterição de formalidades (art. 99.º)
 - ⏰ **Prazo: 3 meses** (art. 102.º, n.º 1) a contar, entre outros, do termo do prazo de pagamento voluntário, da notificação de outros atos tributários, da citação do revertido, da **formação do indeferimento tácito** ou da notificação de outros atos impugnáveis. Nulidade: **a todo o tempo** (n.º 3)
-- ⏰ **Após indeferimento expresso da reclamação graciosa**: o antigo prazo especial de **15 dias** do art. 102.º, n.º 2 **foi revogado** (Lei 82-E/2014) — aplica-se o prazo geral de **3 meses** do n.º 1 a contar da notificação do indeferimento. ⚠️ `references/fiscal.md` ainda indica "90 dias" — o prazo atual é 3 meses
+- ⏰ **Após indeferimento expresso da reclamação graciosa**: o antigo prazo especial de **15 dias** do art. 102.º, n.º 2 **foi revogado** (Lei 82-E/2014) — aplica-se o prazo geral de **3 meses** do n.º 1 a contar da notificação do indeferimento.
 - Apresentação no tribunal ou no serviço de Finanças; pode seguir por correio registado (vale a data do registo) (art. 103.º, n.ºs 1 e 6); **efeito suspensivo só com garantia** (n.º 4)
 - Taxa de justiça e patrocínio: confirmar valor/alçada em `references/valores-2026.md`; com **advogado** sempre que obrigatório (a confirmar consoante o valor)
 
@@ -101,7 +101,7 @@
 - **Juros compensatórios** a teu cargo quando o atraso na liquidação te é imputável (art. 35.º); **juros de mora** sobre dívidas em atraso — taxa anual de **7,221%** em 2026 (Aviso IGCP n.º 18/2026/2; DL 73/99) — ver `references/valores-2026.md`
 
 ## Contraordenações fiscais (RGIT)
-- ⏰ **Notificação para defesa: 30 dias** para apresentar defesa e prova **ou** optar por: pagamento antecipado, atenuação especial, dispensa de coima ou, até à decisão, pagamento voluntário (art. 70.º, n.º 1 RGIT)
+- ⏰ **Notificação para defesa: 30 dias** para apresentar defesa e prova **ou** optar por: pagamento antecipado, atenuação especial, dispensa de coima (art. 70.º, n.º 1 RGIT); depois de fixada a coima, **pagamento voluntário** com redução para 75% do montante fixado, em 15 dias após a notificação (art. 78.º RGIT)
 - **Antes de haver processo** (redução por iniciativa própria — art. 30.º): pagar a pedido, **sem** auto de notícia, participação ou inspeção iniciada → coima reduzida a **12,5% do mínimo legal**; até ao fim do prazo de audição prévia da inspeção → **50% do mínimo**. Condições: pagar em **30 dias** após a notificação da coima reduzida **e regularizar** a falta no mesmo prazo (n.º 3). Para coimas indexadas ao imposto, o mínimo é **10% (pessoa singular) ou 20% (pessoa coletiva)** do imposto em falta (art. 31.º, n.º 1). Se a falta for só de declaração, entregá-la vale como pedido de redução (art. 30.º, n.º 5)
 - **Dispensa de coima** (art. 29.º): sem prejuízo efetivo para a receita (nunca há quando falta a entrega de imposto) e falta regularizada, requerida no prazo de defesa; não pode ter havido condenação nem benefício de dispensa/redução nos **5 anos** anteriores. A redação do n.º 1 é ambígua (a confirmar o alcance)
 - **Pagamento antecipado** no prazo de defesa: coima reduzida ao **mínimo legal** e custas a metade, desde que regularizes a situação (art. 75.º)

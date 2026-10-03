@@ -171,7 +171,7 @@ O Fornecedor garante que o Serviço funciona em conformidade substancial com a d
 15.1 O contrato vigora pelo Prazo Inicial e pelas renovações, nos termos da cláusula 11.2.
 *This agreement remains in force for the Initial Term and any renewals under clause 11.2.*
 
-15.2 Qualquer parte pode resolver o contrato por incumprimento grave da outra não sanado no prazo de {{DIAS_SANACAO}} dias após interpelação escrita, ou de imediato em caso de insolvência da outra parte.
+15.2 Qualquer parte pode resolver o contrato por incumprimento grave da outra não sanado no prazo de {{DIAS_SANACAO}} dias após interpelação escrita. <!-- Não incluir resolução automática por insolvência da outra parte: é nula (CIRE, art. 119.º); declarada a insolvência, aplicam-se os arts. 102.º e seguintes do CIRE. -->
 *Either Party may terminate for the other's material breach not remedied within {{CURE_DAYS}} days of written notice, or immediately upon the other Party's insolvency.*
 
 15.3 O Cliente pode ainda resolver o contrato se a Disponibilidade ficar abaixo de {{DISPONIBILIDADE_MINIMA}} % em {{N_MESES}} meses de um período de {{M_MESES}} meses consecutivos.

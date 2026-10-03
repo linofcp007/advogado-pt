@@ -3,9 +3,10 @@
 //   ~/.advogado-pt/perfil-empresa.md           (perfil geral — a empresa por defeito)
 // Formato: uma linha "campo: valor" por campo. Só os campos de CAMPOS_PERFIL contam.
 // O hook (hooks/advogado-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
+import { dirProjeto as dirProjetoBase, escreverSeguro } from "./fs-seguro.js";
 
 export const CAMPOS_PERFIL = [
   "forma_juridica",
@@ -62,7 +63,7 @@ export interface OpcoesPerfil {
 }
 
 function dirProjeto(o: OpcoesPerfil): string {
-  return resolve(o.projeto ?? process.env.CLAUDE_PROJECT_DIR ?? process.cwd());
+  return dirProjetoBase(o.projeto);
 }
 
 function dirHome(o: OpcoesPerfil): string {
@@ -189,9 +190,6 @@ export function guardarPerfil(
   opts: OpcoesPerfil = {}
 ): Perfil {
   const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
-  if (!existsSync(base) || !statSync(base).isDirectory()) {
-    throw new Error(`O diretório '${base}' não existe.`);
-  }
   const nome = opts.perfil ? validarNome(opts.perfil) : undefined;
   const caminho = nome ? caminhoNomeado(base, nome) : caminhoPerfil(base);
   let atuais: Record<string, string> = {};
@@ -209,8 +207,8 @@ export function guardarPerfil(
   }
   const hoje = opts.hoje ?? new Date();
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
-  mkdirSync(nome ? join(base, PASTA, "perfis") : join(base, PASTA), { recursive: true });
-  writeFileSync(caminho, serializar(campos), "utf8");
+  // Escrita segura: recusa ligações (symlink/junction) e grava por temporário + renomeação.
+  escreverSeguro(base, nome ? [PASTA, "perfis", `${nome}.md`] : [PASTA, FICHEIRO], serializar(campos));
   return { origem: destino, caminho, campos, desatualizado: false, ...(nome ? { nome } : {}) };
 }
 
@@ -262,9 +260,5 @@ export function listarPerfis(opts: OpcoesPerfil = {}): Array<{ nome: string; ori
 export function ativarPerfil(nome: string, destino: "projeto" | "geral", opts: OpcoesPerfil = {}): void {
   const n = validarNome(nome);
   const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
-  if (!existsSync(base) || !statSync(base).isDirectory()) {
-    throw new Error(`O diretório '${base}' não existe.`);
-  }
-  mkdirSync(join(base, PASTA), { recursive: true });
-  writeFileSync(join(base, PASTA, "perfil-ativo"), n + "\n", "utf8");
+  escreverSeguro(base, [PASTA, "perfil-ativo"], n + "\n");
 }

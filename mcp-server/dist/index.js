@@ -2982,7 +2982,7 @@ var require_compile = __commonJS({
       const schOrFunc = root.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve5.call(this, root, ref);
+      let _sch = resolve4.call(this, root, ref);
       if (_sch === void 0) {
         const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
@@ -3009,7 +3009,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve5(root, ref) {
+    function resolve4(root, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -3640,7 +3640,7 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve5(baseURI, relativeURI, options) {
+    function resolve4(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const resolved = resolveComponent(parse3(baseURI, schemelessOptions), parse3(relativeURI, schemelessOptions), schemelessOptions, true);
       schemelessOptions.skipEscape = true;
@@ -3898,7 +3898,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve5,
+      resolve: resolve4,
       resolveComponent,
       equal,
       serialize,
@@ -18978,7 +18978,7 @@ var Protocol = class {
           return;
         }
         const pollInterval = task2.pollInterval ?? this._options?.defaultTaskPollInterval ?? 1e3;
-        await new Promise((resolve5) => setTimeout(resolve5, pollInterval));
+        await new Promise((resolve4) => setTimeout(resolve4, pollInterval));
         options?.signal?.throwIfAborted();
       }
     } catch (error2) {
@@ -18995,7 +18995,7 @@ var Protocol = class {
    */
   request(request, resultSchema, options) {
     const { relatedRequestId, resumptionToken, onresumptiontoken, task, relatedTask } = options ?? {};
-    return new Promise((resolve5, reject) => {
+    return new Promise((resolve4, reject) => {
       const earlyReject = (error2) => {
         reject(error2);
       };
@@ -19073,7 +19073,7 @@ var Protocol = class {
           if (!parseResult.success) {
             reject(parseResult.error);
           } else {
-            resolve5(parseResult.data);
+            resolve4(parseResult.data);
           }
         } catch (error2) {
           reject(error2);
@@ -19334,12 +19334,12 @@ var Protocol = class {
       }
     } catch {
     }
-    return new Promise((resolve5, reject) => {
+    return new Promise((resolve4, reject) => {
       if (signal.aborted) {
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
         return;
       }
-      const timeoutId = setTimeout(resolve5, interval);
+      const timeoutId = setTimeout(resolve4, interval);
       signal.addEventListener("abort", () => {
         clearTimeout(timeoutId);
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
@@ -20670,7 +20670,7 @@ var McpServer = class {
     let task = createTaskResult.task;
     const pollInterval = task.pollInterval ?? 5e3;
     while (task.status !== "completed" && task.status !== "failed" && task.status !== "cancelled") {
-      await new Promise((resolve5) => setTimeout(resolve5, pollInterval));
+      await new Promise((resolve4) => setTimeout(resolve4, pollInterval));
       const updatedTask = await extra.taskStore.getTask(taskId);
       if (!updatedTask) {
         throw new McpError(ErrorCode.InternalError, `Task ${taskId} not found during polling`);
@@ -21343,12 +21343,12 @@ var StdioServerTransport = class {
     this.onclose?.();
   }
   send(message) {
-    return new Promise((resolve5) => {
+    return new Promise((resolve4) => {
       const json = serializeMessage(message);
       if (this._stdout.write(json)) {
-        resolve5();
+        resolve4();
       } else {
-        this._stdout.once("drain", resolve5);
+        this._stdout.once("drain", resolve4);
       }
     });
   }
@@ -22538,8 +22538,13 @@ function listar(cat) {
   if (!existsSync(d)) return [];
   return readdirSync(d).filter((f) => f.endsWith(".md") && f.toLowerCase() !== "readme.md").map((f) => f.slice(0, -3)).sort();
 }
+var NOME_CONTEUDO = /^[a-z0-9][a-z0-9-]{0,80}$/i;
+function itemValido(cat, nome) {
+  return CATEGORIAS.includes(cat) && NOME_CONTEUDO.test(String(nome ?? "").replace(/\.md$/i, ""));
+}
 function ler(cat, nome) {
-  const limpo = nome.replace(/\.md$/i, "").replace(/[\\/]/g, "");
+  const limpo = String(nome ?? "").trim().replace(/\.md$/i, "");
+  if (!itemValido(cat, limpo)) return null;
   const caminho2 = join(dir(cat), `${limpo}.md`);
   if (!existsSync(caminho2)) return null;
   return readFileSync(caminho2, "utf8");
@@ -22600,9 +22605,71 @@ function formatarProcura(res) {
 }
 
 // src/perfil.ts
-import { existsSync as existsSync2, mkdirSync, readFileSync as readFileSync2, readdirSync as readdirSync2, statSync, writeFileSync } from "node:fs";
+import { existsSync as existsSync2, readFileSync as readFileSync2, readdirSync as readdirSync2 } from "node:fs";
 import { homedir } from "node:os";
+import { join as join3, resolve as resolve3 } from "node:path";
+
+// src/fs-seguro.ts
+import { lstatSync, mkdirSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import { join as join2, resolve as resolve2 } from "node:path";
+import { randomBytes } from "node:crypto";
+function dirProjeto(projeto) {
+  return resolve2(projeto ?? process.env.CLAUDE_PROJECT_DIR ?? process.cwd());
+}
+function codigo(e) {
+  return e?.code;
+}
+function estado(caminho2, nome) {
+  let st;
+  try {
+    st = lstatSync(caminho2);
+  } catch (e) {
+    if (codigo(e) === "ENOENT") return "nenhum";
+    throw new Error(`N\xE3o foi poss\xEDvel verificar '${nome}'.`);
+  }
+  if (st.isSymbolicLink()) {
+    throw new Error(
+      `Escrita recusada: '${nome}' \xE9 uma liga\xE7\xE3o (symlink ou junction). Por seguran\xE7a, o plugin n\xE3o escreve atrav\xE9s de liga\xE7\xF5es \u2014 substitui-a por uma pasta normal.`
+    );
+  }
+  return st.isDirectory() ? "dir" : "ficheiro";
+}
+function escreverSeguro(base, partes, conteudo) {
+  if (partes.length === 0) throw new Error("Caminho de destino vazio.");
+  for (const p of partes) {
+    if (!p || p === "." || p === ".." || /[\\/]/.test(p) || p.includes("\0")) {
+      throw new Error(`Nome inv\xE1lido no caminho de destino: '${p}'.`);
+    }
+  }
+  const raiz = resolve2(base);
+  if (estado(raiz, raiz) !== "dir") throw new Error(`O diret\xF3rio '${raiz}' n\xE3o existe.`);
+  let atual = raiz;
+  const relativo = [];
+  for (const pasta of partes.slice(0, -1)) {
+    atual = join2(atual, pasta);
+    relativo.push(pasta);
+    const e = estado(atual, relativo.join("/"));
+    if (e === "nenhum") mkdirSync(atual);
+    else if (e !== "dir") throw new Error(`'${relativo.join("/")}' existe e n\xE3o \xE9 uma pasta.`);
+  }
+  const final = join2(atual, partes[partes.length - 1]);
+  if (estado(final, partes.join("/")) === "dir") throw new Error(`'${partes.join("/")}' \xE9 uma pasta.`);
+  const tmp = `${final}.${process.pid}.${randomBytes(4).toString("hex")}.tmp`;
+  try {
+    writeFileSync(tmp, conteudo, { encoding: "utf8", flag: "wx" });
+    renameSync(tmp, final);
+  } catch (e) {
+    try {
+      unlinkSync(tmp);
+    } catch {
+    }
+    if (e instanceof Error && /^(Escrita recusada|Nome inválido)/.test(e.message)) throw e;
+    throw new Error(`N\xE3o foi poss\xEDvel gravar '${partes.join("/")}' (${codigo(e) ?? "erro de escrita"}).`);
+  }
+  return final;
+}
+
+// src/perfil.ts
 var CAMPOS_PERFIL = [
   "forma_juridica",
   "denominacao",
@@ -22633,14 +22700,14 @@ var ROTULOS = {
 var PASTA = ".advogado-pt";
 var FICHEIRO = "perfil-empresa.md";
 var MS_12_MESES = 365 * 24 * 60 * 60 * 1e3;
-function dirProjeto(o) {
-  return resolve2(o.projeto ?? process.env.CLAUDE_PROJECT_DIR ?? process.cwd());
+function dirProjeto2(o) {
+  return dirProjeto(o.projeto);
 }
 function dirHome(o) {
-  return resolve2(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
+  return resolve3(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
 }
 function caminhoPerfil(base) {
-  return join2(base, PASTA, FICHEIRO);
+  return join3(base, PASTA, FICHEIRO);
 }
 var NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
 function validarNome(nome) {
@@ -22651,11 +22718,11 @@ function validarNome(nome) {
   return n;
 }
 function caminhoNomeado(base, nome) {
-  return join2(base, PASTA, "perfis", `${nome}.md`);
+  return join3(base, PASTA, "perfis", `${nome}.md`);
 }
 function nomeAtivoEm(base) {
   try {
-    const f = join2(base, PASTA, "perfil-ativo");
+    const f = join3(base, PASTA, "perfil-ativo");
     if (!existsSync2(f)) return null;
     const n = readFileSync2(f, "utf8").split(/\r?\n/)[0].trim().toLowerCase();
     return NOME_RE.test(n) ? n : null;
@@ -22690,14 +22757,14 @@ function lerDe(caminho2, origem, hoje) {
   }
 }
 function lerPorDefeito(opts, hoje) {
-  return lerDe(caminhoPerfil(dirProjeto(opts)), "projeto", hoje) ?? lerDe(caminhoPerfil(dirHome(opts)), "geral", hoje);
+  return lerDe(caminhoPerfil(dirProjeto2(opts)), "projeto", hoje) ?? lerDe(caminhoPerfil(dirHome(opts)), "geral", hoje);
 }
 function lerNomeado(nome, opts, hoje) {
-  const p = lerDe(caminhoNomeado(dirProjeto(opts), nome), "projeto", hoje) ?? lerDe(caminhoNomeado(dirHome(opts), nome), "geral", hoje);
+  const p = lerDe(caminhoNomeado(dirProjeto2(opts), nome), "projeto", hoje) ?? lerDe(caminhoNomeado(dirHome(opts), nome), "geral", hoje);
   return p ? { ...p, nome } : null;
 }
 function nomePerfilAtivo(opts = {}) {
-  return nomeAtivoEm(dirProjeto(opts)) ?? nomeAtivoEm(dirHome(opts));
+  return nomeAtivoEm(dirProjeto2(opts)) ?? nomeAtivoEm(dirHome(opts));
 }
 function lerPerfil(opts = {}) {
   const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
@@ -22726,10 +22793,7 @@ function serializar(campos) {
   return linhas.join("\n") + "\n";
 }
 function guardarPerfil(novos, destino, opts = {}) {
-  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
-  if (!existsSync2(base) || !statSync(base).isDirectory()) {
-    throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  }
+  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome(opts);
   const nome = opts.perfil ? validarNome(opts.perfil) : void 0;
   const caminho2 = nome ? caminhoNomeado(base, nome) : caminhoPerfil(base);
   let atuais = {};
@@ -22747,8 +22811,7 @@ function guardarPerfil(novos, destino, opts = {}) {
   }
   const hoje = opts.hoje ?? /* @__PURE__ */ new Date();
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
-  mkdirSync(nome ? join2(base, PASTA, "perfis") : join2(base, PASTA), { recursive: true });
-  writeFileSync(caminho2, serializar(campos), "utf8");
+  escreverSeguro(base, nome ? [PASTA, "perfis", `${nome}.md`] : [PASTA, FICHEIRO], serializar(campos));
   return { origem: destino, caminho: caminho2, campos, desatualizado: false, ...nome ? { nome } : {} };
 }
 function resumoPerfil(p) {
@@ -22771,9 +22834,9 @@ function textoPerguntasPerfil() {
 function listarPerfis(opts = {}) {
   const ativo = nomePerfilAtivo(opts);
   const vistos = /* @__PURE__ */ new Map();
-  for (const [base, origem] of [[dirProjeto(opts), "projeto"], [dirHome(opts), "geral"]]) {
+  for (const [base, origem] of [[dirProjeto2(opts), "projeto"], [dirHome(opts), "geral"]]) {
     try {
-      const dir2 = join2(base, PASTA, "perfis");
+      const dir2 = join3(base, PASTA, "perfis");
       if (!existsSync2(dir2)) continue;
       for (const f of readdirSync2(dir2)) {
         const n = f.replace(/\.md$/i, "").toLowerCase();
@@ -22786,17 +22849,11 @@ function listarPerfis(opts = {}) {
 }
 function ativarPerfil(nome, destino, opts = {}) {
   const n = validarNome(nome);
-  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
-  if (!existsSync2(base) || !statSync(base).isDirectory()) {
-    throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  }
-  mkdirSync(join2(base, PASTA), { recursive: true });
-  writeFileSync(join2(base, PASTA, "perfil-ativo"), n + "\n", "utf8");
+  const base = destino === "projeto" ? dirProjeto2(opts) : dirHome(opts);
+  escreverSeguro(base, [PASTA, "perfil-ativo"], n + "\n");
 }
 
 // src/calendario.ts
-import { existsSync as existsSync3, mkdirSync as mkdirSync2, statSync as statSync2, writeFileSync as writeFileSync2 } from "node:fs";
-import { join as join3, resolve as resolve3 } from "node:path";
 var AT_D = "https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/calendario_fiscal/documents/obrigacoes_declarativas.pdf";
 var AT_P = "https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/calendario_fiscal/documents/obrigacoes_pagamento.pdf";
 var DL127 = "https://files.diariodarepublica.pt/1s/2025/12/23600/0000200005.pdf";
@@ -23401,12 +23458,7 @@ function paraICS(obrigacoes, opts = {}) {
 }
 function exportarICS(ano, obrigacoes, dir2, hoje) {
   if (!Number.isInteger(ano) || ano < 2e3 || ano > 2100) throw new Error(`Ano inv\xE1lido: ${ano}`);
-  const base = resolve3(dir2 ?? process.cwd());
-  if (!existsSync3(base) || !statSync2(base).isDirectory()) throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  mkdirSync2(join3(base, ".advogado-pt"), { recursive: true });
-  const caminho2 = join3(base, ".advogado-pt", `calendario-${ano}.ics`);
-  writeFileSync2(caminho2, paraICS(obrigacoes, { hoje }), "utf8");
-  return caminho2;
+  return escreverSeguro(dirProjeto(dir2), [".advogado-pt", `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
 }
 function formatarCalendario(obrigacoes, opts = {}) {
   const lista = opts.mes ? obrigacoes.filter((o) => Number(o.data.slice(5, 7)) === opts.mes) : obrigacoes;
@@ -23429,15 +23481,15 @@ function formatarCalendario(obrigacoes, opts = {}) {
 }
 
 // src/prazos-estado.ts
-import { existsSync as existsSync4, mkdirSync as mkdirSync3, readFileSync as readFileSync3, statSync as statSync3, writeFileSync as writeFileSync3 } from "node:fs";
-import { join as join4, resolve as resolve4 } from "node:path";
+import { existsSync as existsSync3, readFileSync as readFileSync3 } from "node:fs";
+import { join as join4 } from "node:path";
 var PASTA2 = ".advogado-pt";
 var FICHEIRO2 = "prazos.md";
 var SEP = " \u2014 ";
 var LINHA_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
 var CABECALHO = '# Prazos em curso\n\n<!-- advogado-pt: uma linha por prazo \u2014 "- [ ] AAAA-MM-DD \u2014 descri\xE7\xE3o \u2014 origem". Marca [x] quando cumprido. O aviso aparece ao abrir a sess\xE3o (vencidos e pr\xF3ximos 7 dias). -->\n\n';
 function dirBase(dir2) {
-  return resolve4(dir2 ?? process.cwd());
+  return dirProjeto(dir2);
 }
 function caminho(dir2) {
   return join4(dirBase(dir2), PASTA2, FICHEIRO2);
@@ -23468,7 +23520,7 @@ function linhaDe(p) {
 }
 function lerPrazos(dir2) {
   const f = caminho(dir2);
-  if (!existsSync4(f)) return [];
+  if (!existsSync3(f)) return [];
   const out = [];
   for (const linha of readFileSync3(f, "utf8").split(/\r?\n/)) {
     const p = parseLinha(linha);
@@ -23477,15 +23529,38 @@ function lerPrazos(dir2) {
   return out;
 }
 function gravar(prazos, dir2) {
-  const base = dirBase(dir2);
-  if (!existsSync4(base) || !statSync3(base).isDirectory()) {
-    throw new Error(`O diret\xF3rio '${base}' n\xE3o existe.`);
-  }
-  mkdirSync3(join4(base, PASTA2), { recursive: true });
   const ordenados = [...prazos].sort(
     (a, b) => Number(a.concluido) - Number(b.concluido) || a.data.localeCompare(b.data)
   );
-  writeFileSync3(caminho(dir2), CABECALHO + ordenados.map(linhaDe).join("\n") + "\n", "utf8");
+  const novas = ordenados.map(linhaDe);
+  let atual = null;
+  try {
+    const f = caminho(dir2);
+    if (existsSync3(f)) atual = readFileSync3(f, "utf8");
+  } catch {
+    atual = null;
+  }
+  let texto2;
+  if (atual === null) {
+    texto2 = CABECALHO + novas.join("\n") + "\n";
+  } else {
+    const saida = [];
+    let inseridas = false;
+    for (const linha of atual.split(/\r?\n/)) {
+      if (parseLinha(linha)) {
+        if (!inseridas) {
+          saida.push(...novas);
+          inseridas = true;
+        }
+        continue;
+      }
+      saida.push(linha);
+    }
+    while (saida.length && saida[saida.length - 1].trim() === "") saida.pop();
+    if (!inseridas) saida.push("", ...novas);
+    texto2 = saida.join("\n") + "\n";
+  }
+  escreverSeguro(dirBase(dir2), [PASTA2, FICHEIRO2], texto2);
 }
 function registarPrazo(p, dir2) {
   const data = validarData(p.data);
@@ -24433,7 +24508,10 @@ function registerResources(server) {
     async (uri, variables) => {
       const categoria = String(variables.categoria);
       const nome = String(variables.nome);
-      const txt = ler(categoria, nome) ?? `(n\xE3o encontrado: ${categoria}/${nome})`;
+      const txt = itemValido(categoria, nome) ? ler(categoria, nome) : null;
+      if (txt === null) {
+        throw new Error(`Recurso desconhecido: ${categoria.slice(0, 40)}/${nome.slice(0, 80)}`);
+      }
       return {
         contents: [{ uri: uri.href, mimeType: "text/markdown", text: txt }]
       };

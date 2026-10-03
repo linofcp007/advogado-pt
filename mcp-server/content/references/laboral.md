@@ -29,13 +29,13 @@
 
 ### Tipos de Contrato
 - **Sem termo** (regra geral): não exige forma escrita mas é recomendável
-- **A termo certo**: máx. 2 anos, renovável até 3x, motivo justificativo obrigatório (Art. 140º CT)
+- **A termo certo**: máx. 2 anos, renovável até 3x, motivo justificativo obrigatório (Art. 140º CT); a duração total das renovações não pode exceder a do período inicial (CT, art. 149.º, n.º 4)
 - **A termo incerto**: para substituição ou tarefa definida
 - **Tempo parcial**: por escrito, com indicação do período normal de trabalho
 - **Teletrabalho**: acordo escrito obrigatório (Arts. 165º-171º CT, Lei 83/2021)
 
 ### Período Experimental
-- Sem termo: 90 dias (regra), 180 dias (cargos complexos), 240 dias (direção/quadros superiores)
+- Sem termo: 90 dias (regra), 180 dias (cargos complexos e trabalhador à procura do primeiro emprego ou desempregado de longa duração — CT, art. 112.º, n.º 1, al. b)), 240 dias (direção/quadros superiores)
 - A termo ≥ 6 meses: 30 dias
 - A termo < 6 meses: 15 dias
 

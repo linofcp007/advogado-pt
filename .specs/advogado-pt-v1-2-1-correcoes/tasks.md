@@ -166,21 +166,21 @@
   - _Depends: 2_
 
 ## História US-6 (P1): escrita e hook seguros
-- [ ] 23. [US6] `perfil.ts`, `prazos-estado.ts` e `calendario.ts` passam a gravar com `fs-seguro` no `dirProjeto`; `prazos.md` preserva as notas
+- [x] 23. [US6] `perfil.ts`, `prazos-estado.ts` e `calendario.ts` passam a gravar com `fs-seguro` no `dirProjeto`; `prazos.md` preserva as notas
   - _Requirements: US-6.AC-1, US-6.AC-10, EC-4, EC-5_
   - _Makes green: T-223, T-224_
   - _Implements: mcp-server/src/perfil.ts, mcp-server/src/prazos-estado.ts, mcp-server/src/calendario.ts_
   - _Verify: npm --prefix mcp-server run build && node --test --test-name-pattern="T-223|T-224" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 3_
-- [ ] 24. [US6] Hook: perfil limitado e rotulado como dados, ponto de entrada por caminho real, mesmo diretório dos prazos, leitura até 256 KB, MultiEdit
+- [x] 24. [US6] Hook: perfil limitado e rotulado como dados, ponto de entrada por caminho real, mesmo diretório dos prazos, leitura até 256 KB, MultiEdit
   - _Requirements: US-6.AC-11, US-6.AC-13, US-8.AC-6, NFR-4_
   - _Makes green: T-225, T-227, T-250_
   - _Implements: hooks/advogado-hook.mjs_
   - _Verify: node --test --test-name-pattern="T-225|T-227|T-250" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 3_
-- [ ] 25. [US6] Resources com lista fechada de categorias e nomes; erros sem stack trace nem caminhos; sem segredos
+- [x] 25. [US6] Resources com lista fechada de categorias e nomes; erros sem stack trace nem caminhos; sem segredos
   - _Requirements: US-6.AC-12, US-6.AC-14_
   - _Makes green: T-226, T-228_
   - _Implements: mcp-server/src/resources.ts, mcp-server/src/tools.ts_

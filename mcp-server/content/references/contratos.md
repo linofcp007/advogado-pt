@@ -5,7 +5,7 @@
 ## Legislação Base
 - Código Civil (CC): Arts. 217º-294º (declaração negocial), 397º-812º (obrigações/contratos)
 - Código Comercial: contratos mercantis
-- DL 290-D/99: documentos eletrónicos e assinatura digital
+- DL 12/2021: documentos eletrónicos e assinaturas eletrónicas (executa o Regulamento eIDAS — Reg. (UE) 910/2014; revogou o DL 290-D/99)
 - Lei 41/2004 e RGPD: proteção de dados em contratos digitais
 
 ## Tipos de Contratos Comuns no Contexto do Utilizador

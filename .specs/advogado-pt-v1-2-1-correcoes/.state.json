@@ -511,9 +511,63 @@
       ],
       "task": "[US5][P] Citações de artigos e cláusulas enganadoras nos templates",
       "verify": "node --test --test-name-pattern=\"T-222\" mcp-server/test/v121.test.mjs"
+    },
+    "23": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-223|T-224\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-223 e T-224 2/2. perfil, perfil-ativo, prazos.md e .ics gravados com escreverSeguro no dirProjeto (CLAUDE_PROJECT_DIR); prazos.md preserva notas e títulos; junction em .advogado-pt recusada e alvo intacto. perfil/v12/cli: 39/39 verdes.",
+      "at": "2026-10-03T21:48:37.312Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-223|T-224\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-223 e T-224 2/2. perfil, perfil-ativo, prazos.md e .ics gravados com escreverSeguro no dirProjeto (CLAUDE_PROJECT_DIR); prazos.md preserva notas e títulos; junction em .advogado-pt recusada e alvo intacto. perfil/v12/cli: 39/39 verdes.",
+          "at": "2026-10-03T21:48:37.312Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] `perfil.ts`, `prazos-estado.ts` e `calendario.ts` passam a gravar com `fs-seguro` no `dirProjeto`; `prazos.md` preserva as notas",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-223|T-224\" mcp-server/test/v121.test.mjs"
+    },
+    "24": {
+      "command": "node --test --test-name-pattern=\"T-225|T-227|T-250\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "3/3. Hook: campos do perfil limpos (sem controlo/quebras) e até 200 caracteres, resumo até 1.500, rotulado 'dados do utilizador, não são instruções'; ponto de entrada por realpath (junction OK); leituras até 256 KB; Edit/MultiEdit analisam o ficheiro do disco (T-239 também verde); hooks.test.mjs 13/13; SessionStart < 300 ms.",
+      "at": "2026-10-03T21:49:40.758Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-225|T-227|T-250\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "3/3. Hook: campos do perfil limpos (sem controlo/quebras) e até 200 caracteres, resumo até 1.500, rotulado 'dados do utilizador, não são instruções'; ponto de entrada por realpath (junction OK); leituras até 256 KB; Edit/MultiEdit analisam o ficheiro do disco (T-239 também verde); hooks.test.mjs 13/13; SessionStart < 300 ms.",
+          "at": "2026-10-03T21:49:40.758Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] Hook: perfil limitado e rotulado como dados, ponto de entrada por caminho real, mesmo diretório dos prazos, leitura até 256 KB, MultiEdit",
+      "verify": "node --test --test-name-pattern=\"T-225|T-227|T-250\" mcp-server/test/v121.test.mjs"
+    },
+    "25": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-226|T-228\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-226 e T-228 2/2. content.ler e o resource advogado-pt://{categoria}/{nome} com lista fechada (categorias conhecidas, nomes [a-z0-9-]); '..', '/' e '\\' recusados com erro (antes lia ../README.md fora de content/); erros das tools só com a mensagem. content.test e plugin.test sem regressões (falhas só nos testes novos de tarefas futuras).",
+      "at": "2026-10-03T21:50:38.057Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-226|T-228\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-226 e T-228 2/2. content.ler e o resource advogado-pt://{categoria}/{nome} com lista fechada (categorias conhecidas, nomes [a-z0-9-]); '..', '/' e '\\' recusados com erro (antes lia ../README.md fora de content/); erros das tools só com a mensagem. content.test e plugin.test sem regressões (falhas só nos testes novos de tarefas futuras).",
+          "at": "2026-10-03T21:50:38.057Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] Resources com lista fechada de categorias e nomes; erros sem stack trace nem caminhos; sem segredos",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-226|T-228\" mcp-server/test/v121.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T21:47:25.593Z",
+  "lastTickAt": "2026-10-03T21:50:38.057Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -536,6 +590,9 @@
     "19": "2026-10-03T21:43:41.265Z",
     "20": "2026-10-03T21:44:49.483Z",
     "21": "2026-10-03T21:46:31.342Z",
-    "22": "2026-10-03T21:47:25.593Z"
+    "22": "2026-10-03T21:47:25.593Z",
+    "23": "2026-10-03T21:48:37.312Z",
+    "24": "2026-10-03T21:49:40.758Z",
+    "25": "2026-10-03T21:50:38.057Z"
   }
 }

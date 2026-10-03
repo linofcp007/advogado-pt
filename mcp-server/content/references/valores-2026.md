@@ -188,6 +188,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Item | Valor 2026 | Base legal |
 |---|---|---|
 | Coeficiente de atualização anual de rendas | **1,0224** (+2,24%) | Aviso 23174/2025/2 (INE) |
+| Coeficiente de atualização anual de rendas para 2027 | **1,0256** (+2,56%) — apurado pelo INE a 10/9/2026 (IPC sem habitação, 12 meses até agosto); **(a confirmar)** com o Aviso no Diário da República, publicado até 30/10/2026 | NRAU (Lei 6/2006), art. 24.º; INE |
 | Caução máxima | 2 meses de renda | Art. 1076.º CC |
 | Imposto do selo sobre arrendamento | **10%** sobre 1 mês de renda; encargo legal do **senhorio** | TGIS verba 2; CIS art. 3.º, n.º 3, al. b) |
 | Retenção na fonte de IRS sobre rendas (arrendatário com contabilidade organizada) | **25%** | CIRS art. 101.º, n.º 1, al. e) |
@@ -263,6 +264,16 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Coimas do DL 166/2013 (práticas individuais restritivas) | muito graves: micro 2.500-50.000 € … grande 5.000-2.500.000 €; graves: micro 500-10.000 € … grande 2.500-500.000 € (dimensão = n.º de trabalhadores) | DL 166/2013, arts. 9.º-10.º; RJCE (DL 9/2021) art. 19.º |
 
 > Os limiares de concentrações são fixados na lei (não mudam todos os anos), mas ficam aqui por serem montantes. Confirmar sempre a versão consolidada em pgdlisboa.pt / dre.pt.
+
+## Contratação Pública 🔄
+
+> CCP após o **DL 177/2026** (17.ª alteração; em vigor a 1/10/2026, aplica-se aos procedimentos iniciados a partir dessa data). Valores do contrato **inferiores** a (sem IVA). Confirmar no texto publicado no Diário da República antes de decidir o procedimento.
+
+| Procedimento | Bens e serviços | Empreitadas | Base |
+|---|---|---|---|
+| Ajuste direto (regime geral) | **75.000 €** | **150.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
+| Consulta prévia (mín. 3 entidades) | **130.000 €** | **1.000.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
+| Procedimentos iniciados até 30/9/2026 | AD 20.000 € · CP 75.000 € | AD 30.000 € · CP 150.000 € | redação anterior |
 
 ## Compliance, Denúncias, Dados e IA (coimas e limiares)
 
