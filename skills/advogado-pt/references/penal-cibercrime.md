@@ -49,7 +49,7 @@
 - **Burla / burla informática**: induzir alguém em erro para obter enriquecimento — distinguir de mero incumprimento contratual
 - **Abuso de confiança fiscal e à SS** (Arts. 105.º e 107.º RGIT): **não entrega** ao Estado de IVA liquidado ou de retenções (IRS/SS) efetivamente deduzidas — é crime, não simples dívida; existem patamares e prazos de regularização
 - **Insolvência dolosa / culposa**: dissipação de bens em pré-insolvência (cross-ref `references/insolvencia.md`)
-- **Branqueamento** (Lei 83/2017): movimentar fundos de origem ilícita; deveres de identificação/comunicação
+- **Branqueamento** (CP, art. 368.º-A): converter, transferir ou dissimular vantagens de origem ilícita; os deveres preventivos de identificação e comunicação estão na Lei 83/2017
 - **Distinção essencial**: o **incumprimento civil** (não pagar uma fatura por dificuldade) **não é crime**; só há crime quando há dolo de enganar, apropriação ou não entrega de valores do Estado
 
 ## Para o contexto do utilizador (ENI / Unipessoal Lda)

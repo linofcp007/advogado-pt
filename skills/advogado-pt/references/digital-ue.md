@@ -22,7 +22,7 @@ Aplica-se a quem **desenvolve (provider)**, **utiliza (deployer)**, importa ou d
 ### Abordagem por risco
 | Categoria | Tratamento |
 |---|---|
-| **Risco inaceitável** (proibido) | Ex.: *social scoring* por entidades públicas, manipulação subliminar, *scraping* indiscriminado de rostos, reconhecimento de emoções no trabalho/escola. **Proibido.** |
+| **Risco inaceitável** (proibido) | Ex.: *social scoring* (por entidades públicas ou privadas), manipulação subliminar, *scraping* indiscriminado de rostos, reconhecimento de emoções no trabalho/escola. **Proibido.** |
 | **Alto risco** (Anexos I e III) | Ex.: IA em recrutamento, crédito, educação, biometria, infraestruturas críticas. Sujeito a gestão de risco, qualidade de dados, documentação técnica, supervisão humana, registo, avaliação de conformidade e marcação CE. |
 | **Risco limitado** (transparência) | Chatbots, *deepfakes*, conteúdo gerado por IA → **dever de informar** o utilizador de que interage com IA / de que o conteúdo é artificial. |
 | **Risco mínimo** | Maioria das aplicações (filtros de spam, jogos). Sem obrigações específicas. |
@@ -55,7 +55,7 @@ Eleva as exigências de cibersegurança para **entidades essenciais e importante
 - **Medidas de gestão de risco** (Art. 21.º): políticas de segurança, gestão de incidentes, continuidade, segurança da cadeia de fornecimento, cifra, controlo de acessos.
 - **Reporte de incidentes**: *early warning* em **24h**, notificação em **72h**, relatório final em 1 mês.
 - **Responsabilidade da gestão**: os órgãos de administração respondem pela supervisão das medidas.
-- **Autoridade em Portugal**: CNCS — Centro Nacional de Cibersegurança. Verificar o diploma nacional de transposição e o âmbito setorial.
+- **Autoridade em Portugal**: CNCS — Centro Nacional de Cibersegurança. Transposição: **DL 125/2025** (Regime Jurídico da Cibersegurança — ver `references/compliance.md`); confirmar o âmbito setorial e a dimensão da entidade.
 - **Coimas**: significativas (entidades essenciais até 10 M€ ou 2% do volume de negócios mundial).
 
 > Mesmo que não seja diretamente abrangido, é frequente que **clientes abrangidos pela NIS2 imponham contratualmente** requisitos de segurança aos seus fornecedores — antecipar nos contratos.
@@ -79,7 +79,7 @@ Estabelece **requisitos de cibersegurança para produtos com elementos digitais*
 
 - Requisitos *security by design*, gestão de vulnerabilidades, atualizações de segurança durante o período de suporte, marcação CE.
 - Dever de comunicar vulnerabilidades ativamente exploradas e incidentes graves (à ENISA/autoridade).
-- Aplicação faseada — obrigações principais a partir de **2027** (verificar). Planear o ciclo de desenvolvimento desde já.
+- Aplicação faseada (Reg. (UE) 2024/2847, art. 71.º): o dever de comunicar vulnerabilidades ativamente exploradas e incidentes graves (art. 14.º) aplica-se desde **11/9/2026**; as restantes obrigações a partir de **11/12/2027**. Planear o ciclo de desenvolvimento desde já.
 
 ---
 
@@ -102,7 +102,7 @@ Estabelece **requisitos de cibersegurança para produtos com elementos digitais*
 
 Checklist rápido de exposição regulatória:
 - [ ] **Usa ou vende IA?** → mapear o risco no AI Act; transparência (Art. 50.º) e medidas de literacia (Art. 4.º) — `assets/templates/politica-uso-ia.md`.
-- [ ] **Vende software/produtos digitais na UE?** → preparar conformidade CRA (calendário até 2027).
+- [ ] **Vende software/produtos digitais na UE?** → comunicação de vulnerabilidades e incidentes já obrigatória (desde 11/9/2026); conformidade CRA completa até 11/12/2027.
 - [ ] **É fornecedor TIC de entidades reguladas?** → antecipar requisitos NIS2 nos contratos.
 - [ ] **Opera plataforma/marketplace?** → deveres do DSA (notice-and-action, KYBC).
 - [ ] **Usa cookies/marketing?** → consentimento ePrivacy + base RGPD.

@@ -11,7 +11,7 @@
 
 ## Fluxo de decisão
 
-1. **Estás dentro do período experimental?** (90/180/240 dias sem termo; 15/30 dias a termo) → se SIM: podes **denunciar livremente**, sem fundamento, respeitando o aviso prévio aplicável (7 ou 15 dias consoante a duração já decorrida). É a via mais simples — não precisas de processo disciplinar · se NÃO: passo 2.
+1. **Estás dentro do período experimental?** (90/180/240 dias sem termo; 15/30 dias a termo) → se SIM: podes **denunciar livremente**, sem fundamento, respeitando o aviso prévio aplicável (7 ou 30 dias, se o período experimental já durou mais de 60 ou de 120 dias — CT, art. 114.º). É a via mais simples — não precisas de processo disciplinar · se NÃO: passo 2.
 
 2. **Qual é o fundamento real da cessação?**
    - **Facto imputável ao trabalhador** (comportamento grave: faltas injustificadas, insubordinação, violação de deveres) → **justa causa** · passo 3.

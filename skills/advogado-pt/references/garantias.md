@@ -38,7 +38,7 @@
 
 ## Graduação e Concurso de Garantias
 - Na **execução** e na **insolvência**, os créditos garantidos têm preferência sobre os comuns; a graduação depende do tipo de garantia e da data (registo)
-- Hierarquia típica: privilégios creditórios → garantias reais registadas (por ordem de registo) → credores comuns
+- Ordem de pagamento (simplificada): os **privilégios imobiliários especiais** (ex.: IMI do próprio prédio) preferem à hipoteca e ao direito de retenção, mesmo anteriores (CC, art. 751.º); os **privilégios gerais** não prevalecem sobre as garantias reais de terceiros (CC, art. 749.º); entre hipotecas conta a ordem do registo; os credores comuns recebem no fim, em rateio. Na insolvência, o CIRE extingue alguns privilégios do Estado e da Segurança Social (CIRE, art. 97.º)
 - Em insolvência, as garantias reais conferem o estatuto de **credor garantido** (pagamento pelo produto do bem onerado) — cross-ref `references/insolvencia.md` e `references/cobrancas.md`
 - A garantia bancária autónoma e o aval, sendo pessoais, **não** dão preferência sobre os bens do devedor, mas acrescentam um novo património (banco/avalista) à execução
 

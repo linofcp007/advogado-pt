@@ -108,25 +108,25 @@
 **Checkpoint:** US-1 a US-3 — todas as calculadoras com resultados da lei.
 
 ## História US-4 (P1): conteúdo jurídico
-- [ ] 14. [US4][P] Notificações eletrónicas da AT (5.º dia) e contraordenações laborais/RGCO; factos `v121-notif-`, `v121-coima-`
+- [x] 14. [US4][P] Notificações eletrónicas da AT (5.º dia) e contraordenações laborais/RGCO; factos `v121-notif-`, `v121-coima-`
   - _Requirements: US-4.AC-1, US-4.AC-2_
   - _Makes green: T-214_
   - _Verify: node --test --test-name-pattern="T-214" mcp-server/test/v121.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 15. [US4][P] `arrendamento.md` (arts. 1083.º, 1096.º a 1101.º CC); factos `v121-arrend-`
+- [x] 15. [US4][P] `arrendamento.md` (arts. 1083.º, 1096.º a 1101.º CC); factos `v121-arrend-`
   - _Requirements: US-4.AC-3_
   - _Makes green: T-215_
   - _Verify: node --test --test-name-pattern="T-215" mcp-server/test/v121.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 16. [US4][P] Afirmações desatualizadas (CISG, CRA, CCP com o DL 177/2026 e secção de contratação pública em `valores-2026.md`, NIS2, diplomas revogados, ICE, IFICI, laboral, réplica, retenção, seguros, 368.º-A, social scoring); factos `v121-atual-`
+- [x] 16. [US4][P] Afirmações desatualizadas (CISG, CRA, CCP com o DL 177/2026 e secção de contratação pública em `valores-2026.md`, NIS2, diplomas revogados, ICE, IFICI, laboral, réplica, retenção, seguros, 368.º-A, social scoring); factos `v121-atual-`
   - _Requirements: US-4.AC-4_
   - _Makes green: T-216_
   - _Verify: node --test --test-name-pattern="T-216" mcp-server/test/v121.test.mjs_
   - _Size: L_
   - _Depends: 2_
-- [ ] 17. [US4][P] Contradições entre ficheiros; factos `v121-contra-`
+- [x] 17. [US4][P] Contradições entre ficheiros; factos `v121-contra-`
   - _Requirements: US-4.AC-5_
   - _Makes green: T-217_
   - _Verify: node --test --test-name-pattern="T-217" mcp-server/test/v121.test.mjs_

@@ -11,7 +11,7 @@
 - CIMI — Código do Imposto Municipal sobre Imóveis (inclui AIMI, Arts. 135.º-A e segs.)
 - CIS — Código do Imposto do Selo (verba 1.1 da Tabela Geral, aquisição onerosa)
 - CRPredial — Código do Registo Predial (princípio da prioridade, Art. 6.º)
-- DL 281/99: exigência de licença de utilização para atos sobre prédios urbanos
+- DL 10/2024 (Simplex urbanístico): revogou o DL 281/99 — a escritura deixou de exigir a exibição da autorização de utilização (continua a ser essencial verificá-la: uso legal, financiamento)
 - DL 74-A/2017: crédito à habitação a consumidores
 
 ## Fases da Compra
@@ -19,7 +19,7 @@
 ### (a) Contrato-Promessa de Compra e Venda (CPCV)
 - Vincula as partes a celebrar o contrato definitivo; forma escrita com reconhecimento de assinaturas (Art. 410.º, n.º 3 CC, para prédios)
 - **Sinal** (Art. 442.º CC): o valor entregue presume-se sinal; em incumprimento, o promitente-comprador faltoso perde o sinal; o promitente-vendedor faltoso restitui o sinal em dobro
-- **Execução específica** (Art. 830.º CC): a parte fiel pode pedir ao tribunal uma sentença que produza os efeitos da declaração negocial em falta; afastada se houver sinal e convenção em contrário
+- **Execução específica** (Art. 830.º CC): a parte fiel pode pedir ao tribunal uma sentença que produza os efeitos da declaração negocial em falta; havendo sinal presume-se afastada (n.º 2), **salvo** nas promessas de transmissão de edifício ou fração autónoma (art. 410.º, n.º 3), em que não pode ser afastada (n.º 3). O promitente-comprador consumidor, com sinal e tradição da coisa, goza de direito de retenção, mesmo na insolvência do vendedor (CC, art. 755.º, n.º 1, al. f); AUJ do STJ 4/2014)
 - **Tradição da coisa**: entrega antecipada do imóvel ao promitente-comprador; confere direito de retenção (Art. 755.º, n.º 1, al. f) CC) que prevalece sobre hipoteca anterior
 
 ### (b) Escritura pública ou Documento Particular Autenticado (DPA)
@@ -34,7 +34,7 @@
 ## Due Diligence do Comprador
 - **Caderneta predial** (Finanças): identificação fiscal do prédio, VPT, titular
 - **Certidão permanente do registo predial**: titularidade atual e cadeia de transmissões, ónus e encargos
-- **Licença de utilização** (câmara municipal): finalidade autorizada; sem ela, o ato pode estar comprometido (DL 281/99)
+- **Licença/autorização de utilização** (câmara municipal): finalidade autorizada; desde o DL 10/2024 já não é exibida na escritura, mas sem ela o uso pode ser ilegal e o banco pode recusar o crédito — verifica-a sempre
 - **Certificado energético** (ADENE): obrigatório para venda
 - **Ficha técnica de habitação**: para imóveis cuja construção/reabilitação foi licenciada após 30/03/2004
 - **Ónus, hipotecas, penhoras, arrestos**: confirmar na certidão permanente; exigir distrate/cancelamento antes ou na escritura

@@ -6,20 +6,21 @@
 - RGCO: Regime Geral das Contraordenações (DL 433/82)
 - Código da Estrada (CE): contraordenações rodoviárias
 - RGIT: Regime Geral das Infrações Tributárias
+- Lei 107/2009: regime processual das contraordenações laborais e de segurança social
 - Legislação setorial: ACT (trabalho), ASAE (económicas), CNPD (dados), ANACOM (telecom)
 
 ## Contraordenações — Noções Gerais
 - Não são crimes — são infrações administrativas punidas com coima
 - Podem ter sanções acessórias (suspensão de licença, encerramento, apreensão)
-- Prescrição do procedimento: varia (regra geral 3-5 anos consoante a coima máxima)
-- Prescrição da coima aplicada: varia consoante o valor
+- Prescrição do procedimento (regime geral): 5, 3 ou 1 ano, consoante o montante máximo da coima aplicável (RGCO, art. 27.º); suspensão e interrupção nos arts. 27.º-A e 28.º. Os regimes setoriais (laboral, fiscal, rodoviário) podem ter regras próprias
+- Prescrição da coima aplicada: prazos próprios (RGCO, art. 29.º)
 
 ## Defesa — Procedimento Padrão
 
 ### Fase 1: Notificação
 - Ler atentamente: facto imputado, norma violada, coima aplicável, prazo de defesa
 - Verificar: notificação válida? Prazo a correr? Factos corretos?
-- **Prazo de defesa**: o indicado na notificação — varia com o regime (trânsito e laboral: 15 dias úteis; contraordenações fiscais: 30 dias — art. 70.º RGIT)
+- **Prazo de defesa**: o indicado na notificação — varia com o regime (laboral: 15 dias, contados de forma contínua — Lei 107/2009, arts. 6.º e 17.º; trânsito: 15 dias úteis; contraordenações fiscais: 30 dias — art. 70.º RGIT)
 
 ### Fase 2: Defesa Escrita
 - Identificação do arguido
@@ -32,7 +33,7 @@
 ### Fase 3: Decisão Administrativa
 - Se desfavorável: recurso para o tribunal judicial
 - **Prazo de recurso**: 20 dias após a notificação da decisão (art. 59.º, n.º 3, RGCO; suspende-se aos sábados, domingos e feriados — art. 60.º); contraordenações fiscais: 30 dias (art. 80.º RGIT)
-- Recurso suspende a execução da coima (regra geral)
+- Efeito da impugnação: no regime geral a decisão não se torna definitiva enquanto estiver impugnada, pelo que a coima não é ainda exigível; nas contraordenações **laborais** a impugnação tem efeito **meramente devolutivo** — só suspende a decisão se o arguido depositar o valor da coima e das custas (Lei 107/2009, art. 35.º)
 
 ### Fase 4: Recurso Judicial
 - Tribunal de 1ª instância
@@ -59,7 +60,9 @@
 - ACT: Autoridade para as Condições do Trabalho
 - Falta de comunicação de admissão, incumprimento de horários, falta de seguro AT
 - Coimas elevadas: escalonadas por dimensão da empresa e gravidade
-- Defesa: 15 dias úteis após notificação
+- Regime processual próprio: Lei 107/2009 (RGCO só subsidiário)
+- ⏰ Defesa: 15 dias após a notificação, contados de forma contínua (arts. 6.º e 17.º)
+- ⏰ Impugnação judicial da decisão: 20 dias (art. 33.º), com efeito meramente devolutivo (art. 35.º)
 
 ## Contraordenações RGPD (CNPD)
 - CNPD: Comissão Nacional de Proteção de Dados

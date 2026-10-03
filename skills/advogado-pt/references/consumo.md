@@ -5,7 +5,7 @@
 ## Legislação Base
 - Lei 24/96: Lei de Defesa do Consumidor
 - DL 24/2014: contratos à distância e fora do estabelecimento
-- DL 67/2003: venda de bens de consumo e garantias (atualizado pelo DL 84/2021)
+- DL 67/2003: antigo regime da venda de bens de consumo — **revogado pelo DL 84/2021**; só releva para contratos celebrados antes de 1/1/2022
 - DL 84/2021: direitos do consumidor na compra e venda de bens, conteúdos e serviços digitais
 - DL 446/85: cláusulas contratuais gerais
 

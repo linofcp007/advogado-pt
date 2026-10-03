@@ -349,9 +349,81 @@
       ],
       "task": "[US3] Injunção nas transações comerciais sem limite de valor: playbook, `cobrancas.md`, calculadora de custas (TS e Python)",
       "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-213\" mcp-server/test/v121.test.mjs"
+    },
+    "14": {
+      "command": "node --test --test-name-pattern=\"T-214\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-214 1/1. Reconfirmado: CPPT 38.º-A n.º 4 (NCEPF, 5.º dia) vs 39.º (ViaCTT, 15.º dia). multas.md: Lei 107/2009 (15 dias contínuos, 20 dias, efeito devolutivo), RGCO 27.º 5/3/1 ano; template de defesa com 27.º/27.º-A; playbook da AT com o 5.º dia.",
+      "at": "2026-10-03T21:37:25.044Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-214\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-214 1/1. Reconfirmado: CPPT 38.º-A n.º 4 (NCEPF, 5.º dia) vs 39.º (ViaCTT, 15.º dia). multas.md: Lei 107/2009 (15 dias contínuos, 20 dias, efeito devolutivo), RGCO 27.º 5/3/1 ano; template de defesa com 27.º/27.º-A; playbook da AT com o 5.º dia.",
+          "at": "2026-10-03T21:37:25.044Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Notificações eletrónicas da AT (5.º dia) e contraordenações laborais/RGCO; factos `v121-notif-`, `v121-coima-`",
+      "verify": "node --test --test-name-pattern=\"T-214\" mcp-server/test/v121.test.mjs"
+    },
+    "15": {
+      "command": "node --test --test-name-pattern=\"T-215\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-215 1/1 (factos v121-arrend-). arrendamento.md: 1096.º renovação 3 anos; 1097.º 240/120/60 e n.º 3 (3 anos); 1098.º 120/90/60 e denúncia antecipada; 1100.º 120/60; 1101.º c) 5 anos; 1083.º mora igual ou superior a 3 meses.",
+      "at": "2026-10-03T21:38:13.796Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-215\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-215 1/1 (factos v121-arrend-). arrendamento.md: 1096.º renovação 3 anos; 1097.º 240/120/60 e n.º 3 (3 anos); 1098.º 120/90/60 e denúncia antecipada; 1100.º 120/60; 1101.º c) 5 anos; 1083.º mora igual ou superior a 3 meses.",
+          "at": "2026-10-03T21:38:13.796Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] `arrendamento.md` (arts. 1083.º, 1096.º a 1101.º CC); factos `v121-arrend-`",
+      "verify": "node --test --test-name-pattern=\"T-215\" mcp-server/test/v121.test.mjs"
+    },
+    "16": {
+      "command": "node --test --test-name-pattern=\"T-216\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-216 1/1 (17 factos v121-atual-). CISG desde 1/10/2021; CRA art. 14.º 11/9/2026 e 11/12/2027; social scoring público ou privado; CCP com DL 177/2026 (limiares AD 75.000/150.000, CP 130.000/1.000.000 — confirmados em 3 fontes secundárias, marcados para confirmar no DR) e secção Contratação Pública em valores-2026; NIS2 DL 125/2025 desde 3/4/2026; DL 67/2003, 290-D/99 e 281/99 revogados; AUJ 4/2014; laboral 112.º/149.º n.º 4; 7 ou 30 dias; réplica 584.º; Lei 147/2015, DL 159/99; CP 368.º-A.",
+      "at": "2026-10-03T21:40:54.089Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-216\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-216 1/1 (17 factos v121-atual-). CISG desde 1/10/2021; CRA art. 14.º 11/9/2026 e 11/12/2027; social scoring público ou privado; CCP com DL 177/2026 (limiares AD 75.000/150.000, CP 130.000/1.000.000 — confirmados em 3 fontes secundárias, marcados para confirmar no DR) e secção Contratação Pública em valores-2026; NIS2 DL 125/2025 desde 3/4/2026; DL 67/2003, 290-D/99 e 281/99 revogados; AUJ 4/2014; laboral 112.º/149.º n.º 4; 7 ou 30 dias; réplica 584.º; Lei 147/2015, DL 159/99; CP 368.º-A.",
+          "at": "2026-10-03T21:40:54.089Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Afirmações desatualizadas (CISG, CRA, CCP com o DL 177/2026 e secção de contratação pública em `valores-2026.md`, NIS2, diplomas revogados, ICE, IFICI, laboral, réplica, retenção, seguros, 368.º-A, social scoring); factos `v121-atual-`",
+      "verify": "node --test --test-name-pattern=\"T-216\" mcp-server/test/v121.test.mjs"
+    },
+    "17": {
+      "command": "node --test --test-name-pattern=\"T-217\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-217 1/1 (11 factos v121-contra-). Julgados de Paz vs alçada; graduação 749.º/751.º/CIRE 97.º; coima fiscal a 75% só depois de fixada (RGIT 78.º, confirmado em fonte); marca INPI remete para valores; B2C/OSS e 'IVA - autoliquidação' com remissão para iva-internacional.md; FGCT retirado; aviso obsoleto removido.",
+      "at": "2026-10-03T21:42:15.511Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-217\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-217 1/1 (11 factos v121-contra-). Julgados de Paz vs alçada; graduação 749.º/751.º/CIRE 97.º; coima fiscal a 75% só depois de fixada (RGIT 78.º, confirmado em fonte); marca INPI remete para valores; B2C/OSS e 'IVA - autoliquidação' com remissão para iva-internacional.md; FGCT retirado; aviso obsoleto removido.",
+          "at": "2026-10-03T21:42:15.511Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Contradições entre ficheiros; factos `v121-contra-`",
+      "verify": "node --test --test-name-pattern=\"T-217\" mcp-server/test/v121.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T21:35:59.878Z",
+  "lastTickAt": "2026-10-03T21:42:15.511Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -365,6 +437,10 @@
     "10": "2026-10-03T21:32:32.859Z",
     "11": "2026-10-03T21:35:07.532Z",
     "12": "2026-10-03T21:35:10.048Z",
-    "13": "2026-10-03T21:35:59.878Z"
+    "13": "2026-10-03T21:35:59.878Z",
+    "14": "2026-10-03T21:37:25.044Z",
+    "15": "2026-10-03T21:38:13.796Z",
+    "16": "2026-10-03T21:40:54.089Z",
+    "17": "2026-10-03T21:42:15.511Z"
   }
 }

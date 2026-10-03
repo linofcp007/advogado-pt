@@ -264,6 +264,16 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 
 > Os limiares de concentrações são fixados na lei (não mudam todos os anos), mas ficam aqui por serem montantes. Confirmar sempre a versão consolidada em pgdlisboa.pt / dre.pt.
 
+## Contratação Pública 🔄
+
+> CCP após o **DL 177/2026** (17.ª alteração; em vigor a 1/10/2026, aplica-se aos procedimentos iniciados a partir dessa data). Valores do contrato **inferiores** a (sem IVA). Confirmar no texto publicado no Diário da República antes de decidir o procedimento.
+
+| Procedimento | Bens e serviços | Empreitadas | Base |
+|---|---|---|---|
+| Ajuste direto (regime geral) | **75.000 €** | **150.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
+| Consulta prévia (mín. 3 entidades) | **130.000 €** | **1.000.000 €** | CCP arts. 19.º e 20.º (redação do DL 177/2026) |
+| Procedimentos iniciados até 30/9/2026 | AD 20.000 € · CP 75.000 € | AD 30.000 € · CP 150.000 € | redação anterior |
+
 ## Compliance, Denúncias, Dados e IA (coimas e limiares)
 
 | Item | Valor | Base legal |

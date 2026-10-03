@@ -5,7 +5,7 @@
 > 💶 **Limiares dos procedimentos, valores de caução e taxas de justiça do contencioso pré-contratual:** ver `references/valores-2026.md` e o CCP (os limiares são atualizados, designadamente pelas diretivas UE). Cláusulas contratuais gerais em `references/contratos.md`; consórcios e vertente internacional em `references/contratos-internacionais.md`.
 
 ## Legislação Base
-- Código dos Contratos Públicos — CCP: DL 18/2008 e alterações (incl. DL 111-B/2017)
+- Código dos Contratos Públicos — CCP: DL 18/2008 e alterações (incl. DL 111-B/2017 e **DL 177/2026**, 17.ª alteração, em vigor a 1/10/2026 para os procedimentos iniciados a partir dessa data — sobe os limiares do ajuste direto e da consulta prévia e revoga as medidas especiais da Lei 30/2021; limiares em `references/valores-2026.md`, secção Contratação Pública)
 - Diretivas UE 2014/24 (setores clássicos) e 2014/25 (setores especiais: água, energia, transportes)
 - Código de Processo nos Tribunais Administrativos — CPTA: contencioso pré-contratual urgente
 - Lei dos Tribunais Administrativos e Fiscais (organização da jurisdição administrativa)

@@ -19,7 +19,7 @@
 - **RGPD** (Regulamento (UE) 2016/679): art. 30.º, n.º 5 (registo de atividades) e art. 37.º (encarregado de proteção de dados, DPO). **Lei 58/2019**: execução nacional.
 - **Lei 83/2017** (branqueamento) e **Lei 89/2017** (RCBE): ver `references/bancario.md`.
 - **Relato de sustentabilidade**: CSRD, Diretiva (UE) 2022/2464, alterada pela Diretiva "Omnibus I" (UE) 2026/470, de 24/2/2026. Ainda **não transposta** em Portugal (EUR-Lex, medidas nacionais de transposição, consultado em 3/10/2026).
-- **DL 125/2025** (Regime Jurídico da Cibersegurança, que transpõe a NIS2) (a confirmar): ver `references/digital-ue.md`.
+- **DL 125/2025** (Regime Jurídico da Cibersegurança, que transpõe a NIS2 — Diretiva (UE) 2022/2555), em vigor desde **3/4/2026**: ver `references/digital-ue.md`.
 
 ## Quem conta como "empresa com N trabalhadores"
 - **RGPC, art. 2.º, n.º 1**: aplica-se às **pessoas coletivas com sede em Portugal que empreguem 50 ou mais trabalhadores** e às **sucursais em Portugal** de pessoas coletivas estrangeiras com 50 ou mais trabalhadores. O MENAC esclarece que o critério é **só o número de trabalhadores**, e não o setor nem as funções (FAQ RGPC, n.º 3).
