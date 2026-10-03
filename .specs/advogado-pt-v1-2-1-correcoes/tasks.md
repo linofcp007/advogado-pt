@@ -132,13 +132,13 @@
   - _Verify: node --test --test-name-pattern="T-217" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 2_
-- [ ] 18. [US4][P] Prazos em falta nos playbooks; factos `v121-playbook-`
+- [x] 18. [US4][P] Prazos em falta nos playbooks; factos `v121-playbook-`
   - _Requirements: US-4.AC-6_
   - _Makes green: T-218_
   - _Verify: node --test --test-name-pattern="T-218" mcp-server/test/v121.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 19. [US4] Marcas: fechar as já confirmadas pela revisão; o que não se confirmar fica "(a confirmar)" com fonte; coeficiente de rendas 2027 conforme o aviso no DR (ou "a confirmar" até sair)
+- [x] 19. [US4] Marcas: fechar as já confirmadas pela revisão; o que não se confirmar fica "(a confirmar)" com fonte; coeficiente de rendas 2027 conforme o aviso no DR (ou "a confirmar" até sair)
   - _Requirements: US-4.AC-7, US-4.AC-8, EC-6_
   - _Makes green: T-219_
   - _Verify: node --test --test-name-pattern="T-219" mcp-server/test/v121.test.mjs_
@@ -146,19 +146,19 @@
   - _Depends: 14, 15, 16, 17, 18_
 
 ## História US-5 (P1): templates
-- [ ] 20. [US5][P] Retirar as cláusulas nulas ou ineficazes (CPCV, acordo de revogação, SaaS, eficácia real)
+- [x] 20. [US5][P] Retirar as cláusulas nulas ou ineficazes (CPCV, acordo de revogação, SaaS, eficácia real)
   - _Requirements: US-5.AC-1_
   - _Makes green: T-220_
   - _Verify: node --test --test-name-pattern="T-220" mcp-server/test/v121.test.mjs_
   - _Size: S_
   - _Depends: 2_
-- [ ] 21. [US5][P] Acrescentar os requisitos (CITE, motivo–termo, cônjuge, art. 28.º RGPD no DPA, ressalva de dolo/culpa grave, loja online)
+- [x] 21. [US5][P] Acrescentar os requisitos (CITE, motivo–termo, cônjuge, art. 28.º RGPD no DPA, ressalva de dolo/culpa grave, loja online)
   - _Requirements: US-5.AC-2_
   - _Makes green: T-221_
   - _Verify: node --test --test-name-pattern="T-221" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 2_
-- [ ] 22. [US5][P] Citações de artigos e cláusulas enganadoras nos templates
+- [x] 22. [US5][P] Citações de artigos e cláusulas enganadoras nos templates
   - _Requirements: US-5.AC-3_
   - _Makes green: T-222_
   - _Verify: node --test --test-name-pattern="T-222" mcp-server/test/v121.test.mjs_

@@ -188,6 +188,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Item | Valor 2026 | Base legal |
 |---|---|---|
 | Coeficiente de atualização anual de rendas | **1,0224** (+2,24%) | Aviso 23174/2025/2 (INE) |
+| Coeficiente de atualização anual de rendas para 2027 | **1,0256** (+2,56%) — apurado pelo INE a 10/9/2026 (IPC sem habitação, 12 meses até agosto); **(a confirmar)** com o Aviso no Diário da República, publicado até 30/10/2026 | NRAU (Lei 6/2006), art. 24.º; INE |
 | Caução máxima | 2 meses de renda | Art. 1076.º CC |
 | Imposto do selo sobre arrendamento | **10%** sobre 1 mês de renda; encargo legal do **senhorio** | TGIS verba 2; CIS art. 3.º, n.º 3, al. b) |
 | Retenção na fonte de IRS sobre rendas (arrendatário com contabilidade organizada) | **25%** | CIRS art. 101.º, n.º 1, al. e) |

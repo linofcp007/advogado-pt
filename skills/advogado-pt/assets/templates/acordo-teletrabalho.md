@@ -41,7 +41,7 @@ O valor da compensação é de **{{VALOR_COMPARTICIPACAO}}** por {{PERIODICIDADE
 O Empregador abstém-se de contactar o Trabalhador no período de descanso, ressalvadas as situações de força maior, sendo garantido o **direito a desligar** previsto no Art. 199.º-A do CT. O Trabalhador não pode ser desfavorecido por não atender comunicações fora do horário de trabalho.
 
 ## Cláusula 7.ª (Igualdade de tratamento e isolamento)
-O Trabalhador em teletrabalho goza dos mesmos direitos e está sujeito aos mesmos deveres dos demais trabalhadores, designadamente em matéria de formação, progressão, limites do tempo de trabalho, descanso, segurança e saúde. O Empregador promove o contacto regular para evitar o isolamento (Art. 169.º-A CT).
+O Trabalhador em teletrabalho goza dos mesmos direitos e está sujeito aos mesmos deveres dos demais trabalhadores, designadamente em matéria de formação, progressão, limites do tempo de trabalho, descanso, segurança e saúde. O Empregador promove contactos presenciais regulares, com a periodicidade aqui acordada ({{PERIODICIDADE_CONTACTOS}}), para reduzir o isolamento do Trabalhador (Art. 169.º-B CT).
 
 ## Cláusula 8.ª (Proteção de dados e confidencialidade)
 O Trabalhador obriga-se a observar as políticas de segurança da informação e de proteção de dados do Empregador, a utilizar os meios disponibilizados exclusivamente para fins profissionais e a garantir a confidencialidade da informação tratada. O tratamento de dados pessoais respeita o RGPD (Regulamento (UE) 2016/679) e a Lei 58/2019. Qualquer meio de controlo da atividade respeita a reserva da intimidade da vida privada (Arts. 20.º e 170.º CT).

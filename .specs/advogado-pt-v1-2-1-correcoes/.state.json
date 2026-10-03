@@ -421,9 +421,99 @@
       ],
       "task": "[US4][P] Contradições entre ficheiros; factos `v121-contra-`",
       "verify": "node --test --test-name-pattern=\"T-217\" mcp-server/test/v121.test.mjs"
+    },
+    "18": {
+      "command": "node --test --test-name-pattern=\"T-218\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-218 1/1 (factos v121-playbook-). quero-despedir: CT 329.º (60 dias/1 ano), 355.º, 357.º n.º 1 (30 dias), 387.º n.º 2 (60 dias), 63.º (CITE); citação (728.º, 785.º, 139.º n.º 5) e cobrança (323.º n.º 2, 40 €) já feitas nas tarefas 7 e 9.",
+      "at": "2026-10-03T21:42:55.961Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-218\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-218 1/1 (factos v121-playbook-). quero-despedir: CT 329.º (60 dias/1 ano), 355.º, 357.º n.º 1 (30 dias), 387.º n.º 2 (60 dias), 63.º (CITE); citação (728.º, 785.º, 139.º n.º 5) e cobrança (323.º n.º 2, 40 €) já feitas nas tarefas 7 e 9.",
+          "at": "2026-10-03T21:42:55.961Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4][P] Prazos em falta nos playbooks; factos `v121-playbook-`",
+      "verify": "node --test --test-name-pattern=\"T-218\" mcp-server/test/v121.test.mjs"
+    },
+    "19": {
+      "command": "node --test --test-name-pattern=\"T-219\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-219 1/1. Rendas 2027: 1,0256 (+2,56%) apurado pelo INE a 10/9/2026, '(a confirmar)' até ao Aviso no DR (NRAU art. 24.º). Marcas fechadas onde a revisão confirmou (NIS2/DL 125/2025 em compliance e checklist); as restantes '(a confirmar)' mantêm-se com fonte.",
+      "at": "2026-10-03T21:43:41.265Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-219\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-219 1/1. Rendas 2027: 1,0256 (+2,56%) apurado pelo INE a 10/9/2026, '(a confirmar)' até ao Aviso no DR (NRAU art. 24.º). Marcas fechadas onde a revisão confirmou (NIS2/DL 125/2025 em compliance e checklist); as restantes '(a confirmar)' mantêm-se com fonte.",
+          "at": "2026-10-03T21:43:41.265Z",
+          "observed": false
+        }
+      ],
+      "task": "[US4] Marcas: fechar as já confirmadas pela revisão; o que não se confirmar fica \"(a confirmar)\" com fonte; coeficiente de rendas 2027 conforme o aviso no DR (ou \"a confirmar\" até sair)",
+      "verify": "node --test --test-name-pattern=\"T-219\" mcp-server/test/v121.test.mjs"
+    },
+    "20": {
+      "command": "node --test --test-name-pattern=\"T-220\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-220 1/1 (factos v121-tpl-nulo-). CPCV: execução específica inafastável (830.º n.º 3), eficácia real só com forma e registo (413.º), forma do 410.º n.º 3 como requisito; acordo de revogação sem quitação total (CT 337.º n.º 3, 349.º n.º 5); SaaS sem resolução por insolvência (CIRE 119.º).",
+      "at": "2026-10-03T21:44:49.483Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-220\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-220 1/1 (factos v121-tpl-nulo-). CPCV: execução específica inafastável (830.º n.º 3), eficácia real só com forma e registo (413.º), forma do 410.º n.º 3 como requisito; acordo de revogação sem quitação total (CT 337.º n.º 3, 349.º n.º 5); SaaS sem resolução por insolvência (CIRE 119.º).",
+          "at": "2026-10-03T21:44:49.483Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5][P] Retirar as cláusulas nulas ou ineficazes (CPCV, acordo de revogação, SaaS, eficácia real)",
+      "verify": "node --test --test-name-pattern=\"T-220\" mcp-server/test/v121.test.mjs"
+    },
+    "21": {
+      "command": "node --test --test-name-pattern=\"T-221\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-221 1/1 (factos v121-tpl-req-). CITE (CT 63.º, 381.º d)); motivo–termo (141.º n.º 3) e renovações (148.º, 149.º n.os 3 e 4); cônjuge (1682.º-A, 1687.º) em trespasse, arrendamentos e pacto; DPA com o art. 28.º n.º 3 completo (apagar/devolver, auditorias); TI com dolo/culpa grave e danos pessoais (809.º CC, DL 446/85 art. 18.º); loja online com rejeição (DL 84/2021 art. 16.º), Roma I art. 6.º n.º 2, custo da devolução e botão da Diretiva 2023/2673 [VERIFICAR transposição].",
+      "at": "2026-10-03T21:46:31.342Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-221\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-221 1/1 (factos v121-tpl-req-). CITE (CT 63.º, 381.º d)); motivo–termo (141.º n.º 3) e renovações (148.º, 149.º n.os 3 e 4); cônjuge (1682.º-A, 1687.º) em trespasse, arrendamentos e pacto; DPA com o art. 28.º n.º 3 completo (apagar/devolver, auditorias); TI com dolo/culpa grave e danos pessoais (809.º CC, DL 446/85 art. 18.º); loja online com rejeição (DL 84/2021 art. 16.º), Roma I art. 6.º n.º 2, custo da devolução e botão da Diretiva 2023/2673 [VERIFICAR transposição].",
+          "at": "2026-10-03T21:46:31.342Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5][P] Acrescentar os requisitos (CITE, motivo–termo, cônjuge, art. 28.º RGPD no DPA, ressalva de dolo/culpa grave, loja online)",
+      "verify": "node --test --test-name-pattern=\"T-221\" mcp-server/test/v121.test.mjs"
+    },
+    "22": {
+      "command": "node --test --test-name-pattern=\"T-222\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-222 1/1 (factos v121-tpl-cit-). Teletrabalho 169.º-B; nota de culpa 98.º e 356.º; segredos comerciais CPI 313.º; reconhecimento de dívida sem epígrafe enganadora; carta de cobrança sem ameaça de execução sem título; partilha: unido de facto isento de Selo mas não legitimário (2157.º); livrança com montante máximo e LULL 10.º/77.º.",
+      "at": "2026-10-03T21:47:25.593Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-222\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-222 1/1 (factos v121-tpl-cit-). Teletrabalho 169.º-B; nota de culpa 98.º e 356.º; segredos comerciais CPI 313.º; reconhecimento de dívida sem epígrafe enganadora; carta de cobrança sem ameaça de execução sem título; partilha: unido de facto isento de Selo mas não legitimário (2157.º); livrança com montante máximo e LULL 10.º/77.º.",
+          "at": "2026-10-03T21:47:25.593Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5][P] Citações de artigos e cláusulas enganadoras nos templates",
+      "verify": "node --test --test-name-pattern=\"T-222\" mcp-server/test/v121.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T21:42:15.511Z",
+  "lastTickAt": "2026-10-03T21:47:25.593Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -441,6 +531,11 @@
     "14": "2026-10-03T21:37:25.044Z",
     "15": "2026-10-03T21:38:13.796Z",
     "16": "2026-10-03T21:40:54.089Z",
-    "17": "2026-10-03T21:42:15.511Z"
+    "17": "2026-10-03T21:42:15.511Z",
+    "18": "2026-10-03T21:42:55.961Z",
+    "19": "2026-10-03T21:43:41.265Z",
+    "20": "2026-10-03T21:44:49.483Z",
+    "21": "2026-10-03T21:46:31.342Z",
+    "22": "2026-10-03T21:47:25.593Z"
   }
 }
