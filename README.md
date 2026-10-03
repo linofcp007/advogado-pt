@@ -30,7 +30,7 @@ Depois, no repositório, **uma vez**: `npm run setup` (instala + compila o servi
 
 ### Comandos (slash commands)
 
-`/advogado` · `/parecer` · `/cobrar` · `/contrato` · `/prazo` · `/juros` · `/imt` · `/defesa` · `/rgpd` · `/despedir` · `/citacao` · `/sociedade` · `/comprar-imovel` · `/herancas` · `/arrendamento` · `/fisco` · `/insolvencia` · `/perfil` · `/template` · `/referencia` · `/procurar` (+ `/adv`, `/intake`, `/prescricao`, `/doctor`).
+`/advogado` · `/parecer` · `/cobrar` · `/contrato` · `/prazo` · `/prazos` · `/calendario` · `/juros` · `/imt` · `/defesa` · `/rgpd` · `/despedir` · `/salario` · `/irc` · `/compliance` · `/citacao` · `/sociedade` · `/comprar-imovel` · `/herancas` · `/arrendamento` · `/fisco` · `/insolvencia` · `/perfil` · `/template` · `/referencia` · `/procurar` (+ `/adv`, `/intake`, `/prescricao`, `/doctor`).
 
 ## Estrutura
 
@@ -38,17 +38,17 @@ Depois, no repositório, **uma vez**: `npm run setup` (instala + compila o servi
 advogado-pt/                     # plugin Claude Code
 ├── .claude-plugin/             # plugin.json + marketplace.json
 ├── .mcp.json                   # servidor MCP (${CLAUDE_PLUGIN_ROOT})
-├── commands/        (25)       # slash commands (/advogado, /cobrar, /fisco, /perfil, /doctor…)
+├── commands/        (30)       # slash commands (/advogado, /cobrar, /calendario, /prazos, /perfil…)
 ├── hooks/                      # hooks.json + advogado-hook.mjs (SessionStart/PostToolUse)
-├── cli/advogado-pt.mjs         # CLI universal (mcp-config + calc + prompt + doctor)
+├── cli/advogado-pt.mjs         # CLI universal (mcp-config + calc + calendario + prazos + prompt + doctor)
 ├── skills/advogado-pt/         # a skill (conteúdo jurídico)
 │   ├── SKILL.md                # lógica, fluxo, protocolos de rigor
-│   ├── references/   (30)      # ⭐ valores-2026.md = ponto único de verdade
-│   ├── assets/templates/  (45) # documentos com {{...}}, [VERIFICAR] e "Antes de enviar"
-│   ├── assets/checklists/ (8)
-│   ├── playbooks/    (7)       # árvores de decisão
-│   └── scripts/      (10)      # calculadoras Python + testes
-├── mcp-server/                 # servidor MCP TypeScript (21 tools + resources + prompt)
+│   ├── references/   (33)      # ⭐ valores-2026.md = ponto único de verdade
+│   ├── assets/templates/  (62) # documentos com {{...}}, [VERIFICAR] e "Antes de enviar"
+│   ├── assets/checklists/ (10)
+│   ├── playbooks/    (11)      # árvores de decisão
+│   └── scripts/      (14)      # calculadoras Python + testes
+├── mcp-server/                 # servidor MCP TypeScript (32 tools + resources + prompt)
 ├── integrations/               # configs por plataforma (Cursor, Windsurf, Codex, Gemini, ChatGPT)
 ├── .cursor/ .windsurf/ .gemini/ .vscode/   # dotfiles de editor (dogfooding)
 ├── AGENTS.md · GEMINI.md · CLAUDE.md        # persona portátil + manutenção
@@ -58,17 +58,20 @@ advogado-pt/                     # plugin Claude Code
 
 ## Áreas Cobertas
 
-- **Empresarial**: contratos TI/SaaS, contratos internacionais, cobranças, insolvência/PER (como devedor e como credor), societário, garantias e crédito, laboral, fiscal, **contencioso tributário** (`contencioso-tributario`), **bancário e serviços financeiros** (`bancario`), **concorrência** (`concorrencia`), **direito da UE para empresas** (`uniao-europeia`), RGPD, regulação digital UE (AI Act/NIS2/CRA), propriedade intelectual, consumo/e-commerce, contratação pública, seguros
+- **Empresarial**: contratos TI/SaaS, contratos internacionais, cobranças, insolvência/PER (como devedor e como credor), societário, garantias e crédito, laboral, fiscal, **contencioso tributário** (`contencioso-tributario`), **bancário e serviços financeiros** (`bancario`), **concorrência** (`concorrencia`), **direito da UE para empresas** (`uniao-europeia`), **compliance por dimensão** (`compliance`: RGPC, canal de denúncias), **IVA internacional** (`iva-internacional`), **licenciamento setorial** (`licenciamento-setorial`: AL, restauração, construção, transportes, mediação imobiliária), RGPD, regulação digital UE (AI Act/NIS2/CRA), propriedade intelectual, consumo/e-commerce, contratação pública, seguros
 - **Pessoal**: imobiliário (compra/venda), arrendamento, família e regimes de bens, heranças, sucessões internacionais, IRS, multas e contraordenações
 - **Transversal**: contencioso civil e ADR, penal económico e cibercrime, estrangeiros e imigração, glossário PT↔EN
 
 ## O que esta skill faz de diferente
 
-- **Perfil da empresa guardado**: `.advogado-pt/perfil-empresa.md` no projeto (ou o perfil geral em `~/.advogado-pt/`) — carregado no início de cada sessão; pergunta só o que falta.
-- **Templates reais** (45), não promessas: cada documento parte de um esqueleto, declara o **âmbito** (nacional / UE / misto) e termina com a lista **"Antes de enviar — verificar"** (prazos ⏰, forma de envio, normas a confirmar).
-- **Playbooks** (7): árvores de decisão que transformam conhecimento em ação guiada (cliente não paga, citação, despedir, data breach, comprar imóvel, notificação das Finanças, cliente insolvente).
-- **Checklists** (8): verificação acionável (RGPD, due diligence, constituição, contrato, pré-deploy, registo de marca, loja online, concorrência).
-- **Calculadoras** (10, Python + TypeScript, com testes): juros **por tramos semestrais com memória de cálculo**, prazos, compensação, **créditos laborais na cessação**, custas, imposto de selo, IMT, prescrição, IRS simplificado, **legítima**.
+- **Perfil da empresa guardado**: `.advogado-pt/perfil-empresa.md` no projeto (ou o perfil geral em `~/.advogado-pt/`) — carregado no início de cada sessão; pergunta só o que falta. **Vários perfis** para contabilistas e consultores (`ativar_perfil`).
+- **Calendário de obrigações** a partir do perfil (IVA, Modelo 22, IES, SS, contas, RCBE, Relatório Único, RGPC…), com base legal por data e exportação `.ics` para Google Calendar/Outlook (`/calendario`).
+- **Prazos em curso** guardados no projeto, com aviso ao abrir a sessão (`/prazos`).
+- **Templates reais** (62), não promessas: cada documento parte de um esqueleto, declara o **âmbito** (nacional / UE / misto) e termina com a lista **"Antes de enviar — verificar"** (prazos ⏰, forma de envio, normas a confirmar).
+- **Playbooks** (11): árvores de decisão que transformam conhecimento em ação guiada (cliente não paga, citação, despedir, despedimento coletivo, lay-off, data breach, comprar imóvel, notificação das Finanças, cliente insolvente, faturar ao estrangeiro, fechar a empresa).
+- **Checklists** (10): verificação acionável (RGPD, due diligence, constituição, contrato, pré-deploy, registo de marca, loja online, concorrência, compliance por dimensão, segurança e saúde no trabalho).
+- **Calculadoras** (14, Python + TypeScript, com testes): juros **por tramos semestrais com memória de cálculo**, prazos, compensação (**regime transitório por períodos**, validada contra o simulador da ACT), créditos laborais, **salário líquido e custo do trabalhador**, **IRC** (PME, derramas, tributação autónoma), **decisor de IVA internacional**, **taxa de justiça**, custas de injunção, imposto de selo, IMT, prescrição, IRS simplificado, legítima.
+- **Factos de referência** (`mcp-server/test/factos.json`): perguntas jurídicas verificadas, testadas a cada build para que um erro corrigido não volte.
 - **Exportar como prompt** para qualquer IA: `node cli/advogado-pt.mjs prompt <template>`.
 - **Ponto único de verdade** para valores (`skills/advogado-pt/references/valores-2026.md`) — sem números desatualizados espalhados.
 - **Protocolos de rigor**: anti-alucinação de citações e anti-desatualização de valores (ver SKILL.md).
@@ -106,6 +109,8 @@ O advogado não assume quem és. Guarda o perfil (forma jurídica, setor, n.º d
 - `~/.advogado-pt/perfil-empresa.md` — o perfil geral, usado em qualquer pasta sem perfil próprio.
 
 Vê ou atualiza com `/perfil` (ou as tools `obter_perfil_empresa` / `guardar_perfil_empresa`). É um ficheiro de texto, editável à mão; não guarda dados de trabalhadores nem de clientes.
+
+**Vários perfis** (contabilista com muitos clientes): grava cada empresa com um nome (`perfis/<nome>.md`) e escolhe a ativa com `ativar_perfil`; o hook, as respostas e o calendário passam a usar essa.
 
 ## Manutenção
 

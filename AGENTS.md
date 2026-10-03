@@ -42,21 +42,43 @@ Tool-agnostic: vê a intenção do utilizador e encadeia playbook + calculadora 
 | "Tenho uma multa", "contraordenação" | `obter_template` (`defesa-contraordenacao`) + `ler_referencia` (`multas`) |
 | "O que diz a lei sobre…", "quais os meus direitos" | `listar_areas_juridicas` → `ler_referencia` (área) ou `procurar_conteudo` (termo) |
 | "Antes de lançar / pôr online" (loja, serviço) | `obter_checklist` (`checklist-predeploy-legal`) + `obter_template` (`termos-condicoes-loja-online`) |
+| "Que obrigações tenho este ano", "agenda fiscal", "pôr no Google Calendar" | `calendario_obrigacoes` (`ano`; `exportar: true` gera o `.ics`) — a partir do perfil da empresa |
+| "Tenho um prazo a correr", "lembra-me do prazo" | `calc_prazo` → `registar_prazo`; `listar_prazos` / `concluir_prazo` (aviso automático no início da sessão) |
+| "Quanto recebo líquido", "quanto custa contratar" | `calc_salario_liquido` / `calc_custo_trabalhador` |
+| "Quanto pago de IRC", "tributação autónoma do carro" | `calc_irc` + `ler_referencia` (`fiscal`) |
+| "Faturar a cliente estrangeiro", "leva IVA?", "autoliquidação", "OSS" | `calc_iva_operacao` + `obter_playbook` (`faturar-cliente-estrangeiro`) + `ler_referencia` (`iva-internacional`) |
+| "Temos 50 trabalhadores", "canal de denúncias", "plano anticorrupção" | `ler_referencia` (`compliance`) + `obter_checklist` (`checklist-compliance-dimensao`) + `obter_template` (`plano-prevencao-riscos-corrupcao`, `regulamento-canal-denuncias`) |
+| "Lay-off", "despedimento coletivo", "fechar a empresa" | `obter_playbook` (`lay-off`, `despedimento-coletivo`, `dissolucao-liquidacao`) |
+| "Recebi uma injunção / execução e quero opor-me", "quanto custa pôr uma ação" | `obter_template` (`oposicao-injuncao`, `oposicao-execucao`) + `calc_prazo`; `calc_taxa_justica` |
+| "Alojamento local", "restaurante", "obras", "TVDE", "imobiliária" | `ler_referencia` (`licenciamento-setorial`) |
+| "Sou contabilista e tenho vários clientes" | `guardar_perfil_empresa` com `perfil` + `ativar_perfil` / `listar_perfis` |
 
 Descoberta: `listar_areas_juridicas`, `listar_templates`, `listar_playbooks`, `listar_checklists` e `procurar_conteudo` (procura transversal por termo) ajudam a encontrar o recurso certo quando a intenção não mapeia diretamente acima.
 
-## As 8 calculadoras (e como invocá-las)
+## As calculadoras (e como invocá-las)
 
 Todas devolvem texto com um aviso de que são estimativas de apoio (valores de 2026).
 
 1. **`calc_juros_mora`** — juros de mora entre duas datas. Args: `capital` (€), `data_inicio` (YYYY-MM-DD), `data_fim` (opcional, default hoje), `tipo` (`comercial` default | `civil`).
 2. **`calc_prazo`** — conta um prazo legal. Args: `inicio` (YYYY-MM-DD), `dias` (inteiro), `tipo` (`uteis` default | `corridos`). Salta fins-de-semana e feriados nacionais PT.
-3. **`calc_compensacao_despedimento`** — compensação por cessação de contrato. Args: `retribuicao_base` (€), `diuturnidades` (default 0), `anos` (aceita decimais), `modalidade` (`sem-termo` default | `extincao-posto` | `coletivo` | `termo`).
+3. **`calc_compensacao_despedimento`** — compensação por cessação de contrato (14 dias/ano, tetos, sem mínimo de 3 meses). Args: `retribuicao_base` (€), `diuturnidades` (default 0), `data_admissao` + `data_cessacao` (YYYY-MM-DD — recomendado: aplica o regime transitório por períodos) ou `anos`, `modalidade` (`sem-termo` default | `extincao-posto` | `coletivo` | `termo`).
 4. **`calc_custas_injuncao`** — taxa de justiça de uma injunção. Args: `valor` (€ da dívida). UC 2026 = 102€.
 5. **`calc_imposto_selo_heranca`** — imposto do selo em transmissões gratuitas. Args: `valor` (€), `herdeiro` (`conjuge` | `descendente` | `ascendente` | `outro` default), `inclui_imovel` (bool, default false), `vpt_imovel` (€, default 0).
 6. **`calc_imt`** — IMT 2026 (Continente) na compra de imóvel + Imposto do Selo 0,8%. Args: `valor` (maior entre preço e VPT, €), `tipo` (`hpp` default | `secundaria`), `jovem` (bool — isenção IMT Jovem ≤35 anos, 1.ª HPP).
 7. **`calc_prescricao`** — data-limite de prescrição/caducidade. Args: `inicio` (YYYY-MM-DD), `tipo` (enum, ver `calc_prescricao` para os tipos disponíveis).
 8. **`calc_irs_simplificado`** — rendimento tributável no regime simplificado (Cat. B). Args: `rendimento` (bruto anual, €), `tipo` (`mercadorias` | `servicos-151` | `servicos-outros` | `propriedade-intelectual`). Não calcula o imposto final.
+9. **`calc_creditos_laborais`** / **`calc_legitima`** — créditos na cessação do contrato; legítima e quota disponível.
+10. **`calc_salario_liquido`** — salário líquido 2026. Args: `bruto`, `tabela` (`I` | `II` | `III`), `dependentes`, `subsidio_refeicao_dia`, `dias_refeicao`, `refeicao_cartao`.
+11. **`calc_custo_trabalhador`** — custo anual para a empresa. Args: `base`, `diuturnidades`, `subsidio_refeicao_dia`, `taxa_seguro_at`.
+12. **`calc_irc`** — IRC estimado. Args: `lucro_tributavel`, `pme`, `derrama_municipal`, `prejuizos_dedutiveis`, `despesas_representacao`, `viaturas` [`{custo_aquisicao, tipo, encargos}`], `ano`.
+13. **`calc_iva_operacao`** — decisor de IVA com o estrangeiro. Args: `tipo` (`bens` | `servicos`), `cliente` (`empresa` | `consumidor`), `destino` (`PT` | `UE` | `fora-UE`), `nif_vies`, `vendas_distancia_ue`, `servico`, `regime53`.
+14. **`calc_taxa_justica`** — taxa de justiça (RCP, Tabela I). Args: `valor_acao`, `tabela` (`A` | `B` | `C`), `reducao_eletronica`.
+
+## Perfil, calendário e prazos
+
+- `obter_perfil_empresa` / `guardar_perfil_empresa` (`perfil` opcional para perfis nomeados) / `listar_perfis` / `ativar_perfil`.
+- `calendario_obrigacoes` (`ano`, `mes`, `exportar`) — obrigações do ano a partir do perfil, com base legal; `.ics` para Google Calendar/Outlook.
+- `registar_prazo` / `listar_prazos` / `concluir_prazo` — prazos em curso em `.advogado-pt/prazos.md`.
 
 ## Tools de conteúdo
 

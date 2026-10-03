@@ -69,6 +69,6 @@ _(Lista para quem envia — não faz parte do documento.)_
 
 - [ ] ⏰ Preencher a data de início e escolher a duração: indeterminada (cessação com efeitos ao 60.º dia após comunicação escrita) ou determinada até 6 meses (renovação automática; oposição até 15 dias antes); denúncia livre nos primeiros 30 dias (art. 167.º CT).
 - [ ] Forma escrita obrigatória (art. 166.º CT), em duplicado; se for adenda, identificar o contrato de trabalho de origem e confirmar o IRCT aplicável (pode fixar a compensação de despesas).
-- [ ] Compensação de despesas (cláusula 5.ª, art. 168.º CT): definir o método (valor acordado ou diferença face às despesas homólogas) e confirmar o limite isento de IRS/TSU — não consta de `references/valores-2026.md` [VERIFICAR — valores-2026].
+- [ ] Compensação de despesas (cláusula 5.ª, art. 168.º CT): definir o método (valor acordado ou diferença face às despesas homólogas) e limite isento de IRS e SS: 1,00 € por dia completo de teletrabalho (eletricidade 0,10 € + internet 0,40 € + computador 0,50 €; +50% se fixado por IRCT), só para bens não fornecidos pelo empregador — Portaria 292-A/2023; ver `references/valores-2026.md`.
 - [ ] Meios de controlo à distância: respeitar os arts. 20.º e 170.º CT e o RGPD; não usar software de monitorização contínua do ecrã/atividade (a confirmar as orientações da CNPD).
 - [ ] Preencher a janela horária das visitas (cláusula 9.ª) e incluir o posto de teletrabalho na avaliação de riscos de segurança e saúde.

@@ -24,7 +24,7 @@ const AREAS: Record<string, { titulo: string; foco: string }> = {
   },
   laboral: {
     titulo: "Direito do trabalho",
-    foco: "Foco: relação laboral. Usa `ler_referencia laboral`; para cessação, `calc_compensacao_despedimento` e o playbook `quero-despedir`; templates de contrato/nota de culpa via `obter_template`.",
+    foco: "Foco: relação laboral. Usa `ler_referencia laboral`; para cessação, `calc_compensacao_despedimento` (com as datas) e os playbooks `quero-despedir`, `despedimento-coletivo` e `lay-off`; salário e custo com `calc_salario_liquido` / `calc_custo_trabalhador`; templates de contrato/nota de culpa via `obter_template`.",
   },
   imovel: {
     titulo: "Imobiliário (compra/venda)",

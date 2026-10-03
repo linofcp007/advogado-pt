@@ -12,7 +12,7 @@
 ## Celebração do Contrato
 - Forma escrita obrigatória
 - Comunicação às Finanças: até ao fim do mês seguinte ao do início do arrendamento (art. 60.º, n.º 2, CIS — Modelo 2, Portal das Finanças)
-- Imposto do selo: 10% sobre a renda de 1 mês (pago pelo senhorio, repercutível)
+- Imposto do selo: 10% sobre a renda de 1 mês (TGIS, verba 2); o encargo é do **senhorio** (art. 3.º, n.º 3, al. b), CIS)
 - Depósito/caução: máximo 2 meses de renda (Art. 1076º CC)
 
 ## Tipos de Contrato

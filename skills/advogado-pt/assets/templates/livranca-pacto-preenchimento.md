@@ -50,6 +50,6 @@ _(Lista para quem envia — não faz parte do documento.)_
 
 - [ ] ⏰ As ações contra o subscritor (e o avalista) prescrevem em 3 anos a contar do vencimento (arts. 70.º e 77.º LULL) — a data de vencimento que se preencher marca o início desse prazo.
 - [ ] Usar o impresso oficial de livrança e garantir os requisitos do título (palavra "livrança", promessa de pagar, vencimento, lugar de pagamento, beneficiário, local e data de emissão, assinatura — art. 75.º LULL, a confirmar); a Parte I é só o texto a transpor.
-- [ ] Imposto do selo sobre a livrança: confirmar a verba da TGIS e o valor — não consta de `references/valores-2026.md` [VERIFICAR — valores-2026].
+- [ ] Imposto do selo sobre a livrança: 0,5% do valor da livrança, com mínimo de 1 € (TGIS, verba 23.2) — ver `references/valores-2026.md`.
 - [ ] O pacto de preenchimento deve ser assinado pelo subscritor **e** pelos avalistas; se o subscritor for sociedade, assinam os gerentes com poderes, com indicação dessa qualidade.
 - [ ] Antes de preencher: interpelar subscritor e avalistas por carta registada com AR com a antecedência do ponto 3 e preencher só pelo valor efetivamente em dívida (o preenchimento abusivo pode ser oposto ao portador — a confirmar).

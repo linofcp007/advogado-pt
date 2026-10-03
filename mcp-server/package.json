@@ -1,6 +1,6 @@
 {
   "name": "advogado-pt-mcp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Advogado PT — assessoria jurídica de Portugal como servidor MCP: referências legais, templates de documentos e calculadoras (juros, IMT, prazos, prescrição, compensação). Funciona em Claude, Cursor, Windsurf, ChatGPT, Codex e Gemini.",
   "type": "module",
   "license": "MIT",
@@ -33,7 +33,7 @@
     "build:server": "node scripts/build-server.mjs",
     "build": "npm run bundle && npm run typecheck && npm run build:server",
     "start": "node dist/index.js",
-    "test": "npm run build && node --test test/calculators.test.mjs test/plugin.test.mjs test/hooks.test.mjs test/content.test.mjs test/perfil.test.mjs test/cli.test.mjs",
+    "test": "npm run build && node --test test/calculators.test.mjs test/plugin.test.mjs test/hooks.test.mjs test/content.test.mjs test/perfil.test.mjs test/cli.test.mjs test/v12.test.mjs test/factos.test.mjs",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

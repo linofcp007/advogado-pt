@@ -54,13 +54,13 @@
 - [ ] Sem preços ou condições de venda discriminatórios para prestações equivalentes (art. 3.º) e com tabelas de preços e condições de venda transparentes (art. 4.º)
 - [ ] Sem **venda com prejuízo** — abaixo do preço de compra efetivo (art. 5.º)
 - [ ] Sem **recusa de venda** injustificada (art. 6.º) nem **práticas negociais abusivas** (art. 7.º); setor agroalimentar — práticas proibidas e sujeitas a acordo (arts. 7.º-B e 7.º-C)
-- [ ] Fiscalização e processos pela ASAE (art. 13.º — a confirmar); coimas [VERIFICAR — valores-2026]
+- [ ] Fiscalização e processos pela ASAE (art. 13.º — a confirmar); coimas: muito graves de 2.500 € (micro) a 2.500.000 € (grande); graves de 500 € a 500.000 €, por dimensão (n.º de trabalhadores) — ver `references/valores-2026.md`
 
 ## Concentrações (notificação prévia)
 - [ ] Compra de empresa, de ativos com clientela, fusão ou *joint venture* com autonomia = possível concentração (Lei 19/2012, art. 36.º)
 - [ ] Testar os limiares de notificação prévia à AdC — quotas de mercado e volumes de negócios em Portugal (art. 37.º, n.º 1; limiares (ver `references/valores-2026.md`)); operações entre as mesmas partes em 2 anos somam-se (art. 38.º)
 - [ ] ⏰ Notificar **depois de concluído o acordo e antes de realizar** a operação (art. 37.º, n.º 2); proibido executar antes da decisão de não oposição (art. 40.º, n.º 1) — o *gun jumping* é contraordenação (art. 68.º, n.º 1, al. f))
-- [ ] Operações com dimensão europeia: notificação à Comissão Europeia (Regulamento (CE) 139/2004 — limiares [VERIFICAR — valores-2026])
+- [ ] Operações com dimensão europeia: notificação à Comissão Europeia (Regulamento (CE) 139/2004 — VN mundial > 5.000 M€ e ≥ 2 empresas > 250 M€ na UE, ou os limiares alternativos do art. 1.º, n.º 3; ver `references/valores-2026.md`)
 - [ ] Em caso de dúvida, pedir avaliação prévia à AdC (art. 37.º, n.º 5)
 
 ## Busca da AdC — o que fazer

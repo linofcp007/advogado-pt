@@ -50,7 +50,7 @@ Consigna-se que, de acordo com as contas aprovadas, a distribuição decidida n�
 
 O sócio único decide a distribuição, a seu favor, do montante de {{VALOR_DISTRIBUICAO}} euros, por conta de {{RESERVAS_DISTRIBUIDAS: identificar — ex. reservas livres / resultados transitados}}, expressamente constantes do balanço aprovado relativo ao exercício de {{ANO}}, a pagar até {{DATA_PAGAMENTO}}.
 
-### [D] Adiantamento sobre lucros do exercício em curso [VERIFICAR]
+### [D] Adiantamento sobre lucros do exercício em curso (desaconselhado — ver a Nota doutrinal)
 
 <!-- [VERIFICAR] O CSC só regula adiantamentos sobre lucros nas sociedades anónimas (art. 297.º: autorização no
      contrato; balanço intercalar com antecedência máxima de 30 dias, certificado por ROC; um só adiantamento, na
@@ -112,6 +112,14 @@ O gerente designado,
 
 _______________________________
 {{GERENTE_NOME}}}}
+
+_(Nota para quem usa o template — não faz parte do documento.)_
+
+## Nota doutrinal — adiantamentos sobre lucros numa sociedade por quotas
+
+- **Posição recomendada:** **não usar** a decisão [D] sem antes alterar e registar o contrato de sociedade. Preferir: (1) remuneração de gerência mensal; (2) aprovar as contas cedo (até 3 meses após o fecho) e distribuir; (3) distribuir **reservas livres e resultados transitados** a meio do ano, por decisão do sócio único em ata, com base no último balanço aprovado e respeitando os arts. 32.º e 33.º CSC. Se mesmo assim quiserem adiantar: cláusula no pacto que espelhe o art. 297.º (balanço intercalar com ≤ 30 dias certificado por ROC; um adiantamento na 2.ª metade do exercício; máximo de metade do distribuível; só a partir do exercício seguinte ao registo da cláusula) + decisão do sócio único + retenção de 28% de IRS.
+- **Fundamento:** o art. 297.º CSC só regula as sociedades anónimas; o art. 31.º, n.º 1, só admite distribuições sem deliberação nos casos "expressamente previstos na lei". Doutrina dividida: Raúl Ventura admite a analogia com controlo equivalente; Paulo Olavo Cunha e Coutinho de Abreu não. Sem jurisprudência que o admita em Lda; TRG 13-07-2021, proc. 871/20.4T8VCT.G1, mostra o risco de litígio. Riscos: restituição (art. 34.º), responsabilidade dos gerentes (arts. 31.º, n.º 2, 72.º, 78.º), crime de distribuição ilícita (art. 514.º, n.º 3), e tributação como rendimentos de capitais (CIRS arts. 5.º, n.º 2, al. h), e 6.º, n.º 4; STA 11-09-2019, proc. 0203/17.9BEVIS).
+- **Grau de certeza:** médio-baixo (doutrina dividida, sem jurisprudência direta).
 
 ---
 

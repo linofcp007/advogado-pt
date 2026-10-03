@@ -227,8 +227,9 @@ test("IMT secundária 160000 (continuidade escalão 5%)", () => {
 });
 
 // === Compensação ===
-test("compensação sem-termo 1500 / 4 anos -> mínimo 4500", () => {
-  // 1500 * 14/30 * 4 = 2800 < mínimo 3 meses (4500) -> aplica 4500.
+test("compensação sem-termo 1500 / 4 anos -> 2800 (sem mínimo de 3 meses)", () => {
+  // 1500 / 30 * 14 * 4 = 2800. O art. 366.º em vigor não tem mínimo (corrigido na v1.2;
+  // o mínimo de 3 meses só existe no regime transitório de contratos anteriores a 1/11/2011).
   const { diasAno, bruto, minimoAplicado } = calcularCompensacao(
     1500,
     0,
@@ -236,8 +237,8 @@ test("compensação sem-termo 1500 / 4 anos -> mínimo 4500", () => {
     "sem-termo"
   );
   assert.equal(diasAno, 14);
-  assert.ok(minimoAplicado);
-  quase(bruto, 4500.0);
+  assert.ok(!minimoAplicado);
+  quase(bruto, 2800.0);
 });
 
 // === Prescrição ===

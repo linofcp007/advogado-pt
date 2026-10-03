@@ -1,5 +1,11 @@
 {
-  "features": {},
+  "features": {
+    "advogado-pt-v1-2-operacional": {
+      "dependsOn": [
+        "advogado-pt-v1-1-empresas"
+      ]
+    }
+  },
   "meta": {
     "lang": "pt",
     "checks": {

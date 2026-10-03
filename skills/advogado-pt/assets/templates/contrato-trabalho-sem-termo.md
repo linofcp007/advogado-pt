@@ -66,7 +66,7 @@ O Empregador: _______________________   O Trabalhador: _______________________
 
 _(Lista para quem envia — não faz parte do documento.)_
 
-- [ ] ⏰ Comunicar a admissão à Segurança Social antes do início da produção de efeitos do contrato (nos 15 dias anteriores ao início — art. 29.º, n.º 2, do Código Contributivo) e ter o seguro de acidentes de trabalho ativo desde o 1.º dia.
+- [ ] ⏰ Comunicar a admissão à Segurança Social antes do início da produção de efeitos do contrato (até ao início da execução do contrato — art. 29.º, n.º 2, al. a), do Código Contributivo, na redação do DL 127/2025) e ter o seguro de acidentes de trabalho ativo desde o 1.º dia.
 - [ ] Retribuição base igual ou superior à RMMG em vigor (`references/valores-2026.md`) e à tabela do IRCT aplicável; confirmar o IRCT na cláusula 10.ª.
 - [ ] Período experimental (cl. 5.ª): escolher 90, 180 ou 240 dias conforme o enquadramento do art. 112.º CT e descontar estágios ou contratos anteriores para a mesma atividade (a confirmar).
 - [ ] Garantir que o trabalhador recebe por escrito toda a informação obrigatória sobre o contrato (arts. 106.º e seguintes CT — a confirmar o prazo); o que não estiver no contrato vai em anexo.

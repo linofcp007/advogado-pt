@@ -2,8 +2,9 @@
 // Dispatcher de hooks do plugin advogado-pt. Sem dependências (só node: builtins) e FAIL-OPEN:
 // qualquer erro -> exit 0 (nunca bloqueia o utilizador). Lê o payload JSON do Claude Code de stdin.
 //
-//   SessionStart  -> breve briefing de "advogado ativo" + perfil da empresa guardado
-//                    (projeto -> geral) ou instrução para o perguntar.
+//   SessionStart  -> breve briefing de "advogado ativo" + perfil da empresa (o ativo, se houver
+//                    vários; senão o por defeito, projeto -> geral) ou instrução para o perguntar,
+//                    + aviso dos prazos em curso (.advogado-pt/prazos.md) vencidos ou a <= 7 dias.
 //   PostToolUse   -> ao gravar um INSTRUMENTO jurídico (detetado pela estrutura, não pelo
 //                    léxico — ver detetarDocumentoJuridico), lembra as cláusulas essenciais
 //                    e o disclaimer. Informativo, nunca bloqueia.
@@ -36,7 +37,8 @@ function lerStdin() {
 }
 
 // --- Perfil da empresa -----------------------------------------------------
-// <projeto>/.advogado-pt/perfil-empresa.md tem prioridade; senão ~/.advogado-pt/perfil-empresa.md.
+// Perfil ativo (.advogado-pt/perfil-ativo -> perfis/<nome>.md; projeto -> geral); senão
+// <projeto>/.advogado-pt/perfil-empresa.md; senão ~/.advogado-pt/perfil-empresa.md.
 // Leitor mínimo, alinhado com mcp-server/src/perfil.ts (o hook não importa o servidor).
 const CAMPOS_PERFIL = [
   "forma_juridica", "denominacao", "setor", "trabalhadores", "volume_negocios", "regime_iva",
@@ -44,9 +46,24 @@ const CAMPOS_PERFIL = [
 ];
 const MS_12_MESES = 365 * 24 * 60 * 60 * 1000;
 
-function lerPerfilEm(base, origem, hoje) {
+const NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
+
+function nomeAtivoEm(base) {
   try {
-    const caminho = join(base, ".advogado-pt", "perfil-empresa.md");
+    const f = join(base, ".advogado-pt", "perfil-ativo");
+    if (!existsSync(f)) return null;
+    const n = readFileSync(f, "utf8").split(/\r?\n/)[0].trim().toLowerCase();
+    return NOME_RE.test(n) ? n : null;
+  } catch {
+    return null;
+  }
+}
+
+function lerPerfilEm(base, origem, hoje, nome) {
+  try {
+    const caminho = nome
+      ? join(base, ".advogado-pt", "perfis", `${nome}.md`)
+      : join(base, ".advogado-pt", "perfil-empresa.md");
     if (!existsSync(caminho)) return null;
     const campos = {};
     for (const linha of readFileSync(caminho, "utf8").split(/\r?\n/)) {
@@ -58,9 +75,71 @@ function lerPerfilEm(base, origem, hoje) {
     const d = /^(\d{4})-(\d{2})-(\d{2})$/.exec(campos.atualizado_em || "");
     const desatualizado = !d || hoje.getTime() - Date.UTC(+d[1], +d[2] - 1, +d[3]) > MS_12_MESES;
     const resumo = uteis.map((c) => `${c}: ${campos[c]}`).join(" · ");
-    return { origem, resumo, desatualizado };
+    return { origem, resumo, desatualizado, nome };
   } catch {
     return null; // fail-open
+  }
+}
+
+function lerPerfilAtivo(projeto, home, hoje) {
+  const nome = nomeAtivoEm(projeto) || nomeAtivoEm(home);
+  if (nome) {
+    const p = lerPerfilEm(projeto, "projeto", hoje, nome) || lerPerfilEm(home, "geral", hoje, nome);
+    if (p) return p;
+  }
+  const d = lerPerfilEm(projeto, "projeto", hoje) || lerPerfilEm(home, "geral", hoje);
+  return d && nome ? { ...d, aviso: `perfil ativo '${nome}' não encontrado — a usar o por defeito` } : d;
+}
+
+// --- Prazos em curso -------------------------------------------------------
+// <projeto>/.advogado-pt/prazos.md — "- [ ] AAAA-MM-DD — descrição — origem".
+// Leitor mínimo, alinhado com mcp-server/src/prazos-estado.ts.
+const PRAZO_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
+const DIAS_AVISO = 7;
+
+function hojeEmLisboa(hoje) {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Lisbon", year: "numeric", month: "2-digit", day: "2-digit",
+    }).format(hoje);
+  } catch {
+    return hoje.toISOString().slice(0, 10);
+  }
+}
+
+function avisoPrazos(projeto, hoje) {
+  try {
+    const f = join(projeto, ".advogado-pt", "prazos.md");
+    if (!existsSync(f)) return "";
+    const h = hojeEmLisboa(hoje);
+    const hMs = Date.parse(`${h}T00:00:00Z`);
+    const vencidos = [];
+    const proximos = [];
+    for (const linha of readFileSync(f, "utf8").split(/\r?\n/)) {
+      const m = PRAZO_RE.exec(linha);
+      if (!m || m[1] !== " ") continue;
+      const ms = Date.parse(`${m[2]}T00:00:00Z`);
+      if (Number.isNaN(ms)) continue;
+      const desc = m[3].split(/\s+[—–]\s+/)[0].slice(0, 120);
+      const faltam = Math.round((ms - hMs) / 86400000);
+      if (faltam < 0) vencidos.push({ data: m[2], desc });
+      else if (faltam <= DIAS_AVISO) proximos.push({ data: m[2], desc, faltam });
+    }
+    if (vencidos.length === 0 && proximos.length === 0) return "";
+    const ord = (a, b) => a.data.localeCompare(b.data);
+    const partes = [
+      ...vencidos.sort(ord).map((x) => `VENCIDO em ${x.data} — ${x.desc}`),
+      ...proximos.sort(ord).map((x) =>
+        `${x.faltam === 0 ? "termina HOJE" : x.faltam === 1 ? "falta 1 dia" : `faltam ${x.faltam} dias`} (${x.data}) — ${x.desc}`
+      ),
+    ].slice(0, 10);
+    return (
+      ` ⏰ Prazos em curso (.advogado-pt/prazos.md): ${partes.join("; ")}. ` +
+      "Avisa o utilizador logo no início; um prazo vencido pede verificação imediata (justo impedimento, multa do art. 139.º CPC?). " +
+      "Marca cumpridos com concluir_prazo."
+    );
+  } catch {
+    return ""; // fail-open: ficheiro ilegível -> sem aviso
   }
 }
 
@@ -68,16 +147,19 @@ function lerPerfilEm(base, origem, hoje) {
 export function mensagemSessionStart(opts = {}) {
   let msg =
     "⚖️ advogado-pt ativo — assessoria jurídica de Portugal · active — legal assistant for Portugal. " +
-    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /defesa /rgpd /despedir /fisco /insolvencia /perfil /doctor. " +
+    "Comandos / commands: /advogado /parecer /cobrar /contrato /prazo /prazos /calendario /defesa /rgpd /despedir /salario /irc /fisco /compliance /insolvencia /perfil /doctor. " +
     "Valores 2026 em valores-2026; confirma prazos a correr · check running deadlines. " +
     "Orientação informativa, não substitui advogado da OA · informational guidance, not a substitute for a registered lawyer.";
   try {
     const hoje = opts.hoje || new Date();
     const projeto = opts.projeto || process.env.CLAUDE_PROJECT_DIR || process.cwd();
     const home = opts.home || process.env.ADVOGADO_PT_HOME || homedir();
-    const p = lerPerfilEm(projeto, "projeto", hoje) || lerPerfilEm(home, "geral", hoje);
+    const p = lerPerfilAtivo(projeto, home, hoje);
     if (p) {
-      msg += ` 🏢 Perfil da empresa (${p.origem}): ${p.resumo}. Adapta as respostas a este perfil.`;
+      const quem = p.nome ? ` '${p.nome}'` : "";
+      msg += ` 🏢 Perfil da empresa${quem} (${p.origem}): ${p.resumo}. Adapta as respostas a este perfil.`;
+      if (p.nome) msg += " Há vários perfis: confirma a empresa se o pedido parecer de outra (listar_perfis / ativar_perfil).";
+      if (p.aviso) msg += ` ⚠️ ${p.aviso}.`;
       if (p.desatualizado) {
         msg += " ⚠️ Perfil com mais de 12 meses (ou sem data): confirma os dados com o utilizador antes de os usar.";
       }
@@ -89,6 +171,12 @@ export function mensagemSessionStart(opts = {}) {
     }
   } catch {
     /* fail-open: segue sem perfil */
+  }
+  try {
+    const projeto = opts.projeto || process.env.CLAUDE_PROJECT_DIR || process.cwd();
+    msg += avisoPrazos(projeto, opts.hoje || new Date());
+  } catch {
+    /* fail-open: segue sem prazos */
   }
   return msg;
 }
@@ -126,7 +214,12 @@ const TIPO_DOC =
   // "ATA N.º 3" — \b depois de "N" (seguido de "."); "# Ata nova" não dispara.
   "decis[ãa]o d[oa] s[óo]ci[oa] [úu]nic[oa]|ata (n|da assembleia|de reuni[ãa]o)|" +
   "formul[áa]rio de livre resolu[çc][ãa]o|registo das atividades de tratamento|" +
-  "resposta a pedido de exerc[íi]cio|queixa (à comiss[ãa]o|contra|-crime)";
+  "resposta a pedido de exerc[íi]cio|queixa (à comiss[ãa]o|contra|-crime)|" +
+  // v1.2 — peças processuais e regulamentos/políticas internas, sempre com o complemento.
+  "embargos de executado|oposi[çc][ãa]o (ao requerimento de injun[çc][ãa]o|[àa] (injun[çc][ãa]o|execu[çc][ãa]o|penhora))|" +
+  "plano de preven[çc][ãa]o de riscos|regulamento (interno de empresa|do canal de den[úu]ncia)|" +
+  "pol[íi]tica de (registo dos tempos de trabalho|utiliza[çc][ãa]o de intelig[êe]ncia artificial|" +
+  "utiliza[çc][ãa]o dos meios inform[áa]ticos|videovigil[âa]ncia)";
 
 // Só prosa: um .ts/.py/.json nunca é um instrumento, por muito que o cite.
 const EXT_PROSA = /\.(md|markdown|txt|rtf)$/i;

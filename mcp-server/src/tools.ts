@@ -1,4 +1,4 @@
-// Registo das TOOLS do servidor MCP: 8 calculadoras jurídicas + ferramentas de conteúdo.
+// Registo das TOOLS do servidor MCP: calculadoras jurídicas, conteúdo, perfil, calendário e prazos.
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import {
@@ -6,6 +6,7 @@ import {
   memoriaJuros,
   contarPrazo,
   calcularCompensacao,
+  calcularCompensacaoPorDatas,
   custasInjuncao,
   impostoSeloHeranca,
   calcularIMT,
@@ -13,13 +14,20 @@ import {
   calcularIRSSimplificado,
   calcularCreditosCessacao,
   calcularLegitima,
+  calcularSalarioLiquido,
+  calcularCustoTrabalhador,
+  calcularIRC,
+  calcularTaxaJustica,
+  decidirIVA,
   formatarEuros,
   PRESCRICAO_TIPOS,
   COMPENSACAO_MODALIDADES,
 } from "./calculators/index.js";
 import { listar, ler, procurar, listarComAmbito, formatarProcura, type Categoria } from "./content.js";
-import { lerPerfil, guardarPerfil, resumoPerfil, textoPerguntasPerfil } from "./perfil.js";
+import { lerPerfil, guardarPerfil, resumoPerfil, textoPerguntasPerfil, listarPerfis, ativarPerfil } from "./perfil.js";
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
+import { gerarCalendario, exportarICS, formatarCalendario } from "./calendario.js";
+import { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } from "./prazos-estado.js";
 
 const AVISO =
   "\n\n⚠️ Estimativa de apoio. Valores/taxas de 2026 — confirmar no ano corrente. Não substitui aconselhamento de advogado inscrito na OA.";
@@ -104,27 +112,59 @@ export function registerTools(server: McpServer): void {
     {
       title: "Compensação por cessação de contrato",
       description:
-        "Calcula a compensação por cessação do contrato de trabalho (sem-termo/coletivo = 14 dias/ano; extinção-posto/inadaptação = 12; termo = 24), com mínimo de 3 meses. Usa quando se fala em despedir/ser despedido ou no valor a receber/pagar ('quanto recebo se for despedido', 'indemnização', 'compensação', 'fim de contrato', 'rescisão'). EN: severance/redundancy pay on dismissal or contract termination.",
+        "Calcula a compensação por cessação do contrato de trabalho (art. 366.º CT): 14 dias de RB+diuturnidades por ano (despedimento coletivo, extinção do posto, inadaptação), 24 na caducidade do termo, com os tetos legais e SEM mínimo de 3 meses. Com data_admissao e data_cessacao aplica o regime transitório por períodos (antiguidade anterior a 1/5/2023 — Lei 69/2013 e Lei 13/2023), validado contra o simulador da ACT. Usa quando se fala em despedir/ser despedido ou no valor a receber/pagar ('quanto recebo se for despedido', 'indemnização', 'compensação', 'fim de contrato'). EN: severance pay on dismissal or contract termination.",
       inputSchema: {
         retribuicao_base: z.number().describe("Retribuição base mensal (€)"),
         diuturnidades: z.number().default(0),
-        anos: z.number().describe("Antiguidade em anos (aceita decimais)"),
+        anos: z.number().optional().describe("Antiguidade em anos (sem datas: só regra atual)"),
+        data_admissao: z.string().optional().describe("Data de admissão (YYYY-MM-DD) — recomendado"),
+        data_cessacao: z.string().optional().describe("Data de cessação (YYYY-MM-DD)"),
         modalidade: z
           .enum(["sem-termo", "extincao-posto", "coletivo", "termo"])
           .default("sem-termo"),
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ retribuicao_base, diuturnidades, anos, modalidade }) => {
-      const r = calcularCompensacao(retribuicao_base, diuturnidades, anos, modalidade);
-      return texto(
-        `Compensação (${modalidade})\n` +
-          `Base (RB+diut.): ${formatarEuros(retribuicao_base + diuturnidades)}\n` +
-          `Antiguidade: ${anos} anos · ${r.diasAno} dias/ano\n` +
-          `VALOR BRUTO: ${formatarEuros(r.bruto)}` +
-          (r.minimoAplicado ? "\n(Aplicado o mínimo legal de 3 meses.)" : "") +
-          AVISO
-      );
+    async ({ retribuicao_base, diuturnidades, anos, data_admissao, data_cessacao, modalidade }) => {
+      try {
+        if (data_admissao && data_cessacao) {
+          const r = calcularCompensacaoPorDatas({
+            retribuicaoBase: retribuicao_base,
+            diuturnidades,
+            dataAdmissao: parseData(data_admissao),
+            dataCessacao: parseData(data_cessacao),
+            modalidade: modalidade === "termo" ? "termo" : "sem-termo",
+          });
+          return texto(
+            `Compensação (${modalidade}) — ${data_admissao} a ${data_cessacao}\n` +
+              r.periodos
+                .map((x) => `- ${x.de} a ${x.ate}: ${x.dias} dias/ano = ${formatarEuros(x.valor)}`)
+                .join("\n") +
+              `\nVALOR BRUTO: ${formatarEuros(r.total)}` +
+              (r.tetoAplicado ? "\n(Aplicado o teto do art. 366.º, n.º 2, CT.)" : "") +
+              (r.minimoAplicado ? "\n(Aplicado o mínimo de 3 meses do regime transitório — contrato anterior a 1/11/2011.)" : "") +
+              (modalidade === "termo"
+                ? "\nNota: 24 dias por toda a duração (prática da ACT); para contratos a termo anteriores a 1/5/2023 não há norma transitória expressa."
+                : "") +
+              AVISO
+          );
+        }
+        if (anos === undefined) {
+          return texto("Indica data_admissao e data_cessacao (recomendado) ou anos.");
+        }
+        const r = calcularCompensacao(retribuicao_base, diuturnidades, anos, modalidade);
+        return texto(
+          `Compensação (${modalidade}) — regra atual (antiguidade desde 1/5/2023)\n` +
+            `Base (RB+diut.): ${formatarEuros(retribuicao_base + diuturnidades)}\n` +
+            `Antiguidade: ${anos} anos · ${r.diasAno} dias/ano\n` +
+            `VALOR BRUTO: ${formatarEuros(r.bruto)}` +
+            (r.tetoAplicado ? "\n(Aplicado o teto do art. 366.º, n.º 2, CT.)" : "") +
+            "\nAtenção: se a antiguidade começou antes de 1/5/2023, usa data_admissao/data_cessacao (regime transitório)." +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
     }
   );
 
@@ -513,14 +553,24 @@ export function registerTools(server: McpServer): void {
           .string()
           .optional()
           .describe("Diretório do projeto (por defeito, o do cliente/cwd)"),
+        perfil: z
+          .string()
+          .optional()
+          .describe("Nome de um perfil nomeado (ex.: cliente de um contabilista); omitido = perfil ativo ou o por defeito"),
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ diretorio }) => {
-      const p = lerPerfil({ projeto: diretorio });
+    async ({ diretorio, perfil }) => {
+      let p;
+      try {
+        p = lerPerfil({ projeto: diretorio, perfil });
+      } catch (e) {
+        return texto(`Não foi possível ler o perfil: ${(e as Error).message}`);
+      }
       if (!p) return texto(textoPerguntasPerfil());
       return texto(
-        `Perfil da empresa (${p.origem}) — ${p.caminho}\n` +
+        (p.aviso ? `⚠️ ${p.aviso}\n` : "") +
+        `Perfil da empresa${p.nome ? ` '${p.nome}'` : ""} (${p.origem}) — ${p.caminho}\n` +
           resumoPerfil(p) +
           `\natualizado_em: ${p.campos.atualizado_em ?? "(sem data)"}` +
           (p.desatualizado
@@ -545,15 +595,423 @@ export function registerTools(server: McpServer): void {
           .string()
           .optional()
           .describe("Diretório do projeto quando destino = projeto (por defeito, cwd)"),
+        perfil: z
+          .string()
+          .optional()
+          .describe("Nome do perfil (ex.: 'cliente-a'); omitido = perfil por defeito perfil-empresa.md"),
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
     },
-    async ({ campos, destino, diretorio }) => {
+    async ({ campos, destino, diretorio, perfil }) => {
       try {
-        const p = guardarPerfil(campos, destino, { projeto: diretorio });
+        const p = guardarPerfil(campos, destino, { projeto: diretorio, perfil });
         return texto(`Perfil guardado (${p.origem}) em ${p.caminho}\n${resumoPerfil(p)}`);
       } catch (e) {
         return texto(`Não foi possível guardar o perfil: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "listar_perfis",
+    {
+      title: "Listar perfis de empresa",
+      description:
+        "Lista os perfis de empresa nomeados guardados (no projeto e no perfil geral) e indica o ativo. Usa quando o utilizador gere várias empresas (contabilista, consultor, grupo) e quer ver ou escolher a empresa em causa ('que clientes tenho', 'muda para a empresa X'). EN: list saved company profiles.",
+      inputSchema: {
+        diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ diretorio }) => {
+      const lst = listarPerfis({ projeto: diretorio });
+      if (lst.length === 0) {
+        return texto("Sem perfis nomeados. Grava um com guardar_perfil_empresa e o parâmetro perfil (ex.: 'cliente-a').");
+      }
+      return texto(
+        "Perfis de empresa:\n" +
+          lst.map((x) => `- ${x.nome} (${x.origem})${x.ativo ? " ← ativo" : ""}`).join("\n")
+      );
+    }
+  );
+
+  server.registerTool(
+    "ativar_perfil",
+    {
+      title: "Ativar perfil de empresa",
+      description:
+        "Define o perfil de empresa ativo (usado nas respostas, no hook de início de sessão e no calendário de obrigações). destino 'projeto' (só esta pasta) ou 'geral' (todas as pastas sem perfil ativo próprio). EN: set the active company profile.",
+      inputSchema: {
+        nome: z.string().describe("Nome do perfil (ex.: 'cliente-a')"),
+        destino: z.enum(["projeto", "geral"]).default("projeto"),
+        diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
+    },
+    async ({ nome, destino, diretorio }) => {
+      try {
+        ativarPerfil(nome, destino, { projeto: diretorio });
+        const p = lerPerfil({ projeto: diretorio });
+        return texto(`Perfil ativo: ${nome} (${destino}).` + (p?.aviso ? `\n⚠️ ${p.aviso}` : ""));
+      } catch (e) {
+        return texto(`Não foi possível ativar: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "calendario_obrigacoes",
+    {
+      title: "Calendário de obrigações legais da empresa",
+      description:
+        "Gera o calendário anual de obrigações legais a partir do perfil da empresa: IVA (mensal/trimestral, recapitulativa), e-fatura, DMR, retenções, Modelo 10, Modelo 22, pagamentos por conta, IES, Modelo 3 (ENI), Segurança Social, aprovação de contas, RCBE, Relatório Único, mapa de férias, formação e RGPC (50+ trabalhadores). Cada data tem base legal e fonte; feriados, fins de semana, férias fiscais e prorrogações por despacho já aplicados. Com exportar=true grava um .ics para importar no Google Calendar / Outlook. Usa para 'que obrigações tenho', 'prazos fiscais do ano', 'quando entrego o IVA', 'agenda fiscal', 'calendário para o Google Calendar'. EN: yearly compliance calendar (tax, social security, corporate, labour) with .ics export.",
+      inputSchema: {
+        ano: z.number().int().min(2000).max(2100).describe("Ano civil (ex.: 2026)"),
+        mes: z.number().int().min(1).max(12).optional().describe("Só este mês (1-12)"),
+        exportar: z.boolean().default(false).describe("Gravar .advogado-pt/calendario-<ano>.ics"),
+        diretorio: z.string().optional().describe("Diretório do projeto (perfil e exportação; por defeito, cwd)"),
+        perfil: z.string().optional().describe("Perfil nomeado a usar (por defeito, o ativo)"),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
+    },
+    async ({ ano, mes, exportar, diretorio, perfil }) => {
+      try {
+        const p = lerPerfil({ projeto: diretorio, perfil });
+        const cal = gerarCalendario(ano, p?.campos ?? null);
+        const nAc = cal.filter((o) => o.aConfirmar).length;
+        let out =
+          `Calendário de obrigações ${ano}` +
+          (p ? ` — perfil${p.nome ? ` '${p.nome}'` : ""} (${p.origem})` : " — SEM perfil da empresa") +
+          ` · ${cal.length} prazos${nAc ? ` (${nAc} a confirmar)` : ""}\n` +
+          (p?.aviso ? `⚠️ ${p.aviso}\n` : "") +
+          (!p ? "Sem perfil, as obrigações vêm marcadas ❓: grava o perfil (guardar_perfil_empresa) para um calendário à medida.\n" : "") +
+          formatarCalendario(cal, { mes });
+        if (exportar) {
+          const caminho = exportarICS(ano, cal, diretorio);
+          out +=
+            `\n\n📅 Exportado: ${caminho}\nGoogle Calendar: Definições → Importar e exportar → Importar (escolhe um calendário próprio, ex.: "Obrigações"). Outlook/Apple: abrir o ficheiro .ics.`;
+        } else {
+          out += "\n\nPara importar no Google Calendar/Outlook: chama de novo com exportar=true (gera um .ics).";
+        }
+        out +=
+          "\n\nDatas conferidas com o calendário fiscal da AT; prorrogações posteriores por despacho podem alterar prazos — confirmar no Portal das Finanças e na Segurança Social Direta." +
+          AVISO;
+        return texto(out);
+      } catch (e) {
+        return texto(`Não foi possível gerar o calendário: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "registar_prazo",
+    {
+      title: "Registar prazo em curso",
+      description:
+        "Guarda um prazo a correr (data-limite, descrição, origem) em .advogado-pt/prazos.md do projeto; o hook avisa ao abrir cada sessão quando estiver vencido ou a 7 dias ou menos. Usa sempre que surgir um prazo perentório (notificação da AT, citação, audição prévia, recurso, resposta a carta) — de preferência depois de o calcular com calc_prazo. EN: save a running deadline with start-of-session reminders.",
+      inputSchema: {
+        data: z.string().describe("Data-limite AAAA-MM-DD"),
+        descricao: z.string().describe("O que tem de ser feito (ex.: 'Oposição à execução fiscal')"),
+        origem: z.string().optional().describe("Norma ou ato de origem (ex.: 'art. 203.º CPPT, citação de 20/9')"),
+        diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
+    },
+    async ({ data, descricao, origem, diretorio }) => {
+      try {
+        const p = registarPrazo({ data, descricao, origem }, diretorio);
+        const { proximos, vencidos } = prazosProximos([p], new Date(), 7);
+        const alerta = vencidos.length
+          ? " ⚠️ Esta data já passou."
+          : proximos.length
+            ? ` ⏰ Faltam ${proximos[0].faltam} dia(s).`
+            : "";
+        return texto(`Prazo registado: ${p.data} — ${p.descricao}${p.origem ? ` (${p.origem})` : ""}.${alerta}\nFicheiro: .advogado-pt/prazos.md (aviso automático ao abrir a sessão).`);
+      } catch (e) {
+        return texto(`Não foi possível registar: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "listar_prazos",
+    {
+      title: "Listar prazos em curso",
+      description:
+        "Lista os prazos registados no projeto (.advogado-pt/prazos.md), com os vencidos e os dias em falta. Usa para 'que prazos tenho', 'o que está a correr', 'prazos pendentes'. EN: list running deadlines.",
+      inputSchema: {
+        diretorio: z.string().optional().describe("Diretório do projeto (por defeito, cwd)"),
+        incluir_concluidos: z.boolean().default(false),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ diretorio, incluir_concluidos }) => {
+      try {
+        const todos = lerPrazos(diretorio);
+        if (todos.length === 0) return texto("Sem prazos registados neste projeto (usa registar_prazo).");
+        const { vencidos, proximos } = prazosProximos(todos, new Date(), 36500);
+        const linhas = [
+          ...vencidos.map((x) => `- ⚠️ VENCIDO ${x.data} — ${x.descricao}${x.origem ? ` (${x.origem})` : ""}`),
+          ...proximos.map((x) => `- ${x.faltam <= 7 ? "⏰ " : ""}${x.data} — ${x.descricao}${x.origem ? ` (${x.origem})` : ""} · ${x.faltam === 0 ? "termina hoje" : `faltam ${x.faltam} dias`}`),
+        ];
+        if (incluir_concluidos) {
+          linhas.push(...todos.filter((x) => x.concluido).map((x) => `- ✔ ${x.data} — ${x.descricao} (cumprido)`));
+        }
+        return texto(`Prazos em curso:\n${linhas.join("\n") || "(nenhum em aberto)"}\nConfirma sempre a contagem com calc_prazo (dias úteis, férias judiciais, dilação).`);
+      } catch (e) {
+        return texto(`Não foi possível ler os prazos: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "concluir_prazo",
+    {
+      title: "Marcar prazo como cumprido",
+      description:
+        "Marca como cumprido um prazo registado (data + descrição exatas, como em listar_prazos). EN: mark a deadline as done.",
+      inputSchema: {
+        data: z.string().describe("Data-limite AAAA-MM-DD"),
+        descricao: z.string(),
+        diretorio: z.string().optional(),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
+    },
+    async ({ data, descricao, diretorio }) => {
+      try {
+        return texto(
+          concluirPrazo(data, descricao, diretorio)
+            ? `Cumprido: ${data} — ${descricao}.`
+            : `Não encontrei um prazo em aberto com a data ${data} e a descrição '${descricao}' (vê listar_prazos).`
+        );
+      } catch (e) {
+        return texto(`Não foi possível concluir: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  const pct = (x: number) => `${String(Math.round(x * 100) / 100).replace(".", ",")}%`;
+
+  server.registerTool(
+    "calc_salario_liquido",
+    {
+      title: "Salário líquido (2026)",
+      description:
+        "Calcula o salário líquido mensal de um trabalhador por conta de outrem no Continente em 2026: retenção na fonte de IRS pelas tabelas do Despacho 233-A/2026 (I: não casado sem dependentes ou casado dois titulares; II: não casado com dependentes; III: casado único titular), Segurança Social 11% e subsídio de refeição (isento até 6,15 €/dia em dinheiro ou 10,46 €/dia em cartão; o excesso é tributado). Usa para 'quanto recebo líquido', 'salário líquido de X', 'quanto desconta', 'proposta salarial'. EN: Portuguese net salary 2026.",
+      inputSchema: {
+        bruto: z.number().describe("Retribuição bruta mensal (€)"),
+        tabela: z.enum(["I", "II", "III"]).default("I"),
+        dependentes: z.number().int().min(0).default(0),
+        subsidio_refeicao_dia: z.number().default(0).describe("Subsídio de refeição por dia (€)"),
+        dias_refeicao: z.number().default(22),
+        refeicao_cartao: z.boolean().default(false),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ bruto, tabela, dependentes, subsidio_refeicao_dia, dias_refeicao, refeicao_cartao }) => {
+      try {
+        const r = calcularSalarioLiquido({
+          bruto,
+          tabela,
+          dependentes,
+          subsidioRefeicaoDia: subsidio_refeicao_dia,
+          diasRefeicao: subsidio_refeicao_dia ? dias_refeicao : 0,
+          refeicaoCartao: refeicao_cartao,
+        });
+        return texto(
+          `Salário líquido (Continente, 2026) — bruto ${formatarEuros(bruto)}, tabela ${tabela}, ${dependentes} dependente(s)\n` +
+            (subsidio_refeicao_dia
+              ? `Subsídio de refeição: ${formatarEuros(r.refeicaoIsenta + r.refeicaoTributavel)} (isento ${formatarEuros(r.refeicaoIsenta)}; tributável ${formatarEuros(r.refeicaoTributavel)})\n`
+              : "") +
+            `Segurança Social (11%): −${formatarEuros(r.segurancaSocial)}\n` +
+            `Retenção de IRS (taxa ${pct(r.taxaMarginal)}${dependentes >= 3 ? ", −1 p.p. por 3+ dependentes" : ""}): −${formatarEuros(r.retencaoIRS)}\n` +
+            `LÍQUIDO: ${formatarEuros(r.liquido)}\n` +
+            "Subsídios de férias e de Natal têm retenção autónoma (art. 99.º-C CIRS). Açores e Madeira têm tabelas próprias." +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "calc_custo_trabalhador",
+    {
+      title: "Custo total de um trabalhador para a empresa",
+      description:
+        "Calcula o custo anual e mensal médio de um trabalhador para o empregador: 14 retribuições, TSU 23,75% (incluindo sobre o subsídio de refeição acima do limite isento), subsídio de refeição e seguro de acidentes de trabalho. Usa para 'quanto me custa contratar', 'custo de um trabalhador', 'orçamento de contratação'. EN: total employer cost of an employee in Portugal.",
+      inputSchema: {
+        base: z.number().describe("Retribuição base mensal (€)"),
+        diuturnidades: z.number().default(0),
+        subsidio_refeicao_dia: z.number().default(0),
+        dias_refeicao_mes: z.number().default(22),
+        meses_refeicao: z.number().default(11),
+        refeicao_cartao: z.boolean().default(false),
+        taxa_seguro_at: z.number().default(0).describe("Taxa do seguro de acidentes de trabalho (ex.: 0,01 = 1%)"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async (a) => {
+      try {
+        const r = calcularCustoTrabalhador({
+          base: a.base,
+          diuturnidades: a.diuturnidades,
+          subsidioRefeicaoDia: a.subsidio_refeicao_dia,
+          diasRefeicaoMes: a.dias_refeicao_mes,
+          mesesRefeicao: a.meses_refeicao,
+          refeicaoCartao: a.refeicao_cartao,
+          taxaSeguroAT: a.taxa_seguro_at,
+        });
+        return texto(
+          `Custo anual do trabalhador (2026) — base ${formatarEuros(a.base)}\n` +
+            `Retribuições (14 meses): ${formatarEuros(r.retribuicaoAnual)}\n` +
+            `TSU do empregador (23,75%): ${formatarEuros(r.tsuAnual)}\n` +
+            `Subsídio de refeição: ${formatarEuros(r.refeicaoAnual)}\n` +
+            `Seguro de acidentes de trabalho: ${formatarEuros(r.seguroAnual)}\n` +
+            `TOTAL ANUAL: ${formatarEuros(r.total)} · média mensal ${formatarEuros(r.mensalMedio)}\n` +
+            "Não inclui: medicina no trabalho, formação (40 h/ano), FGCT (suspenso), seguros de saúde ou prémios." +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "calc_irc",
+    {
+      title: "IRC estimado (2026)",
+      description:
+        "Estima o IRC de uma sociedade: taxa geral (19% em 2026, 18% em 2027, 17% desde 2028) ou PME/Small Mid Cap (15% nos primeiros 50.000 €), dedução de prejuízos (até 65%), derrama municipal (até 1,5%), derrama estadual (3/5/9%) e tributações autónomas (viaturas, representação, ajudas de custo, despesas não documentadas; +10 p.p. com prejuízo). Usa para 'quanto pago de IRC', 'imposto da empresa', 'tributação autónoma da viatura', 'vale a pena carro elétrico'. EN: Portuguese corporate income tax estimate.",
+      inputSchema: {
+        lucro_tributavel: z.number().describe("Lucro tributável (€); negativo = prejuízo fiscal"),
+        pme: z.boolean().describe("PME ou Small Mid Cap (certificação IAPMEI)"),
+        derrama_municipal: z.number().default(0.015).describe("Taxa da derrama do município (0 a 0,015)"),
+        prejuizos_dedutiveis: z.number().default(0),
+        despesas_representacao: z.number().default(0),
+        ajudas_custo: z.number().default(0),
+        despesas_nao_documentadas: z.number().default(0),
+        viaturas: z
+          .array(
+            z.object({
+              custo_aquisicao: z.number(),
+              tipo: z.enum(["combustao", "phev", "gnv", "eletrico"]),
+              encargos: z.number().describe("Encargos anuais (depreciações, combustível, seguros, manutenção, rendas)"),
+            })
+          )
+          .default([]),
+        isento_agravamento: z.boolean().default(false).describe("Sem +10 p.p. apesar do prejuízo (início de atividade e 2 anos seguintes; em 2026, lucro num dos 3 anos anteriores com declarações cumpridas)"),
+        ano: z.number().int().default(2026),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async (a) => {
+      try {
+        const r = calcularIRC({
+          lucroTributavel: a.lucro_tributavel,
+          pme: a.pme,
+          derramaMunicipal: a.derrama_municipal,
+          prejuizosDedutiveis: a.prejuizos_dedutiveis,
+          despesasRepresentacao: a.despesas_representacao,
+          ajudasCusto: a.ajudas_custo,
+          despesasNaoDocumentadas: a.despesas_nao_documentadas,
+          viaturas: a.viaturas.map((v) => ({ custoAquisicao: v.custo_aquisicao, tipo: v.tipo, encargos: v.encargos })),
+          isentoAgravamento: a.isento_agravamento,
+          ano: a.ano,
+        });
+        return texto(
+          `IRC ${a.ano} — taxa geral ${r.taxaGeral}%${a.pme ? " (PME: 15% nos primeiros 50.000 €)" : ""}\n` +
+            (r.deducaoPrejuizos ? `Dedução de prejuízos (máx. 65%): −${formatarEuros(r.deducaoPrejuizos)}\n` : "") +
+            `Matéria coletável: ${formatarEuros(r.materiaColetavel)}\n` +
+            `IRC: ${formatarEuros(r.irc)}\n` +
+            `Derrama municipal: ${formatarEuros(r.derramaMunicipal)}\n` +
+            `Derrama estadual: ${formatarEuros(r.derramaEstadual)}\n` +
+            `Tributação autónoma: ${formatarEuros(r.tributacaoAutonoma)}${a.lucro_tributavel < 0 && !a.isento_agravamento ? " (agravada em 10 p.p. pelo prejuízo)" : ""}\n` +
+            `TOTAL: ${formatarEuros(r.total)}\n` +
+            "Base: CIRC arts. 52.º, 87.º, 87.º-A e 88.º; Lei 64/2025. Não inclui benefícios fiscais (ex.: SIFIDE, DLRR/ICE), pagamentos por conta nem retenções." +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "calc_iva_operacao",
+    {
+      title: "IVA em operações com o estrangeiro",
+      description:
+        "Decide o IVA de uma venda ou serviço a cliente estrangeiro: onde se tributa, quem liquida, a menção e o código da AT na fatura (M05, M10, M16, M40, M44) e as declarações (periódica, recapitulativa, OSS). Cobre bens a empresas da UE (VIES), vendas à distância e limiar de 10.000 €, exportações, serviços B2B/B2C, serviços eletrónicos e as exceções do art. 6.º. Usa para 'como faturo a um cliente estrangeiro', 'leva IVA?', 'autoliquidação', 'reverse charge', 'OSS'. EN: VAT treatment of cross-border sales from Portugal.",
+      inputSchema: {
+        tipo: z.enum(["bens", "servicos"]),
+        cliente: z.enum(["empresa", "consumidor"]),
+        destino: z.enum(["PT", "UE", "fora-UE"]),
+        nif_vies: z.boolean().default(false).describe("NIF de IVA do cliente válido no VIES"),
+        vendas_distancia_ue: z.number().default(0).describe("Vendas à distância + serviços eletrónicos a consumidores da UE (ano anterior ou em curso, €)"),
+        servico: z
+          .enum(["geral", "eletronico", "imovel", "evento", "transporte-passageiros", "restauracao", "lista-art6-11"])
+          .default("geral"),
+        regime53: z.boolean().default(false).describe("Prestador isento pelo art. 53.º CIVA"),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async (a) => {
+      try {
+        const r = decidirIVA({
+          tipo: a.tipo,
+          cliente: a.cliente,
+          destino: a.destino,
+          nifVIES: a.nif_vies,
+          vendasDistanciaUE: a.vendas_distancia_ue,
+          servico: a.servico,
+          regime53: a.regime53,
+        });
+        return texto(
+          `IVA da operação — ${a.tipo}, ${a.cliente}, ${a.destino}\n` +
+            `Onde se tributa: ${r.tributacao}\n` +
+            `Quem liquida: ${r.liquida}\n` +
+            (r.codigo ? `Menção na fatura: "${r.mencaoFatura}" (código ${r.codigo})\n` : "") +
+            `Declarações: ${r.declaracoes.join("; ") || "—"}\n` +
+            `Base legal: ${r.base}\n` +
+            r.avisos.map((x) => `- ${x}\n`).join("") +
+            "Fora do decisor: operações triangulares, regime da margem, IEC e regime transfronteiriço PME (ver ler_referencia iva-internacional)." +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível decidir: ${(e as Error).message}`);
+      }
+    }
+  );
+
+  server.registerTool(
+    "calc_taxa_justica",
+    {
+      title: "Taxa de justiça (RCP)",
+      description:
+        "Calcula a taxa de justiça de uma ação pelo valor da causa (Regulamento das Custas Processuais, Tabela I, colunas A/B/C; UC 2026 = 102 €), com o remanescente acima de 275.000 € e a redução de 10% pela entrega eletrónica quando esta não é obrigatória. Usa para 'quanto custa pôr uma ação', 'custas do processo', 'taxa de justiça'. EN: Portuguese court fee.",
+      inputSchema: {
+        valor_acao: z.number().describe("Valor da causa (€)"),
+        tabela: z.enum(["A", "B", "C"]).default("A").describe("A: regra; B: casos do art. 6.º n.º 2 / 7.º / 12.º; C: especial complexidade"),
+        reducao_eletronica: z.boolean().default(false),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async ({ valor_acao, tabela, reducao_eletronica }) => {
+      try {
+        const r = calcularTaxaJustica(valor_acao, { tabela, reducaoEletronica: reducao_eletronica });
+        return texto(
+          `Taxa de justiça — valor ${formatarEuros(valor_acao)} (${r.escalao}), coluna ${tabela}, UC ${formatarEuros(r.ucValor)}\n` +
+            `Taxa inicial: ${String(r.taxaInicialUC).replace(".", ",")} UC = ${formatarEuros(r.taxaInicialEuros)}${reducao_eletronica ? " (com redução a 90%)" : ""}\n` +
+            (r.remanescenteUC ? `Remanescente (pago a final; o juiz pode dispensar — art. 6.º, n.º 7, RCP): ${String(r.remanescenteUC).replace(".", ",")} UC = ${formatarEuros(r.remanescenteUC * r.ucValor)}\n` : "") +
+            `TOTAL: ${String(r.totalUC).replace(".", ",")} UC = ${formatarEuros(r.totalEuros)}\n` +
+            "Cada parte paga a sua taxa (autor e réu). Recursos: Tabela I-B; injunção e embargos/oposição à execução: tabelas próprias (ver calc_custas_injuncao e a Tabela II). Com advogado a via eletrónica é obrigatória — a redução do art. 6.º, n.º 3, normalmente não se aplica." +
+            AVISO
+        );
+      } catch (e) {
+        return texto(`Não foi possível calcular: ${(e as Error).message}`);
       }
     }
   );

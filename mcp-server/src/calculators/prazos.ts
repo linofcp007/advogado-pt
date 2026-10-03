@@ -52,7 +52,7 @@ function chaveDia(timestamp: number): number {
 }
 
 /** Conjunto de feriados nacionais obrigatórios para um ano (chaves YYYYMMDD). */
-function feriadosNacionais(ano: number): Set<number> {
+export function feriadosNacionais(ano: number): Set<number> {
   const feriados = new Set<number>([
     ano * 10000 + 1 * 100 + 1, // Ano Novo
     ano * 10000 + 4 * 100 + 25, // Dia da Liberdade
@@ -84,6 +84,20 @@ function ehDiaUtil(timestamp: number, cache: Map<number, Set<number>>): boolean 
     cache.set(ano, feriadosNacionais(ano));
   }
   return !cache.get(ano)!.has(chaveDia(timestamp));
+}
+
+const CACHE_FERIADOS = new Map<number, Set<number>>();
+
+/** Dia útil (sem sábado, domingo nem feriado nacional) — timestamp UTC. Exportado para o calendário. */
+export function eDiaUtil(timestamp: number): boolean {
+  return ehDiaUtil(timestamp, CACHE_FERIADOS);
+}
+
+/** Primeiro dia útil igual ou posterior ao timestamp UTC dado. */
+export function proximoDiaUtil(timestamp: number): number {
+  let ts = timestamp;
+  while (!ehDiaUtil(ts, CACHE_FERIADOS)) ts += MS_POR_DIA;
+  return ts;
 }
 
 /** Conta `nDias` dias úteis a partir do dia seguinte ao de início. */

@@ -1,7 +1,7 @@
 # Direito da Concorrência
 
 > **Âmbito:** misto
-> 💶 **Valores, taxas e montantes:** consulta `references/valores-2026.md` (ponto único de verdade). Os limiares de notificação de concentrações, a taxa de notificação à AdC e as coimas em € das práticas individuais restritivas do comércio dependem do ano e da dimensão da empresa → `[VERIFICAR — valores-2026]`.
+> 💶 **Valores, taxas e montantes:** consulta `references/valores-2026.md` (ponto único de verdade). Os limiares de notificação de concentrações, a taxa de notificação à AdC e as coimas em € das práticas individuais restritivas do comércio dependem do ano e da dimensão da empresa → estão em `references/valores-2026.md`.
 > Articula com `references/contratos.md` (agência e distribuição), `references/contratacao-publica.md` (conluio em concursos), `references/uniao-europeia.md` (auxílios de Estado, recurso de decisões da Comissão), `references/laboral.md` (pacto de não concorrência do trabalhador) e `references/consumo.md` (práticas comerciais desleais com consumidores).
 
 ## Legislação Base
@@ -14,7 +14,7 @@
 - **DL 118/2010** — prazos máximos de pagamento de produtos agrícolas e alimentares (alterado pelo DL 76/2021)
 - **Lei 23/2018**, de 5 de junho — **ações de indemnização** por infração ao direito da concorrência (*private enforcement*; transpõe a Diretiva 2014/104/UE)
 - **Regulamento (CE) 139/2004** — concentrações de dimensão europeia, notificadas à Comissão Europeia (balcão único)
-- **Regulamento (UE) 2022/2560** — subvenções estrangeiras: pode obrigar a notificar à Comissão concentrações e concursos públicos de grande dimensão (limiares → `[VERIFICAR — valores-2026]`)
+- **Regulamento (UE) 2022/2560** — subvenções estrangeiras: pode obrigar a notificar à Comissão concentrações e concursos públicos de grande dimensão (concentrações: VN na UE ≥ 500 M€ e contribuições financeiras estrangeiras > 50 M€ em 3 anos; contratos públicos ≥ 250 M€ — arts. 20.º e 28.º; ver `references/valores-2026.md`)
 
 ## Quem aplica o quê
 - **AdC — Autoridade da Concorrência** ([concorrencia.pt](https://www.concorrencia.pt)): práticas restritivas (arts. 9.º, 11.º e 12.º RJC; arts. 101.º/102.º TFUE), controlo de concentrações, clemência e denúncias
@@ -86,9 +86,9 @@
 - **Setor agroalimentar** (arts. 2.º-A, 7.º-B e 7.º-C):
   - Há práticas **sempre proibidas**, como cancelar encomendas de perecíveis com **menos de 30 dias** de antecedência face à entrega prevista ou alterar o contrato unilateralmente.
   - Há outras que só são **admitidas se acordadas previamente por escrito**.
-  - O âmbito depende do volume de negócios do fornecedor e do comprador → `[VERIFICAR — valores-2026]`.
+  - **Não há limiar de volume de negócios**: o regime agroalimentar aplica-se a todos os fornecedores e compradores, seja qual for o Estado-Membro onde estão estabelecidos, e aos compradores públicos (arts. 2.º-A, 7.º-B e 7.º-C, na redação do DL 76/2021) — Portugal não adotou os escalões da Diretiva (UE) 2019/633.
   - Os prazos máximos de pagamento estão no DL 118/2010 (a confirmar).
-- **Sanções**: coimas graduadas pela dimensão do infrator (pessoa singular, micro, pequena, média ou grande empresa) e pela gravidade → `[VERIFICAR — valores-2026]`. Há também medidas cautelares (art. 8.º) e sanções pecuniárias compulsórias (art. 11.º)
+- **Sanções**: coimas graduadas pela dimensão do infrator (pessoa singular, micro, pequena, média ou grande empresa) e pela gravidade: muito graves de 750 € (pessoa singular) / 2.500 € (micro) até 2.500.000 € (grande); graves de 250 € / 500 € até 500.000 €; a dimensão conta-se só pelo n.º de trabalhadores (RJCE, art. 19.º) — ver `references/valores-2026.md`. Há também medidas cautelares (art. 8.º) e sanções pecuniárias compulsórias (art. 11.º)
 - **Autorregulação** (art. 16.º): os códigos de boas práticas setoriais podem ser homologados pelo Governo. Confirma se o teu setor tem um
 
 ## Controlo de concentrações
@@ -109,7 +109,7 @@
   - **Fase 1**: a instrução termina em **30 dias úteis** a contar da notificação (art. 49.º, n.º 1). Se a AdC não decidir nesse prazo, isso vale como **não oposição** (art. 50.º, n.º 4).
   - **Investigação aprofundada**: até **90 dias úteis** a contar da notificação (art. 52.º).
   - Os prazos podem suspender-se com pedidos de elementos (a confirmar).
-- A notificação paga uma **taxa** → `[VERIFICAR — valores-2026]`. São recomendáveis contactos de pré-notificação com a AdC
+- A notificação paga uma **taxa**: 7.500 € (VN conjunto em PT ≤ 150 M€), 15.000 € (≤ 300 M€) ou 25.000 € (> 300 M€), +50% se houver investigação aprofundada (art. 94.º; Regulamento AdC n.º 1/E/2003) — ver `references/valores-2026.md`. São recomendáveis contactos de pré-notificação com a AdC
 - Na **dimensão UE** (limiares do Reg. 139/2004) notifica-se a Comissão, e não a AdC. Pode ainda ser necessária uma notificação paralela ao abrigo do Reg. (UE) 2022/2560 (subvenções estrangeiras)
 - **Nos contratos de M&A**, prever:
   - uma condição suspensiva de aprovação da AdC;

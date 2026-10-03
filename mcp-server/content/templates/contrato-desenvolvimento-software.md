@@ -14,7 +14,7 @@
        a cláusula 6 protege o background IP do Fornecedor.
      - FORMA DA CESSÃO: os negócios sobre programas de computador regem-se pelas regras gerais dos contratos, aplicando-se
        do CDADC só os arts. 40.º, 45.º a 51.º e 55.º (DL 252/94, art. 11.º) — a forma solene do art. 44.º CDADC não será,
-       em princípio, exigida para o código [VERIFICAR — doutrina]. Para obras que não sejam programa nem material de
+       em princípio, exigida para o código (ver a Nota doutrinal no fim). Para obras que não sejam programa nem material de
        conceção preliminar (DL 252/94, art. 1.º, n.º 3), vale o CDADC: transmissão total e definitiva por escritura pública,
        com identificação da obra e do preço (art. 44.º); transmissão parcial por documento escrito com reconhecimento
        notarial das assinaturas (art. 43.º, n.º 2) — ambas sob pena de nulidade. Por prudência: assinaturas reconhecidas,
@@ -87,8 +87,8 @@
 5.2 As obras cedidas são as identificadas no **Anexo III** (repositório, versão ou *commit*, módulos e documentação), atualizado em cada aceitação.
 *The assigned works are identified in **Schedule III** (repository, version or commit, modules and documentation), updated upon each acceptance.*
 
-5.3 As Partes declaram que o Software é criado por encomenda do Cliente, que é o seu destinatário; a presente cláusula confirma e, na medida do necessário, opera a transmissão dos direitos.
-*The Parties declare that the Software is commissioned by the Client, as its intended recipient; this clause confirms and, to the extent necessary, effects the transfer of the rights.*
+5.3 As Partes declaram que o Software é criado por encomenda do Cliente, que é o seu destinatário, pelo que, nos termos do artigo 3.º, n.º 3, do Decreto-Lei n.º 252/94, de 20 de outubro, os direitos patrimoniais sobre o Software pertencem ao Cliente desde a sua criação, não existindo estipulação em contrário; a presente cláusula confirma e, na medida do necessário, opera a transmissão dos direitos.
+*The Parties declare that the Software is commissioned by the Client, as its intended recipient; accordingly, under Article 3(3) of Decree-Law 252/94 of 20 October, the economic rights in the Software belong to the Client from its creation, there being no stipulation to the contrary; this clause confirms and, to the extent necessary, effects the transfer of the rights.*
 
 5.4 A contrapartida da cessão está incluída no preço da cláusula 4, correspondendo-lhe o montante de {{VALOR_CESSAO}} euros.
 *The consideration for the assignment is included in the price under clause 4, of which {{ASSIGNMENT_VALUE}} euros corresponds to the assignment.*
@@ -198,6 +198,15 @@
 {{LOCAL}}, {{DATA}}
 
 O Fornecedor / The Developer: __________________   O Cliente / The Client: __________________
+
+_(Nota para quem usa o template — não faz parte do documento.)_
+
+## Nota doutrinal — forma da cessão de direitos sobre software
+
+- **Posição recomendada:** no software feito por encomenda, os direitos pertencem ao Cliente **por força da lei** (art. 3.º, n.º 3, do DL 252/94), sem forma especial — basta um contrato escrito e assinado que o diga expressamente, com uma cláusula subsidiária de transmissão total (identificação da obra e preço) por cautela, e a indicação, junto às assinaturas, do n.º do documento de identificação de cada signatário (DL 250/96, art. 2.º). Para comprar **software que já existia** (de um freelancer, ou do fundador para a Lda) com valor relevante, o mais seguro é **escritura pública**; a alternativa barata (escrito com reconhecimento de assinaturas por advogado/solicitador) tem risco residual.
+- **Fundamento:** o art. 11.º, n.º 2, do DL 252/94 só manda aplicar ao software os arts. 40.º, 45.º-51.º e 55.º do CDADC — ficam de fora os arts. 43.º (escrito com reconhecimento notarial) e 44.º (escritura pública). TRL 16-01-2014, proc. 113/13.9YHLSB-A.L1-6 (aplicou o art. 3.º, n.º 3 a um contrato informal, com faturas); TRL 11-12-2019, proc. 89359/10.7YIPRT.L2-2 ("propósito de reduzir as formalidades"); o STJ (25-05-2021, mesmo processo) não decidiu a questão da forma. Doutrina dividida (lista fechada vs. exemplificativa — Garcia Marques/Lourenço Martins; Tiago Bessa, ROA 2012).
+- **Grau de certeza:** médio. Em aberto: se um tribunal aplicaria o art. 44.º ao código pela aplicação transversal do CDADC; a lei aplicável à forma em contratos internacionais (Roma I, art. 11.º).
+- **Cláusula segura (já refletida na secção 5):** "O Programa é criado por encomenda do Cliente; nos termos do art. 3.º, n.º 3, do DL 252/94, os direitos patrimoniais pertencem ao Cliente desde a sua criação. Na medida em que algum direito pertença ou venha a pertencer ao Prestador, este transmite-o ao Cliente total e definitivamente, para todos os modos de utilização, sem limites de tempo ou território, pelo preço de € {{PRECO_CESSAO}}, incluído no preço global."
 
 ---
 

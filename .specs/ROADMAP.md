@@ -2,9 +2,9 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 100%** ▰▰▰▰▰▰▰▰▰▰ · 1/1 features completas · 28/28 tasks feitas
+**Progresso: 100%** ▰▰▰▰▰▰▰▰▰▰ · 2/2 features completas · 58/58 tasks feitas
 
-_Velocidade: 66 ponto(s)/dia útil — 28 tarefa(s), 66 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 149 ponto(s)/dia útil — 58 tarefa(s), 149 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
@@ -16,10 +16,14 @@ Todas as features completas 🎉
 | | Feature | Tracks | Fase | % | Tasks | Deps | Próxima | Previsão |
 |---|---|---|---|---|---|---|---|---|
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
+| ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
 
 ## Dependências
 
-_Sem dependências declaradas._
+```mermaid
+graph LR
+  advogado_pt_v1_1_empresas["advogado-pt-v1-1-empresas"] --> advogado_pt_v1_2_operacional["advogado-pt-v1-2-operacional"]
+```
 
 ## ⚠ Precisa de atenção
 

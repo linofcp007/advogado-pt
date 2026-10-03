@@ -55,12 +55,12 @@
 - **Inadaptação**: após formação e período de adaptação
 
 ### Compensações (desde 01/05/2023 — Lei 13/2023)
-- **Despedimento sem termo / coletivo**: **14 dias** de retribuição base + diuturnidades por cada ano completo
-- **Extinção do posto de trabalho / inadaptação**: **12 dias** por ano (Art. 366.º CT)
-- **Caducidade de contrato a termo** (certo/incerto): **24 dias** por ano
-- Contratos mais antigos: regras transitórias por períodos (podem ser 18, 20 ou 30 dias/ano consoante o período) — calcular por tramos
-- Mínimo: 3 meses de retribuição base + diuturnidades
-- ⚠️ Valores e cálculo em `references/valores-2026.md` e `scripts/compensacao_despedimento.py` (versão anterior desta secção indicava "12 dias" genérico — desatualizado)
+- **Despedimento coletivo, extinção do posto de trabalho e inadaptação**: **14 dias** de retribuição base + diuturnidades por ano de antiguidade, com frações proporcionais (Art. 366.º CT, aplicável por remissão dos Arts. 372.º e 379.º)
+- **Caducidade de contrato a termo** (certo/incerto): **24 dias** por ano (Arts. 344.º e 345.º CT)
+- **Tetos**: retribuição considerada até 20 RMMG; total até 12 × (RB + diuturnidades) ou 240 RMMG (Art. 366.º, n.º 2)
+- **Sem mínimo de 3 meses** no regime atual — esse mínimo só existe no regime transitório dos contratos anteriores a 1/11/2011 (Lei 69/2013, art. 5.º)
+- **Antiguidade anterior a 1/5/2023**: regime transitório por períodos (30, 20, 18 e 12 dias/ano consoante o período — Lei 69/2013, art. 5.º; Lei 13/2023, art. 35.º) — calcular com `calc_compensacao_despedimento` com as datas de admissão e cessação (validado contra o simulador da ACT)
+- ⚠️ Valores em `references/valores-2026.md`; cálculo em `scripts/compensacao_despedimento.py`
 
 ### Aviso Prévio (denúncia pelo trabalhador)
 - Contrato sem termo: 30 dias (até 2 anos de antiguidade), 60 dias (mais de 2 anos)
@@ -74,7 +74,7 @@
 
 ## Obrigações Essenciais do Empregador
 - Seguro de acidentes de trabalho (obrigatório desde o 1º dia)
-- Comunicação de admissão à SS nos 15 dias anteriores ao início do contrato (art. 29.º, n.º 2, al. a), Código Contributivo); só excecionalmente nas 24 horas seguintes ao início (al. b))
+- Comunicação de admissão à SS **até ao início da execução do contrato** (art. 29.º, n.º 2, al. a), Código Contributivo, na redação do DL 127/2025, em vigor desde 1/1/2026); só excecionalmente nas 24 horas seguintes ao início (al. b)). Contribuições pagas entre o dia 1 e o dia 25 do mês seguinte (art. 43.º)
 - Medicina no trabalho (exame de admissão, periódicos, ocasionais)
 - Formação profissional: 40h/ano por trabalhador
 - Relatório Único (entrega anual, habitualmente até março/abril)

@@ -65,16 +65,16 @@ A obrigação prevista na Cláusula 1.ª vale {{AMBITO: ex. no território de Po
 5. A compensação está sujeita aos descontos legais aplicáveis [VERIFICAR o enquadramento em IRS e Segurança Social com o contabilista].
 <!-- A lei não fixa valor mínimo nem fórmula de cálculo; a compensação deve ser séria e proporcional à
      limitação imposta. Compensações simbólicas ou "incluídas no salário" durante o contrato são
-     frequentemente contestadas [VERIFICAR jurisprudência atual em dgsi.pt]. -->
+     frequentemente contestadas (ver a Nota doutrinal no fim: TRL 10-12-2009, TRP 13-10-2025). -->
 
 ## Cláusula 6.ª (Incumprimento)
 
 1. Se o Trabalhador violar a obrigação de não concorrência:
-   - a) cessa de imediato o direito à compensação prevista na Cláusula 5.ª, ficando o Trabalhador obrigado a restituir as quantias recebidas a esse título desde a data do início da violação [VERIFICAR];
+   - a) cessa de imediato o direito à compensação prevista na Cláusula 5.ª, ficando o Trabalhador obrigado a restituir as quantias recebidas a esse título desde a data do início da violação;
    - b) o Trabalhador fica obrigado a pagar ao Empregador, a título de cláusula penal, a quantia de **{{CLAUSULA_PENAL_VALOR}}** (art. 810.º do Código Civil), reduzível pelo tribunal se for manifestamente excessiva (art. 812.º do Código Civil);
    - c) {{DANO_EXCEDENTE: opcional — a cláusula penal não obsta à indemnização pelo dano excedente que o Empregador prove (art. 811.º, n.º 2, do Código Civil), nunca superior ao prejuízo resultante do incumprimento (art. 811.º, n.º 3)}};
    - d) sem prejuízo do recurso a providências cautelares para fazer cessar a atividade concorrente, nos limites do art. 811.º, n.º 1, do Código Civil.
-2. Se o Empregador não pagar pontualmente a compensação e, interpelado por escrito, não regularizar o pagamento em {{PRAZO_REGULARIZACAO: ex. 15}} dias, o Trabalhador fica desobrigado da limitação prevista neste pacto, sem prejuízo do direito às compensações vencidas [VERIFICAR].
+2. Se o Empregador não pagar pontualmente a compensação e, interpelado por escrito, não regularizar o pagamento em {{PRAZO_REGULARIZACAO: ex. 15}} dias, o Trabalhador fica desobrigado da limitação prevista neste pacto, sem prejuízo do direito às compensações vencidas (TRC 17-11-2017, proc. 1019/09.1TTLRA.C1: a falta de pagamento permite ao Trabalhador invocar a exceção de não cumprimento ou resolver o pacto).
 
 ## Cláusula 7.ª (Confidencialidade)
 
@@ -82,7 +82,7 @@ O presente pacto não prejudica o dever de sigilo do Trabalhador, nem a proteç�
 
 ## Cláusula 8.ª (Renúncia pelo Empregador) {{opcional}}
 
-{{RENUNCIA: O Empregador pode renunciar ao presente pacto mediante comunicação escrita ao Trabalhador com, pelo menos, {{N_DIAS}} dias de antecedência relativamente à data da cessação do contrato, caso em que não é devida a compensação. [VERIFICAR — a validade da renúncia unilateral é discutida; após a cessação, só com acordo do Trabalhador.]}}
+{{RENUNCIA: O Empregador pode renunciar ao presente pacto mediante comunicação escrita ao Trabalhador com, pelo menos, {{N_DIAS}} dias de antecedência relativamente à data da cessação do contrato, caso em que não é devida a compensação. [NÃO RECOMENDADO — o STJ (30-04-2014, proc. 2525/11.3TTLSB.L1.S1) não admite a renúncia unilateral do empregador ao pacto, que é oneroso e sinalagmático; só com acordo do Trabalhador. A validade de uma cláusula de renúncia até à cessação não foi testada.]}}
 
 ## Cláusula 9.ª (Lei aplicável e foro)
 
@@ -94,6 +94,14 @@ Feito em duplicado, ficando um exemplar em poder de cada parte.
 
 O Empregador: _______________________   O Trabalhador: _______________________
 
+_(Nota para quem usa o template — não faz parte do documento.)_
+
+## Nota doutrinal — compensação do pacto de não concorrência
+
+- **Posição recomendada:** fixar a compensação em **50% da retribuição base mensal à data da cessação**, paga **mensalmente depois da cessação**, durante todo o período de limitação, com o número de prestações indicado; não a "incluir" no salário durante o contrato; descrever com precisão a atividade, o setor e o território e justificar o prejuízo (concorrência diferencial); cláusula penal proporcional (reduzível — art. 812.º CC).
+- **Fundamento:** a lei não fixa mínimo, mas a compensação é requisito de validade — o pacto é **nulo** se faltar, não for determinada nem determinável, ou for irrisória/manifestamente desproporcionada (TC 256/2004: compensação "suficiente para compensar a perda de rendimentos"; TRL 10-12-2009, proc. 376/06.6TTSNT.L1-4: 38,40 €/mês durante o contrato, valor indeterminável → nulo; TRP 08-06-2017, proc. 3526/15.8T8OAZ.P2; TRP 13-10-2025, proc. 3244/23.3T8AVR.P1: pode ser paga em parte durante o contrato, mas tem de ser determinada ou determinável; TRL 04-12-2019, proc. 3889/16.8T8BRR.L1-4: 150 €/mês mantido num caso concreto). Forma de pagamento livre (TRC 17-11-2017; STJ 02-05-2018). O empregador não pode renunciar unilateralmente (STJ 30-04-2014; STJ 02-11-2022, proc. 2214/21.0T8LSB.L1.S1). Os 50% são referência de direito comparado (§74 HGB alemão; Júlio Vieira Gomes, RMP n.º 127, 2011) e de prática — não são lei; a única referência legal é o teto de 100% da retribuição base no n.º 3 do art. 136.º.
+- **Grau de certeza:** alto quanto à exigência de compensação determinável e às consequências da falta de pagamento; médio quanto ao limiar de "irrisória" (análise caso a caso, ónus do trabalhador).
+
 ---
 
 ## Antes de enviar — verificar
@@ -103,7 +111,7 @@ _(Lista para quem envia — não faz parte do documento.)_
 - [ ] ⏰ **Duração** ≤ 24 meses após a cessação (art. 136.º, n.º 2); entre 24 e 36 meses só com a justificação do art. 136.º, n.º 5 escrita na Cláusula 4.ª, n.º 2. A contagem começa na data da cessação do contrato.
 - [ ] **Forma escrita** e assinatura das duas partes (art. 136.º, n.º 2, al. a)); um exemplar para cada. Se integrado num acordo de revogação, ver `assets/templates/acordo-revogacao.md`.
 - [ ] **Atividade e prejuízo concretos** (Cláusulas 1.ª e 2.ª): descrever a atividade que o trabalhador realmente exercia e porque é que a concorrência prejudica a empresa — cláusulas genéricas arriscam a nulidade (art. 136.º, n.º 1).
-- [ ] **Compensação** paga **durante o período de limitação** (art. 136.º, n.º 2, al. c)); a lei não fixa mínimo — confirmar que o valor é sério e proporcional [VERIFICAR jurisprudência em dgsi.pt]. Para referência salarial (RMMG), ver `references/valores-2026.md`.
+- [ ] **Compensação** paga **durante o período de limitação** (art. 136.º, n.º 2, al. c)); a lei não fixa mínimo — confirmar que o valor é determinado ou determinável e não irrisório (ver a Nota doutrinal). Para referência salarial (RMMG), ver `references/valores-2026.md`.
 - [ ] **Redução por formação** só se houver despesas **avultadas** com a formação do trabalhador, documentadas (Anexo II).
 - [ ] Não confundir com o **pacto de permanência** (art. 137.º): é o trabalhador que se obriga a **não denunciar** o contrato por até **3 anos**, como compensação de despesas avultadas com a sua formação; pode desobrigar-se pagando o montante dessas despesas. São figuras diferentes e podem coexistir.
 - [ ] Durante o contrato, a concorrência já é proibida pelo **dever de lealdade** (art. 128.º, n.º 1, al. f)) — este pacto só é preciso para o período **pós-contratual**.

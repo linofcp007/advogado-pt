@@ -25,18 +25,19 @@
    - Profere **decisão fundamentada** por escrito. Se houver comissão de trabalhadores/sindicato, há comunicações próprias.
    - ⚠️ Vícios neste processo = despedimento ilícito. Sequência mínima: **nota de culpa → resposta → instrução → decisão**.
 
-4. **Extinção do posto de trabalho** → critérios legais rigorosos (o posto tem de desaparecer efetivamente; não pode haver outro idêntico; critérios objetivos e não discriminatórios para escolher quem sai). Há comunicações e prazos próprios. **Compensação: 12 dias/ano** (Art. 366.º CT). Confirma a viabilidade em `references/laboral.md` — é frequentemente impugnada.
+4. **Extinção do posto de trabalho** → critérios legais rigorosos (o posto tem de desaparecer efetivamente; não pode haver outro idêntico; critérios objetivos e não discriminatórios para escolher quem sai). Há comunicações e prazos próprios. **Compensação: 14 dias/ano** (Arts. 372.º e 366.º CT). Confirma a viabilidade em `references/laboral.md` — é frequentemente impugnada.
 
 5. **Mútuo acordo (revogação)** → a via mais segura e sem litígio. Negoceia a compensação e formaliza o **acordo de revogação** (`assets/templates/acordo-revogacao.md`), por escrito, com indicação do montante e da data de cessação. O trabalhador tem **direito de retratação de 7 dias** (se a assinatura não for presencial com reconhecimento) — tê-lo em conta.
 
 6. **Calcula a compensação devida** (qualquer via com indemnização):
    ```
-   python scripts/compensacao_despedimento.py --retribuicao-base <valor> --diuturnidades <valor> --anos <antiguidade> --modalidade <sem-termo|extincao-posto|coletivo|termo>
+   python scripts/compensacao_despedimento.py --retribuicao-base <valor> --diuturnidades <valor> --admissao AAAA-MM-DD --cessacao AAAA-MM-DD --modalidade <sem-termo|extincao-posto|coletivo|termo>
    ```
    - **Sem termo / coletivo: 14 dias** de retribuição base + diuturnidades por ano completo.
-   - **Extinção do posto / inadaptação: 12 dias/ano**.
+   - **Extinção do posto / inadaptação: 14 dias/ano** (remetem para o Art. 366.º).
    - **Caducidade de contrato a termo: 24 dias/ano**.
-   - Contratos antigos têm **regras transitórias por tramos** (18/20/30 dias consoante o período) — o script calcula por tramos. Valores em `references/valores-2026.md`.
+   - **Sem mínimo de 3 meses** (só no regime transitório dos contratos anteriores a 1/11/2011); tetos de 20 RMMG na retribuição e 12 meses (ou 240 RMMG) no total.
+   - Antiguidade anterior a 1/5/2023 tem **regras transitórias por períodos** (30/20/18/12 dias) — o script calcula por períodos quando lhe dás as datas. Valores em `references/valores-2026.md`.
 
 7. **Cumpre as formalidades finais**: documento de cessação, certificado de trabalho, acerto de contas (férias e subsídios vencidos e proporcionais, formação não dada), comunicação à Segurança Social e situação de desemprego. Paga a compensação no prazo.
 
