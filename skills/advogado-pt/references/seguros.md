@@ -97,6 +97,6 @@ Antes de assinar cada contrato de serviços, comparar o **cap de responsabilidad
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Carta de participação de sinistro à seguradora
-- Reclamação por recusa de indemnização (com indicação de queixa à ASF/mediação)
-- Checklist de cobertura de seguros para contratos de serviços TI (verificação do alinhamento capital ↔ cap de responsabilidade, âmbito territorial e base claims made)
+- Carta de participação de sinistro à seguradora — `assets/templates/carta-participacao-sinistro.md`
+- Reclamação por recusa de indemnização (com indicação de queixa à ASF/mediação) (a pedido)
+- Checklist de cobertura de seguros para contratos de serviços TI (verificação do alinhamento capital ↔ cap de responsabilidade, âmbito territorial e base claims made) (a pedido)

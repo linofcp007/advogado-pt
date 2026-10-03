@@ -43,7 +43,7 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Acordo de cessão de direitos de autor (PT/EN)
-- Licença de software proprietário
-- NDA com cláusula de PI
-- Política interna de propriedade intelectual
+- Acordo de cessão de direitos de autor (PT/EN) (a pedido)
+- Licença de software proprietário (a pedido)
+- NDA com cláusula de PI — `assets/templates/nda-bilingue.md`
+- Política interna de propriedade intelectual (a pedido)

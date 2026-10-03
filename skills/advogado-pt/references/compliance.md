@@ -245,4 +245,4 @@
 - `assets/templates/regulamento-interno.md` — regulamento interno de empresa (CT art. 99.º)
 - `assets/checklists/checklist-compliance-dimensao.md` — o que é obrigatório por escalão de trabalhadores
 - `assets/checklists/checklist-seguranca-saude-trabalho.md` — organização da SST por dimensão e risco
-- Gerados a pedido, neste estilo: código de conduta do RGPC (art. 7.º), relatório de infração (art. 7.º, n.º 3), plano de formação (art. 9.º), política de ofertas e conflitos de interesses, questionário de due diligence de terceiros (art. 18.º), nomeação do responsável pelo cumprimento normativo
+- Gerados a pedido, neste estilo: código de conduta do RGPC (art. 7.º), relatório de infração (art. 7.º, n.º 3), plano de formação (art. 9.º), política de ofertas e conflitos de interesses, questionário de due diligence de terceiros (art. 18.º), nomeação do responsável pelo cumprimento normativo (a pedido)

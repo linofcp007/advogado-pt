@@ -274,7 +274,7 @@
   - _Verify: node --test --test-name-pattern="T-247" mcp-server/test/v121.test.mjs_
   - _Size: M_
   - _Depends: 29_
-- [ ] 38. [US10][P] Secções `## Templates` das references com nomes de ficheiro ou "(a pedido)"
+- [x] 38. [US10][P] Secções `## Templates` das references com nomes de ficheiro ou "(a pedido)"
   - _Requirements: US-10.AC-5_
   - _Makes green: T-248_
   - _Verify: node --test --test-name-pattern="T-248" mcp-server/test/v121.test.mjs_

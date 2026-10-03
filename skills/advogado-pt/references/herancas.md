@@ -61,7 +61,7 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Requerimento de habilitação de herdeiros (guião)
-- Acordo de partilha extrajudicial
-- Declaração de repúdio de herança
-- Procuração para representação em partilha
+- Requerimento de habilitação de herdeiros (guião) (a pedido)
+- Acordo de partilha extrajudicial — `assets/templates/acordo-partilha-extrajudicial.md`
+- Declaração de repúdio de herança (a pedido)
+- Procuração para representação em partilha (a pedido)

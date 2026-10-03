@@ -83,5 +83,5 @@
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
 - `assets/templates/reclamacao-creditos-insolvencia.md` — reclamação de créditos ao AI (insolvência) ou ao administrador judicial provisório (PER/PEAP)
-- Nota/guião de apresentação de PER (declaração do devedor e pressupostos a verificar)
-- Carta de credor a pedir constituição de garantia antes do agravamento
+- Nota/guião de apresentação de PER (declaração do devedor e pressupostos a verificar) (a pedido)
+- Carta de credor a pedir constituição de garantia antes do agravamento (a pedido)

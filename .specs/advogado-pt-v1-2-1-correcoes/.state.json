@@ -763,9 +763,27 @@
       ],
       "task": "[US10] Gerador das integrações a partir da fonte única; contagens da documentação",
       "verify": "node --test --test-name-pattern=\"T-247\" mcp-server/test/v121.test.mjs"
+    },
+    "38": {
+      "command": "node --test --test-name-pattern=\"T-248\" mcp-server/test/v121.test.mjs",
+      "exitCode": 0,
+      "summary": "T-248 1/1. 26 references: 41 bullets ligados ao template/checklist/playbook existente (caminho verificado) e os restantes marcados '(a pedido)'. Teste T-248 alargado para aceitar caminhos existentes de assets/checklists/ e playbooks/, como diz o US-10.AC-5 ('nomes de ficheiro existentes').",
+      "at": "2026-10-03T22:08:56.155Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-248\" mcp-server/test/v121.test.mjs",
+          "exitCode": 0,
+          "summary": "T-248 1/1. 26 references: 41 bullets ligados ao template/checklist/playbook existente (caminho verificado) e os restantes marcados '(a pedido)'. Teste T-248 alargado para aceitar caminhos existentes de assets/checklists/ e playbooks/, como diz o US-10.AC-5 ('nomes de ficheiro existentes').",
+          "at": "2026-10-03T22:08:56.155Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10][P] Secções `## Templates` das references com nomes de ficheiro ou \"(a pedido)\"",
+      "verify": "node --test --test-name-pattern=\"T-248\" mcp-server/test/v121.test.mjs"
     }
   },
-  "lastTickAt": "2026-10-03T22:07:27.584Z",
+  "lastTickAt": "2026-10-03T22:08:56.155Z",
   "ticks": {
     "1": "2026-10-03T21:01:03.885Z",
     "2": "2026-10-03T21:18:47.832Z",
@@ -802,6 +820,7 @@
     "34": "2026-10-03T22:03:18.029Z",
     "35": "2026-10-03T22:04:48.103Z",
     "36": "2026-10-03T22:05:42.183Z",
-    "37": "2026-10-03T22:07:27.584Z"
+    "37": "2026-10-03T22:07:27.584Z",
+    "38": "2026-10-03T22:08:56.155Z"
   }
 }

@@ -61,7 +61,7 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Queixa-crime (modelo: identificação do queixoso, factos, qualificação jurídica, prova, pedido)
-- Denúncia de cibercrime (guião para queixaselectronicas.mai.gov.pt / PJ-UNC3T)
-- Pedido de indemnização civil em processo penal (guião de dedução por adesão)
-- Requerimento de constituição de assistente
+- Queixa-crime (modelo: identificação do queixoso, factos, qualificação jurídica, prova, pedido) (a pedido)
+- Denúncia de cibercrime (guião para queixaselectronicas.mai.gov.pt / PJ-UNC3T) (a pedido)
+- Pedido de indemnização civil em processo penal (guião de dedução por adesão) (a pedido)
+- Requerimento de constituição de assistente (a pedido)

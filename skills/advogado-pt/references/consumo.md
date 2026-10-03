@@ -49,7 +49,7 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Termos e Condições para loja online (conforme DL 24/2014)
-- Política de devoluções e reembolsos
-- Resposta a reclamação no livro de reclamações
-- Informação pré-contratual para vendas à distância
+- Termos e Condições para loja online (conforme DL 24/2014) — `assets/templates/termos-condicoes-loja-online.md`
+- Política de devoluções e reembolsos (a pedido)
+- Resposta a reclamação no livro de reclamações (a pedido)
+- Informação pré-contratual para vendas à distância (a pedido)

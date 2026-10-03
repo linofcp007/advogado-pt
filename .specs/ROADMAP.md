@@ -2,9 +2,9 @@
 
 <!-- AUTO-GERADO por dev-spec — não editar à mão. -->
 
-**Progresso: 80%** ▰▰▰▰▰▰▰▰▱▱ · 2/4 features completas · 94/137 tasks feitas
+**Progresso: 81%** ▰▰▰▰▰▰▰▰▱▱ · 2/4 features completas · 95/137 tasks feitas
 
-_Velocidade: 235 ponto(s)/dia útil — 94 tarefa(s), 235 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
+_Velocidade: 237 ponto(s)/dia útil — 95 tarefa(s), 237 ponto(s) concluídos desde 2026-10-03 (últimos 28 dias)_
 
 Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por começar
 
@@ -16,7 +16,7 @@ Legenda: ✅ feito · 🟡 em curso · ⛔ bloqueada · 📋 planeada · ⬜ por
 | | Feature | Tracks | Fase | % | Tasks | Deps | Próxima | Previsão |
 |---|---|---|---|---|---|---|---|---|
 | ✅ | [advogado-pt-v1-1-empresas](./advogado-pt-v1-1-empresas/requirements.md) | core +tdd | concluída | 100% | 28/28 | — | — | — |
-| 🟡 | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | em execução | 91% | 36/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | #33 Testes em falta (`contarPrazo`, custas, Se | 2026-10-05 |
+| 🟡 | [advogado-pt-v1-2-1-correcoes](./advogado-pt-v1-2-1-correcoes/requirements.md) | core +tdd +sec | em execução | 93% | 37/41 | advogado-pt-v1-2-operacional ✓, advogado-pt-v1-1-empresas ✓ | #33 Testes em falta (`contarPrazo`, custas, Se | 2026-10-05 |
 | ✅ | [advogado-pt-v1-2-operacional](./advogado-pt-v1-2-operacional/requirements.md) | core +tdd | concluída | 100% | 30/30 | advogado-pt-v1-1-empresas ✓ | — | — |
 | ⛔ | [juridico-pt-v2-0](./juridico-pt-v2-0/requirements.md) | core +tdd +ai +privacy | tarefas prontas | 30% | 0/38 | advogado-pt-v1-2-1-correcoes ✗ | bloqueada | 2026-10-06 |
 

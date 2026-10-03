@@ -55,6 +55,6 @@
 ## Templates
 > Documentos gerados a pedido neste estilo. Os que já existem como ficheiro estão em `assets/templates/` (ver índice); os restantes são redigidos quando pedires.
 
-- Checklist de submissão de proposta (habilitação, capacidade, conformidade com o caderno de encargos)
-- Pedido de esclarecimentos / apresentação de erros e omissões
-- Impugnação administrativa de peças ou de atos do procedimento (guião)
+- Checklist de submissão de proposta (habilitação, capacidade, conformidade com o caderno de encargos) (a pedido)
+- Pedido de esclarecimentos / apresentação de erros e omissões (a pedido)
+- Impugnação administrativa de peças ou de atos do procedimento (guião) (a pedido)

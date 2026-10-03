@@ -483,8 +483,9 @@ test("T-248 secções ## Templates das references usam nomes de ficheiro existen
     for (const linha of resto) {
       if (/^## /.test(linha)) break;
       if (!/^\s*-\s/.test(linha)) continue;
-      const ficheiros = [...linha.matchAll(/`assets\/templates\/([a-z0-9-]+)\.md`/g)].map((x) => x[1]);
-      const ok = ficheiros.length > 0 ? ficheiros.every((n) => existsSync(SKILL("assets", "templates", `${n}.md`))) : /\(a pedido\)/.test(linha);
+      // Ficheiros citados: templates, checklists ou playbooks — têm de existir.
+      const ficheiros = [...linha.matchAll(/`((?:assets\/templates|assets\/checklists|playbooks)\/[a-z0-9-]+\.md)`/g)].map((x) => x[1]);
+      const ok = ficheiros.length > 0 ? ficheiros.every((n) => existsSync(SKILL(...n.split("/")))) : /\(a pedido\)/.test(linha);
       if (!ok) falhas.push(`${f}: ${linha.trim().slice(0, 100)}`);
     }
   }
