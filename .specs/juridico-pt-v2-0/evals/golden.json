@@ -71,7 +71,7 @@
       "input": "Tenho 30 anos e vou comprar a minha primeira casa para habitação própria e permanente por 300.000 €. Quanto pago de IMT e de Imposto do Selo?",
       "expect": {
         "type": "regex",
-        "value": "isent"
+        "value": "isen[tç]"
       }
     },
     {

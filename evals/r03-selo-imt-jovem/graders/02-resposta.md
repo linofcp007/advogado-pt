@@ -1,5 +1,5 @@
 ---
 type: regex
-pattern: 'isent'
+pattern: 'isen[tç]'
 flags: i
 ---

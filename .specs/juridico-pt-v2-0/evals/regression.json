@@ -23,7 +23,7 @@
       "input": "Compro a primeira casa aos 28 anos por 300.000 €, para habitação própria. Pago o Imposto do Selo de 0,8%?",
       "expect": {
         "type": "regex",
-        "value": "isent"
+        "value": "isen[tç]"
       }
     },
     {

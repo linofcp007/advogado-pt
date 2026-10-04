@@ -268,7 +268,7 @@
   - _Verify: npm --prefix mcp-server test_
   - _Size: S_
   - _Depends: 35_
-- [ ] 37. [shared] Avaliações contra os limiares, suites completas, validador oficial, desempenho do hook
+- [x] 37. [shared] Avaliações contra os limiares, suites completas, validador oficial, desempenho do hook
   - _Requirements: US-4.AC-2, NFR-3, NFR-4, SC-002_
   - _Makes green: T-313, T-338, T-339_
   - _Verify: python skills/juridico-pt/scripts/test_scripts.py_

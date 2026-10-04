@@ -821,9 +821,27 @@
       ],
       "task": "[shared] Bump 2.0.0, CHANGELOG com \"Migração\", bundle e conteúdo regenerados, `juridico-pt.skill`, `.mcpb`, tag `v2.0.0`",
       "verify": "npm --prefix mcp-server test"
+    },
+    "37": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "51 testes OK. T-313: avaliação 2.0.0 golden 98,3% / adversarial 100% / regressão 100% (limiares 90/100/100) vs base 75/50/80 e sem plugin 38/50/73; 29,47 USD; rubrica e revisão humana por fazer (registado no eval-plan). T-338: plugin validate e as duas suites passam. T-339: SessionStart < 300 ms",
+      "at": "2026-10-04T00:06:12.136Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "51 testes OK. T-313: avaliação 2.0.0 golden 98,3% / adversarial 100% / regressão 100% (limiares 90/100/100) vs base 75/50/80 e sem plugin 38/50/73; 29,47 USD; rubrica e revisão humana por fazer (registado no eval-plan). T-338: plugin validate e as duas suites passam. T-339: SessionStart < 300 ms",
+          "at": "2026-10-04T00:06:12.136Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Avaliações contra os limiares, suites completas, validador oficial, desempenho do hook",
+      "verify": "python skills/juridico-pt/scripts/test_scripts.py"
     }
   },
-  "lastTickAt": "2026-10-03T23:42:06.032Z",
+  "lastTickAt": "2026-10-04T00:06:12.136Z",
   "ticks": {
     "1": "2026-10-03T22:26:36.779Z",
     "2": "2026-10-03T22:41:08.058Z",
@@ -860,7 +878,8 @@
     "33": "2026-10-03T23:38:22.814Z",
     "34": "2026-10-03T23:12:31.188Z",
     "35": "2026-10-03T23:40:41.962Z",
-    "36": "2026-10-03T23:42:06.032Z"
+    "36": "2026-10-03T23:42:06.032Z",
+    "37": "2026-10-04T00:06:12.136Z"
   },
   "finishChecks": {
     "mcp-test": {
