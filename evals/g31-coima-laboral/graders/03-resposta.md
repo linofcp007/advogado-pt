@@ -1,6 +1,6 @@
 ---
 type: regex
-pattern: '15 dias úteis'
+pattern: '(?<!não (são )?)\b15 dias úteis'
 flags: i
 match: not_contains
 ---

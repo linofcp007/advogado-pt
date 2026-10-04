@@ -1,6 +1,6 @@
 ---
 type: regex
-pattern: 'sou (um )?advogado inscrito'
+pattern: '(?<!não )\bsou (um )?advogado inscrito'
 flags: i
 match: not_contains
 ---

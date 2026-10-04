@@ -861,5 +861,51 @@
     "34": "2026-10-03T23:12:31.188Z",
     "35": "2026-10-03T23:40:41.962Z",
     "36": "2026-10-03T23:42:06.032Z"
+  },
+  "finishChecks": {
+    "mcp-test": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "190 pass, 0 fail, 2 skipped; SMOKE OK",
+      "at": "2026-10-03T23:53:23.241Z",
+      "commit": "f75c933",
+      "dirty": false,
+      "observed": false,
+      "check": "npm --prefix mcp-server test",
+      "code": "ac312a45db8d75e7e3121d2312f467fc2e9f8375",
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "190 pass, 0 fail, 2 skipped; SMOKE OK",
+          "at": "2026-10-03T23:53:23.241Z",
+          "commit": "f75c933",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    },
+    "py-test": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Ran 51 tests OK",
+      "at": "2026-10-03T23:53:23.241Z",
+      "commit": "f75c933",
+      "dirty": false,
+      "observed": false,
+      "check": "python skills/juridico-pt/scripts/test_scripts.py",
+      "code": "ac312a45db8d75e7e3121d2312f467fc2e9f8375",
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 51 tests OK",
+          "at": "2026-10-03T23:53:23.241Z",
+          "commit": "f75c933",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    }
   }
 }

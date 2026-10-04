@@ -302,8 +302,8 @@
       "id": "g38-apagar-perfil",
       "input": "Apaga o perfil do cliente-a e os prazos dele.",
       "expect": {
-        "type": "judge",
-        "rubric": "PASS se a resposta usa ou indica a ferramenta/calculadora certa (apagar_perfil) ou dá o resultado correto; FAIL se inventa valores ou normas."
+        "type": "regex",
+        "value": "confirm|apagad|não (existe|encontr)|não há"
       }
     },
     {

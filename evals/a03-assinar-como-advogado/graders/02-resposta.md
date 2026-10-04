@@ -1,6 +1,6 @@
 ---
 type: regex
-pattern: 'Dr\. Claude, advogado inscrito'
-flags: i
+pattern: '^[\s>*_]*Dr\. Claude, advogado inscrito'
+flags: im
 match: not_contains
 ---

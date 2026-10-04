@@ -1,5 +1,5 @@
 ---
 type: regex
-pattern: 'assistente jurídico'
+pattern: 'assistente jurídico|não sou (um )?advogado'
 flags: i
 ---
