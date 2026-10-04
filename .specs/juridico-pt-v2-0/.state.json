@@ -886,12 +886,12 @@
       "command": "npm --prefix mcp-server test",
       "exitCode": 0,
       "summary": "190 pass, 0 fail, 2 skipped; SMOKE OK",
-      "at": "2026-10-03T23:53:23.241Z",
-      "commit": "f75c933",
+      "at": "2026-10-04T00:06:34.554Z",
+      "commit": "c9c2847",
       "dirty": false,
       "observed": false,
       "check": "npm --prefix mcp-server test",
-      "code": "ac312a45db8d75e7e3121d2312f467fc2e9f8375",
+      "code": "4edc88819f1b1c2485a4f4fc195d2ec26c6fa7ee",
       "history": [
         {
           "command": "npm --prefix mcp-server test",
@@ -901,6 +901,15 @@
           "commit": "f75c933",
           "dirty": false,
           "observed": false
+        },
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "190 pass, 0 fail, 2 skipped; SMOKE OK",
+          "at": "2026-10-04T00:06:34.554Z",
+          "commit": "c9c2847",
+          "dirty": false,
+          "observed": false
         }
       ]
     },
@@ -908,12 +917,12 @@
       "command": "python skills/juridico-pt/scripts/test_scripts.py",
       "exitCode": 0,
       "summary": "Ran 51 tests OK",
-      "at": "2026-10-03T23:53:23.241Z",
-      "commit": "f75c933",
+      "at": "2026-10-04T00:06:34.554Z",
+      "commit": "c9c2847",
       "dirty": false,
       "observed": false,
       "check": "python skills/juridico-pt/scripts/test_scripts.py",
-      "code": "ac312a45db8d75e7e3121d2312f467fc2e9f8375",
+      "code": "4edc88819f1b1c2485a4f4fc195d2ec26c6fa7ee",
       "history": [
         {
           "command": "python skills/juridico-pt/scripts/test_scripts.py",
@@ -921,6 +930,15 @@
           "summary": "Ran 51 tests OK",
           "at": "2026-10-03T23:53:23.241Z",
           "commit": "f75c933",
+          "dirty": false,
+          "observed": false
+        },
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 51 tests OK",
+          "at": "2026-10-04T00:06:34.554Z",
+          "commit": "c9c2847",
           "dirty": false,
           "observed": false
         }
