@@ -38,6 +38,11 @@ Todas as alterações relevantes ao **juridico-pt** (até à 1.2.1, **advogado-p
 - Livro de Reclamações (`consumo.md`): o livro eletrónico é obrigatório para todos os fornecedores e os prazos de 15 dias úteis distinguem o eletrónico do físico.
 - Prestação de contas (`societario.md`): 5 meses com contas consolidadas (CSC, art. 65.º, n.º 5).
 - NIS2 (`data-breach.md`): notificação inicial em 24 h, atualização em 72 h e relatório final em 30 dias úteis (DL 125/2025).
+- Coeficiente de atualização das rendas para 2027 (`valores-2026.md`): 1,0256 confirmado pelo Aviso 24199/2026/2 (INE), DR n.º 191/2026, Série II, de 1/10/2026 — deixa de estar "a confirmar".
+
+### Security
+
+- `proxy-addr` 2.0.7 → 2.0.8 no `package-lock.json` do servidor MCP (GHSA-jqcg-44mw-7w3h, crítica; dependência transitiva do SDK via express, que não entra no bundle) — `npm audit` sem vulnerabilidades.
 
 ### Migração
 

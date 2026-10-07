@@ -4,7 +4,7 @@
 >
 > **Como usar este ficheiro:** Este é o **ponto único de verdade** para montantes, taxas e limiares que mudam ao longo do tempo. Os outros ficheiros de referência remetem para aqui em vez de repetir valores. Antes de afirmar qualquer valor numa resposta ao utilizador, confirma aqui. Se o valor tiver mais de ~6 meses ou estiveres em dúvida, **verifica por web search** nas fontes oficiais (ver fundo do ficheiro).
 >
-> **Última atualização:** 2026-10 (v1.2: retenção de IRS, IRC, SS/DL 127/2025, custas, concorrência, INPI e os 18 valores antes por confirmar — todos com fonte oficial; juros de mora do 2.º semestre de 2026)
+> **Última atualização:** 2026-10 (v1.2: retenção de IRS, IRC, SS/DL 127/2025, custas, concorrência, INPI e os 18 valores antes por confirmar — todos com fonte oficial; juros de mora do 2.º semestre de 2026; coeficiente das rendas para 2027 confirmado pelo Aviso 24199/2026/2)
 > **Próxima revisão:** 2027-01-31 — Orçamento do Estado para 2027 e juros de mora do 1.º semestre de 2027 (o plugin avisa no início da sessão depois desta data).
 >
 > **Juros de mora:** taxas oficiais até ao 2.º semestre de 2026 (o aviso da ETF de cada semestre sai no início de janeiro e de julho).
@@ -223,7 +223,7 @@ Fórmula: **IMT = (maior de preço/VPT) × taxa marginal − parcela a abater**.
 | Item | Valor 2026 | Base legal |
 |---|---|---|
 | Coeficiente de atualização anual de rendas | **1,0224** (+2,24%) | Aviso 23174/2025/2 (INE) |
-| Coeficiente de atualização anual de rendas para 2027 | **1,0256** (+2,56%) — apurado pelo INE a 10/9/2026 (IPC sem habitação, 12 meses até agosto); **(a confirmar)** com o Aviso no Diário da República, publicado até 30/10/2026 | NRAU (Lei 6/2006), art. 24.º; INE |
+| Coeficiente de atualização anual de rendas para 2027 | **1,0256** (+2,56%) — para atualizações com efeitos em 2027 | Aviso 24199/2026/2 (INE), DR n.º 191/2026, Série II, de 1/10/2026; NRAU (Lei 6/2006), art. 24.º |
 | Caução máxima | 2 meses de renda | Art. 1076.º CC |
 | Imposto do selo sobre arrendamento | **10%** sobre 1 mês de renda; encargo legal do **senhorio** | TGIS verba 2; CIS art. 3.º, n.º 3, al. b) |
 | Retenção na fonte de IRS sobre rendas (arrendatário com contabilidade organizada) | **25%** | CIRS art. 101.º, n.º 1, al. e) |

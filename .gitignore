@@ -28,3 +28,6 @@ Thumbs.db
 
 # Registos de navegação de agentes (Playwright MCP)
 .playwright-mcp/
+
+# Claude Code: definições locais de cada máquina (ex.: disabledMcpjsonServers)
+.claude/settings.local.json
