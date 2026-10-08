@@ -274,7 +274,7 @@
   - _Verify: python skills/juridico-pt/scripts/test_scripts.py_
   - _Size: M_
   - _Depends: 36_
-- [ ] 38. [shared] Push, renomear o repositório no GitHub para `juridico-pt` (com confirmação explícita do Carlos) e quickstart manual (`.mcpb` no Desktop, `.docx` no Word/LibreOffice, troca da instalação real seguindo o CHANGELOG)
+- [x] 38. [shared] Push, renomear o repositório no GitHub para `juridico-pt` (com confirmação explícita do Carlos) e quickstart manual (`.mcpb` no Desktop, `.docx` no Word/LibreOffice, troca da instalação real seguindo o CHANGELOG)
   - _Requirements: US-1.AC-4, US-10.AC-1, US-10.AC-3, SC-001_
   - _Makes green: T-341_
   - _Size: S_
