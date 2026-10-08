@@ -560,9 +560,9 @@ test("T-336 dependências de runtime iguais às da 1.2.1", () => {
   assert.deepEqual(JSON.parse(lerMd(r("package.json"))).dependencies || {}, {});
 });
 
-test("T-337 versão 2.0.0 em todos os sítios; CHANGELOG ## [2.0.0] com secção Migração", () => {
-  const V = "2.0.0";
-  assert.equal(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version, V);
+test("T-337 versão do plugin (2.x) igual em todos os sítios e no CHANGELOG; ## [2.0.0] com secção Migração", () => {
+  const V = JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version;
+  assert.match(V, /^2\.\d+\.\d+$/);
   const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
   assert.equal(mk.metadata.version, V);
   assert.equal(mk.plugins[0].version, V);
@@ -572,7 +572,8 @@ test("T-337 versão 2.0.0 em todos os sítios; CHANGELOG ## [2.0.0] com secção
   const lock = JSON.parse(lerMd(r("mcp-server", "package-lock.json")));
   assert.equal(lock.version, V);
   const c = lerMd(r("CHANGELOG.md"));
-  const i = c.indexOf(`## [${V}]`);
+  assert.ok(c.includes(`## [${V}]`), `CHANGELOG sem ## [${V}]`);
+  const i = c.indexOf("## [2.0.0]");
   assert.ok(i >= 0);
   const fim = c.indexOf("\n## [", i + 5);
   assert.match(c.slice(i, fim < 0 ? undefined : fim), /^### Migração/m);

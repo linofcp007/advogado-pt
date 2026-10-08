@@ -11,9 +11,7 @@ import { fileURLToPath } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "..");
 
-await build({
-  entryPoints: [resolve(root, "src", "index.ts")],
-  outfile: resolve(root, "dist", "index.js"),
+const comum = {
   bundle: true,
   platform: "node",
   format: "esm",
@@ -24,6 +22,12 @@ await build({
     js: "import { createRequire as __createRequire } from 'node:module';\nconst require = __createRequire(import.meta.url);",
   },
   logLevel: "info",
-});
+};
 
+await build({ ...comum, entryPoints: [resolve(root, "src", "index.ts")], outfile: resolve(root, "dist", "index.js") });
 console.log("OK: servidor MCP empacotado (self-contained) -> dist/index.js");
+
+// O CLI usa as calculadoras, o calendário, os prazos, o painel, a exportação e a atualidade.
+// Também versionado: a saída do tsc no resto de dist/ não chega a quem instala pelo marketplace.
+await build({ ...comum, entryPoints: [resolve(root, "src", "cli-lib.ts")], outfile: resolve(root, "dist", "cli-lib.js") });
+console.log("OK: módulos do CLI empacotados (self-contained) -> dist/cli-lib.js");

@@ -47,8 +47,8 @@ npm run build:mcpb         # build + extensão ../dist/juridico-pt-<versão>.mcp
 ```
 
 O conteúdo jurídico é **o mesmo da skill**: ao mudar `skills/juridico-pt/` ou `mcp-server/src/`, corre
-`npm run build` no `mcp-server/` e faz commit do `mcp-server/dist/index.js` e de `mcp-server/content/`
-regenerados — o plugin instalado pelo marketplace usa-os tal como estão no repositório.
+`npm run build` no `mcp-server/` e faz commit de `mcp-server/dist/index.js`, `mcp-server/dist/cli-lib.js` e
+`mcp-server/content/` regenerados — o plugin instalado pelo marketplace usa-os tal como estão no repositório.
 
 ## Versionamento
 
@@ -61,7 +61,7 @@ Ao subir a versão, faz o bump **em simultâneo** em todos estes sítios, para n
 5. `mcp-server/src/index.ts` (versão reportada pelo servidor)
 6. `CHANGELOG.md` (nova entrada no formato Keep a Changelog + SemVer)
 
-Depois, `npm run build` no `mcp-server/` e commit do bundle `mcp-server/dist/index.js` regenerado.
+Depois, `npm run build` no `mcp-server/` e commit dos bundles `mcp-server/dist/index.js` e `mcp-server/dist/cli-lib.js` regenerados.
 
 ## Commits
 

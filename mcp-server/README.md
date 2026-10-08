@@ -41,7 +41,7 @@ npm run build:mcpb  # build + extensão ../dist/juridico-pt-<versão>.mcpb para 
 npm start         # arranca o servidor em stdio
 ```
 
-Ao mudar `src/` ou o conteúdo da skill, corre `npm run build` e faz commit do `dist/index.js` e de `content/` regenerados — é o que o plugin usa quando é instalado pelo marketplace.
+Ao mudar `src/` ou o conteúdo da skill, corre `npm run build` e faz commit de `dist/index.js` (servidor), `dist/cli-lib.js` (o que o CLI usa) e `content/` regenerados — é o que o plugin e o CLI usam quando são instalados pelo marketplace.
 
 ## Como está construído
 
