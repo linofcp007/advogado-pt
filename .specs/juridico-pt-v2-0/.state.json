@@ -14,21 +14,21 @@
       "fingerprint": "73cdd3393bb7c4991c14e44e33e0d5e377f46c3e"
     },
     "requirements": {
-      "at": "2026-10-03T22:40:59.390Z",
+      "at": "2026-10-08T07:39:44.406Z",
       "by": "Carlos Pereira",
       "fingerprint": "68cc3f30317a9d01c67acd805b2014726ce8dac3",
       "steering": {
-        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
-        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
       }
     },
     "design": {
-      "at": "2026-10-03T22:41:57.183Z",
+      "at": "2026-10-08T07:39:47.516Z",
       "by": "Carlos Pereira",
       "fingerprint": "cbfb6983c6fd3199e0e0c1169c288e4ef2d20eec",
       "steering": {
-        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
-        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
       },
       "weigh": true,
       "reuse": true
@@ -39,10 +39,9 @@
       "fingerprint": "4c614f2d439648fbbf4a770df47ded059da47ca3"
     },
     "eval-plan": {
-      "at": "2026-10-03T21:00:42.985Z",
+      "at": "2026-10-08T07:39:47.734Z",
       "by": "Carlos Pereira",
-      "fingerprint": "42729dd4daf0eb55c19af31151f33351eec05c24",
-      "batch": true
+      "fingerprint": "95e01bd63a29a5a456fbc8b8a5d7545b2634b169"
     },
     "tests": {
       "at": "2026-10-03T23:02:19.571Z",
@@ -179,9 +178,40 @@
       "fingerprint": "9ee6cea9c15cced3495838a8759b6db04cc3d627",
       "batch": true,
       "snapshot": ".history/tasks@1.md"
+    },
+    {
+      "phase": "requirements",
+      "at": "2026-10-08T07:39:44.406Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "68cc3f30317a9d01c67acd805b2014726ce8dac3",
+      "steering": {
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
+      },
+      "snapshot": ".history/requirements@3.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-08T07:39:47.516Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "cbfb6983c6fd3199e0e0c1169c288e4ef2d20eec",
+      "steering": {
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
+      },
+      "weigh": true,
+      "reuse": true,
+      "snapshot": ".history/design@4.md"
+    },
+    {
+      "phase": "eval-plan",
+      "at": "2026-10-08T07:39:47.734Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "95e01bd63a29a5a456fbc8b8a5d7545b2634b169",
+      "snapshot": ".history/eval-plan@2.md"
     }
   ],
-  "lastApprovedPhase": "tasks",
+  "lastApprovedPhase": "eval-plan",
   "evidence": {
     "1": {
       "command": "git rev-parse --abbrev-ref HEAD",
