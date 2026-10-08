@@ -64,6 +64,13 @@
 - **Antiguidade anterior a 1/5/2023**: regime transitório por períodos (30, 20, 18 e 12 dias/ano consoante o período — Lei 69/2013, art. 5.º; Lei 13/2023, art. 35.º) — calcular com `calc_compensacao_despedimento` com as datas de admissão e cessação (validado contra o simulador da ACT)
 - ⚠️ Valores em `references/valores-2026.md`; cálculo em `scripts/compensacao_despedimento.py`
 
+### Revogação por acordo e quitação
+- **Forma**: acordo escrito, assinado por ambas as partes, em duplicado, com a data de celebração e a de início dos efeitos (Art. 349.º CT) — template `acordo-revogacao`
+- **Compensação pecuniária global**: se o acordo a fixar, presume-se que inclui os créditos vencidos à data da cessação ou exigíveis em virtude desta (Art. 349.º, n.º 5 CT); a presunção pode ser afastada pelo trabalhador com prova em contrário — discriminar no acordo as verbas pagas (retribuições, férias e subsídios, proporcionais, formação não ministrada)
+- **Sem quitação por renúncia**: desde 1/5/2023, os créditos do trabalhador emergentes do contrato, da sua violação ou cessação não podem ser extintos por **remissão abdicativa**, salvo através de **transação judicial** (Art. 337.º, n.º 3 CT, Lei 13/2023) — uma "quitação total" num acordo extrajudicial não extingue créditos que ainda sejam devidos
+- ⏰ **Arrependimento**: o trabalhador pode fazer cessar o acordo por comunicação escrita até ao **7.º dia** seguinte à celebração, devolvendo a totalidade das compensações recebidas (Art. 350.º, n.ºs 1 e 3 CT), salvo se o acordo estiver datado e as assinaturas tiverem reconhecimento notarial presencial (n.º 4)
+- ⏰ **Prescrição**: os créditos de qualquer das partes prescrevem **1 ano** a contar do dia seguinte à cessação do contrato (Art. 337.º, n.º 1 CT)
+
 ### Aviso Prévio (denúncia pelo trabalhador)
 - Contrato sem termo: 30 dias (até 2 anos de antiguidade), 60 dias (mais de 2 anos)
 - Contrato a termo: 15 dias (até 6 meses), 30 dias (6+ meses)

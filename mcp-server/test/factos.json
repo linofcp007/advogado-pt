@@ -1700,5 +1700,72 @@
     ],
     "naoContem": [],
     "fonte": "RGPD arts. 5.º e 13.º"
+  },
+  {
+    "id": "v202-coima-laboral-efeito",
+    "pergunta": "A impugnação de uma coima laboral suspende a decisão com depósito?",
+    "ficheiro": "skills/juridico-pt/references/multas.md",
+    "contem": [
+      "515/2025",
+      "revogados pela Lei 13/2023"
+    ],
+    "naoContem": [
+      "só suspende a decisão se o arguido depositar"
+    ],
+    "fonte": "Lei 107/2009, art. 35.º (n.ºs 2 e 3 revogados pela Lei 13/2023, art. 33.º, al. c)); Ac. TC 515/2025"
+  },
+  {
+    "id": "v202-coima-laboral-resposta",
+    "pergunta": "Nas coimas laborais posso responder oralmente?",
+    "ficheiro": "skills/juridico-pt/references/multas.md",
+    "contem": [
+      "resposta é só escrita"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 107/2009, art. 17.º, n.ºs 2 e 3 (red. Lei 13/2023)"
+  },
+  {
+    "id": "v202-quitacao-revogacao",
+    "pergunta": "A quitação total no acordo de revogação extingue os créditos do trabalhador?",
+    "ficheiro": "skills/juridico-pt/references/laboral.md",
+    "contem": [
+      "remissão abdicativa",
+      "337.º, n.º 3",
+      "349.º, n.º 5"
+    ],
+    "naoContem": [],
+    "fonte": "CT arts. 337.º, n.º 3 (Lei 13/2023), 349.º, n.º 5, e 350.º"
+  },
+  {
+    "id": "v202-queixa-cibercrime-playbook",
+    "pergunta": "Prazo de queixa por acesso ilegítimo numa fuga de dados",
+    "ficheiro": "skills/juridico-pt/playbooks/data-breach.md",
+    "contem": [
+      "e dos autores",
+      "crime público"
+    ],
+    "naoContem": [],
+    "fonte": "CP art. 115.º, n.º 1; Lei 109/2009, art. 6.º, n.ºs 5 e 7"
+  },
+  {
+    "id": "v202-acesso-ilegitimo-queixa",
+    "pergunta": "O acesso ilegítimo depende de queixa?",
+    "ficheiro": "skills/juridico-pt/references/penal-cibercrime.md",
+    "contem": [
+      "art. 6.º, n.º 7"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 109/2009, art. 6.º, n.º 7 (red. Lei 79/2021)"
+  },
+  {
+    "id": "v202-viactt-redacao-antiga",
+    "pergunta": "A notificação na caixa postal eletrónica é ao 5.º ou ao 15.º dia?",
+    "ficheiro": "skills/juridico-pt/references/contencioso-tributario.md",
+    "contem": [
+      "15.º dia posterior",
+      "93/2017"
+    ],
+    "naoContem": [],
+    "fonte": "CPPT art. 39.º, n.º 10 (red. Lei 119/2019; antes DL 93/2017)"
   }
 ]

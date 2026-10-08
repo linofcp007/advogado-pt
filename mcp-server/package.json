@@ -1,6 +1,6 @@
 {
   "name": "juridico-pt-mcp",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Jurídico PT — assessoria jurídica de Portugal como servidor MCP: referências legais, templates de documentos e calculadoras (juros, IMT, prazos, prescrição, compensação). Funciona em Claude, Cursor, Windsurf, ChatGPT, Codex e Gemini.",
   "type": "module",
   "license": "MIT",
