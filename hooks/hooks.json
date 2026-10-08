@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/advogado-hook.mjs\" SessionStart",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/juridico-hook.mjs\" SessionStart",
             "timeout": 10
           }
         ]
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/advogado-hook.mjs\" PostToolUse",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/juridico-hook.mjs\" PostToolUse",
             "timeout": 10
           }
         ]

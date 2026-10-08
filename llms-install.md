@@ -1,6 +1,6 @@
-# Instalar o advogado-pt (agentes & Cline)
+# Instalar o juridico-pt (agentes & Cline)
 
-O `advogado-pt` inclui um **servidor MCP local** em TypeScript (Node.js ≥ 18). Expõe assessoria
+O `juridico-pt` inclui um **servidor MCP local** em TypeScript (Node.js ≥ 18). Expõe assessoria
 jurídica de Portugal — referências, templates e calculadoras — a qualquer cliente compatível com MCP.
 Todas as operações são locais: sem rede, sem API key.
 
@@ -9,14 +9,14 @@ Todas as operações são locais: sem rede, sem API key.
 1. **Clona o repositório** para um local permanente e anota o caminho absoluto:
 
    ```bash
-   git clone https://github.com/linofcp007/advogado-pt.git
-   # guarda o caminho absoluto, ex.: /home/you/advogado-pt (ou C:\tools\advogado-pt)
+   git clone https://github.com/linofcp007/juridico-pt.git
+   # guarda o caminho absoluto, ex.: /home/you/juridico-pt (ou C:\tools\juridico-pt)
    ```
 
 2. **Constrói o servidor MCP** (um comando na raiz):
 
    ```bash
-   cd advogado-pt
+   cd juridico-pt
    npm run setup      # instala + compila o MCP (gera dist/index.js) + doctor
    ```
 
@@ -26,20 +26,20 @@ Todas as operações são locais: sem rede, sem API key.
    ```json
    {
      "mcpServers": {
-       "advogado-pt": {
+       "juridico-pt": {
          "command": "node",
-         "args": ["/ABSOLUTE/PATH/advogado-pt/mcp-server/dist/index.js"]
+         "args": ["/ABSOLUTE/PATH/juridico-pt/mcp-server/dist/index.js"]
        }
      }
    }
    ```
 
    A mesma shape `mcpServers` funciona em **Cursor, Claude Desktop, Windsurf, Gemini e Cline**.
-   Dica: `node cli/advogado-pt.mjs mcp-config <host>` imprime o bloco com o caminho absoluto já preenchido.
+   Dica: `node cli/juridico-pt.mjs mcp-config <host>` imprime o bloco com o caminho absoluto já preenchido.
 
 4. **Recarrega o cliente MCP.** O servidor anuncia **17 tools** (8 calculadoras jurídicas + 9
    ferramentas de conteúdo), **resources** (todo o conteúdo jurídico em
-   `advogado-pt://{categoria}/{nome}`) e o **prompt** `advogado_pt` (persona de advogado de Portugal).
+   `juridico-pt://{categoria}/{nome}`) e o **prompt** `assistente_juridico` (persona de assistente jurídico de Portugal).
 
 ## Notes
 

@@ -1,10 +1,10 @@
 # Tecnologia
 
 ## Stack
-- Conteúdo: Markdown em `skills/advogado-pt/` (references, assets/templates, assets/checklists, playbooks).
-- Calculadoras: Python 3 (stdlib) em `skills/advogado-pt/scripts/` + port TypeScript em `mcp-server/src/calculators/`.
+- Conteúdo: Markdown em `skills/juridico-pt/` (references, assets/templates, assets/checklists, playbooks).
+- Calculadoras: Python 3 (stdlib) em `skills/juridico-pt/scripts/` + port TypeScript em `mcp-server/src/calculators/`.
 - Servidor MCP: TypeScript, `@modelcontextprotocol/sdk` + `zod`, bundle self-contained com esbuild (`mcp-server/dist/index.js`).
-- CLI e hook: Node ESM sem dependências (`cli/advogado-pt.mjs`, `hooks/advogado-hook.mjs`).
+- CLI e hook: Node ESM sem dependências (`cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`).
 - Base de dados / Auth: n/a — tudo local, sem estado.
 
 ## Infraestrutura

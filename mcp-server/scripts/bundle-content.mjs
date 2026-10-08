@@ -8,8 +8,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(here, "..", "..");                 // .../advogado-pt
-const skillRoot = resolve(repoRoot, "skills", "advogado-pt"); // conteúdo da skill
+const repoRoot = resolve(here, "..", "..");                 // .../juridico-pt
+const skillRoot = resolve(repoRoot, "skills", "juridico-pt"); // conteúdo da skill
 const contentDir = resolve(here, "..", "content");
 
 const COPY = [
@@ -42,7 +42,7 @@ async function main() {
   const stamp = process.env.BUNDLE_STAMP || "build";
   await writeFile(
     resolve(contentDir, "BUNDLE.json"),
-    JSON.stringify({ bundledFrom: "advogado-pt skill", stamp }, null, 2)
+    JSON.stringify({ bundledFrom: "juridico-pt skill", stamp }, null, 2)
   );
 
   console.log(`Conteúdo empacotado em ${contentDir}`);

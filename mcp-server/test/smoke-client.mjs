@@ -50,16 +50,16 @@ check("calc_iva_operacao serviços B2B UE => M40", iva.content[0].text.includes(
 const cal = await client.callTool({ name: "calendario_obrigacoes", arguments: { ano: 2026 } });
 check("calendario_obrigacoes 2026 => Modelo 22", cal.content[0].text.includes("Modelo 22"));
 
-const ref = await client.readResource({ uri: "advogado-pt://references/valores-2026" });
+const ref = await client.readResource({ uri: "juridico-pt://references/valores-2026" });
 check("readResource valores-2026", (ref.contents[0].text ?? "").length > 500, `${(ref.contents[0].text ?? "").length} chars`);
 
 const tmpl = await client.callTool({ name: "obter_template", arguments: { nome: "requerimento-injuncao" } });
 check("obter_template requerimento-injuncao", tmpl.content[0].text.includes("Injunção"));
 
 const prompts = await client.listPrompts();
-check("listPrompts advogado_pt", prompts.prompts.some((p) => p.name === "advogado_pt"));
+check("listPrompts assistente_juridico", prompts.prompts.some((p) => p.name === "assistente_juridico"));
 
-const prompt = await client.getPrompt({ name: "advogado_pt", arguments: { assunto: "cliente não pagou" } });
+const prompt = await client.getPrompt({ name: "assistente_juridico", arguments: { assunto: "cliente não pagou" } });
 check("getPrompt persona", prompt.messages[0].content.text.includes("DIREITO PORTUGUÊS"));
 
 await client.close();

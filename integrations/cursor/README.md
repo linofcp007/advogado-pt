@@ -1,6 +1,6 @@
-# Cursor — `advogado-pt-mcp`
+# Cursor — `juridico-pt-mcp`
 
-Liga o servidor MCP `advogado-pt-mcp` ao **Cursor** e adiciona a persona como regra.
+Liga o servidor MCP `juridico-pt-mcp` ao **Cursor** e adiciona a persona como regra.
 
 ## Ficheiros
 
@@ -8,7 +8,7 @@ Liga o servidor MCP `advogado-pt-mcp` ao **Cursor** e adiciona a persona como re
 cursor/
 ├── mcp.json                  # Configuração MCP → vai para .cursor/mcp.json
 └── rules/
-    └── advogado-pt.mdc       # Regra com a persona → vai para .cursor/rules/
+    └── juridico-pt.mdc       # Regra com a persona → vai para .cursor/rules/
 ```
 
 ## 1. Configurar o servidor MCP
@@ -24,24 +24,24 @@ preenchendo o caminho **absoluto** para `dist/index.js`:
 ```json
 {
   "mcpServers": {
-    "advogado-pt": {
+    "juridico-pt": {
       "command": "node",
-      "args": ["/ABSOLUTE/PATH/TO/advogado-pt/mcp-server/dist/index.js"]
+      "args": ["/ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js"]
     }
   }
 }
 ```
 
-> Substitui `/ABSOLUTE/PATH/TO/advogado-pt` pelo caminho absoluto na tua máquina, ou corre
-> `node cli/advogado-pt.mjs mcp-config cursor` na raiz do repo para gerar o bloco com o
+> Substitui `/ABSOLUTE/PATH/TO/juridico-pt` pelo caminho absoluto na tua máquina, ou corre
+> `node cli/juridico-pt.mjs mcp-config cursor` na raiz do repo para gerar o bloco com o
 > caminho **absoluto** já preenchido.
 
-Depois vai a **Settings → Cursor Settings → MCP** e confirma que `advogado-pt` está
+Depois vai a **Settings → Cursor Settings → MCP** e confirma que `juridico-pt` está
 **ligado** (toggle verde). As tools ficam disponíveis no chat/Composer (modo Agent).
 
 ## 2. Instalar a regra (persona)
 
-Copia [`rules/advogado-pt.mdc`](./rules/advogado-pt.mdc) para `.cursor/rules/` na raiz do
+Copia [`rules/juridico-pt.mdc`](./rules/juridico-pt.mdc) para `.cursor/rules/` na raiz do
 projeto. O frontmatter usa `alwaysApply: false` — a regra é aplicada por relevância
-(descrição) ou quando a referencias explicitamente com `@advogado-pt`. Para a ter sempre
+(descrição) ou quando a referencias explicitamente com `@juridico-pt`. Para a ter sempre
 ativa, muda para `alwaysApply: true`.

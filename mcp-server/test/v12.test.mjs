@@ -1,8 +1,8 @@
 /**
- * Testes da v1.2 (advogado-pt v1.2 operacional) — T-101 a T-135.
+ * Testes da v1.2 (juridico-pt v1.2 operacional) — T-101 a T-135.
  * Importa a versão COMPILADA (`../dist/`); `npm test` compila antes.
  * Valores de referência calculados à mão a partir das fontes oficiais (ver
- * .specs/advogado-pt-v1-2-operacional/test-plan.md).
+ * .specs/juridico-pt-v1-2-operacional/test-plan.md).
  */
 
 import { test } from "node:test";
@@ -25,14 +25,14 @@ import {
 import { gerarCalendario, paraICS } from "../dist/calendario.js";
 import { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } from "../dist/prazos-estado.js";
 import { lerPerfil, guardarPerfil, listarPerfis, ativarPerfil } from "../dist/perfil.js";
-import { mensagemSessionStart } from "../../hooks/advogado-hook.mjs";
+import { mensagemSessionStart } from "../../hooks/juridico-hook.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "..", "..");
 const r = (...p) => resolve(repo, ...p);
-const SKILL = (...p) => r("skills", "advogado-pt", ...p);
+const SKILL = (...p) => r("skills", "juridico-pt", ...p);
 const lerMd = (p) => readFileSync(p, "utf8");
-const CLI = r("cli", "advogado-pt.mjs");
+const CLI = r("cli", "juridico-pt.mjs");
 const quase = (a, b, tol = 0.01) => assert.ok(Math.abs(a - b) < tol, `esperado ${b}, obtido ${a}`);
 const D = (s) => new Date(`${s}T00:00:00Z`);
 const HOJE = D("2026-10-03");
@@ -184,14 +184,14 @@ test("T-108 tool calendario_obrigacoes + CLI calendario (texto e .ics)", () => {
   const src = lerMd(r("mcp-server", "src", "tools.ts"));
   assert.match(src, /registerTool\(\s*"calendario_obrigacoes"/);
   const dir = tmp("adv-cal-");
-  mkdirSync(join(dir, ".advogado-pt"));
-  writeFileSync(join(dir, ".advogado-pt", "perfil-empresa.md"), "forma_juridica: Lda\nregime_iva: trimestral\ntrabalhadores: 12\ncontabilidade: organizada\natualizado_em: 2026-09-01\n");
+  mkdirSync(join(dir, ".juridico-pt"));
+  writeFileSync(join(dir, ".juridico-pt", "perfil-empresa.md"), "forma_juridica: Lda\nregime_iva: trimestral\ntrabalhadores: 12\ncontabilidade: organizada\natualizado_em: 2026-09-01\n");
   const out = spawnSync(process.execPath, [CLI, "calendario", "--ano", "2026", "--dir", dir], { encoding: "utf8" });
   assert.equal(out.status, 0, out.stderr);
   assert.match(out.stdout, /Modelo 22/);
   const ics = spawnSync(process.execPath, [CLI, "calendario", "--ano", "2026", "--dir", dir, "--ics"], { encoding: "utf8" });
   assert.equal(ics.status, 0, ics.stderr);
-  assert.ok(existsSync(join(dir, ".advogado-pt", "calendario-2026.ics")));
+  assert.ok(existsSync(join(dir, ".juridico-pt", "calendario-2026.ics")));
 });
 
 test("T-113 RGPC no calendário só a partir de 50 trabalhadores", () => {
@@ -203,13 +203,13 @@ test("T-113 RGPC no calendário só a partir de 50 trabalhadores", () => {
 
 // ---------------- US-3 prazos ----------------
 
-test("T-109 registar, listar e concluir prazos em .advogado-pt/prazos.md", () => {
+test("T-109 registar, listar e concluir prazos em .juridico-pt/prazos.md", () => {
   const dir = tmp("adv-prz-");
   registarPrazo({ data: "2026-10-20", descricao: "Oposição à execução fiscal", origem: "art. 203.º CPPT" }, dir);
   registarPrazo({ data: "2026-10-06", descricao: "Resposta à audição prévia" }, dir);
   const p = lerPrazos(dir);
   assert.equal(p.length, 2);
-  assert.ok(existsSync(join(dir, ".advogado-pt", "prazos.md")));
+  assert.ok(existsSync(join(dir, ".juridico-pt", "prazos.md")));
   assert.equal(concluirPrazo("2026-10-06", "Resposta à audição prévia", dir), true);
   assert.equal(lerPrazos(dir).filter((x) => x.concluido).length, 1);
   assert.throws(() => registarPrazo({ data: "20/10/2026", descricao: "x" }, dir), /data/i);
@@ -230,14 +230,14 @@ test("T-110 prazos próximos e vencidos", () => {
 test("T-111 hook avisa prazos; ficheiro ilegível não rebenta", () => {
   const projeto = tmp("adv-hpz-");
   const home = tmp("adv-hhm-");
-  mkdirSync(join(projeto, ".advogado-pt"));
-  writeFileSync(join(projeto, ".advogado-pt", "prazos.md"), "- [ ] 2026-10-01 — Recurso de coima\n- [ ] 2026-10-06 — Audição prévia AT\n");
+  mkdirSync(join(projeto, ".juridico-pt"));
+  writeFileSync(join(projeto, ".juridico-pt", "prazos.md"), "- [ ] 2026-10-01 — Recurso de coima\n- [ ] 2026-10-06 — Audição prévia AT\n");
   const m = mensagemSessionStart({ projeto, home, hoje: HOJE });
   assert.match(m, /vencid/i);
   assert.match(m, /faltam 3 dias/i);
   const lixo = tmp("adv-hlx-");
-  mkdirSync(join(lixo, ".advogado-pt"));
-  writeFileSync(join(lixo, ".advogado-pt", "prazos.md"), Buffer.from([0, 255, 1, 2]));
+  mkdirSync(join(lixo, ".juridico-pt"));
+  writeFileSync(join(lixo, ".juridico-pt", "prazos.md"), Buffer.from([0, 255, 1, 2]));
   assert.doesNotThrow(() => mensagemSessionStart({ projeto: lixo, home, hoje: HOJE }));
 });
 
@@ -352,7 +352,7 @@ test("T-127 perfis nomeados: gravar, listar, ativar e ler o ativo", () => {
   const home = tmp("adv-pfh-");
   guardarPerfil({ forma_juridica: "Lda", setor: "Restauração" }, "projeto", { projeto, home, hoje: HOJE, perfil: "cliente-a" });
   guardarPerfil({ forma_juridica: "ENI", setor: "Consultoria" }, "projeto", { projeto, home, hoje: HOJE, perfil: "cliente-b" });
-  assert.ok(existsSync(join(projeto, ".advogado-pt", "perfis", "cliente-a.md")));
+  assert.ok(existsSync(join(projeto, ".juridico-pt", "perfis", "cliente-a.md")));
   ativarPerfil("cliente-b", "projeto", { projeto, home });
   const lst = listarPerfis({ projeto, home });
   assert.deepEqual(lst.map((p) => [p.nome, p.ativo]).sort(), [["cliente-a", false], ["cliente-b", true]]);
@@ -364,9 +364,9 @@ test("T-127 perfis nomeados: gravar, listar, ativar e ler o ativo", () => {
 test("T-128 perfil ativo inexistente -> perfil por defeito e aviso", () => {
   const projeto = tmp("adv-pf2-");
   const home = tmp("adv-pf2h-");
-  mkdirSync(join(projeto, ".advogado-pt"));
-  writeFileSync(join(projeto, ".advogado-pt", "perfil-empresa.md"), "forma_juridica: SA\natualizado_em: 2026-09-01\n");
-  writeFileSync(join(projeto, ".advogado-pt", "perfil-ativo"), "nao-existe\n");
+  mkdirSync(join(projeto, ".juridico-pt"));
+  writeFileSync(join(projeto, ".juridico-pt", "perfil-empresa.md"), "forma_juridica: SA\natualizado_em: 2026-09-01\n");
+  writeFileSync(join(projeto, ".juridico-pt", "perfil-ativo"), "nao-existe\n");
   const p = lerPerfil({ projeto, home, hoje: HOJE });
   assert.equal(p.campos.forma_juridica, "SA");
   assert.match(p.aviso || "", /nao-existe/);

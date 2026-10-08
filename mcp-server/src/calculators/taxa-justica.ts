@@ -8,7 +8,7 @@
  * - Redução a 90% quando a entrega eletrónica NÃO é obrigatória e a parte entrega todas as peças
  *   por via eletrónica (art. 6.º, n.ºs 3 e 4) — aplicada só à taxa inicial.
  *
- * Igual a skills/advogado-pt/scripts/taxa_justica.py.
+ * Igual a skills/juridico-pt/scripts/taxa_justica.py.
  */
 
 import { formatarEuros } from "./format.js";

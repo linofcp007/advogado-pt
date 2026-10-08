@@ -9,7 +9,7 @@
  * (Portaria 51-B/2026/1; art. 2.º, n.º 3, al. b), 2), CIRS); o excesso é rendimento
  * do trabalho (IRS e SS). Valores resumidos em references/valores-2026.md.
  *
- * Igual a skills/advogado-pt/scripts/salario_liquido.py.
+ * Igual a skills/juridico-pt/scripts/salario_liquido.py.
  */
 
 import { r2 } from "./arredondar.js";

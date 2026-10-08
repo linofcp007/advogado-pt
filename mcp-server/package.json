@@ -1,7 +1,7 @@
 {
-  "name": "advogado-pt-mcp",
-  "version": "1.2.1",
-  "description": "Advogado PT — assessoria jurídica de Portugal como servidor MCP: referências legais, templates de documentos e calculadoras (juros, IMT, prazos, prescrição, compensação). Funciona em Claude, Cursor, Windsurf, ChatGPT, Codex e Gemini.",
+  "name": "juridico-pt-mcp",
+  "version": "2.0.0",
+  "description": "Jurídico PT — assessoria jurídica de Portugal como servidor MCP: referências legais, templates de documentos e calculadoras (juros, IMT, prazos, prescrição, compensação). Funciona em Claude, Cursor, Windsurf, ChatGPT, Codex e Gemini.",
   "type": "module",
   "license": "MIT",
   "keywords": [
@@ -17,7 +17,7 @@
     "windsurf"
   ],
   "bin": {
-    "advogado-pt-mcp": "dist/index.js"
+    "juridico-pt-mcp": "dist/index.js"
   },
   "files": [
     "dist",
@@ -34,7 +34,8 @@
     "build": "npm run bundle && npm run typecheck && npm run build:server",
     "start": "node dist/index.js",
     "integracoes": "node scripts/gerar-integracoes.mjs",
-    "test": "npm run build && node --test test/calculators.test.mjs test/plugin.test.mjs test/hooks.test.mjs test/content.test.mjs test/perfil.test.mjs test/cli.test.mjs test/v12.test.mjs test/v121.test.mjs test/factos.test.mjs && node test/smoke-client.mjs",
+    "build:mcpb": "npm run build && node scripts/build-mcpb.mjs",
+    "test": "npm run build && node --test test/calculators.test.mjs test/plugin.test.mjs test/hooks.test.mjs test/content.test.mjs test/perfil.test.mjs test/cli.test.mjs test/v12.test.mjs test/v121.test.mjs test/v20.test.mjs test/factos.test.mjs && node test/smoke-client.mjs",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

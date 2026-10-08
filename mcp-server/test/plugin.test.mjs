@@ -1,5 +1,5 @@
 /**
- * Testes de estrutura do plugin advogado-pt (JavaScript puro, runner node:test).
+ * Testes de estrutura do plugin juridico-pt (JavaScript puro, runner node:test).
  *
  * Valida a coerência entre os slash commands, as tools registadas no servidor MCP,
  * o manifesto do plugin e o conteúdo da skill. Lê o .ts fonte e os .md diretamente
@@ -51,9 +51,9 @@ test("cada tool referenciada num command existe no servidor MCP", () => {
   for (const { nome, texto } of lerCommands()) {
     for (const m of texto.matchAll(TOOL_RE)) {
       const tool = m[1];
-      // O prompt MCP `advogado_pt` não é uma tool — a regex acima não o captura,
+      // O prompt MCP `assistente_juridico` não é uma tool — a regex acima não o captura,
       // mas mantemos a verificação explícita por robustez.
-      if (tool === "advogado_pt") continue;
+      if (tool === "assistente_juridico") continue;
       if (!registadas.has(tool)) problemas.push(`${nome}: tool '${tool}' não registada`);
     }
   }
@@ -85,7 +85,7 @@ test("plugin.json aponta para caminhos existentes", () => {
   assert.ok(existsSync(r(mcpRef)), `plugin.json: 'mcpServers' -> '${mcpRef}' não existe`);
 
   const mcp = JSON.parse(readFileSync(r(mcpRef), "utf8"));
-  assert.ok(mcp.mcpServers && mcp.mcpServers["advogado-pt"], ".mcp.json deve definir o servidor 'advogado-pt'");
+  assert.ok(mcp.mcpServers && mcp.mcpServers["juridico-pt"], ".mcp.json deve definir o servidor 'juridico-pt'");
 });
 
 test("o conteúdo (referência/template/playbook/checklist) citado nos commands existe", () => {
@@ -123,7 +123,7 @@ test("o conteúdo (referência/template/playbook/checklist) citado nos commands 
 
   const faltam = [];
   for (const { comando, verbo, conteudo } of pares) {
-    const caminho = r("skills", "advogado-pt", ...DIR[verbo], `${conteudo}.md`);
+    const caminho = r("skills", "juridico-pt", ...DIR[verbo], `${conteudo}.md`);
     if (!existsSync(caminho)) faltam.push(`${comando}: ${verbo} '${conteudo}' -> ${caminho} não existe`);
   }
   assert.equal(faltam.length, 0, "conteúdo citado mas inexistente:\n" + faltam.join("\n"));
@@ -133,7 +133,7 @@ test("o conteúdo (referência/template/playbook/checklist) citado nos commands 
 // v1.1 — método dos templates, cobertura empresarial, perfil e release
 // ===========================================================================
 
-const SKILL = (...p) => r("skills", "advogado-pt", ...p);
+const SKILL = (...p) => r("skills", "juridico-pt", ...p);
 const lerMd = (p) => readFileSync(p, "utf8");
 const mds = (dir) =>
   readdirSync(dir)
@@ -221,12 +221,12 @@ test("T-25 conteúdos novos existem e estão nos índices", () => {
 
 const PERSONAS = [
   ["mcp-server", "src", "persona.ts"],
-  ["skills", "advogado-pt", "SKILL.md"],
+  ["skills", "juridico-pt", "SKILL.md"],
   ["AGENTS.md"],
   ["GEMINI.md"],
   ["integrations", "chatgpt", "custom-gpt-instructions.md"],
   ["integrations", "codex", "AGENTS.md"],
-  ["integrations", "cursor", "rules", "advogado-pt.mdc"],
+  ["integrations", "cursor", "rules", "juridico-pt.mdc"],
   ["integrations", "gemini-cli", "GEMINI.md"],
   ["integrations", "windsurf", ".windsurfrules"],
 ];
@@ -312,8 +312,8 @@ test("T-43 SKILL.md: secção 'Perfil da Empresa' com projeto -> geral, 12 meses
   assert.ok(m, "SKILL.md sem '## Perfil da Empresa'");
   const fim = t.indexOf("\n## ", m.index + 5);
   const secao = t.slice(m.index, fim < 0 ? undefined : fim);
-  assert.match(secao, /\.advogado-pt\/perfil-empresa\.md/);
-  assert.match(secao, /~\/\.advogado-pt/);
+  assert.match(secao, /\.juridico-pt\/perfil-empresa\.md/);
+  assert.match(secao, /~\/\.juridico-pt/);
   assert.match(secao, /12 meses/);
   assert.match(secao, /outra entidade/i);
 });
@@ -383,7 +383,7 @@ test("T-233 SKILL.md: name no padrão e description com até 1024 caracteres, se
   const validar = (desc) =>
     spawnSync(PY, ["-c", "import sys, build; build.validar_skill_md(sys.stdin.read())"], {
       cwd: repo,
-      input: `---\nname: advogado-pt\ndescription: ${desc}\n---\n# X\n`,
+      input: `---\nname: juridico-pt\ndescription: ${desc}\n---\n# X\n`,
       encoding: "utf8",
     });
   assert.equal(validar("Assessoria jurídica de Portugal.").status, 0, "build.validar_skill_md recusou uma description válida");
@@ -392,7 +392,7 @@ test("T-233 SKILL.md: name no padrão e description com até 1024 caracteres, se
   assert.match(longa.stderr + longa.stdout, /1024/);
 });
 
-test("T-234 instruções do servidor com até 2000 caracteres e todas as tools; persona completa no prompt advogado_pt", async () => {
+test("T-234 instruções do servidor com até 2000 caracteres e todas as tools; persona completa no prompt assistente_juridico", async () => {
   const transport = new StdioClientTransport({
     command: process.execPath,
     args: [r("mcp-server", "dist", "index.js")],
@@ -407,11 +407,11 @@ test("T-234 instruções do servidor com até 2000 caracteres e todas as tools; 
     const { tools } = await client.listTools();
     const faltam = tools.map((t) => t.name).filter((n) => !instr.includes(n));
     assert.deepEqual(faltam, [], `tools sem menção nas instruções: ${faltam.join(", ")}`);
-    const p = await client.getPrompt({ name: "advogado_pt" });
+    const p = await client.getPrompt({ name: "assistente_juridico" });
     const texto = p.messages.map((m) => m.content?.text || "").join("\n");
     assert.match(texto, /RIGOR/);
     assert.match(texto, /SIN[ÓO]NIMOS/);
-    assert.ok(texto.length > instr.length, "o prompt advogado_pt devia ter a persona completa");
+    assert.ok(texto.length > instr.length, "o prompt assistente_juridico devia ter a persona completa");
   } finally {
     await client.close();
   }
@@ -429,7 +429,7 @@ test("T-235 nenhum command com nome de comando nativo; /diagnostico no hook e no
   const colisoes = nomes.filter((n) => NATIVOS.includes(n));
   assert.deepEqual(colisoes, [], `commands que colidem com comandos nativos: ${colisoes.join(", ")}`);
   assert.ok(nomes.includes("diagnostico"), "falta commands/diagnostico.md");
-  const hook = lerMd(r("hooks", "advogado-hook.mjs"));
+  const hook = lerMd(r("hooks", "juridico-hook.mjs"));
   assert.match(hook, /\/diagnostico\b/);
   assert.doesNotMatch(hook, /\/doctor\b/);
   const readme = lerMd(r("README.md"));
@@ -448,19 +448,19 @@ test("T-236 commands citam ficheiros do plugin com ${CLAUDE_PLUGIN_ROOT} e não 
   assert.deepEqual(falhas, [], falhas.join("\n"));
 });
 
-test("T-237 o .skill gerado tem a pasta advogado-pt na raiz", () => {
+test("T-237 o .skill gerado tem a pasta juridico-pt na raiz", () => {
   const out = tmpDir("adv-skill-");
   const b = spawnSync(PY, [r("build.py"), "--out", out], { cwd: repo, encoding: "utf8" });
   assert.equal(b.status, 0, b.stderr || b.stdout);
   const z = spawnSync(
     PY,
-    ["-c", "import sys, zipfile; print(chr(10).join(zipfile.ZipFile(sys.argv[1]).namelist()))", join(out, "advogado-pt.skill")],
+    ["-c", "import sys, zipfile; print(chr(10).join(zipfile.ZipFile(sys.argv[1]).namelist()))", join(out, "juridico-pt.skill")],
     { encoding: "utf8" }
   );
   assert.equal(z.status, 0, z.stderr);
   const nomes = z.stdout.split(/\r?\n/).filter(Boolean);
-  assert.ok(nomes.includes("advogado-pt/SKILL.md"), "o .skill não tem advogado-pt/SKILL.md");
-  assert.deepEqual(nomes.filter((n) => !n.startsWith("advogado-pt/")), []);
+  assert.ok(nomes.includes("juridico-pt/SKILL.md"), "o .skill não tem juridico-pt/SKILL.md");
+  assert.deepEqual(nomes.filter((n) => !n.startsWith("juridico-pt/")), []);
 });
 
 test("T-239 não existe bin/ na raiz; o hook analisa os edits do MultiEdit", () => {
@@ -477,7 +477,7 @@ test("T-239 não existe bin/ na raiz; o hook analisa os edits do MultiEdit", () 
       edits: [{ old_string: "## Cláusula 1.ª", new_string: "## Cláusula 1.ª (Objeto)" }],
     },
   };
-  const out = spawnSync(process.execPath, [r("hooks", "advogado-hook.mjs"), "PostToolUse"], {
+  const out = spawnSync(process.execPath, [r("hooks", "juridico-hook.mjs"), "PostToolUse"], {
     input: JSON.stringify(payload),
     encoding: "utf8",
   });
@@ -497,8 +497,71 @@ test("T-244 nenhuma referência, checklist ou playbook com perfil fixo do utiliz
   assert.deepEqual(falhas, [], `perfil fixo em: ${falhas.join(", ")}`);
 });
 
-test("T-249 versão 1.2.1 nos 6 sítios e no package-lock; CHANGELOG com ## [1.2.1]", () => {
-  const V = "1.2.1";
+// Na 2.0 a versão corrente nos 6 sítios passou para o T-337; o T-249 fica com o histórico da 1.2.1
+// e com a coerência do package-lock (raiz e pacote "") com a versão do plugin.
+test("T-249 package-lock coerente com a versão do plugin; CHANGELOG mantém ## [1.2.1]", () => {
+  const V = JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version;
+  const lock = JSON.parse(lerMd(r("mcp-server", "package-lock.json")));
+  assert.equal(lock.version, V);
+  assert.equal(lock.packages[""].version, V);
+  assert.ok(lerMd(r("CHANGELOG.md")).includes("## [1.2.1]"));
+});
+
+// ---------------- v2.0 (juridico-pt) ----------------
+
+test("T-301 identificador juridico-pt em todo o lado e nome apresentado 'Jurídico PT'", () => {
+  const manifest = JSON.parse(lerMd(r(".claude-plugin", "plugin.json")));
+  assert.equal(manifest.name, "juridico-pt");
+  assert.equal(manifest.displayName, "Jurídico PT");
+  const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
+  assert.equal(mk.name, "juridico-pt");
+  assert.equal(mk.plugins[0].name, "juridico-pt");
+  assert.match(lerMd(r("mcp-server", "src", "index.ts")), /name:\s*"juridico-pt"/);
+  assert.ok(existsSync(r("skills", "juridico-pt", "SKILL.md")), "falta skills/juridico-pt/SKILL.md");
+  assert.ok(!existsSync(r("skills", "advogado-pt")), "a pasta skills/advogado-pt ainda existe");
+  assert.match(lerMd(r("skills", "juridico-pt", "SKILL.md")), /^---\r?\nname:\s*juridico-pt\r?\n/);
+  assert.ok(existsSync(r("cli", "juridico-pt.mjs")));
+  assert.ok(!existsSync(r("cli", "advogado-pt.mjs")), "sem atalhos com o nome antigo (D-1)");
+  assert.ok(existsSync(r("hooks", "juridico-hook.mjs")));
+  assert.match(lerMd(r("hooks", "hooks.json")), /juridico-hook\.mjs/);
+  assert.match(lerMd(r("build.py")), /SKILL_NAME = "juridico-pt"/);
+  assert.ok(JSON.parse(lerMd(r(".mcp.json"))).mcpServers["juridico-pt"], ".mcp.json sem o servidor juridico-pt");
+  for (const f of [r(".claude-plugin", "plugin.json"), r(".claude-plugin", "marketplace.json"), r(".mcp.json"), r("hooks", "hooks.json")]) {
+    assert.doesNotMatch(lerMd(f), /advogado-pt|advogado-hook/, f);
+  }
+  assert.match(lerMd(r("mcp-server", "src", "resources.ts")), /juridico-pt:\/\//);
+  assert.match(lerMd(r("mcp-server", "src", "prompts.ts")), /"assistente_juridico"/);
+});
+
+const SO_LEITURA = new Set(["Read", "Grep", "Glob", "WebFetch", "WebSearch"]);
+
+test("T-316 subagentes verificador-citacoes e revisor-contratos: frontmatter válido, só leitura e formato de saída", () => {
+  const casos = {
+    "verificador-citacoes": [/verificad[ao]/i, /divergente/i, /não encontrad[ao]/i, /URL/],
+    "revisor-contratos": [/vermelho/i, /amarelo/i, /verde/i, /checklist-revisao-contrato/],
+  };
+  for (const [nome, padroes] of Object.entries(casos)) {
+    const t = lerMd(r("agents", `${nome}.md`));
+    const m = /^---\r?\n([\s\S]*?)\r?\n---/.exec(t);
+    assert.ok(m, `${nome}: sem frontmatter`);
+    assert.match(m[1], new RegExp(`^name:\\s*${nome}\\s*$`, "m"));
+    assert.match(m[1], /^description:\s*\S/m);
+    const tools = (/^tools:\s*(.+)$/m.exec(m[1]) || [])[1];
+    assert.ok(tools, `${nome}: sem tools`);
+    const lista = tools.replace(/[[\]"']/g, "").split(",").map((s) => s.trim()).filter(Boolean);
+    assert.ok(lista.length > 0 && lista.every((x) => SO_LEITURA.has(x)), `${nome}: ferramentas que escrevem (${lista.join(", ")})`);
+    for (const p of padroes) assert.match(t, p, `${nome}: falta ${p}`);
+  }
+});
+
+test("T-336 dependências de runtime iguais às da 1.2.1", () => {
+  const mcp = JSON.parse(lerMd(r("mcp-server", "package.json")));
+  assert.deepEqual(Object.keys(mcp.dependencies).sort(), ["@modelcontextprotocol/sdk", "zod"]);
+  assert.deepEqual(JSON.parse(lerMd(r("package.json"))).dependencies || {}, {});
+});
+
+test("T-337 versão 2.0.0 em todos os sítios; CHANGELOG ## [2.0.0] com secção Migração", () => {
+  const V = "2.0.0";
   assert.equal(JSON.parse(lerMd(r(".claude-plugin", "plugin.json"))).version, V);
   const mk = JSON.parse(lerMd(r(".claude-plugin", "marketplace.json")));
   assert.equal(mk.metadata.version, V);
@@ -508,6 +571,9 @@ test("T-249 versão 1.2.1 nos 6 sítios e no package-lock; CHANGELOG com ## [1.2
   assert.ok(lerMd(r("mcp-server", "src", "index.ts")).includes(`version: "${V}"`));
   const lock = JSON.parse(lerMd(r("mcp-server", "package-lock.json")));
   assert.equal(lock.version, V);
-  assert.equal(lock.packages[""].version, V);
-  assert.ok(lerMd(r("CHANGELOG.md")).includes(`## [${V}]`));
+  const c = lerMd(r("CHANGELOG.md"));
+  const i = c.indexOf(`## [${V}]`);
+  assert.ok(i >= 0);
+  const fim = c.indexOf("\n## [", i + 5);
+  assert.match(c.slice(i, fim < 0 ? undefined : fim), /^### Migração/m);
 });

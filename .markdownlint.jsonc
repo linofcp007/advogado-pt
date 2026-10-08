@@ -1,4 +1,4 @@
-// Configuração de markdownlint para o advogado-pt.
+// Configuração de markdownlint para o juridico-pt.
 // As regras desativadas abaixo refletem o ESTILO INTENCIONAL da skill — listas coladas aos
 // cabeçalhos, secções "## Legislação Base" repetidas entre referências, linhas longas com
 // citações de diplomas, etc. Não é ruído a corrigir; é a convenção da casa (ver CLAUDE.md).

@@ -14,7 +14,7 @@ brevidade e manter-te informado durante a resolução. A divulgação coordenada
 
 Esta política cobre o conteúdo deste repositório:
 
-- a skill `advogado-pt` (`skills/advogado-pt/`),
+- a skill `juridico-pt` (`skills/juridico-pt/`),
 - o servidor MCP em TypeScript (`mcp-server/`),
 - o plugin do Claude Code (`commands/`, `hooks/`, `.claude-plugin/`) e as `integrations/`.
 
@@ -30,7 +30,7 @@ servido a partir de ficheiros locais empacotados.
 
 ## Aviso legal importante
 
-O `advogado-pt` fornece **orientação informativa** baseada na legislação portuguesa. **Não constitui
+O `juridico-pt` fornece **orientação informativa** baseada na legislação portuguesa. **Não constitui
 aconselhamento jurídico** e **não substitui um advogado inscrito na Ordem dos Advogados**. Os valores,
 taxas e prazos referem-se a 2026 e devem ser confirmados no ano corrente. Para ações judiciais formais
 ou situações de elevada complexidade, recorre a um advogado.

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Gera as instruções das integrações (Codex, Gemini CLI, Cursor, ChatGPT e o AGENTS.md da raiz)
+// Gera as instruções das integrações (Codex, Gemini CLI, Cursor, Windsurf, ChatGPT, o AGENTS.md e as regras de editor da raiz)
 // a partir de uma fonte única: PERSONA_INTEGRACOES em `src/persona.ts` (lida do build em `dist/`).
 // O texto é escrito entre os marcadores INICIO/FIM; o resto de cada ficheiro não é tocado.
 //
@@ -15,15 +15,18 @@ const here = dirname(fileURLToPath(import.meta.url));
 const raiz = resolve(here, "..", "..");
 const persona = resolve(here, "..", "dist", "persona.js");
 
-const INICIO = "<!-- advogado-pt:persona:inicio — gerado por mcp-server/scripts/gerar-integracoes.mjs; não editar à mão -->";
-const FIM = "<!-- advogado-pt:persona:fim -->";
+const INICIO = "<!-- juridico-pt:persona:inicio — gerado por mcp-server/scripts/gerar-integracoes.mjs; não editar à mão -->";
+const FIM = "<!-- juridico-pt:persona:fim -->";
 
 const ALVOS = [
   "AGENTS.md",
   "integrations/codex/AGENTS.md",
   "integrations/gemini-cli/GEMINI.md",
-  "integrations/cursor/rules/advogado-pt.mdc",
+  "integrations/cursor/rules/juridico-pt.mdc",
   "integrations/chatgpt/custom-gpt-instructions.md",
+  "integrations/windsurf/.windsurfrules",
+  ".cursor/rules/juridico-pt.mdc",
+  ".windsurf/rules/juridico-pt.md",
 ];
 
 if (!existsSync(persona)) {

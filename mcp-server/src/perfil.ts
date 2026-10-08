@@ -1,12 +1,13 @@
 // Perfil da empresa do utilizador, guardado em ficheiro local e editável:
-//   <projeto>/.advogado-pt/perfil-empresa.md   (prioridade — a empresa deste projeto)
-//   ~/.advogado-pt/perfil-empresa.md           (perfil geral — a empresa por defeito)
+//   <projeto>/.juridico-pt/perfil-empresa.md   (prioridade — a empresa deste projeto)
+//   ~/.juridico-pt/perfil-empresa.md           (perfil geral — a empresa por defeito; JURIDICO_PT_HOME)
 // Formato: uma linha "campo: valor" por campo. Só os campos de CAMPOS_PERFIL contam.
-// O hook (hooks/advogado-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
+// O hook (hooks/juridico-hook.mjs) tem um leitor equivalente — manter os dois alinhados.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { homedir } from "node:os";
-import { join, resolve } from "node:path";
-import { dirProjeto as dirProjetoBase, escreverSeguro } from "./fs-seguro.js";
+import { join } from "node:path";
+import { PASTA_DADOS, NOME_PERFIL_RE, avisoGitignore, dirHome as dirHomeBase, validarNomePerfil } from "./dados.js";
+import { apagarSeguro, dirProjeto as dirProjetoBase, escreverSeguro, listarSeguro } from "./fs-seguro.js";
+import { removerPrazosDoPerfil } from "./prazos-estado.js";
 
 export const CAMPOS_PERFIL = [
   "forma_juridica",
@@ -20,6 +21,16 @@ export const CAMPOS_PERFIL = [
   "dados_pessoais",
   "linguas",
   "notas",
+  // v2.0 (modo contabilista e calendário)
+  "cae",
+  "concelho",
+  "fim_periodo_tributacao",
+  "imoveis",
+  "viaturas",
+  "setor_nis2",
+  "vendas_b2c",
+  "trabalhadores_estrangeiros",
+  "emite_faturas",
   "atualizado_em",
 ] as const;
 
@@ -35,9 +46,18 @@ const ROTULOS: Record<string, string> = {
   dados_pessoais: "Dados pessoais tratados (clientes, trabalhadores, saúde…)",
   linguas: "Línguas de trabalho",
   notas: "Notas (licenças, setor regulado, sócios…)",
+  cae: "CAE principal",
+  concelho: "Concelho da sede (derrama, IMI)",
+  fim_periodo_tributacao: "Fim do período de tributação, se não for 31/12 (MM-DD, ex.: 06-30)",
+  imoveis: "Tem imóveis (sim/não) — IMI",
+  viaturas: "Tem viaturas (sim/não; meses da matrícula, ex.: sim (março, julho)) — IUC",
+  setor_nis2: "Setor dos anexos da NIS2, se aplicável (DL 125/2025)",
+  vendas_b2c: "Vende a consumidores (sim/não; online, loja física)",
+  trabalhadores_estrangeiros: "Tem trabalhadores estrangeiros (sim/não)",
+  emite_faturas: "Emite faturas (sim/não; programa certificado ou Portal das Finanças)",
 };
 
-const PASTA = ".advogado-pt";
+const PASTA = PASTA_DADOS;
 const FICHEIRO = "perfil-empresa.md";
 const MS_12_MESES = 365 * 24 * 60 * 60 * 1000;
 
@@ -50,16 +70,20 @@ export interface Perfil {
   nome?: string;
   /** Aviso a mostrar (ex.: perfil ativo inexistente). */
   aviso?: string;
+  /** Projeto num repositório git cujo .gitignore não exclui `.juridico-pt/`. */
+  avisoGitignore?: string;
 }
 
 export interface OpcoesPerfil {
-  /** Perfil nomeado (`.advogado-pt/perfis/<nome>.md`); omitido = perfil ativo ou o por defeito. */
+  /** Perfil nomeado (`.juridico-pt/perfis/<nome>.md`); omitido = perfil ativo ou o por defeito. */
   perfil?: string;
   /** Diretório do projeto (default: CLAUDE_PROJECT_DIR ou cwd). */
   projeto?: string;
-  /** Diretório "home" do perfil geral (default: ADVOGADO_PT_HOME ou homedir()). */
+  /** Diretório "home" do perfil geral (default: JURIDICO_PT_HOME ou homedir()). */
   home?: string;
   hoje?: Date;
+  /** Num repositório git, acrescentar `.juridico-pt/` ao .gitignore (uma só vez). */
+  acrescentarGitignore?: boolean;
 }
 
 function dirProjeto(o: OpcoesPerfil): string {
@@ -67,28 +91,21 @@ function dirProjeto(o: OpcoesPerfil): string {
 }
 
 function dirHome(o: OpcoesPerfil): string {
-  return resolve(o.home ?? process.env.ADVOGADO_PT_HOME ?? homedir());
+  return dirHomeBase(o.home);
 }
 
 function caminhoPerfil(base: string): string {
   return join(base, PASTA, FICHEIRO);
 }
 
-const NOME_RE = /^[a-z0-9][a-z0-9-]{0,40}$/;
-
-function validarNome(nome: string): string {
-  const n = String(nome ?? "").trim().toLowerCase();
-  if (!NOME_RE.test(n)) {
-    throw new Error(`Nome de perfil inválido: '${nome}' (usa letras minúsculas, algarismos e hífens).`);
-  }
-  return n;
-}
+const NOME_RE = NOME_PERFIL_RE;
+const validarNome = validarNomePerfil;
 
 function caminhoNomeado(base: string, nome: string): string {
   return join(base, PASTA, "perfis", `${nome}.md`);
 }
 
-/** Nome guardado em `<base>/.advogado-pt/perfil-ativo`, se válido. */
+/** Nome guardado em `<base>/.juridico-pt/perfil-ativo`, se válido. */
 function nomeAtivoEm(base: string): string | null {
   try {
     const f = join(base, PASTA, "perfil-ativo");
@@ -151,7 +168,7 @@ export function nomePerfilAtivo(opts: OpcoesPerfil = {}): string | null {
 
 /**
  * Perfil a usar: o nomeado pedido em `opts.perfil`; senão o perfil ativo
- * (`.advogado-pt/perfil-ativo`); senão o por defeito (`perfil-empresa.md`, projeto -> geral).
+ * (`.juridico-pt/perfil-ativo`); senão o por defeito (`perfil-empresa.md`, projeto -> geral).
  * Se o nomeado/ativo não existir, devolve o por defeito com `aviso`. null se nenhum.
  */
 export function lerPerfil(opts: OpcoesPerfil = {}): Perfil | null {
@@ -173,9 +190,9 @@ function umaLinha(v: string): string {
 
 function serializar(campos: Record<string, string>): string {
   const linhas = [
-    "# Perfil da empresa — advogado-pt",
+    "# Perfil da empresa — juridico-pt",
     "",
-    "<!-- Gerido pelo advogado-pt. Podes editar à mão: uma linha `campo: valor` por campo.",
+    "<!-- Gerido pelo juridico-pt. Podes editar à mão: uma linha `campo: valor` por campo.",
     "     Não guardes aqui dados pessoais de trabalhadores ou clientes. -->",
     "",
   ];
@@ -209,14 +226,59 @@ export function guardarPerfil(
   campos.atualizado_em = hoje.toISOString().slice(0, 10);
   // Escrita segura: recusa ligações (symlink/junction) e grava por temporário + renomeação.
   escreverSeguro(base, nome ? [PASTA, "perfis", `${nome}.md`] : [PASTA, FICHEIRO], serializar(campos));
-  return { origem: destino, caminho, campos, desatualizado: false, ...(nome ? { nome } : {}) };
+  const aviso = destino === "projeto" ? avisoGitignore(base, opts.acrescentarGitignore === true) : undefined;
+  return {
+    origem: destino, caminho, campos, desatualizado: false,
+    ...(nome ? { nome } : {}),
+    ...(aviso ? { avisoGitignore: aviso } : {}),
+  };
+}
+
+// --- v2.0: privacidade (US-11) ---
+
+/**
+ * Apaga um perfil e o que lhe pertence (direito ao apagamento, RGPD art. 17.º): o ficheiro do perfil,
+ * os prazos com esse perfil, os calendários `.ics` do perfil e a marca de perfil ativo, se for ele.
+ * `nome` "perfil-empresa" apaga o perfil por defeito. Recusa nomes inválidos e ligações.
+ */
+export function apagarPerfil(
+  nome: string,
+  destino: "projeto" | "geral" = "projeto",
+  opts: OpcoesPerfil = {}
+): { apagados: string[] } {
+  const n = validarNome(nome);
+  const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);
+  const apagados: string[] = [];
+  const ficheiro = n === "perfil-empresa" ? [PASTA, FICHEIRO] : [PASTA, "perfis", `${n}.md`];
+  const f = apagarSeguro(base, ficheiro);
+  if (f) apagados.push(f);
+  if (destino === "projeto" && n !== "perfil-empresa") {
+    const k = removerPrazosDoPerfil(n, base);
+    if (k > 0) apagados.push(`${k} prazo(s) do perfil '${n}' em ${PASTA}/prazos.md`);
+  }
+  const ics = n === "perfil-empresa" ? /^calendario-\d{4}\.ics$/ : new RegExp(`^calendario-\\d{4}-${n}\\.ics$`);
+  for (const nomeF of listarSeguro(base, [PASTA]).filter((x) => ics.test(x))) {
+    const c = apagarSeguro(base, [PASTA, nomeF]);
+    if (c) apagados.push(c);
+  }
+  if (nomeAtivoEm(base) === n) {
+    const c = apagarSeguro(base, [PASTA, "perfil-ativo"]);
+    if (c) apagados.push(`${c} (perfil ativo reposto)`);
+  }
+  return { apagados };
 }
 
 /** Resumo de uma linha para o contexto ("forma_juridica: Lda · setor: …"). */
 export function resumoPerfil(p: Perfil): string {
-  return CAMPOS_PERFIL.filter((c) => c !== "atualizado_em" && p.campos[c])
-    .map((c) => `${c}: ${p.campos[c]}`)
+  // Mesmos limites que o hook (200 por campo, 1500 no total): o perfil pode vir de um repositório de terceiros.
+  const limpo = (v: string) => v.replace(/[\u0000-\u001f\u007f]+/g, " ").trim();
+  const r = CAMPOS_PERFIL.filter((c) => c !== "atualizado_em" && p.campos[c])
+    .map((c) => {
+      const v = limpo(p.campos[c]);
+      return `${c}: ${v.length > 200 ? v.slice(0, 199) + "…" : v}`;
+    })
     .join(" · ");
+  return r.length > 1500 ? r.slice(0, 1499) + "…" : r;
 }
 
 /** O que perguntar quando não há perfil (só o que for relevante para a questão). */
@@ -229,8 +291,8 @@ export function textoPerguntasPerfil(): string {
     ...itens,
     "",
     "Depois oferece guardar com `guardar_perfil_empresa`, à escolha do utilizador:",
-    "- destino \"projeto\" -> <projeto>/.advogado-pt/perfil-empresa.md (esta empresa/pasta)",
-    "- destino \"geral\" -> ~/.advogado-pt/perfil-empresa.md (empresa por defeito em todas as pastas)",
+    "- destino \"projeto\" -> <projeto>/.juridico-pt/perfil-empresa.md (esta empresa/pasta)",
+    "- destino \"geral\" -> ~/.juridico-pt/perfil-empresa.md (empresa por defeito em todas as pastas)",
     "Nunca guardes dados de outra entidade (ex.: um cliente) como perfil do utilizador.",
   ].join("\n");
 }
@@ -256,7 +318,7 @@ export function listarPerfis(opts: OpcoesPerfil = {}): Array<{ nome: string; ori
   return [...vistos.entries()].map(([nome, origem]) => ({ nome, origem, ativo: nome === ativo }));
 }
 
-/** Define o perfil ativo (escreve `.advogado-pt/perfil-ativo` no projeto ou no geral). */
+/** Define o perfil ativo (escreve `.juridico-pt/perfil-ativo` no projeto ou no geral). */
 export function ativarPerfil(nome: string, destino: "projeto" | "geral", opts: OpcoesPerfil = {}): void {
   const n = validarNome(nome);
   const base = destino === "projeto" ? dirProjeto(opts) : dirHome(opts);

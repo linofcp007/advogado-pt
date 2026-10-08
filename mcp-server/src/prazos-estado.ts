@@ -1,25 +1,30 @@
-// Prazos em curso do projeto, guardados em <projeto>/.advogado-pt/prazos.md (editável à mão).
-// Uma linha por prazo:  "- [ ] 2026-10-20 — Oposição à execução fiscal — art. 203.º CPPT"
-//                        caixa · data-limite · descrição · origem (opcional)
-// Concluído = "- [x]". O hook (hooks/advogado-hook.mjs) tem um leitor equivalente — manter alinhados.
+// Prazos em curso do projeto, guardados em <projeto>/.juridico-pt/prazos.md (editável à mão).
+// Uma linha por prazo:  "- [ ] 2026-10-20 — Oposição à execução fiscal — art. 203.º CPPT — perfil: cliente-a"
+//                        caixa · data-limite · descrição · origem (opcional) · perfil (opcional)
+// Conservação: os prazos cumpridos com data há mais de 12 meses saem na escrita seguinte.
+// Concluído = "- [x]". O hook (hooks/juridico-hook.mjs) tem um leitor equivalente — manter alinhados.
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { PASTA_DADOS, validarNomePerfil } from "./dados.js";
 import { dirProjeto, escreverSeguro } from "./fs-seguro.js";
 
 export interface PrazoRegistado {
   data: string;
   descricao: string;
   origem?: string;
+  /** Perfil (empresa/cliente) a que o prazo pertence — modo contabilista. */
+  perfil?: string;
   concluido: boolean;
 }
 
-const PASTA = ".advogado-pt";
+const PASTA = PASTA_DADOS;
 const FICHEIRO = "prazos.md";
 const SEP = " — ";
 const LINHA_RE = /^\s*-\s*\[( |x|X)\]\s*(\d{4}-\d{2}-\d{2})\s*[—–]\s*(.+?)\s*$/;
+const PERFIL_RE = /^perfil:\s*([a-z0-9][a-z0-9-]{0,40})$/i;
 const CABECALHO =
   "# Prazos em curso\n\n" +
-  "<!-- advogado-pt: uma linha por prazo — \"- [ ] AAAA-MM-DD — descrição — origem\". " +
+  "<!-- juridico-pt: uma linha por prazo — \"- [ ] AAAA-MM-DD — descrição — origem\". " +
   "Marca [x] quando cumprido. O aviso aparece ao abrir a sessão (vencidos e próximos 7 dias). -->\n\n";
 
 // Mesmo diretório que o hook lê: o indicado, senão CLAUDE_PROJECT_DIR, senão o cwd.
@@ -54,14 +59,26 @@ function parseLinha(linha: string): PrazoRegistado | null {
   const m = LINHA_RE.exec(linha);
   if (!m) return null;
   const partes = m[3].split(/\s+[—–]\s+/);
+  const ult = partes.length > 1 ? PERFIL_RE.exec(partes[partes.length - 1].trim()) : null;
+  const perfil = ult ? ult[1].toLowerCase() : "";
+  if (ult) partes.pop();
   const descricao = partes[0].trim();
   if (!descricao) return null;
   const origem = partes.slice(1).join(SEP).trim();
-  return { data: m[2], descricao, ...(origem ? { origem } : {}), concluido: m[1] !== " " };
+  return { data: m[2], descricao, ...(origem ? { origem } : {}), ...(perfil ? { perfil } : {}), concluido: m[1] !== " " };
 }
 
 function linhaDe(p: PrazoRegistado): string {
-  return `- [${p.concluido ? "x" : " "}] ${p.data}${SEP}${p.descricao}${p.origem ? SEP + p.origem : ""}`;
+  return (
+    `- [${p.concluido ? "x" : " "}] ${p.data}${SEP}${p.descricao}${p.origem ? SEP + p.origem : ""}` +
+    (p.perfil ? `${SEP}perfil: ${p.perfil}` : "")
+  );
+}
+
+/** Data de há 12 meses (AAAA-MM-DD), a partir de hoje em Lisboa. */
+function limiteConservacao(hoje: Date): string {
+  const h = hojeEmLisboa(hoje);
+  return `${Number(h.slice(0, 4)) - 1}${h.slice(4)}`;
 }
 
 /** Prazos do ficheiro (ordem do ficheiro); [] se não existir. */
@@ -80,8 +97,10 @@ export function lerPrazos(dir?: string): PrazoRegistado[] {
  * Grava os prazos preservando tudo o que não é linha de prazo (títulos, notas escritas à mão):
  * as linhas de prazo, ordenadas, ocupam o lugar da primeira que existia (ou vão para o fim).
  */
-function gravar(prazos: PrazoRegistado[], dir?: string): void {
-  const ordenados = [...prazos].sort(
+function gravar(prazos: PrazoRegistado[], dir?: string, hoje: Date = new Date()): void {
+  // Conservação (minimização): um prazo cumprido com data há mais de 12 meses já não é preciso.
+  const limite = limiteConservacao(hoje);
+  const ordenados = prazos.filter((p) => !(p.concluido && p.data < limite)).sort(
     (a, b) => Number(a.concluido) - Number(b.concluido) || a.data.localeCompare(b.data)
   );
   const novas = ordenados.map(linhaDe);
@@ -116,20 +135,35 @@ function gravar(prazos: PrazoRegistado[], dir?: string): void {
   escreverSeguro(dirBase(dir), [PASTA, FICHEIRO], texto);
 }
 
-/** Regista um prazo (data AAAA-MM-DD obrigatória e válida). */
+/** Regista um prazo (data AAAA-MM-DD obrigatória e válida; perfil opcional). */
 export function registarPrazo(
-  p: { data: string; descricao: string; origem?: string },
+  p: { data: string; descricao: string; origem?: string; perfil?: string },
   dir?: string
 ): PrazoRegistado {
   const data = validarData(p.data);
   const descricao = limpar(p.descricao);
   if (!descricao) throw new Error("Falta a descrição do prazo.");
   const origem = p.origem ? limpar(p.origem) : "";
-  const novo: PrazoRegistado = { data, descricao, ...(origem ? { origem } : {}), concluido: false };
+  const perfil = p.perfil ? validarNomePerfil(p.perfil) : "";
+  const novo: PrazoRegistado = {
+    data, descricao, ...(origem ? { origem } : {}), ...(perfil ? { perfil } : {}), concluido: false,
+  };
   const atuais = lerPrazos(dir);
-  if (!atuais.some((x) => x.data === data && x.descricao === descricao && !x.concluido)) atuais.push(novo);
+  const igual = (x: PrazoRegistado) =>
+    x.data === data && x.descricao === descricao && (x.perfil ?? "") === perfil && !x.concluido;
+  if (!atuais.some(igual)) atuais.push(novo);
   gravar(atuais, dir);
   return novo;
+}
+
+/** Retira os prazos de um perfil (ao apagar o perfil); devolve quantos saíram. */
+export function removerPrazosDoPerfil(perfil: string, dir?: string): number {
+  const n = validarNomePerfil(perfil);
+  const atuais = lerPrazos(dir);
+  const ficam = atuais.filter((p) => p.perfil !== n);
+  const saem = atuais.length - ficam.length;
+  if (saem > 0) gravar(ficam, dir);
+  return saem;
 }
 
 /** Marca como cumprido o prazo com esta data e descrição; false se não existir em aberto. */

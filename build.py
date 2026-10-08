@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Empacota a skill advogado-pt num ficheiro .skill (arquivo ZIP) pronto para upload no Claude.
+Empacota a skill juridico-pt num ficheiro .skill (arquivo ZIP) pronto para upload no Claude.
 
 Uso:
-    python build.py                 # gera advogado-pt.skill na raiz da skill
-    python build.py --out dist      # gera em dist/advogado-pt.skill
+    python build.py                 # gera juridico-pt.skill na raiz da skill
+    python build.py --out dist      # gera em dist/juridico-pt.skill
 
-O ZIP contém a pasta advogado-pt/ na raiz (advogado-pt/SKILL.md, references/, assets/,
+O ZIP contém a pasta juridico-pt/ na raiz (juridico-pt/SKILL.md, references/, assets/,
 playbooks/ e scripts/), como pede o formato de upload de Skills.
 Exclui artefactos: __pycache__, *.pyc, .git, .DS_Store e o próprio ficheiro .skill.
 Antes de empacotar valida o SKILL.md (name, description <= 1024 sem < nem >) e a
@@ -25,7 +25,7 @@ try:
 except (AttributeError, ValueError):
     pass
 
-SKILL_NAME = "advogado-pt"
+SKILL_NAME = "juridico-pt"
 EXCLUDE_DIRS = {"__pycache__", ".git", ".idea", ".vscode", "dist", "node_modules",
                 "mcp-server", "integrations"}
 EXCLUDE_FILES_SUFFIX = (".pyc", ".skill", ".zip")
@@ -89,7 +89,7 @@ def should_include(path: Path, root: Path, out_path: Path) -> bool:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Empacota a skill advogado-pt num .skill")
+    parser = argparse.ArgumentParser(description="Empacota a skill juridico-pt num .skill")
     parser.add_argument("--out", default=None, help="Pasta de destino (default: raiz da skill)")
     args = parser.parse_args()
 
@@ -116,7 +116,7 @@ def main() -> None:
                 fpath = Path(dirpath) / name
                 if not should_include(fpath, skill_src, out_path):
                     continue
-                # Pasta da skill na raiz do arquivo: advogado-pt/SKILL.md, advogado-pt/references/...
+                # Pasta da skill na raiz do arquivo: juridico-pt/SKILL.md, juridico-pt/references/...
                 arcname = f"{SKILL_NAME}/{fpath.relative_to(skill_src).as_posix()}"
                 zf.write(fpath, arcname)
                 count += 1

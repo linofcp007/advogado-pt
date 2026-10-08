@@ -1,4 +1,4 @@
-// Regista os PROMPTS MCP: o `advogado_pt` (persona geral) + prompts por área para
+// Regista os PROMPTS MCP: o `assistente_juridico` (persona geral) + prompts por área para
 // ativação granular em clientes que listam prompts.
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
@@ -42,11 +42,11 @@ const AREAS: Record<string, { titulo: string; foco: string }> = {
 
 export function registerPrompts(server: McpServer): void {
   server.registerPrompt(
-    "advogado_pt",
+    "assistente_juridico",
     {
-      title: "Advogado PT — assessor jurídico de Portugal",
+      title: "Jurídico PT — assistente jurídico de Portugal",
       description:
-        "Ativa a persona de advogado pessoal e empresarial especializado em direito português (geral).",
+        "Ativa o assistente jurídico de direito português (geral). Não substitui advogado inscrito na OA.",
       argsSchema: {
         assunto: z.string().optional().describe("Questão ou tarefa jurídica concreta (opcional)"),
       },
@@ -59,8 +59,8 @@ export function registerPrompts(server: McpServer): void {
     server.registerPrompt(
       nome,
       {
-        title: `Advogado PT — ${titulo}`,
-        description: `Persona de advogado de Portugal focada em: ${titulo.toLowerCase()}.`,
+        title: `Jurídico PT — ${titulo}`,
+        description: `Assistente jurídico de direito português focado em: ${titulo.toLowerCase()}.`,
         argsSchema: {
           assunto: z.string().optional().describe("Situação concreta (opcional)"),
         },

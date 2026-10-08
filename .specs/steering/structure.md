@@ -4,16 +4,16 @@
 ```
 .claude-plugin/        plugin.json + marketplace.json
 commands/              slash commands (wrappers finos)
-hooks/                 hooks.json + advogado-hook.mjs (dispatcher fail-open)
-cli/advogado-pt.mjs    CLI universal (mcp-config, calc, doctor)
-skills/advogado-pt/    SKILL.md + references/ + assets/{templates,checklists}/ + playbooks/ + scripts/
+hooks/                 hooks.json + juridico-hook.mjs (dispatcher fail-open)
+cli/juridico-pt.mjs    CLI universal (mcp-config, calc, doctor)
+skills/juridico-pt/    SKILL.md + references/ + assets/{templates,checklists}/ + playbooks/ + scripts/
 mcp-server/            src/ (tools, content, calculators, persona) + test/ + scripts/ + dist/ + content/
 integrations/          instruções para outras IAs (Cursor, Windsurf, Gemini, ChatGPT, Codex)
-build.py               gera advogado-pt.skill
+build.py               gera juridico-pt.skill
 ```
 
 ## Fronteiras de Módulos
-- `skills/advogado-pt/` é a fonte do conteúdo; `mcp-server/content/` é uma cópia gerada (nunca editar à mão).
+- `skills/juridico-pt/` é a fonte do conteúdo; `mcp-server/content/` é uma cópia gerada (nunca editar à mão).
 - `mcp-server/src/calculators/*` são funções puras; `tools.ts` só formata e regista; o CLI importa as calculadoras compiladas.
 - O hook não importa nada do servidor MCP.
 

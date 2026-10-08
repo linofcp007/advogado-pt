@@ -10,6 +10,7 @@
 //   todos "independentemente de esse dia ser útil", e as janelas mensais (RGPC).
 // Agosto: férias fiscais (LGT 57.º-A) e contributivas (CRC 23.º-B) -> 31/8; declaração ou
 //   confirmação de remunerações à SS -> 25/8. IVA de junho / 2.º trimestre -> setembro (CIVA 41.º e 27.º, n.º 10).
+import { PASTA_DADOS, validarNomePerfil } from "./dados.js";
 import { dirProjeto, escreverSeguro } from "./fs-seguro.js";
 import { eDiaUtil, proximoDiaUtil } from "./calculators/prazos.js";
 
@@ -40,6 +41,13 @@ interface PerfilNorm {
   trabalhadores: number | null;
   contabilidade: "organizada" | "simplificado" | null;
   ue: boolean;
+  imoveis: boolean | null;
+  viaturas: boolean | null;
+  /** Meses da matrícula das viaturas (IUC até 2026), se indicados no perfil. */
+  mesesMatricula: number[];
+  /** Fim do período de tributação diferente de 31/12 (mês e dia), ou null. */
+  fimPeriodo: { m: number; d: number } | null;
+  emiteFaturas: boolean | null;
 }
 
 interface Aplic {
@@ -68,7 +76,7 @@ interface Regra {
   agosto?: 31 | 25;
   nota?: string;
   aplica: (p: PerfilNorm) => Aplic;
-  datas: (ano: number) => Ocorrencia[];
+  datas: (ano: number, p: PerfilNorm) => Ocorrencia[];
 }
 
 // --- Fontes -----------------------------------------------------------------
@@ -80,6 +88,10 @@ const PGDL_CT = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=104
 const PGDL_RGPC = "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3543&tabela=leis";
 const RCBE = "https://justica.gov.pt/Guias/guia-do-registo-central-do-beneficiario-efetivo-rcbe";
 const RU = "https://www.dgcp.mtsss.gov.pt/relatorio-unico";
+const OE2026 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/legislacao/diplomas_legislativos/Documents/lei-73-a-2025.pdf";
+const CIMI120 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cimi/Pages/cimi120.aspx";
+const CIUC17 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/iuc/Pages/iuc17.aspx";
+const DL161 = "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/legislacao/diplomas_legislativos/Documents/decreto-lei-161-2026.pdf";
 
 // --- Prorrogações por despacho (ano a ano) ------------------------------------
 const PRORROGACOES: Record<string, { data: string; nota: string }> = {
@@ -346,9 +358,12 @@ const REGRAS: Regra[] = [
     base: "CIRC, art. 120.º, n.ºs 1 e 2, e art. 104.º, n.º 1, al. b)",
     fonte: AT_D,
     transferivel: false,
-    nota: "Prazo legal: último dia de maio, independentemente de ser útil. Período diferente do ano civil: último dia do 5.º mês após o fim.",
+    nota: "Prazo legal: último dia do 5.º mês após o fim do período de tributação (maio, se coincidir com o ano civil), independentemente de ser útil.",
     aplica: (p) => formaEm(p, ["sociedade", "associacao"]),
-    datas: (a) => [{ data: iso(a, 5, 31), periodo: `exercício de ${a - 1}` }],
+    datas: (a, p) =>
+      p.fimPeriodo
+        ? apos(a, p.fimPeriodo, 5, (ano, m) => fimMes(ano, m))
+        : [{ data: iso(a, 5, 31), periodo: `exercício de ${a - 1}` }],
   },
   {
     id: "irc_pagamentos_conta",
@@ -359,11 +374,11 @@ const REGRAS: Regra[] = [
     transferivel: true,
     nota: "Dispensado se o IRC do ano anterior for < 199,52 €. Lucro tributável > 1,5 M€: também pagamento adicional por conta (derrama estadual).",
     aplica: (p) => formaEm(p, ["sociedade"]),
-    datas: (a) => [
+    datas: (a, p) => (p.fimPeriodo ? pagamentosContaPeriodo(a, p.fimPeriodo) : [
       { data: fimMes(a, 7), periodo: "1.º pagamento" },
       { data: fimMes(a, 9), periodo: "2.º pagamento" },
       { data: iso(a, 12, 15), periodo: "3.º pagamento" },
-    ],
+    ]),
   },
   {
     id: "ies",
@@ -372,14 +387,17 @@ const REGRAS: Regra[] = [
     base: "CIRC, art. 121.º, n.º 2; CIRS, art. 113.º; CRCom, arts. 15.º, n.º 4, e 42.º",
     fonte: AT_D,
     transferivel: false,
-    nota: "15 de julho, independentemente de ser útil. Período diferente do ano civil: dia 15 do 7.º mês após o fim.",
+    nota: "Dia 15 do 7.º mês após o fim do período de tributação (15 de julho, se coincidir com o ano civil), independentemente de ser útil.",
     aplica: (p) => {
       if (!p.forma) return talvez("forma_juridica");
       if (p.forma === "sociedade" || p.forma === "associacao") return SIM;
       if (p.forma === "eni") return contabOrganizada(p);
       return NAO;
     },
-    datas: (a) => [{ data: iso(a, 7, 15), periodo: `exercício de ${a - 1}` }],
+    datas: (a, p) =>
+      p.fimPeriodo && (p.forma === "sociedade" || p.forma === "associacao")
+        ? apos(a, p.fimPeriodo, 7, (ano, m) => iso(ano, m, 15))
+        : [{ data: iso(a, 7, 15), periodo: `exercício de ${a - 1}` }],
   },
   // ---------------- Fiscal: IRS (ENI) ----------------
   {
@@ -472,9 +490,10 @@ const REGRAS: Regra[] = [
     base: "CSC, art. 65.º, n.º 5 (SA: art. 376.º, n.º 1); art. 67.º",
     fonte: PGDL_CSC,
     transferivel: false,
-    nota: "3 meses após o fecho do exercício; 5 meses (31/5) se houver contas consolidadas ou método da equivalência patrimonial. Sem contas nos 2 meses seguintes, qualquer sócio pode pedir inquérito judicial (art. 67.º).",
+    nota: "3 meses após o fecho do exercício; 5 meses se houver contas consolidadas ou método da equivalência patrimonial. Sem contas nos 2 meses seguintes, qualquer sócio pode pedir inquérito judicial (art. 67.º).",
     aplica: (p) => formaEm(p, ["sociedade"]),
-    datas: (a) => [{ data: iso(a, 3, 31), periodo: `exercício de ${a - 1}` }],
+    datas: (a, p) =>
+      p.fimPeriodo ? apos(a, p.fimPeriodo, 3, (ano, m) => fimMes(ano, m)) : [{ data: iso(a, 3, 31), periodo: `exercício de ${a - 1}` }],
   },
   {
     id: "rcbe_confirmacao_anual",
@@ -544,7 +563,113 @@ const REGRAS: Regra[] = [
     aplica: rgpc,
     datas: (a) => [{ data: iso(a, 10, 31), final: ultimoDiaUtilAte(iso(a, 10, 31)) }],
   },
+  // ---------------- v2.0: faturação, IMI e IUC ----------------
+  {
+    id: "faturas_pdf_fim",
+    titulo: "Último dia das faturas em PDF sem assinatura qualificada",
+    area: "Fiscal",
+    base: "Lei 73-A/2025 (OE 2026), art. 95.º, n.º 3; DL 28/2019, art. 12.º",
+    fonte: OE2026,
+    transferivel: false,
+    nota:
+      "A partir de 1/1/2027 só é fatura eletrónica a que tiver assinatura eletrónica qualificada ou selo eletrónico qualificado (ou EDI); um PDF simples passa a ser fatura em papel. Ver o playbook faturacao-eletronica-2027.",
+    aplica: (p) => {
+      if (p.forma === "particular") return NAO;
+      if (p.emiteFaturas === false) return NAO;
+      return p.emiteFaturas ? SIM : talvez("emite_faturas");
+    },
+    datas: (a) => (a === 2026 ? [{ data: iso(2026, 12, 31) }] : []),
+  },
+  {
+    id: "imi",
+    titulo: "IMI — pagamento",
+    area: "Fiscal",
+    base: "CIMI, art. 120.º, n.º 1",
+    fonte: CIMI120,
+    transferivel: true,
+    nota:
+      "Prestação única em maio se o IMI for até 100 €; maio e novembro se for de 100 € a 500 €; maio, agosto e novembro acima de 500 € (valores em valores-2026). Falhar uma prestação vence as seguintes.",
+    aplica: (p) => (p.imoveis ? SIM : NAO),
+    datas: (a) => [
+      { data: fimMes(a, 5), periodo: "1.ª prestação (ou única)" },
+      { data: fimMes(a, 8), periodo: "2.ª prestação (só acima de 500 €)" },
+      { data: fimMes(a, 11), periodo: "última prestação (acima de 100 €)" },
+    ],
+  },
+  {
+    id: "iuc_matricula",
+    titulo: "IUC — mês da matrícula",
+    area: "Fiscal",
+    base: "CIUC, art. 17.º, n.º 2, e art. 4.º, n.º 2 (redação anterior ao DL 161/2026)",
+    fonte: CIUC17,
+    transferivel: true,
+    nota:
+      "Até 2026 o IUC das viaturas ligeiras paga-se até ao fim do mês do aniversário da matrícula de cada viatura. A partir de 2027 passa a uma liquidação anual (DL 161/2026).",
+    aplica: (p) => (p.viaturas ? (p.mesesMatricula.length ? SIM : talvez("viaturas")) : NAO),
+    datas: (a, p) =>
+      a > 2026
+        ? []
+        : p.mesesMatricula.length
+          ? p.mesesMatricula.map((m) => ({ data: fimMes(a, m), periodo: `viaturas matriculadas em ${MESES[m - 1]}` }))
+          : [{ data: fimMes(a, 1), periodo: "indica no perfil os meses da matrícula (ex.: viaturas: sim (março, julho))" }],
+  },
+  {
+    id: "iuc_anual",
+    titulo: "IUC — pagamento anual",
+    area: "Fiscal",
+    base: "CIUC, art. 17.º (redação do DL 161/2026, com efeitos a 1/1/2027); DL 161/2026, art. 6.º (2027)",
+    fonte: DL161,
+    transferivel: true,
+    nota:
+      "Liquidação anual até 30 de abril. Em 2027 (regime transitório): até 500 € paga-se em outubro; acima de 500 €, em julho e outubro (ou tudo em julho). Desde 2028: abril se for até 100 €; abril e outubro de 100 € a 500 €; abril, julho e outubro acima de 500 €. Isenções e elementos a comunicar até ao fim de fevereiro.",
+    aplica: (p) => (p.viaturas ? SIM : NAO),
+    datas: (a) =>
+      a < 2027
+        ? []
+        : a === 2027
+          ? [
+              { data: fimMes(a, 7), periodo: "1.ª prestação (só acima de 500 €)" },
+              { data: fimMes(a, 10), periodo: "prestação única (até 500 €) ou 2.ª prestação" },
+            ]
+          : [
+              { data: fimMes(a, 4), periodo: "1.ª prestação (ou única)" },
+              { data: fimMes(a, 7), periodo: "2.ª prestação (só acima de 500 €)" },
+              { data: fimMes(a, 10), periodo: "última prestação (acima de 100 €)" },
+            ],
+  },
 ];
+
+/**
+ * Ocorrências de um prazo contado em meses após o fim de um período de tributação diferente do ano
+ * civil: considera os períodos que terminam no ano anterior e no próprio ano e guarda as que caem em `a`.
+ */
+function apos(a: number, fim: { m: number; d: number }, meses: number, dia: (ano: number, m: number) => string): Ocorrencia[] {
+  const out: Ocorrencia[] = [];
+  for (const anoFim of [a - 1, a]) {
+    const [pa, pm] = mesMais(anoFim, fim.m, meses);
+    if (pa === a) out.push({ data: dia(pa, pm), periodo: `período que terminou a ${iso(anoFim, fim.m, fim.d)}` });
+  }
+  return out;
+}
+
+/** Pagamentos por conta num período diferente do ano civil: 7.º e 9.º meses e dia 15 do 12.º (CIRC, art. 104.º, n.º 1, al. a)). */
+function pagamentosContaPeriodo(a: number, fim: { m: number; d: number }): Ocorrencia[] {
+  const out: Ocorrencia[] = [];
+  for (const anoFim of [a, a + 1]) {
+    // O período termina em fim.m de anoFim; começa no mês seguinte ao fim do anterior.
+    const [ia, im] = mesMais(anoFim - 1, fim.m, 1);
+    const pagamentos: Array<[number, string, (ano: number, m: number) => string]> = [
+      [6, "1.º pagamento", (ano, m) => fimMes(ano, m)],
+      [8, "2.º pagamento", (ano, m) => fimMes(ano, m)],
+      [11, "3.º pagamento", (ano, m) => iso(ano, m, 15)],
+    ];
+    for (const [desloc, rotulo, dia] of pagamentos) {
+      const [pa, pm] = mesMais(ia, im, desloc);
+      if (pa === a) out.push({ data: dia(pa, pm), periodo: `${rotulo} (período que termina a ${iso(anoFim, fim.m, fim.d)})` });
+    }
+  }
+  return out;
+}
 
 function rgpc(p: PerfilNorm): Aplic {
   if (p.forma === "eni" || p.forma === "particular") return NAO; // só pessoas coletivas (RGPC, art. 2.º)
@@ -572,7 +697,28 @@ function normalizar(perfil: Record<string, string> | null): PerfilNorm {
   const c = v("contabilidade");
   const contabilidade = /organizada/.test(c) ? "organizada" : /simplificad/.test(c) ? "simplificado" : null;
   const ue = /\bue\b|europ|intracomunit|estrangeir|internacion/.test(v("clientes"));
-  return { forma, iva, trabalhadores, contabilidade, ue };
+  const simNao = (k: string): boolean | null => {
+    const x = v(k);
+    if (!x) return null;
+    if (/^(n[ãa]o|nao|nenhum|0\b|sem\b|no\b)/.test(x)) return false;
+    if (/^(sim|s\b|yes|\d)/.test(x)) return true;
+    return null;
+  };
+  const viaturas = simNao("viaturas");
+  const mesesMatricula = viaturas
+    ? [...new Set(MESES.map((nome, i) => (new RegExp(`\\b${nome}\\b`).test(v("viaturas")) ? i + 1 : 0)).filter(Boolean))]
+    : [];
+  const fp = /^(\d{1,2})-(\d{1,2})$/.exec(v("fim_periodo_tributacao"));
+  let fimPeriodo: PerfilNorm["fimPeriodo"] = null;
+  if (fp) {
+    const m = Number(fp[1]);
+    const d = Number(fp[2]);
+    if (m >= 1 && m <= 12 && d >= 1 && d <= 31 && !(m === 12 && d === 31)) fimPeriodo = { m, d };
+  }
+  return {
+    forma, iva, trabalhadores, contabilidade, ue,
+    imoveis: simNao("imoveis"), viaturas, mesesMatricula, fimPeriodo, emiteFaturas: simNao("emite_faturas"),
+  };
 }
 
 // --- Gerar ------------------------------------------------------------------------------
@@ -613,7 +759,7 @@ export function gerarCalendario(ano: number, perfil: Record<string, string> | nu
   for (const r of REGRAS) {
     const a = r.aplica(p);
     if (a.ok === false) continue;
-    for (const o of r.datas(ano)) {
+    for (const o of r.datas(ano, p)) {
       const { data, nota } = resolverData(r, o, ano);
       const notas = [nota, o.nota, r.nota].filter(Boolean).join(" ");
       out.push({
@@ -674,10 +820,10 @@ export function paraICS(obrigacoes: Obrigacao[], opts: { hoje?: Date; alarmeDias
   const linhas: string[] = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//advogado-pt//Calendario de obrigacoes legais//PT",
+    "PRODID:-//juridico-pt//Calendario de obrigacoes legais//PT",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "X-WR-CALNAME:Obrigações legais (advogado-pt)",
+    "X-WR-CALNAME:Obrigações legais (juridico-pt)",
   ];
   for (const o of obrigacoes) {
     const fim = isoDe(tsDe(o.data) + MS_DIA);
@@ -688,13 +834,13 @@ export function paraICS(obrigacoes: Obrigacao[], opts: { hoje?: Date; alarmeDias
       o.nota ?? "",
       o.aConfirmar ? `A confirmar no perfil: ${o.camposEmFalta.join(", ")}` : "",
       `Fonte: ${o.fonte}`,
-      "Gerado pelo advogado-pt: confirmar no Portal das Finanças / Segurança Social Direta. Não substitui advogado nem contabilista.",
+      "Gerado pelo juridico-pt: confirmar no Portal das Finanças / Segurança Social Direta. Não substitui advogado nem contabilista.",
     ]
       .filter(Boolean)
       .join("\n");
     linhas.push(
       "BEGIN:VEVENT",
-      `UID:${o.id}-${o.data}@advogado-pt`,
+      `UID:${o.id}-${o.data}@juridico-pt`,
       `DTSTAMP:${stamp}`,
       `DTSTART;VALUE=DATE:${dataICS(o.data)}`,
       `DTEND;VALUE=DATE:${dataICS(fim)}`,
@@ -718,11 +864,12 @@ export function paraICS(obrigacoes: Obrigacao[], opts: { hoje?: Date; alarmeDias
   return linhas.map(dobrar).join("\r\n") + "\r\n";
 }
 
-/** Grava `<dir>/.advogado-pt/calendario-<ano>.ics` e devolve o caminho. */
-export function exportarICS(ano: number, obrigacoes: Obrigacao[], dir?: string, hoje?: Date): string {
+/** Grava `<dir>/.juridico-pt/calendario-<ano>[-<perfil>].ics` e devolve o caminho. */
+export function exportarICS(ano: number, obrigacoes: Obrigacao[], dir?: string, hoje?: Date, perfil?: string): string {
   if (!Number.isInteger(ano) || ano < 2000 || ano > 2100) throw new Error(`Ano inválido: ${ano}`);
+  const sufixo = perfil ? `-${validarNomePerfil(perfil)}` : "";
   // Mesmo diretório que o hook lê; escrita segura (sem seguir ligações, temporário + renomeação).
-  return escreverSeguro(dirProjeto(dir), [".advogado-pt", `calendario-${ano}.ics`], paraICS(obrigacoes, { hoje }));
+  return escreverSeguro(dirProjeto(dir), [PASTA_DADOS, `calendario-${ano}${sufixo}.ics`], paraICS(obrigacoes, { hoje }));
 }
 
 /** Texto legível do calendário, agrupado por mês (para a tool e o CLI). */

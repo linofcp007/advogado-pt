@@ -2,7 +2,7 @@
   {
     "id": "carta-cobranca-nao-interrompe",
     "pergunta": "A carta de cobrança interrompe a prescrição?",
-    "ficheiro": "skills/advogado-pt/assets/templates/carta-cobranca-formal-registada.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/carta-cobranca-formal-registada.md",
     "contem": [
       "NÃO interrompe a prescrição"
     ],
@@ -12,7 +12,7 @@
   {
     "id": "interrupcao-prescricao",
     "pergunta": "O que interrompe a prescrição de um crédito?",
-    "ficheiro": "skills/advogado-pt/references/cobrancas.md",
+    "ficheiro": "skills/juridico-pt/references/cobrancas.md",
     "contem": [
       "interrompe-se com: citação judicial"
     ],
@@ -22,7 +22,7 @@
   {
     "id": "reconhecimento-divida",
     "pergunta": "O reconhecimento de dívida interrompe a prescrição e é título executivo?",
-    "ficheiro": "skills/advogado-pt/assets/templates/reconhecimento-divida.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/reconhecimento-divida.md",
     "contem": [
       "Art\\. 325\\.º do Código Civil",
       "autenticado"
@@ -33,7 +33,7 @@
   {
     "id": "profissoes-liberais-presuntiva",
     "pergunta": "Em quanto tempo prescrevem os honorários de profissões liberais?",
-    "ficheiro": "skills/advogado-pt/references/cobrancas.md",
+    "ficheiro": "skills/juridico-pt/references/cobrancas.md",
     "contem": [
       "presuntiva de 2 anos",
       "317\\.º, al\\. c\\)"
@@ -46,7 +46,7 @@
   {
     "id": "juros-comerciais-2s-2026",
     "pergunta": "Qual a taxa de juros de mora comerciais no 2.º semestre de 2026?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "10,40%"
     ],
@@ -56,7 +56,7 @@
   {
     "id": "juros-dividas-estado",
     "pergunta": "Qual a taxa de juros de mora das dívidas ao Estado em 2026?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "7,221%"
     ],
@@ -66,7 +66,7 @@
   {
     "id": "arrendamento-comunicacao-at",
     "pergunta": "Até quando se comunica um arrendamento às Finanças?",
-    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "ficheiro": "skills/juridico-pt/references/arrendamento.md",
     "contem": [
       "art\\. 60\\.º, n\\.º 2, CIS"
     ],
@@ -76,7 +76,7 @@
   {
     "id": "is-arrendamento-senhorio",
     "pergunta": "Quem suporta o Imposto do Selo do arrendamento?",
-    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "ficheiro": "skills/juridico-pt/references/arrendamento.md",
     "contem": [
       "encargo é do \\*\\*senhorio"
     ],
@@ -88,7 +88,7 @@
   {
     "id": "heranca-modelo1",
     "pergunta": "Qual o prazo da participação do Imposto do Selo por óbito?",
-    "ficheiro": "skills/advogado-pt/references/herancas.md",
+    "ficheiro": "skills/juridico-pt/references/herancas.md",
     "contem": [
       "Modelo 1 do IS: até ao fim do 3\\.º mês"
     ],
@@ -98,7 +98,7 @@
   {
     "id": "admissao-seguranca-social",
     "pergunta": "Quando se comunica a admissão de um trabalhador à Segurança Social?",
-    "ficheiro": "skills/advogado-pt/references/laboral.md",
+    "ficheiro": "skills/juridico-pt/references/laboral.md",
     "contem": [
       "até ao início da execução do contrato"
     ],
@@ -110,7 +110,7 @@
   {
     "id": "compensacao-sem-minimo",
     "pergunta": "Há um mínimo de 3 meses na compensação por despedimento?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "\\*\\*não existe\\*\\* no regime atual"
     ],
@@ -120,7 +120,7 @@
   {
     "id": "compensacao-extincao-14",
     "pergunta": "Quantos dias por ano na compensação por extinção do posto de trabalho?",
-    "ficheiro": "skills/advogado-pt/references/laboral.md",
+    "ficheiro": "skills/juridico-pt/references/laboral.md",
     "contem": [
       "extinção do posto de trabalho e inadaptação\\*\\*: \\*\\*14 dias"
     ],
@@ -133,7 +133,7 @@
   {
     "id": "compensacao-playbook-14",
     "pergunta": "O playbook de despedimento usa 14 dias/ano?",
-    "ficheiro": "skills/advogado-pt/playbooks/quero-despedir.md",
+    "ficheiro": "skills/juridico-pt/playbooks/quero-despedir.md",
     "contem": [
       "Compensação: 14 dias/ano"
     ],
@@ -158,7 +158,7 @@
   {
     "id": "compensacao-codigo-py",
     "pergunta": "A calculadora Python usa 14 dias na extinção do posto?",
-    "ficheiro": "skills/advogado-pt/scripts/compensacao_despedimento.py",
+    "ficheiro": "skills/juridico-pt/scripts/compensacao_despedimento.py",
     "contem": [
       "\"extincao-posto\": 14"
     ],
@@ -170,7 +170,7 @@
   {
     "id": "ss-pagamento-dia-25",
     "pergunta": "Até que dia se pagam as contribuições à Segurança Social em 2026?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "entre o \\*\\*dia 1 e o dia 25\\*\\*"
     ],
@@ -180,7 +180,7 @@
   {
     "id": "retencao-irs-1500",
     "pergunta": "Quanto se retém de IRS a 1.500 € (tabela I, sem dependentes)?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "168,17 €"
     ],
@@ -190,7 +190,7 @@
   {
     "id": "subsidio-refeicao-2026",
     "pergunta": "Até quanto é isento o subsídio de refeição em 2026?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "6,15 €/dia",
       "10,46 €/dia"
@@ -201,7 +201,7 @@
   {
     "id": "coimas-laborais-muito-graves",
     "pergunta": "Quais os limites das coimas laborais muito graves?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "2\\.040 € a 61\\.200 €"
     ],
@@ -211,7 +211,7 @@
   {
     "id": "impugnacao-judicial-3-meses",
     "pergunta": "Qual o prazo da impugnação judicial de uma liquidação?",
-    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "ficheiro": "skills/juridico-pt/references/contencioso-tributario.md",
     "contem": [
       "Prazo: 3 meses\\*\\* \\(art\\. 102\\.º"
     ],
@@ -221,7 +221,7 @@
   {
     "id": "notificacao-carta-registada",
     "pergunta": "Quando se presume feita a notificação por carta registada da AT?",
-    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "ficheiro": "skills/juridico-pt/references/contencioso-tributario.md",
     "contem": [
       "3\\.º dia posterior ao registo"
     ],
@@ -231,7 +231,7 @@
   {
     "id": "prestacao-minima-execucao",
     "pergunta": "Qual a prestação mínima num plano de prestações da execução fiscal?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "¼ UC = 25,50 €"
     ],
@@ -241,7 +241,7 @@
   {
     "id": "irc-taxa-2026",
     "pergunta": "Qual a taxa geral de IRC em 2026?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "\\*\\*19%\\*\\* \\(desce p/ 18% em 2027, 17% em 2028\\)"
     ],
@@ -261,7 +261,7 @@
   {
     "id": "irc-pme-15",
     "pergunta": "Qual a taxa de IRC das PME nos primeiros 50.000 €?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "Small Mid Cap \\(1\\.os 50\\.000€ matéria coletável\\) \\| \\*\\*15%\\*\\*"
     ],
@@ -271,7 +271,7 @@
   {
     "id": "derrama-estadual",
     "pergunta": "Quais os escalões da derrama estadual?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "\\*\\*3%\\*\\* de 1,5 M€ a 7,5 M€"
     ],
@@ -281,7 +281,7 @@
   {
     "id": "prejuizos-65",
     "pergunta": "Até quanto se deduzem prejuízos fiscais?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "até \\*\\*65%\\*\\* do lucro tributável"
     ],
@@ -291,7 +291,7 @@
   {
     "id": "ta-viaturas",
     "pergunta": "Qual a tributação autónoma de uma viatura de 30.000 €?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "< 37\\.500 € \\*\\*8%\\*\\*"
     ],
@@ -301,7 +301,7 @@
   {
     "id": "iva-periodicidade-mensal",
     "pergunta": "Quando passa a periodicidade do IVA a mensal?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "≥ 650\\.000 €"
     ],
@@ -313,7 +313,7 @@
   {
     "id": "iva-art53-limiar",
     "pergunta": "Qual o limiar de isenção do art. 53.º do CIVA?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "\\*\\*15\\.000€\\*\\*"
     ],
@@ -323,7 +323,7 @@
   {
     "id": "iva-taxas-ilhas",
     "pergunta": "Qual a taxa normal de IVA nos Açores e na Madeira?",
-    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "ficheiro": "skills/juridico-pt/references/fiscal.md",
     "contem": [
       "22% \\(Madeira\\) / 16% \\(Açores\\)"
     ],
@@ -356,7 +356,7 @@
   {
     "id": "trespasse-imposto-selo",
     "pergunta": "Que Imposto do Selo paga um trespasse?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "Imposto do selo no trespasse de estabelecimento \\| \\*\\*5%\\*\\*"
     ],
@@ -366,7 +366,7 @@
   {
     "id": "uc-2026",
     "pergunta": "Qual o valor da UC em 2026?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "\\*\\*102€\\*\\* \\(congelada\\)"
     ],
@@ -376,7 +376,7 @@
   {
     "id": "taxa-justica-tabela-i",
     "pergunta": "Qual a taxa de justiça de uma ação de 275.000 €?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "até 275\\.000 € \\*\\*16 UC\\*\\*"
     ],
@@ -386,7 +386,7 @@
   {
     "id": "oposicao-injuncao-15-dias",
     "pergunta": "Qual o prazo para deduzir oposição a uma injunção?",
-    "ficheiro": "skills/advogado-pt/assets/templates/oposicao-injuncao.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/oposicao-injuncao.md",
     "contem": [
       "15 dias a contar da notificação"
     ],
@@ -396,7 +396,7 @@
   {
     "id": "embargos-executado-20-dias",
     "pergunta": "Qual o prazo dos embargos de executado?",
-    "ficheiro": "skills/advogado-pt/assets/templates/oposicao-execucao.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/oposicao-execucao.md",
     "contem": [
       "20 dias a contar da citação"
     ],
@@ -406,7 +406,7 @@
   {
     "id": "reserva-legal-2500",
     "pergunta": "Qual o mínimo da reserva legal numa Lda?",
-    "ficheiro": "skills/advogado-pt/references/societario.md",
+    "ficheiro": "skills/juridico-pt/references/societario.md",
     "contem": [
       "nunca menos de \\*\\*2\\.500 €\\*\\*"
     ],
@@ -416,7 +416,7 @@
   {
     "id": "aprovacao-contas-31-marco",
     "pergunta": "Até quando se aprovam as contas de uma sociedade?",
-    "ficheiro": "skills/advogado-pt/references/societario.md",
+    "ficheiro": "skills/juridico-pt/references/societario.md",
     "contem": [
       "aprovação até 31 de março"
     ],
@@ -426,7 +426,7 @@
   {
     "id": "per-standstill",
     "pergunta": "Quanto dura a suspensão das ações no PER?",
-    "ficheiro": "skills/advogado-pt/references/insolvencia.md",
+    "ficheiro": "skills/juridico-pt/references/insolvencia.md",
     "contem": [
       "\\*\\*4 meses\\*\\*",
       "\\*\\*2 meses\\*\\*, prorrogável uma vez por 1 mês"
@@ -437,7 +437,7 @@
   {
     "id": "marca-inpi-2026",
     "pergunta": "Quanto custa registar uma marca nacional no INPI?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "151,98 €"
     ],
@@ -447,7 +447,7 @@
   {
     "id": "segredos-comerciais-cpi",
     "pergunta": "Onde se protegem os segredos comerciais?",
-    "ficheiro": "skills/advogado-pt/references/pi.md",
+    "ficheiro": "skills/juridico-pt/references/pi.md",
     "contem": [
       "DL 110/2018\\), arts\\. 313"
     ],
@@ -457,7 +457,7 @@
   {
     "id": "software-encomenda-dl252",
     "pergunta": "A quem pertence o software feito por encomenda?",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-desenvolvimento-software.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-desenvolvimento-software.md",
     "contem": [
       "252/94"
     ],
@@ -467,7 +467,7 @@
   {
     "id": "bens-usados-18-meses",
     "pergunta": "Pode reduzir-se a garantia de bens usados?",
-    "ficheiro": "skills/advogado-pt/references/consumo.md",
+    "ficheiro": "skills/juridico-pt/references/consumo.md",
     "contem": [
       "18 meses\\*\\* \\(art\\. 12\\.º, n\\.º 3, DL 84/2021"
     ],
@@ -477,7 +477,7 @@
   {
     "id": "odr-encerrada",
     "pergunta": "A plataforma europeia ODR ainda existe?",
-    "ficheiro": "skills/advogado-pt/references/consumo.md",
+    "ficheiro": "skills/juridico-pt/references/consumo.md",
     "contem": [
       "ODR\\) foi encerrada em 20/07/2025"
     ],
@@ -487,7 +487,7 @@
   {
     "id": "botao-livre-resolucao",
     "pergunta": "O botão de livre resolução já está transposto em Portugal?",
-    "ficheiro": "skills/advogado-pt/assets/checklists/checklist-loja-online.md",
+    "ficheiro": "skills/juridico-pt/assets/checklists/checklist-loja-online.md",
     "contem": [
       "Portugal ainda não transpôs"
     ],
@@ -497,7 +497,7 @@
   {
     "id": "dsa-lei-12a-2026",
     "pergunta": "Quem coordena os serviços digitais (DSA) em Portugal?",
-    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "ficheiro": "skills/juridico-pt/references/digital-ue.md",
     "contem": [
       "Lei 12-A/2026"
     ],
@@ -507,7 +507,7 @@
   {
     "id": "rgpc-50-trabalhadores",
     "pergunta": "A partir de quantos trabalhadores se aplica o RGPC?",
-    "ficheiro": "skills/advogado-pt/references/compliance.md",
+    "ficheiro": "skills/juridico-pt/references/compliance.md",
     "contem": [
       "50 ou mais trabalhadores"
     ],
@@ -517,7 +517,7 @@
   {
     "id": "denuncia-7-dias",
     "pergunta": "Em quantos dias se confirma a receção de uma denúncia?",
-    "ficheiro": "skills/advogado-pt/references/compliance.md",
+    "ficheiro": "skills/juridico-pt/references/compliance.md",
     "contem": [
       "\\*\\*7 dias\\*\\*: notificar ao denunciante"
     ],
@@ -527,7 +527,7 @@
   {
     "id": "agencia-indemnizacao-clientela",
     "pergunta": "Qual o prazo para pedir a indemnização de clientela?",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-agencia.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-agencia.md",
     "contem": [
       "indemnização de clientela em 1 ano"
     ],
@@ -537,7 +537,7 @@
   {
     "id": "ia-literacia-art4",
     "pergunta": "O que exige o art. 4.º do Regulamento da IA?",
-    "ficheiro": "skills/advogado-pt/assets/templates/politica-uso-ia.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/politica-uso-ia.md",
     "contem": [
       "art\\. 4\\.º do Regulamento da IA"
     ],
@@ -547,7 +547,7 @@
   {
     "id": "videovigilancia-30-dias",
     "pergunta": "Quanto tempo se guardam as imagens de videovigilância?",
-    "ficheiro": "skills/advogado-pt/assets/templates/politica-videovigilancia.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/politica-videovigilancia.md",
     "contem": [
       "Conservação máxima de 30 dias"
     ],
@@ -557,7 +557,7 @@
   {
     "id": "al-seguro-75000",
     "pergunta": "Qual o capital mínimo do seguro do alojamento local?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "capital mínimo \\*\\*75\\.000 €\\*\\*"
     ],
@@ -567,7 +567,7 @@
   {
     "id": "m40-servicos-fora-ue",
     "pergunta": "Que código de isenção leva um serviço B2B a uma empresa fora da UE?",
-    "ficheiro": "skills/advogado-pt/references/iva-internacional.md",
+    "ficheiro": "skills/juridico-pt/references/iva-internacional.md",
     "contem": [
       "usa-se o \\*\\*M40\\*\\*"
     ],
@@ -590,7 +590,7 @@
   {
     "id": "tvde-taxa-sem-iva",
     "pergunta": "Qual o máximo da taxa de intermediação das plataformas TVDE?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "\\*\\*25%\\*\\* do valor da viagem \\*\\*sem IVA\\*\\*"
     ],
@@ -600,7 +600,7 @@
   {
     "id": "tvde-coimas",
     "pergunta": "Quais as coimas do regime TVDE para empresas?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "pessoas coletivas \\*\\*5\\.000 € a 44\\.000 €\\*\\*"
     ],
@@ -610,7 +610,7 @@
   {
     "id": "alvara-classe-1",
     "pergunta": "Até que valor vai a classe 1 do alvará de construção?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "classe 1 até \\*\\*200\\.000 €\\*\\*"
     ],
@@ -620,7 +620,7 @@
   {
     "id": "certificado-empreiteiro",
     "pergunta": "Até quanto pode executar quem só tem certificado de empreiteiro?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "\\*\\*40\\.000 €\\*\\*"
     ],
@@ -630,7 +630,7 @@
   {
     "id": "mediacao-seguro",
     "pergunta": "Qual o seguro mínimo de uma empresa de mediação imobiliária?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "capital mínimo \\*\\*150\\.000 €\\*\\*"
     ],
@@ -640,7 +640,7 @@
   {
     "id": "rjue-dl108-vigor",
     "pergunta": "Quando entrou em vigor o novo RJUE (DL 108/2026)?",
-    "ficheiro": "skills/advogado-pt/references/licenciamento-setorial.md",
+    "ficheiro": "skills/juridico-pt/references/licenciamento-setorial.md",
     "contem": [
       "em vigor desde 1/10/2026\\*\\* \\(DL 108/2026"
     ],
@@ -650,7 +650,7 @@
   {
     "id": "csrd-omnibus-450",
     "pergunta": "A que empresas se aplica a CSRD depois da Omnibus I?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "> \\*\\*450 M€ e\\*\\* número médio > \\*\\*1\\.000\\*\\*"
     ],
@@ -660,7 +660,7 @@
   {
     "id": "ai-act-small-midcaps",
     "pergunta": "As small mid caps têm sempre a coima mais baixa no AI Act?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "o mais baixo só nas dos n\\.os 4 e 5"
     ],
@@ -670,7 +670,7 @@
   {
     "id": "ai-act-anexo-iii-2027",
     "pergunta": "Quando se aplicam as regras de alto risco do Anexo III do AI Act?",
-    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "ficheiro": "skills/juridico-pt/references/digital-ue.md",
     "contem": [
       "\\*\\*02/12/2027\\*\\*"
     ],
@@ -682,7 +682,7 @@
   {
     "id": "ai-literacia-promover",
     "pergunta": "O art. 4.º do AI Act obriga a garantir um nível de literacia?",
-    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "ficheiro": "skills/juridico-pt/references/digital-ue.md",
     "contem": [
       "\\*\\*promover\\*\\* a literacia"
     ],
@@ -694,7 +694,7 @@
   {
     "id": "anacom-ia-pendente",
     "pergunta": "A ANACOM já é a autoridade nacional do AI Act?",
-    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "ficheiro": "skills/juridico-pt/references/digital-ue.md",
     "contem": [
       "ainda não foi publicada"
     ],
@@ -704,7 +704,7 @@
   {
     "id": "v121-prazos-skill",
     "pergunta": "Como se conta um prazo processual (CPC)?",
-    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "ficheiro": "skills/juridico-pt/SKILL.md",
     "contem": [
       "judicial",
       "138\\.º"
@@ -717,7 +717,7 @@
   {
     "id": "v121-prazos-citacao",
     "pergunta": "Em que tipo de dias se conta a oposição à injunção?",
-    "ficheiro": "skills/advogado-pt/playbooks/recebi-citacao-ou-injuncao.md",
+    "ficheiro": "skills/juridico-pt/playbooks/recebi-citacao-ou-injuncao.md",
     "contem": [
       "--tipo judicial",
       "férias judiciais"
@@ -730,7 +730,7 @@
   {
     "id": "v121-prescricao-playbook",
     "pergunta": "Em quanto tempo prescreve uma fatura entre empresas?",
-    "ficheiro": "skills/advogado-pt/playbooks/cliente-nao-paga.md",
+    "ficheiro": "skills/juridico-pt/playbooks/cliente-nao-paga.md",
     "contem": [
       "20 anos",
       "317\\.º"
@@ -744,7 +744,7 @@
   {
     "id": "v121-prescricao-skill",
     "pergunta": "A skill distingue a prescrição presuntiva?",
-    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "ficheiro": "skills/juridico-pt/SKILL.md",
     "contem": [
       "presuntiva"
     ],
@@ -754,7 +754,7 @@
   {
     "id": "v121-irs-valores",
     "pergunta": "Que coeficiente tem a propriedade intelectual e qual a dedução?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "propriedade intelectual[^\\n]{0,20}0,95",
       "4\\.587,09"
@@ -768,7 +768,7 @@
   {
     "id": "v121-irs-fiscal",
     "pergunta": "Coeficientes do regime simplificado em fiscal.md",
-    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "ficheiro": "skills/juridico-pt/references/fiscal.md",
     "contem": [
       "0,35",
       "0,95"
@@ -782,7 +782,7 @@
   {
     "id": "v121-ss-valores",
     "pergunta": "Qual a taxa contributiva do ENI?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "25,2%"
     ],
@@ -794,7 +794,7 @@
   {
     "id": "v121-ss-fiscal",
     "pergunta": "Base e mínimo das contribuições do ENI",
-    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "ficheiro": "skills/juridico-pt/references/fiscal.md",
     "contem": [
       "25,2%",
       "20 ?€"
@@ -808,7 +808,7 @@
   {
     "id": "v121-ss-moe",
     "pergunta": "Onde estão as taxas dos MOE?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "Código Contributivo, art\\. 69\\.º"
     ],
@@ -820,7 +820,7 @@
   {
     "id": "v121-injuncao-playbook",
     "pergunta": "Há limite de valor para a injunção entre empresas?",
-    "ficheiro": "skills/advogado-pt/playbooks/cliente-nao-paga.md",
+    "ficheiro": "skills/juridico-pt/playbooks/cliente-nao-paga.md",
     "contem": [
       "independentemente do valor|qualquer que seja o valor"
     ],
@@ -832,7 +832,7 @@
   {
     "id": "v121-injuncao-cobrancas",
     "pergunta": "cobrancas.md sobre o limite da injunção",
-    "ficheiro": "skills/advogado-pt/references/cobrancas.md",
+    "ficheiro": "skills/juridico-pt/references/cobrancas.md",
     "contem": [
       "62/2013"
     ],
@@ -844,7 +844,7 @@
   {
     "id": "v121-notif-playbook",
     "pergunta": "Quando se considera feita a notificação no Portal das Finanças?",
-    "ficheiro": "skills/advogado-pt/playbooks/recebi-notificacao-at.md",
+    "ficheiro": "skills/juridico-pt/playbooks/recebi-notificacao-at.md",
     "contem": [
       "5\\.º dia",
       "38\\.º-A"
@@ -855,7 +855,7 @@
   {
     "id": "v121-notif-skill",
     "pergunta": "O SKILL.md distingue o 5.º e o 15.º dia?",
-    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "ficheiro": "skills/juridico-pt/SKILL.md",
     "contem": [
       "5\\.º dia"
     ],
@@ -867,7 +867,7 @@
   {
     "id": "v121-coima-multas",
     "pergunta": "Prazo e efeito da defesa e impugnação nas coimas laborais",
-    "ficheiro": "skills/advogado-pt/references/multas.md",
+    "ficheiro": "skills/juridico-pt/references/multas.md",
     "contem": [
       "devolutivo",
       "107/2009",
@@ -883,7 +883,7 @@
   {
     "id": "v121-coima-skill",
     "pergunta": "O SKILL.md não diz 15 dias úteis nas coimas laborais",
-    "ficheiro": "skills/advogado-pt/SKILL.md",
+    "ficheiro": "skills/juridico-pt/SKILL.md",
     "contem": [],
     "naoContem": [
       "trânsito/laboral: 15 dias úteis"
@@ -893,7 +893,7 @@
   {
     "id": "v121-coima-template",
     "pergunta": "Prescrição e prazo no template de defesa",
-    "ficheiro": "skills/advogado-pt/assets/templates/defesa-contraordenacao.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/defesa-contraordenacao.md",
     "contem": [
       "27\\.º"
     ],
@@ -906,7 +906,7 @@
   {
     "id": "v121-arrend-denuncia",
     "pergunta": "Antecedência da denúncia pelo senhorio",
-    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "ficheiro": "skills/juridico-pt/references/arrendamento.md",
     "contem": [
       "5 anos",
       "1101\\.º"
@@ -919,7 +919,7 @@
   {
     "id": "v121-arrend-arrendatario",
     "pergunta": "Avisos do arrendatário",
-    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "ficheiro": "skills/juridico-pt/references/arrendamento.md",
     "contem": [
       "1100\\.º",
       "1098\\.º",
@@ -934,7 +934,7 @@
   {
     "id": "v121-arrend-renovacao",
     "pergunta": "Renovação e mora no arrendamento",
-    "ficheiro": "skills/advogado-pt/references/arrendamento.md",
+    "ficheiro": "skills/juridico-pt/references/arrendamento.md",
     "contem": [
       "1096\\.º",
       "1097\\.º",
@@ -948,7 +948,7 @@
   {
     "id": "v121-atual-cisg",
     "pergunta": "Portugal é parte da CISG?",
-    "ficheiro": "skills/advogado-pt/references/contratos-internacionais.md",
+    "ficheiro": "skills/juridico-pt/references/contratos-internacionais.md",
     "contem": [
       "1/10/2021|1 de outubro de 2021"
     ],
@@ -960,7 +960,7 @@
   {
     "id": "v121-atual-cra",
     "pergunta": "Desde quando há obrigações do CRA?",
-    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "ficheiro": "skills/juridico-pt/references/digital-ue.md",
     "contem": [
       "11/9/2026|11/09/2026"
     ],
@@ -972,7 +972,7 @@
   {
     "id": "v121-atual-scoring",
     "pergunta": "O social scoring proibido é só público?",
-    "ficheiro": "skills/advogado-pt/references/digital-ue.md",
+    "ficheiro": "skills/juridico-pt/references/digital-ue.md",
     "contem": [],
     "naoContem": [
       "\\*social scoring\\* por entidades públicas,"
@@ -982,7 +982,7 @@
   {
     "id": "v121-atual-ccp",
     "pergunta": "A contratação pública reflete o DL 177/2026?",
-    "ficheiro": "skills/advogado-pt/references/contratacao-publica.md",
+    "ficheiro": "skills/juridico-pt/references/contratacao-publica.md",
     "contem": [
       "177/2026"
     ],
@@ -992,7 +992,7 @@
   {
     "id": "v121-atual-ccp-valores",
     "pergunta": "Os limiares do CCP estão no valores-2026?",
-    "ficheiro": "skills/advogado-pt/references/valores-2026.md",
+    "ficheiro": "skills/juridico-pt/references/valores-2026.md",
     "contem": [
       "## Contratação Pública"
     ],
@@ -1002,7 +1002,7 @@
   {
     "id": "v121-atual-nis2",
     "pergunta": "A NIS2 está transposta?",
-    "ficheiro": "skills/advogado-pt/references/compliance.md",
+    "ficheiro": "skills/juridico-pt/references/compliance.md",
     "contem": [
       "3/4/2026"
     ],
@@ -1014,7 +1014,7 @@
   {
     "id": "v121-atual-consumo",
     "pergunta": "O DL 67/2003 ainda está em vigor?",
-    "ficheiro": "skills/advogado-pt/references/consumo.md",
+    "ficheiro": "skills/juridico-pt/references/consumo.md",
     "contem": [
       "84/2021"
     ],
@@ -1026,7 +1026,7 @@
   {
     "id": "v121-atual-contratos",
     "pergunta": "Que diploma rege a assinatura eletrónica?",
-    "ficheiro": "skills/advogado-pt/references/contratos.md",
+    "ficheiro": "skills/juridico-pt/references/contratos.md",
     "contem": [
       "12/2021"
     ],
@@ -1038,7 +1038,7 @@
   {
     "id": "v121-atual-imobiliario",
     "pergunta": "A escritura exige licença de utilização? Execução específica afastável?",
-    "ficheiro": "skills/advogado-pt/references/imobiliario.md",
+    "ficheiro": "skills/juridico-pt/references/imobiliario.md",
     "contem": [
       "10/2024",
       "4/2014"
@@ -1052,7 +1052,7 @@
   {
     "id": "v121-atual-comprar",
     "pergunta": "Playbook de compra de imóvel atualizado",
-    "ficheiro": "skills/advogado-pt/playbooks/comprar-imovel.md",
+    "ficheiro": "skills/juridico-pt/playbooks/comprar-imovel.md",
     "contem": [
       "4/2014"
     ],
@@ -1065,7 +1065,7 @@
   {
     "id": "v121-atual-duediligence",
     "pergunta": "Checklist de due diligence atualizada",
-    "ficheiro": "skills/advogado-pt/assets/checklists/checklist-due-diligence-imovel.md",
+    "ficheiro": "skills/juridico-pt/assets/checklists/checklist-due-diligence-imovel.md",
     "contem": [
       "10/2024"
     ],
@@ -1075,7 +1075,7 @@
   {
     "id": "v121-atual-fiscal",
     "pergunta": "Benefícios fiscais atuais",
-    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "ficheiro": "skills/juridico-pt/references/fiscal.md",
     "contem": [
       "ICE",
       "IFICI"
@@ -1088,7 +1088,7 @@
   {
     "id": "v121-atual-laboral",
     "pergunta": "Período experimental de 1.º emprego e renovações",
-    "ficheiro": "skills/advogado-pt/references/laboral.md",
+    "ficheiro": "skills/juridico-pt/references/laboral.md",
     "contem": [
       "180 dias[^\\n]{0,120}(primeiro emprego|1\\.º emprego|desempregad)",
       "149\\.º, n\\.º 4"
@@ -1099,7 +1099,7 @@
   {
     "id": "v121-atual-experimental",
     "pergunta": "Aviso prévio na denúncia no período experimental",
-    "ficheiro": "skills/advogado-pt/playbooks/quero-despedir.md",
+    "ficheiro": "skills/juridico-pt/playbooks/quero-despedir.md",
     "contem": [
       "7 ou 30 dias"
     ],
@@ -1111,7 +1111,7 @@
   {
     "id": "v121-atual-replica",
     "pergunta": "Quando há réplica?",
-    "ficheiro": "skills/advogado-pt/references/contencioso.md",
+    "ficheiro": "skills/juridico-pt/references/contencioso.md",
     "contem": [
       "584\\.º"
     ],
@@ -1123,7 +1123,7 @@
   {
     "id": "v121-atual-seguros",
     "pergunta": "Diploma da atividade seguradora e AT dos independentes",
-    "ficheiro": "skills/advogado-pt/references/seguros.md",
+    "ficheiro": "skills/juridico-pt/references/seguros.md",
     "contem": [
       "Lei 147/2015",
       "159/99"
@@ -1136,7 +1136,7 @@
   {
     "id": "v121-atual-penal",
     "pergunta": "Onde está o crime de branqueamento?",
-    "ficheiro": "skills/advogado-pt/references/penal-cibercrime.md",
+    "ficheiro": "skills/juridico-pt/references/penal-cibercrime.md",
     "contem": [
       "368\\.º-A"
     ],
@@ -1148,7 +1148,7 @@
   {
     "id": "v121-contra-alcada",
     "pergunta": "15.000 € é a alçada da 1.ª instância?",
-    "ficheiro": "skills/advogado-pt/references/contencioso.md",
+    "ficheiro": "skills/juridico-pt/references/contencioso.md",
     "contem": [],
     "naoContem": [
       "15\\.000€\\*\\* \\(valor da alçada da 1\\.ª instância\\)"
@@ -1158,7 +1158,7 @@
   {
     "id": "v121-contra-graduacao",
     "pergunta": "Ordem de pagamento dos credores",
-    "ficheiro": "skills/advogado-pt/references/garantias.md",
+    "ficheiro": "skills/juridico-pt/references/garantias.md",
     "contem": [
       "751\\.º"
     ],
@@ -1170,7 +1170,7 @@
   {
     "id": "v121-contra-coima75",
     "pergunta": "Quando se paga a coima fiscal a 75%?",
-    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "ficheiro": "skills/juridico-pt/references/contencioso-tributario.md",
     "contem": [
       "78\\.º"
     ],
@@ -1182,7 +1182,7 @@
   {
     "id": "v121-contra-coima75-playbook",
     "pergunta": "Pagamento voluntário no playbook da AT",
-    "ficheiro": "skills/advogado-pt/playbooks/recebi-notificacao-at.md",
+    "ficheiro": "skills/juridico-pt/playbooks/recebi-notificacao-at.md",
     "contem": [],
     "naoContem": [
       "Até à decisão: \\*\\*pagamento voluntário\\*\\*"
@@ -1192,7 +1192,7 @@
   {
     "id": "v121-contra-marca",
     "pergunta": "Taxa da marca nacional fora do valores-2026",
-    "ficheiro": "skills/advogado-pt/references/pi.md",
+    "ficheiro": "skills/juridico-pt/references/pi.md",
     "contem": [],
     "naoContem": [
       "Marca nacional: ~200€"
@@ -1202,7 +1202,7 @@
   {
     "id": "v121-contra-b2c",
     "pergunta": "Limiar das vendas B2C",
-    "ficheiro": "skills/advogado-pt/references/uniao-europeia.md",
+    "ficheiro": "skills/juridico-pt/references/uniao-europeia.md",
     "contem": [
       "iva-internacional\\.md"
     ],
@@ -1214,7 +1214,7 @@
   {
     "id": "v121-contra-autoliq",
     "pergunta": "Menção na fatura de serviços B2B UE",
-    "ficheiro": "skills/advogado-pt/references/contratos-internacionais.md",
+    "ficheiro": "skills/juridico-pt/references/contratos-internacionais.md",
     "contem": [
       "IVA - autoliquidação",
       "iva-internacional\\.md"
@@ -1227,7 +1227,7 @@
   {
     "id": "v121-contra-fgct",
     "pergunta": "FGCT no despedimento coletivo",
-    "ficheiro": "skills/advogado-pt/playbooks/despedimento-coletivo.md",
+    "ficheiro": "skills/juridico-pt/playbooks/despedimento-coletivo.md",
     "contem": [],
     "naoContem": [
       "sem prejuízo do FGCT"
@@ -1237,7 +1237,7 @@
   {
     "id": "v121-contra-aviso",
     "pergunta": "Aviso obsoleto sobre fiscal.md",
-    "ficheiro": "skills/advogado-pt/references/contencioso-tributario.md",
+    "ficheiro": "skills/juridico-pt/references/contencioso-tributario.md",
     "contem": [],
     "naoContem": [
       "ainda indica \"90 dias\""
@@ -1247,7 +1247,7 @@
   {
     "id": "v121-contra-loja-iva",
     "pergunta": "A loja online remete o IVA para iva-internacional",
-    "ficheiro": "skills/advogado-pt/assets/templates/termos-condicoes-loja-online.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/termos-condicoes-loja-online.md",
     "contem": [
       "iva-internacional\\.md"
     ],
@@ -1257,7 +1257,7 @@
   {
     "id": "v121-contra-ti-iva",
     "pergunta": "O contrato TI remete o IVA para iva-internacional",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-prestacao-servicos-ti.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-prestacao-servicos-ti.md",
     "contem": [
       "iva-internacional\\.md"
     ],
@@ -1267,7 +1267,7 @@
   {
     "id": "v121-playbook-citacao",
     "pergunta": "Prazos de embargos, penhora e multa",
-    "ficheiro": "skills/advogado-pt/playbooks/recebi-citacao-ou-injuncao.md",
+    "ficheiro": "skills/juridico-pt/playbooks/recebi-citacao-ou-injuncao.md",
     "contem": [
       "728\\.º",
       "785\\.º",
@@ -1279,7 +1279,7 @@
   {
     "id": "v121-playbook-despedir",
     "pergunta": "Prazos do procedimento disciplinar",
-    "ficheiro": "skills/advogado-pt/playbooks/quero-despedir.md",
+    "ficheiro": "skills/juridico-pt/playbooks/quero-despedir.md",
     "contem": [
       "357\\.º",
       "329\\.º",
@@ -1292,7 +1292,7 @@
   {
     "id": "v121-playbook-cobrar",
     "pergunta": "Injunção antes da prescrição e indemnização de 40 €",
-    "ficheiro": "skills/advogado-pt/playbooks/cliente-nao-paga.md",
+    "ficheiro": "skills/juridico-pt/playbooks/cliente-nao-paga.md",
     "contem": [
       "323\\.º, n\\.º 2",
       "40 ?€"
@@ -1303,7 +1303,7 @@
   {
     "id": "v121-tpl-nulo-cpcv",
     "pergunta": "O CPCV deixa afastar a execução específica?",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-promessa-compra-venda.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-promessa-compra-venda.md",
     "contem": [
       "830\\.º, n\\.º 3"
     ],
@@ -1316,7 +1316,7 @@
   {
     "id": "v121-tpl-nulo-cpcv-forma",
     "pergunta": "Reconhecimento presencial é requisito",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-promessa-compra-venda.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-promessa-compra-venda.md",
     "contem": [],
     "naoContem": [
       "— recomendado para garantir a eficácia"
@@ -1326,7 +1326,7 @@
   {
     "id": "v121-tpl-nulo-revogacao",
     "pergunta": "Quitação total no acordo de revogação",
-    "ficheiro": "skills/advogado-pt/assets/templates/acordo-revogacao.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/acordo-revogacao.md",
     "contem": [
       "337\\.º"
     ],
@@ -1338,7 +1338,7 @@
   {
     "id": "v121-tpl-nulo-saas",
     "pergunta": "Resolução por insolvência no SaaS",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-saas-b2b.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-saas-b2b.md",
     "contem": [],
     "naoContem": [
       "ou de imediato em caso de insolvência da outra parte"
@@ -1348,7 +1348,7 @@
   {
     "id": "v121-tpl-req-cite",
     "pergunta": "Parecer da CITE na carta de despedimento",
-    "ficheiro": "skills/advogado-pt/assets/templates/carta-despedimento-justa-causa.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/carta-despedimento-justa-causa.md",
     "contem": [
       "CITE",
       "63\\.º"
@@ -1359,7 +1359,7 @@
   {
     "id": "v121-tpl-req-termo",
     "pergunta": "Relação motivo–termo",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-trabalho-termo-certo.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-trabalho-termo-certo.md",
     "contem": [
       "141\\.º, n\\.º 3"
     ],
@@ -1369,7 +1369,7 @@
   {
     "id": "v121-tpl-req-conjuge-trespasse",
     "pergunta": "Consentimento do cônjuge no trespasse",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-trespasse.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-trespasse.md",
     "contem": [
       "1682\\.º-A"
     ],
@@ -1379,7 +1379,7 @@
   {
     "id": "v121-tpl-req-conjuge-arrend-h",
     "pergunta": "Consentimento do cônjuge no arrendamento habitacional",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-arrendamento-habitacional.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-arrendamento-habitacional.md",
     "contem": [
       "1682\\.º-A"
     ],
@@ -1389,7 +1389,7 @@
   {
     "id": "v121-tpl-req-conjuge-arrend-nh",
     "pergunta": "Consentimento do cônjuge no arrendamento não habitacional",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-arrendamento-nao-habitacional.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-arrendamento-nao-habitacional.md",
     "contem": [
       "1682\\.º-A"
     ],
@@ -1399,7 +1399,7 @@
   {
     "id": "v121-tpl-req-conjuge-pacto",
     "pergunta": "Consentimento do cônjuge na entrada em espécie",
-    "ficheiro": "skills/advogado-pt/assets/templates/pacto-social-unipessoal-lda.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/pacto-social-unipessoal-lda.md",
     "contem": [
       "1682\\.º-A"
     ],
@@ -1409,7 +1409,7 @@
   {
     "id": "v121-tpl-req-dpa",
     "pergunta": "Conteúdo obrigatório do DPA",
-    "ficheiro": "skills/advogado-pt/assets/templates/dpa-bilingue.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/dpa-bilingue.md",
     "contem": [
       "28\\.º, n\\.º 3",
       "auditori",
@@ -1421,7 +1421,7 @@
   {
     "id": "v121-tpl-req-ti",
     "pergunta": "Ressalvas na limitação de responsabilidade",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-prestacao-servicos-ti.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-prestacao-servicos-ti.md",
     "contem": [
       "809\\.º",
       "danos pessoais|dano pessoal"
@@ -1432,7 +1432,7 @@
   {
     "id": "v121-tpl-req-loja",
     "pergunta": "Termos da loja online B2C",
-    "ficheiro": "skills/advogado-pt/assets/templates/termos-condicoes-loja-online.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/termos-condicoes-loja-online.md",
     "contem": [
       "rejeição|rejeitar",
       "593/2008|Roma I",
@@ -1445,7 +1445,7 @@
   {
     "id": "v121-tpl-cit-teletrabalho",
     "pergunta": "Artigo do teletrabalho",
-    "ficheiro": "skills/advogado-pt/assets/templates/acordo-teletrabalho.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/acordo-teletrabalho.md",
     "contem": [
       "169\\.º-B"
     ],
@@ -1457,7 +1457,7 @@
   {
     "id": "v121-tpl-cit-notaculpa",
     "pergunta": "Artigos da nota de culpa",
-    "ficheiro": "skills/advogado-pt/assets/templates/nota-de-culpa.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/nota-de-culpa.md",
     "contem": [
       "98\\.º"
     ],
@@ -1470,7 +1470,7 @@
   {
     "id": "v121-tpl-cit-software",
     "pergunta": "Segredos comerciais no contrato de software",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-desenvolvimento-software.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-desenvolvimento-software.md",
     "contem": [
       "313\\.º"
     ],
@@ -1482,7 +1482,7 @@
   {
     "id": "v121-tpl-cit-termo",
     "pergunta": "Renovações do contrato a termo certo",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-trabalho-termo-certo.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-trabalho-termo-certo.md",
     "contem": [
       "149\\.º"
     ],
@@ -1494,7 +1494,7 @@
   {
     "id": "v121-tpl-cit-reconhecimento",
     "pergunta": "Epígrafe do reconhecimento de dívida",
-    "ficheiro": "skills/advogado-pt/assets/templates/reconhecimento-divida.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/reconhecimento-divida.md",
     "contem": [],
     "naoContem": [
       "## Cláusula 5\\.ª \\(Título executivo\\)"
@@ -1504,7 +1504,7 @@
   {
     "id": "v121-tpl-cit-cobranca",
     "pergunta": "Ameaça de ação executiva só com fatura",
-    "ficheiro": "skills/advogado-pt/assets/templates/carta-cobranca-formal-registada.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/carta-cobranca-formal-registada.md",
     "contem": [],
     "naoContem": [
       "procedimento de injunção e/ou ação executiva"
@@ -1514,7 +1514,7 @@
   {
     "id": "v121-tpl-cit-partilha",
     "pergunta": "O unido de facto é herdeiro legitimário?",
-    "ficheiro": "skills/advogado-pt/assets/templates/acordo-partilha-extrajudicial.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/acordo-partilha-extrajudicial.md",
     "contem": [
       "2157\\.º|não é herdeiro legitimário"
     ],
@@ -1526,7 +1526,7 @@
   {
     "id": "v121-tpl-cit-livranca",
     "pergunta": "Teto no pacto de preenchimento",
-    "ficheiro": "skills/advogado-pt/assets/templates/livranca-pacto-preenchimento.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/livranca-pacto-preenchimento.md",
     "contem": [
       "montante máximo|limite máximo"
     ],
@@ -1536,7 +1536,7 @@
   {
     "id": "v121-final-selo-heranca",
     "pergunta": "A herança de um imóvel paga os 0,8% da verba 1.1?",
-    "ficheiro": "skills/advogado-pt/references/herancas.md",
+    "ficheiro": "skills/juridico-pt/references/herancas.md",
     "contem": [
       "doação"
     ],
@@ -1548,7 +1548,7 @@
   {
     "id": "v121-final-saas-en",
     "pergunta": "A versão EN do SaaS ainda resolve por insolvência?",
-    "ficheiro": "skills/advogado-pt/assets/templates/contrato-saas-b2b.md",
+    "ficheiro": "skills/juridico-pt/assets/templates/contrato-saas-b2b.md",
     "contem": [
       "119"
     ],
@@ -1560,7 +1560,7 @@
   {
     "id": "v121-final-insolvencia-graduacao",
     "pergunta": "Graduação na insolvência alinhada com o CC",
-    "ficheiro": "skills/advogado-pt/references/insolvencia.md",
+    "ficheiro": "skills/juridico-pt/references/insolvencia.md",
     "contem": [
       "751\\.º",
       "749\\.º"
@@ -1571,7 +1571,7 @@
   {
     "id": "v121-final-pi-software",
     "pergunta": "Software criado por trabalhador",
-    "ficheiro": "skills/advogado-pt/references/pi.md",
+    "ficheiro": "skills/juridico-pt/references/pi.md",
     "contem": [
       "2009/24"
     ],
@@ -1583,7 +1583,7 @@
   {
     "id": "v121-final-amlr",
     "pergunta": "Limite europeu de numerário (AMLR)",
-    "ficheiro": "skills/advogado-pt/references/bancario.md",
+    "ficheiro": "skills/juridico-pt/references/bancario.md",
     "contem": [
       "10/7/2027"
     ],
@@ -1595,11 +1595,110 @@
   {
     "id": "v121-final-iva-mensal",
     "pergunta": "Limiar do IVA mensal em fiscal.md",
-    "ficheiro": "skills/advogado-pt/references/fiscal.md",
+    "ficheiro": "skills/juridico-pt/references/fiscal.md",
     "contem": [],
     "naoContem": [
       "mensal se volume negócios > 650\\.000€"
     ],
     "fonte": "CIVA art. 41.º"
+  },
+  {
+    "id": "v20-fatura-ref",
+    "pergunta": "As faturas em PDF continuam a valer em 2027?",
+    "ficheiro": "skills/juridico-pt/references/faturacao.md",
+    "contem": [
+      "28/2019",
+      "art\\. 12\\.º|artigo 12\\.º",
+      "31/12/2026|31 de dezembro de 2026",
+      "ATCUD",
+      "QR",
+      "qualificad"
+    ],
+    "naoContem": [],
+    "fonte": "DL 28/2019, art. 12.º; regime transitório do OE2026; Portaria 195/2020"
+  },
+  {
+    "id": "v20-fatura-playbook",
+    "pergunta": "O que muda a 1/1/2027 nas faturas",
+    "ficheiro": "skills/juridico-pt/playbooks/faturacao-eletronica-2027.md",
+    "contem": [
+      "1/1/2027|1 de janeiro de 2027",
+      "selo eletrónico qualificado|assinatura eletrónica qualificada"
+    ],
+    "naoContem": [],
+    "fonte": "DL 28/2019, art. 12.º"
+  },
+  {
+    "id": "v20-cobranca-pepex",
+    "pergunta": "Procedimento extrajudicial pré-executivo",
+    "ficheiro": "skills/juridico-pt/playbooks/cliente-nao-paga.md",
+    "contem": [
+      "PEPEX",
+      "32/2014",
+      "78\\.º-A"
+    ],
+    "naoContem": [],
+    "fonte": "Lei 32/2014; CIVA art. 78.º-A"
+  },
+  {
+    "id": "v20-nis2-checklist",
+    "pergunta": "Obrigações NIS2",
+    "ficheiro": "skills/juridico-pt/assets/checklists/checklist-nis2.md",
+    "contem": [
+      "125/2025",
+      "essencia",
+      "importante",
+      "incidente",
+      "CNCS"
+    ],
+    "naoContem": [],
+    "fonte": "DL 125/2025; Diretiva (UE) 2022/2555"
+  },
+  {
+    "id": "v20-fundos-ref",
+    "pergunta": "Fundos europeus: PRR e Portugal 2030",
+    "ficheiro": "skills/juridico-pt/references/fundos-europeus.md",
+    "contem": [
+      "PRR",
+      "Portugal 2030|PT2030",
+      "devolu"
+    ],
+    "naoContem": [],
+    "fonte": "regulamentação do PRR e do Portugal 2030"
+  },
+  {
+    "id": "v20-fundos-playbook",
+    "pergunta": "Recebi um pedido de devolução de apoio",
+    "ficheiro": "skills/juridico-pt/playbooks/recebi-pedido-devolucao-apoio.md",
+    "contem": [
+      "audiência prévia|audição prévia",
+      "prazo"
+    ],
+    "naoContem": [],
+    "fonte": "CPA arts. 121.º e 122.º"
+  },
+  {
+    "id": "v20-ccp-playbook",
+    "pergunta": "Vender ao Estado — limiares",
+    "ficheiro": "skills/juridico-pt/playbooks/vender-ao-estado.md",
+    "contem": [
+      "177/2026",
+      "calc_procedimento_ccp"
+    ],
+    "naoContem": [],
+    "fonte": "DL 177/2026"
+  },
+  {
+    "id": "v20-priv-ref",
+    "pergunta": "Que dados guarda o plugin?",
+    "ficheiro": "skills/juridico-pt/references/privacidade-plugin.md",
+    "contem": [
+      "\\.juridico-pt/",
+      "12 meses",
+      "fornecedor do modelo",
+      "apagar_perfil"
+    ],
+    "naoContem": [],
+    "fonte": "RGPD arts. 5.º e 13.º"
   }
 ]

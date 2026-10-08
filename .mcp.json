@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "advogado-pt": {
+    "juridico-pt": {
       "command": "node",
       "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/dist/index.js"]
     }

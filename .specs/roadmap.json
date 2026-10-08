@@ -21,7 +21,7 @@
     "lang": "pt",
     "checks": {
       "mcp-test": "npm --prefix mcp-server test",
-      "py-test": "python skills/advogado-pt/scripts/test_scripts.py"
+      "py-test": "python skills/juridico-pt/scripts/test_scripts.py"
     },
     "specVersion": "1.21.1"
   }

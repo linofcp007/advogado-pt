@@ -9,9 +9,8 @@
 
 ## Modificações Necessárias
 - Renomeação de identificadores e pastas (git mv para manter o histórico).
-- `.advogado-pt/` → `.juridico-pt/` com fallback de leitura e cópia na primeira escrita.
+- Pasta de dados `.juridico-pt/` (a antiga `.advogado-pt/` renomeia-se à mão).
 - Instruções e persona sem "advogado".
-- Plugin legado no marketplace.
 - Hook: linha curta fora de projetos com dados; aviso de atualidade.
 
 ## Sequenciamento
@@ -23,17 +22,17 @@
 - Fase 6: push e renomeação do repositório (com confirmação), quickstart.
 
 ## Riscos e Mitigações
-- Registo antigo do marketplace deixa de atualizar: decidido na investigação; alternativa de manter o nome do marketplace; plugin legado e instruções no CHANGELOG.
+- Registo antigo do marketplace deixa de atualizar: aceite (um só utilizador); passos de troca no CHANGELOG (D-1).
 - Testes antigos que citam caminhos `advogado-pt`: atualizados na mesma tarefa da renomeação; suite completa a verde antes de seguir.
-- Utilizadores com dados só em `.advogado-pt/`: leitura garantida pelo fallback; nada é apagado.
+- Dados só em `.advogado-pt/`: o plugin não os lê nem apaga; o CHANGELOG manda renomear a pasta.
 - Rollback: a 1.2.1 continua no histórico e no marketplace até ao push da 2.0.0; um `git revert` do merge repõe tudo.
 
 ## Ficheiros Afetados (melhor estimativa)
-- `.claude-plugin/*`, `.mcp.json`, `legacy/advogado-pt/**` → identidade e migração
+- `.claude-plugin/*`, `.mcp.json` → identidade
 - `skills/advogado-pt/**` → `skills/juridico-pt/**` (renomeado) + conteúdo novo
 - `mcp-server/src/{index,tools,resources,prompts,persona,perfil,prazos-estado,calendario,dados,painel,atualidade,docx,zip,elicitacao}.ts`, `mcp-server/src/calculators/{juros-lote,ccp}.ts`
 - `mcp-server/scripts/{build-mcpb,gerar-integracoes}.mjs`, `build.py`
-- `cli/juridico-pt.mjs` (+ atalho `cli/advogado-pt.mjs`), `hooks/juridico-hook.mjs`, `hooks/hooks.json`
+- `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, `hooks/hooks.json`
 - `agents/*.md`, `evals/**`, `commands/{faturacao,painel,exportar,cobrar}.md`
 - `README.md`, `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `INSTALL.md`, `integrations/**`, `CHANGELOG.md`
 - `mcp-server/test/{v20.test.mjs,plugin.test.mjs,factos.json,fixtures/**}`, `skills/juridico-pt/scripts/test_scripts.py`

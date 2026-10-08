@@ -9,43 +9,49 @@
   ],
   "approvals": {
     "classification": {
-      "at": "2026-10-03T21:00:42.754Z",
+      "at": "2026-10-03T22:41:55.954Z",
       "by": "Carlos Pereira",
-      "fingerprint": "e10d953d69fda490a4c2d8981f2cfd16151307a5",
-      "batch": true
+      "fingerprint": "73cdd3393bb7c4991c14e44e33e0d5e377f46c3e"
     },
     "requirements": {
-      "at": "2026-10-03T21:00:42.817Z",
+      "at": "2026-10-08T07:39:44.406Z",
       "by": "Carlos Pereira",
-      "fingerprint": "2426af0b434c8c231135f3a140ccd5d4c67c3b8d",
+      "fingerprint": "68cc3f30317a9d01c67acd805b2014726ce8dac3",
       "steering": {
-        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
-        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
-      },
-      "batch": true
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
+      }
     },
     "design": {
-      "at": "2026-10-03T21:00:42.871Z",
+      "at": "2026-10-08T07:39:47.516Z",
       "by": "Carlos Pereira",
-      "fingerprint": "95f6ebf6c7f6ab0c396e8382d1a76e73f969ef44",
+      "fingerprint": "cbfb6983c6fd3199e0e0c1169c288e4ef2d20eec",
       "steering": {
-        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
-        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
       },
       "weigh": true,
-      "reuse": true,
-      "batch": true
+      "reuse": true
     },
     "test-plan": {
-      "at": "2026-10-03T21:00:42.931Z",
+      "at": "2026-10-03T22:41:58.101Z",
       "by": "Carlos Pereira",
-      "fingerprint": "490fc59e43ce17c4e5b3067bc2deefb9efe151b8",
-      "batch": true
+      "fingerprint": "4c614f2d439648fbbf4a770df47ded059da47ca3"
     },
     "eval-plan": {
-      "at": "2026-10-03T21:00:42.985Z",
+      "at": "2026-10-08T07:39:47.734Z",
       "by": "Carlos Pereira",
-      "fingerprint": "42729dd4daf0eb55c19af31151f33351eec05c24",
+      "fingerprint": "95e01bd63a29a5a456fbc8b8a5d7545b2634b169"
+    },
+    "tests": {
+      "at": "2026-10-03T23:02:19.571Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    "tasks": {
+      "at": "2026-10-03T23:02:19.680Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "9ee6cea9c15cced3495838a8759b6db04cc3d627",
       "batch": true
     }
   },
@@ -100,7 +106,873 @@
       "fingerprint": "42729dd4daf0eb55c19af31151f33351eec05c24",
       "batch": true,
       "snapshot": ".history/eval-plan@1.md"
+    },
+    {
+      "phase": "requirements",
+      "at": "2026-10-03T22:40:59.390Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "68cc3f30317a9d01c67acd805b2014726ce8dac3",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "snapshot": ".history/requirements@2.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-03T22:41:00.000Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "79f0a8cd3318db9ba53e0250c6f874e06e3bdb78",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "snapshot": ".history/design@2.md"
+    },
+    {
+      "phase": "test-plan",
+      "at": "2026-10-03T22:41:00.976Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "83b0b0af8c99c40735c39f7956316b6e3bfd0ea4",
+      "snapshot": ".history/test-plan@2.md"
+    },
+    {
+      "phase": "classification",
+      "at": "2026-10-03T22:41:55.954Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "73cdd3393bb7c4991c14e44e33e0d5e377f46c3e",
+      "snapshot": ".history/classification@2.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-03T22:41:57.183Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "cbfb6983c6fd3199e0e0c1169c288e4ef2d20eec",
+      "steering": {
+        "constitution.md": "1c92f6843aea8702df82bfe2f66600dd3435040c",
+        "testing-standards.md": "51cb1213f8f823410cd3050a33414390b902eaf4"
+      },
+      "weigh": true,
+      "reuse": true,
+      "snapshot": ".history/design@3.md"
+    },
+    {
+      "phase": "test-plan",
+      "at": "2026-10-03T22:41:58.101Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "4c614f2d439648fbbf4a770df47ded059da47ca3",
+      "snapshot": ".history/test-plan@3.md"
+    },
+    {
+      "phase": "tests",
+      "at": "2026-10-03T23:02:19.571Z",
+      "by": "Carlos Pereira",
+      "batch": true
+    },
+    {
+      "phase": "tasks",
+      "at": "2026-10-03T23:02:19.680Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "9ee6cea9c15cced3495838a8759b6db04cc3d627",
+      "batch": true,
+      "snapshot": ".history/tasks@1.md"
+    },
+    {
+      "phase": "requirements",
+      "at": "2026-10-08T07:39:44.406Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "68cc3f30317a9d01c67acd805b2014726ce8dac3",
+      "steering": {
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
+      },
+      "snapshot": ".history/requirements@3.md"
+    },
+    {
+      "phase": "design",
+      "at": "2026-10-08T07:39:47.516Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "cbfb6983c6fd3199e0e0c1169c288e4ef2d20eec",
+      "steering": {
+        "constitution.md": "6d390cf8d1cb82d267dbcebacef94007e4909474",
+        "testing-standards.md": "2ef4a821db0587a5488994f7a4c5744d96d7fb52"
+      },
+      "weigh": true,
+      "reuse": true,
+      "snapshot": ".history/design@4.md"
+    },
+    {
+      "phase": "eval-plan",
+      "at": "2026-10-08T07:39:47.734Z",
+      "by": "Carlos Pereira",
+      "fingerprint": "95e01bd63a29a5a456fbc8b8a5d7545b2634b169",
+      "snapshot": ".history/eval-plan@2.md"
     }
   ],
-  "lastApprovedPhase": "eval-plan"
+  "lastApprovedPhase": "eval-plan",
+  "evidence": {
+    "1": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exitCode": 0,
+      "summary": "feat/v2.0-juridico-pt (criado a partir da main com a 1.2.1 publicada, 3da861a); a spec aprovada já está no histórico (73585f2).",
+      "at": "2026-10-03T22:26:36.779Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "git rev-parse --abbrev-ref HEAD",
+          "exitCode": 0,
+          "summary": "feat/v2.0-juridico-pt (criado a partir da main com a 1.2.1 publicada, 3da861a); a spec aprovada já está no histórico (73585f2).",
+          "at": "2026-10-03T22:26:36.779Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Branch `feat/v2.0-juridico-pt` a partir do `main` com a 1.2.1; commit da spec aprovada",
+      "verify": "git rev-parse --abbrev-ref HEAD"
+    },
+    "2": {
+      "summary": "Investigação concluída e registada em decisions.md: D-2 (claude plugin eval: evals/<caso>/prompt.md + graders regex/tool_used; .mcpb: ZIP stored com manifest 0.3, sem assinatura, package.json type module; elicitation: getClientCapabilities()?.elicitation?.form + elicitInput, com recurso a argumentos/texto porque o Desktop não a documenta) e D-1 (renomeação direta sem migração, por decisão do Carlos; teste local mostrou que o renames funciona mas a mudança de nome do marketplace não é aplicada ao registo existente). Spec ajustada (US-1.AC-3/4/5, EC-1, SC-001, T-303/304/305, tarefas 5 e 8) e reaprovada.",
+      "manual": true,
+      "at": "2026-10-03T22:41:08.058Z",
+      "task": "[shared] Investigação: confirmar na documentação oficial (claude-code-guide e docs) (a) o que acontece a um marketplace instalado quando o `name` do `marketplace.json` e o repositório mudam, (b) o formato e as opções do `claude plugin eval`, (c) o manifesto `.mcpb` para servidores Node, (d) a elicitation no SDK do MCP e o anúncio da capacidade pelo cliente; registar as decisões em `decisions.md` e ajustar o design se a alternativa de recurso for necessária",
+      "verify": ""
+    },
+    "3": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 1,
+      "summary": "Vermelho esperado: 192 testes, 154 passam, 36 falham (T-301 a T-340 da v2.0 e T-130 pelos 8 factos v20-); T-336 já passa (dependências inalteradas). Python: T309 e T326 em erro (módulos por criar), restantes 49 OK. Fixtures: paridade.json com jurosLote e ccp; 10 perfis fictícios em fixtures/contabilista.",
+      "at": "2026-10-03T22:48:16.978Z",
+      "expected": "fail",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 1,
+          "summary": "Vermelho esperado: 192 testes, 154 passam, 36 falham (T-301 a T-340 da v2.0 e T-130 pelos 8 factos v20-); T-336 já passa (dependências inalteradas). Python: T309 e T326 em erro (módulos por criar), restantes 49 OK. Fixtures: paridade.json com jurosLote e ccp; 10 perfis fictícios em fixtures/contabilista.",
+          "at": "2026-10-03T22:48:16.978Z",
+          "expected": "fail",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Escrever os testes a falhar: `mcp-server/test/v20.test.mjs` (T-302 a T-340 exceto T-309, T-313, T-316, T-326, T-336 a T-338), os casos novos de `plugin.test.mjs` (T-301, T-316, T-336, T-337), `test_scripts.py` (T-309, T-326), fixtures do contabilista e factos `v20-` esperados",
+      "verify": "npm --prefix mcp-server test"
+    },
+    "4": {
+      "command": "node --test --test-name-pattern=\"T-312\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-312 passa (53 casos, verificações determinísticas, golden/adversarial/regressao). Base registada no eval-plan.md: com a 1.2.1 71,7% (score 0,795), sem plugin 43,4% (0,588); 38,01 USD; detalhe em eval-base-1.2.1.md",
+      "at": "2026-10-03T23:25:54.617Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-312\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-312 passa (53 casos, verificações determinísticas, golden/adversarial/regressao). Base registada no eval-plan.md: com a 1.2.1 71,7% (score 0,795), sem plugin 43,4% (0,588); 38,01 USD; detalhe em eval-base-1.2.1.md",
+          "at": "2026-10-03T23:25:54.617Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Conjunto de avaliação (`evals/`, ≥ 40 casos golden/adversariais/regressão com verificações determinísticas) e base registada no `eval-plan.md` (sem plugin e com a 1.2.1)",
+      "verify": "node --test --test-name-pattern=\"T-312\" mcp-server/test/v20.test.mjs"
+    },
+    "5": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-303|T-305\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "build OK; T-303 e T-305 passam (pass 2, fail 0). Suite completa: 157 pass, 33 fail (só testes de tarefas seguintes), 2 skipped",
+      "at": "2026-10-03T22:57:02.520Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-303|T-305\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "build OK; T-303 e T-305 passam (pass 2, fail 0). Suite completa: 157 pass, 33 fail (só testes de tarefas seguintes), 2 skipped",
+          "at": "2026-10-03T22:57:02.520Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] `dados.ts`: pasta `.juridico-pt/` no projeto e no perfil geral (`JURIDICO_PT_HOME` ou a home), sem ler `.advogado-pt/`; perfil, prazos e calendário passam a usá-la",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-303|T-305\" mcp-server/test/v20.test.mjs"
+    },
+    "6": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-301\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-301 passa (pass 1, fail 0). Suite: 159 pass / 31 fail (só tarefas seguintes); Python 49 OK + T309/T326 em erro (esperado); plugin validate OK; build.py gera juridico-pt.skill (136 ficheiros); integrações em dia",
+      "at": "2026-10-03T22:59:25.736Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-301\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-301 passa (pass 1, fail 0). Suite: 159 pass / 31 fail (só tarefas seguintes); Python 49 OK + T309/T326 em erro (esperado); plugin validate OK; build.py gera juridico-pt.skill (136 ficheiros); integrações em dia",
+          "at": "2026-10-03T22:59:25.736Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Renomear identificadores: manifesto, marketplace, servidor MCP, `skills/juridico-pt/` (git mv), `cli/juridico-pt.mjs`, `hooks/juridico-hook.mjs`, URI `juridico-pt://`, prompt `assistente_juridico`, `build.py` → `juridico-pt.skill`, integrações, README, AGENTS, GEMINI, CLAUDE.md e constituição",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-301\" mcp-server/test/plugin.test.mjs"
+    },
+    "7": {
+      "command": "node --test --test-name-pattern=\"T-302\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-302 passa (pass 1, fail 0). Suite completa: 160 pass / 30 fail (só tarefas seguintes). Integrações regeneradas (8 alvos, incl. regras de editor da raiz) e --check OK",
+      "at": "2026-10-03T23:01:22.586Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-302\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-302 passa (pass 1, fail 0). Suite completa: 160 pass / 30 fail (só tarefas seguintes). Integrações regeneradas (8 alvos, incl. regras de editor da raiz) e --check OK",
+          "at": "2026-10-03T23:01:22.586Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] Persona e textos de \"assistente jurídico\" em persona, instruções, SKILL.md, commands, agents e documentação; aviso da OA mantido",
+      "verify": "node --test --test-name-pattern=\"T-302\" mcp-server/test/v20.test.mjs"
+    },
+    "8": {
+      "command": "node --test --test-name-pattern=\"T-304\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-304 passa (pass 1, fail 0): CHANGELOG ## [2.0.0] com ### Migração (4 comandos /plugin, advogado-pt-marketplace, .advogado-pt/ -> .juridico-pt/); README com o mesmo bloco",
+      "at": "2026-10-03T23:02:08.820Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-304\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-304 passa (pass 1, fail 0): CHANGELOG ## [2.0.0] com ### Migração (4 comandos /plugin, advogado-pt-marketplace, .advogado-pt/ -> .juridico-pt/); README com o mesmo bloco",
+          "at": "2026-10-03T23:02:08.820Z",
+          "observed": false
+        }
+      ],
+      "task": "[US1] CHANGELOG 2.0.0 e README com os passos para trocar a instalação (remover `advogado-pt-marketplace`, adicionar o marketplace `juridico-pt`, instalar `juridico-pt`) e renomear `.advogado-pt/` à mão",
+      "verify": "node --test --test-name-pattern=\"T-304\" mcp-server/test/v20.test.mjs"
+    },
+    "9": {
+      "command": "node --test --test-name-pattern=\"T-306\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-306 passa: faturacao.md, faturacao-eletronica-2027.md, checklist-faturacao.md e /faturacao indexados; factos v20-fatura- OK. Regra-chave confirmada na fonte (Lei 73-A/2025, art. 95.º, n.º 3; DL 28/2019, art. 12.º); valores em valores-2026 (secção Faturação)",
+      "at": "2026-10-03T23:32:54.222Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-306\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-306 passa: faturacao.md, faturacao-eletronica-2027.md, checklist-faturacao.md e /faturacao indexados; factos v20-fatura- OK. Regra-chave confirmada na fonte (Lei 73-A/2025, art. 95.º, n.º 3; DL 28/2019, art. 12.º); valores em valores-2026 (secção Faturação)",
+          "at": "2026-10-03T23:32:54.222Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2] Referência `faturacao`, playbook `faturacao-eletronica-2027`, checklist `checklist-faturacao`, command `/faturacao`, datas em `valores-2026.md` — cada regra confirmada no DR/Portal das Finanças; factos `v20-fatura-`",
+      "verify": "node --test --test-name-pattern=\"T-306\" mcp-server/test/v20.test.mjs"
+    },
+    "10": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-307\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-307 passa: obrigação faturas_pdf_fim a 2026-12-31 com base 'Lei 73-A/2025, art. 95.º, n.º 3; DL 28/2019, art. 12.º'; sem emite_faturas fica a confirmar",
+      "at": "2026-10-03T23:32:56.759Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-307\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-307 passa: obrigação faturas_pdf_fim a 2026-12-31 com base 'Lei 73-A/2025, art. 95.º, n.º 3; DL 28/2019, art. 12.º'; sem emite_faturas fica a confirmar",
+          "at": "2026-10-03T23:32:56.759Z",
+          "observed": false
+        }
+      ],
+      "task": "[US2] Calendário: campo `emite_faturas` e evento da data-limite das faturas em PDF sem assinatura qualificada",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-307\" mcp-server/test/v20.test.mjs"
+    },
+    "11": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-308\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-308 passa (pass 1, fail 0): 5 faturas da paridade, totais 9.556,33 €, CLI calc lote OK",
+      "at": "2026-10-03T23:06:34.601Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-308\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-308 passa (pass 1, fail 0): 5 faturas da paridade, totais 9.556,33 €, CLI calc lote OK",
+          "at": "2026-10-03T23:06:34.601Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] `calcularJurosLote` + tool `calc_juros_lote` + CLI `calc lote`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-308\" mcp-server/test/v20.test.mjs"
+    },
+    "12": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py -k T309",
+      "exitCode": 0,
+      "summary": "Ran 1 test OK — calcular_juros_lote igual ao TS (paridade.json); CLI --lote OK",
+      "at": "2026-10-03T23:07:21.071Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py -k T309",
+          "exitCode": 0,
+          "summary": "Ran 1 test OK — calcular_juros_lote igual ao TS (paridade.json); CLI --lote OK",
+          "at": "2026-10-03T23:07:21.071Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] Python `calcular_juros_lote` com os mesmos casos",
+      "verify": "python skills/juridico-pt/scripts/test_scripts.py -k T309"
+    },
+    "13": {
+      "command": "node --test --test-name-pattern=\"T-310\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-310 passa: carta-cobranca-varias-faturas no estilo da casa e indexada; cliente-nao-paga e cobrancas com PEPEX (Lei 32/2014) e IVA de créditos incobráveis (CIVA 78.º-A a 78.º-D), fontes no relatório do agente; factos v20-cobranca- OK",
+      "at": "2026-10-03T23:32:59.447Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-310\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-310 passa: carta-cobranca-varias-faturas no estilo da casa e indexada; cliente-nao-paga e cobrancas com PEPEX (Lei 32/2014) e IVA de créditos incobráveis (CIVA 78.º-A a 78.º-D), fontes no relatório do agente; factos v20-cobranca- OK",
+          "at": "2026-10-03T23:32:59.447Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3][P] Template de carta com várias faturas; PEPEX (Lei 32/2014) e IVA de créditos incobráveis no playbook `cliente-nao-paga` e em `cobrancas.md`, com fonte",
+      "verify": "node --test --test-name-pattern=\"T-310\" mcp-server/test/v20.test.mjs"
+    },
+    "14": {
+      "command": "node --test --test-name-pattern=\"T-311\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-311 passa (pass 1, fail 0): /cobrar com conector de faturação, calc_juros_lote e registar_prazo; descrição com 124 caracteres",
+      "at": "2026-10-03T23:07:40.573Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-311\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-311 passa (pass 1, fail 0): /cobrar com conector de faturação, calc_juros_lote e registar_prazo; descrição com 124 caracteres",
+          "at": "2026-10-03T23:07:40.573Z",
+          "observed": false
+        }
+      ],
+      "task": "[US3] `/cobrar` com instruções para o conector de faturação (quando existe) e proposta de `registar_prazo`",
+      "verify": "node --test --test-name-pattern=\"T-311\" mcp-server/test/v20.test.mjs"
+    },
+    "15": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-314|T-315\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-314 e T-315 passam: atualidade.ts + tool verificar_atualidade + CLI atualidade; 'Próxima revisão: 2027-01-31' e 'Juros de mora: ... 2.º semestre de 2026' no topo de valores-2026; aviso no SessionStart (hook lê o mesmo topo)",
+      "at": "2026-10-03T23:27:15.778Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-314|T-315\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-314 e T-315 passam: atualidade.ts + tool verificar_atualidade + CLI atualidade; 'Próxima revisão: 2027-01-31' e 'Juros de mora: ... 2.º semestre de 2026' no topo de valores-2026; aviso no SessionStart (hook lê o mesmo topo)",
+          "at": "2026-10-03T23:27:15.778Z",
+          "observed": false
+        }
+      ],
+      "task": "[US5] `atualidade.ts` + tool `verificar_atualidade` + linha no SessionStart; \"Próxima revisão\" no topo de `valores-2026.md`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-314|T-315\" mcp-server/test/v20.test.mjs"
+    },
+    "16": {
+      "command": "node --test --test-name-pattern=\"T-316\" mcp-server/test/plugin.test.mjs",
+      "exitCode": 0,
+      "summary": "T-316 passa (e T-317): agents/verificador-citacoes.md e agents/revisor-contratos.md, só ferramentas de leitura, model: inherit, saída em tabela, 'não verificada' sem fonte; claude plugin validate OK",
+      "at": "2026-10-03T23:34:13.911Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-316\" mcp-server/test/plugin.test.mjs",
+          "exitCode": 0,
+          "summary": "T-316 passa (e T-317): agents/verificador-citacoes.md e agents/revisor-contratos.md, só ferramentas de leitura, model: inherit, saída em tabela, 'não verificada' sem fonte; claude plugin validate OK",
+          "at": "2026-10-03T23:34:13.911Z",
+          "observed": false
+        }
+      ],
+      "task": "[US6] `agents/verificador-citacoes.md` e `agents/revisor-contratos.md` (só leitura, `model: inherit`, saída estruturada, \"não verificada\" sem fonte)",
+      "verify": "node --test --test-name-pattern=\"T-316\" mcp-server/test/plugin.test.mjs"
+    },
+    "17": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-320\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-320 passa: 9 campos novos (perfil.ts e hook); IMI (CIMI 120.º), IUC por mês da matrícula até 2026 e anual desde 2027 (DL 161/2026, confirmado no Portal das Finanças), Modelo 22/IES/pagamentos por conta com período diferente do ano civil (06-30 -> 30/11)",
+      "at": "2026-10-03T23:33:02.616Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-320\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-320 passa: 9 campos novos (perfil.ts e hook); IMI (CIMI 120.º), IUC por mês da matrícula até 2026 e anual desde 2027 (DL 161/2026, confirmado no Portal das Finanças), Modelo 22/IES/pagamentos por conta com período diferente do ano civil (06-30 -> 30/11)",
+          "at": "2026-10-03T23:33:02.616Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] Campos novos do perfil e regras do calendário que os usam (IMI, IUC, período de tributação diferente do ano civil)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-320\" mcp-server/test/v20.test.mjs"
+    },
+    "18": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-319\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-319 passa (pass 1, fail 0): linha '— perfil: cliente-a', lerPrazos devolve perfil, calendario-2026-cliente-a.ics; tools registar_prazo/listar_prazos/calendario_obrigacoes (por_perfil) e hook atualizados; hooks.test 13/13",
+      "at": "2026-10-03T23:12:29.079Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-319\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-319 passa (pass 1, fail 0): linha '— perfil: cliente-a', lerPrazos devolve perfil, calendario-2026-cliente-a.ics; tools registar_prazo/listar_prazos/calendario_obrigacoes (por_perfil) e hook atualizados; hooks.test 13/13",
+          "at": "2026-10-03T23:12:29.079Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] Prazos com perfil e `.ics` por perfil",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-319\" mcp-server/test/v20.test.mjs"
+    },
+    "19": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-318\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-318 passa: painel com os 10 perfis fictícios, itens dos próximos 30 dias ordenados por data e perfil, prazos com perfil, aviso sem perfis; tool painel_clientes, CLI painel e /painel",
+      "at": "2026-10-03T23:35:13.514Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-318\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-318 passa: painel com os 10 perfis fictícios, itens dos próximos 30 dias ordenados por data e perfil, prazos com perfil, aviso sem perfis; tool painel_clientes, CLI painel e /painel",
+          "at": "2026-10-03T23:35:13.514Z",
+          "observed": false
+        }
+      ],
+      "task": "[US7] `painel.ts` + tool `painel_clientes` + CLI `painel` + command `/painel`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-318\" mcp-server/test/v20.test.mjs"
+    },
+    "20": {
+      "command": "node --test --test-name-pattern=\"T-321\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-321 passa: convocatoria-assembleia-geral, ata-aprovacao-contas, procuracao, carta-caducidade-contrato-termo e resposta-livro-reclamacoes com âmbito, verificação final e índice; regras com fonte (CSC, CC, CT, DL 156/2005)",
+      "at": "2026-10-03T23:33:05.199Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-321\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-321 passa: convocatoria-assembleia-geral, ata-aprovacao-contas, procuracao, carta-caducidade-contrato-termo e resposta-livro-reclamacoes com âmbito, verificação final e índice; regras com fonte (CSC, CC, CT, DL 156/2005)",
+          "at": "2026-10-03T23:33:05.199Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8][P] Templates `convocatoria-assembleia-geral`, `ata-aprovacao-contas`, `procuracao`, `carta-caducidade-contrato-termo`, `resposta-livro-reclamacoes` (fonte por regra) e índice",
+      "verify": "node --test --test-name-pattern=\"T-321\" mcp-server/test/v20.test.mjs"
+    },
+    "21": {
+      "command": "node --test --test-name-pattern=\"T-322\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-322 passa: 370 placeholders em 41 templates convertidos (N_X, PREENCHER, ESCOLHER, OPCIONAL, sem acentos, sinónimos LOCAL/DATA/IBAN); convenção documentada no índice dos templates; hooks.test 13/13 (convocatória detetada)",
+      "at": "2026-10-03T23:37:30.780Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-322\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-322 passa: 370 placeholders em 41 templates convertidos (N_X, PREENCHER, ESCOLHER, OPCIONAL, sem acentos, sinónimos LOCAL/DATA/IBAN); convenção documentada no índice dos templates; hooks.test 13/13 (convocatória detetada)",
+          "at": "2026-10-03T23:37:30.780Z",
+          "observed": false
+        }
+      ],
+      "task": "[US8] Convenção única de placeholders em todos os templates",
+      "verify": "node --test --test-name-pattern=\"T-322\" mcp-server/test/v20.test.mjs"
+    },
+    "22": {
+      "command": "node --test --test-name-pattern=\"T-323\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-323 passa: checklist-nis2 (DL 125/2025, Reg. CNCS 756/2026) indexada; compliance.md e digital-ue.md atualizados; data-breach.md corrigido (24h/72h/30 dias úteis); coimas em valores-2026",
+      "at": "2026-10-03T23:33:07.658Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-323\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-323 passa: checklist-nis2 (DL 125/2025, Reg. CNCS 756/2026) indexada; compliance.md e digital-ue.md atualizados; data-breach.md corrigido (24h/72h/30 dias úteis); coimas em valores-2026",
+          "at": "2026-10-03T23:33:07.658Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9][P] `checklist-nis2` (DL 125/2025) e atualização de `compliance.md`/`digital-ue.md`",
+      "verify": "node --test --test-name-pattern=\"T-323\" mcp-server/test/v20.test.mjs"
+    },
+    "23": {
+      "command": "node --test --test-name-pattern=\"T-324\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-324 passa: fundos-europeus.md e recebi-pedido-devolucao-apoio.md indexados; DL 29-B/2021, DL 5/2023, DL 20-A/2023 e CPA confirmados; valores em valores-2026",
+      "at": "2026-10-03T23:33:09.838Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-324\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-324 passa: fundos-europeus.md e recebi-pedido-devolucao-apoio.md indexados; DL 29-B/2021, DL 5/2023, DL 20-A/2023 e CPA confirmados; valores em valores-2026",
+          "at": "2026-10-03T23:33:09.838Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9][P] Referência `fundos-europeus` e playbook `recebi-pedido-devolucao-apoio`",
+      "verify": "node --test --test-name-pattern=\"T-324\" mcp-server/test/v20.test.mjs"
+    },
+    "24": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-325\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-325 passa (pass 1, fail 0): 8 casos de fronteira, valor negativo recusado, tool calc_procedimento_ccp e CLI calc ccp",
+      "at": "2026-10-03T23:09:11.511Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-325\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-325 passa (pass 1, fail 0): 8 casos de fronteira, valor negativo recusado, tool calc_procedimento_ccp e CLI calc ccp",
+          "at": "2026-10-03T23:09:11.511Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] `calcularProcedimentoCCP` + tool `calc_procedimento_ccp` + CLI `calc ccp` (limiares do DL 177/2026 confirmados no DR)",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-325\" mcp-server/test/v20.test.mjs"
+    },
+    "25": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py -k T326",
+      "exitCode": 0,
+      "summary": "Ran 1 test OK — procedimento_ccp igual ao TS nos 8 casos de fronteira; suite Python completa OK",
+      "at": "2026-10-03T23:09:45.404Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py -k T326",
+          "exitCode": 0,
+          "summary": "Ran 1 test OK — procedimento_ccp igual ao TS nos 8 casos de fronteira; suite Python completa OK",
+          "at": "2026-10-03T23:09:45.404Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9] Python `procedimento_ccp` com os mesmos casos",
+      "verify": "python skills/juridico-pt/scripts/test_scripts.py -k T326"
+    },
+    "26": {
+      "command": "node --test --test-name-pattern=\"T-327\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-327 passa: vender-ao-estado e 4 templates CCP (esclarecimentos, erros e omissões, audiência prévia, impugnação) indexados; confirmado no CCP republicado pelo DL 177/2026; contratacao-publica.md atualizada; notas do ccp.ts corrigidas (art. 17.º-B, 473.º)",
+      "at": "2026-10-03T23:33:12.346Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-327\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-327 passa: vender-ao-estado e 4 templates CCP (esclarecimentos, erros e omissões, audiência prévia, impugnação) indexados; confirmado no CCP republicado pelo DL 177/2026; contratacao-publica.md atualizada; notas do ccp.ts corrigidas (art. 17.º-B, 473.º)",
+          "at": "2026-10-03T23:33:12.346Z",
+          "observed": false
+        }
+      ],
+      "task": "[US9][P] Playbook `vender-ao-estado` e templates de esclarecimentos, erros e omissões, audiência prévia e impugnação administrativa",
+      "verify": "node --test --test-name-pattern=\"T-327\" mcp-server/test/v20.test.mjs"
+    },
+    "27": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-328\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-328 passa: ZIP com CRC válido, XML bem formado, títulos/listas/negrito/escapes, sem 'Antes de enviar'. Aberto sem erros no LibreOffice (headless) e no Word (COM). Tool exportar_documento, CLI exportar e /exportar",
+      "at": "2026-10-03T23:17:57.418Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-328\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-328 passa: ZIP com CRC válido, XML bem formado, títulos/listas/negrito/escapes, sem 'Antes de enviar'. Aberto sem erros no LibreOffice (headless) e no Word (COM). Tool exportar_documento, CLI exportar e /exportar",
+          "at": "2026-10-03T23:17:57.418Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] `zip.ts` + `docx.ts` + tool `exportar_documento` + CLI `exportar` + command `/exportar`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-328\" mcp-server/test/v20.test.mjs"
+    },
+    "28": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-329\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-329 passa: cliente com elicitation recebe formulário (forma_juridica/regime_iva com enum) e o calendário usa os dados; sem suporte, texto com os campos a perguntar",
+      "at": "2026-10-03T23:20:41.936Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-329\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-329 passa: cliente com elicitation recebe formulário (forma_juridica/regime_iva com enum) e o calendário usa os dados; sem suporte, texto com os campos a perguntar",
+          "at": "2026-10-03T23:20:41.936Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] Elicitation do perfil com recurso a perguntas em texto",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-329\" mcp-server/test/v20.test.mjs"
+    },
+    "29": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-330\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-330 passa: .mcpb (125 ficheiros, stored, CRC válido) com manifest 0.3, server/index.js, package.json type module e content/; o servidor extraído arranca e responde. 'npx @anthropic-ai/mcpb validate': Manifest schema validation passes",
+      "at": "2026-10-03T23:19:38.178Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-330\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-330 passa: .mcpb (125 ficheiros, stored, CRC válido) com manifest 0.3, server/index.js, package.json type module e content/; o servidor extraído arranca e responde. 'npx @anthropic-ai/mcpb validate': Manifest schema validation passes",
+          "at": "2026-10-03T23:19:38.178Z",
+          "observed": false
+        }
+      ],
+      "task": "[US10] `build-mcpb.mjs` e pacote `.mcpb`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-330\" mcp-server/test/v20.test.mjs"
+    },
+    "30": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-331\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-331 passa: aviso em repositório git sem a exclusão; acrescentar_gitignore junta '.juridico-pt/' uma só vez; sem aviso depois",
+      "at": "2026-10-03T23:14:22.081Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-331\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-331 passa: aviso em repositório git sem a exclusão; acrescentar_gitignore junta '.juridico-pt/' uma só vez; sem aviso depois",
+          "at": "2026-10-03T23:14:22.081Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] Aviso de `.gitignore` e `acrescentar_gitignore`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-331\" mcp-server/test/v20.test.mjs"
+    },
+    "31": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-332\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-332 passa: apaga perfil, prazos do perfil, .ics e perfil ativo; recusa '../' e junction (alvo intacto); tool apagar_perfil registada",
+      "at": "2026-10-03T23:14:23.979Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-332\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-332 passa: apaga perfil, prazos do perfil, .ics e perfil ativo; recusa '../' e junction (alvo intacto); tool apagar_perfil registada",
+          "at": "2026-10-03T23:14:23.979Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] Tool `apagar_perfil`",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-332\" mcp-server/test/v20.test.mjs"
+    },
+    "32": {
+      "command": "node --test --test-name-pattern=\"T-333\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-333 passa: sem .juridico-pt/ o SessionStart é uma linha com ≤ 200 caracteres (191 na amostra; antes ~560). Descrições de todos os commands ≤ 150 caracteres. hooks.test 13/13",
+      "at": "2026-10-03T23:27:17.836Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-333\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-333 passa: sem .juridico-pt/ o SessionStart é uma linha com ≤ 200 caracteres (191 na amostra; antes ~560). Descrições de todos os commands ≤ 150 caracteres. hooks.test 13/13",
+          "at": "2026-10-03T23:27:17.836Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] SessionStart numa linha fora de projetos com dados; descrições dos commands ≤ 150 caracteres",
+      "verify": "node --test --test-name-pattern=\"T-333\" mcp-server/test/v20.test.mjs"
+    },
+    "33": {
+      "command": "node --test --test-name-pattern=\"T-334\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-334 passa: references/privacidade-plugin.md (que dados, onde, 12 meses, apagar_perfil, fornecedor do modelo, RGPD arts. 5.º/13.º/17.º/28.º) indexada no SKILL.md; README com a secção 'Privacidade e dados guardados'",
+      "at": "2026-10-03T23:38:22.814Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-334\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-334 passa: references/privacidade-plugin.md (que dados, onde, 12 meses, apagar_perfil, fornecedor do modelo, RGPD arts. 5.º/13.º/17.º/28.º) indexada no SKILL.md; README com a secção 'Privacidade e dados guardados'",
+          "at": "2026-10-03T23:38:22.814Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11][P] Referência `privacidade-plugin` e secção no README",
+      "verify": "node --test --test-name-pattern=\"T-334\" mcp-server/test/v20.test.mjs"
+    },
+    "34": {
+      "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-335 passa: prazos cumpridos com data há mais de 12 meses saem na escrita seguinte; em aberto nunca saem; perfil de 2024 assinalado como desatualizado e não apagado",
+      "at": "2026-10-03T23:12:31.188Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-335 passa: prazos cumpridos com data há mais de 12 meses saem na escrita seguinte; em aberto nunca saem; perfil de 2024 assinalado como desatualizado e não apagado",
+          "at": "2026-10-03T23:12:31.188Z",
+          "observed": false
+        }
+      ],
+      "task": "[US11] Conservação: prazos cumpridos há mais de 12 meses retirados; perfil antigo assinalado",
+      "verify": "npm --prefix mcp-server run build && node --test --test-name-pattern=\"T-335\" mcp-server/test/v20.test.mjs"
+    },
+    "35": {
+      "command": "node --test --test-name-pattern=\"T-340\" mcp-server/test/v20.test.mjs",
+      "exitCode": 0,
+      "summary": "T-340 passa; suite completa 189 pass / 1 fail (só T-337, o bump da tarefa 36) / 2 skipped. Índices, SKILL.md, README (38 tools, commands, privacidade), AGENTS.md (mapa), persona e INSTRUCOES_MCP (1.765 caracteres, todas as tools), integrações regeneradas, CLAUDE.md",
+      "at": "2026-10-03T23:40:41.962Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "node --test --test-name-pattern=\"T-340\" mcp-server/test/v20.test.mjs",
+          "exitCode": 0,
+          "summary": "T-340 passa; suite completa 189 pass / 1 fail (só T-337, o bump da tarefa 36) / 2 skipped. Índices, SKILL.md, README (38 tools, commands, privacidade), AGENTS.md (mapa), persona e INSTRUCOES_MCP (1.765 caracteres, todas as tools), integrações regeneradas, CLAUDE.md",
+          "at": "2026-10-03T23:40:41.962Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Índices, SKILL.md (tabelas), README, persona, lista de commands do hook e integrações com tudo o que é novo",
+      "verify": "node --test --test-name-pattern=\"T-340\" mcp-server/test/v20.test.mjs"
+    },
+    "36": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "192 testes: 190 pass, 0 fail, 2 skipped (externos; corridos à parte com JURIDICO_PT_TESTES_EXTERNOS=1: npm audit e plugin validate OK); smoke OK. Versão 2.0.0 nos 6 sítios + package-lock; CHANGELOG 2.0.0 (Changed/Added/Fixed/Migração); juridico-pt.skill (155 ficheiros) e juridico-pt-2.0.0.mcpb gerados em dist/. Tag v2.0.0 fica para o merge, com a aprovação final do Carlos.",
+      "at": "2026-10-03T23:42:06.032Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "192 testes: 190 pass, 0 fail, 2 skipped (externos; corridos à parte com JURIDICO_PT_TESTES_EXTERNOS=1: npm audit e plugin validate OK); smoke OK. Versão 2.0.0 nos 6 sítios + package-lock; CHANGELOG 2.0.0 (Changed/Added/Fixed/Migração); juridico-pt.skill (155 ficheiros) e juridico-pt-2.0.0.mcpb gerados em dist/. Tag v2.0.0 fica para o merge, com a aprovação final do Carlos.",
+          "at": "2026-10-03T23:42:06.032Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Bump 2.0.0, CHANGELOG com \"Migração\", bundle e conteúdo regenerados, `juridico-pt.skill`, `.mcpb`, tag `v2.0.0`",
+      "verify": "npm --prefix mcp-server test"
+    },
+    "37": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "51 testes OK. T-313: avaliação 2.0.0 golden 98,3% / adversarial 100% / regressão 100% (limiares 90/100/100) vs base 75/50/80 e sem plugin 38/50/73; 29,47 USD; rubrica e revisão humana por fazer (registado no eval-plan). T-338: plugin validate e as duas suites passam. T-339: SessionStart < 300 ms",
+      "at": "2026-10-04T00:06:12.136Z",
+      "observed": false,
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "51 testes OK. T-313: avaliação 2.0.0 golden 98,3% / adversarial 100% / regressão 100% (limiares 90/100/100) vs base 75/50/80 e sem plugin 38/50/73; 29,47 USD; rubrica e revisão humana por fazer (registado no eval-plan). T-338: plugin validate e as duas suites passam. T-339: SessionStart < 300 ms",
+          "at": "2026-10-04T00:06:12.136Z",
+          "observed": false
+        }
+      ],
+      "task": "[shared] Avaliações contra os limiares, suites completas, validador oficial, desempenho do hook",
+      "verify": "python skills/juridico-pt/scripts/test_scripts.py"
+    }
+  },
+  "lastTickAt": "2026-10-04T00:06:12.136Z",
+  "ticks": {
+    "1": "2026-10-03T22:26:36.779Z",
+    "2": "2026-10-03T22:41:08.058Z",
+    "3": "2026-10-03T22:48:16.978Z",
+    "4": "2026-10-03T23:25:54.617Z",
+    "5": "2026-10-03T22:57:02.520Z",
+    "6": "2026-10-03T22:59:25.736Z",
+    "7": "2026-10-03T23:01:22.586Z",
+    "8": "2026-10-03T23:02:08.820Z",
+    "9": "2026-10-03T23:32:54.222Z",
+    "10": "2026-10-03T23:32:56.759Z",
+    "11": "2026-10-03T23:06:34.601Z",
+    "12": "2026-10-03T23:07:21.071Z",
+    "13": "2026-10-03T23:32:59.447Z",
+    "14": "2026-10-03T23:07:40.573Z",
+    "15": "2026-10-03T23:27:15.778Z",
+    "16": "2026-10-03T23:34:13.911Z",
+    "17": "2026-10-03T23:33:02.616Z",
+    "18": "2026-10-03T23:12:29.079Z",
+    "19": "2026-10-03T23:35:13.514Z",
+    "20": "2026-10-03T23:33:05.199Z",
+    "21": "2026-10-03T23:37:30.780Z",
+    "22": "2026-10-03T23:33:07.658Z",
+    "23": "2026-10-03T23:33:09.838Z",
+    "24": "2026-10-03T23:09:11.511Z",
+    "25": "2026-10-03T23:09:45.404Z",
+    "26": "2026-10-03T23:33:12.346Z",
+    "27": "2026-10-03T23:17:57.418Z",
+    "28": "2026-10-03T23:20:41.936Z",
+    "29": "2026-10-03T23:19:38.178Z",
+    "30": "2026-10-03T23:14:22.081Z",
+    "31": "2026-10-03T23:14:23.979Z",
+    "32": "2026-10-03T23:27:17.836Z",
+    "33": "2026-10-03T23:38:22.814Z",
+    "34": "2026-10-03T23:12:31.188Z",
+    "35": "2026-10-03T23:40:41.962Z",
+    "36": "2026-10-03T23:42:06.032Z",
+    "37": "2026-10-04T00:06:12.136Z"
+  },
+  "finishChecks": {
+    "mcp-test": {
+      "command": "npm --prefix mcp-server test",
+      "exitCode": 0,
+      "summary": "190 pass, 0 fail, 2 skipped; SMOKE OK",
+      "at": "2026-10-04T00:06:34.554Z",
+      "commit": "c9c2847",
+      "dirty": false,
+      "observed": false,
+      "check": "npm --prefix mcp-server test",
+      "code": "4edc88819f1b1c2485a4f4fc195d2ec26c6fa7ee",
+      "history": [
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "190 pass, 0 fail, 2 skipped; SMOKE OK",
+          "at": "2026-10-03T23:53:23.241Z",
+          "commit": "f75c933",
+          "dirty": false,
+          "observed": false
+        },
+        {
+          "command": "npm --prefix mcp-server test",
+          "exitCode": 0,
+          "summary": "190 pass, 0 fail, 2 skipped; SMOKE OK",
+          "at": "2026-10-04T00:06:34.554Z",
+          "commit": "c9c2847",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    },
+    "py-test": {
+      "command": "python skills/juridico-pt/scripts/test_scripts.py",
+      "exitCode": 0,
+      "summary": "Ran 51 tests OK",
+      "at": "2026-10-04T00:06:34.554Z",
+      "commit": "c9c2847",
+      "dirty": false,
+      "observed": false,
+      "check": "python skills/juridico-pt/scripts/test_scripts.py",
+      "code": "4edc88819f1b1c2485a4f4fc195d2ec26c6fa7ee",
+      "history": [
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 51 tests OK",
+          "at": "2026-10-03T23:53:23.241Z",
+          "commit": "f75c933",
+          "dirty": false,
+          "observed": false
+        },
+        {
+          "command": "python skills/juridico-pt/scripts/test_scripts.py",
+          "exitCode": 0,
+          "summary": "Ran 51 tests OK",
+          "at": "2026-10-04T00:06:34.554Z",
+          "commit": "c9c2847",
+          "dirty": false,
+          "observed": false
+        }
+      ]
+    }
+  }
 }
