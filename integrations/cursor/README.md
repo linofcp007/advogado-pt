@@ -13,8 +13,8 @@ cursor/
 
 ## 1. Configurar o servidor MCP
 
-Clona o repo e compila o servidor **uma vez** (`npm install && npm run build` em
-`mcp-server/`). Depois copia [`mcp.json`](./mcp.json) para uma destas localizações,
+Clona o repo: o servidor já vem compilado e autocontido em `mcp-server/dist/index.js`
+(basta ter Node ≥ 18, sem `npm install` nem build). Depois copia [`mcp.json`](./mcp.json) para uma destas localizações,
 preenchendo o caminho **absoluto** para `dist/index.js`:
 
 - **Por projeto**: `.cursor/mcp.json` na raiz do projeto.

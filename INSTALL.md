@@ -1,13 +1,15 @@
 # Instalar o Jurídico PT em qualquer IA
 
-O Jurídico PT distribui-se por **dois canais**:
+O Jurídico PT distribui-se por **quatro canais**, todos sobre o mesmo conteúdo:
 
 | Canal | Para quê | Onde |
 |---|---|---|
-| **A. Skill (.skill)** | Claude.ai, Claude Code, Claude Desktop (sistema de Skills) | `juridico-pt.skill` (gerar com `python build.py`) |
-| **B. Servidor MCP** | Cursor, Windsurf, Codex, Gemini CLI, ChatGPT/OpenAI, Claude (via MCP) | `mcp-server/` (Node, build local — sem npm publish) |
+| **Plugin** (recomendado no Claude) | Claude Code e conta claude.ai / app Claude (**Customize > Plugins**): conteúdo, 38 tools, slash commands, hooks e subagentes | `/plugin marketplace add linofcp007/juridico-pt` — ver o [README](README.md#instalação) |
+| **Extensão `.mcpb`** | Conversas da app Claude Desktop, sem instalar Node: só o servidor MCP (38 tools, resources e prompt) | `dist/juridico-pt-<versão>.mcpb` (gerar com `npm --prefix mcp-server run build:mcpb`) — ver [integrations/claude-desktop/](integrations/claude-desktop/) |
+| **A. Skill (.skill)** | Claude.ai, Claude Code, Claude Desktop (sistema de Skills): conteúdo, instruções e calculadoras Python | `juridico-pt.skill` (gerar com `python build.py`) |
+| **B. Servidor MCP** | Cursor, Windsurf, Codex, Gemini CLI, ChatGPT/OpenAI, Claude (via MCP) | `mcp-server/` (Node, já compilado no repositório — sem npm publish) |
 
-O **MCP** é o que torna isto disponível em "todas as IAs": é um padrão aberto que Claude, OpenAI, Google e os editores (Cursor/Windsurf) já falam. Um único servidor serve todos.
+O **MCP** é o que torna isto disponível em "todas as IAs": é um padrão aberto que Claude, OpenAI, Google e os editores (Cursor/Windsurf) já falam. Um único servidor serve todos; o plugin e a extensão `.mcpb` trazem esse mesmo servidor.
 
 ---
 
@@ -26,7 +28,7 @@ Carrega em **Claude → Settings → Skills**. (Claude Code: coloca a pasta em `
 
 O servidor vem já compilado e autocontido no repositório (`mcp-server/dist/index.js`): basta clonar e ter **Node ≥ 18** — não é preciso instalar dependências nem compilar.
 
-> Não há pacote npm publicado (por opção). Só para **desenvolver** o plugin: `npm run setup` na raiz (instala as dependências, compila o servidor e corre o diagnóstico).
+> Não há pacote npm publicado (por opção). Corre `npm run setup` na raiz (instala as dependências, compila e corre o diagnóstico) só para **desenvolver** o plugin ou para usar o **CLI** fora do MCP (`calc`, `calendario`, `prazos`, `painel`, `exportar`, `atualidade`); o `mcp-config` e o `prompt` do CLI funcionam sem build.
 
 ### 2. Ligar a cada plataforma
 
@@ -39,7 +41,7 @@ Config genérica — substitui pelo caminho absoluto da tua máquina, ou corre `
 | Plataforma | Instruções | Persona |
 |---|---|---|
 | **Claude Code** (plugin) | `/plugin marketplace add linofcp007/juridico-pt` | prompt MCP `assistente_juridico` |
-| **Claude Desktop** | `integrations/claude-desktop/` | prompt MCP `assistente_juridico` |
+| **Claude Desktop** | extensão `.mcpb` (sem Node) ou `integrations/claude-desktop/` | prompt MCP `assistente_juridico` |
 | **Cursor** | `integrations/cursor/` (`.cursor/mcp.json` + rule) | `.cursor/rules/juridico-pt.mdc` |
 | **Windsurf** | `integrations/windsurf/` | `.windsurfrules` |
 | **Gemini CLI** | `integrations/gemini-cli/` (`~/.gemini/settings.json`) | `GEMINI.md` |

@@ -20,8 +20,8 @@ O Codex CLI lê a configuração de **`~/.codex/config.toml`**:
 | **Windows** | `%USERPROFILE%\.codex\config.toml` |
 | **macOS / Linux** | `~/.codex/config.toml` |
 
-Clona o repo e compila o servidor **uma vez** (`npm install && npm run build` em
-`mcp-server/`). Depois cola o bloco de [`config.snippet.toml`](./config.snippet.toml), com o
+Clona o repo: o servidor já vem compilado e autocontido em `mcp-server/dist/index.js`
+(basta ter Node ≥ 18, sem `npm install` nem build). Depois cola o bloco de [`config.snippet.toml`](./config.snippet.toml), com o
 caminho **absoluto** para `dist/index.js`:
 
 ```toml

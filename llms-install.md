@@ -13,11 +13,13 @@ Todas as operações são locais: sem rede, sem API key.
    # guarda o caminho absoluto, ex.: /home/you/juridico-pt (ou C:\tools\juridico-pt)
    ```
 
-2. **Constrói o servidor MCP** (um comando na raiz):
+2. **Não é preciso compilar o servidor.** Já vem compilado e autocontido em
+   `mcp-server/dist/index.js` — basta Node ≥ 18. Só o **CLI** (`calc`, `calendario`, `prazos`,
+   `painel`, `exportar`, `atualidade`) precisa de um build local:
 
    ```bash
    cd juridico-pt
-   npm run setup      # instala + compila o MCP (gera dist/index.js) + doctor
+   npm run setup      # opcional, só para o CLI: instala + compila + doctor
    ```
 
 3. **Regista o servidor** no teu cliente MCP. Substitui `/ABSOLUTE/PATH/` pelo caminho do passo 1.
@@ -37,13 +39,14 @@ Todas as operações são locais: sem rede, sem API key.
    A mesma shape `mcpServers` funciona em **Cursor, Claude Desktop, Windsurf, Gemini e Cline**.
    Dica: `node cli/juridico-pt.mjs mcp-config <host>` imprime o bloco com o caminho absoluto já preenchido.
 
-4. **Recarrega o cliente MCP.** O servidor anuncia **17 tools** (8 calculadoras jurídicas + 9
-   ferramentas de conteúdo), **resources** (todo o conteúdo jurídico em
+4. **Recarrega o cliente MCP.** O servidor anuncia **38 tools** (17 calculadoras jurídicas,
+   10 de perfil, calendário e prazos, 11 de conteúdo e documentos), **resources** (todo o conteúdo jurídico em
    `juridico-pt://{categoria}/{nome}`) e o **prompt** `assistente_juridico` (persona de assistente jurídico de Portugal).
 
 ## Notes
 
 - **Requisitos:** Node.js ≥ 18.
 - **Línguas:** PT e EN.
-- **Privacidade:** o conteúdo é local e o servidor nunca acede à rede.
+- **Privacidade:** o conteúdo é local e o servidor nunca acede à rede. O perfil da empresa e os
+  prazos ficam em ficheiros de texto em `.juridico-pt/` (projeto) e `~/.juridico-pt/` (geral).
 - **Aviso:** orientação informativa — não substitui advogado inscrito na Ordem dos Advogados.

@@ -1,28 +1,39 @@
 # Claude Desktop — `juridico-pt-mcp`
 
-Liga o servidor MCP `juridico-pt-mcp` à app **Claude Desktop**.
+Liga o servidor MCP `juridico-pt-mcp` à app **Claude Desktop**. Há duas formas; a extensão é a mais simples.
 
-## Onde fica o ficheiro de configuração
+> **Extensão, plugin ou servidor manual?** A extensão `.mcpb` e a configuração manual dão o mesmo: as 38 tools, o conteúdo jurídico como resources e o prompt `assistente_juridico` nas conversas do Desktop. O **plugin** (conta claude.ai, **Customize > Plugins**) traz também os slash commands, os hooks e os subagentes, e sincroniza com o Claude Code. Se as tools do `juridico-pt` já aparecem nas conversas do Desktop através do plugin, não precisas de nada desta página.
 
-O Claude Desktop lê um ficheiro `claude_desktop_config.json`:
+## A. Extensão `.mcpb` (recomendado)
+
+Não precisa de Node nem de editar JSON: a extensão usa o Node que o Claude Desktop traz.
+
+1. Gera o pacote na raiz do repositório:
+
+   ```powershell
+   npm --prefix mcp-server run build:mcpb   # → dist/juridico-pt-<versão>.mcpb
+   ```
+
+2. No Claude Desktop, **Definições → Extensões → Instalar extensão…** e escolhe o ficheiro `.mcpb`.
+3. Abre uma conversa e pede, por exemplo, os juros de mora de uma fatura: a tool `calc_juros_mora` deve responder.
+
+Para atualizar, gera e instala o `.mcpb` da versão nova. Para remover, **Definições → Extensões**.
+
+## B. Configuração manual do servidor
+
+### Onde fica o ficheiro de configuração
+
+O Claude Desktop lê um ficheiro `claude_desktop_config.json`. O atalho mais seguro é abri-lo a partir da app: **Settings → Developer → Edit Config**.
 
 | Sistema | Caminho |
 |---|---|
-| **Windows** | `%APPDATA%\Claude\claude_desktop_config.json`  (normalmente `C:\Users\<utilizador>\AppData\Roaming\Claude\claude_desktop_config.json`) |
+| **Windows** (instalador) | `%APPDATA%\Claude\claude_desktop_config.json` |
+| **Windows** (Microsoft Store) | `%LOCALAPPDATA%\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude_desktop_config.json` |
 | **macOS** | `~/Library/Application Support/Claude/claude_desktop_config.json` |
 
-Atalho para abrir a partir da app: **Settings → Developer → Edit Config**.
+### Como configurar
 
-## Como configurar
-
-1. Clona o repo e compila o servidor **uma vez**:
-
-   ```powershell
-   # dentro de mcp-server/
-   npm install
-   npm run build
-   ```
-
+1. Clona o repositório. O servidor já vem compilado e autocontido em `mcp-server/dist/index.js`: só precisas de **Node ≥ 18** no PATH, sem `npm install` nem build.
 2. Abre (ou cria) o `claude_desktop_config.json`.
 3. Cola o bloco `mcpServers` de [`claude_desktop_config.snippet.json`](./claude_desktop_config.snippet.json),
    usando o caminho **absoluto** para `dist/index.js`. Se o ficheiro já tiver outros
@@ -48,9 +59,12 @@ Atalho para abrir a partir da app: **Settings → Developer → Edit Config**.
 5. Confirma no ícone de ferramentas/plug (🔌) da caixa de conversa que o servidor
    `juridico-pt` está ligado. O prompt `assistente_juridico` aparece no menu de prompts.
 
+Não uses a extensão e a configuração manual ao mesmo tempo: terias as mesmas tools em duplicado.
+
 ## Resolução de problemas
 
 - **O servidor não aparece** — confirma que o JSON é válido (sem vírgulas a mais), que o
-  `node` está no PATH e que o caminho para `dist/index.js` existe (compilaste o servidor com
-  `npm run build`?).
-- **Logs** — em macOS, `~/Library/Logs/Claude/`; em Windows, `%APPDATA%\Claude\logs\`.
+  `node` está no PATH e que o caminho para `mcp-server/dist/index.js` existe. Na raiz do repo,
+  `node cli/juridico-pt.mjs doctor` diz o que falta.
+- **Logs** — em macOS, `~/Library/Logs/Claude/`; em Windows, `%APPDATA%\Claude\logs\` (instalador)
+  ou `%LOCALAPPDATA%\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\logs\` (Microsoft Store).

@@ -3,9 +3,12 @@
 O **núcleo** deste projeto é um servidor **MCP (Model Context Protocol)** chamado
 `juridico-pt-mcp`. Ele expõe, por transporte **stdio**:
 
-- **TOOLS** — calculadoras determinísticas (juros de mora, IMT, prazos, prescrição,
-  compensação por despedimento, custas/injunção, imposto de selo, IRS) e ferramentas de
-  conteúdo (listar/obter referências, templates, playbooks, checklists; procurar).
+- **TOOLS** (38) — calculadoras determinísticas (juros de mora, também em lote, IMT, prazos,
+  prescrição, compensação e créditos laborais, salário líquido e custo do trabalhador, IRC, IVA
+  internacional, taxa de justiça, custas de injunção, imposto de selo, IRS, legítima,
+  procedimento de contratação pública), perfil da empresa, calendário de obrigações, prazos,
+  painel de clientes, exportação `.docx`, verificação de atualidade e ferramentas de conteúdo
+  (listar/obter referências, templates, playbooks, checklists; procurar).
 - **RESOURCES** — todo o conteúdo jurídico em markdown (referências por área, templates,
   playbooks, checklists).
 - **PROMPT** — um prompt reutilizável chamado `assistente_juridico` que carrega a persona do
@@ -18,16 +21,12 @@ respetivo `README.md`.
 
 ## Como o servidor é arrancado
 
-O servidor corre a partir do **build local** do repositório. O comando é sempre o mesmo em
-todas as plataformas; muda só onde colas o bloco de configuração.
+O servidor corre a partir do repositório. O comando é sempre o mesmo em todas as
+plataformas; muda só onde colas o bloco de configuração.
 
-**1. Clona o repo e compila o servidor uma vez:**
-
-```bash
-cd mcp-server
-npm install
-npm run build
-```
+**1. Clona o repo.** O servidor já vem compilado e autocontido em `mcp-server/dist/index.js`:
+basta ter **Node ≥ 18**, sem `npm install` nem build. (No Claude Desktop há ainda a extensão
+`.mcpb`, que nem precisa de Node — ver [`claude-desktop/`](./claude-desktop/).)
 
 **2. Aponta a configuração ao `dist/index.js` com o caminho ABSOLUTO:**
 
@@ -51,7 +50,7 @@ npm run build
 | Plataforma | Pasta | Configuração MCP | Persona / instruções |
 |---|---|---|---|
 | **Claude Code** (plugin) | raiz: `.claude-plugin/` | `/plugin marketplace add linofcp007/juridico-pt` | prompt `assistente_juridico` do servidor |
-| **Claude Desktop** | [`claude-desktop/`](./claude-desktop/) | `claude_desktop_config.json` (`mcpServers`) | prompt `assistente_juridico` do servidor |
+| **Claude Desktop** | [`claude-desktop/`](./claude-desktop/) | extensão `.mcpb` ou `claude_desktop_config.json` (`mcpServers`) | prompt `assistente_juridico` do servidor |
 | **Cursor** | [`cursor/`](./cursor/) | `.cursor/mcp.json` | `.cursor/rules/juridico-pt.mdc` |
 | **Windsurf** | [`windsurf/`](./windsurf/) | `mcp_config.json` | `.windsurfrules` |
 | **Gemini CLI** | [`gemini-cli/`](./gemini-cli/) | `~/.gemini/settings.json` (`mcpServers`) | `GEMINI.md` |

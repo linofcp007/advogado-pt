@@ -34,8 +34,8 @@ Importante perceber o transporte:
 
 ### O servidor é local (stdio)
 
-O servidor MCP corre a partir do **build local** do repositório e arranca por **stdio**.
-Clona o repo e compila-o **uma vez** (`npm install && npm run build` em `mcp-server/`); depois
+O servidor MCP corre a partir do repositório e arranca por **stdio**. Clona o repo: o
+servidor já vem compilado em `mcp-server/dist/index.js` (basta ter Node ≥ 18); depois
 aponta os clientes ao `dist/index.js` com `command: "node"` e o caminho **absoluto** em
 `args`. Ferramentas que falam stdio diretamente consomem-no sem mais nada:
 
@@ -69,7 +69,7 @@ Resumo:
 
 ### Forma local (para o wrapper / Agents SDK)
 
-- Compila (`npm install && npm run build` em `mcp-server/`) e usa `command: "node"`,
+- Usa o servidor já compilado do repositório com `command: "node"`,
   `args: ["/ABSOLUTE/PATH/TO/juridico-pt/mcp-server/dist/index.js"]` (caminho **absoluto**).
 - Atalho: corre `node cli/juridico-pt.mjs mcp-config codex` (ou outro host) na raiz do repo
   para obter o bloco com o caminho **absoluto** já preenchido para a tua máquina.

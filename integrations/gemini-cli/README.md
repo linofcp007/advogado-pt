@@ -20,8 +20,8 @@ O Gemini CLI lê as definições de `settings.json`:
 | **Global (utilizador)** | `~/.gemini/settings.json`  (Windows: `C:\Users\<utilizador>\.gemini\settings.json`) |
 | **Por projeto** | `.gemini/settings.json` na raiz do projeto |
 
-Clona o repo e compila o servidor **uma vez** (`npm install && npm run build` em
-`mcp-server/`). Depois cola o bloco `mcpServers` de
+Clona o repo: o servidor já vem compilado e autocontido em `mcp-server/dist/index.js`
+(basta ter Node ≥ 18, sem `npm install` nem build). Depois cola o bloco `mcpServers` de
 [`settings.snippet.json`](./settings.snippet.json), com o caminho **absoluto** para
 `dist/index.js`. Se o ficheiro já existir, acrescenta apenas a chave `"juridico-pt"` dentro
 do `mcpServers` existente:

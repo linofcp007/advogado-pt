@@ -4,6 +4,14 @@ Todas as alterações relevantes ao **juridico-pt** (até à 1.2.1, **advogado-p
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [Unreleased]
+
+### Changed
+
+- **Plugin, extensão `.mcpb` ou skill**: o README, o `INSTALL.md` e `integrations/claude-desktop/` explicam o que cada forma traz e onde funciona, e como instalar a extensão no Claude Desktop (**Definições → Extensões → Instalar extensão…**), com os caminhos da configuração e dos logs da versão Microsoft Store.
+- **Migração do `advogado-pt`**: troca só no Claude Code de um computador, sem mexer na conta (`claude plugin disable advogado-pt@synced`, depois o marketplace e o `install`), e notas para quem vem da 1.0.x (`/doctor` → `/diagnostico`; o perfil grava-se com `/perfil geral`). Nenhuma tool, template, referência ou command da 1.0.x desapareceu.
+- **Documentação alinhada com a 2.0**: 38 tools no `llms-install.md` e no `mcp-server/README.md`; contagens do README (36 referências, 72 templates, 14 playbooks, 12 checklists, 15 calculadoras) e resumo das versões 1.2.0 a 2.0.0; as integrações deixam de mandar compilar o servidor (o bundle vem compilado); o CLI fora do MCP (`calc`, `calendario`, `prazos`, `painel`, `exportar`, `atualidade`) fica documentado como precisando de `npm run setup`; requisitos de desenvolvimento (Node ≥ 18, Python 3) e a lista completa do bump de versão no `CONTRIBUTING.md`; ligações do CHANGELOG para o repositório `juridico-pt`.
+
 ## [2.0.0] - 2026-10
 
 **O plugin passa a chamar-se `juridico-pt` ("Jurídico PT") e apresenta-se como assistente jurídico.** A renomeação é direta, sem migração automática (decisão D-1: só havia um utilizador).
@@ -267,7 +275,14 @@ registado informalmente no `README.md`) numa única release versionada, com dist
 - **Custas de injunção** atualizadas (escalões e taxa de justiça desatualizados).
 - Removido o link da **Plataforma ODR** (extinta) e demais correções de revisão de QA.
 
-[1.0.3]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.3
-[1.0.2]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.2
-[1.0.1]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.1
-[1.0.0]: https://github.com/linofcp007/advogado-pt/releases/tag/v1.0.0
+[Unreleased]: https://github.com/linofcp007/juridico-pt/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.0
+[1.2.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.2.1
+[1.2.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.2.0
+[1.1.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.1.0
+[1.0.5]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.0.5
+[1.0.4]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.0.4
+[1.0.3]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.0.3
+[1.0.2]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.0.2
+[1.0.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.0.1
+[1.0.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.0.0
