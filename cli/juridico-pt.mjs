@@ -3,7 +3,7 @@
 //   juridico-pt mcp-config <host> [--npx]   -> imprime o bloco de config MCP pronto a colar
 //   juridico-pt calc <calc> [args]          -> corre uma calculadora jurídica
 //   juridico-pt prompt <nome> [--tipo …]    -> exporta um template/playbook como prompt para outras IAs
-// Sem dependências externas (só node: builtins + as calculadoras compiladas do mcp-server).
+// Sem dependências externas (só node: builtins + o bundle versionado mcp-server/dist/cli-lib.js).
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
@@ -11,8 +11,9 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "..");
 const serverPath = resolve(repo, "mcp-server", "dist", "index.js");
-const calcPath = resolve(repo, "mcp-server", "dist", "calculators", "index.js");
-const distPath = (f) => resolve(repo, "mcp-server", "dist", f);
+// Bundle self-contained e versionado (como o dist/index.js): existe também numa instalação pelo marketplace.
+const libPath = resolve(repo, "mcp-server", "dist", "cli-lib.js");
+const COMO_RESOLVER = "Num clone do repositório: npm run setup. Com o plugin instalado: reinstala o plugin.";
 
 const HOSTS = {
   "claude-desktop": "json-mcpServers",
@@ -62,7 +63,7 @@ function mcpConfig(args) {
   }
   if (!existsSync(serverPath)) {
     console.error(
-      `Aviso: ${serverPath} não existe ainda. Corre primeiro:\n  cd mcp-server && npm install && npm run build\n`
+      `Aviso: ${serverPath} não existe. ${COMO_RESOLVER}\n`
     );
   }
   console.log(renderConfig(host));
@@ -100,11 +101,7 @@ function str(args, flag, def) {
 }
 
 async function calc(args) {
-  if (!existsSync(calcPath)) {
-    console.error("Calculadoras ainda não compiladas. Corre: cd mcp-server && npm install && npm run build");
-    process.exit(1);
-  }
-  const c = await import(pathToFileURL(calcPath).href);
+  const c = await lib();
   const which = args[0];
   const rest = args.slice(1);
   const fmt = c.formatarEuros;
@@ -334,22 +331,21 @@ async function calc(args) {
   }
 }
 
-// --- calendario / prazos: usam os módulos compilados do mcp-server ----------
-async function modulo(f) {
-  const p = distPath(f);
-  if (!existsSync(p)) {
-    console.error("Servidor ainda não compilado. Corre: cd mcp-server && npm install && npm run build");
+// --- calc, calendario, prazos, painel, exportar, atualidade: módulos do mcp-server -----
+async function lib() {
+  if (!existsSync(libPath)) {
+    console.error(`Falta ${libPath}. ${COMO_RESOLVER}`);
     process.exit(1);
   }
-  return import(pathToFileURL(p).href);
+  return import(pathToFileURL(libPath).href);
 }
 
 async function calendarioCmd(args) {
   const ano = num(args, "--ano", new Date().getFullYear());
   const dir = resolve(str(args, "--dir", process.cwd()));
   const mes = args.includes("--mes") ? num(args, "--mes") : undefined;
-  const { gerarCalendario, formatarCalendario, exportarICS } = await modulo("calendario.js");
-  const { lerPerfil } = await modulo("perfil.js");
+  const { gerarCalendario, formatarCalendario, exportarICS } = await lib();
+  const { lerPerfil } = await lib();
   const perfil = lerPerfil({ projeto: dir, perfil: str(args, "--perfil", undefined) });
   const cal = gerarCalendario(ano, perfil?.campos ?? null);
   console.log(
@@ -368,12 +364,12 @@ async function calendarioCmd(args) {
 
 async function painelCmd(args) {
   const dir = resolve(str(args, "--dir", process.cwd()));
-  const { painelClientes, textoPainel } = await modulo("painel.js");
+  const { painelClientes, textoPainel } = await lib();
   console.log(textoPainel(painelClientes({ projeto: dir, dias: num(args, "--dias", 30) })));
 }
 
 async function atualidadeCmd() {
-  const { verificarAtualidade, textoAtualidade } = await modulo("atualidade.js");
+  const { verificarAtualidade, textoAtualidade } = await lib();
   const hoje = new Date();
   console.log(textoAtualidade(verificarAtualidade({ hoje }), hoje));
 }
@@ -383,7 +379,7 @@ async function exportarCmd(args) {
   const ficheiro = str(args, "--ficheiro", undefined);
   const template = str(args, "--template", undefined);
   const nome = str(args, "--nome", OBRIGATORIO);
-  const { exportarDocumento } = await modulo("exportar.js");
+  const { exportarDocumento } = await lib();
   const conteudo = ficheiro !== undefined ? readFileSync(resolve(ficheiro), "utf8") : undefined;
   const r = exportarDocumento({ conteudo, template, nome, projeto: dir });
   console.log(`Exportado: ${r.caminho} (${r.bytes} bytes)`);
@@ -392,7 +388,7 @@ async function exportarCmd(args) {
 
 async function prazosCmd(args) {
   const dir = resolve(str(args, "--dir", process.cwd()));
-  const { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } = await modulo("prazos-estado.js");
+  const { lerPrazos, registarPrazo, concluirPrazo, prazosProximos } = await lib();
   const sub = args[0];
   if (sub === "add") {
     const p = registarPrazo(
@@ -498,7 +494,7 @@ function doctor() {
   const checks = [
     [`Node >= 18`, major >= 18, `Node ${process.versions.node}`],
     [`MCP compilado (dist/index.js)`, existsSync(serverPath), ""],
-    [`Calculadoras compiladas`, existsSync(calcPath), ""],
+    [`Módulos do CLI (dist/cli-lib.js)`, existsSync(libPath), ""],
     [`Conteúdo empacotado (content/)`, existsSync(contentDir), ""],
   ];
   let ok = true;
@@ -509,7 +505,7 @@ function doctor() {
   console.log(
     ok
       ? "\nTudo pronto. Liga um cliente com: node cli/juridico-pt.mjs mcp-config <host>"
-      : "\nResolver: cd mcp-server && npm install && npm run build"
+      : `\n${COMO_RESOLVER}`
   );
   process.exit(ok ? 0 : 1);
 }
@@ -564,7 +560,7 @@ Uso:
       Imprime um prompt autocontido (persona + rigor + conteúdo) para colar noutra IA.
 
   juridico-pt doctor
-      Verifica pré-requisitos (Node, build do MCP, conteúdo empacotado).
+      Verifica pré-requisitos (Node, servidor MCP e módulos do CLI empacotados, conteúdo).
 
 Orientação informativa — não substitui advogado inscrito na Ordem dos Advogados.`;
 

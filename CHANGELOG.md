@@ -4,13 +4,19 @@ Todas as alterações relevantes ao **juridico-pt** (até à 1.2.1, **advogado-p
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
-## [Unreleased]
+## [2.0.1] - 2026-10
+
+### Fixed
+
+- **CLI numa instalação pelo marketplace**: `calc`, `calendario`, `prazos`, `painel`, `exportar` e `atualidade` falhavam com "ainda não compilado" — importavam a saída do `tsc` em `mcp-server/dist/`, que o git não distribui. Passam a usar um bundle self-contained e versionado, `mcp-server/dist/cli-lib.js` (como o `dist/index.js` do servidor). Com isto, as alternativas "sem MCP" do `/painel` e do `/exportar` funcionam no plugin instalado.
+- **`/diagnostico` (CLI `doctor`)**: deixa de acusar "FALTA Calculadoras compiladas" e de mandar compilar num plugin que funciona; verifica o `dist/cli-lib.js` e, se faltar alguma coisa, distingue o clone do repositório (`npm run setup`) do plugin instalado (reinstalar).
+- Teste de regressão: o CLI corre só com os ficheiros que o git distribui (`mcp-server/test/cli.test.mjs`).
 
 ### Changed
 
 - **Plugin, extensão `.mcpb` ou skill**: o README, o `INSTALL.md` e `integrations/claude-desktop/` explicam o que cada forma traz e onde funciona, e como instalar a extensão no Claude Desktop (**Definições → Extensões → Instalar extensão…**), com os caminhos da configuração e dos logs da versão Microsoft Store.
 - **Migração do `advogado-pt`**: troca só no Claude Code de um computador, sem mexer na conta (`claude plugin disable advogado-pt@synced`, depois o marketplace e o `install`), e notas para quem vem da 1.0.x (`/doctor` → `/diagnostico`; o perfil grava-se com `/perfil geral`). Nenhuma tool, template, referência ou command da 1.0.x desapareceu.
-- **Documentação alinhada com a 2.0**: 38 tools no `llms-install.md` e no `mcp-server/README.md`; contagens do README (36 referências, 72 templates, 14 playbooks, 12 checklists, 15 calculadoras) e resumo das versões 1.2.0 a 2.0.0; as integrações deixam de mandar compilar o servidor (o bundle vem compilado); o CLI fora do MCP (`calc`, `calendario`, `prazos`, `painel`, `exportar`, `atualidade`) fica documentado como precisando de `npm run setup`; requisitos de desenvolvimento (Node ≥ 18, Python 3) e a lista completa do bump de versão no `CONTRIBUTING.md`; ligações do CHANGELOG para o repositório `juridico-pt`.
+- **Documentação alinhada com a 2.0**: 38 tools no `llms-install.md` e no `mcp-server/README.md`; contagens do README (36 referências, 72 templates, 14 playbooks, 12 checklists, 15 calculadoras) e resumo das versões 1.2.0 a 2.0.0; as integrações deixam de mandar compilar o servidor nem o CLI (vêm compilados); requisitos de desenvolvimento (Node ≥ 18, Python 3) e a lista completa do bump de versão no `CONTRIBUTING.md`; ligações do CHANGELOG para o repositório `juridico-pt`.
 
 ## [2.0.0] - 2026-10
 
@@ -275,7 +281,7 @@ registado informalmente no `README.md`) numa única release versionada, com dist
 - **Custas de injunção** atualizadas (escalões e taxa de justiça desatualizados).
 - Removido o link da **Plataforma ODR** (extinta) e demais correções de revisão de QA.
 
-[Unreleased]: https://github.com/linofcp007/juridico-pt/compare/v2.0.0...HEAD
+[2.0.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.1
 [2.0.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.0
 [1.2.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.2.1
 [1.2.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.2.0

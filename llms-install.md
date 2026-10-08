@@ -13,13 +13,12 @@ Todas as operações são locais: sem rede, sem API key.
    # guarda o caminho absoluto, ex.: /home/you/juridico-pt (ou C:\tools\juridico-pt)
    ```
 
-2. **Não é preciso compilar o servidor.** Já vem compilado e autocontido em
-   `mcp-server/dist/index.js` — basta Node ≥ 18. Só o **CLI** (`calc`, `calendario`, `prazos`,
-   `painel`, `exportar`, `atualidade`) precisa de um build local:
+2. **Confirma que está pronto.** Não é preciso compilar nada: o servidor e o CLI vêm compilados
+   e autocontidos em `mcp-server/dist/` — basta Node ≥ 18:
 
    ```bash
    cd juridico-pt
-   npm run setup      # opcional, só para o CLI: instala + compila + doctor
+   node cli/juridico-pt.mjs doctor   # verifica o Node, o servidor, o CLI e o conteúdo
    ```
 
 3. **Regista o servidor** no teu cliente MCP. Substitui `/ABSOLUTE/PATH/` pelo caminho do passo 1.

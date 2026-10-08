@@ -28,7 +28,7 @@ Carrega em **Claude → Settings → Skills**. (Claude Code: coloca a pasta em `
 
 O servidor vem já compilado e autocontido no repositório (`mcp-server/dist/index.js`): basta clonar e ter **Node ≥ 18** — não é preciso instalar dependências nem compilar.
 
-> Não há pacote npm publicado (por opção). Corre `npm run setup` na raiz (instala as dependências, compila e corre o diagnóstico) só para **desenvolver** o plugin ou para usar o **CLI** fora do MCP (`calc`, `calendario`, `prazos`, `painel`, `exportar`, `atualidade`); o `mcp-config` e o `prompt` do CLI funcionam sem build.
+> Não há pacote npm publicado (por opção). O CLI (`node cli/juridico-pt.mjs …`) também funciona sem build. Só para **desenvolver** o plugin: `npm run setup` na raiz (instala as dependências, compila e corre o diagnóstico).
 
 ### 2. Ligar a cada plataforma
 
