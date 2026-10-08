@@ -30,7 +30,9 @@ Não é preciso compilar nada: o servidor MCP vem empacotado no plugin. Se algum
 /plugin install juridico-pt@juridico-pt
 ```
 
-e renomeia à mão a pasta de dados `.advogado-pt/` para `.juridico-pt/` em cada projeto (e `~/.advogado-pt/` para `~/.juridico-pt/`). Detalhes no [CHANGELOG](CHANGELOG.md).
+Se o tinhas adicionado no claude.ai ou na app Claude (aparece no Claude Code como `advogado-pt@synced`), a troca faz-se lá, em **Customize > Plugins**: remove o `advogado-pt`, adiciona o marketplace `linofcp007/juridico-pt` (**Add > Add marketplace**) e instala o `juridico-pt`; o Claude Code sincroniza-o no arranque seguinte como `juridico-pt@synced`.
+
+Em qualquer dos casos, renomeia à mão a pasta de dados `.advogado-pt/` para `.juridico-pt/` em cada projeto (e `~/.advogado-pt/` para `~/.juridico-pt/`). Detalhes no [CHANGELOG](CHANGELOG.md).
 
 Para **desenvolver** o plugin a partir de um clone: `npm run setup` (instala as dependências, compila o servidor MCP e corre o diagnóstico).
 

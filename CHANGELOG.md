@@ -55,6 +55,8 @@ Quem tinha o `advogado-pt` instalado troca a instalação com estes comandos no 
 /plugin install juridico-pt@juridico-pt
 ```
 
+Se o tinhas adicionado no claude.ai ou na app Claude (no Claude Code aparece como `advogado-pt@synced`), troca-o lá, em **Customize > Plugins**: remove o `advogado-pt`, adiciona o marketplace `linofcp007/juridico-pt` (**Add > Add marketplace**) e instala o `juridico-pt`. O Claude Code sincroniza-o no arranque seguinte como `juridico-pt@synced`.
+
 Depois, em cada projeto onde guardaste dados, renomeia à mão a pasta `.advogado-pt/` para `.juridico-pt/` (e `~/.advogado-pt/` para `~/.juridico-pt/` no perfil geral). Se usavas `ADVOGADO_PT_HOME`, passa a `JURIDICO_PT_HOME`.
 
 ## [1.2.1] - 2026-10
