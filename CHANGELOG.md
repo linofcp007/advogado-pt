@@ -4,6 +4,12 @@ Todas as alterações relevantes ao **juridico-pt** (até à 1.2.1, **advogado-p
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
+## [Unreleased]
+
+### Changed
+
+- O README, o `INSTALL.md` e `integrations/claude-desktop/` apontam para a [última release](https://github.com/linofcp007/juridico-pt/releases/latest) para descarregar a extensão `.mcpb` e o `.skill` (gerá-los a partir de um clone continua possível). Os releases antigos do `advogado-pt` (v1.0.0 a v1.0.5) foram retirados do GitHub; as tags mantêm-se.
+
 ## [2.0.1] - 2026-10
 
 ### Fixed
@@ -281,6 +287,7 @@ registado informalmente no `README.md`) numa única release versionada, com dist
 - **Custas de injunção** atualizadas (escalões e taxa de justiça desatualizados).
 - Removido o link da **Plataforma ODR** (extinta) e demais correções de revisão de QA.
 
+[Unreleased]: https://github.com/linofcp007/juridico-pt/compare/v2.0.1...HEAD
 [2.0.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.1
 [2.0.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.0
 [1.2.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.2.1

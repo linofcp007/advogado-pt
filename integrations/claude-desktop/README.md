@@ -8,7 +8,8 @@ Liga o servidor MCP `juridico-pt-mcp` à app **Claude Desktop**. Há duas formas
 
 Não precisa de Node nem de editar JSON: a extensão usa o Node que o Claude Desktop traz.
 
-1. Gera o pacote na raiz do repositório:
+1. Descarrega `juridico-pt-<versão>.mcpb` da [última release](https://github.com/linofcp007/juridico-pt/releases/latest),
+   ou gera-o na raiz de um clone do repositório:
 
    ```powershell
    npm --prefix mcp-server run build:mcpb   # → dist/juridico-pt-<versão>.mcpb

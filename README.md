@@ -34,14 +34,14 @@ Não é preciso compilar nada: o servidor MCP vem empacotado no plugin. Se algum
 
 **Extensão no Claude Desktop:**
 
-1. Gera o pacote: `npm --prefix mcp-server run build:mcpb` → `dist/juridico-pt-<versão>.mcpb`
+1. Descarrega `juridico-pt-<versão>.mcpb` da [última release](https://github.com/linofcp007/juridico-pt/releases/latest) (ou gera-o a partir de um clone: `npm --prefix mcp-server run build:mcpb` → `dist/juridico-pt-<versão>.mcpb`).
 2. No Claude Desktop, **Definições → Extensões → Instalar extensão…** e escolhe o ficheiro.
 
 Se as tools do `juridico-pt` já aparecem nas conversas do Desktop através do plugin da conta, a extensão é desnecessária (terias as mesmas tools em duplicado). Detalhes em [integrations/claude-desktop/](integrations/claude-desktop/).
 
 **Skill** (Claude.ai / Claude Desktop):
 
-1. Gera o pacote com `python build.py` (ou `./build.ps1`) → `juridico-pt.skill`
+1. Descarrega `juridico-pt.skill` da [última release](https://github.com/linofcp007/juridico-pt/releases/latest) (ou gera-o com `python build.py` / `./build.ps1`).
 2. No Claude, **Settings → Skills** e faz upload do ficheiro
 
 **Noutras IAs** (Cursor, Windsurf, Codex, Gemini, ChatGPT): ver [INSTALL.md](INSTALL.md) e [integrations/](integrations/), ou corre `node cli/juridico-pt.mjs mcp-config <host>`.

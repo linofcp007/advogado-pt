@@ -5,8 +5,8 @@ O Jurídico PT distribui-se por **quatro canais**, todos sobre o mesmo conteúdo
 | Canal | Para quê | Onde |
 |---|---|---|
 | **Plugin** (recomendado no Claude) | Claude Code e conta claude.ai / app Claude (**Customize > Plugins**): conteúdo, 38 tools, slash commands, hooks e subagentes | `/plugin marketplace add linofcp007/juridico-pt` — ver o [README](README.md#instalação) |
-| **Extensão `.mcpb`** | Conversas da app Claude Desktop, sem instalar Node: só o servidor MCP (38 tools, resources e prompt) | `dist/juridico-pt-<versão>.mcpb` (gerar com `npm --prefix mcp-server run build:mcpb`) — ver [integrations/claude-desktop/](integrations/claude-desktop/) |
-| **A. Skill (.skill)** | Claude.ai, Claude Code, Claude Desktop (sistema de Skills): conteúdo, instruções e calculadoras Python | `juridico-pt.skill` (gerar com `python build.py`) |
+| **Extensão `.mcpb`** | Conversas da app Claude Desktop, sem instalar Node: só o servidor MCP (38 tools, resources e prompt) | `juridico-pt-<versão>.mcpb` da [última release](https://github.com/linofcp007/juridico-pt/releases/latest) (ou gerar com `npm --prefix mcp-server run build:mcpb`) — ver [integrations/claude-desktop/](integrations/claude-desktop/) |
+| **A. Skill (.skill)** | Claude.ai, Claude Code, Claude Desktop (sistema de Skills): conteúdo, instruções e calculadoras Python | `juridico-pt.skill` da [última release](https://github.com/linofcp007/juridico-pt/releases/latest) (ou gerar com `python build.py`) |
 | **B. Servidor MCP** | Cursor, Windsurf, Codex, Gemini CLI, ChatGPT/OpenAI, Claude (via MCP) | `mcp-server/` (Node, já compilado no repositório — sem npm publish) |
 
 O **MCP** é o que torna isto disponível em "todas as IAs": é um padrão aberto que Claude, OpenAI, Google e os editores (Cursor/Windsurf) já falam. Um único servidor serve todos; o plugin e a extensão `.mcpb` trazem esse mesmo servidor.
