@@ -7,7 +7,7 @@
 - ⏰ **72 HORAS para notificar a CNPD** (Art. 33.º RGPD), a contar do momento em que tomas **conhecimento** da violação — salvo se for improvável que resulte risco para os direitos e liberdades dos titulares. **O relógio já começou.** Se notificares depois das 72h, tens de justificar o atraso.
 - ⏰ **Notificação aos titulares** (Art. 34.º): **sem demora injustificada** se houver **risco elevado**.
 - ⏰ Se fores entidade abrangida pela **NIS2** (DL 125/2025): notificação inicial ao CNCS em **24h**, atualização em **72h** quando necessário, notificação do fim do impacto em 24h e relatório final em **30 dias úteis** depois dela (arts. 41.º a 44.º) — em paralelo com a CNPD. Ver `assets/checklists/checklist-nis2.md`.
-- ⏰ Se houve **crime** (acesso ilegítimo, ransomware, burla/BEC): a queixa-crime tem prazo de **6 meses** (crimes semi-públicos) — mas **preserva a prova digital JÁ** (não limpes sistemas antes de cópia forense). Ver `references/penal-cibercrime.md`.
+- ⏰ Se houve **crime** (acesso ilegítimo, ransomware, burla/BEC): a queixa-crime tem prazo de **6 meses** a contar do conhecimento do facto **e dos autores** (CP art. 115.º) nos crimes semi-públicos — o acesso ilegítimo simples ou com violação de regras de segurança depende de queixa (Lei 109/2009, art. 6.º, n.º 7), mas as formas agravadas (acesso a dados confidenciais protegidos por lei, vantagem de valor consideravelmente elevado — n.º 5) são **crime público**; apresenta queixa logo, mesmo contra desconhecidos — e **preserva a prova digital JÁ** (não limpes sistemas antes de cópia forense). Ver `references/penal-cibercrime.md`.
 
 ## Fluxo de decisão
 

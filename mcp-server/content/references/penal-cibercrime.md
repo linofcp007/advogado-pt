@@ -14,6 +14,7 @@
 
 ## Natureza dos crimes e prazo de queixa
 - **Crimes semi-públicos** (a maioria das burlas e crimes informáticos simples): dependem de **queixa** do ofendido — prazo de **6 meses** a contar do conhecimento do facto e do autor (Art. 115.º CP)
+- **Acesso ilegítimo** (Lei 109/2009, art. 6.º, na redação da Lei 79/2021): depende de queixa nas formas simples, com violação de regras de segurança ou obtenção de dados de meios de pagamento, e na tentativa (art. 6.º, n.º 7); é **crime público** nas formas agravadas — acesso a segredo comercial ou industrial ou a dados confidenciais protegidos por lei, ou vantagem de valor consideravelmente elevado (n.º 5)
 - **Crimes públicos**: o Ministério Público (MP) age oficiosamente, basta a denúncia
 - A queixa pode ser apresentada por escrito ou verbalmente em qualquer órgão de polícia criminal, no MP ou online
 

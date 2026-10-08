@@ -4,7 +4,19 @@ Todas as alterações relevantes ao **juridico-pt** (até à 1.2.1, **advogado-p
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto adere ao
 [Versionamento Semântico](https://semver.org/lang/pt-BR/). A versão refere-se ao plugin como um todo.
 
-## [Unreleased]
+## [2.0.2] - 2026-10
+
+**Correções da revisão pós-lançamento de 8/10/2026** (rubrica, normas citadas e revisão humana — `.specs/juridico-pt-v2-0/revisao-2.0.1.md`). Cada norma foi confirmada no texto consolidado do Diário da República e cada correção ficou protegida por um facto de referência (`factos.json`, ids `v202-`).
+
+### Fixed
+
+- **Coimas laborais** (`multas.md`): a impugnação tem efeito meramente devolutivo e já não há efeito suspensivo com depósito da coima e das custas — os n.ºs 2 e 3 do art. 35.º da Lei 107/2009 foram revogados pela Lei 13/2023 (desde 1/5/2023); acrescenta o Ac. TC 515/2025 (garantia bancária, fiscalização concreta) e que a resposta à notificação é só escrita (art. 17.º).
+- **Queixa por cibercrime** (`data-breach.md`, `penal-cibercrime.md`): os 6 meses contam do conhecimento do facto e dos autores (CP art. 115.º); o acesso ilegítimo depende de queixa nas formas simples (Lei 109/2009, art. 6.º, n.º 7) e é crime público nas agravadas (n.º 5).
+- **Notificações eletrónicas da AT** (`contencioso-tributario.md`): a redação anterior do CPPT, art. 39.º, n.º 10 (5.º dia, DL 93/2017) só vale para notificações anteriores a 1/10/2019 — desde a Lei 119/2019 é o 15.º dia.
+
+### Added
+
+- **Revogação por acordo e quitação** (`laboral.md`): compensação pecuniária global (CT art. 349.º, n.º 5), créditos não extinguíveis por remissão abdicativa salvo transação judicial (art. 337.º, n.º 3, Lei 13/2023), arrependimento até ao 7.º dia (art. 350.º) e prescrição de 1 ano (art. 337.º, n.º 1).
 
 ### Changed
 
@@ -287,7 +299,7 @@ registado informalmente no `README.md`) numa única release versionada, com dist
 - **Custas de injunção** atualizadas (escalões e taxa de justiça desatualizados).
 - Removido o link da **Plataforma ODR** (extinta) e demais correções de revisão de QA.
 
-[Unreleased]: https://github.com/linofcp007/juridico-pt/compare/v2.0.1...HEAD
+[2.0.2]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.2
 [2.0.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.1
 [2.0.0]: https://github.com/linofcp007/juridico-pt/releases/tag/v2.0.0
 [1.2.1]: https://github.com/linofcp007/juridico-pt/releases/tag/v1.2.1

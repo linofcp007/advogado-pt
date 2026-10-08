@@ -27,13 +27,13 @@
 - Referência ao processo
 - Contestação dos factos e/ou da qualificação jurídica
 - Requerimento de provas (testemunhas, documentos)
-- Pode requerer audiência oral
+- Pode requerer audiência oral no regime geral; nas contraordenações **laborais** a resposta é só escrita, em português, com até 2 testemunhas por infração (5 no total se forem 3 ou mais infrações com coima única) — Lei 107/2009, art. 17.º, n.ºs 2 e 3, na redação da Lei 13/2023
 - Enviar por correio registado (conta a data de envio)
 
 ### Fase 3: Decisão Administrativa
 - Se desfavorável: recurso para o tribunal judicial
 - **Prazo de recurso**: 20 dias após a notificação da decisão (art. 59.º, n.º 3, RGCO; suspende-se aos sábados, domingos e feriados — art. 60.º); contraordenações fiscais: 30 dias (art. 80.º RGIT)
-- Efeito da impugnação: no regime geral a decisão não se torna definitiva enquanto estiver impugnada, pelo que a coima não é ainda exigível; nas contraordenações **laborais** a impugnação tem efeito **meramente devolutivo** — só suspende a decisão se o arguido depositar o valor da coima e das custas (Lei 107/2009, art. 35.º)
+- Efeito da impugnação: no regime geral a decisão não se torna definitiva enquanto estiver impugnada, pelo que a coima não é ainda exigível; nas contraordenações **laborais** a impugnação tem efeito **meramente devolutivo** (Lei 107/2009, art. 35.º, n.º 1). Desde 1/5/2023 deixou de haver efeito suspensivo com depósito da coima e das custas: os n.ºs 2 e 3 do art. 35.º foram revogados pela Lei 13/2023 (art. 33.º, al. c)). O Tribunal Constitucional julgou inconstitucional esse efeito meramente devolutivo quando o arguido se dispõe a prestar garantia bancária à primeira solicitação (Ac. TC 515/2025, em fiscalização concreta, sem força obrigatória geral): pode pedir-se o efeito suspensivo oferecendo essa garantia e invocando o acórdão
 
 ### Fase 4: Recurso Judicial
 - Tribunal de 1ª instância
